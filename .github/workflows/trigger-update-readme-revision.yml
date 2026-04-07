@@ -1,0 +1,35 @@
+name: Trigger update-readme-revision after verify-readme
+
+on:
+  workflow_run:
+    workflows: ["Verify README Documentation"]
+    types: [completed]
+
+jobs:
+  trigger:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Post /update-readme on PR if improvements needed
+        env:
+          GH_TOKEN: ${{ secrets.MAINTAINER_PAT }}
+        run: |
+          # Find the most recent open documentation PR without ready-to-merge
+          PR_NUMBER=$(gh pr list \
+            --repo "${{ github.repository }}" \
+            --state open \
+            --label documentation \
+            --json number,labels,createdAt \
+            --jq '[.[] | select(.labels | map(.name) | index("ready-to-merge") | not)] | sort_by(.createdAt) | last | .number')
+
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
+            echo "No open documentation PR needing improvements found, skipping."
+            exit 0
+          fi
+
+          echo "Found documentation PR #$PR_NUMBER without ready-to-merge, posting /update-readme"
+          gh pr comment "$PR_NUMBER" \
+            --repo "${{ github.repository }}" \
+            --body "/update-readme"

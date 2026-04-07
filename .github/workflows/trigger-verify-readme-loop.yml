@@ -1,0 +1,35 @@
+name: Trigger verify-readme after update-readme-revision
+
+on:
+  workflow_run:
+    workflows: ["Update README — Revision"]
+    types: [completed]
+
+jobs:
+  trigger:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Post /verify-readme on PR
+        env:
+          GH_TOKEN: ${{ secrets.MAINTAINER_PAT }}
+        run: |
+          # Find the most recent open documentation PR
+          PR_NUMBER=$(gh pr list \
+            --repo "${{ github.repository }}" \
+            --state open \
+            --label documentation \
+            --json number,createdAt \
+            --jq 'sort_by(.createdAt) | last | .number')
+
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
+            echo "No open documentation PR found, skipping."
+            exit 0
+          fi
+
+          echo "Found documentation PR #$PR_NUMBER, posting /verify-readme"
+          gh pr comment "$PR_NUMBER" \
+            --repo "${{ github.repository }}" \
+            --body "/verify-readme"
