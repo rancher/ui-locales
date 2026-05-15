@@ -36,6 +36,7 @@ safe-outputs:
     title-prefix: "feat: "
     labels: [translations, update-language, automated]
   add-comment: {}
+  dispatch-workflow: [verify-translation]
 ---
 
 # Update Existing Language Translation
@@ -93,10 +94,14 @@ If the issue does not meet these criteria, do nothing and stop.
      - Summary of changes: how many keys added, removed, re-translated, reordered
      - Validation results
      - Note that translations are AI-generated and should be reviewed by a native speaker
-     - Mention that `/verify-translation` can be run on the PR for structural checks
+     - Note that automated verification will run after the PR is created
    - References and closes the original issue
 
 8. **Add a comment** to the issue confirming the PR was opened, with a link, and noting it needs native speaker review.
+
+9. **Dispatch verify-translation** — After the PR is created, dispatch the `verify-translation` workflow using `dispatch-workflow` with inputs:
+   - `pr_number`: the number of the PR you just created
+   - `attempt`: `"1"`
 
 ## Update learnings
 

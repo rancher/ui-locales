@@ -33,6 +33,7 @@ safe-outputs:
     title-prefix: "fix: "
     labels: [translations, fix, automated]
   add-comment: {}
+  dispatch-workflow: [verify-translation]
 ---
 
 # Fix Translation Error
@@ -106,3 +107,11 @@ Do **NOT** check or modify other language files. Only fix the specific language 
 - In PR bodies, be clear and concise about what was changed and why
 - Always note when a fix is AI-generated and recommend native speaker review
 - If unsure about a translation, flag it explicitly in the PR body rather than guessing silently
+
+## Dispatch verify-translation
+
+After creating each PR, dispatch the `verify-translation` workflow using `dispatch-workflow` with inputs:
+- `pr_number`: the number of the PR you just created
+- `attempt`: `"1"`
+
+This triggers automated verification of the fix.
