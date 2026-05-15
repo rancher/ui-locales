@@ -35,7 +35,7 @@ tools:
     branch-name: memory/default
     max-file-size: 32768
     max-patch-size: 32768
-    file-glob: ["memory/default/**/*.md", "*.patch"]
+    file-glob: ["**/*.md", "*.patch"]
   bash: true
 
 safe-outputs:
