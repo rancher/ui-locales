@@ -1,15 +1,23 @@
 ---
 description: |
-  This workflow improves translation coverage in pull requests on-demand via the
-  '/improve-translation' slash command. It finds all untranslated strings (values
-  still identical to en-us.yaml) in the locale file, translates them in chunks,
-  pushes the improved file, and reports progress. Can be run repeatedly until
+  This workflow improves translation coverage in pull requests. It finds all
+  untranslated strings (values still identical to en-us.yaml) in the locale file,
+  translates them in chunks, saves a patch to repo-memory, and dispatches the
+  apply-translation-patch workflow to push changes. Can be run repeatedly until
   100% coverage is reached.
 
 on:
-  slash_command:
-    name: improve-translation
-  reaction: "eyes"
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to improve translations for"
+        required: true
+        type: string
+      attempt:
+        description: "Current attempt number (loop counter)"
+        required: false
+        type: string
+        default: "1"
 
 permissions:
   contents: read
@@ -26,20 +34,32 @@ tools:
   repo-memory:
     branch-name: memory/default
     max-file-size: 32768
-    file-glob: ["memory/default/**/*.md"]
+    max-patch-size: 32768
+    file-glob: ["memory/default/**/*.md", "*.patch"]
   bash: true
 
 safe-outputs:
   max-patch-size: 1024
-  push-to-pull-request-branch:
   add-comment:
     hide-older-comments: true
+  dispatch-workflow: [apply-translation-patch]
+  noop:
 
 ---
 
 # Improve Translation
 
-You are an AI assistant that improves translation coverage for locale files in the Rancher UI locales project. Your job is to find all untranslated strings in the locale file on pull request #${{ github.event.issue.number }} of ${{ github.repository }}, translate them, and push the improved file back.
+You are an AI assistant that improves translation coverage for locale files in the Rancher UI locales project. Your job is to find all untranslated strings in the locale file on pull request #${{ github.event.inputs.pr_number }} of ${{ github.repository }}, translate them, save a patch, and dispatch the apply workflow to push changes.
+
+## Loop Guard
+
+Before doing any work, check the attempt counter: `${{ github.event.inputs.attempt }}`.
+
+If the attempt number is greater than 5:
+1. Post a comment on PR #${{ github.event.inputs.pr_number }} explaining that the automated verify→improve loop has reached its maximum of 5 iterations and requires manual intervention.
+2. Use `noop` and stop — do NOT continue with translation.
+
+Otherwise, proceed normally.
 
 ## Shared rules
 
@@ -47,19 +67,18 @@ You are an AI assistant that improves translation coverage for locale files in t
 
 ## 1. Read the PR and previous comments
 
-Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
+Read pull request #${{ github.event.inputs.pr_number }} — its description, all comments, and the list of changed files.
 
-- **Check for a previous `/verify-translation` report.** If one exists, read it carefully — it contains structural issues found, translation coverage by section, placeholder errors, and the list of untranslated strings. Use this to:
+- **Check for a previous verification report.** If one exists, read it carefully — it contains structural issues found, translation coverage by section, placeholder errors, and the list of untranslated strings. Use this to:
   - **Fix structural issues first** (duplicate keys, missing placeholders, key ordering problems) before translating new strings.
   - **Prioritise sections** with the lowest coverage.
   - **Avoid re-checking** things the verification already confirmed as clean.
-- If there are previous `/improve-translation` comments from earlier runs, read them to understand what was already translated and what coverage was achieved.
-- Take heed of any additional instructions in the slash command: "${{ steps.sanitized.outputs.text }}"
+- If there are previous improve-translation comments from earlier runs, read them to understand what was already translated and what coverage was achieved.
 - Identify the locale file (e.g. `pkg/ui-locales/l10n/pt-br.yaml`) and the target language.
 
 ## 2. Check out the PR branch
 
-Check out the branch for pull request #${{ github.event.issue.number }} and set up the environment.
+Check out the branch for pull request #${{ github.event.inputs.pr_number }} and set up the environment.
 
 ## 3. Identify untranslated strings
 
@@ -93,18 +112,47 @@ Re-run the coverage script from step 3 to get updated numbers:
 - How many strings were translated in this run
 - How many untranslated strings remain
 
-## 7. Push and comment
+## 7. Save patch and dispatch apply workflow
 
-Push the improved file and add a **detailed comment** to the PR:
+Instead of pushing directly, save the changes as a patch and dispatch the apply workflow:
 
-- Summary header: "🌐 **Improve Translation — Progress Report**"
-- Coverage before this run → coverage after this run
-- Number of strings translated in this run
-- Breakdown by top-level section (how many translated per section)
-- Number of untranslated strings remaining
-- If coverage is 100%: "✅ All strings are now translated! Ready for native speaker review."
-- If coverage < 100%: "Run `/improve-translation` again to continue translating the remaining {N} strings."
-- Always note that translations are AI-generated and need native speaker review
+1. Find the locale file that was modified:
+   ```bash
+   LOCALE_FILE=$(git diff --name-only)
+   ```
+
+2. Commit the changes locally and generate a patch:
+   ```bash
+   git add "$LOCALE_FILE"
+   git commit -m "improve: translate strings for $LOCALE - attempt ${{ github.event.inputs.attempt }}"
+   git diff HEAD~1 -- "$LOCALE_FILE" > /tmp/gh-aw/repo-memory/default/translation-pr-${{ github.event.inputs.pr_number }}.patch
+   ```
+
+3. Verify the patch starts with `diff --git` (not `---` with timestamps):
+   ```bash
+   head -3 /tmp/gh-aw/repo-memory/default/translation-pr-${{ github.event.inputs.pr_number }}.patch
+   ```
+   If the first line does NOT start with `diff --git`, delete it and regenerate.
+
+4. **IMPORTANT**: The patch file MUST be placed directly at:
+   `/tmp/gh-aw/repo-memory/default/translation-pr-<PR_NUMBER>.patch`
+   Do NOT create any subdirectories — the sandbox blocks mkdir inside repo-memory.
+
+5. After saving, call the push_repo_memory tool to validate the size is within limits.
+
+6. Dispatch the `apply-translation-patch` workflow using `dispatch-workflow` with inputs:
+   - `pr_number`: `${{ github.event.inputs.pr_number }}`
+   - `attempt`: `${{ github.event.inputs.attempt }}`
+
+7. Add a **detailed comment** to PR #${{ github.event.inputs.pr_number }}:
+   - Summary header: "🌐 **Improve Translation — Progress Report**"
+   - Coverage before this run → coverage after this run
+   - Number of strings translated in this run
+   - Breakdown by top-level section (how many translated per section)
+   - Number of untranslated strings remaining
+   - If coverage is 100%: "✅ All strings are now translated! Ready for native speaker review."
+   - If coverage < 100%: "The verify-translation workflow will be triggered automatically after changes are applied to continue the improvement cycle."
+   - Always note that translations are AI-generated and need native speaker review
 
 ## 8. Update learnings
 

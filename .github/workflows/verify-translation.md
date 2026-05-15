@@ -1,16 +1,24 @@
 ---
 description: |
   This workflow performs a read-only verification of translation files in pull
-  requests on-demand via the '/verify-translation' slash command. It compares the
-  target locale YAML against en-us.yaml and produces a detailed report covering
-  structural integrity, translation coverage, placeholder preservation, and key
-  ordering. It does NOT modify any files — it only reports findings. When issues
-  are found it recommends running '/improve-translation' to apply fixes.
+  requests. It compares the target locale YAML against en-us.yaml and produces
+  a detailed report covering structural integrity, translation coverage,
+  placeholder preservation, and key ordering. It does NOT modify any files —
+  it only reports findings. When coverage is below 100% it dispatches the
+  improve-translation workflow automatically.
 
 on:
-  slash_command:
-    name: verify-translation
-  reaction: "eyes"
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to verify"
+        required: true
+        type: string
+      attempt:
+        description: "Current attempt number (loop counter)"
+        required: false
+        type: string
+        default: "1"
 
 permissions:
   contents: read
@@ -36,14 +44,26 @@ safe-outputs:
     hide-older-comments: true
   add-labels:
   submit-pull-request-review:
-    target: ${{ github.event.issue.number }}
+    target: ${{ github.event.inputs.pr_number }}
     footer: "if-body"
+  dispatch-workflow: [improve-translation]
+  noop:
 
 ---
 
 # Verify Translation
 
-You are an AI assistant specialized in auditing translation YAML files for the Rancher UI locales project. Your job is to **verify** the translated locale file in pull request #${{ github.event.issue.number }} of ${{ github.repository }} and produce a detailed quality report. You do **NOT** modify or fix any files — you only analyze and report.
+You are an AI assistant specialized in auditing translation YAML files for the Rancher UI locales project. Your job is to **verify** the translated locale file in pull request #${{ github.event.inputs.pr_number }} of ${{ github.repository }} and produce a detailed quality report. You do **NOT** modify or fix any files — you only analyze and report.
+
+## Loop Guard
+
+Before doing any work, check the attempt counter: `${{ github.event.inputs.attempt }}`.
+
+If the attempt number is greater than 5:
+1. Post a comment on PR #${{ github.event.inputs.pr_number }} explaining that the automated verify→improve loop has reached its maximum of 5 iterations and requires manual intervention.
+2. Use `noop` and stop — do NOT continue with verification.
+
+Otherwise, proceed normally.
 
 ## Shared rules
 
@@ -51,19 +71,18 @@ You are an AI assistant specialized in auditing translation YAML files for the R
 
 ## Important: read-only workflow
 
-This workflow is strictly read-only. You must **never** push changes, edit files, or modify the PR branch. All findings are reported as a PR comment. If issues are found, recommend that the user runs `/improve-translation` to apply fixes.
+This workflow is strictly read-only. You must **never** push changes, edit files, or modify the PR branch. All findings are reported as a PR comment. If issues are found, the improve-translation workflow will be dispatched automatically.
 
 ## 1. Read the PR and previous comments
 
-Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
+Read pull request #${{ github.event.inputs.pr_number }} — its description, all comments, and the list of changed files.
 
-- If there are previous `/verify-translation` comments from earlier runs, read them to understand what was already reported and whether issues have been addressed since.
-- Take heed of any additional instructions in the slash command: "${{ steps.sanitized.outputs.text }}"
+- If there are previous verification comments from earlier runs, read them to understand what was already reported and whether issues have been addressed since.
 - Identify which locale file is being added or modified (e.g. `pkg/ui-locales/l10n/pt-br.yaml`).
 
 ## 2. Check out the PR branch
 
-Check out the branch for pull request #${{ github.event.issue.number }} and set up the environment.
+Check out the branch for pull request #${{ github.event.inputs.pr_number }} and set up the environment.
 
 ## 3. Structural validation
 
@@ -216,19 +235,30 @@ The file is structurally sound and fully translated. Ready for native speaker re
 | ...     | ...       | ...            | ...         | ...      |
 
 ### Recommended Actions
-Run `/improve-translation` to fix structural issues and translate remaining strings.
+The improve-translation workflow will be dispatched automatically to fix structural issues and translate remaining strings.
 ```
 
 ## 6. Label and approve on 100% coverage
 
 If **all** structural checks passed (valid YAML, key parity, key ordering, structure parity, placeholders, empty/special values) **and** overall translation coverage is **100%** after the agent review (i.e. zero genuinely untranslated strings), then:
 
-1. Add the label `ready-to-merge` to pull request #${{ github.event.issue.number }}.
+1. Add the label `ready-to-merge` to pull request #${{ github.event.inputs.pr_number }}.
 2. Submit an **approving PR review** using `submit_pull_request_review` with event `APPROVE` and a body like:
    > ✅ AI verification passed — all structural checks clean, 100% translation coverage. Ready for native speaker review of translation quality.
 
-If the coverage is below 100% or any structural check failed, do **not** add the label or approve the PR.
+If the coverage is below 100% or any structural check failed, do **not** add the label or approve the PR. Instead, proceed to Section 7 to dispatch the improve-translation workflow.
 
-## 7. Update learnings
+## 7. Dispatch improve-translation (if needed)
+
+If overall translation coverage is **below 100%** or structural issues were found that `/improve-translation` can fix:
+
+1. Dispatch the `improve-translation` workflow using `dispatch-workflow` with inputs:
+   - `pr_number`: `${{ github.event.inputs.pr_number }}`
+   - `attempt`: `${{ github.event.inputs.attempt }}`
+2. Include a note in your verification comment that the improve-translation workflow has been dispatched automatically.
+
+If coverage is already 100% and all checks passed (label + approve applied), do NOT dispatch.
+
+## 8. Update learnings
 
 After completing the verification and labeling, update the learnings file following the instructions in the shared rules file.
