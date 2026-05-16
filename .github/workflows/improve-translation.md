@@ -33,8 +33,8 @@ tools:
     lockdown: false
   repo-memory:
     branch-name: memory/default
-    max-file-size: 32768
-    max-patch-size: 32768
+    max-file-size: 102400
+    max-patch-size: 102400
     file-glob: ["**/*.md", "*.patch"]
   bash: true
 
@@ -99,7 +99,7 @@ Translate the untranslated strings following the translation rules, priority ord
 
 Additionally for this workflow:
 
-- **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
+- **Stop after translating 500 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off. This limit ensures the resulting patch stays under the 100 KB repo-memory size limit.
 
 ## 5. Validate after translation
 
