@@ -2,9 +2,8 @@
 description: |
   This workflow improves translation coverage in pull requests. It finds all
   untranslated strings (values still identical to en-us.yaml) in the locale file,
-  translates them in chunks, saves a patch to repo-memory, and dispatches the
-  apply-translation-patch workflow to push changes. Can be run repeatedly until
-  100% coverage is reached.
+  translates them in chunks, pushes the improved file, and dispatches the
+  verify-translation workflow. Can be run repeatedly until 100% coverage is reached.
 
 on:
   workflow_dispatch:
@@ -35,21 +34,22 @@ tools:
     branch-name: memory/default
     max-file-size: 102400
     max-patch-size: 102400
-    file-glob: ["**/*.md", "*.patch"]
+    file-glob: ["**/*.md"]
   bash: true
 
 safe-outputs:
-  max-patch-size: 1024
+  push-to-pull-request-branch:
+    target: ${{ github.event.inputs.pr_number }}
   add-comment:
     hide-older-comments: true
-  dispatch-workflow: [apply-translation-patch]
+  dispatch-workflow: [verify-translation]
   noop:
 
 ---
 
 # Improve Translation
 
-You are an AI assistant that improves translation coverage for locale files in the Rancher UI locales project. Your job is to find all untranslated strings in the locale file on pull request #${{ github.event.inputs.pr_number }} of ${{ github.repository }}, translate them, save a patch, and dispatch the apply workflow to push changes.
+You are an AI assistant that improves translation coverage for locale files in the Rancher UI locales project. Your job is to find all untranslated strings in the locale file on pull request #${{ github.event.inputs.pr_number }} of ${{ github.repository }}, translate them, push the improved file, and dispatch the verify-translation workflow.
 
 ## Loop Guard
 
@@ -105,7 +105,7 @@ Translate the untranslated strings following the translation rules, priority ord
 
 Additionally for this workflow:
 
-- **Stop after translating 500 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off. This limit ensures the resulting patch stays under the 100 KB repo-memory size limit.
+- **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
 
 ## 5. Validate after translation
 
@@ -118,47 +118,25 @@ Re-run the coverage script from step 3 to get updated numbers:
 - How many strings were translated in this run
 - How many untranslated strings remain
 
-## 7. Save patch and dispatch apply workflow
+## 7. Push and dispatch verify-translation
 
-Instead of pushing directly, save the changes as a patch and dispatch the apply workflow:
+Push the improved locale file to the PR branch (the framework handles this via `push-to-pull-request-branch`).
 
-1. Find the locale file that was modified:
-   ```bash
-   LOCALE_FILE=$(git diff --name-only)
-   ```
+Then **MANDATORY — dispatch verify-translation**: You MUST call the `dispatch_workflow` tool to dispatch the `verify-translation` workflow. This step is NOT optional. Use `dispatch-workflow` with inputs:
+- `pr_number`: `${{ github.event.inputs.pr_number }}`
+- `attempt`: `${{ github.event.inputs.attempt }}`
 
-2. Commit the changes locally and generate a patch:
-   ```bash
-   git add "$LOCALE_FILE"
-   git commit -m "improve: translate strings for $LOCALE - attempt ${{ github.event.inputs.attempt }}"
-   git diff HEAD~1 -- "$LOCALE_FILE" > /tmp/gh-aw/repo-memory/default/translation-pr-${{ github.event.inputs.pr_number }}.patch
-   ```
+If you do not dispatch this workflow, the translation will never be re-verified. Do NOT skip this step.
 
-3. Verify the patch starts with `diff --git` (not `---` with timestamps):
-   ```bash
-   head -3 /tmp/gh-aw/repo-memory/default/translation-pr-${{ github.event.inputs.pr_number }}.patch
-   ```
-   If the first line does NOT start with `diff --git`, delete it and regenerate.
-
-4. **IMPORTANT**: The patch file MUST be placed directly at:
-   `/tmp/gh-aw/repo-memory/default/translation-pr-<PR_NUMBER>.patch`
-   Do NOT create any subdirectories — the sandbox blocks mkdir inside repo-memory.
-
-5. After saving, call the push_repo_memory tool to validate the size is within limits.
-
-6. Dispatch the `apply-translation-patch` workflow using `dispatch-workflow` with inputs:
-   - `pr_number`: `${{ github.event.inputs.pr_number }}`
-   - `attempt`: `${{ github.event.inputs.attempt }}`
-
-7. Add a **detailed comment** to PR #${{ github.event.inputs.pr_number }}:
-   - Summary header: "🌐 **Improve Translation — Progress Report**"
-   - Coverage before this run → coverage after this run
-   - Number of strings translated in this run
-   - Breakdown by top-level section (how many translated per section)
-   - Number of untranslated strings remaining
-   - If coverage is 100%: "✅ All strings are now translated! Ready for native speaker review."
-   - If coverage < 100%: "The verify-translation workflow will be triggered automatically after changes are applied to continue the improvement cycle."
-   - Always note that translations are AI-generated and need native speaker review
+Finally, add a **detailed comment** to PR #${{ github.event.inputs.pr_number }}:
+- Summary header: "🌐 **Improve Translation — Progress Report**"
+- Coverage before this run → coverage after this run
+- Number of strings translated in this run
+- Breakdown by top-level section (how many translated per section)
+- Number of untranslated strings remaining
+- If coverage is 100%: "✅ All strings are now translated! Ready for native speaker review."
+- If coverage < 100%: "The verify-translation workflow has been dispatched to re-check coverage."
+- Always note that translations are AI-generated and need native speaker review
 
 ## 8. Update learnings
 
