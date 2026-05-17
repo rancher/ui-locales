@@ -99,9 +99,11 @@ If the issue does not meet these criteria, do nothing and stop.
 
 8. **Add a comment** to the issue confirming the PR was opened, with a link, and noting it needs native speaker review.
 
-9. **Dispatch verify-translation** — After the PR is created, dispatch the `verify-translation` workflow using `dispatch-workflow` with inputs:
-   - `pr_number`: the number of the PR you just created
+9. **MANDATORY — Dispatch verify-translation** — You MUST call the `dispatch_workflow` tool to dispatch the `verify-translation` workflow. This step is NOT optional. Use `dispatch-workflow` with inputs:
+   - `pr_number`: the number of the PR you just created (e.g. `"3"`)
    - `attempt`: `"1"`
+
+   If you do not dispatch this workflow, the translation will never be verified. Do NOT skip this step.
 
 ## Update learnings
 

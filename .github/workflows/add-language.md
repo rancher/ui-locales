@@ -75,9 +75,11 @@ If the issue does not meet these criteria, call the `noop` tool and stop.
 
 7. **Add a comment** to the original issue letting the requester know a PR has been opened with the translation, linking to it, noting it needs native speaker review before merging, and that automated verification will run shortly.
 
-8. **Dispatch verify-translation** — After the PR is created, dispatch the `verify-translation` workflow using `dispatch-workflow` with inputs:
-   - `pr_number`: the number of the PR you just created
+8. **MANDATORY — Dispatch verify-translation** — You MUST call the `dispatch_workflow` tool to dispatch the `verify-translation` workflow. This step is NOT optional. Use `dispatch-workflow` with inputs:
+   - `pr_number`: the number of the PR you just created (e.g. `"3"`)
    - `attempt`: `"1"`
+
+   If you do not dispatch this workflow, the translation will never be verified. Do NOT skip this step.
 
 ## Update learnings
 

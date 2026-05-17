@@ -108,10 +108,10 @@ Do **NOT** check or modify other language files. Only fix the specific language 
 - Always note when a fix is AI-generated and recommend native speaker review
 - If unsure about a translation, flag it explicitly in the PR body rather than guessing silently
 
-## Dispatch verify-translation
+## MANDATORY — Dispatch verify-translation
 
-After creating each PR, dispatch the `verify-translation` workflow using `dispatch-workflow` with inputs:
-- `pr_number`: the number of the PR you just created
+After creating each PR, you MUST call the `dispatch_workflow` tool to dispatch the `verify-translation` workflow. This step is NOT optional. Use `dispatch-workflow` with inputs:
+- `pr_number`: the number of the PR you just created (e.g. `"3"`)
 - `attempt`: `"1"`
 
-This triggers automated verification of the fix.
+If you do not dispatch this workflow, the translation fix will never be verified. Do NOT skip this step.
