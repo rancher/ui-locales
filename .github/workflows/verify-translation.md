@@ -149,7 +149,7 @@ Use bash to write and run a script that calculates translation coverage:
      - Acronyms and abbreviations (e.g. `CPU`, `GPU`, `RAM`, `DNS`, `API`, `HTTP`, `HTTPS`, `SSH`, `TCP`, `UDP`, `CIDR`, `RBAC`, `OIDC`, `LDAP`, `SAML`, `PVC`, `CSI`)
      - File extensions, formats, and protocols (e.g. `.yaml`, `.json`, `base64`, `PEM`, `PKCS`)
      - Values that are a single word that is also a universal technical term in IT (commonly left in English even in fully translated software)
-   - **Skipped**: values that are inherently non-translatable — empty strings, pure numbers, single characters, URLs, variable-only values like `{name}`, special values like `'—'`, HTML-only values
+   - **Skipped**: values that are inherently non-translatable — empty strings, pure numbers, single characters, URLs and URI paths, CSS classes or selectors (e.g. `btn-primary`, `d-flex`), purely structural HTML markup (e.g. `<br/>`, `<hr>`), variable-only values like `{name}`, special values like `'—'`, values that are exclusively code/markup with no human-readable text
    - **Untranslated**: value is identical to English and does **not** fit in "Kept in English" or "Skipped" — these genuinely need translation.
 3. Calculate:
    - **Total leaf keys** in `en-us.yaml`

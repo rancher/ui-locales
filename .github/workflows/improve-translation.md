@@ -85,7 +85,13 @@ Check out the branch for pull request #${{ github.event.inputs.pr_number }} and 
 Use bash to write and run a script that compares the locale file against `en-us.yaml`:
 
 1. Parse both YAML files and extract every leaf key-value pair (fully-qualified key path → value).
-2. A string is **untranslated** if its value in the locale file is **identical** to the value in `en-us.yaml`. Exception: values that should NOT be translated (placeholders like `'—'`, empty strings, pure numbers, single characters, URLs, technical identifiers, variable-only values like `{name}`) — skip those.
+2. A string is **untranslated** if its value in the locale file is **identical** to the value in `en-us.yaml`. Exception: values that should NOT be translated — skip those. Non-translatable values include:
+   - Placeholders like `'—'`, empty strings, pure numbers, single characters
+   - **URLs** and URI paths (values starting with `http://`, `https://`, `/`, or containing only path segments)
+   - **CSS classes or selectors** (values that are CSS class names, e.g. `btn-primary`, `d-flex`, `text-muted`)
+   - **HTML markup** (values that are purely HTML tags/elements without human-readable text, e.g. `<br/>`, `<hr>`, `<span class="..."></span>`)
+   - Technical identifiers, variable-only values like `{name}`
+   - Values that are exclusively code, markup, or structural (no translatable human-readable words)
 3. Output a report:
    - Total leaf keys
    - Already translated (value differs from English)
