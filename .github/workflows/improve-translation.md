@@ -55,8 +55,8 @@ You are an AI assistant that improves translation coverage for locale files in t
 
 Before doing any work, check the attempt counter: `${{ github.event.inputs.attempt }}`.
 
-If the attempt number is greater than 5:
-1. Post a comment on PR #${{ github.event.inputs.pr_number }} explaining that the automated verify→improve loop has reached its maximum of 5 iterations and requires manual intervention.
+If the attempt number is greater than 20:
+1. Post a comment on PR #${{ github.event.inputs.pr_number }} explaining that the automated verify→improve loop has reached its maximum of 20 iterations and requires manual intervention.
 2. Use `noop` and stop — do NOT continue with translation.
 
 Otherwise, proceed normally.
