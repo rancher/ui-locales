@@ -654,7 +654,7 @@ authConfig:
       ldap: LDAP
       tls: LDAPS (TLS)
     customizeSchema: Personalizar Schema
-    oktaSchema: Os padrões abaixo são para um servidor OpenLDAP genérico. Para mais informações sobre os valores a usar quando integrado ao Okta, consulte a documentação do Okta.
+    oktaSchema: 'Os padrões abaixo são para um servidor OpenLDAP genérico. Para mais informações sobre os valores a usar com a interface LDAP do Okta, consulte: <a target="_blank" rel="noopener noreferrer nofollow" href="https://help.okta.com/en-us/Content/Topics/Directory/LDAP-interface-connection-settings.htm">Configurações de conexão da interface LDAP do Okta</a>'
     users: Usuários
     groups: Grupos
     searchAttribute: Atributo de Pesquisa
@@ -1022,7 +1022,7 @@ backupRestoreOperator:
   backup:
     label: Conjunto de Recursos
     description: O Conjunto de Recursos determina quais recursos o backup-restore-operator coleta em um backup
-    enableEncryptionWarning: É altamente recomendado habilitar a criptografia ao usar o <b><i>backup completo do Rancher</i></b> para evitar expor credenciais.
+    enableEncryptionWarning: 'É altamente recomendado habilitar a criptografia ao usar o <b><i>backup completo do Rancher</i></b>; caso contrário, informações sensíveis serão salvas em texto simples. <a target="_blank" rel="noopener noreferrer nofollow" href="https://ranchermanager.docs.rancher.com/reference-guides/backup-restore-configuration/backup-configuration#resourcesets">Saiba mais</a>.'
     missingResourceSetWarning: O conjunto de recursos <b><i>{resourceSet}</i></b> não existe; é possível que tenha sido excluído.
     resourceSetOptions:
       'rancher-resource-set-basic': 'Conjunto de recursos básico do Rancher para backup'
@@ -1052,7 +1052,7 @@ backupRestoreOperator:
       warning: 'Este {type} não tem sua política de recuperação definida como "Retain". Seus backups podem ser perdidos se o volume for excluído.'
   encryption: Criptografia
   encryptionConfigName:
-    backuptip: Qualquer secret no namespace <code>{ns}</code> que tenha um campo <code>encryption-provider-config</code> pode ser usado.
+    backuptip: 'Qualquer secret no namespace <code>{ns}</code> que tenha uma chave <code>encryption-provider-config.yaml</code>. <br/>O conteúdo deste arquivo é necessário para realizar uma restauração deste backup e não é armazenado pelo Rancher Backup.'
     label: Segredo de Configuração de Criptografia
     options:
       none: Armazenar o conteúdo do backup sem criptografia
@@ -1657,13 +1657,13 @@ cluster:
         label: ID do Tenant
     digitalocean:
       accessToken:
-        help: Cole um Token de Acesso Pessoal da sua conta DigitalOcean.
+        help: 'Cole um Token de Acesso Pessoal da tela <a href="https://cloud.digitalocean.com/settings/api/tokens" target="_blank" rel="noopener noreferrer nofollow">Aplicações & API</a> do DigitalOcean.'
         label: Token de Acesso
         placeholder: Seu Token de Acesso da API DigitalOcean
     label: Credencial de Nuvem
     linode:
       accessToken:
-        help: Cole um Token de Acesso Pessoal da sua conta Linode.
+        help: 'Cole um Token de Acesso Pessoal da tela de <a href="https://cloud.linode.com/profile/tokens" target="_blank" rel="noopener noreferrer nofollow">Tokens de API</a> do Linode.'
         label: Token de Acesso
         placeholder: Seu Token de Acesso da API Linode
     pnap:
@@ -1781,7 +1781,7 @@ cluster:
       secureBoot: Inicialização Segura
       enableEfi: Inicializando no modo EFI
       installGuestAgent: Instalar agente convidado
-      tokenExpirationWarning: 'Aviso: As Credenciais Cloud do Harvester usam um token de autenticação subjacente. Recrie as credenciais se expiradas.'
+      tokenExpirationWarning: 'Aviso: As Credenciais Cloud do Harvester usam um token de autenticação subjacente que pode ter um prazo de expiração - consulte o seguinte <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">artigo da base de conhecimento</a> para possíveis implicações nas operações de gerenciamento.'
   description:
     label: Descrição do Cluster
     placeholder: Qualquer texto que descreva melhor este cluster
@@ -2480,7 +2480,7 @@ cluster:
     modal:
       editYamlMachinePool:
         title: Salvar Configurações de Máquina
-        body: As Configurações de Máquina definem como as máquinas nos Pools são implantadas. Elas serão salvas antecipadamente para garantir que um YAML de Cluster válido possa ser salvo.
+        body: As Configurações de Máquina definem como as máquinas nos Pools são implantadas.<br><br> Elas serão salvas antecipadamente para garantir que um YAML de Cluster válido possa ser salvo.
       ipv6Warning:
         title: Verificar Configurações de IPv6
         body: 'Os pools de máquinas neste cluster estão configurados para usar redes IPv6, mas as configurações de rede do cluster podem não suportá-lo.'
@@ -2617,7 +2617,7 @@ cluster:
           label: CA Cert do Endpoint
     stackPreference:
       label: Preferência de Stack
-      description: 'A preferência de pilha determina a pilha de rede usada pelo cluster. IPv4 usa <code>127.0.0.1</code> como endereço localhost, IPv6 usa <code>[::1]</code>, e Dual usa ambos.'
+      description: 'A preferência de pilha determina a pilha de rede usada pelo cluster. IPv4 usa <code>127.0.0.1</code>, Dual-Stack usa <code>localhost</code> e IPv6 usa <code>[::1]</code>. Saiba mais sobre redes <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >RKE2</a> e <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/k3s-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >K3s</a> na documentação do Rancher.'
       options:
         ipv4: IPv4
         ipv6: IPv6
@@ -2833,7 +2833,7 @@ providers:
 drivers:
   kontainer:
     title: Drivers de Cluster
-    emberDeprecationMessage: O suporte a Plugins de UI (baseado em Ember) para drivers de cluster e nó foi descontinuado e será removido em uma versão futura.
+    emberDeprecationMessage: 'O suporte a Plugins de UI (baseado em Ember) para drivers de cluster e nó foi descontinuado no Rancher 2.11.0 e será removido em uma versão futura. É necessário migrar para o novo <a href="https://extensions.rancher.io" target="_blank" rel="noopener noreferrer nofollow">framework de Extensões de UI</a>.'
     refreshError: 'Erro ao atualizar drivers de cluster: {error}'
   node:
     title: Drivers de Nó
@@ -2865,8 +2865,8 @@ drivers:
       }
     warningDrivers: |-
       {count, plural,
-      =1 { Você não poderá mais editar a configuração de clusters usando este driver. }
-      other { Você não poderá mais editar a configuração de clusters usando estes drivers. }
+      =1 { Você não poderá mais editar a configuração de clusters usando o driver {names}. }
+      other { Você não poderá mais editar a configuração de clusters usando os drivers {names}. }
       }
     warning: |-
       {count, plural,
@@ -3542,7 +3542,7 @@ gatekeeperIndex:
   poweredBy: OPA Gatekeeper
   unavailable: OPA + Gatekeeper não está disponível no catálogo de charts do sistema.
   violations: Violações
-  deprecated: O chart OPA Gatekeeper está obsoleto a partir do Rancher 2.8 e será removido em uma versão futura.
+  deprecated: 'O chart OPA Gatekeeper está obsoleto a partir do Rancher 2.8 e será removido em uma versão futura. Considere migrar para o <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.kubewarden.io">Kubewarden</a>.'
 
 gatekeeperInstall:
   auditInterval: Intervalo Automático
@@ -3862,7 +3862,7 @@ istio:
   links:
     kiali:
       label: Kiali
-      description: 'Visualização dos serviços dentro de uma malha de serviços e como eles estão conectados. Para que o Kiali exiba dados, o Prometheus deve estar configurado.'
+      description: 'Visualização dos serviços dentro de uma malha de serviços e como eles estão conectados. Para que o Kiali exiba dados, você precisa do Prometheus instalado. Se precisar de uma solução de monitoramento, instale o <a tabindex="0" href="{link}">{vendor} monitoring</a>.'
     jaeger:
       label: Jaeger
       description: Monitorar e solucionar problemas em sistemas distribuídos baseados em microsserviços.
@@ -4508,7 +4508,7 @@ monitoring:
     readOnlyMany: Somente Leitura por Muitos
   aggregateDefaultRoles:
     label: Agregar Funções Padrão
-    tip: 'Agregar às funções padrão de cluster'
+    tip: 'Adiciona rótulos aos ClusterRoles implantados pelo chart de Monitoramento para <a target="_blank" rel="noopener nofollow noreferrer" href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles"> agregar aos ClusterRoles admin, edit e view padrão do k8s correspondentes.</a>'
   alerting:
     config:
       label: Configuração de Alertas
@@ -4516,7 +4516,7 @@ monitoring:
       label: Habilitar Alertas
     secrets:
       additional:
-        info: Segredos adicionais a incluir para alertas
+        info: 'Os caminhos de arquivo abaixo devem ser referenciados em <pre class=\'inline-block m-0\'>/etc/alertmanager/secrets/</pre>'
         label: Segredos Adicionais
       existing: Secret Existente
       info: |
@@ -4542,7 +4542,7 @@ monitoring:
     tip: 'Cria ClusterRoles <code>monitoring-admin</code>, <code>monitoring-edit</code> e <code>monitoring-view</code> que podem ser atribuídas a usuários para fornecer permissões aos CRDs instalados pelo chart de Monitoramento.'
   etcdNodeDirectory:
     label: Diretório de Certificados do Nó etcd
-    tooltip: "Para clusters que usam RancherOS para os nós etcd, esta opção deve ser definida como '/var/lib/etcd'."
+    tooltip: 'Para clusters que usam RancherOS para os nós etcd, esta opção deve ser definida como <pre class=\'inline-block m-0\'>/opt/rke/etc/kubernetes/ssl</pre>. Ambientes híbridos que exigem múltiplos diretórios de certificados não são suportados.'
   grafana:
     storage:
       annotations: Anotações do PVC
@@ -4641,7 +4641,7 @@ monitoring:
       keyFilePath:
         label: Caminho do Arquivo de Chave
         placeholder: 'ex.: ./key-file.pfx'
-      secretsBanner: 'Os caminhos de arquivo abaixo devem ser referenciados em <pre class="inline-block m-0 p-0 vertical-middle">alertmanager.yaml</pre>.'
+      secretsBanner: 'Os caminhos de arquivo abaixo devem ser referenciados em <pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre> ao implantar o chart de Monitoramento. Para mais informações, consulte nossa <a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">documentação</a>.'
   projectMonitoring:
     detail:
       error: 'Não foi possível buscar os valores do Dashboard com status: '
@@ -4700,7 +4700,7 @@ monitoring:
     grafana: Grafana
     prometheus: Prometheus
     projectMetrics: Métricas do Projeto
-  v1Warning: O Monitoramento está atualmente implantado pelo Cluster Manager. Se você estiver migrando de v1 para v2, desinstale primeiro a versão v1.
+  v1Warning: 'O Monitoramento está atualmente implantado pelo Cluster Manager. Se você estiver migrando de uma versão mais antiga do {vendor} com monitoramento habilitado, desative o monitoramento no Cluster Manager antes de instalar o novo chart de Monitoramento do {vendor} no Cluster Explorer.'
 
 monitoringReceiver:
   addButton: Adicionar {type}
@@ -4979,23 +4979,27 @@ networkpolicy:
       matchesSome: |-
         {matched, plural,
           =0 {Corresponde a 0 de {total, number} pods}
-          =1 {Corresponde a 1 de {total, number} pods}
-          other {Corresponde a {matched, number} de {total, number} pods}
+          =1 {Corresponde a 1 de {total, number} pods: "{sample}"}
+          other {Corresponde a {matched, number} de {total, number} pods existentes, incluindo "{sample}"}
         }
     matchingNamespaces:
       matchesSome: |-
         {matched, plural,
           =0 {Corresponde a 0 de {total, number} namespaces}
-          =1 {Corresponde a 1 de {total, number} namespaces}
-          other {Corresponde a {matched, number} de {total, number} namespaces}
+          =1 {Corresponde a 1 de {total, number} namespaces: "{sample}"}
+          other {Corresponde a {matched, number} de {total, number} namespaces existentes, incluindo "{sample}"}
         }
     matchingNamespacesAndPods:
       tooltip: Uma regra de entrada única que especifica tanto o Seletor de Namespace quanto o Seletor de Pod que seleciona Pods específicos em namespaces específicos
       matchesSome: |-
         {matchedPods, plural,
           =0 {Corresponde a 0 de {totalPods, number} pods}
-          =1 {Corresponde a 1 de {totalPods, number} pods}
-          other {Corresponde a {matchedPods, number} de {totalPods, number} pods}
+          =1 {Corresponde a 1 de {totalPods, number} pods: "{samplePods}"}
+          other {Corresponde a {matchedPods, number} de {totalPods, number} pods existentes, incluindo "{samplePods}"}
+        } em {matchedNamespaces, plural,
+          =0 {0 de {totalNamespaces, number} namespaces}
+          =1 {1 de {totalNamespaces, number} namespaces: "{sampleNamespaces}"}
+          other {{matchedNamespaces, number} de {totalNamespaces, number} namespaces existentes, incluindo "{sampleNamespaces}"}
         }
 node:
   list:
@@ -5528,7 +5532,7 @@ plugins:
           label: Segredos de Pull de Imagem
           tooltip: Deve ser do tipo `kubernetes.io/dockercfg` ou `kubernetes.io/dockerconfigjson`
         secrets:
-          banner: Se o registro que hospeda a Imagem do Catálogo requer Segredos de Pull, eles devem ser configurados aqui.
+          banner: "Se o registro que hospeda a Imagem do Catálogo requer Segredos de Pull, eles devem ser criados no seguinte namespace:<pre>cattle-ui-plugin-system</pre>"
       banner: Isso criará um Deployment, Service e repositório Helm para servir as extensões a partir da imagem carregada.
       imageVersion:
         title: Versão da Imagem Não Encontrada
@@ -5851,11 +5855,11 @@ prometheusRule:
 
 promptForceRemove:
   modalTitle: 'Tem certeza?'
-  removeWarning: Houve um problema ao excluir a infraestrutura subjacente. Se você prosseguir com a exclusão forçada, o recurso será removido do Rancher mas a infraestrutura pode permanecer.
+  removeWarning: "Houve um problema ao excluir a infraestrutura subjacente. Se você prosseguir com esta ação, a Máquina <b>{nameToMatch}</b> será excluída apenas do Rancher. É altamente recomendado excluir manualmente qualquer infraestrutura referenciada."
   forceDelete: Forçar Exclusão
   ariaLabel: Copiar nome da Máquina para a área de transferência
   confirmName: 'Digite o nome do pool abaixo para confirmar:'
-  podRemoveWarning: A exclusão forçada de pods não aguarda confirmação de que os processos do pod foram encerrados.
+  podRemoveWarning: "A exclusão forçada de pods não aguarda confirmação de que os processos do pod foram encerrados. Isso pode resultar em <strong>corrupção de dados ou inconsistências</strong>"
 
 promptScaleMachineDown:
   attemptingToRemove: Você está tentando excluir {count} {type}
@@ -6447,9 +6451,9 @@ servicesPage:
       description: As chaves e valores do seletor destinam-se a corresponder rótulos e valores em Pods existentes.
       matchesSome: |-
         {matched, plural,
-          =0 {Corresponde a 0 de {total, number} pods. Se nenhum seletor for criado, nenhum pod será selecionado.}
-          =1 {Corresponde a 1 de {total, number} pods}
-          other {Corresponde a {matched, number} de {total, number} pods}
+          =0 {Corresponde a 0 de {total, number} pods. Se nenhum seletor for criado, os endpoints devem ser criados manualmente.}
+          =1 {Corresponde a 1 de {total, number} pods: "{sample}"}
+          other {Corresponde a {matched, number} de {total, number} pods existentes, incluindo "{sample}"}
         }
   serviceTypes:
     clusterIp:
@@ -6479,7 +6483,7 @@ setup:
   currentPassword: Senha Bootstrap
   confirmPassword: Confirmar Nova Senha
   defaultPassword:
-    intro: Parece que esta é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha, use-a aqui.
+    intro: 'Parece que esta é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha de bootstrap, insira-a aqui. Caso contrário, uma senha aleatória foi gerada para você. Para encontrá-la:<br/><br/>'
     dockerPrefix: "Para uma instalação com 'docker run':"
     dockerPs: 'Encontre o ID do seu contêiner com <code>docker ps</code>, depois execute:'
     dockerSuffix: ""
@@ -6492,7 +6496,7 @@ setup:
     label: URL do Servidor
     skip: Pular
     tip: Qual URL deve ser usada para esta instalação do {vendor}? Todos os nós em seus clusters precisarão conseguir acessá-la.
-  setPassword: A primeira etapa é definir uma senha forte para o usuário padrão <code>{user}</code>.
+  setPassword: A primeira etapa é definir uma senha forte para o usuário padrão <code>{username}</code>. Sugerimos usar esta gerada aleatoriamente para você, mas insira a sua própria se preferir.
   useManual: Definir uma senha específica para usar
   useRandom: Usar uma senha gerada aleatoriamente
   copyRandom: Copiar senha aleatória para a área de transferência
@@ -8877,8 +8881,8 @@ featureFlags:
 performance:
   label: Desempenho
   settingName: Configurações de Desempenho
-  deprecatedInactivitySetting: Esta configuração de inatividade está obsoleta
-  deprecatedForSSP: Esta configuração está obsoleta para SSP
+  deprecatedInactivitySetting: 'A configuração <i class="mr-5">"Inatividade"</i> está obsoleta em favor de <i class="mr-5">auth-user-session-idle-ttl-minutes</i>&nbsp;<a href="{settingsPageUrl}">Configuração</a>.'
+  deprecatedForSSP: 'A configuração <i class="mr-5">"{setting}"</i> está obsoleta e será removida em uma versão futura.'
   incrementalLoad:
     label: Carregamento Incremental
     setting: Configuração de Carregamento Incremental
