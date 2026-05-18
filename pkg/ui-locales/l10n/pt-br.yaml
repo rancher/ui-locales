@@ -1986,14 +1986,11 @@ cluster:
         label: Tags do Droplet
         placeholder: 'ex.: my_server'
     linode:
-      typeLabel: '{label}, {vcpus, plural,
-  =1 {# vCPU}
-  other {# vCPUs}
-}, {disk} GB Disco ({value})'
+      typeLabel: |-
         {label}, {vcpus, plural,
           =1 {# vCPU}
           other {# vCPUs}
-        }, {disk} GB Disk ({value})
+        }, {disk} GB Disco ({value})
     vsphere:
       hostOptions:
         any: Qualquer
@@ -7369,7 +7366,7 @@ wm:
     searchLogs: Pesquisar/filtrar logs
     logActionMenu: Menu de ações de logs
     clear: Limpar
-    containerName: 'Container: {label}'
+    containerName: 'Contêiner: {label}'
     download: Baixar
     follow: Acompanhar
     noData: Não há entradas de log para mostrar no intervalo atual.
@@ -7396,7 +7393,7 @@ wm:
   containerShell:
     escapeText: Pressione Shift+Escape para sair do terminal
     clear: Limpar
-    containerName: 'Container: {label}'
+    containerName: 'Contêiner: {label}'
     failed: "Não foi possível abrir um shell para o container (nenhum dos comandos shell foi bem-sucedido)\n\r"
     logLevel:
       info: INFO
