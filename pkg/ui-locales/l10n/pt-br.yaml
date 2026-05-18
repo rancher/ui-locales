@@ -750,7 +750,7 @@ authConfig:
         linkText: 'Atualize aqui.'
       modal:
         title: 'Tem certeza? Esta atualização é irreversível.'
-        body: <p><b>Talvez você precise fazer algumas alterações adicionais</b>. Certifique-se de que o aplicativo do Azure AD tenha a permissão de Leitura de Diretório configurada. Para mais informações, consulte a documentação.</p>
+        body: '<p><b>Talvez você precise fazer algumas alterações adicionais</b>. Certifique-se de que o aplicativo do Azure AD tenha a permissão Directory.Read.All <b>Application</b> adicionada ao Microsoft Graph.<br> Se algum endpoint foi personalizado durante a configuração da autenticação Azure AD no Rancher, ele não será atualizado automaticamente. </p>'
   oidc:
     endSessionEndpoint: 
       title: Endpoint de Encerramento de Sessão
@@ -4516,7 +4516,7 @@ monitoring:
       label: Habilitar Alertas
     secrets:
       additional:
-        info: 'Os caminhos de arquivo abaixo devem ser referenciados em <pre class=\'inline-block m-0\'>/etc/alertmanager/secrets/</pre>'
+        info: 'Os caminhos de arquivo abaixo devem ser referenciados em <pre class=''inline-block m-0''>/etc/alertmanager/secrets/</pre>'
         label: Segredos Adicionais
       existing: Secret Existente
       info: |
@@ -4542,7 +4542,7 @@ monitoring:
     tip: 'Cria ClusterRoles <code>monitoring-admin</code>, <code>monitoring-edit</code> e <code>monitoring-view</code> que podem ser atribuídas a usuários para fornecer permissões aos CRDs instalados pelo chart de Monitoramento.'
   etcdNodeDirectory:
     label: Diretório de Certificados do Nó etcd
-    tooltip: 'Para clusters que usam RancherOS para os nós etcd, esta opção deve ser definida como <pre class=\'inline-block m-0\'>/opt/rke/etc/kubernetes/ssl</pre>. Ambientes híbridos que exigem múltiplos diretórios de certificados não são suportados.'
+    tooltip: 'Para clusters que usam RancherOS para os nós etcd, esta opção deve ser definida como <pre class=''inline-block m-0''>/opt/rke/etc/kubernetes/ssl</pre>. Ambientes híbridos que exigem múltiplos diretórios de certificados não são suportados.'
   grafana:
     storage:
       annotations: Anotações do PVC
@@ -5868,8 +5868,8 @@ promptScaleMachineDown:
   retainedMachine2: <b>{ name }</b> permanecerá
   scaling: |-
     {count, plural,
-      =1 {Este pool de máquinas ainda está reconciliando. Um nó diferente pode ser excluído em vez daquele que você selecionou.}
-      other {Estes pools de máquinas ainda estão reconciliando. Nós diferentes podem ser excluídos.}
+      =1 {Este pool de máquinas ainda está reconciliando. Um nó diferente pode ser excluído em vez daquele que você selecionou. É melhor aguardar até que a reconciliação termine.<br> Você ainda deseja marcar este nó para exclusão?}
+      other {Pelo menos um desses pools de máquinas ainda está reconciliando. Nós diferentes podem ser excluídos em vez dos que você selecionou. É melhor aguardar até que a reconciliação termine.<br> Você ainda deseja marcar esses nós para exclusão?}
     }
 promptSlo:
   title: Sair
@@ -7198,22 +7198,22 @@ validation:
   dns:
     doubleHyphen: '"{key}" Não pode conter dois ou mais hífens consecutivos'
     hostname:
-      empty: 'O hostname não pode estar vazio'
-      emptyLabel: 'O hostname não pode ter rótulos vazios (dois pontos consecutivos)'
-      endDot: 'O hostname não pode terminar com um ponto'
-      endHyphen: 'O hostname não pode terminar com um hífen'
-      startDot: 'O hostname não pode começar com um ponto'
-      startHyphen: 'O hostname não pode começar com um hífen'
-      startNumber: 'O hostname não pode começar com um número'
-      tooLong: 'O hostname não pode ter mais de 253 caracteres'
-      tooLongLabel: 'Rótulos de hostname não podem ter mais de 63 caracteres'
+      empty: '"{key}" deve ter pelo menos um caractere'
+      emptyLabel: '"{key}" não pode conter dois pontos consecutivos'
+      endDot: '"{key}" não pode terminar com um ponto'
+      endHyphen: '"{key}" não pode terminar com um hífen'
+      startDot: '"{key}" não pode começar com um ponto'
+      startHyphen: '"{key}" não pode começar com um hífen'
+      startNumber: '"{key}" não pode começar com um número'
+      tooLong: '"{key}" não pode ter mais de {max} caracteres'
+      tooLongLabel: '"{key}" não pode conter uma seção com mais de {max} caracteres'
     label:
-      endDot: 'O rótulo DNS não pode terminar com um ponto'
-      startDot: 'O rótulo DNS não pode começar com um ponto'
-      emptyLabel: 'O rótulo DNS não pode ter rótulos vazios'
-      endHyphen: 'O rótulo DNS não pode terminar com um hífen'
-      startHyphen: 'O rótulo DNS não pode começar com um hífen'
-      startNumber: 'O rótulo DNS não pode começar com um número'
+      endDot: '"{key}" não pode terminar com um ponto'
+      startDot: '"{key}" não pode começar com um ponto'
+      emptyLabel: '"{key}" não pode estar vazio'
+      endHyphen: '"{key}" não pode terminar com um hífen'
+      startHyphen: '"{key}" não pode começar com um hífen'
+      startNumber: '"{key}" não pode começar com um número'
       tooLongLabel: '"{key}" não pode ter mais de {max} caracteres'
   flowOutput:
     both: Requer que "Saída" ou "Saída do Cluster" seja selecionada.
@@ -8785,7 +8785,7 @@ advancedSettings:
   setEnv: Definir Ambiente
   hideShow: Ocultar/Mostrar
   label: Configurações Avançadas
-  subtext: Estas configurações são para uso avançado apenas. Modificar essas configurações pode causar instabilidade ou comportamento inesperado.
+  subtext: 'Usuários típicos não precisarão alterar essas configurações. Prossiga com cuidado, valores incorretos podem prejudicar sua instalação do {appName}. Configurações personalizadas em relação ao padrão são marcadas como ''Modificado''.'
   show: Mostrar
   hide: Ocultar
   none: Nenhum
