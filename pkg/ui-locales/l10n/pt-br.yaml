@@ -1792,7 +1792,7 @@ cluster:
       state: Aviso
       cloudProvider:
         incompatible:
-          You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
+          Você não pode selecionar o provedor de nuvem Harvester, pois a versão atual do Harvester não é compatível com a versão do RKE2 Kubernetes selecionada. Clique <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são suportadas.
     clusterWarning: |-
       Há {count, plural,
       =1 {1 cluster Harvester que não está sendo exibido}
@@ -4395,7 +4395,7 @@ logging:
 longhorn:
   overview:
     title: Visão Geral
-    subtitle: "Powered By: <a href='https://github.com/longhorn' target='_blank' rel='noopener nofollow noreferrer'>Longhorn</a>"
+    subtitle: "Desenvolvido por: <a href='https://github.com/longhorn' target='_blank' rel='noopener nofollow noreferrer'>Longhorn</a>"
     linkedList:
       longhorn:
         label: Longhorn
@@ -4406,7 +4406,7 @@ longhorn:
 neuvector:
   overview:
     title: Visão Geral
-    subtitle: "Powered by: <a href='https://github.com/neuvector' target='_blank' rel='noopener nofollow noreferrer'>NeuVector</a>"
+    subtitle: "Desenvolvido por: <a href='https://github.com/neuvector' target='_blank' rel='noopener nofollow noreferrer'>NeuVector</a>"
     linkedList:
       neuvector:
         label: NeuVector
