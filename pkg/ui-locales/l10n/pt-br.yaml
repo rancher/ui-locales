@@ -2850,7 +2850,7 @@ drivers:
       placeholder: https://test.com/ui
       tooltip: 'A URL para carregar a tela personalizada de Adicionar Nós para este driver. Consulte https://github.com/rancher/ui-driver-skel para mais informações.'
     checksum:
-      label: Checksum
+      label: Soma de Verificação
       tooltip: Checksum para verificar se o driver baixado corresponde ao checksum esperado.
     whitelist: Domínios na Lista de Permissões
   actions:
@@ -3975,7 +3975,7 @@ istio:
         placeholder: 'ex.: 10'
         help: Percentual máximo de hosts no pool de balanceamento de carga para o serviço upstream que pode ser ejetado.
     subsets:
-      label: Subsets
+      label: Subconjuntos
       noSubsets: Nenhum Subset
       addSubsetLabel: Adicionar Subset
       removeSubsetLabel: Remover Subset
@@ -4519,10 +4519,10 @@ monitoring:
         info: Segredos adicionais a incluir para alertas
         label: Segredos Adicionais
       existing: Secret Existente
-      info: '<span class="text-bold">Criar configuração padrão</span>:<br>Um Secret contendo sua configuração do Alertmanager será criado.'
-        <span class="text-bold">Create default config</span>:<br>A Secret containing your Alertmanager Config will be created in the <pre class='inline-block m-0'>cattle-monitoring-system</pre> namespace on deploying this chart under the name <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. By default, this Secret will never be modified on an uninstall or upgrade of this chart. <br /><br />
-        Once you have deployed this chart, you should edit the Secret via the UI in order to add your custom notification configurations that will be used by Alertmanager to send alerts. <br /> <br />
-        <span class="text-bold">Choose an existing config secret</span>:<br>You must specify a Secret that exists in the <pre class='inline-block m-0'>cattle-monitoring-system</pre> namespace. If the namespace does not exist, you will not be able to select an existing secret.
+      info: |
+        <span class="text-bold">Criar configuração padrão</span>:<br>Um Secret contendo sua configuração do Alertmanager será criado no namespace <pre class='inline-block m-0'>cattle-monitoring-system</pre> ao implantar este chart com o nome <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Por padrão, este Secret nunca será modificado em uma desinstalação ou atualização deste chart. <br /><br />
+        Após implantar este chart, você deve editar o Secret via UI para adicionar suas configurações de notificação personalizadas que serão usadas pelo Alertmanager para enviar alertas. <br /> <br />
+        <span class="text-bold">Escolher um secret de configuração existente</span>:<br>Você deve especificar um Secret que exista no namespace <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Se o namespace não existir, você não poderá selecionar um secret existente.
       label: Secrets
       new: Novo Secret
       radio:
@@ -4623,9 +4623,9 @@ monitoring:
       size: Tamanho
       volumeName: Nome do Volume
     title: Configurar Prometheus
-    warningInstalled: 'Atenção: Operadores Prometheus estão atualmente implantados. Implantar múltiplos Prometheus Operators pode causar conflitos.'
-      Warning: Prometheus Operators are currently deployed. Deploying multiple Prometheus Operators onto one cluster is not currently supported. Please remove all other Prometheus Operator deployments from this cluster before trying to install this chart.
-      If you are migrating from an older version of {vendor} with Monitoring enabled, please disable Monitoring on this cluster completely before attempting to install this chart.
+    warningInstalled: |
+      Atenção: Operadores Prometheus estão atualmente implantados. Implantar múltiplos Prometheus Operators em um cluster não é suportado atualmente. Remova todas as outras implantações do Prometheus Operator deste cluster antes de tentar instalar este chart.
+      Se você estiver migrando de uma versão mais antiga do {vendor} com Monitoring habilitado, desabilite o Monitoring neste cluster completamente antes de tentar instalar este chart.
   receiver:
     addReceiver: Adicionar Receptor
     fields:
@@ -5688,13 +5688,13 @@ prefs:
   helm:
     'true': Incluir Versões Pré-lançamento
     'false': Mostrar Apenas Lançamentos
-    label: Helm Charts
+    label: 'Gráficos Helm'
   confirmationSetting:
     title: Configuração de Confirmação
     scalingDownPrompt: Não pedir confirmação ao reduzir pools de nós.
 
 principal:
-  loading: Loading&hellip;
+  loading: Carregando&hellip;
   error: Não foi possível buscar informações do principal
   name: Nome
   loginName: Nome de usuário
@@ -6099,12 +6099,10 @@ resourceDetail:
     endpoints: Endpoints
     labels: Rótulos
     namespaces: Namespaces
-    ownerReferences: '{count, plural,
-=1 {Proprietário}
-other {Proprietários}}'
+    ownerReferences: |-
       {count, plural,
-      =1 {Owner}
-      other {Owners}}
+      =1 {Proprietário}
+      other {Proprietários}}
     hideLabels: Ocultar rótulos do sistema
     showLabels: Mostrar todos os rótulos
     hideAnnotations: |-
@@ -6656,7 +6654,7 @@ storageClass:
       label: Nome da Política de Armazenamento
       placeholder: 'ex.: gold'
     datastore:
-      label: Datastore
+      label: Armazenamento de Dados
       placeholder: 'ex.: VSANDatastore'
     hostFailuresToTolerate:
       label: Falhas de Host a Tolerar
@@ -9060,7 +9058,7 @@ resourceQuota:
   resourceIdentifier:
     placeholder: 'ex.: configmaps'
     tooltip: "Selecione 'Personalizado' na lista 'Tipo de Recurso' e insira o identificador de recurso"
-  configMaps: Config Maps
+  configMaps: Mapas de Configuração
   limitsCpu: Limite de CPU
   limitsMemory: Limite de Memória
   persistentVolumeClaims: Solicitações de Volume Persistente
@@ -9363,7 +9361,7 @@ component:
           title: Jobs
           ariaResourceName: jobs
         insightsCard:
-          title: Insights
+          title: Informações
           rows:
             conditions: Condições
             events: Eventos
