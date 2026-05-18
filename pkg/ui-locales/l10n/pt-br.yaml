@@ -9042,7 +9042,7 @@ notifications:
     showCheckboxLabel: Mostrar erro personalizado de login
     messageLabel: Texto a exibir
 resourceQuota:
-  banner: Limite o consumo de recursos em um projeto para tipos de recursos padrão (ex.: Limite de CPU) e personalizados. Para tipos de recursos personalizados, você deve fornecer o identificador de recurso. Quer saber mais sobre cotas de recursos? Leia nossa <a href="https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/manage-projects/manage-project-resource-quotas" target="_blank" rel="noopener noreferrer nofollow">documentação <i class="icon icon-external-link"></i></a><span class="sr-only">Abre em uma nova aba</span>
+  banner: "Limite o consumo de recursos em um projeto para tipos de recursos padrão (ex.: Limite de CPU) e personalizados. Para tipos de recursos personalizados, você deve fornecer o identificador de recurso. Quer saber mais sobre cotas de recursos? Leia nossa <a href=\"https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/manage-projects/manage-project-resource-quotas\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">documentação <i class=\"icon icon-external-link\"></i></a><span class=\"sr-only\">Abre em uma nova aba</span>"
   label: Cotas de Recursos
   headers:
     limit: Limite
