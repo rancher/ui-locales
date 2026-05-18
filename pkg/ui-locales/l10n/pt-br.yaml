@@ -3871,7 +3871,7 @@ istio:
   customOverlayFile:
     label: Arquivo de Overlay Personalizado
     tip: 'O <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">arquivo overlay</a> permite configuração adicional sobre a instalação base do Istio de {vendor}. Você pode utilizar a <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >API IstioOperator</a> para fazer alterações e adições em todos os componentes e aplicar essas alterações via este arquivo YAML overlay.'
-  description: '{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para você começar a trabalhar com service mesh.'
+  description: '{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para você começar a integrar com seus aplicativos. Se quiser obter informações adicionais sobre o Istio, visite <a target="_blank" href="https://istio.io/latest/docs/concepts/what-is-istio" rel="noopener noreferrer nofollow">https://istio.io/latest/docs/concepts/what-is-istio/</a>'
   destinationRule:
     title:
       new: Adicionar Regra de Destino
@@ -6842,7 +6842,7 @@ storageClass:
     title: Armazenamento Local
   deprecated:
     title: (Obsoleto)
-    warning: 'O plugin in-tree {provisioner} está obsoleto: Encontre um driver CSI equivalente.'
+    warning: 'O plugin in-tree {provisioner} está obsoleto: Encontre um driver CSI <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes-csi.github.io/docs/drivers.html">aqui.</a>'
   harvesterhci:
     title: Harvester (CSI)
     warning:
