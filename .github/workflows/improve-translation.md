@@ -23,6 +23,10 @@ permissions:
   issues: read
   pull-requests: read
 
+checkout:
+  ref: refs/pull/${{ github.event.inputs.pr_number }}/head
+  fetch-depth: 1
+
 network: defaults
 
 timeout-minutes: 120
