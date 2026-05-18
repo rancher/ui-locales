@@ -217,13 +217,10 @@ nav:
   home: Início
   shell: Shell Kubectl
   shellShortcut: Shell Kubectl {key}
-  support: '{hasSupport, select,
-  true {Suporte}
-  other {Obter Suporte}
-}'
+  support: |-
     {hasSupport, select,
-      true {Support}
-      other {Get Support}
+      true {Suporte}
+      other {Obter Suporte}
     }
   restoreSnapshot: Restaurar Snapshot
   rotateCertificates: Rotacionar Certificados
@@ -1059,7 +1056,7 @@ backupRestoreOperator:
     label: Segredo de Configuração de Criptografia
     options:
       none: Armazenar o conteúdo do backup sem criptografia
-      secret: 'Encrypt backups using an <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration">Encryption Config Secret</a> (Recommended)'
+      secret: 'Criptografar backups usando um <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration">Secret de Configuração de Criptografia</a> (Recomendado)'
     restoretip: Se o backup foi realizado com criptografia habilitada, um secret contendo a mesma chave de criptografia deve estar presente antes de restaurar.
     warning: O conteúdo deste arquivo é necessário para realizar uma restauração deste backup e não é armazenado pelo operador. Guarde-o em um local seguro.
   lastBackup: Último Backup
@@ -2490,12 +2487,12 @@ cluster:
       ipv6Warning:
         title: Verificar Configurações de IPv6
         body: 'Os pools de máquinas neste cluster estão configurados para usar redes IPv6, mas as configurações de rede do cluster podem não suportá-lo.'
-        stackPrefInvalid: The <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Stack Preference</a> should be set to "Dual" or "IPv6" to use dual-stack or IPv6-only networking, respectively. 
+        stackPrefInvalid: A <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Preferência de Pilha</a> deve ser definida como "Dual" ou "IPv6" para usar rede dual-stack ou somente IPv6, respectivamente. 
         flannelMasqInvalid: O K3s usa o plugin cni Flannel por padrão. Habilitar o Flannel Masq é geralmente recomendado ao usar redes IPv6.
         cidrInvalidRke2: 'Para habilitar redes dual-stack em clusters RKE2, você deve definir intervalos de CIDR válidos de dual-stack para cluster e serviço.'
         cidrInvalidK3s: 'Para habilitar redes dual-stack ou apenas IPv6 em clusters K3s, você deve definir intervalos de CIDR válidos de dual-stack ou IPv6 para cluster e serviço.'
-        readMoreK3s: <a href="https://docs.k3s.io/networking/basic-network-options#dual-stack-ipv4--ipv6-networking" target="_blank" rel="noopener noreferrer nofollow" aria-label="k3s dual-stack networking documentation">Learn more about K3s networking</a>
-        readMoreRke2: <a href="https://docs.rke2.io/networking/basic_network_options#ipv6-setup" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 ipv6 networking documentation">Learn more about RKE2 networking</a>
+        readMoreK3s: <a href="https://docs.k3s.io/networking/basic-network-options#dual-stack-ipv4--ipv6-networking" target="_blank" rel="noopener noreferrer nofollow" aria-label="k3s dual-stack networking documentation">Saiba mais sobre redes K3s</a>
+        readMoreRke2: <a href="https://docs.rke2.io/networking/basic_network_options#ipv6-setup" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 ipv6 networking documentation">Saiba mais sobre redes RKE2</a>
         verifySettings: 'Antes de continuar, por favor verifique as seguintes configurações:'
     snapshots:
       suffix: Snapshots por nó
@@ -2508,7 +2505,7 @@ cluster:
       header: Serviços do Sistema
     cni:
       label: Rede de Contêiner
-      cniNoneBanner: When CNI is set to 'none' an <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#additionalmanifest" target="_blank" rel="noopener noreferrer nofollow">Additional Manifest</a> deploying an alternate CNI must be specified for successful cluster provisioning.
+      cniNoneBanner: Quando o CNI está definido como 'none', um <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#additionalmanifest" target="_blank" rel="noopener noreferrer nofollow">Manifesto Adicional</a> implantando um CNI alternativo deve ser especificado para o provisionamento bem-sucedido do cluster.
       cilium:
         BandwidthManager:
           enable: Habilitar Gerenciador de Largura de Banda
@@ -3494,8 +3491,8 @@ fleet:
     addTitle: allowedTargetNamespaces
     addLabel: Adicionar
     banner: "{count, plural,
-          =0 { Adding namespaces here will create a GitRepoRestriction. }
-          other { Only the Git Repo Restriction's <code>allowedTargetNamespaces</code> is managed here. You can make additional changes to the Git Repo Restriction}
+          =0 { Adicionar namespaces aqui criará uma GitRepoRestriction. }
+          other { Apenas o campo <code>allowedTargetNamespaces</code> da Restrição Git Repo é gerenciado aqui. Você pode fazer alterações adicionais na Restrição Git Repo}
         }"
   configMaps:
     label: Config Maps
@@ -3879,7 +3876,7 @@ istio:
   cni: Habilitar CNI
   customOverlayFile:
     label: Arquivo de Overlay Personalizado
-    tip: 'The <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">overlay file</a> allows for additional configuration on top of the base {vendor} Istio installation. You can utilize the <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >IstioOperator API</a> to make changes and additions for all components and apply those changes via this overlay YAML file.'
+    tip: 'O <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">arquivo overlay</a> permite configuração adicional sobre a instalação base do Istio de {vendor}. Você pode utilizar a <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >API IstioOperator</a> para fazer alterações e adições em todos os componentes e aplicar essas alterações via este arquivo YAML overlay.'
   description: '{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para você começar a trabalhar com service mesh.'
   destinationRule:
     title:
@@ -4034,7 +4031,7 @@ istio:
   pilot: Habilitar Pilot
   policy: Habilitar Policy
   pilotRequired: O Pilot deve estar habilitado para habilitar o Kiali
-  poweredBy: Powered by <a target="_blank" rel="noopener noreferrer nofollow" href='https://istio.io/latest/'>Istio</a>
+  poweredBy: Desenvolvido com <a target="_blank" rel="noopener noreferrer nofollow" href='https://istio.io/latest/'>Istio</a>
   telemetry: Habilitar Telemetria
   titles:
     components: Componentes
@@ -4185,7 +4182,7 @@ logging:
     dockerRootDirectory: Diretório Raiz do Docker
     systemdLogPath: Caminho de Log do systemd
     tooltip: 'Algumas distribuições Kubernetes registram em <code>journald</code>. Para coletar esses logs, o <code>systemdLogPath</code> precisa ser definido. Embora o diretório <code>/run/log/journal</code> seja usado por padrão, algumas distribuições Linux não usam esse caminho como padrão.'
-    url: '<a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Learn more</a>'
+    url: '<a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Saiba mais</a>'
     default: /run/log/journal
   elasticsearch:
     host: Host
@@ -4601,7 +4598,7 @@ monitoring:
       prometheusTargets:
         description: Destinos Configurados
         label: Destinos Prometheus
-    subtitle: 'Powered By: <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer nofollow">Prometheus</a>'
+    subtitle: 'Desenvolvido com: <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer nofollow">Prometheus</a>'
     title: Visão Geral do Monitoring
   prometheus:
     config:
@@ -5736,10 +5733,10 @@ probe:
     placeholder: 'Padrão: 0'
   successThreshold:
     label: Limite de Sucesso
-    placeholder: 'Default: 1'
+    placeholder: 'Padrão: 1'
   timeout:
-    label: Timeout
-    placeholder: 'Default: 3'
+    label: Tempo Limite
+    placeholder: 'Padrão: 3'
   type:
     label: Tipo
     placeholder: Selecione um tipo de verificação
@@ -6118,12 +6115,12 @@ other {Proprietários}}'
     showLabels: Mostrar todos os rótulos
     hideAnnotations: |-
       {annotations, plural,
-      =1 {Hide 1 annotation}
-      other {Hide {annotations} annotations}}
+      =1 {Ocultar 1 anotação}
+      other {Ocultar {annotations} anotações}}
     showAnnotations: |-
       {annotations, plural,
-      =1 {Show 1 annotation}
-      other {Show {annotations} annotations}}
+      =1 {Mostrar 1 anotação}
+      other {Mostrar {annotations} anotações}}
     name: Nome
   header:
     clone: 'Clonar de {subtype} {name}'
@@ -6152,9 +6149,9 @@ other {Proprietários}}'
     graph: Gráfico
     yaml: YAML
     managedWarning: |-
-      This {type} is managed by {hasName, select,
-        no {a {managedBy} app}
-        yes {the {managedBy} app {appName}}}; changes made here will likely be overwritten the next time {managedBy} runs.
+      Este {type} é gerenciado por {hasName, select,
+        no {um aplicativo {managedBy}}
+        yes {o aplicativo {managedBy} {appName}}}; as alterações feitas aqui provavelmente serão substituídas na próxima vez que {managedBy} for executado.
 resourceList:
   head:
     create: Criar
@@ -7815,7 +7812,7 @@ workload:
       secret: Segredo
       configMap: ConfigMap
       hostPath: Bind-Mount
-      persistentVolumeClaim: Persistent Volume Claim
+      persistentVolumeClaim: Reivindicação de Volume Persistente
       createPVC: Criar Persistent Volume Claim
       csi: CSI
       nfs: NFS
@@ -9053,7 +9050,7 @@ notifications:
     showCheckboxLabel: Mostrar erro personalizado de login
     messageLabel: Texto a exibir
 resourceQuota:
-  banner: Limit resource consumption in a project for both standard (e.g. CPU Limit) and custom resource types. For custom resource types you have to provide the resource identifier yourself. Want to learn more about resource quotas? Read our <a href="https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/manage-projects/manage-project-resource-quotas" target="_blank" rel="noopener noreferrer nofollow">documentation <i class="icon icon-external-link"></i></a><span class="sr-only">Opens in a new tab</span>
+  banner: Limite o consumo de recursos em um projeto para tipos de recursos padrão (ex.: Limite de CPU) e personalizados. Para tipos de recursos personalizados, você deve fornecer o identificador de recurso. Quer saber mais sobre cotas de recursos? Leia nossa <a href="https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/manage-projects/manage-project-resource-quotas" target="_blank" rel="noopener noreferrer nofollow">documentação <i class="icon icon-external-link"></i></a><span class="sr-only">Abre em uma nova aba</span>
   label: Cotas de Recursos
   headers:
     limit: Limite
