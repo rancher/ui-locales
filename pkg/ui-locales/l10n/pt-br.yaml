@@ -1479,10 +1479,10 @@ chartHeading:
 
 compliance:
   addTest: Adicionar ID de Teste
-  alertNeeded: O alerta deve ser habilitado nos valores do chart de conformidade (values.yaml). Isso requer a instalação da pilha de monitoramento do Rancher.
-    Alerting must be enabled within the compliance chart values.yaml.
-    This requires that the <a tabindex="0" href="{link}">{vendor} Monitoring and Alerting app</a> is installed
-    and the Receivers and Routes are <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configured to send out alerts.</a>
+  alertNeeded: |-
+    O alerta deve ser habilitado nos valores do chart de conformidade (values.yaml).
+    Isso requer que o <a tabindex="0" href="{link}">{vendor} aplicativo de Monitoramento e Alertas</a> esteja instalado
+    e que os Receptores e Rotas estejam <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configurados para enviar alertas.</a>
   alertOnComplete: Alertar na conclusão do scan
   alertOnFailure: Alertar na falha do scan
   benchmarkVersion: Versão do Benchmark
@@ -5549,7 +5549,7 @@ plugins:
         message: A imagem do Catálogo de Extensão foi importada com sucesso
     headers:
       image:
-        name: images
+        name: imagens
         label: Imagem de Deployment
       repository:
         label: Nome do Repositório
@@ -8882,8 +8882,8 @@ performance:
   incrementalLoad:
     label: Carregamento Incremental
     setting: Configuração de Carregamento Incremental
-    description: Carrega recursos em lotes para melhorar o desempenho em clusters com muitos recursos.
-      When enabled, resources will appear more quickly, but it may take slightly longer to load the entire set of resources. This setting only applies to resources that come from the Kubernetes API
+    description: |-
+      Quando habilitado, os recursos aparecerão mais rapidamente, mas pode levar um pouco mais de tempo para carregar o conjunto completo de recursos. Esta configuração se aplica apenas a recursos provenientes da API do Kubernetes
     checkboxLabel: Habilitar Carregamento Incremental
     inputLabel: Tamanho do Lote
     incompatibleDescription: "O Carregamento Incremental não é compatível com as configurações selecionadas."
@@ -8891,15 +8891,15 @@ performance:
     label: Atualização Manual
     setting: Configuração de Atualização Manual
     buttonTooltip: Atualizar manualmente os dados desta página
-    description: Desativa as atualizações automáticas e permite ao usuário atualizar os dados manualmente.
-      When enabled, list data will not auto-update but instead the user must manually trigger a list-view refresh. This setting only applies to resources that come from the Kubernetes API
+    description: |-
+      Quando habilitado, os dados da lista não serão atualizados automaticamente; o usuário deverá acionar manualmente a atualização da visualização em lista. Esta configuração se aplica apenas a recursos provenientes da API do Kubernetes
     checkboxLabel: Habilitar Atualização Manual
     inputLabel: Intervalo de Atualização
     incompatibleDescription: "A Atualização Manual não é compatível com as configurações selecionadas."
   websocketNotification:
     label: Notificação WebSocket
-    description: Habilita notificações em tempo real via WebSocket para atualizações de recursos.
-      When checked, websocket notifications will not appear when the UI detects a disconnection.
+    description: |-
+      Quando marcado, as notificações WebSocket não aparecerão quando a interface detectar uma desconexão.
     checkboxLabel: Habilitar Notificações WebSocket
   gc:
     label: Coleta de Lixo de Recursos
