@@ -613,7 +613,7 @@ authConfig:
           serverUrlVerify: Copiar URL de Verificação de Auth do Servidor para a área de transferência
       3:
         title: Criar credenciais de Conta de Serviço
-        introduction: Siga <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/google" target="_blank" rel="noopener noreferrer nofollow">este guia</a> para configurar as credenciais da Conta de Serviço.
+        introduction: 'Siga <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">este</a> guia para:'
         body:
           1: Criar uma conta de serviço.
           2: Gerar uma chave para a conta de serviço.
@@ -1262,10 +1262,10 @@ catalog:
     chart: Gráfico
     warning:
       managed:
-        Warning, {manager} manages deployment and upgrade of the {name} app. Upgrading this app is not supported.<br>
+        Aviso, {manager} gerencia a implantação e atualização do aplicativo {name}. A atualização deste aplicativo não é suportada.<br>
         {version, select,
           null { }
-          other { Under most circumstances, no user intervention should be needed to ensure that the {version} version is compatible with the version of Rancher that you are running.}
+          other { Na maioria das circunstâncias, nenhuma intervenção do usuário deve ser necessária para garantir que a versão {version} seja compatível com a versão do Rancher que você está executando.}
         }
     error:
       requiresFound: '<a href="{url}">{name}</a> deve ser instalado antes de instalar este chart.'
