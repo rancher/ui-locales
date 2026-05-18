@@ -833,7 +833,7 @@ assignTo:
       =1 { Atribuir Cluster A&hellip; }
       other { Atribuir {count} Clusters A&hellip; }
     }
-  workspace: Workspace
+  workspace: Espaço de Trabalho
 
 asyncButton:
   alt:
@@ -1127,7 +1127,7 @@ catalog:
         inputLabel: Registro de Container
         placeholder: Domínio e portas do registro, ex. registry.io:5000
     header:
-      charts: Charts
+      charts: Gráficos
     info:
       appVersion: Versão do Aplicativo
       chartVersions:
@@ -1140,7 +1140,7 @@ catalog:
       maintainers: Mantenedores
       maintainerContactTooltip: Contatar {maintainer}
       related: Relacionado
-      chartUrls: Chart
+      chartUrls: Gráfico
       keywords: Palavras-chave
     errors:
       clusterToolExists: Este chart tem um namespace e nome fixos. Uma <a href="{url}">aplicação</a> correspondente foi encontrada e quaisquer alterações serão feitas nela.
@@ -1168,7 +1168,7 @@ catalog:
     deploysOnWindows: Implanta no Windows
     windowsIncompatible: Somente Linux
     versionWindowsIncompatible: Versão somente Linux
-    header: Charts
+    header: Gráficos
     noCharts:
       title: Nenhum chart para exibir
       message: <b>Dicas:</b> desfaça o último filtro aplicado ou <resetAllFilters>limpe todos os filtros</resetAllFilters>, e certifique-se de ter os <repositoriesUrl>repositórios</repositoriesUrl> corretos.
@@ -1259,7 +1259,7 @@ catalog:
         fetchChart: Erro ao recuperar chart do repositório
         alreadyInstalled: Chart já instalado
         timeoutWaiting: Tempo esgotado aguardando logs
-    chart: Chart
+    chart: Gráfico
     warning:
       managed:
         Warning, {manager} manages deployment and upgrade of the {name} app. Upgrading this app is not supported.<br>
@@ -2493,7 +2493,7 @@ cluster:
         verifySettings: 'Antes de continuar, por favor verifique as seguintes configurações:'
     snapshots:
       suffix: Snapshots por nó
-      s3Suffix: Snapshots
+      s3Suffix: Instantâneos
     systemService:
       rke2-coredns: CoreDNS
       rke2-ingress-nginx: NGINX Ingress
@@ -2770,9 +2770,9 @@ clusterIndexPage:
         etcd:
           label: Etcd
         scheduler:
-          label: Scheduler
+          label: Agendador
         controller-manager:
-          label: Controller Manager
+          label: Gerenciador de Controladores
         cattle:
           label: Cattle
         fleet:
@@ -3235,7 +3235,7 @@ fleet:
       correctDrift: Habilitar auto-reparo
       correctDriftTooltip: 'Quando habilitado, o Fleet garantirá que os recursos do cluster sejam mantidos em sincronia com o repositório git. Todas as alterações de recursos feitas no cluster serão perdidas.'
     polling:
-      label: Polling
+      label: Sondagem
       enable: Habilitar Polling
       pollingInterval:
         label: Intervalo de Polling
@@ -3306,7 +3306,7 @@ fleet:
       specify: Especificar certificados adicionais a serem aceitos
       skip: Aceitar qualquer certificado (inseguro)
     workspace:
-      label: Workspace
+      label: Espaço de Trabalho
       addWorkspace: Criar um workspace
     helmRepoURLRegex: Repositórios Helm (Regex de URL)
   helmOp:
@@ -3341,10 +3341,10 @@ fleet:
           subtext: 'Definir detalhes de metadados'
           description: Informações básicas do Helm Op
         chart:
-          label: Chart
-          title: chart
+          label: Gráfico
+          title: gráfico
           subtext: Definir detalhes da fonte do Chart Helm
-          description: chart
+          description: gráfico
         values:
           label: Valores
           title: valores
@@ -3376,7 +3376,7 @@ fleet:
           label: URL do Repositório
           placeholder: 'ex.: https://foo.bar/baz'
         chart:
-          label: Chart
+          label: Gráfico
           placeholder: O caminho para o nome do chart no repositório
       oci:
         chart:
@@ -3386,7 +3386,7 @@ fleet:
         label: Versão
         placeholder: A versão do Chart
       release:
-        title: Release
+        title: Lançamento
         label: Nome
         placeholder: O nome da release Helm
     values:
@@ -3443,7 +3443,7 @@ fleet:
       correctDrift: Habilitar auto-reparo
       correctDriftTooltip: Quando habilitado, o Fleet garantirá que os recursos do cluster estejam sincronizados com o HelmOp. Todas as alterações de recursos feitas no cluster serão perdidas.
     polling:
-      label: Polling
+      label: Sondagem
       enable: Habilitar Polling
       pollingInterval:
         label: Intervalo de Polling
@@ -3492,9 +3492,9 @@ fleet:
           other { Apenas o campo <code>allowedTargetNamespaces</code> da Restrição Git Repo é gerenciado aqui. Você pode fazer alterações adicionais na Restrição Git Repo}
         }"
   configMaps:
-    label: Config Maps
+    label: Mapas de Configuração
   secrets:
-    label: Secrets
+    label: Segredos
 footer:
   docs: Documentação
   download: Baixar CLI
@@ -3717,13 +3717,10 @@ import:
     label: Editor YAML
   defaultNamespace:
     label: Namespace Padrão
-  success: 'Aplicado {count, plural,
-=1 {1 Recurso}
-other {# Recursos}
-}'
-    Applied {count, plural,
-    =1 {1 Resource}
-    other {# Resources}
+  success: |-
+    Aplicado {count, plural,
+    =1 {1 Recurso}
+    other {# Recursos}
     }
 
 auditPolicy:
@@ -4097,10 +4094,10 @@ landing:
       showingAll: Exibindo {total} clusters.
       showingSome: Exibindo {rows} de {total} clusters criados recentemente.
     provider: Provedor
-    distro: Distro
+    distro: Distribuição
     kubernetesVersion: Versão do Kubernetes
     architecture: Arquitetura
-    explorer: Explorer
+    explorer: Explorador
     explore: Explorar
     cores: |-
       {count, plural,
@@ -4819,7 +4816,7 @@ nameNsDescription:
     label: Namespace
     placeholder: ''
   workspace:
-    label: Workspace
+    label: Espaço de Trabalho
     placeholder:
   description:
     label: Descrição
@@ -4843,7 +4840,7 @@ namespace:
   createNamespace: Criar um novo Namespace
   selectOrCreate: Selecionar ou Criar um Namespace
   snapshots:
-    label: Snapshots
+    label: Instantâneos
     totalSnapshotSize: Tamanho Total do Snapshot
   resourceStates:
       success: Ativo
@@ -5346,22 +5343,22 @@ persistentVolume:
       existingCharacter: Um dispositivo de caractere existente
       existingBlock: Um dispositivo de bloco existente
   gcePersistentDisk:
-    label: Google Persistent Disk
+    label: Disco Persistente do Google
     persistentDiskName:
       label: Nome do Disco Persistente
       placeholder: 'ex.: abc'
   awsElasticBlockStore:
-    label: Amazon EBS Disk
+    label: Disco EBS da Amazon
     volumeId:
       label: ID do Volume
       placeholder: 'ex.: vol-12345678'
   azureFile:
-    label: Azure Filesystem
+    label: Sistema de Arquivos Azure
     shareName:
       label: Nome do Compartilhamento
       placeholder: 'ex.: abc'
   azureDisk:
-    label: Azure Disk
+    label: Disco Azure
     diskName:
       label: Nome do Disco
       placeholder: 'ex.: kubernetes-pvc'
@@ -5904,7 +5901,7 @@ promptRestore:
   name: Nome
   date: Data
   fromS3: Restaurar do S3
-  label: Snapshot
+  label: Instantâneo
   placeholder: Selecione um snapshot para restaurar
   notification:
     title: Restaurar Snapshot
@@ -6139,7 +6136,7 @@ other {Proprietários}}'
       hide: Ocultar Valores Sensíveis
       show: Mostrar Valores Sensíveis
     namespace: Namespace
-    workspace: Workspace
+    workspace: Espaço de Trabalho
     project: Projeto
     detail: Detalhe
     config: Configuração
@@ -6273,11 +6270,11 @@ secret:
   customType: Tipo Personalizado
   type: Tipo
   types:
-    'opaque': Opaque
+    'opaque': Opaco
     'kubernetes.io/service-account-token': 'Token de Conta de Serviço'
-    'kubernetes.io/dockercfg': 'Registry'
-    'kubernetes.io/dockerconfigjson': 'Registry'
-    'kubernetes.io/basic-auth': 'HTTP Basic Auth'
+    'kubernetes.io/dockercfg': Registro
+    'kubernetes.io/dockerconfigjson': Registro
+    'kubernetes.io/basic-auth': Autenticação HTTP Básica
     'kubernetes.io/ssh-auth': 'Chave SSH'
     'kubernetes.io/tls': 'Certificado TLS'
     'bootstrap.kubernetes.io/token': 'Token de Bootstrap'
@@ -6384,11 +6381,11 @@ servicePorts:
       placeholder: 'ex.: 80 ou http'
 
 serviceTypes:
-  clusterip: Cluster IP
+  clusterip: IP do Cluster
   externalname: Nome Externo
   headless: Sem Cabeçalho
   loadbalancer: Balanceador de Carga
-  nodeport: Node Port
+  nodeport: Porta do Nó
 
 servicesPage:
   serviceListDescription: Os Serviços permitem definir um conjunto lógico de Pods que podem ser acessados com um único endereço IP e porta.
@@ -6876,7 +6873,7 @@ tableHeaders:
   bundlesReady: Bundles Prontos
   bundleDeploymentsReady: Implantações
   builtin: Integrado
-  chart: Chart
+  chart: Gráfico
   capacity: Capacidade
   current: Atual
   clusterCreatorDefault: Padrão para Criadores de Cluster
@@ -6915,7 +6912,7 @@ tableHeaders:
   firstSeen: Visto Pela Primeira Vez
   firstSeenTooltip: O momento em que o evento foi registrado pela primeira vez
   flow: Fluxo
-  fingerprint: Fingerprint
+  fingerprint: Impressão Digital
   gitRepos: Repos Git
   helmOps: Operações Helm
   groups: Grupos
@@ -6978,7 +6975,7 @@ tableHeaders:
   object: Objeto
   operatingSystem: SO
   output: Saída
-  p95: 95%tile
+  p95: Percentil 95
   persistentVolumeClaim: Solicitação de Volume Persistente
   persistentVolumeSource: Origem
   phase: Fase
@@ -7019,7 +7016,7 @@ tableHeaders:
   repoName: Nome do Repositório
   reposReady: Repositórios Git Prontos
   replicas: Réplicas
-  reqRate: Req Rate
+  reqRate: Taxa de Req.
   resource: Recurso
   resources: Recursos
   resourcesReady: Recursos Prontos
@@ -7797,7 +7794,7 @@ workload:
       operator: Operador
       operatorOptions:
         equal: =
-        exists: Exists
+        exists: Existe
       tolerationSeconds: Segundos de Tolerância
       value: Valor
   serviceAccountName:
@@ -7808,7 +7805,7 @@ workload:
     subtypes:
       secret: Segredo
       configMap: ConfigMap
-      hostPath: Bind-Mount
+      hostPath: Montagem de Host
       persistentVolumeClaim: Reivindicação de Volume Persistente
       createPVC: Criar Persistent Volume Claim
       csi: CSI
@@ -8851,13 +8848,13 @@ advancedSettings:
       true: Local
       false: Remoto
     'harv-ui-source':
-      auto: 'Auto'
-      bundled: 'Bundled'
-      external: 'External'
+      auto: Automático
+      bundled: Empacotado
+      external: Externo
     'harv-log-level':
-      info: Info
-      debug: Debug
-      trace: Trace
+      info: Informação
+      debug: Depuração
+      trace: Rastreamento
     'agent-tls-mode':
       strict: Estrito
       system-store: Repositório do Sistema
@@ -8995,7 +8992,7 @@ branding:
   directoryName: Nome do Diretório de Ativos de Marca
   logos:
     home: Página principal do produto
-    label: Logo
+    label: Logotipo
     tip: 'Faça upload de um logo para substituir o logo do Rancher no cabeçalho de navegação superior. A altura da imagem deve ser de 21 pixels com largura máxima de 200 pixels. Tamanho máximo de arquivo: 20KB. Formatos aceitos: JPEG, PNG, SVG.'
     lightPreview: Prévia do Tema Claro
     darkPreview: Prévia do Tema Escuro
@@ -9487,7 +9484,7 @@ component:
 
 autoscaler:
   card:
-    title: Autoscaler
+    title: Escalonador Automático
     pause: Pausar
     resume: Retomar
     loadingError: Houve um problema ao carregar os detalhes
@@ -9505,7 +9502,7 @@ autoscaler:
       paused: Pausado
       unavailable: Indisponível
   tab:
-    title: Autoscaler
+    title: Escalonador Automático
 
 ext.cattle.io.kubeconfig:
   deleted: '{name} (excluído)'
