@@ -10,5 +10,5 @@ export default function(plugin: IPlugin): void {
   plugin.metadata = require('./package.json');
 
   // Add new locales
-  plugin.addLocale('en-uk', 'UK English');
+  plugin.addLocale('zh-hant', '繁體中文');
 }
