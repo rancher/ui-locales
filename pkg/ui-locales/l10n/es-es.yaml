@@ -5731,7 +5731,7 @@ prometheusRule:
     removeRecord: Eliminar registro
 promptForceRemove:
   modalTitle: ¿Está seguro?
-  removeWarning: Hubo un problema al eliminar la infraestructura subyacente. Si continúa con la eliminación, el recurso se eliminará de {vendor} pero la infraestructura subyacente puede permanecer.
+  removeWarning: 'Hubo un problema al eliminar la infraestructura subyacente. Si continúa con esta acción, la Máquina <b>{nameToMatch}</b> solo se eliminará de Rancher. Se recomienda encarecidamente eliminar manualmente cualquier infraestructura referenciada.'
   forceDelete: Forzar eliminación
   ariaLabel: Copiar nombre de máquina al portapapeles
   confirmName: 'Ingrese el nombre del grupo a continuación para confirmar:'
@@ -5768,7 +5768,7 @@ promptRemove:
   confirmName: 'Ingrese <b>{nameToMatch}</b> a continuación para confirmar:'
   deleteAssociatedNamespaces: 'También eliminar los espacios de nombres en este proyecto:'
   willDeleteAssociatedNamespaces: 'Esto también eliminará todos los espacios de nombres del proyecto: '
-  confirmRelatedResource: Eliminar el {type} eliminará todos los recursos de este {type} particular y esta acción no se puede deshacer.
+  confirmRelatedResource: '¿Está seguro de que desea continuar eliminando {names}? Eliminar el {type} eliminará todos los recursos de este {type} particular y esta acción no se puede deshacer.'
   promptConfirmation: No volver a pedir confirmación al reducir el escalado.
 promptRemoveApp:
   removeCrd: Eliminar el CRD asociado con esta aplicación
@@ -5874,13 +5874,16 @@ rbac:
       }
     usersBound: |-
       {count, plural,
-        =1 { Caution: There is 1 user bound to the role(s) about to be deleted. Do you want to proceed? }
-      global:
-        label: Permisos globales
+        =1 { Advertencia: Hay 1 usuario vinculado a los roles que están a punto de eliminarse. ¿Desea continuar? }
+        other { Advertencia: Hay {count} usuarios vinculados a los roles que están a punto de eliminarse. ¿Desea continuar? }
+      }
     types:
       global:
         label: Permisos Globales
-        description: Controls what access the {isUser, select,
+        description: |-
+          Controla el acceso que el {isUser, select,
+          true {usuario}
+          false {grupo}} tiene para administrar la instalación general de {appName}.
       custom:
         label: Personalizado
         description: Roles no creados por {vendor}.
@@ -6010,8 +6013,8 @@ resourceDetail:
     managedWarning: |-
       Este {type} es administrado por {hasName, select,
         no {una aplicación de {managedBy}}
-        yes {la aplicación {name}}
-      }. Los cambios realizados aquí pueden ser sobrescritos.
+        yes {la aplicación {managedBy} {appName}}
+      }; los cambios realizados aquí probablemente serán sobrescritos la próxima vez que se ejecute {managedBy}.
 resourceList:
   head:
     create: Crear
@@ -6385,13 +6388,13 @@ sortableTable:
       {pages, plural,
       =0 {Sin elementos}
       =1 {{count} {count, plural, =1 {Elemento} other {Elementos}}}
-      other {{count} {count, plural, =1 {Elemento} other {Elementos}} de {pages}}
+      other {{from} - {to} de {count} Elementos}
       }
     resource: |-
       {pages, plural,
       =0 {Sin {pluralLabel}}
       =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}} de {pages}}
+      other {{from} - {to} de {count} {pluralLabel}}
       }
   search: Filtrar
   searchLabel: Filtrar resultados de la tabla
@@ -8511,7 +8514,7 @@ advancedSettings:
   setEnv: Establecido por variable de entorno
   hideShow: Ocultar/mostrar configuración
   label: Configuración
-  subtext: Configuración avanzada
+  subtext: "Los usuarios habituales no necesitarán cambiar estas opciones. Proceda con precaución, los valores incorrectos pueden romper su instalación de {appName}. Las configuraciones personalizadas desde los valores predeterminados están etiquetadas como 'Modificada'."
   show: Mostrar
   hide: Ocultar
   none: Ninguno
@@ -8521,7 +8524,7 @@ advancedSettings:
     label: Editar configuración
     changeSetting: 'Cambiar configuración:'
     agentConfigBanner:
-      text: ¡Editar este valor no cambiará el valor establecido en los clústeres en ejecución! Para actualizar un clúster en ejecución, consulte los documentos de Fleet.
+      text: '¡Editar este valor no cambiará el valor establecido en los clústeres en ejecución! Para actualizar un clúster en ejecución con los nuevos valores, edite el clúster y haga clic en "Aplicar configuración global para la Clase de Prioridad y el Presupuesto de Interrupción de Pod" en la pestaña de configuración del Agente {agent}.'
       cluster: Clúster
       fleet: Fleet
     trueOption: Verdadero
@@ -8542,7 +8545,7 @@ advancedSettings:
     system-default-registry: Registro privado para todas las imágenes de contenedores del sistema Rancher.
     ui-index: Ubicación del índice HTML para la UI del Cluster Manager.
     ui-dashboard-index: Ubicación del índice HTML para la UI de {appName}.
-    ui-offline-preferred: Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en ui-dashboard-index.
+    ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en los ajustes ui-index y ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
     ui-pl: Nombre de empresa para etiqueta privada.
     auth-user-info-max-age-seconds: La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
     auth-user-info-resync-cron: Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
