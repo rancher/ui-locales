@@ -1364,8 +1364,8 @@ catalog:
         requiresImagePullSecret: "Ce chart nécessite un secret d'extraction d'image pour que les images soient extraites avec succès."
         dontUseDefaultImagePullSecret: "Sélectionner manuellement un secret d'extraction d'image ou en créer un nouveau avec nom d'utilisateur/mot de passe"
         generatedNewImagePullSecret: "Un nouveau secret d'extraction d'image <b>{ imagePullSecretName }</b> sera généré"
-        generatedImagePullSecretBannerFromPreviousAuth: "Un nouveau Secret d'extraction d'image <b>{ imagePullSecretName }</b> sera généré depuis le secret de dépôt."
-        usePreviouslyGeneratedImagePullSecretBanner: "Le Secret d'extraction d'image <b>{ imagePullSecretName }</b> a déjà été créé précédemment depuis le secret de dépôt."
+        generatedImagePullSecretBannerFromPreviousAuth: "Un nouveau Secret d'extraction d'image <b>{ imagePullSecretName }</b> sera généré depuis le secret de dépôt <b>{ repoAuthenticationName }</b>."
+        usePreviouslyGeneratedImagePullSecretBanner: "Le Secret d'extraction d'image <b>{ imagePullSecretName }</b> a déjà été créé précédemment depuis le secret de dépôt <b>{ repoAuthenticationName }</b> et sera utilisé."
       clusterTplVersion:
         label: Version
         subtext: Sélectionner une version du modèle
@@ -4097,7 +4097,7 @@ istio:
   pilot: Activer Pilot
   policy: Activer Policy
   pilotRequired: Pilot doit être activé pour pouvoir activer Kiali
-  poweredBy: Powered by <a target="_blank" rel="noopener noreferrer nofollow" href='https://istio.io/latest/'>Istio</a>
+  poweredBy: Propulsé par <a target="_blank" rel="noopener noreferrer nofollow" href='https://istio.io/latest/'>Istio</a>
   telemetry: Activer la télémétrie
   titles:
     components: Composants
@@ -5539,12 +5539,12 @@ inactivity:
 plugins:
   altIcon: "Icône pour la carte d'extension {extension}"
   incompatiblePrimeOnly: La dernière version de cette extension ({ version }) nécessite Rancher Prime pour être installée.
-  incompatibleRancherVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version actuelle de Rancher."
-  incompatibleKubeVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version Kube actuelle."
+  incompatibleRancherVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version actuelle de Rancher ({ required })."
+  incompatibleKubeVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version Kube actuelle ({ required })."
   incompatibleUiExtensionsApiVersionMissing: "La dernière version de cette extension ({ version }) est manquante de l'annotation obligatoire catalog.cattle.io/ui-extensions-version."
-  incompatibleUiExtensionsApiVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version actuelle de l'API Extensions."
-  incompatibleHost: "La dernière version de cette extension ({ version }) a un hôte de \"{ required }\" qui n'est pas compatible."
-  currentInstalledVersionBlockedByKubeVersion: "Cette version n'est pas compatible avec la version Kubernetes actuelle ({ kubeVersion } vs { kubeVersion })."
+  incompatibleUiExtensionsApiVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version actuelle de l'API Extensions ({ required })."
+  incompatibleHost: 'La dernière version de cette extension ({ version }) a un hôte de "{ required }" qui n''est pas compatible avec cette application "{ mainHost }".'
+  currentInstalledVersionBlockedByKubeVersion: "Cette version n'est pas compatible avec la version Kubernetes actuelle ({ kubeVersion }  Vs  { kubeVersionToCheck })."
   closePluginPanel: Fermer le panneau de description du plugin
   viewVersionDetails: "Voir les détails/Readme de l'extension {name} version {version}"
   labels:
@@ -8882,8 +8882,8 @@ action:
   showConfiguration: Afficher la configuration
 
 unit:
-  sec: secs
-  min: mins
+  sec: s
+  min: min
   hour: |-
     {count, plural,
       one { heure }
