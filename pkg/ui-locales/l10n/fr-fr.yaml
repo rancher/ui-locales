@@ -1485,7 +1485,8 @@ compliance:
   addTest: Ajouter un ID de test
   alertNeeded: |-
     Les alertes doivent être activées dans le fichier values.yaml du chart de conformité.
-    Cela nécessite que l'option <a tabindex>alerting</a> soit activée.
+    Cela nécessite que l'application <a tabindex="0" href="{link}">{vendor} Monitoring and Alerting</a> soit installée
+    et que les destinataires et routes soient <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configurés pour envoyer des alertes.</a>
   alertOnComplete: Alerte à la fin du scan
   alertOnFailure: Alerte en cas d'échec du scan
   benchmarkVersion: Version de référence
@@ -4942,7 +4943,16 @@ networkpolicy:
       matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
     matchingNamespacesAndPods:
       tooltip: "Une règle avec une seule entrée qui spécifie à la fois le sélecteur d'espace de noms et le sélecteur de pod pour sélectionner des pods particuliers."
-      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
+      matchesSome: |-
+        {matchedPods, plural,
+          =0 {Correspond à 0 des {totalPods, number} pods}
+          =1 {Correspond à 1 des {totalPods, number} pods : "{samplePods}"}
+          other {Correspond à {matchedPods, number} des {totalPods, number} pods existants, dont "{samplePods}"}
+        } dans {matchedNamespaces, plural,
+          =0 {0 des {totalNamespaces, number} espaces de noms}
+          =1 {1 des {totalNamespaces, number} espaces de noms : "{sampleNamespaces}"}
+          other {{matchedNamespaces, number} des {totalNamespaces, number} espaces de noms existants, dont "{sampleNamespaces}"}
+        }
 node:
   list:
     pool: Pool
@@ -7006,7 +7016,7 @@ tableHeaders:
   success: Succès
   summary: Résumé
   subobject: Sous-objet
-  taints: Taints
+  taints: Marques
   target: Cible
   targetKind: "Type de cible"
   targetPort: "Port cible"
