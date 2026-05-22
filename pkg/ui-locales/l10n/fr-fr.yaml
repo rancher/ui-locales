@@ -1438,7 +1438,7 @@ catalog:
       urlLabel: "URL de l'hôte du dépôt OCI"
       placeholder: "ex. oci://<hôte-registre>/<espace-noms>/<nom-chart>:<tag>"
       warning: Les URL OCI doivent UNIQUEMENT cibler des charts Helm.
-      info: Pour les grands dépôts contenant de nombreux charts, envisagez de cibler un espace de noms ou un chart spécifique pour améliorer les performances.
+      info: Pour les grands dépôts contenant de nombreux charts, envisagez de cibler un espace de noms ou un chart spécifique pour améliorer les performances, par exemple avec oci://<registry-host>/<namespace> ou oci://<registry-host>/<namespace>/<chart-name>.
       skipTlsVerifications: Ignorer les vérifications TLS
       insecurePlainHttp: HTTP non sécurisé
       exponentialBackOff:
@@ -5957,7 +5957,7 @@ promptForceRemove:
   forceDelete: Forcer la suppression
   ariaLabel: Copier le nom de la machine dans le presse-papiers
   confirmName: "Saisissez le nom du pool ci-dessous pour confirmer :"
-  podRemoveWarning: "La suppression forcée de pods n'attend pas la confirmation que les processus du pod ont été terminés. Cela peut entraîner des pertes de données ou des comportements inattendus."
+  podRemoveWarning: "La suppression forcée de pods n'attend pas la confirmation que les processus du pod ont été terminés. Cela peut entraîner des <strong>corruptions ou incohérences de données</strong>"
 
 promptScaleMachineDown:
   attemptingToRemove: Vous tentez de supprimer {count} {type}
@@ -6988,7 +6988,7 @@ storageClass:
   no-provisioner:
     title: Stockage local
   deprecated:
-    title: (Deprecated)
+    title: (Obsolète)
     warning: "Le plug-in intégré {provisioner} est obsolète : Trouvez un pilote CSI <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://kubernetes-csi.github.io/docs/drivers.html\">ici.</a>"
   harvesterhci:
     title: Harvester (CSI)
