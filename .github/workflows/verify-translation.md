@@ -254,7 +254,7 @@ If overall translation coverage is **below 100%** or structural issues were foun
 
 1. Dispatch the `improve-translation` workflow using `dispatch-workflow` with inputs:
    - `pr_number`: `${{ github.event.inputs.pr_number }}`
-   - `attempt`: `${{ github.event.inputs.attempt + 1 }}`
+   - `attempt`: the current attempt value (`${{ github.event.inputs.attempt }}`) incremented by 1
 2. Include a note in your verification comment that the improve-translation workflow has been dispatched automatically.
 
 If coverage is already 100% and all checks passed (label + approve applied), do NOT dispatch.
