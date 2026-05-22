@@ -266,7 +266,7 @@ nav:
     namespace: "{name}"
     namespaced: Ressources avec espace de noms uniquement
     orphan: "Hors d'un projet"
-  project: "Projet : {name}"
+    project: "Projet : {name}"
     system: Espaces de noms système uniquement
     user: Espaces de noms utilisateur uniquement
   apps: Applications
@@ -274,7 +274,7 @@ nav:
     explore: Explorer le cluster
     multiCluster: Applications globales
     legacy: Applications héritées
-  configuration: Configuration
+    configuration: Configuration
     hci: HCI
   search:
     placeholder: Filtrer les clusters par...
@@ -458,7 +458,7 @@ accountAndKeys:
           maximum: "{value} - Maximum autorisé"
       customExpiry:
         options:
-        minute: Minutes
+          minute: Minutes
           hour: Heures
           day: Jours
           month: Mois
@@ -512,7 +512,7 @@ authConfig:
       label: "ID d'installation"
     privateKey:
       label: Clé privée
-  warning: "Le fournisseur d'authentification GitHub App ne fonctionne qu'avec les organisations GitHub."
+    warning: "Le fournisseur d'authentification GitHub App ne fonctionne qu'avec les organisations GitHub."
     form:
       prefix:
         1: '<li>Ouvrez vos <a href="{baseUrl}/settings/organizations" target="_blank" rel="noopener noreferrer nofollow">paramètres d''organisation</a>.</li>'
@@ -600,8 +600,8 @@ authConfig:
           5: 'Cliquez sur "Enregistrer".'
         topPrivateDomain: 'Domaine privé de premier niveau de :'
         ariaLabel:
-            hostname: Copier le nom d’hôte dans le presse-papiers
-            serverUrl: Copier l’URL du serveur dans le presse-papiers
+          hostname: Copier le nom d’hôte dans le presse-papiers
+          serverUrl: Copier l’URL du serveur dans le presse-papiers
       2:
         title: "Accédez à l'onglet \"Identifiants\" pour créer votre ID client OAuth"
         body:
@@ -611,7 +611,7 @@ authConfig:
           4: 'Cliquez sur "Créer", puis sur le bouton "Télécharger JSON".'
           5: 'Téléversez le fichier JSON téléchargé dans la zone des identifiants OAuth.'
         ariaLabel:
-            serverUrlVerify: Copier l’URL de vérification d’authentification du serveur dans le presse-papiers
+          serverUrlVerify: Copier l’URL de vérification d’authentification du serveur dans le presse-papiers
       3:
         title: 'Créer les identifiants du compte de service'
         introduction: '<a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">Suivez</a> ce guide pour :'
@@ -644,16 +644,16 @@ authConfig:
     nestedGroupMembership:
       label: Appartenance aux groupes imbriqués
       options:
-      direct: Rechercher uniquement les appartenances directes aux groupes
-      nested: Rechercher les appartenances directes et imbriquées aux groupes
+        direct: Rechercher uniquement les appartenances directes aux groupes
+        nested: Rechercher les appartenances directes et imbriquées aux groupes
     objectClass: Classe d’objet
     password: Mot de passe
     port: Port
     protocol: Protocole
     protocols:
-    starttls: Start TLS
+      starttls: Start TLS
       ldap: LDAP
-    tls: LDAPS (TLS)
+      tls: LDAPS (TLS)
     customizeSchema: Personnaliser le schéma
     oktaSchema: "Les valeurs par défaut ci-dessous sont pour un serveur OpenLDAP générique. Pour plus d'informations sur les valeurs correctes pour Okta, consultez la documentation Rancher."
     users: Utilisateurs
@@ -747,11 +747,11 @@ authConfig:
     updateEndpoint:
       button: Mettre à jour le point de terminaison
       banner:
-      message: "Azure AD Authentication doit être mis à jour : il utilise l'API Azure Graph, qui sera dépréciée. Veuillez mettre à jour vers la version actuelle."
-      linkText: 'Mettre à jour ici.'
+        message: "Azure AD Authentication doit être mis à jour : il utilise l'API Azure Graph, qui sera dépréciée. Veuillez mettre à jour vers la version actuelle."
+        linkText: 'Mettre à jour ici.'
       modal:
-      title: 'Êtes-vous sûr ? Cette mise à jour est irréversible.'
-      body: "<p><b>Vous devrez peut-être apporter des modifications supplémentaires</b>. Veuillez vous assurer que l'application Azure AD dispose des autorisations nécessaires.</p>"
+        title: 'Êtes-vous sûr ? Cette mise à jour est irréversible.'
+        body: "<p><b>Vous devrez peut-être apporter des modifications supplémentaires</b>. Veuillez vous assurer que l'application Azure AD dispose des autorisations nécessaires.</p>"
   oidc:
     endSessionEndpoint: 
       title: Point de terminaison de fin de session
@@ -773,7 +773,7 @@ authConfig:
       realm: Realm Keycloak
     issuer: Émetteur
     authEndpoint: Point de terminaison Auth
-      jwksUrl: URL JWKS
+    jwksUrl: URL JWKS
     tokenEndpoint: Point de terminaison Token
     userInfoEndpoint: "Point de terminaison d'informations utilisateur"
     acrValue: "Référence de contexte d'autorisation"
@@ -781,15 +781,15 @@ authConfig:
       label: Revendications personnalisées
       enable:
         label: Ajouter des revendications personnalisées
-      tooltip: "Mappez manuellement les revendications OIDC lorsque votre fournisseur n'utilise pas de noms de revendications standard dans les jetons."
+        tooltip: "Mappez manuellement les revendications OIDC lorsque votre fournisseur n'utilise pas de noms de revendications standard dans les jetons."
       nameClaim: 
         label: Revendication de nom personnalisée
       groupsClaim: 
         label: Revendication de groupes personnalisée
       emailClaim: 
         label: "Revendication d'e-mail personnalisée"
-      cognitoIssuer: URL de l’émetteur
-      cognitoHelp: "Vous devrez créer un client d'application dans Cognito de type <b>Application web traditionnelle</b>."
+    cognitoIssuer: URL de l’émetteur
+    cognitoHelp: "Vous devrez créer un client d'application dans Cognito de type <b>Application web traditionnelle</b>."
     scope:
       label: Portées
       placeholder: openid
@@ -813,7 +813,7 @@ authConfig:
     enabled: "Le fournisseur d'authentification {provider} est actuellement activé."
   testAndEnable: "Tester et activer l'authentification"
   noneEnabled: "L'authentification locale est toujours activée, mais vous pouvez sélectionner un autre fournisseur d'authentification supplémentaire parmi ceux affichés ci-dessous."
-    localEnabled: "{vendor} est configuré pour autoriser l'accès aux comptes de sa base de données locale."
+  localEnabled: "{vendor} est configuré pour autoriser l'accès aux comptes de sa base de données locale."
   manageLocal: Gérer les comptes
 
 authGroups:
@@ -825,7 +825,10 @@ authGroups:
 
 assignTo:
   title: |-
-    Assigner à
+    {count, plural,
+      =1 { Assigner le cluster à&hellip; }
+      other { Assigner {count} clusters à&hellip; }
+    }
   labelsTitle: |-
     {count, plural,
       =1 { Assigner le cluster à&hellip; }
