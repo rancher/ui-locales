@@ -147,11 +147,6 @@ generic:
           =1 {Correspond à 1 sur {total, number} : "{sample}"}
           other {Correspond à {matched, number} sur {total, number}, dont "{sample}"}
         }
-        {matched, plural,
-          =0 {Matches 0 of {total, number}}
-          =1 {Matches 1 of {total, number}: "{sample}"}
-          other {Matches {matched, number} of {total, number}, including "{sample}"}
-        }
   basic: Basique
   ariaLabel:
     keyValue: Entrée Clé-Valeur
@@ -428,10 +423,6 @@ about:
       {count, plural,
         one { Nombre de ressources par cluster ({count} cluster)}
         other { Nombre de ressources par cluster ({count} clusters)}
-      }
-      {count, plural,
-        one { Resource Counts by Cluster ({count} cluster)}
-        other { Resource Counts by Cluster ({count} clusters)}
       }
     modal:
       title: "Les temps de réponse n'ont pas encore été générés."
@@ -1087,10 +1078,6 @@ backupRestoreOperator:
         =1 { Fichier }
         other { Fichiers }
       }
-      {count, plural,
-        =1 { File }
-        other { Files }
-      }
   s3:
     bucketName: Nom du compartiment
     credentialSecretName: Secret des informations d'identification
@@ -1319,10 +1306,6 @@ catalog:
             =1 { révision }
             other { révisions }
           }
-          {value, plural,
-            =1 { revision }
-            other { revisions }
-          }
       hooks: Exécuter les hooks du chart
       openapi: Valider le schéma OpenAPI
       resetValues: Réinitialiser les valeurs
@@ -1332,10 +1315,6 @@ catalog:
           {value, plural,
             =1 { seconde }
             other { secondes }
-          }
-          {value, plural,
-            =1 { second }
-            other { seconds }
           }
       wait: Attendre
     namespaceIsInProject: "L'espace de noms cible de ce chart, <code>{namespace}</code>, existe déjà et ne peut pas être ajouté à un autre projet."
@@ -1507,9 +1486,6 @@ compliance:
   alertNeeded: |-
     Les alertes doivent être activées dans le fichier values.yaml du chart de conformité.
     Cela nécessite que l'option <a tabindex>alerting</a> soit activée.
-    Alerting must be enabled within the compliance chart values.yaml.
-    This requires that the <a tabindex="0" href="{link}">{vendor} Monitoring and Alerting app</a> is installed
-    and the Receivers and Routes are <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configured to send out alerts.</a>
   alertOnComplete: Alerte à la fin du scan
   alertOnFailure: Alerte en cas d'échec du scan
   benchmarkVersion: Version de référence
@@ -1523,18 +1499,10 @@ compliance:
       =1 { Tous les profils utilisant cette version de benchmark ne fonctionneront plus. }
       other { Tous les profils utilisant ces versions de benchmark ne fonctionneront plus. }
     }
-    {count, plural,
-      =1 { Any profiles using this benchmark version will no longer work. }
-      other { Any profiles using these benchmark versions will no longer work }
-    }
   deleteProfileWarning: |-
     {count, plural,
       =1 { Toutes les analyses planifiées utilisant ce profil ne fonctionneront plus. }
       other { Toutes les analyses planifiées utilisant ces profils ne fonctionneront plus. }
-    }
-    {count, plural,
-      =1 { Any scheduled scans using this profile will no longer work. }
-      other { Any scheduled scans using either of these profiles will no longer work. }
     }
   downloadAllReports: Télécharger tous les rapports sauvegardés
   downloadLatestReport: Télécharger le dernier rapport
@@ -2288,10 +2256,6 @@ cluster:
             =1 { Pour toutes les machines, utiliser les arguments Kubelet : }
             other { Pour les machines sans correspondance de sélecteur, utiliser les arguments Kubelet : }
           }
-          {count, plural,
-            =1 { For all machines, use the Kubelet args: }
-            other { For machines without matched labels below: }
-          }
         kubeControllerManagerTitle: Arguments supplémentaires du contrôleur de gestion
         kubeApiServerTitle: Arguments supplémentaires du serveur API
         kubeSchedulerTitle: Arguments supplémentaires du planificateur
@@ -2310,10 +2274,6 @@ cluster:
       {count, plural,
         =1 { {pool_name} : La valeur fournie pour {fields} est introuvable }
         other { Erreurs dans les pools de machines }
-      }
-      {count, plural,
-        =1 { {pool_name}: The provided value for {fields} was not found in the list of expected values. This can happen with clusters provisioned outside of Rancher or when options for the provider have changed. }
-        other { {pool_name}: The provided values for {fields} were not found in the list of expected values. This can happen with clusters provisioned outside of Rancher or when options for the provider have changed. }
       }
     rke1DeprecationMessage: "Rancher Kubernetes Engine (RKE / RKE1) a atteint sa fin de vie et ces clusters ne sont plus pris en charge. Nous recommandons de migrer les clusters RKE1 vers RKE2 pour garantir la continuité du support et des mises à jour de sécurité. En savoir plus sur la transition <a href=\"https://www.suse.com/support/kb/doc/?id=000021518\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">ici</a>."
     nginxDeprecated: Le contrôleur NGINX est obsolète et sera supprimé dans les prochaines versions
@@ -2363,36 +2323,15 @@ cluster:
             =0 { Un cluster nécessite au moins un nœud control plane pour être utilisable. }
             other {{count, number} nœuds control plane}
           }
-          {count, plural,
-            =0 { A cluster needs at least one control plane node to be usable. }
-            =1 { A cluster with only one control plane node is not fault-tolerant. }
-            other {}
-          }
         etcd: |-
           {count, plural,
             =0 { Un cluster nécessite au moins un nœud etcd pour être utilisable. }
             other {{count, number} nœuds etcd}
           }
-          {count, plural,
-            =0 { A cluster needs at least one etcd node to be usable. }
-            =1 { A cluster with only one etcd node is not fault-tolerant. }
-            =2 { Clusters should have an odd number of nodes.  A cluster with 2 etcd nodes is not fault-tolerant. }
-            =3 {}
-            =4 { Clusters should have an odd number of nodes. }
-            =5 {}
-            =6 { Clusters should have an odd number of nodes. }
-            =7 {}
-            other { More than 7 etcd nodes is not recommended. }
-          }
         worker: |-
           {count, plural,
             =0 { Un cluster nécessite au moins un nœud worker pour être utilisable. }
             other {{count, number} nœuds worker}
-          }
-          {count, plural,
-            =0 { A cluster needs at least one worker node to be usable. }
-            =1 { A cluster with only one worker node is not fault-tolerant. }
-            other {}
           }
     quantity:
       label: Nombre de machines
@@ -2680,10 +2619,6 @@ cluster:
         =1 { Un snapshot a été demandé pour 1 cluster }
         other {Un snapshot a été demandé pour {count, number} clusters}
       }
-      {count, plural,
-        =1 { A snapshot has been requested for 1 cluster }
-        other {A snapshot has been requested for {count} clusters}
-      }
     groupLabel: Emplacement
     failed: Instantané du {time} a échoué
     rke1:
@@ -2776,9 +2711,6 @@ clusterIndexPage:
         {count, plural,
         =1 {cœur}
         other {cœurs}}
-        {count, plural,
-        =1 {core}
-        other {cores}}
   header: Tableau de bord du cluster
   resourceGauge:
     totalResources: Ressources totales
@@ -2905,28 +2837,15 @@ drivers:
       =1 { et <b>un autre</b>}
       other { et <b>{count} autres</b>}
       }
-      {count, plural,
-      =0 {}
-      =1 { and <b>one other </b>}
-      other { and <b>{count} other </b>}
-      }
     warningDrivers: |-
       {count, plural,
       =1 { Vous ne pourrez plus modifier la configuration des clusters utilisant {names}.}
       other { Vous ne pourrez plus modifier la configuration des clusters utilisant {names}.}
       }
-      {count, plural,
-      =1 { You will no longer be able to edit the configuration of clusters using {names} driver.}
-      other { You will no longer be able to edit the configuration of clusters using {names} drivers.}
-      }
     warning: |-
       {count, plural,
       =1 { {warningDrivers} Les ressources du fournisseur correspondant ne seront pas automatiquement supprimées. }
       other { Les ressources des fournisseurs correspondants ne seront pas automatiquement supprimées. }
-      }
-      {count, plural,
-      =1 { {warningDrivers} Resources in the corresponding provider will not be automatically removed.}
-      other { {warningDrivers} Resources in the corresponding providers will not be automatically removed.}
       }
   error:
     activate: "Échec de l'activation du pilote { name }"
@@ -2945,11 +2864,6 @@ detailText:
       =1 {+ 1 caractère supplémentaire}
       other {+ {n, number} caractères supplémentaires}
     }
-    {n, plural,
-      =1 {+ 1 more char}
-      other {+ {n, number} more chars}
-    }
-
 drainNode:
   action: Drainer
   actionStop: Arrêter le drainage
@@ -3193,11 +3107,6 @@ fleet:
             =1 {1 cluster sélectionné}
             other {{n, number} clusters sélectionnés}
           }
-          {n, plural,
-            =0 {No clusters selected}
-            =1 {1 cluster selected}
-            other {{n, number} clusters selected}
-            }
         placeholder: Sélectionner des clusters par nom, étiquettes ou groupes
         empty: "Aucun cluster dans l'espace de travail"
         plusMore: |-
@@ -3205,10 +3114,6 @@ fleet:
             =1 {+ 1 cluster supplémentaire}
             other {+ {n, number} clusters supplémentaires}
           }
-          {n, plural,
-            =1 {+ 1 more cluster}
-            other {+ {n, number} more clusters}
-            }
   application:
     pageTitle: "Bundles d'applications"
     menuLabel: "Bundles d'applications"
@@ -3242,11 +3147,6 @@ fleet:
             count, plural,
             =1 {La mise à jour forcée peut être un processus de longue durée. Le dépôt sera recréé.}
             other {La mise à jour forcée peut être un processus de longue durée. Les dépôts seront recréés.}
-          }
-          {
-            count, plural,
-            =1 {Force update could be a long running process, the repository will be cloned again.}
-            other {Force update could be a long running process, the repositories will be cloned again.}
           }
       enablePolling:
         label: "Activer l'interrogation"
@@ -3395,11 +3295,6 @@ fleet:
             =1 {La mise à jour forcée peut être un processus de longue durée.}
             other {La mise à jour forcée peut être un processus de longue durée.}
           }
-          {
-            count, plural,
-            =1 {Force update could be a long running process.}
-            other {Force update could be a long running process.}
-          }
       unpause:
         label: Reprendre
       pause:
@@ -3539,10 +3434,6 @@ fleet:
         {matched, plural,
           =1 {Correspond à 1 des {total, number} clusters existants : "{sample}"}
           other {Correspond à {matched, number} des {total, number} clusters existants}
-        }
-        {matched, plural,
-          =1 {Matches 1 of {total, number} existing clusters: "{sample}"}
-          other {Matches {matched, number} of {total, number} existing clusters, including "{sample}"}
         }
   fdc:
     id: ID
@@ -3790,11 +3681,6 @@ import:
     =1 {1 ressource}
     other {# ressources}
     }
-    Applied {count, plural,
-    =1 {1 Resource}
-    other {# Resources}
-    }
-
 auditPolicy:
   active: Actif
   inactive: Inactif
@@ -4175,9 +4061,6 @@ landing:
       {count, plural,
       =1 {cœur}
       other {cœurs}}
-      {count, plural,
-      =1 {core}
-      other {cores}}
     cpuUsed: CPU utilisé
     memoryUsed: Mémoire utilisée
   whatsNew:
@@ -4809,7 +4692,7 @@ monitoringReceiver:
     add:
       selectWebhookType: Sélectionner le type de Webhook
       generic: Générique
-      msTeams: "MS Teams"
+      msTeams: MS Teams
       alibabaCloudSms: SMS
   auth:
     label: Authentification
@@ -4940,10 +4823,6 @@ namespaceFilter:
       one {1 élément sélectionné}
       other {{total} éléments sélectionnés}
       }
-      {total, plural,
-      one {1 item selected}
-      other {{total} items selected}
-      }
   input: "Filtrer les options d'espace de noms"
   button:
     clear: "Supprimer les filtres d'espace de noms appliqués"
@@ -5058,47 +4937,12 @@ networkpolicy:
     label: Sélecteurs
     hint: La politique réseau est appliquée aux pods sélectionnés
     matchingPods:
-      matchesSome: |-
-        {matched, plural,
-          =0 {Correspond à 0 des {total, number} pods}
-          =1 {Correspond à 1 des {total, number} pods : "{sample}"}
-          other {Correspond à {matched, number} des {total, number} pods}
-        }
-        {matched, plural,
-          =0 {Matches 0 of {total, number} pods}
-          =1 {Matches 1 of {total, number} pods: "{sample}"}
-          other {Matches {matched, number} of {total, number} existing pods, including "{sample}"}
-        }
+      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
     matchingNamespaces:
-      matchesSome: |-
-        {matched, plural,
-          =0 {Correspond à 0 des {total, number} espaces de noms}
-          =1 {Correspond à 1 des {total, number} espaces de noms : "{sample}"}
-          other {Correspond à {matched, number} des {total, number} espaces de noms}
-        }
-        {matched, plural,
-          =0 {Matches 0 of {total, number} namespaces}
-          =1 {Matches 1 of {total, number} namespaces: "{sample}"}
-          other {Matches {matched, number} of {total, number} existing namespaces, including "{sample}"}
-        }
+      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
     matchingNamespacesAndPods:
       tooltip: "Une règle avec une seule entrée qui spécifie à la fois le sélecteur d'espace de noms et le sélecteur de pod pour sélectionner des pods particuliers."
-      matchesSome: |-
-        {matchedPods, plural,
-          =0 {Correspond à 0 des {totalPods, number} pods}
-          =1 {Correspond à 1 des {totalPods, number} pods}
-          other {Correspond à {matchedPods, number} des {totalPods, number} pods}
-        }
-        {matchedPods, plural,
-          =0 {Matches 0 of {totalPods, number} pods}
-          =1 {Matches 1 of {totalPods, number} pods: "{samplePods}"}
-          other {Matches {matchedPods, number} of {totalPods, number} existing pods, including "{samplePods}"}
-        } in {matchedNamespaces, plural,
-          =0 {0 of {totalNamespaces, number} namespaces}
-          =1 {1 of {totalNamespaces, number} namespaces: "{sampleNamespaces}"}
-          other {{matchedNamespaces, number} of {totalNamespaces, number} existing namespaces, including "{sampleNamespaces}"}
-        }
-
+      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
 node:
   list:
     pool: Pool
@@ -5969,10 +5813,6 @@ promptScaleMachineDown:
       =1 {Ce pool de machines est encore en cours de réconciliation. Un nœud différent peut être supprimé à la place de celui que vous avez sélectionné. Il est préférable d'attendre la fin de la réconciliation.<br> Voulez-vous quand même marquer ce nœud pour suppression ?}
       other {Au moins l'un de ces pools de machines est encore en cours de réconciliation. Des nœuds différents peuvent être supprimés. Il est préférable d'attendre la fin de la réconciliation.<br> Voulez-vous quand même marquer ces nœuds pour suppression ?}
     }
-    {count, plural,
-      =1 {This machine pool is still reconciling. A different node may be deleted instead of the one you selected. It’s best to wait until reconciliation finishes.<br> Do you still want to mark this node for deletion?}
-      other {At least one of these machine pools is still reconciling. Different nodes may be deleted instead of the ones you selected. It’s best to wait until reconciliation finishes.<br> Do you still want to mark these nodes for deletion?}
-    }
 promptSlo:
   title: Se déconnecter
   text: Se déconnecter uniquement de Rancher, ou de toutes les applications {name}.
@@ -5989,11 +5829,6 @@ promptRemove:
     =0 {.}
     =1 { et <b>un autre</b>.}
     other { et <b>{count} autres</b>.}
-    }
-    {count, plural,
-    =0 {.}
-    =1 { and <b>one other</b>.}
-    other { and <b>{count} others</b>.}
     }
   attemptingToRemove: Vous tentez de supprimer le/la {type}
   attemptingToRemoveAuthConfig: "Vous tentez de désactiver ce fournisseur d'authentification. <br><br> Notez que les liaisons de modèles de rôles de cluster peuvent être affectées."
@@ -6214,25 +6049,16 @@ resourceDetail:
       {count, plural,
       =1 {Propriétaire}
       other {Propriétaires}}
-      {count, plural,
-      =1 {Owner}
-      other {Owners}}
     hideLabels: Masquer les étiquettes système
     showLabels: Afficher toutes les étiquettes
     hideAnnotations: |-
       {annotations, plural,
       =1 {Masquer 1 annotation}
       other {Masquer {annotations} annotations}}
-      {annotations, plural,
-      =1 {Hide 1 annotation}
-      other {Hide {annotations} annotations}}
     showAnnotations: |-
       {annotations, plural,
       =1 {Afficher 1 annotation}
       other {Afficher {annotations} annotations}}
-      {annotations, plural,
-      =1 {Show 1 annotation}
-      other {Show {annotations} annotations}}
     name: Nom
   header:
     clone: Cloner depuis {subtype} {name}
@@ -6264,9 +6090,6 @@ resourceDetail:
       Ce {type} est géré par {hasName, select,
         no {une application {managedBy}}
         yes {l'application {managedBy} {appName}}}; les modifications peuvent être écrasées.
-      This {type} is managed by {hasName, select,
-        no {a {managedBy} app}
-        yes {the {managedBy} app {appName}}}; changes made here will likely be overwritten the next time {managedBy} runs.
 resourceList:
   head:
     create: Créer
@@ -6349,10 +6172,6 @@ secret:
       other {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}
         sur {pages} pages}
       }
-      {pages, plural,
-      =0 {No {pluralLabel}}
-      =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{from} - {to} of {count} {pluralLabel}}}
     plusMore: + {n} de plus
     privateKey: Clé privée
     privateKeyPlaceholder: "Collez la clé privée, commençant généralement par -----BEGIN RSA PRIVATE KEY-----"
@@ -6392,12 +6211,6 @@ secret:
           =1 {1 entrée}
           other {{entries} entrées}
         }
-        {entries, plural,
-          =0 {Empty}
-          =1 {1 Entry}
-          other {{entries} Entries}
-        }
-
   serviceAcct:
     ca: Certificat CA
     token: Jeton
@@ -6465,7 +6278,7 @@ selectOrCreateAuthSecret:
     none: Aucun
     basic: Auth HTTP basique
     ssh: Clé SSH
-    aws: "AWS/S3"
+    aws: AWS/S3
     custom: Nom du secret
   s3:
     accessKey: "Clé d'accès"
@@ -6587,11 +6400,6 @@ servicesPage:
           =1 {Correspond à 1 des {total, number} pods : "{sample}"}
           other {Correspond à {matched, number} des {total, number} pods}
         }
-        {matched, plural,
-          =0 {Matches 0 of {total, number} pods. If no selector is created, manual endpoints must be made.}
-          =1 {Matches 1 of {total, number} pods: "{sample}"}
-          other {Matches {matched, number} of {total, number} existing pods, including "{sample}"}
-        }
   serviceTypes:
     clusterIp:
       abbrv: IP
@@ -6673,20 +6481,12 @@ sortableTable:
       =1 {{count} {count, plural, =1 {élément} other {éléments}}}
       other {{from} - {to} sur {count} éléments}
       }
-      {pages, plural,
-      =0 {No Items}
-      =1 {{count} {count, plural, =1 {Item} other {Items}}}
-      other {{from} - {to} of {count} Items}}
     resource: |-
       {pages, plural,
       =0 {Aucun {pluralLabel}}
       =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
       other {{from} - {to} sur {count} {pluralLabel}}
       }
-      {pages, plural,
-      =0 {No {pluralLabel}}
-      =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{from} - {to} of {count} {pluralLabel}}}
   search: Filtrer
   searchLabel: Filtrer les résultats du tableau
   in: dans
@@ -6911,7 +6711,7 @@ storageClass:
       label: Utilisateur
       placeholder: e.g. root
     group:
-      label: Group
+      label: Groupe
       placeholder: 'par exemple : root'
     quobyteConfig:
       label: Quobyte Config
@@ -6922,13 +6722,13 @@ storageClass:
   portworx-volume:
     title: Portworx Volume
     filesystem:
-      label: Filesystem
+      label: Système de fichiers
       placeholder: e.g. ext4
     blockSize:
       label: Taille de bloc
       placeholder: e.g. 32
     repl:
-      label: Repl
+      label: Réplication
       placeholder: e.g.1; 0 for entire device
     ioPriority:
       label: Priorité E/S
@@ -6940,33 +6740,33 @@ storageClass:
       label: Niveau d'agrégation
       placeholder: e.g. 0
     ephemeral:
-      label: Ephemeral
+      label: Éphémère
       placeholder: e.g. true
   scaleio:
     title: ScaleIO Volume
     gateway:
-      label: Gateway
+      label: Passerelle
       placeholder: e.g. https://192.168.99.200:443/api
     system:
-      label: System
+      label: Système
       placeholder: e.g. scaleio
     protectionDomain:
       label: Domaine de protection
       placeholder: e.g. pd0
     storagePool:
-      label: Storage Pool
+      label: Pool de stockage
       placeholder: e.g. sp1
     storageMode:
-      label: StorageMode
+      label: Mode de stockage
       thin: Allocation légère
       thick: Allocation épaisse
     secretRef:
-      label: Secret Ref
+      label: Référence secrète
       placeholder: e.g. sio-secret
     readOnly:
-      label: Read Only
+      label: Lecture seule
     filesystemType:
-      label: Filesystem Type
+      label: Type de système de fichiers
       placeholder: e.g. xfs
   storageos:
     title: StorageOS
@@ -6975,15 +6775,15 @@ storageClass:
       placeholder: e.g. default
     description:
       label: Description
-      placeholder: e.g. Kubernetes volume
+      placeholder: ex. Volume Kubernetes
     filesystemType:
-      label: Filesystem Type
+      label: Type de système de fichiers
       placeholder: e.g. ext4
     adminSecretNamespace:
-      label: Admin Secret Namespace
+      label: Espace de noms du secret admin
       placeholder: e.g. default
     adminSecretName:
-      label: Admin Secret Name
+      label: Nom du secret admin
       placeholder: e.g. storageos-secret
   no-provisioner:
     title: Stockage local
@@ -6995,7 +6795,7 @@ storageClass:
     warning:
       unSatisfiesVersion: Veuillez mettre à niveau votre version du pilote Harvester CSI pour utiliser cette fonctionnalité. (csi-driver >= v0.1.15)
     hostStorageClass:
-      label: Host Storage Class
+      label: Classe de stockage hôte
       placeholder: Nom de la classe de stockage sur le cluster Harvester hôte
       tooltip: Par défaut, la classe de stockage par défaut du cluster Harvester hôte est utilisée.
 
@@ -7525,11 +7325,6 @@ wm:
         {value, plural,
         =1 {Heure}
         other {Heures}
-        }
-        {value, number}
-        {value, plural,
-        =1 {Hour}
-        other {Hours}
         }
       label: Afficher les derniers
       lines: "{value, number} lignes"
@@ -9213,7 +9008,7 @@ resourceQuota:
   resourceIdentifier:
     placeholder: ex. configmaps
     tooltip: "Sélectionnez 'Personnalisé' dans la liste 'Type de ressource' et saisissez l'identifiant de ressource (ex. requests.nvidia.com/gpu) pour ajouter des quotas de ressources personnalisés."
-  configMaps: "Config Maps"
+  configMaps: Config Maps
   limitsCpu: Limite CPU
   limitsMemory: Limite mémoire
   persistentVolumeClaims: Demandes de volumes persistants
