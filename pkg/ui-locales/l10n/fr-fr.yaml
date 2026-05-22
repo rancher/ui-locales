@@ -47,9 +47,9 @@ generic:
   invalidCron: Planification cron invalide
   inProgress: En cours
   imagePullPolicy:
-    always: Always
+    always: Toujours
     ifNotPresent: IfNotPresent
-    never: Never
+    never: Jamais
   labels: Étiquettes
   labelsAndAnnotations: Étiquettes et annotations
   podSecurityAdmission: Admission de sécurité des pods
@@ -65,9 +65,9 @@ generic:
   notification:
     title:
       succeed: Succès
-      info: Info
+      info: Information
       warning: Avertissement
-      error: Error
+      error: Erreur
   ok: OK
   other: |-
     {count, plural,
@@ -103,7 +103,7 @@ generic:
   upload: Télécharger
   provisioning: '—'
   key: Clé
-  value: Value
+  value: Valeur
   yes: Oui
   no: Non
   units:
@@ -134,7 +134,7 @@ generic:
   featured: En vedette
   shortFeatured: Vedette
   category: Catégorie
-  tags: Tags
+  tags: Étiquettes
   tag: Étiquette
   placeholder: "ex. {text}"
   moreInfo: "Plus d'informations"
@@ -220,7 +220,7 @@ nav:
   support: |-
     {hasSupport, select,
       true {Support}
-      other {Get Support}
+      other {Obtenir de l'aide}
     }
   restoreSnapshot: Restaurer le snapshot
   rotateCertificates: Renouveler les certificats
@@ -266,7 +266,7 @@ nav:
     namespace: "{name}"
     namespaced: Ressources avec espace de noms uniquement
     orphan: "Hors d'un projet"
-    project: "Project: {name}"
+  project: "Projet : {name}"
     system: Espaces de noms système uniquement
     user: Espaces de noms utilisateur uniquement
   apps: Applications
@@ -274,7 +274,7 @@ nav:
     explore: Explorer le cluster
     multiCluster: Applications globales
     legacy: Applications héritées
-    configuration: Configuration
+  configuration: Configuration
     hci: HCI
   search:
     placeholder: Filtrer les clusters par...
@@ -352,19 +352,19 @@ suffix:
   ago: il y a
   revisions: |-
     {count, plural,
-      =1 { Revision }
-      other { Revisions }
+      =1 { Révision }
+      other { Révisions }
     }
   seconds: |-
     {count, plural,
-      =1 { Second }
-      other { Seconds }
+      =1 { Seconde }
+      other { Secondes }
     }
   sec: s
   times: |-
     {count, plural,
-      =1 { Time }
-      other { Times }
+      =1 { Fois }
+      other { Fois }
     }
 
 ##############################
@@ -458,7 +458,7 @@ accountAndKeys:
           maximum: "{value} - Maximum autorisé"
       customExpiry:
         options:
-          minute: Minutes
+        minute: Minutes
           hour: Heures
           day: Jours
           month: Mois
@@ -500,7 +500,7 @@ authConfig:
     unrestricted: Autoriser tout utilisateur valide
   allowedPrincipalIds:
     title: Utilisateurs et groupes autorisés
-  associatedWarning: 'The {provider} account that is used to enable the external provider will be granted admin permissions. If you use a test account or non-admin account, that account will still be granted admin-level permissions. See <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> to understand why.'
+  associatedWarning: 'Le compte {provider} utilisé pour activer le fournisseur externe recevra les autorisations d''administrateur.'
   githubapp:
     clientId:
       label: ID client
@@ -512,30 +512,30 @@ authConfig:
       label: "ID d'installation"
     privateKey:
       label: Clé privée
-    warning: The GitHub App authentication provider only works with <a href="https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts" target="_blank" rel="noopener noreferrer nofollow">GitHub Organization accounts</a>. It does not support User accounts.
+  warning: "Le fournisseur d'authentification GitHub App ne fonctionne qu'avec les organisations GitHub."
     form:
       prefix:
-        1: <li>Open your <a href="{baseUrl}/settings/organizations" target="_blank" rel="noopener noreferrer nofollow">GitHub organization settings</a> in a new window</li>
-        2: <li>To the right of the organization, click "Settings"</li>
-        3: <li>In the left sidebar, click "Developer settings" -> "GitHub Apps"</li>
-        4: <li>Click "New Github App"</li>
+        1: '<li>Ouvrez vos <a href="{baseUrl}/settings/organizations" target="_blank" rel="noopener noreferrer nofollow">paramètres d''organisation</a>.</li>'
+        2: '<li>À droite de l''organisation, cliquez sur "Paramètres".</li>'
+        3: '<li>Dans la barre latérale gauche, cliquez sur "Paramètres développeur" -> "GitHub Apps".</li>'
+        4: '<li>Cliquez sur "Nouvelle GitHub App".</li>'
       instruction: 'Remplissez le formulaire avec ces valeurs :'
       app:
         label: "Nom de l'application GitHub"
-        value: 'Anything you like, e.g. My {vendor}'
+        value: 'Quelque chose comme Mon {vendor}'
       callback:
         label: URL de rappel
         value: '{serverUrl}/verify-auth'
       description:
         label: "Description de l'application"
-        value: 'Optional, can be left blank'
+        value: 'Facultatif, peut être laissé vide'
       homepage:
         label: "URL de la page d'accueil"
       create: Cliquez sur «Créer une application GitHub»
       suffix:
-        1: <li>Under Client Secrets, click "Generate a new client secret"</li>
-        2: <li>Under Private Keys, click "Generate a private key"</li>
-        3: <li>Copy and paste the "App ID", "Client ID", "Client Secret", and "Private Key" of your newly created OAuth app into the fields below</li>
+        1: '<li>Sous Secrets client, cliquez sur "Générer un nouveau secret client".</li>'
+        2: '<li>Sous Clés privées, cliquez sur "Générer une clé privée".</li>'
+        3: "<li>Copiez et collez l'\"ID de l'App\", l'\"ID client\", le \"Secret client\" et la \"Clé privée\" de votre application nouvellement créée dans les champs correspondants ci-dessous.</li>"
     host:
       label: Hôte GitHub Enterprise
       placeholder: ex. github.monentreprise.exemple
@@ -554,22 +554,22 @@ authConfig:
     form:
       app:
         label: "Nom de l'application"
-        value: 'Anything you like, e.g. My {vendor}'
+        value: 'Quelque chose comme Mon {vendor}'
       callback:
         label: "URL de rappel d'autorisation"
       description:
         label: "Description de l'application"
-        value: 'Optional, can be left blank'
+        value: 'Facultatif, peut être laissé vide'
       homepage:
         label: "URL de la page d'accueil"
       instruction: 'Remplissez le formulaire avec ces valeurs :'
       prefix:
-        1: <li><a href="{baseUrl}/settings/developers" target="_blank" rel="noopener noreferrer nofollow">Click here</a> to go to GitHub application settings in a new window.</li>
-        2: <li>Click on the "OAuth Apps" tab.</li>
-        3: <li>Click the "New OAuth App" button.</li>
+        1: '<li><a href="{baseUrl}/settings/developers" target="_blank" rel="noopener noreferrer nofollow">Cliquez ici</a> pour ouvrir les paramètres des développeurs dans un nouvel onglet.</li>'
+        2: "<li>Cliquez sur l'onglet \"OAuth Apps\".</li>"
+        3: '<li>Cliquez sur le bouton "Nouvelle application OAuth".</li>'
       suffix:
-        1: <li>Click "Register application"</li>
-        2: <li>Copy and paste the Client ID and Client Secret of your newly created OAuth app into the fields below</li>
+        1: "<li>Cliquez sur \"Enregistrer l'application\".</li>"
+        2: "<li>Copiez et collez l'ID client et le Secret client de votre application OAuth nouvellement créée dans les champs ci-dessous.</li>"
     host:
       label: Hôte GitHub Enterprise
       placeholder: ex. github.monentreprise.exemple
@@ -591,71 +591,71 @@ authConfig:
       tip: "Le JSON des identifiants du compte de service se trouve dans la section des comptes de service de la console développeurs de l'API Google."
     steps:
       1:
-        title: 'Click <a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="noopener noreferrer nofollow">here</a> to open applications settings in a new window'
+        title: '<a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="noopener noreferrer nofollow">Cliquez ici</a> pour ouvrir les paramètres des applications dans un nouvel onglet'
         body:
-         1: Login to your account. Navigate to "APIs & Services" and then select "OAuth consent screen".
-         2: 'Authorized domains:'
-         3: 'Application homepage link: '
-         4: 'Under Scopes for Google APIs, enable "email", "profile", and "openid".'
-         5: 'Click on "Save".'
-        topPrivateDomain: 'Top private domain of:'
+          1: 'Connectez-vous à votre compte. Accédez à "APIs & Services" puis sélectionnez "OAuth consent screen".'
+          2: 'Domaines autorisés :'
+          3: "Lien de la page d'accueil de l'application : "
+          4: 'Sous Scopes pour les APIs Google, activez "email", "profile" et "openid".'
+          5: 'Cliquez sur "Enregistrer".'
+        topPrivateDomain: 'Domaine privé de premier niveau de :'
         ariaLabel:
-          hostname: Copy Hostname to clipboard
-          serverUrl: Copy Server URL to clipboard
+            hostname: Copier le nom d’hôte dans le presse-papiers
+            serverUrl: Copier l’URL du serveur dans le presse-papiers
       2:
-        title: 'Navigate to the "Credentials" tab to create your OAuth client ID'
+        title: "Accédez à l'onglet \"Identifiants\" pour créer votre ID client OAuth"
         body:
-          1: 'Select the "Create Credentials" dropdown, and select "OAuth clientID", then select "Web application".'
-          2: 'Authorized Javascript origins:'
-          3: 'Authorized redirect URIs:'
-          4: 'Click "Create", and then click on the "Download JSON" button.'
-          5: 'Upload the downloaded JSON file in the OAuth credentials box.'
+          1: 'Sélectionnez le menu déroulant "Créer des identifiants" et sélectionnez "ID client OAuth", puis sélectionnez "Application Web".'
+          2: 'Origines JavaScript autorisées :'
+          3: 'URIs de redirection autorisées :'
+          4: 'Cliquez sur "Créer", puis sur le bouton "Télécharger JSON".'
+          5: 'Téléversez le fichier JSON téléchargé dans la zone des identifiants OAuth.'
         ariaLabel:
-          serverUrlVerify: Copy Server Auth Verfication URL to clipboard
+            serverUrlVerify: Copier l’URL de vérification d’authentification du serveur dans le presse-papiers
       3:
-        title: 'Create Service Account credentials'
-        introduction: 'Follow <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">this</a> guide to:'
+        title: 'Créer les identifiants du compte de service'
+        introduction: '<a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">Suivez</a> ce guide pour :'
         body:
-          1: Create a service account.
-          2: Generate a key for the service account.
-          3: Add the service account as an OAuth client in your google domain.
+          1: Créer un compte de service.
+          2: Générer une clé pour le compte de service.
+          3: Ajouter le compte de service en tant que client OAuth dans votre domaine Google.
   ldap:
     freeipa: Configurer un serveur FreeIPA
     activedirectory: Configurer un compte Active Directory
     openldap: Configurer un serveur OpenLDAP
     defaultLoginDomain:
       label: Domaine de connexion par défaut
-      placeholder: eg mycompany
+      placeholder: 'par exemple : macompagnie'
       hint: Ce domaine sera utilisé si un utilisateur se connecte sans en spécifier un.
     cert: Certificat
-    disabledStatusBitmask: Disabled Status Bitmask
-    groupDNAttribute: Group DN Attribute
-    groupMemberMappingAttribute: Group Member Mapping Attribute
-    groupMemberUserAttribute: Group Member User Attribute
+    disabledStatusBitmask: Bitmask de statut désactivé
+    groupDNAttribute: Attribut DN de groupe
+    groupMemberMappingAttribute: Attribut de mappage des membres du groupe
+    groupMemberUserAttribute: Attribut utilisateur des membres du groupe
     groupSearchBase:
       label: Base de recherche de groupes
-      placeholder: 'ou=groups,dc=mycompany,dc=com'
+      placeholder: 'ou=groupes,dc=macompagnie,dc=com'
     hostname:
-      label: Hostname/IP
-      placeholder: eg server1,server2
-      hint: Multiple servers can be specified as a comma separated list
-    loginAttribute: Login Attribute
-    nameAttribute: Name Attribute
+      label: Nom d’hôte/Adresse IP
+      placeholder: 'par exemple : serveur1,serveur2'
+      hint: Plusieurs serveurs peuvent être spécifiés séparés par des virgules
+    loginAttribute: Attribut de connexion
+    nameAttribute: Attribut de nom
     nestedGroupMembership:
-      label: Nested Group Membership
+      label: Appartenance aux groupes imbriqués
       options:
-        direct: Search only direct group memberships
-        nested: Search direct and nested group memberships
-    objectClass: Object Class
+      direct: Rechercher uniquement les appartenances directes aux groupes
+      nested: Rechercher les appartenances directes et imbriquées aux groupes
+    objectClass: Classe d’objet
     password: Mot de passe
     port: Port
     protocol: Protocole
     protocols:
-      starttls: Start TLS
+    starttls: Start TLS
       ldap: LDAP
-      tls: LDAPS (TLS)
-    customizeSchema: Customize Schema
-    oktaSchema: 'The defaults below are for a generic OpenLDAP server. For more information on the values to use when using the Okta LDAP interface, see: <a target="_blank" rel="noopener noreferrer nofollow" href="https://help.okta.com/en-us/Content/Topics/Directory/LDAP-interface-connection-settings.htm">Okta LDAP Interface connection settings</a>'
+    tls: LDAPS (TLS)
+    customizeSchema: Personnaliser le schéma
+    oktaSchema: "Les valeurs par défaut ci-dessous sont pour un serveur OpenLDAP générique. Pour plus d'informations sur les valeurs correctes pour Okta, consultez la documentation Rancher."
     users: Utilisateurs
     groups: Groupes
     searchAttribute: Attribut de recherche
@@ -663,42 +663,42 @@ authConfig:
     serverConnectionTimeout: Délai de connexion au serveur
     serviceAccountDN: Nom distinctif du compte de service
     serviceAccountPassword: Mot de passe du compte de service
-    serviceAccountInfo: '{vendor} needs a service account that has read-only access to all of the domains that will be able to login, so that we can determine what groups a user is a member of when they make a request with an API key.'
+    serviceAccountInfo: '{vendor} nécessite un compte de service avec un accès en lecture seule à tous les domaines pouvant se connecter, afin de déterminer les groupes dont un utilisateur est membre lors de requêtes avec une clé API.'
     starttls:
       label: Start TLS
-      tip: Upgrades non-encrypted connections by wrapping with TLS during the connection process. Can not be used in conjunction with TLS.
+      tip: 'Met à niveau les connexions non chiffrées en les enveloppant avec TLS lors du processus de connexion. Ne peut pas être utilisé conjointement avec TLS.'
     searchUsingServiceAccount:
-      label: Enable Service Account Search
-      tip: When enabled, Rancher will use the service account instead of the user account to search for users and groups.
+      label: Activer la recherche par compte de service
+      tip: 'Lorsque activé, Rancher utilisera le compte de service au lieu du compte utilisateur pour rechercher des utilisateurs et des groupes.'
     tls: TLS
-    userEnabledAttribute: User Enabled Attribute
-    userMemberAttribute: User Member Attribute
-    userLoginFilter: User Login Filter
+    userEnabledAttribute: Attribut utilisateur activé
+    userMemberAttribute: Attribut de membre utilisateur
+    userLoginFilter: Filtre de connexion utilisateur
     userSearchBase:
-      label: User Search Base
-      placeholder: 'e.g. ou=users,dc=mycompany,dc=com'
+      label: Base de recherche des utilisateurs
+      placeholder: 'par exemple : ou=utilisateurs,dc=macompagnie,dc=com'
     username: "Nom d'utilisateur"
-    usernameAttribute: Username Attribute
+    usernameAttribute: Attribut nom d’utilisateur
     table:
       server: Serveur
       clientId: ID client
   saml:
     entityID: "Champ ID d'entité"
-    UID: UID Field
+    UID: Champ UID
     adfs: Configurer un compte AD FS
-    api: '{vendor} API Host'
+    api: 'Hôte API {vendor}'
     cert:
-      label: Certificate
-      placeholder: Paste in the certificate, starting with -----BEGIN CERTIFICATE-----
+      label: Certificat
+      placeholder: 'Collez le certificat, commençant par -----BEGIN CERTIFICATE-----'
     displayName: "Champ Nom d'affichage"
     groups: Champ Groupes
     key:
-      label: Private Key
-      placeholder: Paste in the private key, typically starting with -----BEGIN RSA PRIVATE KEY-----
+      label: Clé privée
+      placeholder: 'Collez la clé privée, commençant généralement par -----BEGIN RSA PRIVATE KEY-----'
     keycloak: Configurer un compte Keycloak
     metadata:
-      label: Metadata XML
-      placeholder: Paste in the IDP Metadata XML
+      label: XML de métadonnées
+      placeholder: 'Collez le XML de métadonnées IDP'
     okta: Configurer un compte Okta
     ping: Configurer un compte Ping
     shibboleth: Configurer un compte Shibboleth
@@ -715,10 +715,10 @@ authConfig:
     tenantId:
       label: ID de locataire
       tooltip: Depuis le portail Azure AD
-      placeholder: A long UUID string
+      placeholder: 'Une longue chaîne UUID'
     applicationId:
       label: "ID d'application"
-      placeholder: A long UUID string
+      placeholder: 'Une longue chaîne UUID'
     applicationSecret:
       label: "Secret d'application"
     endpoint:
@@ -737,21 +737,21 @@ authConfig:
     groupMembershipFilter:
       label: "Filtre d'appartenance aux groupes"
       enable: Limiter les utilisateurs par appartenance aux groupes
-      tooltip: Limit users by applying a GroupMembershipFilter
-      externalHelp: See the OData filter expression documentation for more information.
+      tooltip: Limiter les utilisateurs en appliquant un filtre d’appartenance aux groupes
+      externalHelp: Consultez la documentation sur les expressions de filtre OData pour plus d’informations.
       externalHelpLink: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/use-filter-expressions-in-odata-uris#filter-expressions
     reply:
-      info: 'Azure AD requires a whitelisted URL for your Rancher server before beginning this setup. Please ensure that the following URL is set in the Reply URL section of your Azure Portal. Please note that it may take up to 5 minutes for the whitelisted URL to propagate.'
+      info: "Azure AD nécessite une URL sur liste blanche pour votre serveur Rancher avant de commencer cette configuration. Veuillez vous assurer que l'URL suivante est définie dans la section URL de réponse de votre portail Azure. Notez qu'il peut falloir jusqu'à 5 minutes pour que l'URL soit propagée."
       label: URL de réponse
-      ariaLabel: Copy Reply URL to clipboard
+      ariaLabel: Copier l’URL de réponse dans le presse-papiers
     updateEndpoint:
       button: Mettre à jour le point de terminaison
       banner:
-        message: 'Azure AD Authentication must be updated: it is using the Azure Graph API, which will be deprecated at the end of 2022.'
-        linkText: 'Update it here.'
+      message: "Azure AD Authentication doit être mis à jour : il utilise l'API Azure Graph, qui sera dépréciée. Veuillez mettre à jour vers la version actuelle."
+      linkText: 'Mettre à jour ici.'
       modal:
-        title: Are you sure? This update is irreversible.
-        body: '<p><b>You may need to make some additional changes</b>. Please ensure the Azure AD app has the Directory.Read.All <b>Application</b> permission added to Microsoft Graph.<br> If any endpoints were customized while configuring Azure AD authentication in Rancher, they will not be automatically updated. </p>'
+      title: 'Êtes-vous sûr ? Cette mise à jour est irréversible.'
+      body: "<p><b>Vous devrez peut-être apporter des modifications supplémentaires</b>. Veuillez vous assurer que l'application Azure AD dispose des autorisations nécessaires.</p>"
   oidc:
     endSessionEndpoint: 
       title: Point de terminaison de fin de session
@@ -763,17 +763,17 @@ authConfig:
     clientId: ID client
     clientSecret: Secret client
     customEndpoint:
-      label: Endpoints
-      custom: Specify
-      standard: Generate
+      label: Points de terminaison
+      custom: Spécifier
+      standard: Générer
     url: URL
     realm: Domaine
     keycloak:
-      url: Keycloak URL
-      realm: Keycloak Realm
+      url: URL Keycloak
+      realm: Realm Keycloak
     issuer: Émetteur
     authEndpoint: Point de terminaison Auth
-    jwksUrl: JWKS URL
+      jwksUrl: URL JWKS
     tokenEndpoint: Point de terminaison Token
     userInfoEndpoint: "Point de terminaison d'informations utilisateur"
     acrValue: "Référence de contexte d'autorisation"
@@ -781,39 +781,39 @@ authConfig:
       label: Revendications personnalisées
       enable:
         label: Ajouter des revendications personnalisées
-        tooltip: Manually map OIDC claims when your provider doesn’t use standard claim names in tokens.
+      tooltip: "Mappez manuellement les revendications OIDC lorsque votre fournisseur n'utilise pas de noms de revendications standard dans les jetons."
       nameClaim: 
         label: Revendication de nom personnalisée
       groupsClaim: 
         label: Revendication de groupes personnalisée
       emailClaim: 
         label: "Revendication d'e-mail personnalisée"
-    cognitoIssuer: Issuer URL
-    cognitoHelp: "You will need to create an application client in Cognito of type <b>Traditional web application</b> with the Return URL set to the URL shown below."
+      cognitoIssuer: URL de l’émetteur
+      cognitoHelp: "Vous devrez créer un client d'application dans Cognito de type <b>Application web traditionnelle</b>."
     scope:
       label: Portées
       placeholder: openid
-      protip: The <code>openid</code>, <code>profile</code>, and <code>email</code> scopes are required and cannot be removed.
+      protoc: Les scopes <code>openid</code>, <code>profile</code> et <code>email</code> sont requis et seront toujours inclus.
     pkce:
       label: Activer PKCE (S256)
-      tooltip: Enable Proof Key for Code Exchange (PKCE) using the S256 code challenge method. When enabled, this client must use PKCE with S256 for authorization requests.
+      tooltip: 'Activer le Proof Key for Code Exchange (PKCE) en utilisant la méthode de défi de code S256. Lorsque activé, Rancher génère un vérificateur de code lors de la demande de jetons.'
     pkceMethod:
-      label: PKCE Method
+      label: Méthode PKCE
     cert:
       label: Certificat
-      placeholder: Paste in the certificate, starting with -----BEGIN CERTIFICATE-----
+      placeholder: 'Collez le certificat, commençant par -----BEGIN CERTIFICATE-----'
     key:
       label: Clé privée
-      placeholder: Paste in the private key, typically starting with -----BEGIN RSA PRIVATE KEY-----
+      placeholder: 'Collez la clé privée, commençant généralement par -----BEGIN RSA PRIVATE KEY-----'
     groupSearch:
       label: Activer la recherche de groupes
-      tooltip: Allows users with appropriate permissions to search and view all groups within the OIDC provider's realm. This can be useful for administrators who need to assign global roles to groups that they are not currently a member of.
+      tooltip: "Permet aux utilisateurs disposant des autorisations appropriées de rechercher et d'afficher tous les groupes dans le domaine du fournisseur OIDC. Cela peut être utile pour les administrateurs qui doivent attribuer des rôles globaux à des groupes dont ils ne sont pas membres."
   stateBanner:
-    disabled: 'Le fournisseur d'authentification {provider} est actuellement désactivé.'
-    enabled: 'Le fournisseur d'authentification {provider} est actuellement activé.'
+    disabled: "Le fournisseur d'authentification {provider} est actuellement désactivé."
+    enabled: "Le fournisseur d'authentification {provider} est actuellement activé."
   testAndEnable: "Tester et activer l'authentification"
   noneEnabled: "L'authentification locale est toujours activée, mais vous pouvez sélectionner un autre fournisseur d'authentification supplémentaire parmi ceux affichés ci-dessous."
-  localEnabled: '{vendor} is configured to allow access to accounts in its local database.'
+    localEnabled: "{vendor} est configuré pour autoriser l'accès aux comptes de sa base de données locale."
   manageLocal: Gérer les comptes
 
 authGroups:
@@ -828,8 +828,8 @@ assignTo:
     Assigner à
   labelsTitle: |-
     {count, plural,
-      =1 { Assign Cluster To&hellip; }
-      other { Assign {count} Clusters To&hellip; }
+      =1 { Assigner le cluster à&hellip; }
+      other { Assigner {count} clusters à&hellip; }
     }
   workspace: Espace de travail
 
@@ -1424,7 +1424,7 @@ catalog:
           placeholder: 'default: 5'
         maxRetries:
           label: Max Number of Retries
-          placeholder: 'default: 5'
+      placeholder: 'par défaut : 5'
     refreshInterval:
       label: Refresh Interval
       placeholder: 'default: {hours}'
@@ -1553,7 +1553,7 @@ cluster:
       configuration: Calico
     rke2-calico-crd:
       label:  "Add-on: Calico"
-      configuration: Calico
+    configuration: Calico
     rke2-canal:
       label: "Add-on: Canal"
       configuration: Canal
@@ -3170,7 +3170,7 @@ fleet:
       add: Create Git Repo
       empty: No Git Repos have been added
     actions:
-      add: Create Git Repo
+      add: Créer un dépôt Git
       forceUpdate:
         label: Force Update
         promptTitle: Force Update
@@ -3313,7 +3313,7 @@ fleet:
       add: Create Helm Op
       empty: No Helm Ops have been added
     actions:
-      add: Create Helm Op
+      add: Créer une opération Helm
       enablePolling:
         label: Enable Polling
       disablePolling:
@@ -4432,7 +4432,7 @@ login:
   invalidResponseError: Réponse invalide reçue à la demande de connexion. Veuillez réessayer.
   clientError: "Nom d'utilisateur ou mot de passe invalide. Veuillez réessayer."
   userUnauthorized: "Vous n'êtes pas autorisé à utiliser ce système."
-  specificError: 'Une erreur s'est produite lors de la connexion : {msg}'
+  specificError: "Une erreur s'est produite lors de la connexion : {msg}"
   useLocal: Utiliser un utilisateur local
   loginWithProvider: 'Se connecter avec {provider}'
   username: "Nom d'utilisateur"
@@ -4452,7 +4452,7 @@ login:
 
 logout:
   message: Déconnexion en cours...
-  error: 'Une erreur s'est produite lors de la déconnexion : {msg}'
+  error: "Une erreur s'est produite lors de la déconnexion : {msg}"
   specificError:
     unknown: Unknown.\n\nPlease contact your system administrator.
     500: "Server-side error.\n\nPlease contact your system administrator."
@@ -5269,7 +5269,7 @@ persistentVolume:
       placeholder: e.g. abc
     registry:
       label: Registry
-      placeholder: e.g. abc
+      placeholder: 'par exemple : abc'
   photonPersistentDisk:
     label: Photon Volume (Unsupported)
     pdId:
@@ -6247,8 +6247,8 @@ secret:
     password: Password
     username: Username
   basic:
-    password: Password
-    username: Username
+      password: Mot de passe
+      username: Nom d’utilisateur
   ssh:
     keys: Keys
     keysAndHosts: Keys and Known Hosts
@@ -6731,7 +6731,7 @@ storageClass:
       placeholder: e.g. kube
     userId:
       label: User ID
-      placeholder: e.g. kube
+      placeholder: 'par exemple : kube'
     userSecretNamespace:
       label: User Secret Namespace
       placeholder: e.g. default
@@ -6766,7 +6766,7 @@ storageClass:
       placeholder: e.g. root
     group:
       label: Group
-      placeholder: e.g. root
+      placeholder: 'par exemple : root'
     quobyteConfig:
       label: Quobyte Config
       placeholder: e.g. BASE
@@ -7134,7 +7134,7 @@ user:
       username:
         label: "Nom d'utilisateur"
         placeholder: ex. jsmith
-        exists: 'Ce nom d\'utilisateur est déjà utilisé. Veuillez en choisir un nouveau'
+        exists: "Ce nom d'utilisateur est déjà utilisé. Veuillez en choisir un nouveau"
       displayName:
         label: "Nom d'affichage"
         placeholder: e.g. John Smith
@@ -7195,7 +7195,7 @@ validation:
     This screen has been updated to reflect the current values on the cluster. Review and reapply the changes you wanted to make, then Save again.
     Conflicting {fieldCount, plural, =1 {field} other {fields}}: {fields}
   custom:
-    missing: 'Aucun validateur n\'existe pour { validatorName } ! Le validateur existe-t-il dans custom-validators ? Le nom est-il correctement orthographié ?'
+    missing: "Aucun validateur n'existe pour { validatorName } ! Le validateur existe-t-il dans custom-validators ? Le nom est-il correctement orthographié ?"
   dns:
     doubleHyphen: '"{key}" ne peut pas contenir deux tirets consécutifs ou plus'
     hostname:
