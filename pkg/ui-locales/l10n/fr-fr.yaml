@@ -1826,7 +1826,7 @@ cluster:
     clusterWarning: "Il {count, plural, =1 {y a 1 cluster Harvester qui n'est pas affiché} other {y a # clusters Harvester qui ne sont pas affichés}} car ils n'ont pas accès au type virt.harvester.cattle.io/v1.VirtualMachine."
     registration:
       step1: "1. Accédez à la page <code>Avancé / Paramètres</code> de l'interface utilisateur Harvester cible."
-      step2: "2. Trouvez le paramètre <code>cluster-registration-url</code> et cliquez sur l'icône <code><i class=\"icon icon-action\"></i></code>."
+      step2: '2. Trouvez le paramètre <code>cluster-registration-url</code> et cliquez sur le bouton <code><i class="icon icon-actions" ></i></code> -> <code>Modifier le paramètre</code>.'
       step3: "3. Saisissez l'URL d'enregistrement suivante et cliquez sur le bouton <code>Enregistrer</code>."
       step4: "URL d'enregistrement"
     machinePool:
@@ -1854,9 +1854,9 @@ cluster:
   import:
     warningBanner: Vous ne devez pas importer un cluster déjà connecté à une autre instance de Rancher, car cela peut entraîner des comportements inattendus.
     commandInstructions: "Exécutez la commande <code>kubectl</code> ci-dessous sur un cluster Kubernetes existant exécutant une version Kubernetes supportée pour l'importer dans {vendor} :"
-    commandInstructionsInsecure: Si vous obtenez une erreur "certificat signé par une autorité inconnue", votre installation {vendor} a un certificat auto-signé. Exécutez la commande curl ci-dessous à la place.
+    commandInstructionsInsecure: 'Si vous obtenez une erreur &quot;certificat signé par une autorité inconnue&quot;, votre installation {vendor} possède un certificat SSL auto-signé ou non approuvé. Exécutez plutôt la commande ci-dessous pour contourner la vérification du certificat :'
     clusterRoleBindingInstructions: "Si vous obtenez des erreurs de permission lors de la création de certaines ressources, votre utilisateur n'a peut-être pas le rôle <code>cluster-admin</code>."
-    clusterRoleBindingCommand: kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <votre utilisateur>
+    clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <your username from your kubeconfig>'
   explore: Explorer
   importAction: "Importer l'existant"
   manageAction: Gérer
@@ -2418,8 +2418,8 @@ cluster:
     label: Activer le registre de conteneurs au niveau du cluster pour les images de conteneurs système Rancher
     description: Si activé, Rancher extraira les images de conteneur de ce registre lors du provisionnement du cluster.
     importedDescription: "Par défaut, Rancher utilisera également ce registre lors de l'installation des applications Helm officielles de Rancher."
-    docsLinkRke2: "Pour obtenir de l'aide sur la configuration des miroirs de registre privé, consultez la documentation <a href=\"https://docs.rke2.io\">RKE2</a>."
-    docsLinkK3s: "Pour obtenir de l'aide sur la configuration des miroirs de registre privé, consultez la documentation <a href=\"https://docs.k3s.io\">K3s</a>."
+    docsLinkRke2: "Pour obtenir de l'aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.rke2.io/install/private_registry\" target=\"_blank\">documentation RKE2.</a>"
+    docsLinkK3s: "Pour obtenir de l'aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.k3s.io/installation/private-registry\" target=\"_blank\">documentation K3s.</a>"
     privateRegistryUrlError: Un registre doit être une URL valide. Le schéma est facultatif.
   provider:
     aliyunecs: Aliyun ECS
@@ -2498,11 +2498,11 @@ cluster:
     banner:
       psaChange: PSACT est maintenant défini sur la valeur par défaut Rancher automatiquement
       complianceOverride: La modification de ce paramètre peut affecter la sécurité du cluster car elle remplace les paramètres de conformité par défaut.
-      complianceUnsupported: La version Kubernetes sélectionnée ne prend plus en charge le profil de conformité "{profile}". Veuillez sélectionner une version compatible.
+      complianceUnsupported: La version Kubernetes sélectionnée ne prend plus en charge le profil de conformité "{profile}". Veuillez sélectionner un profil pris en charge. Nous vous recommandons de consulter la <a href="https://docs.rke2.io/security/hardening_guide" target="_blank" rel="noopener noreferrer nofollow">documentation</a> pour évaluer l'impact du changement de profil de conformité.
     modal:
       editYamlMachinePool:
         title: Enregistrer les configurations de machine
-        body: "Les configurations de machines définissent comment les machines dans les pools sont déployées. Elles seront sauvegardées à l'avance."
+        body: "Les configurations de machines définissent comment les machines dans les pools sont déployées.<br><br> Elles seront sauvegardées à l'avance pour garantir que le YAML de cluster valide puisse être enregistré."
       ipv6Warning:
         title: Vérifier les paramètres IPv6
         body: "Les pools de machines de ce cluster sont configurés pour utiliser des réseaux IPv6, mais les paramètres réseau du cluster peuvent ne pas le prendre en charge."
@@ -2862,7 +2862,7 @@ providers:
 drivers:
   kontainer:
     title: Pilotes de cluster
-    emberDeprecationMessage: Le support des plugins UI (basés sur Ember) pour les pilotes de cluster et de nœud a été obsolète dans Rancher 2.11.
+    emberDeprecationMessage: 'Le support des plugins UI (basés sur Ember) pour les pilotes de cluster et de nœud a été déprécié dans Rancher 2.11.0 et sera supprimé dans une prochaine version. Ils doivent être migrés vers le nouveau <a href="https://extensions.rancher.io" target="_blank" rel="noopener noreferrer nofollow">cadre UI Extensions</a>.'
     refreshError: "Erreur lors du rafraîchissement des pilotes de cluster : {error}"
   node:
     title: Pilotes de nœud
@@ -3298,7 +3298,7 @@ fleet:
     ociStorageSecret:
       title: Registre OCI
       label: Secret de stockage OCI
-      tooltip: "Si 'Aucun' est sélectionné, Fleet utilisera le secret de repli 'ocistorage' lorsqu'il existe dans l'espace de travail actuel."
+      tooltip: "Si 'Aucun' est sélectionné, Fleet utilisera le secret de repli 'ocistorage' lorsqu'il existe dans l'espace de travail actuel.<br>Toute modification du secret de stockage OCI sélectionné ne sera appliquée qu'à la prochaine mise à jour du dépôt Git."
       options:
         chooseExisting: "Choisir un secret :"
         chooseCustom: "Choisir un secret personnalisé :"
@@ -4584,7 +4584,10 @@ monitoring:
         info: "Les secrets doivent être montés dans <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>"
         label: Secrets supplémentaires
       existing: Choisir un secret de configuration existant
-      info: "<span class=\"text-bold\">Créer une configuration par défaut</span>:<br>Un secret contenant votre configuration Alertmanager sera créé."
+      info: |
+        <span class="text-bold">Créer une configuration par défaut</span>:<br>Un secret contenant votre configuration Alertmanager sera créé dans l'espace de noms <pre class='inline-block m-0'>cattle-monitoring-system</pre> lors du déploiement de ce chart sous le nom <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Par défaut, ce secret ne sera jamais modifié lors d'une désinstallation ou d'une mise à niveau de ce chart. <br /><br />
+        Une fois ce chart déployé, vous devriez modifier le secret via l'interface pour ajouter vos configurations de notification personnalisées utilisées par Alertmanager. <br /> <br />
+        <span class="text-bold">Choisir un secret de configuration existant</span>:<br>Vous devez spécifier un secret qui existe dans l'espace de noms <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Si l'espace de noms n'existe pas, vous ne pourrez pas sélectionner un secret existant.
       label: Secret Alertmanager
       new: Créer la configuration par défaut
       radio:
@@ -4654,7 +4657,7 @@ monitoring:
       prometheusTargets:
         description: Cibles configurées
         label: Cibles Prometheus
-    subtitle: 'Propulsé par : <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer">Prometheus Operator</a>'
+    subtitle: 'Propulsé par : <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer nofollow">Prometheus</a>'
     title: Tableau de bord
   prometheus:
     config:
@@ -4788,7 +4791,7 @@ monitoringReceiver:
     label: Webhook
     title: Configuration Webhook
     urlTooltip: Pour certains webhooks, il s'agit d'une URL pointant vers le DNS du service
-    modifyNamespace: "Si les valeurs par défaut de <pre class=\"inline-block m-0 p-0 vertical-middle\">rancher-alerting-drivers</pre> ont été modifiées, veuillez mettre à jour l'URL ci-dessous."
+    modifyNamespace: Si les valeurs par défaut de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> ont été modifiées, veuillez mettre à jour l'URL ci-dessous au format http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
     banner: Pour utiliser MS Teams ou SMS, vous devrez avoir au moins une instance de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> installée.
     add:
       selectWebhookType: Sélectionner le type de Webhook
@@ -6909,19 +6912,19 @@ storageClass:
       label: Filesystem
       placeholder: e.g. ext4
     blockSize:
-      label: Block Size
+      label: Taille de bloc
       placeholder: e.g. 32
     repl:
       label: Repl
       placeholder: e.g.1; 0 for entire device
     ioPriority:
-      label: I/O Priority
+      label: Priorité E/S
       placeholder: e.g. low
     snapshotsInterval:
-      label: Snapshots Interval
+      label: Intervalle d'instantanés
       placeholder: e.g. 70
     aggregationLevel:
-      label: Aggregation Level
+      label: Niveau d'agrégation
       placeholder: e.g. 0
     ephemeral:
       label: Ephemeral
@@ -6935,7 +6938,7 @@ storageClass:
       label: System
       placeholder: e.g. scaleio
     protectionDomain:
-      label: Protection Domain
+      label: Domaine de protection
       placeholder: e.g. pd0
     storagePool:
       label: Storage Pool
@@ -8870,13 +8873,13 @@ unit:
   min: mins
   hour: |-
     {count, plural,
-      one { hour }
-      other { hours }
+      one { heure }
+      other { heures }
     }
   day: |-
     {count, plural,
-      one { day }
-      other { days }
+      one { jour }
+      other { jours }
     }
 workloadPorts:
   addPort: "Ajouter un port ou un service"
