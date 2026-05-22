@@ -1440,9 +1440,9 @@ chartHeading:
 compliance:
   addTest: Agregar ID de prueba
   alertNeeded: |-
-    Las alertas deben estar habilitadas dentro de los valores de configuración del gráfico de cumplimiento.
-    Esto requiere un repositorio de monitoreo activo.
-    Por favor instale el gráfico de monitoreo o el complemento de monitoreo de Rancher antes de instalar cumplimiento.
+    Las alertas deben estar habilitadas dentro del archivo values.yaml del gráfico de cumplimiento.
+    Esto requiere que la <a tabindex="0" href="{link}">{vendor} Aplicación de Monitoreo y Alertas</a> esté instalada
+    y que los Receptores y Rutas estén <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configurados para enviar alertas.</a>
   alertOnComplete: Alertar al finalizar el análisis
   alertOnFailure: Alertar en caso de error de análisis
   benchmarkVersion: Versión de referencia
@@ -1830,7 +1830,10 @@ cluster:
         {apiName}: {cpu, plural,
         =1 {1 vCPU}
           other {# vCPUs}
-        } / {memory, number} GiB de memoria
+        } / {memory, number} GiB de memoria / {storageSize, plural,
+          =0 {Solo EBS}
+          other {{storageSize, number} {storageUnit} {storageType}}
+        } - {architecture}
     azure:
       acceleratedNetworking:
         label: Redes aceleradas
@@ -1926,8 +1929,13 @@ cluster:
           gd {General: }
           c {CPU: }
           m {Memoria: }
+          so {Almacenamiento: }
+          standard {Estándar: }
           other {}
-        }{vcpus} vCPU / {memory} GB de memoria / {disk} GB de disco
+        }{memoryGb} GB, {vcpus, plural,
+          =1 {# vCPU}
+          other {# vCPUs}
+        }, {disk} GB Disco ({value})
       tags:
         label: Etiquetas
         placeholder: p. ej. mi_servidor
@@ -2792,8 +2800,8 @@ drivers:
       }
     warningDrivers: |-
       {count, plural,
-      =1 { Ya no podrá editar la configuración de clústeres del controlador {driver}. }
-      other { Ya no podrá editar la configuración de clústeres de los controladores {drivers}{andOthers}. }
+      =1 { Ya no podrá editar la configuración de clústeres usando el controlador {names}.}
+      other { Ya no podrá editar la configuración de clústeres usando los controladores {names}.}
       }
     warning: |-
       {count, plural,
@@ -3454,7 +3462,7 @@ gatekeeperConstraint:
     action: Acción de cumplimiento
   violations:
     title: 'Violaciones: {total}'
-    notAll: No se muestran todos debido al límite de violaciones de restricción OPA Gatekeeper configurado.
+    notAll: No se muestran todos debido al límite configurado de violaciones de restricción OPA Gatekeeper - la restricción solo incluye detalles para {shown}
 gatekeeperIndex:
   poweredBy: OPA Gatekeeper
   unavailable: OPA + Gatekeeper no está disponible en el catálogo de gráficos del sistema.
@@ -3524,10 +3532,10 @@ growl:
     message: La conexión a {url} se cerró inesperadamente a las {time}. Desconectado después de {tries} intentos de reconexión. Compruebe su conexión de red y recargue la página
     title: WebSocket desconectado
   connectError:
-    message: La conexión a {url} se cerró inesperadamente a las {time}. Intento de reconexión
+    message: 'La conexión a {url} se cerró inesperadamente a las {time}. Intento de reconexión #{tries}.'
     title: Reconectando WebSocket
   reconnected:
-    message: La conexión a {url} se restableció en el intento
+    message: 'La conexión a {url} se restableció en el intento #{tries}.'
     title: WebSocket reconectado
   podSecurity:
     message: La creación de este Pod violaría las políticas restringidas existentes para el Espacio de Nombres adoptado.
@@ -3767,7 +3775,7 @@ istio:
   links:
     kiali:
       label: Kiali
-      description: Visualización de servicios dentro de una malla de servicios y cómo están conectados. Para que Kiali muestre datos, necesita Prometheus instalado.
+      description: Visualización de servicios dentro de una malla de servicios y cómo están conectados. Para que Kiali muestre datos, necesita Prometheus instalado. Si necesita una solución de monitoreo, instale <a tabindex="0" href="{link}">{vendor} monitoring</a>.
     jaeger:
       label: Jaeger
       description: Monitorear y solucionar problemas de sistemas distribuidos basados en microservicios.
@@ -4311,7 +4319,7 @@ neuvector:
 login:
   login: Iniciar sesión
   howdy: ¡Hola!
-  welcome: Bienvenido a Rancher
+  welcome: Bienvenido a {vendor}
   landscapeAlt: Imagen de paisaje
   loggedOut: Ha cerrado sesión.
   loggedOutSessionIdle: Ha cerrado sesión de Rancher porque su sesión ha expirado. Inicie sesión de nuevo para continuar.
@@ -4516,7 +4524,9 @@ monitoring:
       size: Tamaño
       volumeName: Nombre de volumen
     title: Configurar Prometheus
-    warningInstalled: 'Advertencia: Los Prometheus Operators están actualmente desplegados. Desplegar múltiples Prometheus Operators puede causar conflictos.'
+    warningInstalled: |
+      Advertencia: Los operadores de Prometheus están actualmente desplegados. Desplegar múltiples operadores de Prometheus en un clúster no está soportado actualmente. Por favor elimine todos los demás despliegues de operadores de Prometheus de este clúster antes de intentar instalar este gráfico.
+      Si está migrando desde una versión anterior de {vendor} con Monitoreo habilitado, deshabilite el Monitoreo en este clúster completamente antes de intentar instalar este gráfico.
   receiver:
     addReceiver: Agregar receptor
     fields:
@@ -4532,7 +4542,7 @@ monitoring:
       keyFilePath:
         label: Ruta del archivo de clave
         placeholder: p. ej. ./key-file.pfx
-      secretsBanner: Las rutas de archivo a continuación deben referenciarse en la configuración de alertmanager.
+      secretsBanner: Las rutas de archivo a continuación deben referenciarse en <pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre> al desplegar el gráfico de Monitoreo. Para más información consulte nuestra <a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">documentación</a>.
   projectMonitoring:
     detail:
       error: 'No se pueden obtener los valores del panel con estado: '
@@ -4591,7 +4601,7 @@ monitoring:
     grafana: Grafana
     prometheus: Prometheus
     projectMetrics: Métricas del Proyecto
-  v1Warning: El monitoreo está actualmente desplegado desde el Cluster Manager. Si está migrando desde una versión anterior, consulte la documentación.
+  v1Warning: El monitoreo está actualmente desplegado desde el Administrador de Clústeres. Si está migrando desde una versión anterior de {vendor} con monitoreo habilitado, deshabilite el monitoreo en el Administrador de Clústeres antes de intentar instalar el nuevo gráfico de Monitoreo de {vendor} en el Explorador de Clústeres.
 monitoringReceiver:
   addButton: Agregar {type}
   custom:
@@ -4862,27 +4872,27 @@ networkpolicy:
       matchesSome: |-
         {matched, plural,
           =0 {Coincide con 0 de {total, number} pods}
-          =1 {Coincide con 1 de {total, number} pods}
-          other {Coincide con {matched, number} de {total, number} pods}
+          =1 {Coincide con 1 de {total, number} pods: "{sample}"}
+          other {Coincide con {matched, number} de {total, number} pods existentes, incluyendo "{sample}"}
         }
     matchingNamespaces:
       matchesSome: |-
         {matched, plural,
           =0 {Coincide con 0 de {total, number} espacios de nombres}
-          =1 {Coincide con 1 de {total, number} espacios de nombres}
-          other {Coincide con {matched, number} de {total, number} espacios de nombres}
+          =1 {Coincide con 1 de {total, number} espacios de nombres: "{sample}"}
+          other {Coincide con {matched, number} de {total, number} espacios de nombres existentes, incluyendo "{sample}"}
         }
     matchingNamespacesAndPods:
       tooltip: Una regla de entrada única que especifica tanto el selector de espacio de nombres como el selector de Pod que coincida con ambos simultáneamente.
       matchesSome: |-
         {matchedPods, plural,
           =0 {Coincide con 0 de {totalPods, number} pods}
-          =1 {Coincide con 1 de {totalPods, number} pods}
-          other {Coincide con {matchedPods, number} de {totalPods, number} pods}
+          =1 {Coincide con 1 de {totalPods, number} pods: "{samplePods}"}
+          other {Coincide con {matchedPods, number} de {totalPods, number} pods existentes, incluyendo "{samplePods}"}
         } en {matchedNamespaces, plural,
           =0 {0 de {totalNamespaces, number} espacios de nombres}
-          =1 {1 de {totalNamespaces, number} espacios de nombres}
-          other {{matchedNamespaces, number} de {totalNamespaces, number} espacios de nombres}
+          =1 {1 de {totalNamespaces, number} espacios de nombres: "{sampleNamespaces}"}
+          other {{matchedNamespaces, number} de {totalNamespaces, number} espacios de nombres existentes, incluyendo "{sampleNamespaces}"}
         }
 node:
   list:
