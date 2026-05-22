@@ -1987,7 +1987,20 @@ cluster:
       tags:
         label: Étiquettes
     digitalocean:
-      sizeLabel: "{plan, select, s {Basique: } g {Généraliste: } gd {Généraliste: } c {CPU: } m {Mémoire: } so {Stockage: } other {}}{cpu} vCPU, {memory} Go, {disk} Go SSD"
+      sizeLabel: |-
+        {plan, select,
+          s {Basique : }
+          g {Généraliste : }
+          gd {Généraliste : }
+          c {CPU : }
+          m {Mémoire : }
+          so {Stockage : }
+          standard {Standard : }
+          other {}
+        }{memoryGb} Go, {vcpus, plural,
+          =1 {# vCPU}
+          other {# vCPUs}
+        }, {disk} Go Disque ({value})
       tags:
         label: Étiquettes de Droplet
         placeholder: ex. mon_serveur
@@ -8937,7 +8950,7 @@ advancedSettings:
     label: Modifier le paramètre
     changeSetting: "Modifier le paramètre :"
     agentConfigBanner: 
-      text: "La modification de cette valeur ne changera pas la valeur définie dans les clusters en cours d'exécution ! Pour mettre à jour un cluster en cours d'exécution, utilisez la configuration de l'agent dans les paramètres du cluster."
+      text: "La modification de cette valeur ne changera pas la valeur définie dans les clusters en cours d'exécution ! Pour mettre à jour un cluster en cours d'exécution, modifiez le cluster et cliquez sur \"Appliquer les paramètres globaux pour la classe de priorité et le budget de perturbation des pods\" dans l'onglet de configuration de l'agent {agent}."
       cluster: Cluster
       fleet: Fleet
     trueOption: "Vrai"
