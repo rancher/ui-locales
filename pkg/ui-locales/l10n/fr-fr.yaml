@@ -1593,35 +1593,35 @@ cluster:
       label: Google
     rancher-vsphere:
       label: vSphere
-      note: '<b>Important:</b> Configure the vSphere Cloud Provider and Storage Provider options in the Add-on Configuration tab.'
+      note: "<b>Important :</b> Configurez les options du fournisseur cloud vSphere et du fournisseur de stockage dans l'onglet Configuration des modules complémentaires."
     harvester:
       label: Harvester
-  copyConfig: Copy KubeConfig to Clipboard
-  copiedConfig: Copied KubeConfig to Clipboard
+  copyConfig: Copier KubeConfig dans le presse-papiers
+  copiedConfig: KubeConfig copié dans le presse-papiers
   custom:
     nodeRole:
-      label: Node Role
-      detail: Choose what roles the node will have in the cluster.  The cluster needs to have at least one node with each role.
-      warning: The cluster needs to have at least one node with each role to be usable.
+      label: Rôle du nœud
+      detail: Choisissez les rôles que le nœud aura dans le cluster. Le cluster doit avoir au moins un nœud avec chaque rôle.
+      warning: Le cluster doit avoir au moins un nœud avec chaque rôle pour être utilisable.
     advanced:
-      label: Advanced
-      detail: Additional control over how the node will be registered.  These values will often need to be different for each node registered.
-      nodeName: Node Name
-      publicIp: Node Public IP
-      privateIp: Node Private IP
+      label: Avancé
+      detail: Contrôle supplémentaire sur la manière dont le nœud sera enregistré. Ces valeurs devront souvent être différentes pour chaque nœud enregistré.
+      nodeName: Nom du nœud
+      publicIp: IP publique du nœud
+      privateIp: IP privée du nœud
       nodeLabel:
-        title: Node Labels
-        label: Add Label
-      ipv6: "It looks like this cluster uses IPv6 networking: <code>Node Private IP</code> should be set to the cluster's IPv6 address."
+        title: Étiquettes de nœud
+        label: Ajouter une étiquette
+      ipv6: "Il semble que ce cluster utilise la mise en réseau IPv6 : <code>IP privée du nœud</code> doit être défini sur l'adresse IPv6 du cluster."
     registrationCommand:
-      label: Registration Command
-      linuxDetail: Run this command on each of the existing Linux machines you want to register.
-      windowsDetail: Run this command in PowerShell on each of the existing Windows machines you want to register.
-      windowsWorkersOnly: <b>Windows nodes can only be workers.</b>
-      windowsNotReady: The cluster must be up and running with Linux etcd, control plane, and worker nodes before the registration command for adding Windows workers will display.<br /> <br /><b>Windows nodes can only be workers.</b>
-      windowsWarning: Workload pods, including some deployed by Rancher charts, will be scheduled on both Linux and Windows nodes by default. Edit NodeSelector in the chart to direct them to be placed onto a compatible node.
-      windowsDeprecatedForRKE1: Windows support is being deprecated for RKE1. We suggest migrating to RKE2.
-      insecure: "Insecure: Select this to skip TLS verification if your server has a self-signed certificate."
+      label: "Commande d'enregistrement"
+      linuxDetail: Exécutez cette commande sur chacune des machines Linux existantes que vous souhaitez enregistrer.
+      windowsDetail: Exécutez cette commande dans PowerShell sur chacune des machines Windows existantes que vous souhaitez enregistrer.
+      windowsWorkersOnly: "<b>Les nœuds Windows ne peuvent être que des workers.</b>"
+      windowsNotReady: "Le cluster doit être opérationnel avec des nœuds Linux etcd, plan de contrôle et worker avant que la commande d'enregistrement pour ajouter des workers Windows ne s'affiche.<br /> <br /><b>Les nœuds Windows ne peuvent être que des workers.</b>"
+      windowsWarning: "Les pods de charge de travail, y compris certains déployés par les charts Rancher, seront planifiés sur les nœuds Linux et Windows par défaut. Modifiez NodeSelector dans le chart pour les diriger vers un nœud compatible."
+      windowsDeprecatedForRKE1: La prise en charge de Windows est obsolète pour RKE1. Nous suggérons de migrer vers RKE2.
+      insecure: "Non sécurisé : sélectionnez cette option pour ignorer la vérification TLS si votre serveur possède un certificat auto-signé."
   credential:
     banner:
       createCredential: |-
@@ -1630,93 +1630,93 @@ cluster:
           other {Ok, Let's create a new credential}
         }
     selectExisting:
-      label: Select Existing
+      label: "Sélectionner l'existant"
     select:
       option:
-        new: Create new...
-        none: Select a credential...
+        new: Créer nouveau...
+        none: Sélectionner un identifiant...
     aws:
       accessKey:
-        label: Access Key
-        placeholder: Your AWS Access Key
+        label: "Clé d'accès"
+        placeholder: "Votre clé d'accès AWS"
       defaultRegion:
-        help: The default region to use when creating clusters.  Also contacted to verify that this credential works.
-        label: Default Region
+        help: La région par défaut à utiliser lors de la création de clusters. Également contactée pour vérifier que ces identifiants fonctionnent.
+        label: Région par défaut
       secretKey:
-        label: Secret Key
-        placeholder: Your AWS Secret Key
+        label: Clé secrète
+        placeholder: Votre clé secrète AWS
     azure:
       clientId:
-        label: Client ID
+        label: ID client
       clientSecret:
-        label: Client Secret
+        label: Secret client
       environment:
-        label: Environment
+        label: Environnement
       subscriptionId:
-        label: Subscription ID
+        label: "ID d'abonnement"
       tenantId:
-        label: Tenant ID
+        label: ID de locataire
     digitalocean:
       accessToken:
         help: Paste in a Personal Access Token from the DigitalOcean <a href="https://cloud.digitalocean.com/settings/api/tokens" target="_blank" rel="noopener noreferrer nofollow">Applications & API</a> screen.
-        label: Access Token
-        placeholder: Your DigitalOcean API Access Token
-    label: Cloud Credential
+        label: "Jeton d'accès"
+        placeholder: "Votre jeton d'accès API DigitalOcean"
+    label: Identifiant cloud
     linode:
       accessToken:
         help: Paste in a Personal Access Token from the Linode <a href="https://cloud.linode.com/profile/tokens" target="_blank" rel="noopener noreferrer nofollow">API Tokens</a> screen.
-        label: Access Token
-        placeholder: Your Linode API Access Token
+        label: "Jeton d'accès"
+        placeholder: "Votre jeton d'accès API Linode"
     pnap:
       clientIdentifier:
-        label: Client ID
-        placeholder: Your Client ID
+        label: ID client
+        placeholder: Votre ID client
       clientSecret:
         help: From <a href="https://bmc.phoenixnap.com/credentials/" target="_blank" rel="nofollow noreferrer noopener">phoenixNAP BMC Portal</a> API Credentials
-        label: Client Secret
-        placeholder: Your Client Secret
+        label: Secret client
+        placeholder: Votre secret client
     name:
-      label: Credential Name
-      placeholder: Name for this credential
+      label: "Nom de l'identifiant"
+      placeholder: Nom de cet identifiant
     s3:
       accessKey:
-        label: Access Key
-        placeholder: Your API Access Key
+        label: "Clé d'accès"
+        placeholder: "Votre clé d'accès API"
       defaultRegion:
-        label: Default Region
-        placeholder: "Optional: The default region to use"
+        label: Région par défaut
+        placeholder: "Optionnel : la région par défaut à utiliser"
       defaultBucket:
-        label: Default Bucket
-        placeholder: "Optional: The default bucket to use"
+        label: Compartiment par défaut
+        placeholder: "Optionnel : le compartiment par défaut à utiliser"
       defaultEndpoint:
-        label: Default Endpoint
-        placeholder: "Optional: The default endpoint to use"
+        label: Point de terminaison par défaut
+        placeholder: "Optionnel : le point de terminaison par défaut à utiliser"
       defaultFolder:
-        label: Default Folder
-        placeholder: "Optional: The default folder to use"
+        label: Dossier par défaut
+        placeholder: "Optionnel : le dossier par défaut à utiliser"
       defaultEndpointCA:
-        label: Default Endpoint CA Cert
-        placeholder: "Optional: The default CA certificate to use to verify the endpoint"
+        label: Certificat CA du point de terminaison par défaut
+        placeholder: "Optionnel : le certificat CA par défaut à utiliser pour vérifier le point de terminaison"
       defaultSkipSSLVerify:
-        label: Accept any certificate (insecure)
+        label: Accepter tout certificat (non sécurisé)
       secretKey:
-        label: SecretKey
-        placeholder: Your API Secret Key
+        label: Clé secrète
+        placeholder: Votre clé secrète API
     vmwarevsphere:
         server:
-          label: vCenter or ESXi Server
+          label: Serveur vCenter ou ESXi
           placeholder: vcenter.domain.com
         port:
           label: Port
         username:
-          label: Username
+          label: "Nom d'utilisateur"
         password:
-          label: Password
-        note: 'Note: The free ESXi license does not support API access. Only servers with a valid or evaluation license are supported.'
+          label: Mot de passe
+        note: "Remarque : la licence ESXi gratuite ne prend pas en charge l'accès à l'API. Seuls les serveurs avec une licence valide ou d'évaluation sont pris en charge."
     gcp:
       authEncodedJson:
-        label: Service Account
-        placeholder: Service Account private key JSON file
+        label: Compte de service
+        placeholder: Fichier JSON de clé privée du compte de service
         gke: GKE
         gce: GCE
         help:
@@ -1739,58 +1739,58 @@ cluster:
             </ul>
             More info on roles can be found <a href="https://cloud.google.com/compute/docs/access/iam" target="_blank" rel="noopener noreferrer nofollow">here</a>.
     harvester:
-      namespace: Namespace
+      namespace: Espace de noms
       cpu: CPUs
       memory: Mémoire
-      disk: Disk
+      disk: Disque
       image: Image
       network:
-        title: Networks
-        network: Network
-        addNetwork: Add Network
-        networkName: Network Name
-        macAddress: Mac Address
-        macFormat: 'Invalid MAC address format.'
+        title: Réseaux
+        network: Réseau
+        addNetwork: Ajouter un réseau
+        networkName: Nom du réseau
+        macAddress: Adresse MAC
+        macFormat: "Format d'adresse MAC invalide."
       vGpus:
         warnings:
-          minimumAllocatable: It's highly recommended to select a vGPU with a number of allocatable devices greater than the number of nodes (Machine Count) to avoid "un-schedulable" errors after cluster updates.
+          minimumAllocatable: "Il est fortement recommandé de sélectionner un vGPU avec un nombre de dispositifs allouables supérieur au nombre de nœuds (nombre de machines) pour éviter les erreurs d'impossibilité de planification après les mises à jour du cluster."
         errors:
           notAllocatable: '[{vGpu}] vGPU device is not allocatable; required: {allocated}, allocatable: {allocatable}'
       volume:
         title: Volumes
         volume: Volume
-        imageVolume: Image Volume
-        addVolume: Add Volume
-        addVMImage: Add VM Image
-        storageClass: Storage Class
-      reservedMemory: Reserved Memory
-      sshUser: SSH User
+        imageVolume: Volume image
+        addVolume: Ajouter un volume
+        addVMImage: Ajouter une image VM
+        storageClass: Classe de stockage
+      reservedMemory: Mémoire réservée
+      sshUser: Utilisateur SSH
       userData:
-        label: User Data Template
-        title: "User Data:"
+        label: Modèle de données utilisateur
+        title: "Données utilisateur :"
       networkData:
-        label: Network Data Template
-        title: "Network Data:"
+        label: Modèle de données réseau
+        title: "Données réseau :"
       kubeconfigContent:
-        label: KubeconfigContent
+        label: Contenu Kubeconfig
       placeholder: 'Namespace/Name'
-      cluster: Imported Harvester Cluster
-      enableTpm: Enable TPM
-      enableCpuPinning: Enable CPU Pinning
-      cpuPinningTooltip: Enable CPU Pinning brings better performance and reduce latency for the harvester virtual machine
-      cpuManagerWarning: You must enable CPU Manager for at least one node in harvester host page to enable CPU Pinning for VM
-      secureBoot: Secure Boot
-      enableEfi: Booting in EFI mode
-      installGuestAgent: Install guest agent
+      cluster: Cluster Harvester importé
+      enableTpm: Activer TPM
+      enableCpuPinning: "Activer l'épinglage CPU"
+      cpuPinningTooltip: "L'activation de l'épinglage CPU améliore les performances et réduit la latence pour la machine virtuelle Harvester"
+      cpuManagerWarning: "Vous devez activer le gestionnaire CPU pour au moins un nœud dans la page hôte Harvester pour activer l'épinglage CPU pour la VM"
+      secureBoot: Démarrage sécurisé
+      enableEfi: Démarrage en mode EFI
+      installGuestAgent: "Installer l'agent invité"
       tokenExpirationWarning: 'Warning: Harvester Cloud Credentials use an underlying authentication token that may have an expiry time - please see the following <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">knowledge base article</a> for possible implications on management operations.'
   description:
-    label: Cluster Description
-    placeholder: Any text you want that better describes this cluster
+    label: Description du cluster
+    placeholder: Tout texte décrivant mieux ce cluster
   harvester:
-    importNotice: Import Harvester Clusters via
+    importNotice: Importer des clusters Harvester via
     warning:
-      label: This is a Harvester Cluster - enable the Harvester feature flag to manage it
-      state: Warning
+      label: Ceci est un cluster Harvester - activez le flag de fonctionnalité Harvester pour le gérer
+      state: Avertissement
       cloudProvider:
         incompatible:
           You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
@@ -1803,7 +1803,7 @@ cluster:
       step1: "1. Go to the <code>Advanced / Settings</code> page of the target Harvester's UI."
       step2: '2. Find the <code>cluster-registration-url</code> setting and click the <code><i class="icon icon-actions" ></i></code> -> <code>Edit Setting</code> button.'
       step3: "3. Input the following registration URL and click the <code>Save</code> button."
-      step4: "Registration URL"
+      step4: "URL d'enregistrement"
     machinePool:
       cpu:
         placeholder: e.g. 2
@@ -1816,62 +1816,62 @@ cluster:
       namespace:
         placeholder: e.g. default
       image:
-        placeholder: Please select a image
+        placeholder: Veuillez sélectionner une image
       network:
-        placeholder: Please select a network
+        placeholder: Veuillez sélectionner un réseau
       sshUser:
         placeholder: e.g. ubuntu
-        toolTip: SSH user to login with the selected OS image.
+        toolTip: "Utilisateur SSH pour se connecter avec l'image OS sélectionnée."
     kubeconfigSecret:
-        nameRequired: Cluster name is required.
+        nameRequired: Le nom du cluster est requis.
         error: 'Error generating Harvester kubeconfig secret: {err}'
-  haveOneOwner: There must be at least one member with the Owner role.
+  haveOneOwner: Il doit y avoir au moins un membre avec le rôle Propriétaire.
   import:
     warningBanner: 'You should not import a cluster which has already been connected to another instance of Rancher as it will lead to data corruption.'
     commandInstructions: 'Run the <code>kubectl</code> command below on an existing Kubernetes cluster running a supported Kubernetes version to import it into {vendor}:'
     commandInstructionsInsecure: 'If you get a &quot;certificate signed by unknown authority&quot; error, your {vendor} installation has a self-signed or untrusted SSL certificate.  Run the command below instead to bypass the certificate verification:'
     clusterRoleBindingInstructions: 'If you get permission errors creating some of the resources, your user may not have the <code>cluster-admin</code> role.  Use this command to apply it:'
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <your username from your kubeconfig>'
-  explore: Explore
-  importAction: Import Existing
-  manageAction: Manage
+  explore: Explorer
+  importAction: "Importer l'existant"
+  manageAction: Gérer
   kubernetesVersion:
-    label: Kubernetes Version
-    current: (current)
-    experimental: (experimental)
-    deprecated: (deprecated)
-    manual: (manually upgraded)
-    deprecatedPatches: Show deprecated Kubernetes patch versions
-    deprecatedPatchWarning: We recommend using the latest patch version for each minor Kubernetes version. Deprecated patch versions can be useful for migration purposes.
+    label: Version de Kubernetes
+    current: (actuelle)
+    experimental: (expérimentale)
+    deprecated: (obsolète)
+    manual: (mise à niveau manuelle)
+    deprecatedPatches: Afficher les versions de correctif Kubernetes obsolètes
+    deprecatedPatchWarning: "Nous recommandons d'utiliser la dernière version de correctif pour chaque version mineure de Kubernetes. Les versions de correctif obsolètes peuvent être utiles à des fins de migration."
   legacyWarning: The legacy feature flag is enabled and not all legacy features are supported in Kubernetes 1.21+.
   log:
-    connecting: Connecting…
-    noData: There are no provisioning log entries.
+    connecting: Connexion en cours…
+    noData: "Il n'y a aucune entrée de journal de provisionnement."
   name:
-    label: Cluster Name
-    placeholder: A unique name for the cluster
+    label: Nom du cluster
+    placeholder: Un nom unique pour le cluster
   directoryConfig:
-    title: Data directory configuration
-    banner: Data directory configuration can not be changed once the cluster has been created
+    title: Configuration du répertoire de données
+    banner: La configuration du répertoire de données ne peut pas être modifiée une fois le cluster créé
     radioInput:
-      defaultLabel: Use default data directory configuration
-      commonLabel: Use a common base directory for data directory configuration (sub-directories will be used for the system-agent, provisioning and distro paths)
-      customLabel: Use custom data directories
+      defaultLabel: Utiliser la configuration de répertoire de données par défaut
+      commonLabel: "Utiliser un répertoire de base commun pour la configuration des répertoires de données (des sous-répertoires seront utilisés pour les chemins de l'agent système, du provisionnement et de la distribution)"
+      customLabel: Utiliser des répertoires de données personnalisés
     common:
-      label: Data directory base path
+      label: Chemin de base du répertoire de données
       tooltip: Data directory base path. We will append the sub-directories appropriate for each directory (/agent, /provisioning and either /rke2 or /k3s)
     systemAgent:
-      label: System-agent directory path
+      label: "Chemin du répertoire de l'agent système"
       tooltip: Data directory for the system-agent connection info and plans
     provisioning:
-      label: Provisioning directory path
+      label: Chemin du répertoire de provisionnement
       tooltip: Data directory for provisioning related files
     k8sDistro:
-      label: K8s Distro directory path
+      label: Chemin du répertoire de la distribution K8s
       tooltip: Data directory for the k8s distro
   machineConfig:
     banner:
-      updateInfo: Create a new pool to update machine configs
+      updateInfo: Créer un nouveau pool pour mettre à jour les configurations de machine
     aws:
       sizeLabel: |-
         {apiName}: {cpu, plural,
@@ -1883,91 +1883,91 @@ cluster:
         } - {architecture}
     azure:
       acceleratedNetworking:
-        label: Accelerated Networking
+        label: Mise en réseau accélérée
       availabilitySet:
-        label: Availability Set
-        description: Availability sets are used to protect applications from hardware failures within an Azure data center.
+        label: Groupe à haute disponibilité
+        description: Les groupes à haute disponibilité sont utilisés pour protéger les applications contre les défaillances matérielles dans un centre de données Azure.
       availabilityZone:
-        label: Availability Zone
-        description: Availability zones protect applications from complete Azure data center failures.
+        label: Zone de disponibilité
+        description: Les zones de disponibilité protègent les applications contre les défaillances complètes du centre de données Azure.
         publicIpAndSKUWarning: Availability zones require Static Public IP and Use Standard SKU for Public IP to be enabled.
         publicIpWarning: Availability zones require Static Public IP to be enabled.
         standardSKUWarning: Availability zones require Use Standard SKU for Public IP to be enabled.
         managedDisksWarning: Availability zones require Managed Disks to be enabled.
       dns:
         help: A unique DNS label for the public IP address.
-        label: DNS Label
+        label: Étiquette DNS
       environment:
-        label: Environment
-        tooltip: The environment is configured when cloud credentials are created.
+        label: Environnement
+        tooltip: "L'environnement est configuré lors de la création des identifiants cloud."
       faultDomainCount:
         help: If the availability set has already been created, the fault domain count will be ignored.
-        label: Fault Domain Count
+        label: "Nombre de domaines d'erreur"
       image:
         help: Providing an ARM resource identifier requires using managed disk.
         label: Image
       location:
-        label: Location
+        label: Emplacement
       managedDisks:
-        label: Use Managed Disks
+        label: Utiliser des disques managés
         deprecationWarning: 'Azure is retiring unmanaged disk support on March 31, 2026. After this date, VMs using unmanaged disks will be stopped and deallocated. Enable "Use Managed Disks" to avoid service disruption.'
       managedDisksSize:
-        label: Managed Disk Size
+        label: Taille des disques managés
       nsg:
         help: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
-        label: Network Security Group
+        label: Groupe de sécurité réseau
       openPort:
-        add: Add Port
+        add: Ajouter un port
         help: When using an existing NSG, Open Ports are ignored.
-        label: Open Port
+        label: Port ouvert
       plan:
-        label: Purchase Plan
+        label: "Plan d'achat"
         placeholder: publisher:product:plan
       privateIp:
-        label: Private IP Address
+        label: Adresse IP privée
       publicIpOptions:
-        header: Public IP Options
+        header: Options IP publique
         noPublic:
-          label: No Public IP
+          label: "Pas d'IP publique"
         staticPublicIp:
-          label: Static Public IP
+          label: IP publique statique
         standardSKU:
-          label: Use Standard SKU for Public IP
+          label: "Utiliser le SKU Standard pour l'IP publique"
       resourceGroup:
-        label: Resource Group
+        label: Groupe de ressources
       sections:
-        availabilitySetConfiguration: Availability Set Configuration
-        purchasePlan: Purchase Plan
-        network: Network
-        disks: Disks
+        availabilitySetConfiguration: Configuration du groupe à haute disponibilité
+        purchasePlan: "Plan d'achat"
+        network: Réseau
+        disks: Disques
       size:
-        label: VM Size
+        label: Taille de VM
         tooltip: When accelerated networking is enabled, not all sizes are available.
-        supportsAcceleratedNetworking: Sizes that Support Accelerated Networking
-        doesNotSupportAcceleratedNetworking: Sizes Without Accelerated Networking
+        supportsAcceleratedNetworking: Tailles prenant en charge la mise en réseau accélérée
+        doesNotSupportAcceleratedNetworking: Tailles sans mise en réseau accélérée
         availabilityWarning: The selected VM size is not available in the selected region.
         regionDoesNotSupportAzs: Availability zones are not supported in the selected region. Please select a different region or use an availability set instead.
         regionSupportsAzsButNotThisSize: The selected region does not support availability zones for the selected VM size. Please select a different region or VM size.
         selectedSizeAcceleratedNetworkingWarning: The selected VM size does not support accelerated networking. Please select another VM size or disable accelerated networking.
       sshUser:
-        label: SSH Username
+        label: "Nom d'utilisateur SSH"
       storageType:
-        label: Storage Type
+        label: Type de stockage
         warning: StandardSSD_LRS requires managed disks. Please select Use Managed Disks or select another storage type.
       subnet:
-        label: Subnet
+        label: Sous-réseau
       subnetPrefix:
-        label: Subnet Prefix
+        label: Préfixe de sous-réseau
       updateDomainCount:
         help: If the availability set has already been created, the update domain count will be ignored.
-        label: Update Domain Count
+        label: Nombre de domaines de mise à jour
       usePrivateIp:
-        label: Use Private IP
+        label: "Utiliser l'IP privée"
       vnet:
-        label: Virtual Network
+        label: Réseau virtuel
         placeholder: '[resourcegroup:]name'
       tags:
-        label: Tags
+        label: Étiquettes
     digitalocean:
       sizeLabel: |-
         {plan, select,
@@ -1984,7 +1984,7 @@ cluster:
           other {# vCPUs}
         }, {disk} GB Disk ({value})
       tags:
-        label: Droplet Tags
+        label: Étiquettes de Droplet
         placeholder: e.g. my_server
     linode:
       typeLabel: |-
@@ -1994,222 +1994,222 @@ cluster:
         }, {disk} GB Disk ({value})
     vsphere:
       hostOptions:
-        any: Any
+        any: "N'importe lequel"
       vAppOptions:
-        label: vApp Options
-        description: Choose OVF environment properties
-        disable: Do not use vApp
-        auto: Use vApp to configure networks with network protocol profiles
-        manual: Provide a custom vApp config
-        restoreType: Restore Type
+        label: Options vApp
+        description: "Choisir les propriétés de l'environnement OVF"
+        disable: Ne pas utiliser vApp
+        auto: Utiliser vApp pour configurer les réseaux avec des profils de protocole réseau
+        manual: Fournir une configuration vApp personnalisée
+        restoreType: Type de restauration
         transport:
-          label: OVF environment transport
+          label: "Transport d'environnement OVF"
           tooltip: com.vmware.guestInfo or iso
           placeholder: e.g. com.vmware.guestInfo
         protocol:
-          label: vApp IP protocol
+          label: Protocole IP vApp
           tooltip: IPv4 or IPv6
           placeholder: e.g. IPv4
         allocation:
-          label: vApp IP allocation policy
+          label: "Politique d'allocation d'IP vApp"
           tooltip: dhcp, fixed, transient or fixedAllocated
           placeholder: e.g. fixedAllocated
         properties:
-          label: vApp properties
-          add: Add Property
+          label: Propriétés vApp
+          add: Ajouter une propriété
           keyPlaceholder: e.g. guestinfo.interface.0.ip.0.address
           valuePlaceholder: e.g. ip:VM Network, expression or string
       networks:
-        label: Networks
-        add: Add Network
+        label: Réseaux
+        add: Ajouter un réseau
       guestinfo:
-        label: Configuration Parameters used for guestinfo
-        add: Add Parameter
+        label: Paramètres de configuration utilisés pour guestinfo
+        add: Ajouter un paramètre
         keyPlaceholder: e.g. guestinfo.hostname
         valuePlaceholder: e.g. myrancherhost
       creationMethods:
-        template: 'Deploy from template: Data Center'
-        library: 'Deploy from template: Content Library'
-        vm: 'Clone an existing virtual machine'
-        legacy: 'Install from boot2docker ISO (Legacy)'
+        template: "Déployer depuis un modèle : centre de données"
+        library: "Déployer depuis un modèle : bibliothèque de contenu"
+        vm: Cloner une machine virtuelle existante
+        legacy: "Installer depuis l'ISO boot2docker (héritage)"
       scheduling:
-        label: Scheduling
-        description: Choose what hypervisor the virtual machine will be scheduled to
-        dataCenter: Data Center
-        resourcePool: Resource Pool
-        dataStore: Datastore
-        dataStoreCluster: Datastore Cluster
-        folder: Folder
+        label: Planification
+        description: "Choisir l'hyperviseur sur lequel la machine virtuelle sera planifiée"
+        dataCenter: Centre de données
+        resourcePool: Pool de ressources
+        dataStore: Magasin de données
+        dataStoreCluster: Cluster de magasins de données
+        folder: Dossier
         host:
-          label: Host
-          note: Specific host to create VM on (leave blank for standalone ESXi or for cluster with DRS)
+          label: Hôte
+          note: Hôte spécifique sur lequel créer la VM (laisser vide pour ESXi autonome ou pour le cluster avec DRS)
         gracefulShutdownTimeout:
-          label: Graceful Shutdown Timeout
-          note: The time in seconds to wait before forcing deleting VMs in the infrastructure. Zero means disable graceful shutdown.
+          label: "Délai d'arrêt progressif"
+          note: "Le temps en secondes à attendre avant de forcer la suppression des VM dans l'infrastructure. Zéro signifie désactiver l'arrêt progressif."
       instanceOptions:
-        label: Instance Options
-        description: Choose the size and OS of the virtual machine
+        label: "Options d'instance"
+        description: "Choisir la taille et le système d'exploitation de la machine virtuelle"
         cpus: CPUs
-        memory: Memory
-        disk: Disk
-        creationMethod: Creation method
+        memory: Mémoire
+        disk: Disque
+        creationMethod: Méthode de création
         template:
-          label: Template
-          none: No Templates Found
-        contentLibrary: Content library
-        libraryTemplate: Library template
-        virtualMachine: Virtual machine
+          label: Modèle
+          none: Aucun modèle trouvé
+        contentLibrary: Bibliothèque de contenu
+        libraryTemplate: Modèle de bibliothèque
+        virtualMachine: Machine virtuelle
         osIsoUrl:
           label: OS ISO URL
           placeholder: 'Default: Latest rancheros-vmware image'
         cloudInit:
           label: Cloud Init
           placeholder: e.g. http://my_host/cloud-config.yml
-          note: Cloud-init file or url to set in the guestinfo
+          note: Fichier ou URL cloud-init à définir dans le guestinfo
         cloudConfigYaml: Cloud Config YAML
-        os: Operating System
+        os: "Système d'exploitation"
       tags:
-        label: Tags
-        description: Tags allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
-        addTag: Add Tag
+        label: Étiquettes
+        description: "Les étiquettes vous permettent d'attacher des métadonnées aux objets de l'inventaire vSphere pour faciliter le tri et la recherche de ces objets."
+        addTag: Ajouter une étiquette
       customAttributes:
-        label: Custom attributes (legacy)
-        description: Custom attributes allow you to attach metadata to objects in the vSphere inventory to make it easier to sort and search for these objects.
-        add: Add custom attribute
+        label: Attributs personnalisés (héritage)
+        description: "Les attributs personnalisés vous permettent d'attacher des métadonnées aux objets de l'inventaire vSphere pour faciliter le tri et la recherche de ces objets."
+        add: Ajouter un attribut personnalisé
     amazonEc2:
-      region: Region
+      region: Région
       zone: Zone
-      instanceType: Instance Type
+      instanceType: "Type d'instance"
       rootSize:
         placeholder: 'Default: 16'
-        label: Root Disk Size
-        suffix: GB
+        label: Taille du disque racine
+        suffix: Go
       selectedNetwork:
-        label: 'VPC/Subnet'
-        placeholder: Select a VPC or Subnet
+        label: VPC/Sous-réseau
+        placeholder: Sélectionner un VPC ou un sous-réseau
       iamInstanceProfile:
-        label: IAM Instance Profile Name
+        label: "Nom du profil d'instance IAM"
         tooltip: Kubernetes AWS Cloud Provider support requires an appropriate instance profile
       ami:
-        label: AMI ID
+        label: ID AMI
         placeholder: 'Default: A recent Ubuntu LTS'
       sshUser:
-        label: SSH Username for AMI
+        label: "Nom d'utilisateur SSH pour l'AMI"
         placeholder: 'Default: ubuntu'
         tooltip: 'The username that exists in the selected AMI; Provisioning will SSH to the node with this.'
       securityGroup:
-        title: Security Group
+        title: Groupe de sécurité
         vpcId: '(select a VPC/Subnet first)'
         mode:
           default: 'Standard: Automatically create and use a "{defaultGroup}" security group'
           custom: 'Choose one or more existing security groups:'
       volumeType:
-        label: EBS Root Volume Type
+        label: Type de volume racine EBS
         placeholder: 'Default: gp2'
-      encryptEbsVolume: Encrypt EBS Volume
+      encryptEbsVolume: Chiffrer le volume EBS
       kmsKey:
-        label: KMS Key ARN
+        label: ARN de la clé KMS
         text: 'You do not have permission to list KMS keys, but may still be able to enter a Key ARN if you know one.'
-      requestSpotInstance: Request Spot Instance
+      requestSpotInstance: Demander une instance Spot
       spotPrice:
-        label: Spot Price
+        label: Prix Spot
         placeholder: 'Default: 0.50'
-        suffix: Dollars per hour
-      privateAddressOnly: Use only private address
-      useEbsOptimizedInstance: EBS-Optimized Instance
-      httpEndpoint: Allow access to EC2 metadata
-      httpTokens: Use tokens for metadata
-      tagTitle: EC2 Tags
+        suffix: Dollars par heure
+      privateAddressOnly: "Utiliser uniquement l'adresse privée"
+      useEbsOptimizedInstance: Instance optimisée pour EBS
+      httpEndpoint: "Autoriser l'accès aux métadonnées EC2"
+      httpTokens: Utiliser des jetons pour les métadonnées
+      tagTitle: Étiquettes EC2
       enableIpv6:
-        label: Enable Dual-Stack
+        label: Activer la double pile
         description: "To use dual-stack networking, you will need to update the <a aria-label='scroll to the networking section in cluster configuration' href=\"#networking\">Network Stack Preference Order</a> to <b>DUAL</b> stack. For an IPv6-only cluster, check \"Enable IPv6\" and update the stack preference to <b>IPv6</b>."
       ipv6AddressCount:
-        label: IPv6 Address Count
-        tooltip: Specifies the number of IPv6 addresses to assign to the network interface
-        error: IPv6 Address Count must be greater than 0 when using an IPv6 vpc or subnet.
+        label: "Nombre d'adresses IPv6"
+        tooltip: "Spécifie le nombre d'adresses IPv6 à attribuer à l'interface réseau"
+        error: "Le nombre d'adresses IPv6 doit être supérieur à 0 lors de l'utilisation d'un VPC ou sous-réseau IPv6."
       enablePrimaryIpv6:
-        label: Enable Static Primary IPv6
+        label: "Activer l'IPv6 primaire statique"
         description: This designates the first assigned IPv6 address as the primary address, ensuring a consistent, non-changing IPv6 address for the instance. This option does not control whether IPv6 addresses are assigned.
       ipv6AddressOnly:
-        label: Enable IPv6
+        label: Activer IPv6
       httpProtocolIpv6: 
-        label: Enable IPv6 endpoint for instance metadata service
-      ipv6ValidationWarning: When one pool uses an IPv6 or dual-stack subnet/vpc, all pools must use an IPv6 or dual-stack subnet/vpc.
+        label: "Activer le point de terminaison IPv6 pour le service de métadonnées d'instance"
+      ipv6ValidationWarning: "Quand un pool utilise un sous-réseau/VPC IPv6 ou double pile, tous les pools doivent utiliser un sous-réseau/VPC IPv6 ou double pile."
     pnap:
       serverLocation:
-        label: Location
+        label: Emplacement
       serverType:
         label: Type
       serverCpu:
         label: CPU
       serverCoresPerCpu:
-        label: Cores per CPU
+        label: Cœurs par CPU
       serverCpuCount:
-        label: CPU Count
+        label: Nombre de CPU
       serverCpuFrequency:
         label: CPU Frequency [GHz]
       serverRam:
-        label: RAM [GB]
+        label: "RAM [Go]"
       serverStorage:
-        label: Storage
+        label: Stockage
       serverNetwork:
-        label: Network
+        label: Réseau
       serverOs:
-        label: OS
+        label: "Système d'exploitation"
     gce:
       machineImage:
-        label: Machine Image
+        label: Image machine
         option: '{name} - {description}'
         deprecatedOption: '{name}(deprecated) - {description}'
         tooltip: Please select Image Family to get available images
       imageProjects:
-        label: Image Projects
+        label: "Projets d'image"
       firewall:
-        header: Firewall Configuration
+        header: Configuration du pare-feu
       showDeprecated:
-        label: Show Deprecated
+        label: Afficher les obsolètes
         tooltip: Includes deprecated images
       diskType:
-        label: Disk Type
+        label: Type de disque
       diskSize:
-        label: Disk Size
+        label: Taille du disque
       network:
-        label: Network
+        label: Réseau
       subnetwork:
-        label: Subnetwork
+        label: Sous-réseau
       machineType:
-        label: Machine Type
+        label: Type de machine
       family:
-        label: Image Family
+        label: "Famille d'images"
       location:
         zone:
           label: Zone
       preemptible:
-        label: Make VM instance preemptible
+        label: "Rendre l'instance VM préemptible"
         tooltip: Preemptible machines offer significant cost savings, but may be abruptly stopped when Google Compute Engine needs to reclaim the compute resources for higher-priority VMs.
       scopes:
-        add: Add scope
-        label: Scopes
+        add: Ajouter un périmètre
+        label: Périmètres
       tags:
-        add: Add tags
-        label: Tags
+        add: Ajouter des étiquettes
+        label: Étiquettes
       openPort:
-        add: Add port
-        label: Open Ports
+        add: Ajouter un port
+        label: Ports ouverts
       address:
-        label: External Address
+        label: Adresse externe
         placeholder: '10.0.0.0/14'
         tooltip: External IP address for the GCE VM instance.
       username:
-        label: Username
+        label: "Nom d'utilisateur"
         placeholder: docker-user
         tooltip: This is the username used when SSH'ing into the node, and not a username associated with the GCP account.
       internalFirewall:
-        label: Allow communication between cluster nodes
+        label: Autoriser la communication entre les nœuds du cluster
         tooltip: Allows Rancher to open ports required for internal communication between nodes.
         banner: Tags can be used to impose additional firewall rules.
       externalFirewall:
-        label: Expose external ports
+        label: Exposer les ports externes
         tooltip: Allows Rancher to open ports required for external access.
         banner: By default, the Kubernetes API server listens on port 6443. Exposing this port on control plane machine pools is required for the Authorized Cluster Endpoint feature to work as expected.
       error:
@@ -2219,53 +2219,53 @@ cluster:
   addOns:
     dependencyBanner: Add-On Configuration has changed between Kubernetes versions <b>{previousKubeVersion}</b> and <b>{newKubeVersion}</b> and conflict with your previous values. Please re-apply them.
     additionalManifest:
-      title: Additional Manifest
+      title: Manifeste supplémentaire
       tooltip: 'Additional Kubernetes Manifest YAML to be applied to the cluster on startup.'
   agentConfig:
     tabs:
-      agentsScheduling: Agents Scheduling
-      cluster: Cluster Agent
-      fleet: Fleet Agent
+      agentsScheduling: Planification des agents
+      cluster: Agent de cluster
+      fleet: Agent Fleet
     groups:
-      deploymentLabels: Deployment Labels
-      selector: Selector
-      podAffinity: Affinity
-      podTolerations: Tolerations
-      podRequestsAndLimits: Requests and Limits
-      schedulingCustomization: Scheduling Customization
+      deploymentLabels: Étiquettes de déploiement
+      selector: Sélecteur
+      podAffinity: Affinité
+      podTolerations: Tolérances
+      podRequestsAndLimits: Demandes et limites
+      schedulingCustomization: Personnalisation de la planification
       agentsScheduling:
         text: Ensure that cluster- and/or fleet-agent pods are not evicted due to node pressure, resource constraints or scheduler policies When enabled, these settings may be configured in the 
-        textLink: Global Settings
+        textLink: Paramètres globaux
         label: 'Prevent agent pod eviction for:'
     subGroups:
-      podAffinityAnti: Pod Affinity/Anti-Affinity
-      nodeAffinity: Node Affinity
+      podAffinityAnti: Affinité/Anti-affinité de pod
+      nodeAffinity: Affinité de nœud
       agentsScheduling:
-        cluster: Cluster Agent
-        fleet: Fleet Agent
+        cluster: Agent de cluster
+        fleet: Agent Fleet
         label: Prevent Rancher {agent} pod eviction
         description: This ensures that the {agent} pod is not evicted due to node pressure, resource constraints or scheduler policies.
         banner: This feature is currently configured with settings which differ to the default Global Settings. Enable the checkbox below to overwrite the current settings with the default Global Settings.
         innerCheckbox: Apply global settings for Priority Class and Pod Disruption Budget
     banners:
-      advanced: These are advanced configuration options. Generally, they should be left as-is.
-      tolerations: Additional Pod Tolerations will be added to the default Tolerations applied by Rancher.
-      limits: Pod Requests and Limits do not have a default configuration.
+      advanced: "Ce sont des options de configuration avancées. En général, elles doivent être laissées telles quelles."
+      tolerations: Des tolérances de pod supplémentaires seront ajoutées aux tolérances par défaut appliquées par Rancher.
+      limits: "Les demandes et limites de pod n'ont pas de configuration par défaut."
       windowsCompatibility: "We do not recommend removing the Node Affinity rule that prevents the <b>agent</b> from running on Windows nodes as this is not a supported configuration."
     affinity:
-      default: Use default affinity rules defined by Rancher
-      custom: Use custom affinity rules
+      default: "Utiliser les règles d'affinité par défaut définies par Rancher"
+      custom: "Utiliser des règles d'affinité personnalisées"
   advanced:
     argInfo:
-      title: Additional Kubelet Args
+      title: Arguments Kubelet supplémentaires
       tooltip:
         mixed-args: Kubelet args are defined both at Global and Machine Selector level.<br> Click on "Add Global Argument" to add them as Global config.
         global-args: Kubelet args are defined at Global level.<br> Click on "Add Global Argument" to add them as Global config.
       machineGlobal:
-        listLabel: Add Global Argument
+        listLabel: Ajouter un argument global
       machineSelector:
-        label: Add Machine Selector
-        listLabel: Add Argument
+        label: Ajouter un sélecteur de machine
+        listLabel: Ajouter un argument
         bannerLabel: 'Note: The last selector that matches wins, and only args from it will be used.  Args from other matches above will not be combined together or merged.'
         title: 'For machines with labels matching:'
         subTitle: 'Use the Kubelet args:'
@@ -2278,12 +2278,12 @@ cluster:
         kubeApiServerTitle: Additional API Server Args
         kubeSchedulerTitle: Additional Scheduler Args
     agentArgs:
-      label: Raise error if kernel parameters are different than the expected kubelet defaults
+      label: Lever une erreur si les paramètres du noyau diffèrent des valeurs par défaut kubelet attendues
   banner:
     warning: 'This cluster contains a machineSelectorConfig, which this form does not fully support; use the YAML editor to manage the full configuration.'
     os: 'You are attempting to add a {newOS} worker node to a cluster with one or more {existingOS} worker nodes: some installed apps may need to be upgraded or removed.'
     rke2-k3-reprovisioning: 'Making changes to cluster configuration may result in nodes reprovisioning. For more information see the <a href="{docsBase}/how-to-guides/new-user-guides/launch-kubernetes-with-rancher#launching-kubernetes-on-new-nodes-in-an-infrastructure-provider" target="_blank" rel="noopener nofollow">documentation</a>.'
-    desiredNodeGroupWarning: There are 0 nodes available to run the cluster agent. The cluster will not become active until at least one node is available.
+    desiredNodeGroupWarning: "Il n'y a aucun nœud disponible pour exécuter l'agent du cluster. Le cluster ne deviendra actif qu'une fois qu'au moins un nœud sera disponible."
     haveArgInfo: Configuration information is not available for the selected Kubernetes version.  The options available on this screen will be limited; you may want to use the YAML editor.
     cloudProviderAddConfig: 'On Kubernetes 1.27 or greater, the <b>Amazon</b> Cloud Provider requires additional configuration. See <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon" target="_blank" rel="noopener noreferrer nofollow">the documentation</a> for more information.'
     cloudProviderUnsupportedAzure: 'On Kubernetes 1.30 or greater, the <b>Azure</b> Cloud Provider has been removed. See <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">the documentation</a> for more information.'
@@ -2294,42 +2294,42 @@ cluster:
         other { {pool_name}: The provided values for {fields} were not found in the list of expected values. This can happen with clusters provisioned outside of Rancher or when options for the provider have changed. }
       }
     rke1DeprecationMessage: 'Rancher Kubernetes Engine (RKE / RKE1) has reached end of life and these clusters are no longer supported. We recommend replatforming RKE1 clusters to RKE2 to ensure continued support and security updates. Learn more about the transition <a href="https://www.suse.com/support/kb/doc/?id=000021518" target="_blank" rel="noopener noreferrer nofollow">here</a>.'
-    nginxDeprecated: The NGINX controller is deprecated and will be removed in upcoming versions
-  rke1Unsupported: RKE1 Clusters are no longer supported
+    nginxDeprecated: Le contrôleur NGINX est obsolète et sera supprimé dans les prochaines versions
+  rke1Unsupported: Les clusters RKE1 ne sont plus pris en charge
 
   architecture:
     label:
-      unknown: unknown
-      mixed: mixed
+      unknown: inconnu
+      mixed: mixte
 
   availabilityWarnings:
-    node: Node {name} is inactive
-    machine: Machine {name} is inactive
+    node: "Le nœud {name} est inactif"
+    machine: "La machine {name} est inactive"
 
   detail:
-    provisioner: Provisioner
-    kubernetesVersion: Kubernetes Version
-    machineProvider: Machine Provider
-    machinePools: Machine Pools
+    provisioner: Fournisseur de provisionnement
+    kubernetesVersion: Version de Kubernetes
+    machineProvider: Fournisseur de machine
+    machinePools: Pools de machines
     machines: Machines
-    rkeTemplate: RKE Template
+    rkeTemplate: Modèle RKE
 
   machinePool:
     automation:
-      label: Automation
+      label: Automatisation
     autoscaler:
-      heading: Autoscaler
-      enable: Enable autoscaler and override "Machine Count" value
-      machineCountValueOverride: Controlled by autoscaler
+      heading: "Mise à l'échelle automatique"
+      enable: "Activer la mise à l'échelle automatique et remplacer la valeur \"Nombre de machines\""
+      machineCountValueOverride: "Contrôlé par la mise à l'échelle automatique"
       baseUnit: Machines
       min: Min
       max: Max
       validation:
-        isAutoscalerMaxGreaterThanMin: The max machines count must be equal or exceed the min machine count.
+        isAutoscalerMaxGreaterThanMin: Le nombre maximum de machines doit être égal ou supérieur au nombre minimum de machines.
       etcdControlPlaneWarning: We don't recommend using Autoscaler with machine pools that have the etcd or Control Plane roles. You can modify the yaml if you want to override the current value.
     name:
-      label: Pool Name
-      placeholder: A random one will be generated by default
+      label: Nom du pool
+      placeholder: Un nom aléatoire sera généré par défaut
     nodeTotals:
       label:
         controlPlane: '{count} Control Plane'
@@ -2361,40 +2361,40 @@ cluster:
             other {}
           }
     quantity:
-      label: Machine Count
+      label: Nombre de machines
     drain:
-      header: Drain
-      label: Drain Before Delete
+      header: Vidange
+      label: Vider avant suppression
     role:
-      label: Roles
+      label: Rôles
       etcd: etcd
       controlPlane: Control Plane
       worker: Worker
     labels:
-      label: Kubernetes Node Labels
+      label: Étiquettes de nœud Kubernetes
     noAccessBanner: "You do not have access to see this machine pool's configuration."
     configNotFound: "We could not find this machine pool's configuration. We recommend that you create a new cluster with the desired configuration."
-    noPoolsDisclaimer: You do not have any machine pools defined, click the plus to add one.
+    noPoolsDisclaimer: "Vous n'avez aucun pool de machines défini, cliquez sur le plus pour en ajouter un."
     truncationPool: "Hostname truncation has been manually configured for this pool to {limit}"
     truncationCluster: "Hostname truncation has been manually configured for this cluster to {limit}"
 
     autoReplace:
-      label: Auto Replace
-      toolTip: If greater than 0, nodes that are unreachable for this duration will be automatically deleted and replaced.
-      unit: "Seconds"
+      label: Remplacement automatique
+      toolTip: "Si supérieur à 0, les nœuds inaccessibles pendant cette durée seront automatiquement supprimés et remplacés."
+      unit: Secondes
   managementTimeout: The cluster to become available. It's possible the cluster was created. We suggest checking the clusters page before trying to create another.
   memberRoles:
     removeMessage: 'Note: Removing a user will not remove their project permissions'
     addClusterMember:
-      labelSelect: Select Member
-      labelAdd: Add Member
-      placeholder: Search for a member to provide cluster access
-      searchPlaceholder: Start typing to search
-      noResults: No results found
+      labelSelect: Sélectionner un membre
+      labelAdd: Ajouter un membre
+      placeholder: "Rechercher un membre pour lui accorder l'accès au cluster"
+      searchPlaceholder: Commencer à taper pour rechercher
+      noResults: Aucun résultat trouvé
       minCharacters: Type at least {count} characters to search
   privateRegistry:
-    header: Registry for Rancher System Container Images
-    label: Enable cluster scoped container registry for Rancher system container images
+    header: Registre pour les images de conteneurs système Rancher
+    label: Activer le registre de conteneurs au niveau du cluster pour les images de conteneurs système Rancher
     description: "If enabled, Rancher will pull container images from this registry during cluster provisioning. By default, Rancher will also use this registry when installing Rancher's official Helm chart apps. If the cluster scoped registry is disabled, system images are pulled from the System Default Registry in the global settings."
     importedDescription: "By default, Rancher will also use this registry when installing Rancher's official Helm chart apps. If the cluster scoped registry is disabled, system images are pulled from the System Default Registry in the global settings."
     docsLinkRke2: "For help configuring private registry mirrors, see the RKE2 <a href=\"https://docs.rke2.io/install/private_registry\" target=\"_blank\">documentation.</a>"
@@ -2416,7 +2416,7 @@ cluster:
     baidu: Baidu CCE
     cloudca: Cloud.ca
     cloudscale: Cloudscale
-    custom: Custom
+    custom: Personnalisé
     digitalocean: DigitalOcean
     docker: Docker
     eks: Amazon EKS
@@ -2429,8 +2429,8 @@ cluster:
     googlekubernetesengine: Google GKE (Unsupported Kev1)
     harvester: Harvester
     huaweicce: Huawei CCE
-    import: Generic
-    imported: Imported
+    import: Générique
+    imported: Importé
     k3s: K3s
     kubeAdmin: KubeADM
     linode: Linode
@@ -2444,7 +2444,7 @@ cluster:
     oracle: Oracle
     oracleoke: Oracle OKE
     otc: Open Telekom Cloud
-    other: Other
+    other: Autre
     ovhcloudmks: OVHcloud MKS
     packet: Equinix Metal
     pinganyunecs: Pinganyun ECS
@@ -2465,26 +2465,26 @@ cluster:
     rke2:
       harvester: '{tag}'
   providerGroup:
-    create-custom1: Use existing nodes and create a cluster using RKE
-    create-custom2: Use existing nodes and create a cluster using RKE2/K3s
-    create-hosted: Create a cluster in a hosted Kubernetes provider
-    register-hosted: Register an existing cluster in a hosted Kubernetes provider
-    create-rke1: Provision new nodes and create a cluster using RKE
-    create-rke2: Provision new nodes and create a cluster using RKE2/K3s
-    create-template: Use a Catalog Template to create a cluster
-    register-custom: Import any Kubernetes cluster
+    create-custom1: Utiliser des nœuds existants et créer un cluster avec RKE
+    create-custom2: Utiliser des nœuds existants et créer un cluster avec RKE2/K3s
+    create-hosted: Créer un cluster chez un fournisseur Kubernetes hébergé
+    register-hosted: Enregistrer un cluster existant chez un fournisseur Kubernetes hébergé
+    create-rke1: Provisionner de nouveaux nœuds et créer un cluster avec RKE
+    create-rke2: Provisionner de nouveaux nœuds et créer un cluster avec RKE2/K3s
+    create-template: Utiliser un modèle de catalogue pour créer un cluster
+    register-custom: "Importer n'importe quel cluster Kubernetes"
   rke2:
     banner:
-      psaChange: PSACT is now set to Rancher default automatically
+      psaChange: PSACT est maintenant défini sur la valeur par défaut Rancher automatiquement
       complianceOverride: Changing this setting may affect cluster security as it overrides default compliance settings
       complianceUnsupported: The selected Kubernetes Version no longer supports compliance profile "{profile}". Please select a supported profile. We recommend reviewing the <a href="https://docs.rke2.io/security/hardening_guide" target="_blank" rel="noopener noreferrer nofollow">documentation</a> to evaluate the impact of changing the compliance profile.
     modal:
       editYamlMachinePool:
-        title: Save Machine Configurations
+        title: Enregistrer les configurations de machine
         body: Machine Configurations define how machines in Pools are deployed.<br><br> They will be saved upfront to ensure valid Cluster YAML can be saved.
       ipv6Warning:
-        title: Verify IPv6 Settings
-        body: The machine pools in this cluster are configured to use IPv6 networks, but the cluster's networking settings may not support it. 
+        title: Vérifier les paramètres IPv6
+        body: "Les pools de machines de ce cluster sont configurés pour utiliser des réseaux IPv6, mais les paramètres réseau du cluster peuvent ne pas le prendre en charge."
         stackPrefInvalid: The <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Stack Preference</a> should be set to "Dual" or "IPv6" to use dual-stack or IPv6-only networking, respectively. 
         flannelMasqInvalid: K3s uses the Flannel cni plugin by default. Enabling Flannel Masq is generally advised when using IPv6 networking.
         cidrInvalidRke2: To enable dual-stack networking in RKE2 clusters, you must define valid dual-stack cluster and service CIDR ranges.
@@ -2493,140 +2493,140 @@ cluster:
         readMoreRke2: <a href="https://docs.rke2.io/networking/basic_network_options#ipv6-setup" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 ipv6 networking documentation">Learn more about RKE2 networking</a>
         verifySettings: 'Before continuing, please verify the following settings:'
     snapshots:
-      suffix: Snapshots per node
-      s3Suffix: Snapshots
+      suffix: Instantanés par nœud
+      s3Suffix: Instantanés
     systemService:
       rke2-coredns: 'CoreDNS'
       rke2-ingress-nginx: 'NGINX Ingress'
       rke2-kube-proxy: 'Kube Proxy'
       rke2-metrics-server: 'Metrics Server'
-      header: System Services
+      header: Services système
     cni:
-      label: Container Network
+      label: Réseau de conteneurs
       cniNoneBanner: When CNI is set to 'none' an <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#additionalmanifest" target="_blank" rel="noopener noreferrer nofollow">Additional Manifest</a> deploying an alternate CNI must be specified for successful cluster provisioning.
       cilium:
         BandwidthManager:
           enable: Enable Bandwidth Manager
     cloudProvider:
-      label: Cloud Provider
-      header: Cloud Provider Config
+      label: Fournisseur cloud
+      header: Configuration du fournisseur cloud
       defaultValue:
         label: Default - RKE2 Embedded
     security:
-      header: Security
+      header: Sécurité
     compliance:
-      server: Server compliance Profile
-      agent: Compliance Profile
+      server: Profil de conformité du serveur
+      agent: Profil de conformité
       override: Allow the default Pod Security Admission Configuration Template to be overridden when using a compliance profile
       warning: After saving changes, and if this cluster has already been provisioned, please restart the rke2-server service on all nodes to ensure etcd file permissions are correct
     defaultPodSecurityPolicyTemplateName:
-      label: Default Pod Security Policy
+      label: Politique de sécurité des pods par défaut
       option: Default - RKE2 Embedded
     defaultPodSecurityAdmissionConfigurationTemplateName:
-      label: Pod Security Admission Configuration Template
+      label: "Modèle de configuration d'admission des pods de sécurité"
       option:
         none: (None)
         default: Default - RKE2 Embedded
     secretEncryption:
-      label: Encrypt Secrets
+      label: Chiffrer les secrets
     complianceProfile:
       option: (None)
     enableNetworkPolicy:
-      label: Project Network Isolation
+      label: Isolation du réseau de projet
       warning: Per default, the ingress controller will not be able to route requests to pods on other nodes.
     workNode:
-      label: Worker Nodes
+      label: Nœuds worker
     controlPlaneConcurrency:
-      header: Control Plane
-      label: Control Plane Concurrency
+      header: Plan de contrôle
+      label: Concurrence du plan de contrôle
       toolTip: "This can be either a fixed number of nodes (e.g. 1) at a time or a percentage (e.g. 10%)"
     workerConcurrency:
-      header: Worker Nodes
-      label: Worker Concurrency
+      header: Nœuds worker
+      label: Concurrence des workers
       toolTip: "This can be either a fixed number of nodes (e.g. 1) at a time or a percentage (e.g. 10%)"
     drain:
-      label: Drain Nodes
+      label: Vider les nœuds
       toolTip: Draining preemptively removes the pods on each node so there are no running workloads on the nodes being upgraded.  Upgrading without draining is faster and causes less shuffling around, but pods may still be restarted depending on the upgrade being performed.
       deleteEmptyDir:
         warning: "By default, pods using emptyDir volumes will be deleted on upgrade. Operations reliant on emptyDir volumes persisting through the pod's lifecycle may be impacted."
-        label: Delete pods using emptyDir volumes
+        label: Supprimer les pods utilisant des volumes emptyDir
         tooltip: emptyDir volumes are often used for ephemeral data, but the data will be permanently deleted.  Draining will fail if this is not set and there are pods using emptyDir.
       force:
-        label: Delete standalone pods
+        label: Supprimer les pods autonomes
         tooltip: Delete standalone pods which are not managed by a Workload controller (Deployment, Job, etc).  Draining will fail if this is not set and there are standalone pods.
       gracePeriod:
-        checkboxLabel: Override pod termination grace periods
-        inputLabel: Grace Period
+        checkboxLabel: Remplacer les périodes de grâce de terminaison des pods
+        inputLabel: Période de grâce
       timeout:
-        checkboxLabel: Timeout after
-        inputLabel: Drain Timeout
-    truncateHostnames: Truncate hostnames to 15 characters for NetBIOS compatibility.
+        checkboxLabel: "Délai d'expiration après"
+        inputLabel: Délai de vidange
+    truncateHostnames: "Tronquer les noms d'hôte à 15 caractères pour la compatibilité NetBIOS."
     address:
       tooltip: Cluster networking values cannot be changed after the cluster is created.
-      header: Addressing
+      header: Adressage
       clusterCidr:
-        label: Cluster CIDR
+        label: CIDR du cluster
       serviceCidr:
-        label: Service CIDR
+        label: CIDR du service
       dns:
-        label: Cluster DNS
+        label: DNS du cluster
       domain:
-        label: Cluster Domain
+        label: Domaine du cluster
       nodePortRange:
-        label: NodePort Service Port Range
+        label: Plage de ports du service NodePort
       tlsSan:
-        label: TLS Alternate Names
+        label: Noms alternatifs TLS
       fqdn:
         label: FQDN
         toolTip: A FQDN which will resolve to the healthy control plane nodes of the cluster.
       caCerts:
-        label: CA Certificates
+        label: Certificats CA
         toolTip: Certificates required for the client to successfully verify the validity of the certificate returned by the endpoint.
     etcd:
       disableSnapshots:
-        label: Automatic Backups
+        label: Sauvegardes automatiques
       snapshotScheduleCron:
-        label: Cron Schedule
+        label: Planification Cron
       snapshotRetention:
-        label: Local snapshot retention count
+        label: "Nombre d'instantanés locaux à conserver"
         tooltip: Each backup records 1 snapshot per etcd node. If you specify 3 snapshots and you have 3 etcd nodes you will only retain 1 full backup.
       exportMetric:
-        label: Metrics
-        false: Only available inside the cluster
-        true: Exposed to the public interface
+        label: Métriques
+        false: "Disponible uniquement à l'intérieur du cluster"
+        true: "Exposé à l'interface publique"
       s3backups:
-        label: Save Backups to S3
+        label: Enregistrer les sauvegardes dans S3
       s3config:
         snapshotRetention:
-          title: S3 Snapshot Retention
-          label: S3 Snapshot Retention Count
+          title: Rétention des instantanés S3
+          label: "Nombre d'instantanés S3 à conserver"
           options:
             manual: Set manually
             localDefined: Same as local ({count} Snaphots)
             localUndefined: Same as local
         bucket:
-          label: Bucket
+          label: Compartiment
         folder:
-          label: Folder
+          label: Dossier
         region:
-          label: Region
+          label: Région
         endpoint:
-          label: Endpoint
+          label: Point de terminaison
         skipSSLVerify:
-          label: Accept any certificate (insecure)
+          label: Accepter tout certificat (non sécurisé)
         endpointCA:
-          label: Endpoint CA Cert
+          label: Certificat CA du point de terminaison
     stackPreference:
-      label: Stack Preference
+      label: Préférence de pile
       description: Stack preference determines the networking stack used by the cluster. IPv4 uses <code>127.0.0.1</code>, Dual-Stack uses <code>localhost</code> and IPv6 uses <code>[::1]</code>. Read more about <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >RKE2</a> and <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/k3s-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >K3s</a> networking in the Rancher documentation.
       options:
         ipv4: IPv4
         ipv6: IPv6
-        dual: Dual
+        dual: Double
   k3s:
     flannelMasq:
-      title: IPv6 NAT
-      label: Enable Flannel IPv6 Masquerade
+      title: NAT IPv6
+      label: Activer la mascarade IPv6 Flannel
       banner: It looks like you're using IPv6. If your IPv6 addresses are not publically routed, for example in the ULA range, you might want to check this option to enable IPv6 NAT; by default, pods use their IPv6 address for outgoing communication.
     systemService:
       coredns: 'CoreDNS'
@@ -2637,23 +2637,23 @@ cluster:
   selectCredential:
     genericDescription: "{vendor} has no built-in support for this driver.  We've taken a guess, but consult the driver's documentation for the fields required for authentication."
   snapshot:
-    successTitle: Snapshot Started
+    successTitle: Instantané démarré
     errorTitle: "Error Snapshotting {name}"
     successMessage: "A snapshot has been requested for {name}"
-    bulkSuccessTitle: Snapshot Started
+    bulkSuccessTitle: Instantané démarré
     bulkSuccessMessage: |-
       {count, plural,
         =1 { A snapshot has been requested for 1 cluster }
         other {A snapshot has been requested for {count} clusters}
       }
-    groupLabel: Location
+    groupLabel: Emplacement
     failed: "Snapshot from {time} failed"
     rke1:
       local: local
       s3: s3
   ingress:
-    title: Ingress
-    enableIngress: Install Ingress controller to enable external routing
+    title: Entrée
+    enableIngress: "Installer le contrôleur d'entrée pour activer le routage externe"
     nginx:
       header: Ingress-NGINX
       content: Choose this only if your workloads are not yet ready for Traefik.
@@ -2663,15 +2663,15 @@ cluster:
     traefik:
       header: Traefik
       content: The new default provider for high-performance routing and modern feature support.
-    recommended: Recommended
-    legacy: Legacy
+    recommended: Recommandé
+    legacy: Héritage
     migration: Migration
     learnMore:
-      label: Learn more
-    showAdvanced: Show advanced configuration
-    hideAdvanced: Hide advanced configuration
+      label: En savoir plus
+    showAdvanced: Afficher la configuration avancée
+    hideAdvanced: Masquer la configuration avancée
     configurationOptions:
-      title: Configuration Options
+      title: Options de configuration
       compatibilityMode: Enable Traefik Ingress NGINX compatibility mode for annotations
       traefik:
         http: Traefik HTTP
@@ -2692,30 +2692,30 @@ cluster:
         dual:
           label: Please review our <docsUrl>migration documentation</docsUrl> to ensure your current workloads and annotations are compatible. Taking this step now helps prevent unexpected routing issues during the transition.
     validation:
-      portsMatch: Traefik and Ingress-NGINX ports cannot match
+      portsMatch: Les ports Traefik et Ingress-NGINX ne peuvent pas correspondre
   tabs:
-    ace: Authorized Endpoint
-    addOnAdditionalManifest: Additional Manifest
-    addons: Add-on Configuration
-    advanced: Advanced
-    agentEnv: Agent Environment Vars
-    basic: Basics
-    cluster: Cluster Configuration
+    ace: Point de terminaison autorisé
+    addOnAdditionalManifest: Manifeste supplémentaire
+    addons: Configuration des modules complémentaires
+    advanced: Avancé
+    agentEnv: "Variables d'environnement de l'agent"
+    basic: Bases
+    cluster: Configuration du cluster
     etcd: etcd
-    log: Provisioning Log
-    networking: Networking
-    machinePools: Machine Pools
+    log: Journal de provisionnement
+    networking: Mise en réseau
+    machinePools: Pools de machines
     machines: Machines
-    memberRoles: Member Roles
-    registry: Registries
-    upgrade: Upgrade Strategy
-    registration: Registration
+    memberRoles: Rôles des membres
+    registry: Registres
+    upgrade: Stratégie de mise à niveau
+    registration: Enregistrement
   rotateCertificates:
-    label: Rotate Certificates
-    modalTitle: Rotate Cluster Certificates
+    label: Faire pivoter les certificats
+    modalTitle: Faire pivoter les certificats du cluster
     services: Services
-    allServices: Rotate all service certificates
-    selectService: Rotate an individual service
+    allServices: Faire pivoter tous les certificats de service
+    selectService: Faire pivoter un service individuel
   toggle:
     v1: RKE1
     v2: RKE2/K3s
@@ -2946,16 +2946,16 @@ etcdInfoBanner:
 
 fleet:
   settings:
-    label: Continuous Delivery
-    title: Continuous Delivery Settings
-    info: Rancher will reboot Fleet agent and controller on settings change.
-    apply: Apply changes
-    noPermissions: You have no permissions to modify Fleet Settings
+    label: Livraison continue
+    title: Paramètres de livraison continue
+    info: "Rancher va redémarrer l'agent Fleet et le contrôleur lors d'un changement de paramètres."
+    apply: Appliquer les modifications
+    noPermissions: "Vous n'avez pas les autorisations pour modifier les paramètres Fleet"
     parseError: 'Cannot parse values from "{ path }" in "{ id }" ConfigMap'
     fields:
-      ariaLabel: Fleet {name} setting
+      ariaLabel: "Paramètre Fleet {name}"
     agentTLSMode:
-      label: TLS Mode
+      label: Mode TLS
       description: "Determines whether the agent should trust CA bundles from the operating system's trust store when connecting to a management cluster."
       options:
         system-store:
@@ -2963,55 +2963,55 @@ fleet:
         strict:
           label: strict
     agentCheckinInterval:
-      label: Checkin Interval
-      description: A duration string for how often agents should report a heartbeat.
+      label: "Intervalle d'enregistrement"
+      description: Une chaîne de durée indiquant la fréquence à laquelle les agents doivent signaler un battement de cœur.
     garbageCollectionInterval:
-      label: Garbage Collection Interval
+      label: Intervalle de collecte des déchets
       description: The amount of time that agents will wait before they clean up old Helm releases. A non-existent value or 0 will result in an interval of 15 minutes.
     clusterEnqueueDelay:
-      label: Cluster Enqueue Delay
+      label: "Délai de mise en file d'attente du cluster"
       description: "Interval to sync a repo with bundle deployments states."
     proxy:
       label: Proxy
-      description: Fleet http[s] proxy server.
+      description: "Serveur proxy http[s] Fleet."
       placeholder: http://<username>@<password>:<url>:<port>
     noProxy:
-      label: No Proxy
-      description: Comma separated list of domains or ip addresses that will not use the proxy.
+      label: Pas de proxy
+      description: "Liste séparée par des virgules de domaines ou adresses IP qui n'utiliseront pas le proxy."
     gitClientTimeout:
-      label: Git Client Timeout
+      label: "Délai d'expiration du client Git"
       description: "The amount of time to wait for a response from the server before canceling the request. Used to retrieve the latest commit of configured git repositories. A non-existent value or 0 will result in a timeout of 30 seconds."
     nodeSelector:
-      label: Node Selector
-      description: "Node labels for pod assignment."
-      add: Add Selector
+      label: Sélecteur de nœud
+      description: "Étiquettes de nœud pour l'attribution des pods."
+      add: Ajouter un sélecteur
     tolerations:
-      label: Tolerations
-      description: "List of node taints to tolerate (requires Kubernetes >= 1.6)"
-      add: Add Toleration
+      label: Tolérances
+      description: "Liste des taints de nœud à tolérer (nécessite Kubernetes >= 1.6)"
+      add: Ajouter une tolérance
     priorityClassName:
-      label: Priority Class Name
+      label: Nom de la classe de priorité
       description: "PriorityClassName assigned to deployment."
     metrics:
-      label: Metrics
+      label: Métriques
       description: 'Enable metrics'
     debug:
-      label: Debug
+      label: Débogage
       description: 'Enable debug mode'
     controllerAnnotations:
-      label: Controller
+      label: Contrôleur
       description: ""
-      add: Add Annotation
+      add: Ajouter une annotation
     gitjobAnnotations:
       label: Gitjob
       description: ""
-      add: Add Annotation
+      add: Ajouter une annotation
     helmopsAnnotations:
       label: Helmops
       description: ""
-      add: Add Annotation
+      add: Ajouter une annotation
     controllerReplicas:
-      label: Controller
+      label: Contrôleur
       description: ""
     gitjobReplicas:
       label: Gitjob
@@ -3023,54 +3023,54 @@ fleet:
       label: Agent
       description: ""
     general:
-      label: General
+      label: Général
       description: 'General settings.'
     agent:
       label: Agent
       description: 'Agent deployment settings.'
     replicas:
-      label: Replicas
-      description: 'Number of replicas of Fleet pods.'
+      label: Réplicas
+      description: Nombre de réplicas des pods Fleet.
     annotations:
-      label: Extra Annotations
+      label: Annotations supplémentaires
       description: 'Extra annotations passed to the Fleet pods.'
     developer:
-      label: Developer
+      label: Développeur
       description: 'Enable debug info from Fleet.'
 
   tableHeaders:
     applicationType: Type
     applicationSource: Source
-    applicationTarget: Target
-    applicationClustersReady: Clusters Ready
-    applicationResourcesSummary: Resources
+    applicationTarget: Cible
+    applicationClustersReady: Clusters prêts
+    applicationResourcesSummary: Ressources
   dashboard:
-    pageTitle: Continuous Delivery Dashboard
-    menuLabel: Dashboard
-    welcome: Welcome to Fleet Continuous Delivery
+    pageTitle: Tableau de bord de livraison continue
+    menuLabel: Tableau de bord
+    welcome: Bienvenue dans la livraison continue Fleet
     gitOpsScale: GitOps at scale.
-    learnMore: Learn More.
+    learnMore: En savoir plus.
     learnMoreLink: https://fleet.rancher.io
     noApplications: "You don't have any App Bundles in your Workspaces"
-    getStarted: Get started
-    workspace: Workspace
-    expand: Expand
-    collapse: Collapse
-    expandAll: Expand All
-    collapseAll: Collapse All
-    state: State
+    getStarted: Commencer
+    workspace: Espace de travail
+    expand: Développer
+    collapse: Réduire
+    expandAll: Développer tout
+    collapseAll: Réduire tout
+    state: État
     resourceDetails:
       clusters: Clusters
-      resources: Resources
+      resources: Ressources
       source: Source
     viewMode:
-      table: Show table
-      cards: Show cards
+      table: Afficher le tableau
+      cards: Afficher les cartes
     cards:
       filters:
-        gitRepos: Show Git Repos
-        helmOps: Show Helm Ops
-      search: Filter
+        gitRepos: Afficher les dépôts Git
+        helmOps: Afficher les opérations Helm
+      search: Filtrer
       resourceSummary:
         part1: in
         part2: |-
@@ -3078,16 +3078,16 @@ fleet:
           =1 { cluster }
           other { clusters }
           }
-      noClusters: Not targeting any clusters
-    resources: Resources
+      noClusters: Ne cible aucun cluster
+    resources: Ressources
     source: Source
   cluster:
     label: Cluster
-    summary: Resource Summary
-    nonReady: Non-Ready Bundles
-    labels: Labels
-    hideLabels: Show less
-    showLabels: Show more
+    summary: Résumé des ressources
+    nonReady: Bundles non prêts
+    labels: Étiquettes
+    hideLabels: Afficher moins
+    showLabels: Afficher plus
   clusters:
     harvester: |-
       There {count, plural,
@@ -3101,7 +3101,7 @@ fleet:
       other {# tokens are hidden as they belong to Harvester clusters that can not be used with Continuous Delivery}
       }
   bundles:
-    resources: Resources
+    resources: Ressources
     harvester: |-
       {count, plural,
       =1 {1 bundle is hidden as it belongs to a Harvester cluster that can not be used with Continuous Delivery}
@@ -3109,32 +3109,32 @@ fleet:
       }
   fleetSummary:
     noClusters:
-      gitRepo: This GitRepo is not targeting any clusters
-      helmOp: This HelmOp is not targeting any clusters
+      gitRepo: Ce dépôt Git ne cible aucun cluster
+      helmOp: Cette opération HelmOp ne cible aucun cluster
     state:
       ready: 'Ready'
       info: 'Transitioning'
       warning: 'Warning'
       error: 'Error'
       unknown: 'Unknown'
-      notReady: Not Ready
-      waitApplied: Wait Applied
+      notReady: Pas prêt
+      waitApplied: "En attente d'application"
   clusterTargets:
     advancedConfigs: Advanced target configurations are defined, check the YAML file for further details.
     clusters:
       title: Clusters
       byName:
-        placeholder: Select Multiple Clusters
-        label: Select by cluster name
+        placeholder: Sélectionner plusieurs clusters
+        label: Sélectionner par nom de cluster
       byLabel:
-        title: Select by labels
-        addSelector: Add cluster selector
-        labelKey: Label
+        title: Sélectionner par étiquettes
+        addSelector: Ajouter un sélecteur de cluster
+        labelKey: Étiquette
     clusterGroups:
-      title: Cluster Groups
+      title: Groupes de clusters
       byName:
-        label: Select by cluster group name
-        placeholder: Select Multiple Cluster Groups
+        label: Sélectionner par nom de groupe de clusters
+        placeholder: Sélectionner plusieurs groupes de clusters
     rules:
       matching:
         title: |-
@@ -3144,21 +3144,21 @@ fleet:
             other {{n, number} clusters selected}
             }
         placeholder: Select clusters by name, labels or groups
-        empty: No clusters in the workspace
+        empty: "Aucun cluster dans l'espace de travail"
         plusMore: |-
           {n, plural,
             =1 {+ 1 more cluster}
             other {+ {n, number} more clusters}
             }
   application:
-    pageTitle: App Bundles
-    menuLabel: App Bundles
+    pageTitle: "Bundles d'applications"
+    menuLabel: "Bundles d'applications"
     intro:
-      add: Create App Bundle
-      empty: No App Bundles have been created
+      add: "Créer un bundle d'applications"
+      empty: "Aucun bundle d'applications n'a été créé"
     actions:
-      create: Create App Bundle
-    groupBy: Group By Type
+      create: "Créer un bundle d'applications"
+    groupBy: Grouper par type
     subTypes:
       fleet.cattle.io.gitrepo:
         description: GitRepo describes a git repository that is watched by Fleet. The resource contains the necessary information to deploy the repo, or parts of it, to target clusters.
@@ -3167,16 +3167,16 @@ fleet:
     warningTooltip:
       clusterGroup: There are no clusters in this Cluster Group
       cluster: There are no clusters available
-    noPermissions: You have no permissions to create {label}
+    noPermissions: "Vous n'avez pas les autorisations pour créer {label}"
   gitRepo:
     intro:
-      add: Create Git Repo
-      empty: No Git Repos have been added
+      add: Créer un dépôt Git
+      empty: "Aucun dépôt Git n'a été ajouté"
     actions:
       add: Créer un dépôt Git
       forceUpdate:
-        label: Force Update
-        promptTitle: Force Update
+        label: Forcer la mise à jour
+        promptTitle: Forcer la mise à jour
         promptNames: 'You are attempting to update: '
         promptWarning: |-
           {
@@ -3185,68 +3185,68 @@ fleet:
             other {Force update could be a long running process, the repositories will be cloned again.}
           }
       enablePolling:
-        label: Enable Polling
+        label: "Activer l'interrogation"
       disablePolling:
-        label: Disable Polling
+        label: "Désactiver l'interrogation"
       unpause:
-        label: Unpause
+        label: Reprendre
       pause:
-        label: Pause
+        label: Mettre en pause
     tabs:
-      resources: Resources
-      unready: Non-Ready
+      resources: Ressources
+      unready: Pas prêts
     auth:
-      title: Authentication
-      label: Authentication
-      git: Git Authentication
-      helm: Helm Authentication
+      title: Authentification
+      label: Authentification
+      git: Authentification Git
+      helm: Authentification Helm
       githubdotcomPasswordBanner: 'GitHub no longer supports password authentication for repositories. Please enter a personal access token with the required permissions instead of your GitHub password.'
     caBundle:
-      label: Certificates
+      label: Certificats
       placeholder: "Paste in one or more certificates, starting with -----BEGIN CERTIFICATE----"
     paths:
-      title: Custom paths
-      description: Root directory
+      title: Chemins personnalisés
+      description: Répertoire racine
       index: Path {index}
-      description1: The root folder is used by default. Fleet will scan recursively all folders and subfolders to find fleet.yaml files.
+      description1: Le dossier racine est utilisé par défaut. Fleet analysera récursivement tous les dossiers et sous-dossiers pour trouver les fichiers fleet.yaml.
       description2: You can provide multiple different directories. You can also add subpaths to specify different YAML config file paths.
       ariaLabel: Enter paths for Git Repo
       placeholder: e.g. /directory/in/your/repo
-      addLabel: Add Path
+      addLabel: Ajouter un chemin
       enableBundles: Manually specify config files subpaths (Fleet won't scan subfolders recursively to find fleet.yaml files)
       subpaths:
-        addLabel: Add Subpath
+        addLabel: Ajouter un sous-chemin
         protipValue: 'Only necessary if the filename differs from "fleet.yaml"'
         props:
-          base: Subpath
+          base: Sous-chemin
           options: Fleet YAML file (optional)
         placeholders:
           key: e.g. dev
           value: e.g. kustomize.yaml
     repo:
       title: Source
-      label: Repository URL
+      label: URL du dépôt
       placeholder: e.g. https://github.com/rancher/fleet-examples.git or git@github.com:rancher/fleet-examples.git
-      addRepo: Add Repository
-      noRepos: No repositories have been added
-      noWorkspaces: There are no workspaces.
+      addRepo: Ajouter un dépôt
+      noRepos: "Aucun dépôt n'a été ajouté"
+      noWorkspaces: "Il n'y a aucun espace de travail."
     resources:
-      label: 'Resource Handling'
-      keepResources: Always keep resources
+      label: Gestion des ressources
+      keepResources: Toujours conserver les ressources
       keepResourcesTooltip: When enabled, resources will be kept when deleting a GitRepo or Bundle - only Helm release secrets will be deleted.
-      correctDrift: Enable self-healing
+      correctDrift: "Activer l'auto-correction"
       correctDriftTooltip: When enabled, Fleet will ensure that the cluster resources are kept in sync with the git repository. All resource changes made on the cluster will be lost.
     polling:
-      label: Polling
-      enable: Enable Polling
+      label: Interrogation
+      enable: "Activer l'interrogation"
       pollingInterval:
-        label: Polling Interval
+        label: "Intervalle d'interrogation"
         tooltip: Polling Interval is the time between a push to the Repository and Fleet's reaction to it.
         webhookWarning: A webhook is configured in Rancher to reconcile Git updates and GitRepo resources. The Polling Interval will automatically be adjusted to 1 hour.
         minimumValueWarning: The recommended minimum Polling Interval is 15 seconds. To avoid performance issues with GitRepos that contain a large amount of resources please consider increasing this value.
     ociStorageSecret:
-      title: OCI Registry
-      label: OCI Storage Secret
+      title: Registre OCI
+      label: Secret de stockage OCI
       tooltip: If 'None' is selected, Fleet will use the 'ocistorage' fallback secret when existing in current workspace.<br>Every changes of the selected OCI storage secret will not be applied until next Git Repo update.
       options:
         chooseExisting: "Choose a secret:"
@@ -3254,76 +3254,76 @@ fleet:
     add:
       steps:
         metadata:
-          label: Metadata
+          label: Métadonnées
           title: Specify the Git Repository name and labels/annotations
           subtext: 'Define metadata details'
-          description: Git repository basic info
+          description: Informations de base du dépôt Git
         repo:
-          label: Repository details
+          label: Détails du dépôt
           title: Specify the Git Repository to add to fleet
           subtext: 'Define repository details'
           description: Fleet will continuously monitor the Git Repository you configure below and synchronise the resources contained in it to the configured targets.
         advanced:
-          label: Advanced
+          label: Avancé
           title: Specify advanced settings like authenticaion credentials and polling
           subtext: 'Define advanced settings'
           description: Fleet will use the authentication settings and polling to synchronise the resources contained in it.
           info: These settings are for advanced usage and optional. You can skip them and finish the creation process.
         targetInfo:
-          label: Target details
+          label: Détails de la cible
           title: Specify which target to synchronise this repository to
           subtext: 'Define target details'
           description: You can configure which clusters will be used as the target of synchronisation with the resources in the repository.
     ref:
-      label: Watch
-      branch: A Branch
-      revision: A Revision
-      branchLabel: Branch Name
+      label: Surveiller
+      branch: Une branche
+      revision: Une révision
+      branchLabel: Nom de la branche
       branchPlaceholder: e.g. master
-      revisionLabel: Tag or Commit Hash
+      revisionLabel: Tag ou hash de commit
       revisionPlaceholder: e.g. v1.0.0
     serviceAccount:
-      label: Service Account Name
+      label: Nom du compte de service
       placeholder: "Optional: Use a service account in the target clusters"
     targetNamespace:
-      label: Target Namespace
+      label: Espace de noms cible
       placeholder: "Optional: Require all resources to be in this namespace"
     target:
-      selectLabel: Target
-      advanced: Advanced
+      selectLabel: Cible
+      advanced: Avancé
       cluster: Cluster
-      clusterGroup: Cluster Group
-      label: Deploy To
-      labelLocal: Deploy With
-      additionalOptions: Additional settings
+      clusterGroup: Groupe de clusters
+      label: Déployer vers
+      labelLocal: Déployer avec
+      additionalOptions: Paramètres supplémentaires
     targetDisplay:
       advanced: Advanced
       clusters: Clusters
-      all: All
-      none: None
+      all: Tous
+      none: Aucun
       local: Local
     tls:
-      label: TLS Certificate Verification
-      verify: Require a valid certificate
-      specify: Specify additional certificates to be accepted
-      skip: Accept any certificate (insecure)
+      label: Vérification du certificat TLS
+      verify: Exiger un certificat valide
+      specify: Spécifier des certificats supplémentaires à accepter
+      skip: Accepter tout certificat (non sécurisé)
     workspace:
-      label: Workspace
-      addWorkspace: Create a workspace
+      label: Espace de travail
+      addWorkspace: Créer un espace de travail
     helmRepoURLRegex: Helm Repos (URL Regex)
   helmOp:
     intro:
-      add: Create Helm Op
-      empty: No Helm Ops have been added
+      add: Créer une opération Helm
+      empty: "Aucune opération Helm n'a été ajoutée"
     actions:
       add: Créer une opération Helm
       enablePolling:
-        label: Enable Polling
+        label: "Activer l'interrogation"
       disablePolling:
-        label: Disable Polling
+        label: "Désactiver l'interrogation"
       forceUpdate:
-        label: Force Update
-        promptTitle: Force Update
+        label: Forcer la mise à jour
+        promptTitle: Forcer la mise à jour
         promptNames: 'You are attempting to update: '
         promptWarning: |-
           {
@@ -3332,33 +3332,33 @@ fleet:
             other {Force update could be a long running process.}
           }
       unpause:
-        label: Unpause
+        label: Reprendre
       pause:
-        label: Pause
+        label: Mettre en pause
     add:
       steps:
         metadata:
-          label: Metadata
+          label: Métadonnées
           title: Specify the Helm Op name and labels/annotations
           subtext: 'Define metadata details'
-          description: Helm Op basic info
+          description: "Informations de base sur l'opération Helm"
         chart:
           label: Chart
           title: chart
           subtext: 'Define Helm Chart source details'
           description: chart
         values:
-          label: Values
+          label: Valeurs
           title: values
           subtext: 'Define Helm Values for the chart'
           description: values
         targetInfo:
-          label: Target details
+          label: Détails de la cible
           title: Specify which target to synchronise this repository to
           subtext: 'Define target details'
           description: You can configure which clusters will be used as the target of synchronisation with the resources in the repository.
         advanced:
-          label: Advanced
+          label: Avancé
           title: Specify advanced settings like authenticaion credentials and polling
           subtext: 'Define advanced settings'
           description: Fleet will use the authentication settings and polling to synchronise the resources contained in it.
@@ -3368,37 +3368,37 @@ fleet:
       selectLabel: Type
       types:
         tarball: Tarball
-        repo: Repository
-        oci: OCI Registry
+        repo: Dépôt
+        oci: Registre OCI
       tarball:
-        label: Absolute URL
+        label: URL absolue
         placeholder: e.g. https://example.com/charts/my-chart-1.2.3.tgz
       repo:
         repo:
-          label: Repository URL
+          label: URL du dépôt
           placeholder: e.g. https://foo.bar/baz
         chart:
           label: Chart
           placeholder: The path to the chart name in the repository
       oci:
         chart:
-          label: OCI Registry URL
+          label: URL du registre OCI
           placeholder: e.g. oci://foo.bar/baz
       version:
         label: Version
         placeholder: The Chart version
       release:
-        title: Release
-        label: Name
+        title: Version publiée
+        label: Nom
         placeholder: The Helm release name
     values:
-      title: Values
+      title: Valeurs
       selectLabel: Values
-      description: Configure Values used by Helm that help define the App.
+      description: "Configurer les valeurs utilisées par Helm qui aident à définir l'application."
       types:
-        values: Values
-        valuesFiles: Values Files
-        valuesFrom: Values From
+        values: Valeurs
+        valuesFiles: Fichiers de valeurs
+        valuesFrom: Valeurs depuis
       yaml:
         options:
           edit: Edit YAML
@@ -3410,7 +3410,7 @@ fleet:
         selectLabel: Files
         ariaLabel: Enter path for value File
         placeholder: ''
-        addLabel: Add File path
+        addLabel: Ajouter un chemin de fichier
         empty: empty
       valuesFrom:
         selectLabel: Values From
@@ -3419,51 +3419,51 @@ fleet:
           secretKeyRef: Secret Key
         loading: Loading ConfigMaps and Secrets
     serviceAccount:
-      label: Service Account Name
+      label: Nom du compte de service
       placeholder: "Optional: Use a service account in the target clusters"
     targetNamespace:
-      label: Target Namespace
+      label: Espace de noms cible
       placeholder: "Optional: Require all resources to be in this namespace"
     target:
-      selectLabel: Target
+      selectLabel: Cible
       advanced: Advanced
       cluster: Cluster
-      clusterGroup: Cluster Group
-      label: Deploy To
-      labelLocal: Deploy With
+      clusterGroup: Groupe de clusters
+      label: Déployer vers
+      labelLocal: Déployer avec
       additionalOptions: Additional Options
     targetDisplay:
       advanced: Advanced
       clusters: Clusters
-      all: All
-      none: None
+      all: Tous
+      none: Aucun
       local: Local
     resources:
       label: 'Resources'
-      keepResources: Always keep resources
+      keepResources: Toujours conserver les ressources
       keepResourcesTooltip: When enabled, resources will be kept when deleting a HelmOp or Bundle - only Helm release secrets will be deleted.
-      correctDrift: Enable self-healing
+      correctDrift: "Activer l'auto-correction"
       correctDriftTooltip: When enabled, Fleet will ensure that the cluster resources are kept in sync with the HelmOp. All resource changes made on the cluster will be lost.
     polling:
-      label: Polling
-      enable: Enable Polling
+      label: Interrogation
+      enable: "Activer l'interrogation"
       pollingInterval:
-        label: Polling Interval
+        label: "Intervalle d'interrogation"
         tooltip: Polling Interval is the time between a push to the Repository and Fleet's reaction to it.
         minimumValueWarning: The recommended minimum Polling Interval is 15 seconds. To avoid performance issues with HelmOps that contain a large amount of resources please consider increasing this value.
         versionTooltip: Polling can be enabled only if version is a valid semantic versioning constraint (e.g. 2.x.x, < 1.0).
     tls:
-      insecure: Accept any certificate (insecure)
+      insecure: Accepter tout certificat (non sécurisé)
     auth:
-      title: Authentication
-      label: Authentication
-      helm: Helm Authentication
+      title: Authentification
+      label: Authentification
+      helm: Authentification Helm
     caBundle:
-      label: Certificates
+      label: Certificats
       placeholder: "Paste in one or more certificates, starting with -----BEGIN CERTIFICATE----"
   clusterGroup:
     selector:
-      label: Cluster Selectors
+      label: Sélecteurs de cluster
       matchesAll: Matches all {total, number} existing clusters
       matchesNone: Matches no existing clusters
       matchesSome: |-
@@ -3474,27 +3474,27 @@ fleet:
   fdc:
     id: ID
     type: Type
-    state: State
+    state: État
     cluster: Cluster
-    error: Error
+    error: Erreur
     ready: Ready
-    errors: Errors
+    errors: Erreurs
   workspaces:
     tabs:
-      restrictions: Allowed Target Namespaces
-      ociRegistry: Default OCI Registry
+      restrictions: Espaces de noms cibles autorisés
+      ociRegistry: Registre OCI par défaut
     timeout: Workspace creation timeout. It's possible the workspace was created. We suggest checking the workspace page before trying to create another.
     remove:
       warning: "Deleting a Workspace also deletes all resources in the Workspace. This includes GitRepos but also Clusters.<br><br>Deleted Clusters will be removed from {vendor}, and if {vendor} manages the life-cycle of the Cluster it's underlying infrastructure will also be deleted."
   restrictions:
     addTitle: 'allowedTargetNamespaces'
-    addLabel: Add
+    addLabel: Ajouter
     banner: "{count, plural,
           =0 { Adding namespaces here will create a GitRepoRestriction. }
           other { Only the Git Repo Restriction's <code>allowedTargetNamespaces</code> is managed here. You can make additional changes to the Git Repo Restriction}
         }"
   configMaps:
-    label: Config Maps
+    label: ConfigMaps
   secrets:
     label: Secrets
 footer:
@@ -4131,214 +4131,214 @@ landing:
 
 logging:
   clusterFlow:
-    noOutputsBanner: There are no cluster outputs in the selected namespace.
+    noOutputsBanner: "Il n'y a aucune sortie de cluster dans l'espace de noms sélectionné."
   flow:
     clusterOutputs:
       doesntExistTooltip: This cluster output doesn't exist
-      label: Cluster Outputs
+      label: Sorties de cluster
     matches:
-      banner: Configure which container logs will be pulled from
+      banner: Configurer les journaux de conteneurs à extraire
       unsupportedConfig: This resource contains a match configuration that the form editor does not support. Please use YAML edit.
-      label: Matches
-      addSelect: Add Include Rule
-      addExclude: Add Exclude Rule
+      label: Correspondances
+      addSelect: "Ajouter une règle d'inclusion"
+      addExclude: "Ajouter une règle d'exclusion"
       pods:
         title:
-          include: Include Pods
-          exclude: Exclude Pods
-        keyLabel: Pod Label Key
-        valueLabel: Pod Label Value
-        addLabel: Add Pod
+          include: Inclure les pods
+          exclude: Exclure les pods
+        keyLabel: "Clé d'étiquette du pod"
+        valueLabel: "Valeur d'étiquette du pod"
+        addLabel: Ajouter un pod
       nodes:
         title:
-          include: Limit to specific nodes
-          exclude: Exclude specific nodes
+          include: Limiter à des nœuds spécifiques
+          exclude: Exclure des nœuds spécifiques
         placeholder: "Default: Any node"
       containerNames:
         title:
-          include: Limit to specific container names
-          exclude: Exclude specific container names
+          include: Limiter à des noms de conteneurs spécifiques
+          exclude: Exclure des noms de conteneurs spécifiques
         placeholder: "Default: Any container"
         enter: Enter container name to select
       namespaces:
         title:
-          include: Limit to specific namespaces
-          exclude: Exclude specific namespaces
+          include: Limiter à des espaces de noms spécifiques
+          exclude: Exclure des espaces de noms spécifiques
         placeholder: "Default: Any namespace"
 
     filters:
-      label: Filters
+      label: Filtres
     outputs:
       doesntExistTooltip: This output doesn't exist
-      sameNamespaceError: Output must reside in same namespace as the flow.
-      label: Outputs
+      sameNamespaceError: La sortie doit résider dans le même espace de noms que le flux.
+      label: Sorties
   install:
-    k3sContainerEngine: K3S Container Engine
-    enableAdditionalLoggingSources: Enable enhanced cloud provider logging
-    dockerRootDirectory: Docker Root Directory
-    systemdLogPath: systemd Log Path
+    k3sContainerEngine: Moteur de conteneurs K3S
+    enableAdditionalLoggingSources: Activer la journalisation améliorée du fournisseur cloud
+    dockerRootDirectory: Répertoire racine Docker
+    systemdLogPath: Chemin du journal systemd
     tooltip: 'Some kubernetes distributions log to <code>journald</code>. In order to collect these logs the <code>systemdLogPath</code> needs to be defined. While the <code>/run/log/journal</code> directory is used by default, some Linux distributions do not default to this path.'
     url: '<a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Learn more</a>'
     default: /run/log/journal
   elasticsearch:
     host: Hôte
-    scheme: Scheme
+    scheme: Schéma
     port: Port
-    indexName: Index Name
-    user: User
-    password: Password from Secret
+    indexName: "Nom de l'index"
+    user: Utilisateur
+    password: Mot de passe depuis le secret
     caFile:
-      label: CA File from Secret
+      label: Fichier CA depuis le secret
     clientCert:
-      label: Client Cert from Secret
+      label: Certificat client depuis le secret
       placeholder: Paste in the CA certificate
     clientKey:
-      label: Client Key from Secret
+      label: Clé client depuis le secret
       placeholder: Paste in the client key
-    clientKeyPass: Client Key Pass from Secret
-    verifySsl: Verify SSL
-    sslVersion: SSL Version
+    clientKeyPass: Passe-partout de la clé client depuis le secret
+    verifySsl: Vérifier SSL
+    sslVersion: Version SSL
     suppressTypeName:
-      label: Suppress Type Names
+      label: Supprimer les noms de type
       elasticSearchTips: Suppress type names by default to be compatible with log server. You should enable it for Elasticsearch >= 8.0.0
       openSearchTips: Suppress type names by default to be compatible with log server. You should enable it for OpenSearch >= 2.0.0
   redis:
     host: Host
     port: Port
-    dbNumber: Redis database number
-    ttl: TTL for each key
-    password: Password from Secret
+    dbNumber: Numéro de base de données Redis
+    ttl: TTL pour chaque clé
+    password: Mot de passe depuis le secret
     format:
       title: Format
       type: Type
   gelf:
-    host: Host
+    host: Hôte
     port: Port
-    protocol: Protocol
-    tls: Enable TLS
+    protocol: Protocole
+    tls: Activer TLS
     tlsOptions:
-      clientCert: Client Cert
-      clientKey: Client Cert Key
-      allCiphers: Allow any ciphers to be used
-      tlsVersion: TLS version
-      noVerify: Skip TLS verification
+      clientCert: Certificat client
+      clientKey: Clé du certificat client
+      allCiphers: Autoriser tout chiffrement
+      tlsVersion: Version TLS
+      noVerify: Ignorer la vérification TLS
   kafka:
-    brokers: Brokers
-    defaultTopic: Default Topic
+    brokers: Courtiers
+    defaultTopic: Sujet par défaut
     saslOverSsl: SASL Over SSL
     scramMechanism: Scram Mechanism
-    username: Username from Secret
-    password: Password from Secret
+    username: "Nom d'utilisateur depuis le secret"
+    password: Mot de passe depuis le secret
     sslCaCert:
-      label: CA Cert from Secret
+      label: Certificat CA depuis le secret
       placeholder: Paste in the CA certificate
     sslClientCert:
-      label: Cert from Secret
+      label: Certificat depuis le secret
       placeholder: Paste in the client cert
     sslClientCertChain:
-      label: Cert Chain from Secret
+      label: Chaîne de certificats depuis le secret
       placeholder: Paste in the client cert chain
-    sslClientCertKey: Cert Key from Secret
+    sslClientCertKey: Clé de certificat depuis le secret
   loki:
     url: URL
     urlInvalid: Incorrect URL format. Please  check and correct your URL format before saving.
-    tenant: Tenant
-    username: User from Secret
-    password: Password from Secret
+    tenant: Locataire
+    username: Utilisateur depuis le secret
+    password: Mot de passe depuis le secret
     configureKubernetesLabels: Configure Kubernetes metadata in a Prometheus like format
     extractKubernetesLabels: Extract Kubernetes labels as Loki labels
     dropSingleKey: If a record only has 1 key, then just set the log line to the value and discard the key
-    caCert: CA Cert from Secret
-    cert: Cert from Secret
-    key: Key from Secret
+    caCert: Certificat CA depuis le secret
+    cert: Certificat depuis le secret
+    key: Clé depuis le secret
   awsElasticsearch:
     url: URL
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    keyId: ID de clé depuis le secret
+    secretKey: Clé secrète depuis le secret
   azurestorage:
-    storageAccount: Account from Secret
-    accessKey:  Access Key from Secret
-    container: Container
-    path: Path
-    storeAs: Store As
+    storageAccount: Compte depuis le secret
+    accessKey:  "Clé d'accès depuis le secret"
+    container: Conteneur
+    path: Chemin
+    storeAs: Stocker sous
   cloudwatch:
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
-    endpoint: Endpoint
-    region: Region
-    logGroupName: Log Group Name
-    logStreamName: Log Stream Name
+    keyId: ID de clé depuis le secret
+    secretKey: Clé secrète depuis le secret
+    endpoint: Point de terminaison
+    region: Région
+    logGroupName: Nom du groupe de journaux
+    logStreamName: Nom du flux de journaux
   datadog:
-    apiKey: API Key from Secret
-    useSSL: Use SSL
-    useCompression: Use Compression
-    host: Host
+    apiKey: Clé API depuis le secret
+    useSSL: Utiliser SSL
+    useCompression: Utiliser la compression
+    host: Hôte
   file:
-    path: Path
+    path: Chemin
   gcs:
-    project: Project
-    credentialsJson: Credentials from Secret
-    bucket: Bucket
-    path: Path
-    overwriteExistingPath: Overwrite Existing Path
+    project: Projet
+    credentialsJson: Identifiants depuis le secret
+    bucket: Compartiment
+    path: Chemin
+    overwriteExistingPath: Écraser le chemin existant
   kinesisStream:
-    streamName: Stream Name
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    streamName: Nom du flux
+    keyId: ID de clé depuis le secret
+    secretKey: Clé secrète depuis le secret
   logdna:
-    apiKey: API Key
-    hostname: Hostname
+    apiKey: Clé API
+    hostname: "Nom d'hôte"
     app: App
   logz:
     url: URL
     port: Port
-    token: Api Token from Secret
-    enableCompression: Enable Compression
+    token: Jeton API depuis le secret
+    enableCompression: Activer la compression
   newrelic:
-    apiKey: API Key from Secret
-    licenseKey: License Key from Secret
+    apiKey: Clé API depuis le secret
+    licenseKey: Clé de licence depuis le secret
     baseURI: Base URI
   sumologic:
-    endpoint: Endpoint from Secret
-    sourceName: Source Name
+    endpoint: Point de terminaison depuis le secret
+    sourceName: Nom de la source
   syslog:
-    host: Host
+    host: Hôte
     port: Port
     transport: Transport
     insecure: insecure
-    trustedCaPath: CA Path from Secret
+    trustedCaPath: Chemin CA depuis le secret
     format:
       title: Format
       type: Type
-      addNewLine: Add New Line
-      messageKey: Message Key
+      addNewLine: Ajouter une nouvelle ligne
+      messageKey: Clé de message
     buffer:
-      title: Buffer
+      title: Tampon
       tags: Tags
-      chunkLimitSize: Chunk Limit Size
+      chunkLimitSize: Taille limite de fragment
       chunkLimitRecords: Chunk Limit chunkLimitRecords
-      totalLimitSize: Total Limit Size
-      flushInterval: Flush Interval
+      totalLimitSize: Taille limite totale
+      flushInterval: Intervalle de vidage
       timekey: Timekey
       timekeyWait: Timekey Wait
       timekeyUseUTC: Timekey Use UTC
   s3:
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
-    endpoint: Endpoint
-    bucket: Bucket
-    path: Path
-    overwriteExistingPath: Overwrite Existing Path
+    keyId: ID de clé depuis le secret
+    secretKey: Clé secrète depuis le secret
+    endpoint: Point de terminaison
+    bucket: Compartiment
+    path: Chemin
+    overwriteExistingPath: Écraser le chemin existant
   output:
     buffer:
-      label: Output Buffer
-    selectOutputs: Select Outputs
+      label: Tampon de sortie
+    selectOutputs: Sélectionner les sorties
     selectBanner: Select to configure an output
     sections:
-      target: Target
-      access: Access
-      certificate: Connection
-      labels: Labels
+      target: Cible
+      access: Accès
+      certificate: Connexion
+      labels: Étiquettes
       configuration: Configuration
     tips:
       singleProvider: This output is configured with multiple providers. We currently only support a single provider per output. You can view or edit the YAML.
@@ -4365,34 +4365,34 @@ logging:
     sumologic: SumoLogic
     syslog: Syslog
     s3: S3
-    unknown: Unknown
+    unknown: Inconnu
   overview:
     poweredBy: Banzai Cloud
-    clusterLevel: Cluster-Level
-    namespaceLevel: Namespace-Level
-  provider: Provider
+    clusterLevel: Niveau cluster
+    namespaceLevel: Niveau espace de noms
+  provider: Fournisseur
   splunk:
-    host: Host
+    host: Hôte
     port: Port
-    protocol: Protocol
+    protocol: Protocole
     index: Index
-    token: Token from Secret
+    token: Jeton depuis le secret
     insecureSsl: Insecure SSL
-    indexName: Index Name
+    indexName: "Nom de l'index"
     source: Source
-    caFile: CA File from Secret
+    caFile: Fichier CA depuis le secret
     caPath: CA Path from Secret
-    clientCert: Client Cert from Secret
-    clientKey: Client Key from Secret
+    clientCert: Certificat client depuis le secret
+    clientKey: Clé client depuis le secret
   forward:
-    host: Host
+    host: Hôte
     port: Port
-    sharedKey: Shared Key from Secret
-    username: Username from Secret
-    password: Password from Secret
-    clientCertPath: Client Cert Path from Secret
-    clientPrivateKeyPath: Client Private Key Path from Secret
-    clientPrivateKeyPassphrase: Client Private Key Passphrase from Secret
+    sharedKey: Clé partagée depuis le secret
+    username: "Nom d'utilisateur depuis le secret"
+    password: Mot de passe depuis le secret
+    clientCertPath: Chemin du certificat client depuis le secret
+    clientPrivateKeyPath: Chemin de la clé privée client depuis le secret
+    clientPrivateKeyPassphrase: Passphrase de la clé privée client depuis le secret
 
 longhorn:
   overview:
@@ -7413,170 +7413,170 @@ workload:
   scaleWorkloads: "Mettre à l'échelle les charges de travail"
   healthWorkloads: État de santé des jobs/pods
   healthScaleToggle: "Basculer/Développer la mise à l'échelle/santé des charges de travail"
-  plus: Scale up workload
-  minus: Scale down workload
+  plus: "Augmenter l'échelle de la charge de travail"
+  minus: "Réduire l'échelle de la charge de travail"
   container:
     command:
-      addEnvVar: Add Variable
+      addEnvVar: Ajouter une variable
       args: Arguments
       as: as
-      command: Command
-      env: Environment Variables
+      command: Commande
+      env: "Variables d'environnement"
       fromResource:
         key:
-          label: Key
+          label: Clé
           placeholder: "e.g. metadata.labels['<KEY>']"
         name:
-          label: Variable Name
+          label: Nom de la variable
           placeholder: "e.g. FOO"
-        prefix: Prefix
+        prefix: Préfixe
         source:
           label: Source
           placeholder: e.g. my-container
         secret: Secret
         configMap: ConfigMap
-        containerName: Container Name
+        containerName: Nom du conteneur
         type: Type
         value:
-          label: Value
+          label: Valeur
           placeholder: e.g. bar
       tty: TTY
-      workingDir: WorkingDir
+      workingDir: Répertoire de travail
       stdin: Stdin
-    containerName: Container Name
+    containerName: Nom du conteneur
     healthCheck:
-      checkInterval: Check Interval
+      checkInterval: Intervalle de vérification
       command:
-        command: Command to run
-      failureThreshold: Failure Threshold
+        command: Commande à exécuter
+      failureThreshold: "Seuil d'échec"
       httpGet:
-        headers: Request Headers
-        path: Request Path
-        port: Check Port
-      initialDelay: Initial Delay
-      livenessProbe: Liveness Check
-      livenessTip: Containers will be restarted when this check is failing.  Not recommended for most uses.
+        headers: En-têtes de requête
+        path: Chemin de la requête
+        port: Port de vérification
+      initialDelay: Délai initial
+      livenessProbe: Vérification de vivacité
+      livenessTip: Les conteneurs seront redémarrés lorsque cette vérification échoue. Non recommandé pour la plupart des usages.
       noHealthCheck: "There is not a Readiness Check, Liveness Check or Startup Check configured."
-      readinessProbe: Readiness Checks
-      readinessTip: Containers will be removed from service endpoints when this check is failing.  Recommended.
-      startupProbe: Startup Check
-      startupTip: Containers will wait until this check succeeds before attempting other health checks.
-      successThreshold: Success Threshold
-      timeout: Timeout
+      readinessProbe: Vérifications de disponibilité
+      readinessTip: Les conteneurs seront retirés des points de terminaison de service lorsque cette vérification échoue. Recommandé.
+      startupProbe: Vérification de démarrage
+      startupTip: "Les conteneurs attendront que cette vérification réussisse avant de tenter d'autres vérifications de santé."
+      successThreshold: Seuil de succès
+      timeout: "Délai d'expiration"
       kind:
-        none:  None
-        HTTP:  HTTP request returns a successful status (200-399)
-        HTTPS: HTTPS request returns a successful status
-        tcp:   TCP connection opens successfully
-        exec:  Command run inside the container exits with status 0
-    image: Container Image
-    imagePullPolicy: Pull Policy
+        none:  Aucune
+        HTTP:  La requête HTTP retourne un statut réussi (200-399)
+        HTTPS: La requête HTTPS retourne un statut réussi
+        tcp:   "La connexion TCP s'ouvre avec succès"
+        exec:  La commande exécutée dans le conteneur se termine avec le statut 0
+    image: Image du conteneur
+    imagePullPolicy: Politique de téléchargement
     imagePullSecrets:
-      label: Pull Secrets
+      label: Secrets de téléchargement
       tooltip: Must be of Type `kubernetes.io/dockercfg` or `kubernetes.io/dockerconfigjson`
-    init: Init Container
+    init: "Conteneur d'initialisation"
     lifecycleHook:
       postStart:
         label: PostStart
-        add: Add PostStart Hook
+        add: Ajouter un hook PostStart
       preStop:
         label: PreStop
-        add: Add PreStop Hook
+        add: Ajouter un hook PreStop
       exec:
         title: Exec
-        add: Add command to execute
+        add: Ajouter une commande à exécuter
         command:
-          label: Command
+          label: Commande
           placeholder: "e.g. sh -c 'sleep 10'"
       httpGet:
         title: HttpGet
-        add: Create HTTP request
+        add: Créer une requête HTTP
         host:
-          label: Host IP
+          label: IP hôte
           placeholder: e.g. 172.17.0.2
         path:
-          label: Path
+          label: Chemin
           placeholder: e.g. app/bin/endpoint?param=value
         port:
           label: Port
           placeholder: e.g. 3000
         scheme:
-          label: Scheme
+          label: Schéma
           placeholder: e.g. HTTP
       httpHeaders:
-        title: HTTP Headers
+        title: En-têtes HTTP
         name:
-          label: Name
+          label: Nom
           placeholder: e.g. accept-ranges
         value:
-          label: Value
+          label: Valeur
           placeholder: e.g. bytes
       tcpSocket:
         title: TCPSocket
-        add: Open a TCP socket
+        add: Ouvrir un socket TCP
         host:
-          label: Host
+          label: Hôte
           placeholder: e.g. 192.168.0.1
         port:
           label: Port
           placeholder: e.g. 80
-    name: Container Name
-    noResourceLimits: There are no resource requirements configured.
-    noPorts: There are no ports configured.
-    noServiceAccess: You do not have permission to create or manage services
+    name: Nom du conteneur
+    noResourceLimits: "Aucune exigence de ressources n'est configurée."
+    noPorts: "Aucun port n'est configuré."
+    noServiceAccess: "Vous n'avez pas l'autorisation de créer ou gérer des services"
     ports:
-      expose: Networking
+      expose: Mise en réseau
       description: 'Define a Service to expose the container, or define a non-functional, named port so that humans will know where the app within the container is expected to run.'
       detailedDescription: If ClusterIP, LoadBalancer, or NodePort is selected, a Service is automatically created that will select the Pods in this workload using labels.
       toolTip: 'For help exposing workloads on Kubernetes, see the official Kubernetes documentation on Services. You can also manually create a Service to expose Pods by selecting their labels, and you can use an Ingress to map HTTP routes to Services.'
-      createService: Service Type
-      noCreateService: Do not create a service
-      containerPort: Private Container Port
-      hostIP: Host IP
-      hostPort: Public Host Port
-      name: Name
-      protocol: Protocol
-      listeningPort: Listening Port
-    removeContainer: Remove Container
-    addContainer: Add Container
+      createService: Type de service
+      noCreateService: Ne pas créer de service
+      containerPort: Port privé du conteneur
+      hostIP: IP hôte
+      hostPort: "Port public de l'hôte"
+      name: Nom
+      protocol: Protocole
+      listeningPort: "Port d'écoute"
+    removeContainer: Supprimer le conteneur
+    addContainer: Ajouter un conteneur
     security:
-      addGroupIDs: Add Group IDs
+      addGroupIDs: Ajouter des identifiants de groupe
       allowPrivilegeEscalation:
-        title: Privilege Escalation
+        title: Élévation de privilèges
         'true': "Container can gain more privileges than its parent process"
       capabilities:
-        title: Capabilities
-        add: Add Capabilities
-        drop: Drop Capabilities
-      fsGroup: Filesystem Group
-      hostIPC: Use Host IPC Namespace
-      hostPID: Use Host PID Namespace
-      podFsGroup: Pod Filesystem Group
+        title: Capacités
+        add: Ajouter des capacités
+        drop: Supprimer des capacités
+      fsGroup: Groupe de système de fichiers
+      hostIPC: "Utiliser l'espace de noms IPC de l'hôte"
+      hostPID: "Utiliser l'espace de noms PID de l'hôte"
+      podFsGroup: Groupe de système de fichiers du pod
       privileged:
-        title: Privileged
+        title: Privilégié
         'true': "Container has full access to the host"
         help: Enabling privilege will hide Privilege Escalation and seccompProfile.
         afterTick: 
           'true': Privilege Escalation and seccompProfile have been hidden.
           'false': Privilege Escalation and seccompProfile appeared.
       readOnlyRootFilesystem:
-        title: Read-Only Root Filesystem
+        title: Système de fichiers racine en lecture seule
         'true': "Container has a read-only root filesystem"
-      runAsGroup: Run as Group ID
+      runAsGroup: "Exécuter avec l'identifiant de groupe"
       runAsNonRoot:
-        title: Run as Non-Root
+        title: Exécuter en tant que non-root
         'true': "Container must run as a non-root user"
       runAsNonRootOptions:
         'true': "Containers must run as non-root-user"
       runAsUser: 
-        title: Run as User ID
-        label: User ID
+        title: "Exécuter avec l'identifiant utilisateur"
+        label: Identifiant utilisateur
       seccompProfile:
-        pod: Pod Seccomp Profile
-        container: Seccomp Profile
+        pod: Profil Seccomp du pod
+        container: Profil Seccomp
         type: Type
         localhostProfile:
-          label: Localhost Profile Path
+          label: Chemin du profil local
           tooltip: Points to a specific seccomp file that must already exist on the machine running the container.
           placeholder: e.g. path/to/json
         afterLocalhostProfile: 
@@ -7584,49 +7584,49 @@ workload:
           unselected: Localhost Profile input has been hidden.
         types:
           none:
-            label: None
+            label: Aucun
           runtimeDefault:
-            label: RuntimeDefault - inherit the default seccomp profile
+            label: RuntimeDefault - hériter du profil seccomp par défaut
           localhost:
-            label: Localhost - define a custom seccomp profile
+            label: Localhost - définir un profil seccomp personnalisé
           unconfined:
-            label: Unconfined - no seccomp profile
-      shareProcessNamespace: Share single process namespace
-      supplementalGroups: Additional Group IDs
+            label: Non confiné - aucun profil seccomp
+      shareProcessNamespace: Partager un espace de noms de processus unique
+      supplementalGroups: Identifiants de groupe supplémentaires
       sysctls: Sysctls
-      sysctlsKey: Name
-    standard: Standard Container
+      sysctlsKey: Nom
+    standard: Conteneur standard
     initContainer:
-      label: Init Containers
+      label: "Conteneurs d'initialisation"
     terminationState: "Last state: Terminated with {lsExitCode}: {lsDescription}, started: {lsStartedAt}, finished: {lsFinishedAt}"
     titles:
       pods: Pods
-      container: Container
-      command: Command
-      containers: Containers
-      env: Environment Variables
-      events: Events
-      general: General
-      healthCheck: Health Check
+      container: Conteneur
+      command: Commande
+      containers: Conteneurs
+      env: "Variables d'environnement"
+      events: Événements
+      general: Général
+      healthCheck: Vérification de santé
       image: Image
-      lifecycle: Lifecycle Hooks
-      networking: Networking
-      networkSettings: Network Settings
-      podAnnotations: Pod Annotations
-      podLabels: Pod Labels
-      metrics: Metrics
-      podScheduling: Pod Scheduling
-      nodeScheduling: Node Scheduling
+      lifecycle: Hooks de cycle de vie
+      networking: Mise en réseau
+      networkSettings: Paramètres réseau
+      podAnnotations: Annotations de pod
+      podLabels: Étiquettes de pod
+      metrics: Métriques
+      podScheduling: Planification des pods
+      nodeScheduling: Planification des nœuds
       ports: Ports
-      resources: Resources
-      securityContext: Security Context
-      status: Status
-      volumeClaimTemplates: Volume Claim Templates
-      upgrading: Scaling and Upgrade Policy
-  cronSchedule: Schedule
+      resources: Ressources
+      securityContext: Contexte de sécurité
+      status: État
+      volumeClaimTemplates: Modèles de réclamation de volume
+      upgrading: "Politique de mise à l'échelle et de mise à niveau"
+  cronSchedule: Planification
   detail:
     services: Services
-    ingresses: Ingresses
+    ingresses: Entrées
     cannotViewServices: Could not list Services due to lack of permission.
     cannotFindServices: Could not find any Services that select Pods from this workload.
     serviceListCaption: "The following Services select Pods from this workload:"
@@ -7637,183 +7637,183 @@ workload:
     pods:
       title: Pods
   detailTop:
-    node: Node
-    podIP: Pod IP
-    podRestarts: Pod Restarts
-    workload: Workload
-    pods: Pods by State
-    runs: Runs
-    started: Started
-    duration: Last Scheduled Time
+    node: Nœud
+    podIP: IP du pod
+    podRestarts: Redémarrages du pod
+    workload: Charge de travail
+    pods: Pods par état
+    runs: Exécutions
+    started: Démarré
+    duration: Dernière heure planifiée
     image: Image
   error: Pod { name } Security Policy Violation { policy }
   gaugeStates:
-    succeeded: Successful
-    running: Running
-    failed: Failed
+    succeeded: Réussi
+    running: En cours
+    failed: Échoué
   hideTabs: 'Hide Advanced Options'
   job:
     activeDeadlineSeconds:
-      label: Active Deadline
+      label: Délai actif
       tip: The duration that the job may be active before the system tries to terminate it.
     backoffLimit:
-      label: Back Off Limit
+      label: Limite de tentatives
       tip: The number of retries before marking this job failed.
     completions:
-      label: Completions
+      label: Achèvements
       tip: The number of successfully finished pods the job should be run with.
     failedJobsHistoryLimit:
-      label: Failed Job History Limit
+      label: "Limite d'historique des tâches échouées"
       tip: The number of failed finished jobs to retain.
     parallelism:
-      label: Parallelism
+      label: Parallélisme
       tip: The maximum number of pods the job should run at any given time.
     startingDeadlineSeconds:
-      label: Starting Deadline Seconds
+      label: Secondes de délai de démarrage
       tip: The deadline in seconds for starting the job if it misses scheduled time
     successfulJobsHistoryLimit:
-      label: Successful Job History Limit
+      label: "Limite d'historique des tâches réussies"
       tip: The number of successful finished jobs to retain.
-    suspend: Suspend
+    suspend: Suspendre
   list:
     errorCannotScale: Failed to scale {workloadName} {direction, select, up { up } down { down } }
   metrics:
-    pod: Pod Metrics
-    metricsView: Metrics View
+    pod: Métriques du pod
+    metricsView: Vue des métriques
   networking:
     dnsPolicy:
-      label: DNS Policy
+      label: Politique DNS
       options:
-        clusterFirst: Cluster First
-        clusterFirstWithHostNet: Cluster First With Host Network
-        default: Default
-        none: None
-      placeholder: Select a Policy...
+        clusterFirst: Cluster en premier
+        clusterFirstWithHostNet: Cluster en premier avec réseau hôte
+        default: Par défaut
+        none: Aucune
+      placeholder: Sélectionner une politique...
     hostAliases:
-      add: Add Alias
-      keyLabel: IP Address
+      add: Ajouter un alias
+      keyLabel: Adresse IP
       keyPlaceholder: e.g. 1.1.1.1
-      label: Host Aliases
-      tip: Additional /etc/hosts entries to be injected in the container.
-      valueLabel: Hostname
+      label: "Alias d'hôte"
+      tip: Entrées /etc/hosts supplémentaires à injecter dans le conteneur.
+      valueLabel: "Nom d'hôte"
       valuePlaceholder: "e.g. foo.com, bar.com"
     hostname:
-      label: Hostname
+      label: "Nom d'hôte"
       placeholder: e.g. web
     nameservers:
-      add: Add Nameserver
-      label: Nameservers
+      add: Ajouter un serveur de noms
+      label: Serveurs de noms
       placeholder: e.g. 1.1.1.1
     networkMode:
-      label: Network Mode
+      label: Mode réseau
       options:
-        hostNetwork: Host Network
+        hostNetwork: Réseau hôte
         normal: Normal
-      placeholder: Select a Mode...
+      placeholder: Sélectionner un mode...
     dns: DNS
     resolver:
-      label: Resolver Options
-      add: Add Option
+      label: Options du résolveur
+      add: Ajouter une option
     searches:
-      add: Add Search Domain
-      label: Search Domains
+      add: Ajouter un domaine de recherche
+      label: Domaines de recherche
       placeholder: e.g. mycompany.com
     subdomain:
-      label: Subdomain
+      label: Sous-domaine
       placeholder: e.g. web
   normanWarning: It looks like this workload was created in the legacy Rancher UI. You may need to manually delete any services that were automatically created for it.
   validation:
     containers: Containers
     containerImage: Container {name} - "Container Image" is required.
     localhostProfile: Container {name} - "Container Localhost Profile" is required when SeccompProfile Type is Localhost.
-  replicas: Replicas
+  replicas: Réplicas
   showTabs: 'Show Advanced Options'
   scheduling:
     activeDeadlineSeconds: Pod Active Deadline
     activeDeadlineSecondsTip: The duration that the pod may be active before the system tries to mark it failed and kill associated containers.
     affinity:
-      addNodeSelector: Add Node Selector
-      anyNode: Run pods on any available node
-      affinityTitle: Run pods on nodes with pods matching these selectors
-      antiAffinityTitle: Run pods on nodes without pods matching these selectors
-      affinityOption: Affinity
-      antiAffinityOption: Anti-Affinity
+      addNodeSelector: Ajouter un sélecteur de nœud
+      anyNode: "Exécuter les pods sur n'importe quel nœud disponible"
+      affinityTitle: Exécuter les pods sur les nœuds avec des pods correspondant à ces sélecteurs
+      antiAffinityTitle: Exécuter les pods sur les nœuds sans pods correspondant à ces sélecteurs
+      affinityOption: Affinité
+      antiAffinityOption: Anti-affinité
       matchFields:
-        label: Fields
+        label: Champs
       matchExpressions:
         label: Expressions
-        addRule: Add Rule
-        doesNotExist: is not set
-        exists: is set
+        addRule: Ajouter une règle
+        doesNotExist: "n'est pas défini"
+        exists: est défini
         greaterThan: ">"
-        in: in list
-        inNamespaces: "Specific namespaces"
-        key: Key
+        in: dans la liste
+        inNamespaces: Espaces de noms spécifiques
+        key: Clé
         lessThan: <
-        matchType: Match Type
-        namespaces: Namespaces
-        notIn: not in list
-        operator: Operator
-        value: Value
-        weight: Weight
+        matchType: Type de correspondance
+        namespaces: Espaces de noms
+        notIn: pas dans la liste
+        operator: Opérateur
+        value: Valeur
+        weight: Poids
       noPodRules: There are no pod scheduling rules configured.
-      nodeName: Node Name
-      priority: Priority
+      nodeName: Nom du nœud
+      priority: Priorité
       preferAny: "Prefer any of:"
-      preferred: Preferred
-      required: Required
+      preferred: Préféré
+      required: Requis
       requireAny: "Require any of:"
-      schedulingRules: Run pods on node(s) matching scheduling rules
-      specificNode: Run pods on specific node(s)
-      thisPodNamespace: This pod's namespace
-      allNamespaces: All namespaces
+      schedulingRules: Exécuter les pods sur les nœuds correspondant aux règles de planification
+      specificNode: Exécuter les pods sur des nœuds spécifiques
+      thisPodNamespace: "L'espace de noms de ce pod"
+      allNamespaces: Tous les espaces de noms
       topologyKey:
-        label: Topology Key
+        label: Clé de topologie
         placeholder: e.g. failure-domain.beta.kubernetes.io/zone
       type: Type
       weight:
-        label: Weight
+        label: Poids
         placeholder: Must be a weight between 1 and 100
     priority:
-      className: Priority Class Name
-      priority: Priority
-    terminationGracePeriodSeconds: Termination Grace Period
+      className: Nom de la classe de priorité
+      priority: Priorité
+    terminationGracePeriodSeconds: Période de grâce de terminaison
     terminationGracePeriodSecondsTip: The duration that the pod needs to terminate gracefully.
     titles:
-      advanced: Advanced
-      nodeScheduling: Node Scheduling
-      nodeSelector: Nodes with these labels
-      podScheduling: Pod Scheduling
-      priority: Priority
+      advanced: Avancé
+      nodeScheduling: Planification des nœuds
+      nodeSelector: Nœuds avec ces étiquettes
+      podScheduling: Planification des pods
+      priority: Priorité
       tab: Scheduling
-      tolerations: Tolerations
-      limits: Limits and Reservations
+      tolerations: Tolérances
+      limits: Limites et réservations
     tolerations:
-      addToleration: Add Toleration
-      effect: Effect
+      addToleration: Ajouter une tolérance
+      effect: Effet
       effectOptions:
         all: All
         noExecute: NoExecute
         noSchedule: "NoSchedule"
         preferNoSchedule: PreferNoSchedule
-      labelKey: Key
-      operator: Operator
+      labelKey: Clé
+      operator: Opérateur
       operatorOptions:
         equal: =
         exists: Exists
-      tolerationSeconds: Toleration Seconds
-      value: Value
+      tolerationSeconds: Secondes de tolérance
+      value: Valeur
   serviceAccountName:
-    label: Service Account Name
+    label: Nom du compte de service
     createMessage: The service name [ {name} ] does not exist in this namespace, you will need to create it manually.
-  serviceName: Service Name
+  serviceName: Nom du service
   storage:
     subtypes:
       secret: Secret
       configMap: ConfigMap
-      hostPath: Bind-Mount
-      persistentVolumeClaim: Persistent Volume Claim
-      createPVC: Create Persistent Volume Claim
+      hostPath: Montage lié
+      persistentVolumeClaim: Réclamation de volume persistant
+      createPVC: Créer une réclamation de volume persistant
       csi: CSI
       nfs: NFS
       awsElasticBlockStore: Amazon EBS Disk
@@ -7822,73 +7822,73 @@ workload:
       gcePersistentDisk: Google Persistent Disk
       driver.longhorn.io: Longhorn
       vsphereVolume: VMWare vSphere Volume
-      emptyDir: Empty Dir
-    addClaim: Add Claim
-    addMount: Add Mount
-    addVolume: Add Volume
-    selectVolume: Select Volume
+      emptyDir: Répertoire vide
+    addClaim: Ajouter une réclamation
+    addMount: Ajouter un montage
+    addVolume: Ajouter un volume
+    selectVolume: Sélectionner un volume
     noVolumes: Volumes will appear here after they are added in the Pod tab
-    certificate: Certificate
+    certificate: Certificat
     csi:
-      diskName: Disk Name
+      diskName: Nom du disque
       diskURI: Disk URI
       cachingMode:
-        label: Caching Mode
+        label: Mode de mise en cache
         options:
-          none: None
-          readOnly: Read Only
-          readWrite: Read Write
+          none: Aucun
+          readOnly: Lecture seule
+          readWrite: Lecture-écriture
       kind:
-        label: Kind
+        label: Type
         options:
-          dedicated: Dedicated
-          managed: Managed
-          shared: Shared
+          dedicated: Dédié
+          managed: Managé
+          shared: Partagé
       drivers:
         driver-longhorn-io: Longhorn
-      fsType: Filesystem Type
-      shareName: Share Name
-      secretName: Secret Name
+      fsType: Type de système de fichiers
+      shareName: Nom du partage
+      secretName: Nom du secret
       volumeID: Volume ID
       partition: Partition
       pdName: Persistent Disk Name
       storagePolicyID: Storage Policy ID
       storagePolicyName: Storage Policy Name
       volumePath: Volume Path
-    defaultMode: Default Mode
+    defaultMode: Mode par défaut
     driver: driver
     hostPath:
-      label: The Path on the Node must be
+      label: Le chemin sur le nœud doit être
       options:
         default: 'Anything: do not check the target path'
-        directoryOrCreate: A directory, or create if it doesn't exist
-        directory: An existing directory
-        fileOrCreate: A file, or create if it doesn't exist
-        file: An existing file
-        socket: An existing socket
+        directoryOrCreate: "Un répertoire, ou créer s'il n'existe pas"
+        directory: Un répertoire existant
+        fileOrCreate: "Un fichier, ou créer s'il n'existe pas"
+        file: Un fichier existant
+        socket: Un socket existant
         charDevice: An existing character device
         blockDevice: An existing block device
-    mountPoint: Mount Point
-    nodePath: Path on Node
+    mountPoint: Point de montage
+    nodePath: Chemin sur le nœud
     optional:
-      label: Optional
+      label: Optionnel
       'no': 'No'
       'yes': 'Yes'
-    path: Path
-    readOnly: Read Only
-    server: Server
+    path: Chemin
+    readOnly: Lecture seule
+    server: Serveur
 
-    subPath: Sub Path in Volume
+    subPath: Sous-chemin dans le volume
     title: 'Storage'
-    volumeName: Volume Name
-    volumePath: Volume Path
+    volumeName: Nom du volume
+    volumePath: Chemin du volume
     emptyDir:
       medium:
-        label: Medium
-        default: Node's Default Medium
-        memory: Memory
+        label: Support
+        default: Support par défaut du nœud
+        memory: Mémoire
       sizeLimit:
-        label: Size Limit
+        label: Limite de taille
         placeholder: "e.g. 300"
   typeDescriptions:
     apps.daemonset: DaemonSets run exactly one pod on every eligible node. When new nodes are added to the cluster, DaemonSets automatically deploy to them. Recommended for system-wide or vertically-scalable workloads that never need more than one pod per node.
@@ -7902,27 +7902,27 @@ workload:
       label: Pod Active Deadline
       tip: The duration the pod may be active before the system will try to mark it failed and kill associated containers.
     concurrencyPolicy:
-      label: Concurrency
+      label: Concurrence
       options:
-        allow: Allow CronJobs to run concurrently
-        forbid: Skip next run if current run hasn't finished
-        replace: Replace run if current run hasn't finished
+        allow: "Autoriser l'exécution simultanée des CronJobs"
+        forbid: "Ignorer la prochaine exécution si l'exécution actuelle n'est pas terminée"
+        replace: "Remplacer l'exécution si l'exécution actuelle n'est pas terminée"
     maxSurge:
-      label: Max Surge
-      tip: The maximum number of pods allowed beyond the desired scale at any given time.
+      label: Surge maximal
+      tip: "Le nombre maximum de pods autorisés au-delà de l'échelle souhaitée à tout moment donné."
     maxUnavailable:
-      label: Max Unavailable
-      tip: The maximum number of pods which can be unavailable at any given time.
+      label: Indisponible maximum
+      tip: Le nombre maximum de pods pouvant être indisponibles à tout moment donné.
     minReadySeconds:
-      label: Minimum Ready
+      label: Disponibilité minimale
       tip: The minimum duration a pod should be ready without containers crashing for it to be considered available.
     podManagementPolicy:
       label: Pod Management Policy
     progressDeadlineSeconds:
-      label: Progress Deadline
+      label: Délai de progression
       tip: The minimum duration to wait for a deployment to progress before marking it failed.
     revisionHistoryLimit:
-      label: Revision History Limit
+      label: "Limite de l'historique des révisions"
       tip: The number of old ReplicaSets to retain for rollback.
     strategies:
       labels:
@@ -7930,14 +7930,14 @@ workload:
         recreate: "Recreate: Kill ALL pods, then start new pods."
         rollingUpdate: "Rolling Update: Create new pods, until max surge is reached, before deleting old pods. Don't stop more pods than max unavailable."
     terminationGracePeriodSeconds:
-      label: Termination Grace Period
+      label: Période de grâce de terminaison
       tip: The duration the pod needs to terminate successfully.
-    title: Upgrading
+    title: Mise à niveau
   tabs:
     labels:
-      deployment: Deployment
+      deployment: Déploiement
       pod: Pod
-      containers: Containers
+      containers: Conteneurs
 
 ##############################
 # Model Properties
