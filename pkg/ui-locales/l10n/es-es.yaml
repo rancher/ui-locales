@@ -1034,7 +1034,7 @@ backupRestoreOperator:
     label: Secreto de configuración de cifrado
     options:
       none: Almacenar el contenido de la copia de seguridad sin cifrar
-      secret: Cifrar copias de seguridad usando un <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes.io/docs/concepts/configuration/secret/">Secreto de Kubernetes</a>
+      secret: "Cifrar copias de seguridad usando un <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration\">Secreto de Configuración de Cifrado</a> (Recomendado)"
     restoretip: Si la copia de seguridad fue realizada con el cifrado habilitado, un secreto que contenga la misma configuración de cifrado debe estar disponible en el espacio de nombres configurado para restaurar la copia de seguridad.
     warning: El contenido de este archivo es necesario para realizar una restauración desde esta copia de seguridad y no puede recuperarse si se pierde.
   lastBackup: Última copia de seguridad
@@ -1376,7 +1376,7 @@ catalog:
       urlLabel: URL del host del repositorio OCI
       placeholder: e.g. oci://<registry-host>/<namespace>/<chart-name>:<tag>
       warning: Las URLs OCI deben apuntar SOLO a gráficos helm.
-      info: Para repositorios grandes con muchos gráficos, considere apuntar a un espacio de nombres o gráfico específico para mejorar el rendimiento.
+      info: "Para repositorios grandes con muchos gráficos, considere apuntar a un espacio de nombres o gráfico específico para mejorar el rendimiento, por ejemplo con oci://<registry-host>/<namespace> o oci://<registry-host>/<namespace>/<chart-name>."
       skipTlsVerifications: Omitir verificaciones de TLS
       insecurePlainHttp: HTTP simple no seguro
       exponentialBackOff:
@@ -1681,18 +1681,20 @@ cluster:
           gke: |-
             <p>Estos roles IAM son necesarios para GKE:</p>
             <ul>
-            <li><b>Compute Engine:</b> Compute Viewer</li>
-            <li><b>Kubernetes Engine:</b> Kubernetes Engine Admin</li>
-            <li><b>Service Account:</b> Service Account User</li>
-            <li><b>Cloud Storage:</b> Storage Viewer</li>
+            <li><b>Compute Engine:</b> Compute Viewer (roles/compute.viewer)</li>
+            <li><b>Project:</b> Viewer (roles/viewer)</li>
+            <li><b>Kubernetes Engine:</b> Kubernetes Engine Admin (roles/container.admin)</li>
+            <li><b>Service Accounts:</b> Service Account User (roles/iam.serviceAccountUser)</li>
             </ul>
+            Más información sobre los roles se puede encontrar <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration" target="_blank" rel="noopener noreferrer nofollow">aquí</a>.
           gce: |-
             <p>Estos roles IAM son necesarios para GCE:</p>
             <ul>
-            <li><b>Compute Engine:</b> Compute Admin</li>
-            <li><b>Service Account:</b> Service Account User</li>
+            <li><b>Compute Engine:</b> Compute Engine Admin (roles/compute.admin)</li>
+            <li><b>Project:</b> Viewer (roles/viewer)</li>
+            <li><b>Service Accounts:</b> Service Account User (roles/iam.serviceAccountUser)</li>
             </ul>
-    harvester:
+            Más información sobre los roles se puede encontrar <a href="https://cloud.google.com/compute/docs/access/iam" target="_blank" rel="noopener noreferrer nofollow">aquí</a>.
       namespace: Espacio de nombres
       cpu: CPU
       memory: Memoria
@@ -2075,7 +2077,7 @@ cluster:
       tagTitle: Etiquetas EC2
       enableIpv6:
         label: Habilitar doble pila
-        description: Para usar redes de pila dual, deberá actualizar la <a aria-label="desplazarse a la subred" href="#subnet">configuración de subred</a>.
+        description: "Para usar redes de pila dual, deberá actualizar la <a aria-label='scroll to the networking section in cluster configuration' href=\"#networking\">Orden de preferencia de pila de red</a> a <b>DUAL</b>. Para un clúster solo IPv6, active \"Habilitar IPv6\" y actualice la preferencia de pila a <b>IPv6</b>."
       ipv6AddressCount:
         label: Recuento de direcciones IPv6
         tooltip: Especifica el número de direcciones IPv6 a asignar a la interfaz de red
@@ -2339,8 +2341,8 @@ cluster:
     label: Habilitar registro de contenedores de ámbito del clúster para imágenes de contenedores del sistema de Rancher
     description: Si está habilitado, Rancher extraerá imágenes de contenedor de este registro durante el aprovisionamiento del clúster. De forma predeterminada, Rancher también usará este registro al instalar las aplicaciones del gráfico Helm oficial de Rancher. Si el registro de alcance de clúster está deshabilitado, las imágenes del sistema se extraen del Registro predeterminado del sistema en la configuración global.
     importedDescription: De forma predeterminada, Rancher también usará este registro al instalar las aplicaciones del gráfico Helm oficial de Rancher. Si el registro de alcance de clúster está deshabilitado, las imágenes del sistema se extraen del Registro predeterminado del sistema en la configuración global.
-    docsLinkRke2: Para obtener ayuda sobre la configuración de espejos de registro privado, consulte la <a href="https://docs.rke2.io/install/containerd_registry_configuration" target="_blank" rel="noopener noreferrer nofollow">documentación de RKE2</a>.
-    docsLinkK3s: Para obtener ayuda sobre la configuración de espejos de registro privado, consulte la <a href="https://docs.k3s.io/installation/private-registry" target="_blank" rel="noopener noreferrer nofollow">documentación de K3s</a>.
+    docsLinkRke2: "Para obtener ayuda sobre la configuración de espejos de registro privado, consulte la <a href=\"https://docs.rke2.io/install/private_registry\" target=\"_blank\">documentación de RKE2.</a>"
+    docsLinkK3s: "Para obtener ayuda sobre la configuración de espejos de registro privado, consulte la <a href=\"https://docs.k3s.io/installation/private-registry\" target=\"_blank\">documentación de K3s.</a>"
     privateRegistryUrlError: Un registro debe ser una URL válida. El esquema es opcional.
   provider:
     aliyunecs: Aliyun ECS
@@ -2419,7 +2421,7 @@ cluster:
     banner:
       psaChange: PSACT ahora se establece automáticamente en el valor predeterminado de Rancher
       complianceOverride: Cambiar esta configuración puede afectar la seguridad del clúster ya que anula la configuración de cumplimiento predeterminada
-      complianceUnsupported: La versión de Kubernetes seleccionada ya no soporta el perfil de cumplimiento "{profile}". Por favor seleccione una versión compatible o cambie el perfil de cumplimiento.
+      complianceUnsupported: "La versión de Kubernetes seleccionada ya no soporta el perfil de cumplimiento \"{profile}\". Por favor, seleccione un perfil compatible. Recomendamos revisar la <a href=\"https://docs.rke2.io/security/hardening_guide\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">documentación</a> para evaluar el impacto de cambiar el perfil de cumplimiento."
     modal:
       editYamlMachinePool:
         title: Guardar configuraciones de máquina
@@ -2427,12 +2429,12 @@ cluster:
       ipv6Warning:
         title: Verificar configuración de IPv6
         body: Los grupos de máquinas de este clúster están configurados para usar redes IPv6, pero es posible que la configuración de red del clúster no lo admita.
-        stackPrefInvalid: La <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration" target="_blank" rel="noopener noreferrer nofollow">versión de Kubernetes de RKE2</a> seleccionada no admite la preferencia de pila Dual seleccionada.
+        stackPrefInvalid: "La <a href=\"{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference\" target=\"_blank\" rel=\"noopener noreferrer nofollow\" aria-label=\"rke2 documentation for the stack preference setting\">Preferencia de Pila</a> debe configurarse como \"Dual\" o \"IPv6\" para usar redes dual-stack o solo IPv6, respectivamente."
         flannelMasqInvalid: K3s usa el complemento CNI Flannel de forma predeterminada. Generalmente se recomienda habilitar Flannel Masq al usar redes IPv6.
         cidrInvalidRke2: Para habilitar redes de doble pila en clústeres RKE2, debe definir rangos CIDR de clúster y servicio de doble pila válidos.
         cidrInvalidK3s: Para habilitar redes de doble pila o solo IPv6 en clústeres K3s, debe definir rangos CIDR de clúster y servicio de doble pila o IPv6 válidos.
-        readMoreK3s: <a href="https://docs.k3s.io/networking/basic-network-options#dual-stack-ipv4--ipv6-networking" target="_blank" rel="noopener noreferrer nofollow">Leer más sobre la configuración de red dual-stack de K3s</a>
-        readMoreRke2: <a href="https://docs.rke2.io/networking/basic_network_options#ipv6-setup" target="_blank" rel="noopener noreferrer nofollow">Leer más sobre la configuración de red IPv6 de RKE2</a>
+        readMoreK3s: "<a href=\"https://docs.k3s.io/networking/basic-network-options#dual-stack-ipv4--ipv6-networking\" target=\"_blank\" rel=\"noopener noreferrer nofollow\" aria-label=\"k3s dual-stack networking documentation\">Leer más sobre redes K3s</a>"
+        readMoreRke2: "<a href=\"https://docs.rke2.io/networking/basic_network_options#ipv6-setup\" target=\"_blank\" rel=\"noopener noreferrer nofollow\" aria-label=\"rke2 ipv6 networking documentation\">Leer más sobre redes RKE2</a>"
         verifySettings: 'Antes de continuar, verifique la siguiente configuración:'
     snapshots:
       suffix: Instantáneas por nodo
@@ -2628,7 +2630,7 @@ cluster:
         label: Sin un controlador de Ingress, los servicios en este clúster no serán accesibles mediante URLs externas.
       selected:
         ingress-nginx:
-          label: Ingress-NGINX está ahora obsoleto y será eliminado en una versión futura. Para evitar interrupciones del servicio, comience la migración a Traefik.
+          label: "Ingress-NGINX está ahora obsoleto y será eliminado en una versión futura. Para evitar interrupciones del servicio, comience a migrar sus recursos de Ingress a Traefik. Revise nuestra <docsUrl>documentación de migración</docsUrl>."
         traefik:
           label: Antes de cambiar a Traefik, revise nuestra <docsUrl>documentación de migración</docsUrl> para garantizar que sus recursos de Ingress sean compatibles.
         dual:
@@ -2768,7 +2770,7 @@ providers:
 drivers:
   kontainer:
     title: Controladores de Clúster
-    emberDeprecationMessage: El soporte para plugins de UI (basados en Ember) para controladores de clúster y nodo fue obsoletizado en Rancher v2.7.14. Se eliminará en una versión futura de Rancher.
+    emberDeprecationMessage: "El soporte para plugins de UI (basados en Ember) para controladores de clúster y nodo fue obsoleto en Rancher 2.11.0 y se eliminará en una versión futura. Deben migrarse al nuevo <a href=\"https://extensions.rancher.io\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">marco de Extensiones de UI</a>."
     refreshError: 'Error al actualizar los controladores de clúster: {error}'
   node:
     title: Controladores de Nodo
@@ -2813,9 +2815,9 @@ drivers:
 detailText:
   copyAriaLabel: Copiar valor de {item} al portapapeles
   collapse: Ocultar
-  binary: '<Datos binarios: {n, number} bytes>'
-  empty: <Vacío>
-  unsupported: <Valor no admitido por la interfaz, ver YAML>
+  binary: "<Binary Data: {n, number} bytes>"
+  empty: "<Empty>"
+  unsupported: "<Value not supported by UI, see YAML>"
   sensitive:
     hide: Ocultar valores sensibles
     show: Mostrar valores sensibles
@@ -2903,7 +2905,7 @@ fleet:
     proxy:
       label: Proxy
       description: Servidor proxy http[s] de Fleet.
-      placeholder: http://<usuario>@<contraseña>:<url>:<puerto>
+    placeholder: 'http://<username>@<password>:<url>:<port>'
     noProxy:
       label: Sin proxy
       description: Lista separada por comas de dominios o direcciones IP que no usarán el proxy.
@@ -3417,7 +3419,7 @@ fleet:
   restrictions:
     addTitle: allowedTargetNamespaces
     addLabel: Agregar
-    banner: '{count, plural, =0 { Agregar espacios de nombres aquí creará una GitRepoRestriction. } other { Solo los repositorios Git que usen los espacios de nombres enumerados pueden usar esta flota. } }'
+    banner: '{count, plural, =0 { Agregar espacios de nombres aquí creará una GitRepoRestriction. } other { Solo los <code>allowedTargetNamespaces</code> de la Restricción de Repositorio Git se administran aquí. Puede realizar cambios adicionales a la Restricción de Repositorio Git} }'
   configMaps:
     label: Mapas de configuración
   secrets:
@@ -3467,7 +3469,7 @@ gatekeeperIndex:
   poweredBy: OPA Gatekeeper
   unavailable: OPA + Gatekeeper no está disponible en el catálogo de gráficos del sistema.
   violations: Violaciones
-  deprecated: El gráfico de OPA Gatekeeper está obsoleto a partir de Rancher 2.8 y será eliminado en una versión futura. Se recomienda usar la restricción PSA para la seguridad de pods.
+  deprecated: "El gráfico de OPA Gatekeeper está obsoleto a partir de Rancher 2.8 y será eliminado en una versión futura. Considere cambiar a <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.kubewarden.io\">Kubewarden</a>."
 gatekeeperInstall:
   auditInterval: Intervalo automático
   constraintViolationsLimit: Límite de violaciones de restricción
@@ -3783,8 +3785,8 @@ istio:
   cni: Habilitar CNI
   customOverlayFile:
     label: Archivo de superposición personalizado
-    tip: El <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">archivo de superposición</a> permite configuración adicional sobre la instalación base de Istio de {vendor}.
-  description: El gráfico Helm de Istio de {vendor} instala una configuración mínima de Istio para que pueda comenzar a integrarse con sus aplicaciones.
+    tip: "El <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest\">archivo de superposición</a> permite configuración adicional sobre la instalación base de Istio de {vendor}. Puede utilizar la <a href=\"https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\" >API de IstioOperator</a> para realizar cambios y adiciones en todos los componentes y aplicarlos a través de este archivo YAML de superposición."
+  description: "El gráfico Helm de Istio de {vendor} instala una configuración mínima de Istio para que pueda comenzar a integrarse con sus aplicaciones. Si desea obtener información adicional sobre Istio, visite <a target=\"_blank\" href=\"https://istio.io/latest/docs/concepts/what-is-istio\" rel=\"noopener noreferrer nofollow\">https://istio.io/latest/docs/concepts/what-is-istio/</a>"
   destinationRule:
     title:
       new: Agregar regla de destino
@@ -4082,7 +4084,7 @@ logging:
     dockerRootDirectory: Directorio raíz de Docker
     systemdLogPath: Ruta de registro de systemd
     tooltip: Algunas distribuciones de Kubernetes registran en <code>journald</code>. Para recopilar estos registros se debe configurar correctamente el directorio de socket de systemd.
-    url: <a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener noreferrer nofollow">Haga clic aquí</a> para obtener información sobre las opciones de configuración del registro.
+    url: "<a href=\"{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options\" target=\"_blank\" rel=\"noopener nofollow noreferrer\">Más información</a>"
     default: /run/log/journal
   elasticsearch:
     host: Host
@@ -4300,7 +4302,7 @@ logging:
 longhorn:
   overview:
     title: Resumen
-    subtitle: 'Con tecnología de: <a href=''https://github.com/longhorn'' target=''_blank'' rel=''noopener noreferrer nofollow''>Longhorn</a>'
+    subtitle: 'Con tecnología de: <a href=''https://github.com/longhorn'' target=''_blank'' rel=''noopener nofollow noreferrer''>Longhorn</a>'
     linkedList:
       longhorn:
         label: Longhorn
@@ -4310,7 +4312,7 @@ longhorn:
 neuvector:
   overview:
     title: Resumen
-    subtitle: 'Con tecnología de: <a href=''https://github.com/neuvector'' target=''_blank'' rel=''noopener noreferrer nofollow''>NeuVector</a>'
+    subtitle: 'Con tecnología de: <a href=''https://github.com/neuvector'' target=''_blank'' rel=''noopener nofollow noreferrer''>NeuVector</a>'
     linkedList:
       neuvector:
         label: NeuVector
@@ -4423,7 +4425,7 @@ monitoring:
         info: Los secretos deben montarse en <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>
         label: Secretos adicionales
       existing: Elegir un secreto de configuración existente
-      info: <span class="text-bold">Crear configuración predeterminada</span>:<br>Un Secreto que contiene su configuración de Alertmanager se creará automáticamente.
+      info: "<span class=\"text-bold\">Crear configuración predeterminada</span>:<br>Se creará un Secreto con su Configuración de Alertmanager en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre> al implementar este gráfico bajo el nombre <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Por defecto, este Secreto nunca se modificará al desinstalar o actualizar este gráfico. <br /><br />\nUna vez implementado, debe editar el Secreto desde la UI para añadir sus configuraciones de notificación personalizadas que Alertmanager usará para enviar alertas. <br /> <br />\n<span class=\"text-bold\">Elegir un secreto de configuración existente</span>:<br>Debe especificar un Secreto existente en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Si el espacio de nombres no existe, no podrá seleccionar un secreto existente.\n"
       label: Secreto de Alertmanager
       new: Crear configuración predeterminada
       radio:
@@ -4443,7 +4445,7 @@ monitoring:
     tip: Crea los ClusterRoles <code>monitoring-admin</code>, <code>monitoring-edit</code> y <code>monitoring-view</code> que se pueden asignar a usuarios para proporcionar permisos a los CRD instalados por el gráfico de Monitoring.
   etcdNodeDirectory:
     label: Directorio de certificados del nodo etcd
-    tooltip: Para clústeres que usan RancherOS para los nodos etcd, esta opción debe configurarse con el directorio adecuado.
+    tooltip: "Para clústeres que usan RancherOS para los nodos etcd, esta opción debe configurarse en <pre class='inline-block m-0'>/opt/rke/etc/kubernetes/ssl</pre>. Los entornos híbridos que requieren especificar múltiples directorios de certificados (p. ej., un plano etcd compuesto de hosts RancherOS y Ubuntu) no son compatibles."
   grafana:
     storage:
       annotations: Anotaciones de PVC
@@ -4626,7 +4628,7 @@ monitoringReceiver:
     label: Webhook
     title: Configuración de Webhook
     urlTooltip: Para algunos webhooks, esta es una URL que apunta al DNS del servicio
-    modifyNamespace: Si <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> no está instalado, haga clic en el botón de abajo para instalarlo.
+    modifyNamespace: "Si los valores predeterminados de <pre class=\"inline-block m-0 p-0 vertical-middle\">rancher-alerting-drivers</pre> fueron cambiados, actualice la url a continuación en el formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt;.svc.&lt;port&gt;/&lt;path&gt;"
     banner: Para usar MS Teams o SMS necesitará tener al menos una instancia de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> instalada.
     add:
       selectWebhookType: Seleccionar tipo de Webhook
@@ -5735,7 +5737,7 @@ promptForceRemove:
   forceDelete: Forzar eliminación
   ariaLabel: Copiar nombre de máquina al portapapeles
   confirmName: 'Ingrese el nombre del grupo a continuación para confirmar:'
-  podRemoveWarning: La eliminación forzada de pods no espera confirmación de que los procesos del pod hayan terminado. Puede causar corrupción de datos o estado inconsistente del sistema.
+  podRemoveWarning: "La eliminación forzada de pods no espera confirmación de que los procesos del pod hayan terminado. Esto puede resultar en <strong>corrupción de datos o inconsistencias</strong>"
 promptScaleMachineDown:
   attemptingToRemove: Está intentando eliminar {count} {type}
   attemptingToScaleDown: Está intentando reducir {type}
@@ -5743,8 +5745,8 @@ promptScaleMachineDown:
   retainedMachine2: <b>{ name }</b> permanecerá
   scaling: |-
     {count, plural,
-      =1 {Este grupo de máquinas todavía está reconciliando. Se puede eliminar un nodo diferente o esperar hasta que el grupo haya terminado de reconciliar.}
-      other {Este grupo de máquinas todavía está reconciliando. Se puede eliminar un nodo diferente o esperar hasta que el grupo haya terminado de reconciliar.}
+      =1 {Este grupo de máquinas todavía está reconciliando. Se puede eliminar un nodo diferente en lugar del que seleccionó. Es mejor esperar a que termine la reconciliación.<br> ¿Aún desea marcar este nodo para eliminación?}
+      other {Al menos uno de estos grupos de máquinas todavía está reconciliando. Se pueden eliminar nodos diferentes a los que seleccionó. Es mejor esperar a que termine la reconciliación.<br> ¿Aún desea marcar estos nodos para eliminación?}
     }
 promptSlo:
   title: Parar
@@ -5869,8 +5871,8 @@ rbac:
     unableToCheck: No se puede verificar si algún usuario está vinculado a los roles. Por favor intente de nuevo.
     waiting: |-
       {count, plural,
-        =1 { Verificando si hay usuarios vinculados a este rol <i class="icon icon-spinner icon-spin"></i> }
-        other { Verificando si hay usuarios vinculados a este rol <i class="icon icon-spinner icon-spin"></i> }
+        =1 { Verificando si hay usuarios vinculados a este rol <i class="icon-spin icon icon-spinner" style="margin-left: 5px"></i> }
+        other { Verificando si hay usuarios vinculados a estos roles <i class="icon-spin icon icon-spinner" style="margin-left: 5px"></i> }
       }
     usersBound: |-
       {count, plural,
@@ -6338,13 +6340,13 @@ setup:
   currentPassword: Contraseña de arranque
   confirmPassword: Confirmar nueva contraseña
   defaultPassword:
-    intro: Parece que esta es su primera visita a {vendor}; si preconfiguró su propia contraseña de arranque, ingrésela aquí.
+    intro: "Parece que esta es su primera visita a {vendor}; si preconfiguró su propia contraseña de arranque, ingrésela aquí. De lo contrario, se ha generado una aleatoria para usted. Para encontrarla:<br/><br/>"
     dockerPrefix: 'Para una instalación con "docker run":'
     dockerPs: 'Encuentre su ID de contenedor con <code>docker ps</code>, luego ejecute:'
     dockerSuffix: ''
     helmPrefix: 'Para una instalación con Helm, ejecute:'
     helmSuffix: ''
-  eula: Al marcar la casilla, acepta el <a href="https://www.suse.com/licensing/eula" target="_blank" rel="noopener noreferrer nofollow">Acuerdo de licencia de usuario final (EULA)</a> de SUSE.
+  eula: 'By checking the box, you accept the <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">End User License Agreement & Terms & Conditions</a>'
   newPassword: Nueva contraseña
   newUserSetPassword: Lo primero es establecer una contraseña segura. Le sugerimos usar esta generada aleatoriamente.
   serverUrl:
@@ -8628,7 +8630,7 @@ advancedSettings:
     engine-iso-url: URL de instalación predeterminada del SO (para el controlador vSphere).
     engine-newest-version: La versión de Docker más reciente compatible en el momento de esta versión.
     engine-supported-range: Rango Semver para versiones de motor Docker compatibles.
-    ingress-ip-domain: Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente.
+    ingress-ip-domain: "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
     server-url: URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
     system-default-registry: Registro privado para todas las imágenes de contenedores del sistema Rancher.
     ui-index: Ubicación del índice HTML para la UI del Cluster Manager.
