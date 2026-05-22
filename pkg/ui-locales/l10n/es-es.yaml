@@ -7039,7 +7039,7 @@ validation:
     min: '"{key}" debe contener al menos {count} {count, plural, =1 {elemento} other {elementos}}'
   alphanumeric: '"{key}" debe ser alfanumérico'
   boolean: '"{key}" debe ser un valor booleano.'
-  chars: '{key} solo puede contener {chars}'
+  chars: '"{key}" contiene {count, plural, =1 {un carácter no válido} other {# caracteres no válidos}}: {chars}'
   cluster:
     name: El nombre del clúster no puede ser 'local' ni tener la forma 'c-xxxxx'
   conflict: |-
@@ -7911,10 +7911,26 @@ typeLabel:
       one { Versión de Benchmark }
       other { Versiones de Benchmark }
     }
-  catalog.cattle.io.operation: Operación
-  catalog.cattle.io.app: Aplicación
-  catalog.cattle.io.clusterrepo: Repositorio de clúster
-  catalog.cattle.io.repo: Repositorio
+  catalog.cattle.io.operation: |-
+    {count, plural,
+      one { Operación reciente }
+      other { Operaciones recientes }
+    }
+  catalog.cattle.io.app: |-
+    {count, plural,
+      one { App instalada }
+      other { Apps instaladas }
+    }
+  catalog.cattle.io.clusterrepo: |-
+    {count, plural,
+      one { Repositorio }
+      other { Repositorios }
+    }
+  catalog.cattle.io.repo: |-
+    {count, plural,
+      one { Repo de espacio de nombres }
+      other { Repos de espacio de nombres }
+    }
   chartinstallaction: |-
     {count, plural,
       one { Aplicación }
@@ -8005,7 +8021,11 @@ typeLabel:
       one { Admisión de Seguridad de Pod }
       other { Admisiones de Seguridad de Pod }
     }
-  policy.poddisruptionbudget: Presupuesto de interrupción de pod
+  policy.poddisruptionbudget: |-
+    {count, plural,
+      one { Presupuesto de interrupción de pod }
+      other { Presupuestos de interrupción de pod }
+    }
   limitrange: |-
     {count, plural,
       one { Rango de límite }
@@ -8106,19 +8126,51 @@ typeLabel:
       one { Evento }
       other { Eventos }
     }
-  apps.deployment: Implementación
-  batch.cronjob: CronJob
-  apps.daemonset: DaemonSet
-  batch.job: Trabajo
-  apps.statefulset: StatefulSet
+  apps.deployment: |-
+    {count, plural,
+      one { Deployment }
+      other { Deployments }
+    }
+  batch.cronjob: |-
+    {count, plural,
+      one { CronJob }
+      other { CronJobs }
+    }
+  apps.daemonset: |-
+    {count, plural,
+      one { DaemonSet }
+      other { DaemonSets }
+    }
+  batch.job: |-
+    {count, plural,
+      one { Trabajo }
+      other { Trabajos }
+    }
+  apps.statefulset: |-
+    {count, plural,
+      one { StatefulSet }
+      other { StatefulSets }
+    }
   pod: |-
     {count, plural,
       one { Pod }
       other { Pods }
     }
-  autoscaling.horizontalpodautoscaler: Escalador automático horizontal de pods
-  networking.k8s.io.ingress: Entrada
-  networking.k8s.io.networkpolicy: Política de red
+  autoscaling.horizontalpodautoscaler: |-
+    {count, plural,
+      one { HorizontalPodAutoscaler }
+      other { HorizontalPodAutoscalers }
+    }
+  networking.k8s.io.ingress: |-
+    {count, plural,
+      one { Ingress }
+      other { Ingresses }
+    }
+  networking.k8s.io.networkpolicy: |-
+    {count, plural,
+      one { Política de red }
+      other { Políticas de red }
+    }
   service: |-
     {count, plural,
       one { Servicio }
@@ -8129,7 +8181,11 @@ typeLabel:
       one { VolumenPersistente }
       other { VolúmenesPersistentes }
     }
-  storage.k8s.io.storageclass: Clase de almacenamiento
+  storage.k8s.io.storageclass: |-
+    {count, plural,
+      one { StorageClass }
+      other { StorageClasses }
+    }
   configmap: |-
     {count, plural,
       one { ConfigMap }
@@ -8155,7 +8211,11 @@ typeLabel:
       one { APIService }
       other { APIServices }
     }
-  apiextensions.k8s.io.customresourcedefinition: Definición de recurso personalizado
+  apiextensions.k8s.io.customresourcedefinition: |-
+    {count, plural,
+      one { CustomResourceDefinition }
+      other { CustomResourceDefinitions }
+    }
   flowcontrol.apiserver.k8s.io.flowschema: |-
     {count, plural,
       one { FlowSchema }
@@ -8166,7 +8226,11 @@ typeLabel:
       one { PriorityLevelConfiguration }
       other { PriorityLevelConfigurations }
     }
-  apps.replicaset: ReplicaSet
+  apps.replicaset: |-
+    {count, plural,
+      one { ReplicaSet }
+      other { ReplicaSets }
+    }
   coordination.k8s.io.lease: |-
     {count, plural,
       one { Lease }
@@ -8347,10 +8411,26 @@ typeLabel:
       one { RkeK8sSystemImage }
       other { RkeK8sSystemImages }
     }
-  rbac.authorization.k8s.io.clusterrolebinding: Vinculación de rol de clúster
-  rbac.authorization.k8s.io.clusterrole: Rol de clúster
-  rbac.authorization.k8s.io.rolebinding: Vinculación de rol
-  rbac.authorization.k8s.io.role: Rol
+  rbac.authorization.k8s.io.clusterrolebinding: |-
+    {count, plural,
+      one { Vinculación de rol de clúster }
+      other { Vinculaciones de rol de clúster }
+    }
+  rbac.authorization.k8s.io.clusterrole: |-
+    {count, plural,
+      one { Rol de clúster }
+      other { Roles de clúster }
+    }
+  rbac.authorization.k8s.io.rolebinding: |-
+    {count, plural,
+      one { Vinculación de rol }
+      other { Vinculaciones de rol }
+    }
+  rbac.authorization.k8s.io.role: |-
+    {count, plural,
+      one { Rol }
+      other { Roles }
+    }
   replicationcontroller: |-
     {count, plural,
       one { Controlador de replicación }
@@ -8476,8 +8556,16 @@ action:
 unit:
   sec: seg
   min: min
-  hour: hora
-  day: día
+  hour: |-
+    {count, plural,
+      one { hora }
+      other { horas }
+    }
+  day: |-
+    {count, plural,
+      one { día }
+      other { días }
+    }
 workloadPorts:
   addPort: Agregar puerto o servicio
   remove: Eliminar
