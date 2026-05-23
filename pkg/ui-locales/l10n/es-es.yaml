@@ -2816,9 +2816,9 @@ drivers:
 detailText:
   copyAriaLabel: Copiar valor de {item} al portapapeles
   collapse: Ocultar
-  binary: "<Binary Data: {n, number} bytes>"
-  empty: "<Empty>"
-  unsupported: "<Value not supported by UI, see YAML>"
+  binary: "<Datos Binarios: {n, number} bytes>"
+  empty: "<Vacío>"
+  unsupported: "<Valor no compatible con la interfaz, ver YAML>"
   sensitive:
     hide: Ocultar valores sensibles
     show: Mostrar valores sensibles
@@ -3338,11 +3338,11 @@ fleet:
         selectLabel: YAML
         loading: Cargando desde el gráfico
       valuesFiles:
-        selectLabel: Files
+        selectLabel: Archivos
         ariaLabel: Ingrese la ruta para el archivo de valores
         placeholder: ''
         addLabel: Agregar ruta de archivo
-        empty: empty
+        empty: vacío
       valuesFrom:
         selectLabel: Valores Desde
         options:
