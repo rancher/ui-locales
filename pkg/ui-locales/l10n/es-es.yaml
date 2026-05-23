@@ -101,8 +101,8 @@ generic:
   provisioning: —
   key: Clave
   value: Valor
-  'yes': Sí
-  'no': 'No'
+  yes: Sí
+  no: 'No'
   units:
     time:
       5s: 5s
@@ -496,10 +496,10 @@ authConfig:
     warning: El proveedor de autenticación de GitHub App solo funciona con <a href="https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts" target="_blank" rel="noopener noreferrer nofollow">cuentas de organización de GitHub</a>. No admite cuentas de usuario.
     form:
       prefix:
-        '1': <li>Abra la <a href="{baseUrl}/settings/organizations" target="_blank" rel="noopener noreferrer nofollow">configuración de su organización de GitHub</a> en una nueva ventana</li>
-        '2': <li>A la derecha de la organización, haga clic en "Configuración"</li>
-        '3': <li>En la barra lateral izquierda, haga clic en "Configuración del desarrollador" -> "Aplicaciones de GitHub"</li>
-        '4': <li>Haga clic en "Nueva aplicación de GitHub"</li>
+        1: <li>Abra la <a href="{baseUrl}/settings/organizations" target="_blank" rel="noopener noreferrer nofollow">configuración de su organización de GitHub</a> en una nueva ventana</li>
+        2: <li>A la derecha de la organización, haga clic en "Configuración"</li>
+        3: <li>En la barra lateral izquierda, haga clic en "Configuración del desarrollador" -> "Aplicaciones de GitHub"</li>
+        4: <li>Haga clic en "Nueva aplicación de GitHub"</li>
       instruction: 'Complete el formulario con estos valores:'
       app:
         label: Nombre de la aplicación de GitHub
@@ -514,9 +514,9 @@ authConfig:
         label: URL de la página de inicio
       create: Haga clic en "Crear aplicación de GitHub"
       suffix:
-        '1': <li>En Secretos de cliente, haga clic en "Generar un nuevo secreto de cliente"</li>
-        '2': <li>En Claves privadas, haga clic en "Generar una clave privada"</li>
-        '3': <li>Copie y pegue el "ID de la aplicación", "ID de cliente", "Secreto de cliente" y "Clave privada" de su nueva aplicación OAuth en los campos a continuación</li>
+        1: <li>En Secretos de cliente, haga clic en "Generar un nuevo secreto de cliente"</li>
+        2: <li>En Claves privadas, haga clic en "Generar una clave privada"</li>
+        3: <li>Copie y pegue el "ID de la aplicación", "ID de cliente", "Secreto de cliente" y "Clave privada" de su nueva aplicación OAuth en los campos a continuación</li>
     host:
       label: Host de GitHub Enterprise
       placeholder: p. ej. github.miempresa.ejemplo
@@ -545,12 +545,12 @@ authConfig:
         label: URL de la página de inicio
       instruction: 'Complete el formulario con estos valores:'
       prefix:
-        '1': <li><a href="{baseUrl}/settings/developers" target="_blank" rel="noopener noreferrer nofollow">Registre una nueva aplicación OAuth</a> en GitHub.</li>
-        '2': <li>Haga clic en la pestaña "Aplicaciones OAuth".</li>
-        '3': <li>Haga clic en el botón "Nueva aplicación OAuth".</li>
+        1: <li><a href="{baseUrl}/settings/developers" target="_blank" rel="noopener noreferrer nofollow">Registre una nueva aplicación OAuth</a> en GitHub.</li>
+        2: <li>Haga clic en la pestaña "Aplicaciones OAuth".</li>
+        3: <li>Haga clic en el botón "Nueva aplicación OAuth".</li>
       suffix:
-        '1': <li>Haga clic en "Registrar aplicación"</li>
-        '2': <li>Copie y pegue el ID de cliente y el Secreto de cliente de su nueva aplicación OAuth en los campos a continuación</li>
+        1: <li>Haga clic en "Registrar aplicación"</li>
+        2: <li>Copie y pegue el ID de cliente y el Secreto de cliente de su nueva aplicación OAuth en los campos a continuación</li>
     host:
       label: Host de GitHub Enterprise
       placeholder: p. ej. github.miempresa.ejemplo
@@ -571,35 +571,35 @@ authConfig:
       label: Credenciales de cuenta de servicio
       tip: El JSON de credenciales de cuenta de servicio se puede encontrar en la sección de cuentas de servicio de la consola de desarrolladores de la API de Google.
     steps:
-      '1':
+      1:
         title: Haga <a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="noopener noreferrer nofollow">clic aquí</a> para abrir la configuración de aplicaciones en una nueva ventana
         body:
-          '1': Inicie sesión en su cuenta. Navegue a "APIs y servicios" y luego seleccione "Pantalla de consentimiento de OAuth".
-          '2': 'Dominios autorizados:'
-          '3': 'Enlace a la página de inicio de la aplicación: '
-          '4': En Ámbitos para las API de Google, habilite "email", "profile" y "openid".
-          '5': Haga clic en "Guardar".
+          1: Inicie sesión en su cuenta. Navegue a "APIs y servicios" y luego seleccione "Pantalla de consentimiento de OAuth".
+          2: 'Dominios autorizados:'
+          3: 'Enlace a la página de inicio de la aplicación: '
+          4: En Ámbitos para las API de Google, habilite "email", "profile" y "openid".
+          5: Haga clic en "Guardar".
         topPrivateDomain: 'Dominio privado principal de:'
         ariaLabel:
           hostname: Copiar nombre del host al portapapeles
           serverUrl: Copiar URL del servidor al portapapeles
-      '2':
+      2:
         title: Navegue a la pestaña "Credenciales" para crear su ID de cliente OAuth
         body:
-          '1': Seleccione el menú desplegable "Crear credenciales" y seleccione "ID de cliente OAuth", luego seleccione "Aplicación web".
-          '2': 'Orígenes de JavaScript autorizados:'
-          '3': 'URI de redireccionamiento autorizados:'
-          '4': Haga clic en "Crear" y luego haga clic en el botón "Descargar JSON".
-          '5': Suba el archivo JSON descargado en el cuadro de credenciales OAuth.
+          1: Seleccione el menú desplegable "Crear credenciales" y seleccione "ID de cliente OAuth", luego seleccione "Aplicación web".
+          2: 'Orígenes de JavaScript autorizados:'
+          3: 'URI de redireccionamiento autorizados:'
+          4: Haga clic en "Crear" y luego haga clic en el botón "Descargar JSON".
+          5: Suba el archivo JSON descargado en el cuadro de credenciales OAuth.
         ariaLabel:
           serverUrlVerify: Copiar URL de verificación de autenticación del servidor al portapapeles
-      '3':
+      3:
         title: Crear credenciales de cuenta de servicio
         introduction: 'Siga <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">esta</a> guía para:'
         body:
-          '1': Crear una cuenta de servicio.
-          '2': Generar una clave para la cuenta de servicio.
-          '3': Agregar la cuenta de servicio como cliente OAuth en su dominio de Google.
+          1: Crear una cuenta de servicio.
+          2: Generar una clave para la cuenta de servicio.
+          3: Agregar la cuenta de servicio como cliente OAuth en su dominio de Google.
   ldap:
     freeipa: Configurar un servidor FreeIPA
     activedirectory: Configurar una cuenta de Active Directory
@@ -3661,10 +3661,10 @@ auditPolicy:
       title: Detalle del registro
       banner: El detalle del registro de auditoría y la configuración de registro de auditoría del momento de instalación son aditivos.
       level:
-        '0': 0 - Registrar metadatos de solicitud y respuesta
-        '1': 1 - Registrar encabezados de solicitud y respuesta
-        '2': 2 - Registrar cuerpo de solicitud
-        '3': 3 - Registrar cuerpo de respuesta
+        0: 0 - Registrar metadatos de solicitud y respuesta
+        1: 1 - Registrar encabezados de solicitud y respuesta
+        2: 2 - Registrar cuerpo de solicitud
+        3: 3 - Registrar cuerpo de respuesta
         title: Niveles de registro
         label: Nivel
         tooltip: Cada nivel de registro es acumulativo, los niveles superiores incluyen los datos de los niveles inferiores. Cada entrada de registro contiene información de solicitud y respuesta.
@@ -4084,7 +4084,7 @@ logging:
     enableAdditionalLoggingSources: Habilitar registro de proveedor de nube mejorado
     dockerRootDirectory: Directorio raíz de Docker
     systemdLogPath: Ruta de registro de systemd
-    tooltip: Algunas distribuciones de Kubernetes registran en <code>journald</code>. Para recopilar estos registros se debe configurar correctamente el directorio de socket de systemd.
+    tooltip: 'Algunas distribuciones de Kubernetes registran en <code>journald</code>. Para recopilar estos registros se debe definir <code>systemdLogPath</code>. Mientras que el directorio <code>/run/log/journal</code> se usa de forma predeterminada, algunas distribuciones de Linux no usan esta ruta de forma predeterminada.'
     url: "<a href=\"{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options\" target=\"_blank\" rel=\"noopener nofollow noreferrer\">Más información</a>"
     default: /run/log/journal
   elasticsearch:
@@ -4360,7 +4360,7 @@ logout:
   message: Cerrando sesión...
   error: 'Se produjo un error al cerrar sesión: {msg}'
   specificError:
-    '500': |-
+    500: |-
       Error del lado del servidor.
 
       Contáctese con el administrador del sistema.
@@ -5766,7 +5766,7 @@ promptRemove:
     other { y <b>{count} más</b>.}
     }
   attemptingToRemove: Está intentando eliminar el {type}
-  attemptingToRemoveAuthConfig: Está intentando deshabilitar este proveedor de autenticación. <br><br> Tenga en cuenta que los clústeres locales actualmente autenticados a través de este proveedor perderán acceso inmediatamente. Los usuarios locales no se verán afectados.
+  attemptingToRemoveAuthConfig: "Está intentando deshabilitar este proveedor de autenticación. <br><br> Tenga en cuenta que los vínculos de plantillas de roles de clúster, los vínculos de plantillas de roles de proyecto, los vínculos de roles globales, los usuarios y los tokens se eliminarán todos. <br><br> ¿Está seguro de que desea continuar?"
   protip: 'Consejo: Mantenga presionada la tecla {alternateLabel} mientras hace clic en eliminar para omitir esta confirmación'
   confirmName: 'Ingrese <b>{nameToMatch}</b> a continuación para confirmar:'
   deleteAssociatedNamespaces: 'También eliminar los espacios de nombres en este proyecto:'
