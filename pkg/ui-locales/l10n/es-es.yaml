@@ -6347,7 +6347,7 @@ setup:
     dockerSuffix: ''
     helmPrefix: 'Para una instalación con Helm, ejecute:'
     helmSuffix: ''
-  eula: 'By checking the box, you accept the <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">End User License Agreement & Terms & Conditions</a>'
+  eula: 'Al marcar la casilla, acepta el <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">Acuerdo de Licencia de Usuario Final y Términos y Condiciones</a>'
   newPassword: Nueva contraseña
   newUserSetPassword: Lo primero es establecer una contraseña segura. Le sugerimos usar esta generada aleatoriamente.
   serverUrl:
