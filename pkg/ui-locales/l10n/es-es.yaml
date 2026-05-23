@@ -1695,6 +1695,7 @@ cluster:
             <li><b>Service Accounts:</b> Service Account User (roles/iam.serviceAccountUser)</li>
             </ul>
             Más información sobre los roles se puede encontrar <a href="https://cloud.google.com/compute/docs/access/iam" target="_blank" rel="noopener noreferrer nofollow">aquí</a>.
+    harvester:
       namespace: Espacio de nombres
       cpu: CPU
       memory: Memoria
@@ -2905,7 +2906,7 @@ fleet:
     proxy:
       label: Proxy
       description: Servidor proxy http[s] de Fleet.
-    placeholder: 'http://<username>@<password>:<url>:<port>'
+      placeholder: 'http://<username>@<password>:<url>:<port>'
     noProxy:
       label: Sin proxy
       description: Lista separada por comas de dominios o direcciones IP que no usarán el proxy.
@@ -8749,7 +8750,7 @@ performance:
     title: Inactividad
     checkboxLabel: Habilitar expiración de sesión por inactividad
     inputLabel: Tiempo de inactividad (minutos)
-    information: Para cambiar el comportamiento de cierre de sesión automático, edite los valores de tiempo de espera de autenticación y/o sesión en la página de Configuración.
+    information: Para cambiar el comportamiento de cierre de sesión automático, edite los valores de tiempo de espera de autenticación (<code>auth-user-session-ttl-minutes</code> y <code>auth-token-max-ttl-minutes</code>) y/o sesión en la página de Configuración.
     description: Cuando se habilita y el usuario está inactivo más allá del tiempo de espera especificado, la UI dejará de actualizar el contenido de la página.
     authUserTTL: Este tiempo de espera no puede ser mayor que el tiempo de espera de sesión de usuario auth-user-session-ttl-minutes, que actualmente es {current} minutos.
   serverPagination:
