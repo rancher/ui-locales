@@ -6,7 +6,7 @@ The locales in this repository are maintained on a best-effort basis.
 
 License
 =======
-Copyright (c) 2014-2025 [SUSE](https://www.suse.com)
+Copyright (c) 2014-2026 [SUSE](https://www.suse.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
