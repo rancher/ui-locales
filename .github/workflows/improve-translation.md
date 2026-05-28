@@ -109,7 +109,8 @@ Translate the untranslated strings following the translation rules, priority ord
 
 Additionally for this workflow:
 
-- **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
+- **Stop after translating 500 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
+- **Context budget**: translating strings consumes conversation context. You MUST leave enough context budget for the commit, push, dispatch, and comment steps (steps 5–7). If you notice you have been working for a long time or have processed many chunks, stop translating early and proceed to step 5. It is always better to commit fewer translations successfully than to translate more and fail to commit.
 
 ## 5. Validate after translation
 
