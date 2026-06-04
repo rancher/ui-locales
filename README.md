@@ -1,4 +1,4 @@
-# Rancher UI Locales
+# Rancher Prime UI Locales
 
 This repository contains a UI Extension that contains additional locales (translations) for the [Rancher Dashboard UI](https://github.com/rancher/dashboard).
 
