@@ -30,6 +30,7 @@ generic:
   comma: ', '
   copy: Copy
   copyToClipboard: Copy text to Clipboard
+  copyValueToClipboard: 'Copy {value} to Clipboard'
   copiedToClipboard: Text copied to Clipboard
   create: Create
   created: Created
@@ -131,6 +132,7 @@ generic:
   deprecated: Deprecated
   upgradeable: Upgradeable
   installed: Installed
+  installedMultiple: Installed (multiple)
   featured: Featured
   shortFeatured: Feat
   category: Category
@@ -183,6 +185,7 @@ locale:
   none: (None)
 
 nav:
+  skipToContent: Skip to main content
   ariaLabel:
     clusterIconKeyCombo: Cluster keyboard shortcut combination icon
     localClusterIcon: Local Cluster icon
@@ -438,7 +441,6 @@ accountAndKeys:
     notAllowed: You do not have permission to manage API Keys
     apiEndpoint: "API Endpoint:"
     copyApiEnpoint: Copy API Endpoint to clipboard
-    normanTokenDeprecation: The API Keys feature is being migrated to a new API. Any existing API Keys from the legacy API will continue to work, but new API Keys will be created using the new API.
     add:
       description:
         label: Description
@@ -464,9 +466,7 @@ accountAndKeys:
           month: Months
           year: Years
       scope: Scope
-      userPrincipal: User Principal
       noScope: No Scope
-      enabled: Token enabled
     info:
       accessKey: Access Key
       secretKey: Secret Key
@@ -475,7 +475,7 @@ accountAndKeys:
       keyCreated: A new API Key has been created
       bearerTokenTip: "Access Key and Secret Key can be sent as the username and password for HTTP Basic auth to authorize requests. You can also combine them to use as a Bearer token:"
       ttlLimitedWarning: The Expiry time for this API Key was reduced due to system configuration
-      expiryOptionsWithNever: Since "auth-token-max-ttl-minutes" is set to <= 0, the API Key will not expire unless the "Automatically expire" option is set to "Custom" and a custom expiry time is set.
+
 addClusterMemberDialog:
   title: Add Cluster Member
 
@@ -500,7 +500,7 @@ authConfig:
     unrestricted: Allow any valid user
   allowedPrincipalIds:
     title: Authorized Users & Groups
-  associatedWarning: 'The {provider} account that is used to enable the external provider will be granted admin permissions. If you use a test account or non-admin account, that account will still be granted admin-level permissions. See <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> to understand why.'
+  associatedWarning: 'The {provider} account that is used to enable the external provider will be granted permissions equal to the currently logged in Rancher user. See <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> to understand why.'
   githubapp:
     clientId:
       label: Client ID
@@ -714,7 +714,7 @@ authConfig:
   azuread:
     tenantId:
       label: Tenant ID
-      tooltip: From the Azure AD portal
+      tooltip: From the Microsoft Entra admin center
       placeholder: A long UUID string
     applicationId:
       label: Application ID
@@ -734,6 +734,9 @@ authConfig:
       label: Token Endpoint
     authEndpoint:
       label: Auth Endpoint
+    endSessionEndpoint:
+      title: End Session Endpoint
+      tooltip: "{name} URL used for logging a user out of their session (e.g. https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/logout)"
     groupMembershipFilter:
       label: Group Membership Filter
       enable: Limit users by group membership
@@ -741,17 +744,17 @@ authConfig:
       externalHelp: See the OData filter expression documentation for more information.
       externalHelpLink: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/use-filter-expressions-in-odata-uris#filter-expressions
     reply:
-      info: 'Azure AD requires a whitelisted URL for your Rancher server before beginning this setup. Please ensure that the following URL is set in the Reply URL section of your Azure Portal. Please note that it may take up to 5 minutes for the whitelisted URL to propagate.'
+      info: 'Microsoft Entra ID requires a whitelisted URL for your Rancher server before beginning this setup. Please ensure that the following URL is set in the Reply URL section of your Microsoft Entra admin center. Please note that it may take up to 5 minutes for the whitelisted URL to propagate.'
       label: Reply URL
       ariaLabel: Copy Reply URL to clipboard
     updateEndpoint:
       button: Update Endpoint
       banner:
-        message: 'Azure AD Authentication must be updated: it is using the Azure Graph API, which will be deprecated at the end of 2022.'
+        message: 'Microsoft Entra ID Authentication must be updated: it is using the Azure AD Graph API, which was deprecated at the end of 2022.'
         linkText: 'Update it here.'
       modal:
         title: Are you sure? This update is irreversible.
-        body: '<p><b>You may need to make some additional changes</b>. Please ensure the Azure AD app has the Directory.Read.All <b>Application</b> permission added to Microsoft Graph.<br> If any endpoints were customized while configuring Azure AD authentication in Rancher, they will not be automatically updated. </p>'
+        body: '<p><b>You may need to make some additional changes</b>. Please ensure the Microsoft Entra ID app has the Directory.Read.All <b>Application</b> permission added to Microsoft Graph.<br> If any endpoints were customized while configuring Microsoft Entra ID authentication in Rancher, they will not be automatically updated. </p>'
   oidc:
     endSessionEndpoint: 
       title: End Session Endpoint
@@ -794,6 +797,7 @@ authConfig:
       label: Scopes
       placeholder: openid
       protip: The <code>openid</code>, <code>profile</code>, and <code>email</code> scopes are required and cannot be removed.
+      missingRequired: "The required {count, plural, =1 {scope is} other {scopes are}} missing: {scopes}"
     pkce:
       label: Enable PKCE (S256)
       tooltip: Enable Proof Key for Code Exchange (PKCE) using the S256 code challenge method. When enabled, this client must use PKCE with S256 for authorization requests.
@@ -808,6 +812,9 @@ authConfig:
     groupSearch:
       label: Enable group search
       tooltip: Allows users with appropriate permissions to search and view all groups within the OIDC provider's realm. This can be useful for administrators who need to assign global roles to groups that they are not currently a member of.
+    clientAuthenticatedSearch:
+      label: Enable client authenticated search
+      tooltip: Use the OIDC Client Credentials to authenticate to Keycloak when searching for users or groups. This will bypass user-based RBAC within the realm
   stateBanner:
     disabled: 'The {provider} authentication provider is currently disabled.'
     enabled: 'The {provider} authentication provider is currently enabled.'
@@ -1020,6 +1027,11 @@ asyncButton:
     waiting: Generating&hellip;
 
 backupRestoreOperator:
+  monitoring:
+    label: Monitoring
+    enableMetrics: Enable Metrics
+    enableServiceMonitor: Enable ServiceMonitor
+    serviceMonitorTooltip: Requires rancher-monitoring to be installed before this can be enabled.
   backup:
     label: Resource Set
     description: The Resource Set determines which resources the backup-restore-operator collects in a backup
@@ -1135,7 +1147,6 @@ catalog:
         label: Chart Versions
         showMore: Show More
         showLess: Show Less
-        missingVersionDate: No date available for this chart version
       home: Homepage
       repository: Repository Page
       maintainers: Maintainers
@@ -1149,12 +1160,18 @@ catalog:
     deprecatedWarning: '{chartName} has been marked as deprecated. Use caution when installing this helm chart as it might be removed in the future.'
     experimentalWarning: '{chartName} has been marked as experimental. Use caution when installing this helm chart as it might not function as expected.'
     deprecatedAndExperimentalWarning: '{chartName} has been marked as deprecated and experimental. Use caution when installing this helm chart as it might be removed in the future and might not function as expected.'
+    viewReadmeSeparately:
+      label: View separately
+      tooltip: Open the readme in a new tab
+    installedAppsSelector:
+      ariaLabel: Select installed app instance
     chartButton:
       action:
         install: Install this version
         edit: Edit the current version
         upgrade: Upgrade to this version
         downgrade: Downgrade to this version
+        installNew: Install as a new instance
   charts:
     browseAriaLabel: Show only charts grid
     iconAlt: Icon for {app} card/grid item
@@ -1180,15 +1197,11 @@ catalog:
       all: All Operating Systems
       linux: Linux
       windows: Windows
-    search: Search the catalogue...
-    deprecatedChartsFilter:
-      label: Show deprecated apps
+    search: Search the catalog...
     addNewRepo:
       label: Add new
       ariaLabel: Add a new repository
     appChartCard:
-      subHeaderItem:
-        missingVersionDate: Last updated date is not available for this chart
       footerItem:
         ariaLabel: 'Apply {filter} filter'
     statusFilterCautions:
@@ -1376,6 +1389,7 @@ catalog:
       releaseName: Release Name
       releaseNamespace: Release Namespace
   repo:
+    add: Add Repository
     action:
       refresh: Refresh
     all: All
@@ -1431,6 +1445,8 @@ catalog:
     refreshInterval:
       label: Refresh Interval
       placeholder: 'default: {hours}'
+    error:
+      refresh: Error refreshing repository
   tools:
     iconAlt: Icon for {app} Cluster Tool
     header: Cluster Tools
@@ -1502,9 +1518,12 @@ compliance:
       =1 { Any scheduled scans using this profile will no longer work. }
       other { Any scheduled scans using either of these profiles will no longer work. }
     }
-  downloadAllReports: Download All Saved Reports
-  downloadLatestReport: Download Latest Report
-  downloadReport: Download Report
+  downloadAllReports: Download All Saved Reports (CSV)
+  downloadAllReportsXCCDF: Download All Saved Reports (XCCDF)
+  downloadLatestReport: Download Latest Report (CSV)
+  downloadLatestReportXCCDF: Download Latest Report (XCCDF)
+  downloadReport: Download Report (CSV)
+  downloadReportXCCDF: Download Report (XCCDF)
   maxKubernetesVersion: Maximum allowed Kubernetes version
   minKubernetesVersion: Minimum required Kubernetes version
   noProfiles: There are no valid ClusterScanProfiles for this cluster type to select.
@@ -1513,6 +1532,8 @@ compliance:
   reports: Reports
   retention: Retention Count
   scan:
+    errorNoParsedNodes: No nodes were parsed from the scan results, so no report can be generated.
+    errorDownload: Error downloading file
     description: Description
     fail: Fail
     lastScanTime: Last Scan Time
@@ -2329,7 +2350,9 @@ cluster:
       etcdControlPlaneWarning: We don't recommend using Autoscaler with machine pools that have the etcd or Control Plane roles. You can modify the yaml if you want to override the current value.
     name:
       label: Pool Name
+      notNamed: (Not Named)
       placeholder: A random one will be generated by default
+      unique: Pool names should be unique
     nodeTotals:
       label:
         controlPlane: '{count} Control Plane'
@@ -2382,7 +2405,7 @@ cluster:
       label: Auto Replace
       toolTip: If greater than 0, nodes that are unreachable for this duration will be automatically deleted and replaced.
       unit: "Seconds"
-  managementTimeout: The cluster to become available. It's possible the cluster was created. We suggest checking the clusters page before trying to create another.
+  managementTimeout: The {type} {name} to become available. It's possible the cluster was created. We suggest checking the clusters page before trying to create another.
   memberRoles:
     removeMessage: 'Note: Removing a user will not remove their project permissions'
     addClusterMember:
@@ -2473,6 +2496,7 @@ cluster:
     create-rke2: Provision new nodes and create a cluster using RKE2/K3s
     create-template: Use a Catalog Template to create a cluster
     register-custom: Import any Kubernetes cluster
+    create-capi: Create a cluster using Cluster API
   rke2:
     banner:
       psaChange: PSACT is now set to Rancher default automatically
@@ -2710,6 +2734,7 @@ cluster:
     registry: Registries
     upgrade: Upgrade Strategy
     registration: Registration
+    nodePools: Node Pools
   rotateCertificates:
     label: Rotate Certificates
     modalTitle: Rotate Cluster Certificates
@@ -2721,8 +2746,6 @@ cluster:
     v2: RKE2/K3s
   validation:
     iamInstanceProfileName: If the Amazon cloud provider is selected the "IAM Instance Profile Name" must be defined for each Machine Pool
-  capi:
-    notSupported: Managing clusters provisioned using CAPI infrastructure providers via the UI is currently limited to Rancher Turtles provisioned clusters.
 
 clusterIndexPage:
   hardwareResourceGauge:
@@ -2826,6 +2849,8 @@ cruResource:
   reviewYaml: "Keep editing YAML"
   previewYaml: Edit as YAML
   showYaml: View as YAML
+  tableOfContents:
+    jumpTo: Jump to...
 
 providers:
   hosted: 
@@ -2834,8 +2859,8 @@ providers:
 drivers:
   kontainer:
     title: Cluster Drivers
-    emberDeprecationMessage: 'Support for UI Plugins (based on Ember) for cluster and node drivers was deprecated in Rancher 2.11.0 and will be removed in a future release. These need to be migrated to the new <a href="https://extensions.rancher.io" target="_blank" rel="noopener noreferrer nofollow">UI Extensions framework</a>.'
-    refreshError: 'Error refreshing cluster drivers: {error}'
+    emberRemovalMessage: 'Support for UI Plugins (based on Ember) for cluster and node drivers was deprecated in Rancher 2.11.0 and has been removed in 2.15.0. If you still need one of these plugins, it will need to be migrated to the new <a href="https://extensions.rancher.io/extensions/next/provisioning/hosted-provider/overview" target="_blank" rel="noopener noreferrer nofollow">UI Extensions framework</a>.'
+    emberRemovalTooltip: 'Support for UI Plugins (based on Ember) for cluster and node drivers was deprecated in Rancher 2.11.0 and has been removed in 2.15.0. If you still need this plugin, it will need to be migrated to the new UI Extensions framework.'
   node:
     title: Node Drivers
   add:
@@ -2987,7 +3012,7 @@ fleet:
       add: Add Selector
     tolerations:
       label: Tolerations
-      description: "List of node taints to tolerate (requires Kubernetes >= 1.6)"
+      description: "List of node taints to tolerate."
       add: Add Toleration
     priorityClassName:
       label: Priority Class Name
@@ -4118,8 +4143,8 @@ landing:
     docs: Docs
     forums: Forums
   commercial:
-    title: Commercial Support
-    body: Learn about commercial support
+    title: Rancher Prime
+    body: Learn about Rancher Prime
   landingPrefs:
     body: "You can change where you land when you login"
     ariaLabelTakeMeToCluster: Select which cluster to take me to after login
@@ -5031,6 +5056,7 @@ node:
         cpu: CPU
         memory: MEMORY
         pods: PODS
+        running: Running
       diskPressure: Disk Pressure
       kubelet: kubelet
       memoryPressure: Memory Pressure
@@ -5443,6 +5469,7 @@ inactivity:
 # Rancher Extensions
 plugins:
   altIcon: Icon for {extension} extension card
+  deprecatedExtension: This extension is deprecated and may soon be removed from the catalog.
   incompatiblePrimeOnly: "The latest version of this extension ({ version }) needs Rancher Prime in order to be installed."
   incompatibleRancherVersion: "The latest version of this extension ({ version }) is not compatible with the current Rancher version ({ required })."
   incompatibleKubeVersion: "The latest version of this extension ({ version }) is not compatible with the current Kube version ({ required })."
@@ -5575,6 +5602,9 @@ plugins:
     prompt: "Are you sure that you want to install this extension?"
     version: Version
     warnNotCertified: Please ensure that you are aware of the risks of installing Extensions from untrusted authors
+    alreadyInstalledTitle: This extension is already installed from another source
+    alreadyInstalledPrompt: To install it from this source, you need to uninstall the existing version first and reload the page (required). Would you like to continue?
+    uninstallExisting: Uninstall existing version
   upgrade:
     label: Upgrade
     title: Upgrade extension {name}
@@ -5597,7 +5627,7 @@ plugins:
     banner: There are new extensions repositories available. To enable these repositories, click the button on the right.
     bannerBtn: Add repositories
     title: Add Extensions repositories
-    prompt: You can install multiple Rancher extension repositories to increase your extensions catalog
+    prompt: Enable additional repositories to access more extensions
   setup:
     installed: Already installed
     uninstalled: Already uninstalled
@@ -5613,7 +5643,7 @@ plugins:
       prompt: This will lead you to the page where you can enable the Feature Flag needed to enable Extension support.
       featuresButton: Go to Feature Flags
       airgap: Air-gapped installations should NOT enable this feature
-      addRancherRepo: Add Official Rancher Extensions Repository
+      addRancherRepo: Add Rancher Prime Extensions Repository
       addPartnersRancherRepo: Add Partners Extensions Repository
     remove:
       label: Disable Extension Support
@@ -5775,7 +5805,6 @@ projectMembers:
     createNs: Create Namespaces
     configmapsManage: Manage Config Maps
     ingressManage: Manage Ingress
-    projectcatalogsManage: Manage Project Catalogs
     projectroletemplatebindingsManage: Manage Project Members
     secretsManage: Manage Secrets
     serviceaccountsManage: Manage Service Accounts
@@ -5785,7 +5814,6 @@ projectMembers:
     configmapsView: View Config Maps
     ingressView: View Ingress
     monitoringUiView: View Monitoring
-    projectcatalogsView: View Project Catalogs
     projectroletemplatebindingsView: View Project Members
     secretsView: View Secrets
     serviceaccountsView: View Service Accounts
@@ -6159,6 +6187,8 @@ resourceList:
   nsFiltering: "Please select one or more namespaces or projects using the filter above."
   nsFilteringGeneric: "Please select a valid namespace or project option using the filter above."
   nsFilterToolTip: "Filtering is restricted to projects and namespaces"
+  stateFilterApplied: "State filter applied:"
+  clearStateFilter: "Clear filter"
 resourceLoadingIndicator:
   loading: Loading
 
@@ -6172,6 +6202,7 @@ resourceTable:
     cluster: Group by Cluster
     device: Group by Device
     pool: Group by Pool
+    workspace: Group by Workspace
   groupLabel:
     cluster: "<span>Cluster:</span> {name}"
     notInACluster: Not in a Cluster
@@ -6487,11 +6518,7 @@ setup:
   currentPassword: Bootstrap Password
   confirmPassword: Confirm New Password
   defaultPassword:
-    intro: It looks like this is your first time visiting {vendor}; if you pre-set your own bootstrap password, enter it here.  Otherwise a random one has been generated for you.  To find it:<br/><br/>
-    dockerPrefix: 'For a "docker run" installation:'
-    dockerPs: 'Find your container ID with <code>docker ps</code>, then run:'
-    dockerSuffix: ""
-    helmPrefix: 'For a Helm installation, run:'
+    intro: It looks like this is your first time visiting {vendor}; if you pre-set your own bootstrap password, enter it here.  Otherwise a random one has been generated for you.  To find it, run:<br/><br/>
     helmSuffix: ""
   eula: By checking the box, you accept the <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">End User License Agreement & Terms & Conditions</a>
   newPassword: New Password
@@ -6857,7 +6884,6 @@ storageClass:
       tooltip: By default the default storage class on the host Harvester cluster is used.
 
 tableHeaders:
-  isLegacy: Legacy
   assuredConcurrencyShares: Assured Concurrency Shares
   autoscaler: Autoscaler
   accessKey: Access Key
@@ -6988,6 +7014,7 @@ tableHeaders:
   progress: Progress
   podImages: Image
   podRestarts: Restarts
+  podLastRestart: Last Restart
   pods: Pods
   pod-Selector: Pod-Selector
   providers: Providers
@@ -7408,6 +7435,36 @@ wm:
 
   kubectlShell:
     title: "Kubectl: {name}"
+
+workloadDashboard:
+  title: Workloads Overview
+  subtitle:
+    allNamespaces: "For all namespaces"
+    userNamespaces: "Only for user namespaces"
+    systemNamespaces: "Only for system namespaces"
+    namespacedOnly: "Only for namespaced resources"
+    clusterOnly: "Only for cluster resources"
+    project: "For the namespaces of Project {name}"
+    namespace: "For the namespace {name}"
+    multipleSelected: "For {selected} items selected"
+  workloadCount: |-
+    ({count, plural,
+      =0 {No workload}
+      =1 {{count} workload}
+      other {{count} workloads}
+    })
+  sections:
+    byState: By State
+    byType: By Type
+    byNamespace: By Namespace
+  errors:
+    noAccess: "No access to {type}"
+    fetchType: "Failed to fetch {type}"
+    fetchAll: Failed to fetch workload summaries
+  empty:
+    title: No workloads to show
+    message: "Tips: Update the namespace filter above or <resetLink>reset the namespaces filter</resetLink>."
+    docsMessage: "Want to learn more about Workloads? Read our <docsLink>documentation</docsLink>."
 
 workload:
   scaleWorkloads: Scale workloads
@@ -7964,6 +8021,7 @@ model:
       genericoidc: OIDC provider
       cognito: Amazon Cognito
     name:
+      azuread: Microsoft Entra ID
       keycloak: Keycloak (SAML)
       keycloakoidc: Keycloak (OIDC)
     provider:
@@ -7971,7 +8029,7 @@ model:
       local: Local
       multiple: Multiple
       activedirectory: ActiveDirectory
-      azuread: AzureAD
+      azuread: Microsoft Entra ID
       github: GitHub
       githubapp: GitHub App
       keycloak: Keycloak
@@ -8045,10 +8103,7 @@ typeDescription:
   monitoring.coreos.com.prometheus: A Prometheus server is a Prometheus deployment whose scrape configuration and rules are determined by selected ServiceMonitors, PodMonitors, and PrometheusRules and whose alerts will be sent to all selected Alertmanagers with the custom resource's configuration.
   monitoring.coreos.com.alertmanager: An alert manager is deployment whose configuration will be specified by a secret in the same namespace, which determines which alerts should go to which receiver.
   node: The base Kubernetes Node resource represents a virtual or physical machine which hosts deployments. To manage the machine lifecycle, if available, go to Cluster Management.
-  catalog.cattle.io.clusterrepo: 'A chart repository is a Helm repository or {vendor} git based application catalog. It provides the list of available charts in the cluster.'
-  catalog.cattle.io.clusterrepo.local: ' A chart repository is a Helm repository or {vendor} git based application catalog. It provides the list of available charts in the cluster. Cluster Templates are deployed via Helm charts.'
   catalog.cattle.io.operation: An operation is the list of recent Helm operations that have been applied to the cluster.
-  catalog.cattle.io.app: An installed application is a Helm 3 chart that was installed either via our charts or through the Helm CLI.
   logging.banzaicloud.io.clusterflow: Logs from the cluster will be collected and logged to the selected Cluster Output.
   logging.banzaicloud.io.clusteroutput: A cluster output defines which logging providers that logs can be sent to and is only effective when deployed in the namespace that the logging operator is in.
   logging.banzaicloud.io.flow: A flow defines which logs to collect and filter as well as which output to send the logs. The flow is a namespaced resource, which means logs will only be collected from the namespace that the flow is deployed in.
@@ -8639,6 +8694,11 @@ typeLabel:
       one { Cluster Registration Token }
       other { Cluster Registration Tokens }
     }
+  turtles-capi.cattle.io.capiprovider: |-
+    {count, plural,
+      one { Cluster API Provider }
+      other { Cluster API Providers }
+    }
 
 oidcclient:
   a11y:
@@ -8779,6 +8839,9 @@ registryConfig:
   toolTip: 'When an image needs to be pulled from the given registry hostname, this information will be used to verify the identity of the registry and authenticate to it.'
   addLabel: Add Registry
   description: "Define the TLS and credential configuration for each registry hostname and mirror."
+  caBundle:
+    tooltip: Accepts a CA PEM certificate or a base64 encoded CA PEM.
+    validationError: Invalid CA cert bundle. Must be a CA PEM certificate or a base64 encoded CA PEM.
 
 ##############################
 ### Advanced Settings
@@ -8817,9 +8880,8 @@ advancedSettings:
     'ingress-ip-domain': 'Wildcard DNS domain to use for automatically generated Ingress hostnames. <ingress-name>.<namespace-name>.<ip address of ingress controller> will be added to the domain.'
     'server-url': 'Default {appName} install url. Must be HTTPS. All nodes in your cluster must be able to reach this.'
     'system-default-registry': 'Private registry to be used for all Rancher System Container Images. If no value is specified, the default registry for the container runtime is used. For Docker and containerd, the default is `docker.io`.'
-    'ui-index': 'HTML index location for the Cluster Manager UI.'
     'ui-dashboard-index': 'HTML index location for the {appName} UI.'
-    'ui-offline-preferred': 'Controls whether UI assets are served locally by the server container or from the remote URL defined in the ui-index and ui-dashboard-index settings. The `Dynamic` option will use local assets in production builds of {appName}.'
+    'ui-offline-preferred': 'Controls whether UI assets are served locally by the server container or from the remote URL defined in the ui-dashboard-index setting. The `Dynamic` option will use local assets in production builds of {appName}.'
     'ui-pl': 'Private-Label company name.'
     'auth-user-info-max-age-seconds': 'The maximum age of a users auth tokens before an auth provider group membership sync will be performed.'
     'auth-user-info-resync-cron': 'Default cron schedule for resyncing auth provider group memberships.'
@@ -8949,7 +9011,6 @@ performance:
     label: Server-side Pagination
     description: By default Lists will fetch all resources and paginate (create the page given sort and filter settings) locally in the browser. Server-Side Pagination moves this out from the browser to the server. This improves performance of the UI, especially in systems with lots of resources.
     applicable: "Server-side pagination applies to Resource Types"
-    featureFlag: Enabling/Disabling <i class="mr-5">"Server-side Pagination"</i> is now solely done so via the <i class="mr-5">ui-sql-cache</i>&nbsp;<a href="{ffUrl}">Feature Flag</a>
     resources:
       generic: most resources in the cluster's 'More Resources' section
       all: All Resources
@@ -9127,31 +9188,10 @@ customLinks:
     slack:      Slack
     issues:     File an Issue
     getStarted: Get Started
-    commercialSupport: Commercial Support
+    commercialSupport: Rancher Prime
     appCo: SUSE Application Collection
 
-##############################
-### Support Page
-##############################
-
-support:
-  bannerImage: Support page banner image
-  community:
-    title: SUSE Rancher provides world-class support
-    linksTitle: Community Support
-    learnMore: Find out more about SUSE Rancher Support
-    pricing: Contact us for pricing
-  subscription:
-    haveSupport: Already have support?
-    addSubscription: Add a Subscription ID
-    removeSubscription: Remove your Subscription ID
-    addTitle: Add your SUSE Subscription ID
-    addLabel: "Please enter a valid Subscription ID:"
-    removeTitle: Remove your ID?
-    removeBody: "Note: This will not affect your subscription."
-
   suse:
-    title: "Great News - You're covered"
     editBrand: Customize UI Theme
     access:
       title: Get Support
@@ -9173,10 +9213,6 @@ support:
     four:
       title: Innovate with Freedom
       text: Take advantage of our certified compatibility with a wide range of Kubernetes providers, operating systems, and open source software.
-
-embedding:
-  retry: Retry
-  unavailable: Cluster Manager UI is not available
 
 serverUpgrade:
   title: "{vendor} Server Changed"
