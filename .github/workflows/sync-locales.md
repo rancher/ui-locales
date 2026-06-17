@@ -7,7 +7,7 @@ description: |
   individual language files up to date after the sync PR is merged.
 
 on:
-  schedule: daily
+  schedule: weekly
   workflow_dispatch:
 
 permissions:
