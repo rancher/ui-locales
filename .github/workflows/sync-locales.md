@@ -3,7 +3,7 @@ description: |
   This workflow checks for changes in the en-us.yaml translation file from
   rancher/dashboard and opens a Pull Request in this repository with the updated
   en-us.yaml when changes are found. It only syncs the English source file — it
-  does NOT update other language files. Use the [UPDATE] issue workflow to bring
+  does NOT update other language files. Use the `/update-language` command to bring
   individual language files up to date after the sync PR is merged.
 
 on:
@@ -48,7 +48,7 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
 1. Fetch the latest `en-us.yaml` from `rancher/dashboard` master branch at:
    `https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml`
 
-2. Compare it with the current contents of `pkg/ui-locales/l10n/en-us.yaml` in this repository (**on the default branch**, not a PR branch).
+2. Compare it with the current contents of `reference/en-us.yaml` in this repository (**on the default branch**, not a PR branch).
 
 3. If there are **no changes** to `en-us.yaml` compared to the default branch, do nothing and report that translations are already up to date.
 
@@ -66,10 +66,10 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
 
    a. Identify what changed — keys added, removed, or values modified. Produce a summary.
 
-   b. Open a Pull Request that includes **only** the updated `pkg/ui-locales/l10n/en-us.yaml`:
+   b. Open a Pull Request that includes **only** the updated `reference/en-us.yaml`:
       - Title: `chore: sync en-us.yaml from rancher/dashboard`
       - Body that summarizes: what changed (keys added, removed, values modified), with counts
-      - Include a note: "After merging, open an `[UPDATE] <language>` issue for each language that needs to be brought up to date."
+      - Include a note: "After merging, run `/update-language <locale-code>` for each language that needs to be brought up to date."
       - Labels: `translations`, `sync`, `automated`
 
 ## Style
