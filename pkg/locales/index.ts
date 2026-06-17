@@ -9,6 +9,6 @@ export default function(plugin: IPlugin): void {
   // Provide plugin metadata from package.json
   plugin.metadata = require('./package.json');
 
-  // Load a product
-  // plugin.addProduct(require('./product'));
+  // Add new locales
+  plugin.addLocale('zh-hant', '繁體中文');
 }

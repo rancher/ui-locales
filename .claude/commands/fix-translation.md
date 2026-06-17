@@ -13,7 +13,7 @@ Fix a specific translation error in a locale file.
 
 2. Read `.github/workflows/shared/translation-rules.md` for the canonical translation rules. Follow them throughout.
 
-3. Read `pkg/ui-locales/l10n/<locale-code>.yaml`.
+3. Read `pkg/locales/l10n/<locale-code>.yaml`.
 
 4. Find the exact line(s) containing the wrong text and replace with the correct translation.
 

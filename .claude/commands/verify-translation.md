@@ -15,7 +15,7 @@ Perform a read-only verification of a translation file. Does NOT modify any file
 
 3. Read both files:
    - `reference/en-us.yaml`
-   - `pkg/ui-locales/l10n/<locale-code>.yaml` (the translated file)
+   - `pkg/locales/l10n/<locale-code>.yaml` (the translated file)
 
 4. **Structural validation** — perform ALL checks:
 

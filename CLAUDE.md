@@ -5,7 +5,7 @@ Rancher UI Locales extension — manages translation YAML files for the Rancher 
 ## Structure
 
 - `reference/en-us.yaml` — English source file (synced from `rancher/dashboard`, not bundled with the extension)
-- `pkg/ui-locales/l10n/<locale-code>.yaml` — translated locale files (e.g. `pt-br.yaml`, `fr-fr.yaml`, `es-es.yaml`)
+- `pkg/locales/l10n/<locale-code>.yaml` — translated locale files (e.g. `pt-br.yaml`, `fr-fr.yaml`, `es-es.yaml`)
 - `.github/workflows/shared/translation-rules.md` — canonical translation rules, YAML validation, chunking strategy
 
 ## Translation commands

@@ -11,11 +11,11 @@ Add a new language translation to the UI locales extension.
 
 1. Parse the arguments to extract the language name and BCP 47 locale code (e.g. `Portuguese Brazil pt-br`, `Japanese ja-jp`, `Simplified Chinese zh-hans`).
 
-2. Check if `pkg/ui-locales/l10n/<locale-code>.yaml` already exists. If it does, stop and tell the user — suggest using `/update-language` instead.
+2. Check if `pkg/locales/l10n/<locale-code>.yaml` already exists. If it does, stop and tell the user — suggest using `/update-language` instead.
 
 3. Read `.github/workflows/shared/translation-rules.md` for the canonical translation rules, YAML validation procedures, bash size limits, and chunking strategy. Follow them throughout.
 
-4. Copy `reference/en-us.yaml` to `pkg/ui-locales/l10n/<locale-code>.yaml`.
+4. Copy `reference/en-us.yaml` to `pkg/locales/l10n/<locale-code>.yaml`.
 
 5. Translate all string values in the new file, working in chunks:
    - Work by top-level YAML section

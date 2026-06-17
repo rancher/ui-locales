@@ -15,7 +15,7 @@ Find and translate untranslated strings in an existing locale file.
 
 3. Read both files:
    - `reference/en-us.yaml`
-   - `pkg/ui-locales/l10n/<locale-code>.yaml`
+   - `pkg/locales/l10n/<locale-code>.yaml`
 
 4. **Identify untranslated strings** — write and run a bash script that compares both files:
    - A string is untranslated if its value is identical to en-us.yaml

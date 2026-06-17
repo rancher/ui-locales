@@ -68,7 +68,7 @@ When translating large files, use chunking to stay within output limits:
 - Work by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.)
 - Within each section, translate all leaf values that need translation
 - **Maximum ~50 key-value pairs per chunk** — if a top-level section has more, split it into sub-chunks
-- After each chunk, write the updated content **directly to the locale file in the repo working tree** (e.g. `pkg/ui-locales/l10n/pt-br.yaml`) — **NOT** to a temp file, JSON file, or variable
+- After each chunk, write the updated content **directly to the locale file in the repo working tree** (e.g. `pkg/locales/l10n/pt-br.yaml`) — **NOT** to a temp file, JSON file, or variable
 - Verify each chunk was written by running `git diff --stat` — you must see changes to the locale file
 - Track progress: log how many strings were translated per chunk
 

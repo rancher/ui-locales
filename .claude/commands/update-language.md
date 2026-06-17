@@ -11,13 +11,13 @@ Update an existing language translation file to match the current `en-us.yaml`.
 
 1. Parse the argument to extract the locale code (e.g. `pt-br`, `fr-fr`, `es-es`).
 
-2. Check that `pkg/ui-locales/l10n/<locale-code>.yaml` exists. If it does NOT, stop and suggest using `/add-language` instead.
+2. Check that `pkg/locales/l10n/<locale-code>.yaml` exists. If it does NOT, stop and suggest using `/add-language` instead.
 
 3. Read `.github/workflows/shared/translation-rules.md` for the canonical translation rules. Follow them throughout.
 
 4. Read both files:
    - `reference/en-us.yaml` (source of truth)
-   - `pkg/ui-locales/l10n/<locale-code>.yaml` (file to update)
+   - `pkg/locales/l10n/<locale-code>.yaml` (file to update)
 
 5. Analyze the delta using bash — write and run a script that compares both files and reports:
    - **New keys**: present in en-us.yaml but missing from the locale file
