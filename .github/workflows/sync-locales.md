@@ -10,6 +10,8 @@ on:
   schedule: weekly
   workflow_dispatch:
 
+if: (github.repository_owner == 'rancher' || vars.ENABLE_AGENTIC_WORKFLOWS == 'true') && vars.DISABLE_AW_SYNC_LOCALES != 'true'
+
 permissions:
   contents: read
   issues: read
