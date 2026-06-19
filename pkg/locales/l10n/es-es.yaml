@@ -1,3 +1,10 @@
+# ---
+# locale: es-es (Spanish - Spain)
+# source-locale: en-us
+# synced-against-en-us-commit: 5f2c1a2 (2026-06-17)
+# last-updated: 2026-06-19
+# ---
+
 generic:
   unified: Unificado
   split: Dividido

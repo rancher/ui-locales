@@ -68,7 +68,18 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
 
    a. Identify what changed — keys added, removed, or values modified. Produce a summary.
 
-   b. Open a Pull Request that includes **only** the updated `reference/en-us.yaml`:
+   b. **Add a provenance header** to the top of the synced `reference/en-us.yaml` before committing. The header must be a YAML comment block with the following format (replace values accordingly):
+      ```yaml
+      # ---
+      # source: rancher/dashboard (master)
+      # source-url: https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml
+      # synced-commit: <short-hash-of-the-sync-commit> (<YYYY-MM-DD>)
+      # synced-by: PR #<pr-number>
+      # ---
+      ```
+      The `synced-commit` is the commit hash created for the sync, and `synced-by` is the PR number being opened. If the PR number is not yet known at commit time, use the branch name as a placeholder and update after the PR is created.
+
+   c. Open a Pull Request that includes **only** the updated `reference/en-us.yaml`:
       - Title: `chore: sync en-us.yaml from rancher/dashboard`
       - Body that summarizes: what changed (keys added, removed, values modified), with counts
       - Include a note: "After merging, run `/update-language <locale-code>` for each language that needs to be brought up to date."

@@ -21,6 +21,42 @@ When translating or modifying locale YAML files, these rules are non-negotiable:
 - If a key's value is a mapping (has children) in `reference/en-us.yaml`, it must also be a mapping in the output — never flatten a nested structure into a scalar
 - Values that are URLs or pure technical identifiers must not be translated
 
+## Provenance header
+
+Every locale file must have a **provenance comment block** at the very top of the file, before any YAML content. This header tracks which version of `en-us.yaml` the translation is synced against, making it easy to detect drift.
+
+### Format for translation files (`es-es.yaml`, `fr-fr.yaml`, `pt-br.yaml`, etc.)
+
+```yaml
+# ---
+# locale: <locale-code> (<Language - Region>)
+# source-locale: en-us
+# synced-against-en-us-commit: <short-hash> (<YYYY-MM-DD>)
+# last-updated: <YYYY-MM-DD>
+# ---
+```
+
+- `synced-against-en-us-commit`: the commit hash (from this repo) of the sync that last updated `reference/en-us.yaml`. Read this from the header in `reference/en-us.yaml`.
+- `last-updated`: the date when this translation file was last modified.
+
+### Format for the source file (`reference/en-us.yaml`)
+
+```yaml
+# ---
+# source: rancher/dashboard (master)
+# source-url: https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml
+# synced-commit: <short-hash> (<YYYY-MM-DD>)
+# synced-by: PR #<number>
+# ---
+```
+
+### Rules
+
+- **Always update** the provenance header when modifying a locale file — at minimum update `last-updated`.
+- **Always read** the `synced-commit` from `reference/en-us.yaml` when updating a translation file, and set `synced-against-en-us-commit` to that value.
+- If the header does not exist yet, add it. If it already exists, update it in place.
+- When comparing files to determine if updates are needed, check the `synced-against-en-us-commit` in the translation file against the `synced-commit` in `reference/en-us.yaml` — if they differ, the translation needs updating.
+
 ## YAML validation procedure
 
 After any translation work, validate the output file using bash/Node.js:
