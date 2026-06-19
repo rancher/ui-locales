@@ -27,6 +27,7 @@ generic:
   comma: ', '
   copy: Copiar
   copyToClipboard: Copiar texto al portapapeles
+  copyValueToClipboard: 'Copiar {value} al portapapeles'
   copiedToClipboard: Texto copiado al portapapeles
   create: Crear
   created: Creado
@@ -127,6 +128,7 @@ generic:
   deprecated: En desuso
   upgradeable: Actualizable
   installed: Instalado
+  installedMultiple: Instalado (múltiple)
   featured: Destacado
   shortFeatured: Dest
   category: Categoría
@@ -175,6 +177,7 @@ locale:
   zh-hans: 简体中文
   none: (Ninguno)
 nav:
+  skipToContent: Ir al contenido principal
   ariaLabel:
     clusterIconKeyCombo: Icono de combinación de teclas de acceso directo del clúster
     localClusterIcon: Icono de clúster local
@@ -422,7 +425,6 @@ accountAndKeys:
     notAllowed: No tiene permiso para administrar las claves de API
     apiEndpoint: 'Punto de conexión de la API:'
     copyApiEnpoint: Copiar punto de conexión de la API al portapapeles
-    normanTokenDeprecation: La función de Claves de API está siendo migrada a una nueva API. Las Claves de API existentes de la API heredada continuarán funcionando, pero las nuevas Claves de API se crearán usando la nueva API.
     add:
       description:
         label: Descripción
@@ -448,9 +450,7 @@ accountAndKeys:
           month: Meses
           year: Años
       scope: Alcance
-      userPrincipal: Principal de usuario
       noScope: Sin alcance
-      enabled: Token habilitado
     info:
       accessKey: Clave de acceso
       secretKey: Clave secreta
@@ -459,7 +459,6 @@ accountAndKeys:
       keyCreated: Se ha creado una nueva clave de API
       bearerTokenTip: 'La clave de acceso y la clave secreta se pueden enviar como nombre de usuario y contraseña para la autenticación básica HTTP para autorizar solicitudes. También puede combinarlas para usarlas como token de portador:'
       ttlLimitedWarning: El tiempo de vencimiento de esta clave de API se redujo debido a la configuración del sistema
-      expiryOptionsWithNever: Dado que "auth-token-max-ttl-minutes" está establecido en <= 0, la Clave de API no vencerá a menos que la opción "Vencer automáticamente" esté configurada en "Personalizado" y se establezca un tiempo de vencimiento personalizado.
 addClusterMemberDialog:
   title: Agregar miembro del clúster
 addonConfigConfirmation:
@@ -481,7 +480,7 @@ authConfig:
     unrestricted: Permitir cualquier usuario válido
   allowedPrincipalIds:
     title: Usuarios y grupos autorizados
-  associatedWarning: La cuenta de {provider} que se usa para habilitar el proveedor externo recibirá permisos de administrador. Si usa una cuenta de prueba o sin permisos de administrador, esa cuenta aún recibirá permisos de administrador. Vea <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuración de autenticación externa y usuarios principales</a> para entender por qué.
+  associatedWarning: 'La cuenta de {provider} que se usa para habilitar el proveedor externo recibirá permisos iguales a los del usuario de Rancher actualmente conectado. Vea <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuración de autenticación externa y usuarios principales</a> para entender por qué.'
   githubapp:
     clientId:
       label: ID de cliente
@@ -695,7 +694,7 @@ authConfig:
   azuread:
     tenantId:
       label: ID de inquilino
-      tooltip: Desde el portal de Azure AD
+      tooltip: Desde el centro de administración de Microsoft Entra
       placeholder: Una larga cadena UUID
     applicationId:
       label: ID de aplicación
@@ -715,6 +714,9 @@ authConfig:
       label: Punto de conexión de token
     authEndpoint:
       label: Punto de conexión de autenticación
+    endSessionEndpoint:
+      title: Endpoint de cierre de sesión
+      tooltip: "URL de {name} utilizada para cerrar la sesión de un usuario (p. ej. https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/logout)"
     groupMembershipFilter:
       label: Filtro de pertenencia al grupo
       enable: Limitar usuarios por pertenencia al grupo
@@ -722,17 +724,17 @@ authConfig:
       externalHelp: Consulte la documentación de expresiones de filtro OData para obtener más información.
       externalHelpLink: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/use-filter-expressions-in-odata-uris#filter-expressions
     reply:
-      info: Azure AD requiere una URL en la lista blanca para su servidor Rancher antes de comenzar la configuración. Asegúrese de que la siguiente URL esté en la sección URL de respuesta de su Portal de Azure. Tenga en cuenta que puede tardar hasta 5 minutos en propagarse.
+      info: Microsoft Entra ID requiere una URL en la lista blanca para su servidor Rancher antes de comenzar la configuración. Asegúrese de que la siguiente URL esté en la sección URL de respuesta de su centro de administración de Microsoft Entra. Tenga en cuenta que puede tardar hasta 5 minutos en propagarse.
       label: URL de respuesta
       ariaLabel: Copiar URL de respuesta al portapapeles
     updateEndpoint:
       button: Actualizar endpoint
       banner:
-        message: 'La autenticación de Azure AD debe actualizarse: está usando la API de Azure Graph, que está obsoleta y será eliminada en favor de Microsoft Graph API.'
+        message: 'La autenticación de Microsoft Entra ID debe actualizarse: está usando la API de Azure AD Graph, que fue obsoleta a finales de 2022.'
         linkText: Actualizar aquí.
       modal:
         title: ¿Está seguro? Esta actualización es irreversible.
-        body: <p><b>Es posible que necesite realizar algunos cambios adicionales</b>. Asegúrese de que la aplicación de Azure AD tenga el permiso <b>Application</b> Directory.Read.All de Microsoft Graph.<br> Si los endpoints fueron personalizados al configurar la autenticación de Azure AD en Rancher, no se actualizarán automáticamente. </p>
+        body: '<p><b>Es posible que necesite realizar algunos cambios adicionales</b>. Asegúrese de que la aplicación de Microsoft Entra ID tenga el permiso <b>Application</b> Directory.Read.All de Microsoft Graph.<br> Si los endpoints fueron personalizados al configurar la autenticación de Microsoft Entra ID en Rancher, no se actualizarán automáticamente. </p>'
   oidc:
     endSessionEndpoint:
       title: Endpoint de cierre de sesión
@@ -775,6 +777,7 @@ authConfig:
       label: Alcances
       placeholder: openid
       protip: Los alcances <code>openid</code>, <code>profile</code> y <code>email</code> son obligatorios y no se pueden eliminar.
+      missingRequired: "Faltan los {count, plural, =1 {alcance obligatorio} other {alcances obligatorios}}: {scopes}"
     pkce:
       label: Habilitar PKCE (S256)
       tooltip: Habilite Proof Key for Code Exchange (PKCE) usando el método de desafío de código S256.
@@ -789,6 +792,9 @@ authConfig:
     groupSearch:
       label: Habilitar búsqueda de grupos
       tooltip: Permite a los usuarios con permisos apropiados buscar y ver todos los grupos dentro del realm del proveedor OIDC.
+    clientAuthenticatedSearch:
+      label: Habilitar búsqueda autenticada por cliente
+      tooltip: Usar las credenciales del cliente OIDC para autenticarse en Keycloak al buscar usuarios o grupos. Esto omitirá el RBAC basado en usuarios dentro del realm
   stateBanner:
     disabled: El proveedor de autenticación {provider} está actualmente deshabilitado.
     enabled: El proveedor de autenticación {provider} está actualmente habilitado.
@@ -997,6 +1003,11 @@ asyncButton:
     success: Generado
     waiting: Generando&hellip;
 backupRestoreOperator:
+  monitoring:
+    label: Monitoreo
+    enableMetrics: Habilitar métricas
+    enableServiceMonitor: Habilitar ServiceMonitor
+    serviceMonitorTooltip: Requiere que rancher-monitoring esté instalado antes de que se pueda habilitar.
   backup:
     label: Conjunto de recursos
     description: El conjunto de recursos determina qué recursos recopila el operador de copia de seguridad y restauración en una copia de seguridad
@@ -1111,7 +1122,6 @@ catalog:
         label: Versiones del gráfico
         showMore: Mostrar más
         showLess: Mostrar menos
-        missingVersionDate: No hay fecha disponible para esta versión del gráfico
       home: Página de inicio
       repository: Página del repositorio
       maintainers: Mantenedores
@@ -1125,12 +1135,18 @@ catalog:
     deprecatedWarning: '{chartName} ha sido marcado como obsoleto. Tenga precaución al instalar este gráfico Helm ya que podría eliminarse en el futuro.'
     experimentalWarning: '{chartName} ha sido marcado como experimental. Tenga precaución al instalar este gráfico Helm ya que podría no funcionar como se espera.'
     deprecatedAndExperimentalWarning: '{chartName} ha sido marcado como obsoleto y experimental. Tenga precaución al instalar este gráfico Helm ya que podría eliminarse en el futuro y podría no funcionar como se espera.'
+    viewReadmeSeparately:
+      label: Ver por separado
+      tooltip: Abrir el readme en una nueva pestaña
+    installedAppsSelector:
+      ariaLabel: Seleccionar instancia de aplicación instalada
     chartButton:
       action:
         install: Instalar esta versión
         edit: Editar la versión actual
         upgrade: Actualizar a esta versión
         downgrade: Revertir a esta versión
+        installNew: Instalar como una nueva instancia
   charts:
     browseAriaLabel: Mostrar solo cuadrícula de gráficos
     iconAlt: Ícono para el elemento de tarjeta/cuadrícula de {app}
@@ -1157,14 +1173,10 @@ catalog:
       linux: Linux
       windows: Windows
     search: Buscar en el catálogo...
-    deprecatedChartsFilter:
-      label: Mostrar aplicaciones obsoletas
     addNewRepo:
       label: Agregar nuevo
       ariaLabel: Agregar un nuevo repositorio
     appChartCard:
-      subHeaderItem:
-        missingVersionDate: La fecha de última actualización no está disponible para este gráfico
       footerItem:
         ariaLabel: Aplicar filtro {filter}
     statusFilterCautions:
@@ -1339,6 +1351,7 @@ catalog:
       releaseName: Nombre de la versión
       releaseNamespace: Espacio de nombres de la versión
   repo:
+    add: Agregar repositorio
     action:
       refresh: Actualizar
     all: Todos
@@ -1393,6 +1406,8 @@ catalog:
     refreshInterval:
       label: Intervalo de actualización
       placeholder: 'predeterminado: {hours}'
+    error:
+      refresh: Error al actualizar el repositorio
   tools:
     iconAlt: Ícono para la herramienta de clúster {app}
     header: Herramientas del clúster
@@ -1461,9 +1476,12 @@ compliance:
       =1 { Cualquier escaneo programado que use este perfil dejará de funcionar. }
       other { Cualquier escaneo programado que use cualquiera de estos perfiles dejará de funcionar. }
     }
-  downloadAllReports: Descargar todos los informes guardados
-  downloadLatestReport: Descargar el informe más reciente
-  downloadReport: Descargar informe
+  downloadAllReports: Descargar todos los informes guardados (CSV)
+  downloadAllReportsXCCDF: Descargar todos los informes guardados (XCCDF)
+  downloadLatestReport: Descargar el informe más reciente (CSV)
+  downloadLatestReportXCCDF: Descargar el informe más reciente (XCCDF)
+  downloadReport: Descargar informe (CSV)
+  downloadReportXCCDF: Descargar informe (XCCDF)
   maxKubernetesVersion: Versión máxima permitida de Kubernetes
   minKubernetesVersion: Versión mínima requerida de Kubernetes
   noProfiles: No hay perfiles de análisis de clúster válidos para seleccionar para este tipo de clúster.
@@ -1472,6 +1490,8 @@ compliance:
   reports: Informes
   retention: Recuento de retención
   scan:
+    errorNoParsedNodes: No se pudieron analizar nodos de los resultados del escaneo, por lo que no se puede generar un informe.
+    errorDownload: Error al descargar el archivo
     description: Ejecutar un escaneo de cumplimiento CIS
     fail: Fallido
     lastScanTime: Hora del último análisis
@@ -2281,7 +2301,9 @@ cluster:
       etcdControlPlaneWarning: No recomendamos usar el escalador automático con grupos de máquinas que tienen los roles etcd o plano de control. Puede modificar el yaml si desea anular el valor actual.
     name:
       label: Nombre del grupo
+      notNamed: (Sin nombre)
       placeholder: Se generará uno aleatorio de forma predeterminada
+      unique: Los nombres de grupo deben ser únicos
     nodeTotals:
       label:
         controlPlane: '{count} plano de control'
@@ -2327,7 +2349,7 @@ cluster:
       label: Reemplazo automático
       toolTip: Si es mayor que 0, los nodos inalcanzables durante esta duración se eliminarán y reemplazarán automáticamente.
       unit: Segundos
-  managementTimeout: El clúster tardará en estar disponible. Es posible que el clúster haya sido creado. Le sugerimos verificar el estado del clúster.
+  managementTimeout: El {type} {name} tardará en estar disponible. Es posible que el clúster haya sido creado. Le sugerimos verificar la página de clústeres antes de intentar crear otro.
   memberRoles:
     removeMessage: 'Nota: Eliminar a un usuario no eliminará sus permisos de proyecto'
     addClusterMember:
@@ -2418,6 +2440,7 @@ cluster:
     create-rke2: Aprovisionar nuevos nodos y crear un clúster usando RKE2/K3s
     create-template: Usar una plantilla de catálogo para crear un clúster
     register-custom: Importar cualquier clúster de Kubernetes
+    create-capi: Crear un clúster usando Cluster API
   rke2:
     banner:
       psaChange: PSACT ahora se establece automáticamente en el valor predeterminado de Rancher
@@ -2655,6 +2678,7 @@ cluster:
     registry: Registros
     upgrade: Actualización
     registration: Registro
+    nodePools: Grupos de nodos
   rotateCertificates:
     label: Rotar certificados
     modalTitle: Rotar certificados del clúster
@@ -2666,8 +2690,6 @@ cluster:
     v2: RKE2/K3s
   validation:
     iamInstanceProfileName: Si se selecciona el proveedor cloud de Amazon, el "Nombre del Perfil de Instancia IAM" debe definirse para cada pool de máquinas.
-  capi:
-    notSupported: La gestión de clústeres aprovisionados mediante proveedores de infraestructura CAPI a través de la UI está actualmente limitada.
 clusterIndexPage:
   hardwareResourceGauge:
     consumption: '{useful} de {total} {units} {suffix}'
@@ -2764,6 +2786,8 @@ cruResource:
   reviewYaml: Seguir editando YAML
   previewYaml: Editar como YAML
   showYaml: Ver como YAML
+  tableOfContents:
+    jumpTo: Ir a...
 providers:
   hosted:
     title: Proveedores alojados
@@ -2771,8 +2795,8 @@ providers:
 drivers:
   kontainer:
     title: Controladores de Clúster
-    emberDeprecationMessage: "El soporte para plugins de UI (basados en Ember) para controladores de clúster y nodo fue obsoleto en Rancher 2.11.0 y se eliminará en una versión futura. Deben migrarse al nuevo <a href=\"https://extensions.rancher.io\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">marco de Extensiones de UI</a>."
-    refreshError: 'Error al actualizar los controladores de clúster: {error}'
+    emberRemovalMessage: 'El soporte para plugins de UI (basados en Ember) para controladores de clúster y nodo fue obsoleto en Rancher 2.11.0 y ha sido eliminado en 2.15.0. Si aún necesita uno de estos plugins, deberá migrarse al nuevo <a href="https://extensions.rancher.io/extensions/next/provisioning/hosted-provider/overview" target="_blank" rel="noopener noreferrer nofollow">marco de Extensiones de UI</a>.'
+    emberRemovalTooltip: 'El soporte para plugins de UI (basados en Ember) para controladores de clúster y nodo fue obsoleto en Rancher 2.11.0 y ha sido eliminado en 2.15.0. Si aún necesita este plugin, deberá migrarse al nuevo marco de Extensiones de UI.'
   node:
     title: Controladores de Nodo
   add:
@@ -2919,7 +2943,7 @@ fleet:
       add: Agregar selector
     tolerations:
       label: Tolerancias
-      description: Lista de manchas de nodo a tolerar (requiere Kubernetes >= 1.6)
+      description: Lista de manchas de nodo a tolerar
       add: Agregar tolerancia
     priorityClassName:
       label: Nombre de clase de prioridad
@@ -4027,8 +4051,8 @@ landing:
     docs: Documentación
     forums: Foros
   commercial:
-    title: Soporte comercial
-    body: Conozca el soporte comercial
+    title: Rancher Prime
+    body: Conozca Rancher Prime
   landingPrefs:
     body: Puede cambiar a dónde llega cuando inicia sesión
     ariaLabelTakeMeToCluster: Seleccionar a qué clúster dirigirse después del inicio de sesión
@@ -4924,6 +4948,7 @@ node:
         cpu: CPU
         memory: MEMORIA
         pods: PODS
+        running: En ejecución
       diskPressure: Presión de Disco
       kubelet: kubelet
       memoryPressure: Presión de Memoria
@@ -5329,6 +5354,7 @@ inactivity:
   cta: Reanudar sesión
 plugins:
   altIcon: Ícono para la tarjeta de extensión {extension}
+  deprecatedExtension: Esta extensión está obsoleta y podría ser eliminada del catálogo próximamente.
   incompatiblePrimeOnly: La última versión de esta extensión ({ version }) necesita Rancher Prime para instalarse.
   incompatibleRancherVersion: La última versión de esta extensión ({ version }) no es compatible con la versión actual de Rancher ({ required }).
   incompatibleKubeVersion: La última versión de esta extensión ({ version }) no es compatible con la versión actual de Kube ({ required }).
@@ -5461,6 +5487,9 @@ plugins:
     prompt: ¿Está seguro de que desea instalar esta extensión?
     version: Versión
     warnNotCertified: Asegúrese de estar al tanto de los riesgos de instalar extensiones de autores no confiables
+    alreadyInstalledTitle: Esta extensión ya está instalada desde otra fuente
+    alreadyInstalledPrompt: Para instalarla desde esta fuente, necesita desinstalar la versión existente primero y recargar la página (obligatorio). ¿Desea continuar?
+    uninstallExisting: Desinstalar la versión existente
   upgrade:
     label: Actualizar
     title: Actualizar extensión {name}
@@ -5483,7 +5512,7 @@ plugins:
     banner: Hay nuevos repositorios de extensiones disponibles. Para habilitar estos repositorios, haga clic en el botón de la derecha.
     bannerBtn: Agregar repositorios
     title: Agregar repositorios de extensiones
-    prompt: Puede instalar múltiples repositorios de extensiones de Rancher para aumentar su catálogo de extensiones
+    prompt: Habilite repositorios adicionales para acceder a más extensiones
   setup:
     installed: Ya instalado
     uninstalled: Ya desinstalado
@@ -5499,7 +5528,7 @@ plugins:
       prompt: Esto le llevará a la página donde puede habilitar la marca de características necesaria para habilitar el soporte de extensiones.
       featuresButton: Ir a marcas de características
       airgap: Las instalaciones en entornos sin conexión NO deben habilitar esta función
-      addRancherRepo: Agregar repositorio oficial de extensiones de Rancher
+      addRancherRepo: Agregar repositorio de extensiones de Rancher Prime
       addPartnersRancherRepo: Agregar repositorio de extensiones de socios de Rancher
     remove:
       label: Deshabilitar soporte de extensiones
@@ -5654,7 +5683,6 @@ projectMembers:
     createNs: Crear Espacios de Nombres
     configmapsManage: Gestionar Mapas de Configuración
     ingressManage: Gestionar Entradas
-    projectcatalogsManage: Gestionar Catálogos de Proyecto
     projectroletemplatebindingsManage: Gestionar Miembros del Proyecto
     secretsManage: Gestionar Secretos
     serviceaccountsManage: Gestionar Cuentas de Servicio
@@ -5664,7 +5692,6 @@ projectMembers:
     configmapsView: Ver Mapas de Configuración
     ingressView: Ver Entradas
     monitoringUiView: Ver Monitoreo
-    projectcatalogsView: Ver Catálogos de Proyecto
     projectroletemplatebindingsView: Ver Miembros del Proyecto
     secretsView: Ver Secretos
     serviceaccountsView: Ver Cuentas de Servicio
@@ -6026,6 +6053,8 @@ resourceList:
   nsFiltering: Seleccione uno o más espacios de nombres o proyectos usando el filtro de arriba.
   nsFilteringGeneric: Seleccione una opción válida de espacio de nombres o proyecto usando el filtro de arriba.
   nsFilterToolTip: El filtrado está restringido a proyectos y espacios de nombres
+  stateFilterApplied: "Filtro de estado aplicado:"
+  clearStateFilter: "Limpiar filtro"
 resourceLoadingIndicator:
   loading: Cargando
 resourceTable:
@@ -6038,6 +6067,7 @@ resourceTable:
     cluster: Agrupar por clúster
     device: Agrupar por Dispositivo
     pool: Agrupar por Pool
+    workspace: Agrupar por espacio de trabajo
   groupLabel:
     cluster: <span>Clúster:</span> {name}
     notInACluster: No está en un Clúster
@@ -6341,11 +6371,7 @@ setup:
   currentPassword: Contraseña de arranque
   confirmPassword: Confirmar nueva contraseña
   defaultPassword:
-    intro: "Parece que esta es su primera visita a {vendor}; si preconfiguró su propia contraseña de arranque, ingrésela aquí. De lo contrario, se ha generado una aleatoria para usted. Para encontrarla:<br/><br/>"
-    dockerPrefix: 'Para una instalación con "docker run":'
-    dockerPs: 'Encuentre su ID de contenedor con <code>docker ps</code>, luego ejecute:'
-    dockerSuffix: ''
-    helmPrefix: 'Para una instalación con Helm, ejecute:'
+    intro: "Parece que esta es su primera visita a {vendor}; si preconfiguró su propia contraseña de arranque, ingrésela aquí. De lo contrario, se ha generado una aleatoria para usted. Para encontrarla, ejecute:<br/><br/>"
     helmSuffix: ''
   eula: 'Al marcar la casilla, acepta el <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">Acuerdo de Licencia de Usuario Final y Términos y Condiciones</a>'
   newPassword: Nueva contraseña
@@ -6710,7 +6736,6 @@ storageClass:
       placeholder: Nombre de clase de almacenamiento en el clúster Harvester host
       tooltip: De forma predeterminada, se usa la clase de almacenamiento predeterminada del clúster Harvester host.
 tableHeaders:
-  isLegacy: Legado
   assuredConcurrencyShares: Cuotas de concurrencia asegurada
   autoscaler: Escalador automático
   accessKey: Clave de acceso
@@ -6841,6 +6866,7 @@ tableHeaders:
   progress: Progreso
   podImages: Imagen
   podRestarts: Reinicios
+  podLastRestart: Último reinicio
   pods: Pods
   pod-Selector: Selector de Pod
   providers: Proveedores
@@ -7254,6 +7280,35 @@ wm:
       containerError: '{ logLevel }: Al contenedor le falta el ejecutable de shell (/bin/sh)'
   kubectlShell:
     title: 'Kubectl: {name}'
+workloadDashboard:
+  title: Resumen de cargas de trabajo
+  subtitle:
+    allNamespaces: "Para todos los espacios de nombres"
+    userNamespaces: "Solo para espacios de nombres de usuario"
+    systemNamespaces: "Solo para espacios de nombres del sistema"
+    namespacedOnly: "Solo para recursos con espacio de nombres"
+    clusterOnly: "Solo para recursos del clúster"
+    project: "Para los espacios de nombres del proyecto {name}"
+    namespace: "Para el espacio de nombres {name}"
+    multipleSelected: "Para {selected} elementos seleccionados"
+  workloadCount: |-
+    ({count, plural,
+      =0 {Sin cargas de trabajo}
+      =1 {{count} carga de trabajo}
+      other {{count} cargas de trabajo}
+    })
+  sections:
+    byState: Por estado
+    byType: Por tipo
+    byNamespace: Por espacio de nombres
+  errors:
+    noAccess: "Sin acceso a {type}"
+    fetchType: "Error al obtener {type}"
+    fetchAll: Error al obtener los resúmenes de cargas de trabajo
+  empty:
+    title: No hay cargas de trabajo para mostrar
+    message: "Sugerencias: Actualice el filtro de espacios de nombres anterior o <resetLink>restablezca el filtro de espacios de nombres</resetLink>."
+    docsMessage: "¿Desea obtener más información sobre las cargas de trabajo? Lea nuestra <docsLink>documentación</docsLink>."
 workload:
   scaleWorkloads: Escalar cargas de trabajo
   healthWorkloads: Estado de salud de Jobs/Pods
@@ -7804,6 +7859,7 @@ model:
       genericoidc: Proveedor OIDC
       cognito: Amazon Cognito
     name:
+      azuread: Microsoft Entra ID
       keycloak: Keycloak (SAML)
       keycloakoidc: Keycloak (OIDC)
     provider:
@@ -7811,7 +7867,7 @@ model:
       local: Local
       multiple: Múltiple
       activedirectory: ActiveDirectory
-      azuread: AzureAD
+      azuread: Microsoft Entra ID
       github: GitHub
       githubapp: GitHub App
       keycloak: Keycloak
@@ -7877,10 +7933,7 @@ typeDescription:
   monitoring.coreos.com.prometheus: Un servidor Prometheus es un despliegue de Prometheus cuya configuración de scrape y reglas son determinadas por ServiceMonitors, PodMonitors y PrometheusRules seleccionados, y cuyas alertas se enviarán a todos los Alertmanagers seleccionados.
   monitoring.coreos.com.alertmanager: Un administrador de alertas es un despliegue cuya configuración será especificada por un secreto en el mismo espacio de nombres, que determina qué alertas deben ir a qué receptor.
   node: El recurso base Nodo de Kubernetes representa una máquina virtual o física que aloja despliegues. Para gestionar el ciclo de vida de la máquina, si está disponible, vaya a Gestión de Clústeres.
-  catalog.cattle.io.clusterrepo: Un repositorio de gráficos es un repositorio Helm o catálogo de aplicaciones basado en git de {vendor}. Proporciona la lista de gráficos disponibles en el clúster.
-  catalog.cattle.io.clusterrepo.local: ' Un repositorio de gráficos es un repositorio Helm o catálogo de aplicaciones basado en git de {vendor}. Proporciona la lista de gráficos disponibles en el clúster. Las plantillas de clúster se despliegan mediante gráficos Helm.'
   catalog.cattle.io.operation: Una operación es la lista de operaciones Helm recientes que se han aplicado al clúster.
-  catalog.cattle.io.app: Una aplicación instalada es un gráfico Helm 3 que fue instalado mediante nuestros gráficos o a través de la CLI de Helm.
   logging.banzaicloud.io.clusterflow: Los registros del clúster se recopilarán y se enviarán a la Salida de Clúster seleccionada.
   logging.banzaicloud.io.clusteroutput: Una salida de clúster define qué proveedores de registro pueden recibir los registros y solo es efectiva cuando se despliega en el espacio de nombres donde está el operador de registro.
   logging.banzaicloud.io.flow: Un flujo define qué registros recopilar y filtrar, así como a qué salida enviarlos. El flujo es un recurso de espacio de nombres, lo que significa que solo se recopilarán registros del espacio de nombres donde se despliega.
@@ -8469,6 +8522,11 @@ typeLabel:
       one { Token de Registro de Clúster }
       other { Tokens de Registro de Clúster }
     }
+  turtles-capi.cattle.io.capiprovider: |-
+    {count, plural,
+      one { Proveedor de Cluster API }
+      other { Proveedores de Cluster API }
+    }
 oidcclient:
   a11y:
     copyText:
@@ -8601,6 +8659,9 @@ registryConfig:
   toolTip: Cuando una imagen necesite descargarse del nombre de host del registro dado, esta información se usará para verificar la identidad del registro y autenticarse en él.
   addLabel: Agregar registro
   description: Defina la configuración de TLS y credenciales para cada nombre de host de registro y espejo.
+  caBundle:
+    tooltip: Acepta un certificado CA PEM o un CA PEM codificado en base64.
+    validationError: Paquete de certificados CA no válido. Debe ser un certificado CA PEM o un CA PEM codificado en base64.
 advancedSettings:
   setEnv: Establecido por variable de entorno
   hideShow: Ocultar/mostrar configuración
@@ -8634,9 +8695,8 @@ advancedSettings:
     ingress-ip-domain: "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
     server-url: URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
     system-default-registry: Registro privado para todas las imágenes de contenedores del sistema Rancher.
-    ui-index: Ubicación del índice HTML para la UI del Cluster Manager.
     ui-dashboard-index: Ubicación del índice HTML para la UI de {appName}.
-    ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en los ajustes ui-index y ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
+    ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
     ui-pl: Nombre de empresa para etiqueta privada.
     auth-user-info-max-age-seconds: La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
     auth-user-info-resync-cron: Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
@@ -8757,7 +8817,6 @@ performance:
     label: Paginación del lado del servidor
     description: Por defecto, las listas obtendrán todos los recursos y paginarán localmente en el navegador. La paginación del lado del servidor mueve esto del navegador al servidor, mejorando el rendimiento.
     applicable: La paginación del lado del servidor aplica a tipos de recursos
-    featureFlag: Habilitar/Deshabilitar <i class="mr-5">"Paginación del lado del servidor"</i> ahora se hace únicamente mediante la <i class="mr-5">ui-sql-cache</i>&nbsp;<a href="{ffUrl}">Marca de características</a>
     resources:
       generic: la mayoría de los recursos en la sección 'Más recursos' del clúster
       all: Todos los recursos
@@ -8936,49 +8995,30 @@ customLinks:
     slack: Slack
     issues: Reportar un Problema
     getStarted: Primeros Pasos
-    commercialSupport: Soporte comercial
+    commercialSupport: Rancher Prime
     appCo: Colección de aplicaciones SUSE
-support:
-  bannerImage: Imagen del banner de la página de soporte
-  community:
-    title: SUSE Rancher proporciona soporte de clase mundial
-    linksTitle: Soporte comunitario
-    learnMore: Obtenga más información sobre el soporte de SUSE Rancher
-    pricing: Contáctenos para conocer precios
-  subscription:
-    haveSupport: ¿Ya tiene soporte?
-    addSubscription: Agregar un ID de suscripción
-    removeSubscription: Eliminar su ID de suscripción
-    addTitle: Agregue su ID de suscripción SUSE
-    addLabel: 'Por favor ingrese un ID de suscripción válido:'
-    removeTitle: ¿Eliminar su ID?
-    removeBody: 'Nota: Esto no afectará su suscripción.'
-  suse:
-    title: Excelentes noticias - Está cubierto
-    editBrand: Personalizar tema de la UI
-    access:
-      title: Obtener soporte
-      text: Inicie sesión en el Centro de clientes SUSE para acceder al soporte de su suscripción
-      action: Centro de clientes SUSE
-      aws:
-        generateConfig: Generar configuración de soporte
-        text: Inicie sesión en el Centro de clientes SUSE para acceder al soporte de su suscripción. ¿Necesita abrir un nuevo caso de soporte? Descargue un archivo de configuración de soporte a continuación.
   promos:
     one:
-      title: Soporte 24x7
-      text: Proporcionamos SLAs claramente definidos y opciones de soporte las 24 horas.
+      title: Primeros pasos
+      text: Ya sea un usuario nuevo o experimentado de Kubernetes, tenemos los recursos para ayudarle a aprovechar al máximo Rancher.
     two:
-      title: Resolución de problemas
-      text: Ejecute los productos SUSE Rancher con confianza, sabiendo que los desarrolladores que los crearon están disponibles para resolver problemas rápidamente.
+      title: Únase a la comunidad
+      text: Conéctese con otros usuarios de Rancher y el equipo de ingeniería a través de eventos comunitarios, foros en línea y más.
     three:
-      title: Solución de problemas
-      text: Nos enfocamos en descubrir la causa raíz de cualquier problema, ya sea relacionado con productos SUSE, Kubernetes, Docker o su infraestructura subyacente.
+      title: Documentación
+      text: Encuentre respuestas en la documentación, desde guías detalladas de procedimientos hasta referencias para la API, CLI y más.
     four:
       title: Innove con libertad
       text: Aproveche nuestra compatibilidad certificada con una amplia gama de proveedores de Kubernetes, sistemas operativos y software de código abierto.
-embedding:
-  retry: Reintentar
-  unavailable: La UI del administrador de clúster no está disponible
+  suse:
+    editBrand: Personalizar tema de la interfaz
+    access:
+      title: Obtener soporte
+      text: Cuando necesite ayuda con Rancher, tiene acceso a un equipo de expertos sin igual.
+      action: Abrir una solicitud de soporte
+      aws:
+        text: El soporte está disponible a través de su suscripción de Amazon Marketplace.
+        generateConfig: Generar configuración de soporte
 serverUpgrade:
   title: El servidor de {vendor} ha cambiado
   message: La página se recargó porque la versión de {vendor} en su servidor cambió.

@@ -30,6 +30,7 @@ generic:
   comma: ', '
   copy: Copier
   copyToClipboard: Copier le texte dans le presse-papiers
+  copyValueToClipboard: 'Copier {value} dans le presse-papiers'
   copiedToClipboard: Texte copié dans le presse-papiers
   create: Créer
   created: Créé
@@ -131,6 +132,7 @@ generic:
   deprecated: Obsolète
   upgradeable: Mise à niveau disponible
   installed: Installé
+  installedMultiple: Installé (multiple)
   featured: En vedette
   shortFeatured: Vedette
   category: Catégorie
@@ -183,6 +185,7 @@ locale:
   none: (Aucun)
 
 nav:
+  skipToContent: Passer au contenu principal
   ariaLabel:
     clusterIconKeyCombo: Icône de raccourci clavier du cluster
     localClusterIcon: Icône du cluster local
@@ -438,7 +441,6 @@ accountAndKeys:
     notAllowed: "Vous n'avez pas la permission de gérer les clés API"
     apiEndpoint: "Point de terminaison API :"
     copyApiEnpoint: Copier le point de terminaison API dans le presse-papiers
-    normanTokenDeprecation: "La fonctionnalité Clés API est en cours de migration vers une nouvelle API. Les clés API existantes de l'ancienne API continueront de fonctionner, mais les nouvelles clés API seront créées avec la nouvelle API."
     add:
       description:
         label: Description
@@ -464,9 +466,7 @@ accountAndKeys:
           month: Mois
           year: Années
       scope: Périmètre
-      userPrincipal: Principal utilisateur
       noScope: Aucun périmètre
-      enabled: Token activé
     info:
       accessKey: "Clé d'accès"
       secretKey: Clé secrète
@@ -475,7 +475,6 @@ accountAndKeys:
       keyCreated: Une nouvelle clé API a été créée
       bearerTokenTip: "La clé d'accès et la clé secrète peuvent être envoyées comme nom d'utilisateur et mot de passe pour l'authentification HTTP Basic afin d'autoriser les requêtes. Vous pouvez également les combiner pour les utiliser comme token porteur :"
       ttlLimitedWarning: "Le délai d'expiration de cette clé API a été réduit en raison de la configuration du système"
-      expiryOptionsWithNever: "Puisque \"auth-token-max-ttl-minutes\" est défini sur <= 0, la clé API n'expirera pas sauf si l'option \"Expiration automatique\" est définie sur \"Personnalisé\" et qu'un délai d'expiration personnalisé est défini."
 addClusterMemberDialog:
   title: Ajouter un membre au cluster
 
@@ -500,7 +499,7 @@ authConfig:
     unrestricted: Autoriser tout utilisateur valide
   allowedPrincipalIds:
     title: Utilisateurs et groupes autorisés
-  associatedWarning: "Le compte {provider} utilisé pour activer le fournisseur externe recevra les autorisations d'administrateur. Si vous utilisez un compte de test ou non-administrateur, ce compte recevra quand même des autorisations de niveau administrateur. Voir <a href=\"{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Configuration de l'authentification externe et utilisateurs principaux</a> pour comprendre pourquoi."
+  associatedWarning: 'Le compte {provider} utilisé pour activer le fournisseur externe recevra des autorisations équivalentes à celles de l''utilisateur Rancher actuellement connecté. Voir <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuration de l''authentification externe et utilisateurs principaux</a> pour comprendre pourquoi.'
   githubapp:
     clientId:
       label: ID client
@@ -714,7 +713,7 @@ authConfig:
   azuread:
     tenantId:
       label: ID de locataire
-      tooltip: Depuis le portail Azure AD
+      tooltip: Depuis le centre d'administration Microsoft Entra
       placeholder: 'Une longue chaîne UUID'
     applicationId:
       label: "ID d'application"
@@ -734,6 +733,9 @@ authConfig:
       label: Point de terminaison Token
     authEndpoint:
       label: Point de terminaison Auth
+    endSessionEndpoint:
+      title: Point de terminaison de fin de session
+      tooltip: "URL {name} utilisée pour déconnecter un utilisateur de sa session (ex. https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/logout)"
     groupMembershipFilter:
       label: "Filtre d'appartenance aux groupes"
       enable: Limiter les utilisateurs par appartenance aux groupes
@@ -741,17 +743,17 @@ authConfig:
       externalHelp: Consultez la documentation sur les expressions de filtre OData pour plus d’informations.
       externalHelpLink: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/use-filter-expressions-in-odata-uris#filter-expressions
     reply:
-      info: "Azure AD nécessite une URL sur liste blanche pour votre serveur Rancher avant de commencer cette configuration. Veuillez vous assurer que l'URL suivante est définie dans la section URL de réponse de votre portail Azure. Notez qu'il peut falloir jusqu'à 5 minutes pour que l'URL soit propagée."
+      info: "Microsoft Entra ID nécessite une URL sur liste blanche pour votre serveur Rancher avant de commencer cette configuration. Veuillez vous assurer que l'URL suivante est définie dans la section URL de réponse de votre centre d'administration Microsoft Entra. Notez qu'il peut falloir jusqu'à 5 minutes pour que l'URL soit propagée."
       label: URL de réponse
       ariaLabel: Copier l’URL de réponse dans le presse-papiers
     updateEndpoint:
       button: Mettre à jour le point de terminaison
       banner:
-        message: "Azure AD Authentication doit être mis à jour : il utilise l'API Azure Graph, qui sera dépréciée. Veuillez mettre à jour vers la version actuelle."
+        message: "L'authentification Microsoft Entra ID doit être mise à jour : elle utilise l'API Azure AD Graph, qui a été dépréciée fin 2022."
         linkText: 'Mettre à jour ici.'
       modal:
         title: 'Êtes-vous sûr ? Cette mise à jour est irréversible.'
-        body: "<p><b>Vous devrez peut-être apporter des modifications supplémentaires</b>. Veuillez vous assurer que l'application Azure AD dispose de l'autorisation <b>Application</b> Directory.Read.All ajoutée à Microsoft Graph.<br> Si des points de terminaison ont été personnalisés lors de la configuration de l'authentification Azure AD dans Rancher, ils ne seront pas mis à jour automatiquement. </p>"
+        body: "<p><b>Vous devrez peut-être apporter des modifications supplémentaires</b>. Veuillez vous assurer que l'application Microsoft Entra ID dispose de l'autorisation <b>Application</b> Directory.Read.All ajoutée à Microsoft Graph.<br> Si des points de terminaison ont été personnalisés lors de la configuration de l'authentification Microsoft Entra ID dans Rancher, ils ne seront pas mis à jour automatiquement. </p>"
   oidc:
     endSessionEndpoint: 
       title: Point de terminaison de fin de session
@@ -794,6 +796,7 @@ authConfig:
       label: Portées
       placeholder: openid
       protip: Les scopes <code>openid</code>, <code>profile</code> et <code>email</code> sont requis et seront toujours inclus.
+      missingRequired: "Les {count, plural, =1 {scope requis est manquant} other {scopes requis sont manquants}} : {scopes}"
     pkce:
       label: Activer PKCE (S256)
       tooltip: 'Activer le Proof Key for Code Exchange (PKCE) en utilisant la méthode de défi de code S256. Lorsque activé, Rancher génère un vérificateur de code lors de la demande de jetons.'
@@ -808,6 +811,9 @@ authConfig:
     groupSearch:
       label: Activer la recherche de groupes
       tooltip: "Permet aux utilisateurs disposant des autorisations appropriées de rechercher et d'afficher tous les groupes dans le domaine du fournisseur OIDC. Cela peut être utile pour les administrateurs qui doivent attribuer des rôles globaux à des groupes dont ils ne sont pas membres."
+    clientAuthenticatedSearch:
+      label: Activer la recherche authentifiée par le client
+      tooltip: "Utiliser les identifiants client OIDC pour s'authentifier auprès de Keycloak lors de la recherche d'utilisateurs ou de groupes. Cela contournera le RBAC basé sur l'utilisateur au sein du domaine"
   stateBanner:
     disabled: "Le fournisseur d'authentification {provider} est actuellement désactivé."
     enabled: "Le fournisseur d'authentification {provider} est actuellement activé."
@@ -1020,6 +1026,11 @@ asyncButton:
     waiting: 'Génération&hellip;'
 
 backupRestoreOperator:
+  monitoring:
+    label: Surveillance
+    enableMetrics: Activer les métriques
+    enableServiceMonitor: Activer le ServiceMonitor
+    serviceMonitorTooltip: Nécessite que rancher-monitoring soit installé avant de pouvoir être activé.
   backup:
     label: Ensemble de ressources
     description: L'ensemble de ressources détermine quelles ressources l'opérateur de sauvegarde-restauration collecte dans une sauvegarde
@@ -1135,7 +1146,6 @@ catalog:
         label: Versions du graphique
         showMore: Afficher plus
         showLess: Afficher moins
-        missingVersionDate: Aucune date disponible pour cette version du graphique
       home: "Page d'accueil"
       repository: Page du dépôt
       maintainers: Mainteneurs
@@ -1149,12 +1159,18 @@ catalog:
     deprecatedWarning: "{chartName} a été marqué comme déprécié. Faites preuve de prudence lors de l'installation de ce chart Helm car il pourrait ne pas fonctionner correctement."
     experimentalWarning: "{chartName} a été marqué comme expérimental. Faites preuve de prudence lors de l'installation de ce chart Helm car il pourrait ne pas fonctionner correctement."
     deprecatedAndExperimentalWarning: "{chartName} a été marqué comme déprécié et expérimental. Faites preuve de prudence lors de l'installation de ce chart Helm."
+    viewReadmeSeparately:
+      label: Voir séparément
+      tooltip: Ouvrir le readme dans un nouvel onglet
+    installedAppsSelector:
+      ariaLabel: "Sélectionner l'instance d'application installée"
     chartButton:
       action:
         install: Installer cette version
         edit: Modifier la version actuelle
         upgrade: Mettre à niveau vers cette version
         downgrade: Rétrograder vers cette version
+        installNew: Installer en tant que nouvelle instance
   charts:
     browseAriaLabel: Afficher uniquement la grille de graphiques
     iconAlt: "Icône pour l'élément de carte/grille {app}"
@@ -1181,14 +1197,10 @@ catalog:
       linux: Linux
       windows: Windows
     search: Rechercher dans le catalogue...
-    deprecatedChartsFilter:
-      label: Afficher les applications obsolètes
     addNewRepo:
       label: Ajouter nouveau
       ariaLabel: Ajouter un nouveau dépôt
     appChartCard:
-      subHeaderItem:
-        missingVersionDate: "La date de dernière mise à jour n'est pas disponible pour ce chart"
       footerItem:
         ariaLabel: Appliquer le filtre {filter}
     statusFilterCautions:
@@ -1379,6 +1391,7 @@ catalog:
       releaseName: Nom de la release
       releaseNamespace: Espace de noms de la release
   repo:
+    add: Ajouter un dépôt
     action:
       refresh: Actualiser
     all: Tous
@@ -1434,6 +1447,8 @@ catalog:
     refreshInterval:
       label: Intervalle de rafraîchissement
       placeholder: 'par défaut : {hours}'
+    error:
+      refresh: Erreur lors du rafraîchissement du dépôt
   tools:
     iconAlt: "Icône pour l'outil de cluster {app}"
     header: Outils de cluster
@@ -1505,9 +1520,12 @@ compliance:
       =1 { Toutes les analyses planifiées utilisant ce profil ne fonctionneront plus. }
       other { Toutes les analyses planifiées utilisant ces profils ne fonctionneront plus. }
     }
-  downloadAllReports: Télécharger tous les rapports sauvegardés
-  downloadLatestReport: Télécharger le dernier rapport
-  downloadReport: Télécharger le rapport
+  downloadAllReports: Télécharger tous les rapports sauvegardés (CSV)
+  downloadAllReportsXCCDF: Télécharger tous les rapports sauvegardés (XCCDF)
+  downloadLatestReport: Télécharger le dernier rapport (CSV)
+  downloadLatestReportXCCDF: Télécharger le dernier rapport (XCCDF)
+  downloadReport: Télécharger le rapport (CSV)
+  downloadReportXCCDF: Télécharger le rapport (XCCDF)
   maxKubernetesVersion: Version Kubernetes maximale autorisée
   minKubernetesVersion: Version Kubernetes minimale requise
   noProfiles: Il n'y a pas de ClusterScanProfiles valides pour ce type de cluster à sélectionner.
@@ -1516,6 +1534,8 @@ compliance:
   reports: Rapports
   retention: Nombre de rétentions
   scan:
+    errorNoParsedNodes: "Aucun nœud n'a été analysé à partir des résultats du scan, aucun rapport ne peut donc être généré."
+    errorDownload: Erreur lors du téléchargement du fichier
     description: Description
     fail: Échec
     lastScanTime: Dernier scan
@@ -2312,7 +2332,9 @@ cluster:
       etcdControlPlaneWarning: "Nous ne recommandons pas l'utilisation de l'Autoscaler avec des pools de machines ayant les rôles etcd ou Plan de contrôle."
     name:
       label: Nom du pool
+      notNamed: (Sans nom)
       placeholder: Un nom aléatoire sera généré par défaut
+      unique: Les noms de pools doivent être uniques
     nodeTotals:
       label:
         controlPlane: "'{count} Plan de contrôle'"
@@ -2356,7 +2378,7 @@ cluster:
       label: Remplacement automatique
       toolTip: "Si supérieur à 0, les nœuds inaccessibles pendant cette durée seront automatiquement supprimés et remplacés."
       unit: Secondes
-  managementTimeout: "Le cluster doit devenir disponible. Il est possible que le cluster ait été créé. Nous vous suggérons de vérifier l'état du cluster."
+  managementTimeout: "Le {type} {name} doit devenir disponible. Il est possible que le cluster ait été créé. Nous vous suggérons de vérifier la page des clusters avant d'essayer d'en créer un autre."
   memberRoles:
     removeMessage: "Remarque : la suppression d'un utilisateur ne supprimera pas ses permissions de projet"
     addClusterMember:
@@ -2447,6 +2469,7 @@ cluster:
     create-rke2: Provisionner de nouveaux nœuds et créer un cluster avec RKE2/K3s
     create-template: Utiliser un modèle de catalogue pour créer un cluster
     register-custom: "Importer n'importe quel cluster Kubernetes"
+    create-capi: Créer un cluster en utilisant Cluster API
   rke2:
     banner:
       psaChange: PSACT est maintenant défini sur la valeur par défaut Rancher automatiquement
@@ -2684,6 +2707,7 @@ cluster:
     registry: Registres
     upgrade: Stratégie de mise à niveau
     registration: Enregistrement
+    nodePools: Pools de nœuds
   rotateCertificates:
     label: Faire pivoter les certificats
     modalTitle: Faire pivoter les certificats du cluster
@@ -2695,8 +2719,6 @@ cluster:
     v2: RKE2/K3s
   validation:
     iamInstanceProfileName: "Si le fournisseur cloud Amazon est sélectionné, le \"Nom du profil d'instance IAM\" doit être défini pour chaque pool de machines."
-  capi:
-    notSupported: "La gestion des clusters provisionnés via des fournisseurs d'infrastructure CAPI est actuellement limitée via l'interface utilisateur."
 
 clusterIndexPage:
   hardwareResourceGauge:
@@ -2800,6 +2822,8 @@ cruResource:
   reviewYaml: Continuer à modifier le YAML
   previewYaml: Modifier en tant que YAML
   showYaml: Afficher en tant que YAML
+  tableOfContents:
+    jumpTo: Aller à...
 
 providers:
   hosted: 
@@ -2808,8 +2832,8 @@ providers:
 drivers:
   kontainer:
     title: Pilotes de cluster
-    emberDeprecationMessage: 'Le support des plugins UI (basés sur Ember) pour les pilotes de cluster et de nœud a été déprécié dans Rancher 2.11.0 et sera supprimé dans une prochaine version. Ils doivent être migrés vers le nouveau <a href="https://extensions.rancher.io" target="_blank" rel="noopener noreferrer nofollow">cadre UI Extensions</a>.'
-    refreshError: "Erreur lors du rafraîchissement des pilotes de cluster : {error}"
+    emberRemovalMessage: 'Le support des plugins UI (basés sur Ember) pour les pilotes de cluster et de nœud a été déprécié dans Rancher 2.11.0 et a été supprimé dans la version 2.15.0. Si vous avez encore besoin de l''un de ces plugins, il devra être migré vers le nouveau <a href="https://extensions.rancher.io/extensions/next/provisioning/hosted-provider/overview" target="_blank" rel="noopener noreferrer nofollow">cadre UI Extensions</a>.'
+    emberRemovalTooltip: "Le support des plugins UI (basés sur Ember) pour les pilotes de cluster et de nœud a été déprécié dans Rancher 2.11.0 et a été supprimé dans la version 2.15.0. Si vous avez encore besoin de ce plugin, il devra être migré vers le nouveau cadre UI Extensions."
   node:
     title: Pilotes de nœud
   add:
@@ -2960,7 +2984,7 @@ fleet:
       add: Ajouter un sélecteur
     tolerations:
       label: Tolérances
-      description: "Liste des taints de nœud à tolérer (nécessite Kubernetes >= 1.6)"
+      description: "Liste des taints de nœud à tolérer."
       add: Ajouter une tolérance
     priorityClassName:
       label: Nom de la classe de priorité
@@ -4075,8 +4099,8 @@ landing:
     docs: Documentation
     forums: Forums
   commercial:
-    title: Support commercial
-    body: En savoir plus sur le support commercial
+    title: Rancher Prime
+    body: En savoir plus sur Rancher Prime
   landingPrefs:
     body: Vous pouvez choisir où vous atterrissez lors de la connexion
     ariaLabelTakeMeToCluster: Sélectionner le cluster vers lequel être redirigé après la connexion
@@ -4980,6 +5004,7 @@ node:
         cpu: CPU
         memory: MÉMOIRE
         pods: PODS
+        running: En cours d'exécution
       diskPressure: Pression disque
       kubelet: kubelet
       memoryPressure: Pression mémoire
@@ -5392,6 +5417,7 @@ inactivity:
 # Rancher Extensions
 plugins:
   altIcon: "Icône pour la carte d'extension {extension}"
+  deprecatedExtension: Cette extension est obsolète et pourrait bientôt être retirée du catalogue.
   incompatiblePrimeOnly: La dernière version de cette extension ({ version }) nécessite Rancher Prime pour être installée.
   incompatibleRancherVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version actuelle de Rancher ({ required })."
   incompatibleKubeVersion: "La dernière version de cette extension ({ version }) n'est pas compatible avec la version Kube actuelle ({ required })."
@@ -5524,6 +5550,9 @@ plugins:
     prompt: Êtes-vous sûr de vouloir installer cette extension ?
     version: Version
     warnNotCertified: "Assurez-vous d'être conscient des risques liés à l'installation d'extensions provenant d'auteurs non fiables"
+    alreadyInstalledTitle: "Cette extension est déjà installée depuis une autre source"
+    alreadyInstalledPrompt: "Pour l'installer depuis cette source, vous devez d'abord désinstaller la version existante et recharger la page (obligatoire). Voulez-vous continuer ?"
+    uninstallExisting: Désinstaller la version existante
   upgrade:
     label: Mettre à niveau
     title: "Mettre à niveau l'extension {name}"
@@ -5546,7 +5575,7 @@ plugins:
     banner: "De nouveaux dépôts d'extensions sont disponibles. Pour activer ces dépôts, cliquez sur le bouton."
     bannerBtn: Ajouter des dépôts
     title: "Ajouter des dépôts d'extensions"
-    prompt: "Vous pouvez installer plusieurs dépôts d'extensions Rancher pour enrichir votre catalogue d'extensions"
+    prompt: "Activez des dépôts supplémentaires pour accéder à plus d'extensions"
   setup:
     installed: Déjà installé
     uninstalled: Déjà désinstallé
@@ -5562,7 +5591,7 @@ plugins:
       prompt: "Cela vous mènera à la page où vous pouvez activer l'indicateur de fonctionnalité nécessaire."
       featuresButton: Accéder aux indicateurs de fonctionnalités
       airgap: Les installations air-gapped ne doivent PAS activer cette fonctionnalité
-      addRancherRepo: "Ajouter le dépôt officiel d'extensions Rancher"
+      addRancherRepo: "Ajouter le dépôt d'extensions Rancher Prime"
       addPartnersRancherRepo: "Ajouter le dépôt d'extensions partenaires"
     remove:
       label: Désactiver le support des extensions
@@ -5724,7 +5753,6 @@ projectMembers:
     createNs: Créer des espaces de noms
     configmapsManage: Gérer les ConfigMaps
     ingressManage: "Gérer l'Ingress"
-    projectcatalogsManage: Gérer les catalogues du projet
     projectroletemplatebindingsManage: Gérer les membres du projet
     secretsManage: Gérer les secrets
     serviceaccountsManage: Gérer les comptes de service
@@ -5734,7 +5762,6 @@ projectMembers:
     configmapsView: Voir les ConfigMaps
     ingressView: "Voir l'Ingress"
     monitoringUiView: Voir le monitoring
-    projectcatalogsView: Voir les catalogues du projet
     projectroletemplatebindingsView: Voir les membres du projet
     secretsView: Voir les secrets
     serviceaccountsView: Voir les comptes de service
@@ -6108,6 +6135,8 @@ resourceList:
   nsFiltering: "Veuillez sélectionner un ou plusieurs espaces de noms ou projets à l'aide du filtre ci-dessus."
   nsFilteringGeneric: "Veuillez sélectionner une option d'espace de noms ou de projet valide à l'aide du filtre ci-dessus."
   nsFilterToolTip: Le filtrage est limité aux projets et espaces de noms
+  stateFilterApplied: "Filtre d'état appliqué :"
+  clearStateFilter: "Effacer le filtre"
 resourceLoadingIndicator:
   loading: Chargement
 
@@ -6121,6 +6150,7 @@ resourceTable:
     cluster: Grouper par cluster
     device: Grouper par appareil
     pool: Grouper par pool
+    workspace: "Grouper par espace de travail"
   groupLabel:
     cluster: "<span>Cluster :</span> {name}"
     notInACluster: Pas dans un cluster
@@ -6438,11 +6468,7 @@ setup:
   currentPassword: Mot de passe de démarrage
   confirmPassword: Confirmer le nouveau mot de passe
   defaultPassword:
-    intro: "Il semble que ce soit votre première visite sur {vendor} ; si vous avez prédéfini votre propre mot de passe de démarrage, entrez-le ici. Sinon, un mot de passe aléatoire a été généré pour vous. Pour le trouver :<br/><br/>"
-    dockerPrefix: 'Pour une installation via "docker run" :'
-    dockerPs: "Trouvez votre ID de conteneur avec <code>docker ps</code>, puis exécutez :"
-    dockerSuffix: ""
-    helmPrefix: "Pour une installation Helm, exécutez :"
+    intro: "Il semble que ce soit votre première visite sur {vendor} ; si vous avez prédéfini votre propre mot de passe de démarrage, entrez-le ici. Sinon, un mot de passe aléatoire a été généré pour vous. Pour le trouver, exécutez :<br/><br/>"
     helmSuffix: ""
   eula: "En cochant la case, vous acceptez le <a href=\"https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Contrat de licence utilisateur final et les Conditions générales</a>"
   newPassword: Nouveau mot de passe
@@ -6810,7 +6836,6 @@ storageClass:
       tooltip: Par défaut, la classe de stockage par défaut du cluster Harvester hôte est utilisée.
 
 tableHeaders:
-  isLegacy: Héritage
   assuredConcurrencyShares: Partages de concurrence garantis
   autoscaler: Autoscaler
   accessKey: "Clé d'accès"
@@ -6941,6 +6966,7 @@ tableHeaders:
   progress: Progression
   podImages: Image
   podRestarts: Redémarrages
+  podLastRestart: Dernier redémarrage
   pods: Pods
   pod-Selector: Sélecteur de pod
   providers: Fournisseurs
@@ -7365,6 +7391,36 @@ wm:
 
   kubectlShell:
     title: "Kubectl : {name}"
+
+workloadDashboard:
+  title: "Vue d'ensemble des charges de travail"
+  subtitle:
+    allNamespaces: "Pour tous les espaces de noms"
+    userNamespaces: "Uniquement pour les espaces de noms utilisateur"
+    systemNamespaces: "Uniquement pour les espaces de noms système"
+    namespacedOnly: "Uniquement pour les ressources avec espace de noms"
+    clusterOnly: "Uniquement pour les ressources du cluster"
+    project: "Pour les espaces de noms du projet {name}"
+    namespace: "Pour l'espace de noms {name}"
+    multipleSelected: "Pour {selected} éléments sélectionnés"
+  workloadCount: |-
+    ({count, plural,
+      =0 {Aucune charge de travail}
+      =1 {{count} charge de travail}
+      other {{count} charges de travail}
+    })
+  sections:
+    byState: Par état
+    byType: Par type
+    byNamespace: Par espace de noms
+  errors:
+    noAccess: "Pas d'accès à {type}"
+    fetchType: "Échec de la récupération de {type}"
+    fetchAll: "Échec de la récupération des résumés de charges de travail"
+  empty:
+    title: Aucune charge de travail à afficher
+    message: "Astuce : Mettez à jour le filtre d'espace de noms ci-dessus ou <resetLink>réinitialisez le filtre d'espaces de noms</resetLink>."
+    docsMessage: "Vous souhaitez en savoir plus sur les charges de travail ? Consultez notre <docsLink>documentation</docsLink>."
 
 workload:
   scaleWorkloads: "Mettre à l'échelle les charges de travail"
@@ -7921,6 +7977,7 @@ model:
       genericoidc: Fournisseur OIDC
       cognito: Amazon Cognito
     name:
+      azuread: Microsoft Entra ID
       keycloak: Keycloak (SAML)
       keycloakoidc: Keycloak (OIDC)
     provider:
@@ -7928,7 +7985,7 @@ model:
       local: Local
       multiple: Multiple
       activedirectory: ActiveDirectory
-      azuread: AzureAD
+      azuread: Microsoft Entra ID
       github: GitHub
       githubapp: GitHub App
       keycloak: Keycloak
@@ -8002,10 +8059,7 @@ typeDescription:
   monitoring.coreos.com.prometheus: Un serveur Prometheus est un déploiement Prometheus dont la configuration de scraping et les règles sont déterminées par des ServiceMonitors, PodMonitors et PrometheusRules sélectionnés.
   monitoring.coreos.com.alertmanager: "Un gestionnaire d'alertes est un déploiement dont la configuration est spécifiée par un secret dans le même espace de noms."
   node: La ressource Nœud Kubernetes de base représente une machine virtuelle ou physique qui héberge des déploiements.
-  catalog.cattle.io.clusterrepo: "'Un dépôt de charts est un dépôt Helm ou un catalogue d'applications git {vendor}. Il fournit la liste des charts disponibles dans le cluster.'"
-  catalog.cattle.io.clusterrepo.local: "Un dépôt de charts est un dépôt Helm ou un catalogue d'applications {vendor} basé sur git. Il fournit les charts pour l'installation."
   catalog.cattle.io.operation: Une opération est la liste des opérations Helm récentes appliquées au cluster.
-  catalog.cattle.io.app: "Une application installée est un chart Helm 3 installé via nos charts ou via l'interface CLI Helm."
   logging.banzaicloud.io.clusterflow: Les journaux du cluster seront collectés et enregistrés dans la sortie de cluster sélectionnée.
   logging.banzaicloud.io.clusteroutput: Une sortie de cluster définit les fournisseurs de journalisation vers lesquels les journaux peuvent être envoyés.
   logging.banzaicloud.io.flow: Un flux définit quels journaux collecter et filtrer ainsi que quelle sortie utiliser. Le flux est une ressource avec espace de noms.
@@ -8511,6 +8565,11 @@ typeLabel:
       one { ClusterRegistrationToken }
       other { ClusterRegistrationTokens }
     }
+  turtles-capi.cattle.io.capiprovider: |-
+    {count, plural,
+      one { Fournisseur Cluster API }
+      other { Fournisseurs Cluster API }
+    }
   management.cattle.io.node: |-
     {count, plural,
       one { Node }
@@ -8736,6 +8795,9 @@ registryConfig:
   toolTip: "Lorsqu'une image doit être extraite du nom d'hôte de registre indiqué, ces informations seront utilisées pour vérifier l'identité du registre et s'authentifier auprès de lui."
   addLabel: "Ajouter un registre"
   description: "Définissez la configuration TLS et des identifiants pour chaque nom d'hôte de registre et miroir."
+  caBundle:
+    tooltip: Accepte un certificat CA PEM ou un certificat CA PEM encodé en base64.
+    validationError: "Lot de certificats CA invalide. Doit être un certificat CA PEM ou un certificat CA PEM encodé en base64."
 
 ##############################
 ### Advanced Settings
@@ -8774,9 +8836,8 @@ advancedSettings:
     'ingress-ip-domain': "Domaine DNS générique pour les noms d'hôte Ingress générés automatiquement. <ingress-name>.<namespace-name>.<ip address of ingress controller> sera ajouté au domaine."
     'server-url': "URL d'installation {appName} par défaut. Doit être en HTTPS. Tous les nœuds de votre cluster doivent pouvoir l'atteindre."
     'system-default-registry': "Registre privé pour toutes les images système Rancher. Si aucune valeur n'est spécifiée, le registre par défaut du runtime de conteneur est utilisé. Pour Docker et containerd, la valeur par défaut est `docker.io`."
-    'ui-index': "Emplacement de l'index HTML pour l'interface utilisateur du gestionnaire de clusters."
     'ui-dashboard-index': "Emplacement de l'index HTML pour l'interface {appName}."
-    'ui-offline-preferred': "Contrôle si les ressources de l'interface utilisateur sont servies localement par le conteneur serveur ou depuis l'URL distante définie dans les paramètres ui-index et ui-dashboard-index. L'option `Dynamique` utilisera les ressources locales dans les versions de production de {appName}."
+    'ui-offline-preferred': "Contrôle si les ressources de l'interface utilisateur sont servies localement par le conteneur serveur ou depuis l'URL distante définie dans le paramètre ui-dashboard-index. L'option `Dynamique` utilisera les ressources locales dans les versions de production de {appName}."
     'ui-pl': "Nom de l'entreprise en marque blanche."
     'auth-user-info-max-age-seconds': "L'âge maximum des tokens d'authentification d'un utilisateur avant qu'une synchronisation des appartenances aux groupes soit effectuée."
     'auth-user-info-resync-cron': "Planification cron par défaut pour la resynchronisation des appartenances aux groupes du fournisseur d'authentification."
@@ -8902,7 +8963,6 @@ performance:
     label: Pagination côté serveur
     description: "Par défaut, les listes récupèrent toutes les ressources et paginent localement dans le navigateur. La pagination côté serveur déplace cette opération du navigateur vers le serveur, améliorant les performances de l'interface."
     applicable: "La pagination côté serveur s'applique aux types de ressources"
-    featureFlag: "L'activation/désactivation de <i class=\"mr-5\">« Pagination côté serveur »</i> se fait désormais uniquement via l'<i class=\"mr-5\">indicateur de fonctionnalité ui-sql-cache</i>&nbsp;<a href=\"{ffUrl}\">Feature Flag</a>"
     resources:
       generic: la plupart des ressources dans la section « Plus de ressources » du cluster
       all: Toutes les ressources
@@ -9080,56 +9140,31 @@ customLinks:
     slack: Slack
     issues: Signaler un problème
     getStarted: Démarrer
-    commercialSupport: Support commercial
+    commercialSupport: Rancher Prime
     appCo: "Collection d'applications SUSE"
 
-##############################
-### Support Page
-##############################
-
-support:
-  bannerImage: "Image de bannière de la page de support"
-  community:
-    title: Support communautaire
-    linksTitle: Support communautaire
-    learnMore: En savoir plus sur le support SUSE Rancher
-    pricing: "Contactez-nous pour les tarifs"
-  subscription:
-    haveSupport: Vous avez déjà un support ?
-    addSubscription: "Ajouter un ID d'abonnement"
-    removeSubscription: "Supprimer votre ID d'abonnement"
-    addTitle: "Ajouter votre ID d'abonnement SUSE"
-    addLabel: "Veuillez saisir un ID d'abonnement valide :"
-    removeTitle: Supprimer votre ID ?
-    removeBody: "Remarque : Cela n'affectera pas votre abonnement."
-
   suse:
-    title: Bonne nouvelle - Vous êtes couvert
     editBrand: "Personnaliser le thème de l'interface"
     access:
       title: Obtenir du support
-      text: "Connectez-vous à SUSE Customer Center pour accéder au support de votre abonnement"
-      action: Centre client SUSE
+      text: "Lorsque vous avez besoin d'aide avec Rancher, vous avez accès à une équipe d'experts inégalée."
+      action: Ouvrir une demande de support
       aws:
+        text: "Le support est disponible via votre abonnement Amazon Marketplace."
         generateConfig: "Générer la configuration de support"
-        text: "Connectez-vous à SUSE Customer Center pour accéder au support de votre abonnement. Vous devez ouvrir un nouveau cas de support ? Téléchargez un fichier de configuration de support ci-dessous."
   promos:
     one:
-      title: Support 24h/24 7j/7
-      text: "Nous fournissons des SLA strictement définis et proposons des options de support 24h/24."
+      title: Pour commencer
+      text: "Que vous soyez un utilisateur Kubernetes débutant ou expérimenté, nous avons les ressources pour vous aider à tirer le meilleur parti de Rancher."
     two:
-      title: Résolution des problèmes
-      text: "Exécutez les produits SUSE Rancher en toute confiance, sachant que les développeurs qui les ont créés sont disponibles pour résoudre rapidement les problèmes."
+      title: Rejoindre la communauté
+      text: "Connectez-vous avec d'autres utilisateurs Rancher et l'équipe d'ingénierie à travers des événements communautaires, des forums en ligne et plus encore."
     three:
-      title: Dépannage
-      text: "Nous nous concentrons sur la découverte de la cause profonde de tout problème, qu'il soit lié aux produits SUSE, à Kubernetes, à Docker ou à votre infrastructure sous-jacente."
+      title: Documentation
+      text: "Trouvez des réponses dans la documentation, des guides pratiques détaillés aux références pour l'API, la CLI et plus encore."
     four:
       title: Innover en toute liberté
       text: "Profitez de notre compatibilité certifiée avec un large éventail de fournisseurs Kubernetes, de systèmes d'exploitation et de logiciels open source."
-
-embedding:
-  retry: Réessayer
-  unavailable: "L'interface de gestion du cluster n'est pas disponible"
 
 serverUpgrade:
   title: "{vendor} Serveur modifié"
