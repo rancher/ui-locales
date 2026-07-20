@@ -1467,7 +1467,7 @@ catalog:
           placeholder: 'padrão: 5'
     refreshInterval:
       label: Intervalo de Atualização
-      placeholder: 'padrão: {hours}'
+      placeholder: 'padrão: {value}{unit}'
       unitLabel: Unidade
       enableLabel: Habilitar Intervalo de Atualização
     downloaded:
@@ -3602,7 +3602,7 @@ fleet:
       matchesSome: |-
         {matched, plural,
           =1 {Corresponde a 1 de {total, number} clusters existentes: "{sample}"}
-          other {Corresponde a {matched, number} de {total, number} clusters existentes}
+          other {Corresponde a {matched, number} de {total, number} clusters existentes, incluindo "{sample}"}
         }
   fdc:
     id: ID
@@ -3921,7 +3921,7 @@ auditPolicy:
       placeholder: 'ex.: $.gitCommit'
       add: Adicionar Caminho
   error:
-      enableOrDisable: '{flag, select, enable {Erro ao habilitar - {id}} disable {Erro ao desabilitar - {id}} other {Erro}}'
+      enableOrDisable: '{flag, select, enable {Erro ao habilitar - {id}} disable {Erro ao desabilitar - {id}} other {Erro - {id}}}'
       
 ingress:
   description: Os Ingresses roteiam o tráfego de entrada da internet para os Serviços dentro do cluster com base no hostname e no caminho especificados na solicitação. Você pode expor vários Serviços no mesmo endereço IP externo e porta.
@@ -4861,7 +4861,7 @@ monitoringReceiver:
     label: Webhook
     title: Configuração do Webhook
     urlTooltip: Para alguns webhooks este é um URL que aponta para o DNS do serviço
-    modifyNamespace: Se <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foi implantado em um namespace diferente, atualize o namespace abaixo.
+    modifyNamespace: Se os valores padrão de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foram alterados, atualize a url abaixo no formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
     banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância de <pre class="inline-block m-0">rancher-alerting-drivers</pre> em execução.
     add:
       selectWebhookType: Selecionar Tipo de Webhook
@@ -8984,11 +8984,11 @@ advancedSettings:
   none: Nenhum
   modified: Modificado
   edit:
-    moreActions: Mais Ações
+    moreActions: "Mais ações para configuração - { setting }"
     label: Editar Configuração
     changeSetting: "Alterar Configuração"
     agentConfigBanner: 
-      text: Alterar esta configuração afetará a configuração do agente de cluster
+      text: "Editar este valor não alterará o valor definido nos clusters em execução! Para atualizar um cluster em execução para usar os novos valores, edite o cluster e clique em “Aplicar configurações globais para Priority Class e Pod Disruption Budget” na aba de configuração do Agente {agent}."
       cluster: cluster
       fleet: fleet
     trueOption: "Verdadeiro"
@@ -9495,10 +9495,10 @@ component:
   drawer:
     chrome:
       ariaLabel:
-        close: Fechar painel
+        close: "Fechar painel {target}"
       close: Fechar
     resourceDetailDrawer:
-      title: "Detalhes do Recurso"
+      title: "{resourceName} ({resourceType}) - Configuração"
       editConfig: Editar Configuração
       editYaml: Editar YAML
       ariaLabel:
@@ -9516,7 +9516,7 @@ component:
       card:
         resourceUsage:
           used: Usado
-          amount: 'Quantidade'
+          amount: "{used} de {available}"
           cpu: CPU
           memory: Memória
           pods: Pods
