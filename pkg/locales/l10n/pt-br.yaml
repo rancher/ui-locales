@@ -2,7 +2,7 @@
 # locale: pt-br (Portuguese - Brazil)
 # source-locale: en-us
 # synced-against-en-us-commit: 5f2c1a2 (2026-06-17)
-# last-updated: 2026-06-19
+# last-updated: 2026-07-20
 # ---
 
 ##############################
@@ -9194,28 +9194,28 @@ customLinks:
     commercialSupport: Rancher Prime
     appCo: Coleção de Aplicativos SUSE
 
-  promos:
-    one:
-      title: Primeiros Passos
-      text: Seja você um usuário novo ou experiente de Kubernetes, temos os recursos para ajudá-lo a aproveitar ao máximo o Rancher.
-    two:
-      title: Junte-se à Comunidade
-      text: Conecte-se com outros usuários do Rancher e a equipe de engenharia por meio de eventos da comunidade, fóruns online e muito mais.
-    three:
-      title: Documentação
-      text: Encontre respostas na documentação, desde guias detalhados de como fazer até referências para a API, CLI e muito mais.
-    four:
-      title: Inove com Liberdade
-      text: Aproveite nossa compatibilidade certificada com uma ampla variedade de provedores Kubernetes, sistemas operacionais e software de código aberto.
   suse:
     editBrand: Personalizar Tema da Interface
     access:
       title: Obter Suporte
-      text: Quando você precisa de ajuda com o Rancher, você tem acesso a uma equipe incomparável de especialistas.
-      action: Abrir uma Solicitação de Suporte
+      text: Acesse o SUSE Customer Center para obter suporte para sua assinatura
+      action: SUSE Customer Center
       aws:
-        text: O suporte está disponível através da sua assinatura do Amazon Marketplace.
-        generateConfig: Gerar configuração de suporte
+        generateConfig: Gerar Configuração de Suporte
+        text: 'Acesse o SUSE Customer Center para obter suporte para sua assinatura. Precisa abrir um novo caso de suporte? Baixe um arquivo de configuração de suporte abaixo.'
+  promos:
+    one:
+      title: Suporte 24x7
+      text: Oferecemos SLAs rigorosamente definidos e opções de suporte 24 horas por dia.
+    two:
+      title: Resolução de Problemas
+      text: Execute os produtos SUSE Rancher com confiança, sabendo que os desenvolvedores que os criaram estão disponíveis para resolver problemas rapidamente.
+    three:
+      title: Solução de Problemas
+      text: Focamos em descobrir a causa raiz de qualquer problema, seja ele relacionado a produtos SUSE, Kubernetes, Docker ou sua infraestrutura subjacente.
+    four:
+      title: Inove com Liberdade
+      text: Aproveite nossa compatibilidade certificada com uma ampla variedade de provedores Kubernetes, sistemas operacionais e software de código aberto.
 
 
 serverUpgrade:
