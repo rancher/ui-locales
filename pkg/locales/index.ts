@@ -11,4 +11,7 @@ export default function(plugin: IPlugin): void {
 
   // Add new locales
   plugin.addLocale('zh-hant', '繁體中文');
+  plugin.addLocale('es-es', 'Español');
+  plugin.addLocale('fr-fr', 'Français');
+  plugin.addLocale('pt-br', 'Português (Brasil)');
 }
