@@ -6333,7 +6333,7 @@ resourceTable:
     notInAProject: Não em um Projeto
     project: <span>Projeto:</span> <span>{name}</span>
     notInAWorkspace: Não em um Workspace
-    workspace: '<span>Workspace:</span> {name}'
+    workspace: '<span>Espaço de Trabalho:</span> {name}'
     notInANodePool: Não em um Pool
     nodePool: '<span>Pool:</span> {name}'
     node: <span>Nó:</span> {name}
@@ -8613,8 +8613,8 @@ typeLabel:
     }
   group.principal: |-
     {count, plural,
-      one { Group }
-      other { Groups }
+      one { Grupo }
+      other { Grupos }
     }
   token: |-
     {count, plural,
@@ -8623,8 +8623,8 @@ typeLabel:
     }
   workload: |-
     {count, plural,
-      one { Workload }
-      other { Workloads }
+      one { Carga de Trabalho }
+      other { Cargas de Trabalho }
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
@@ -8638,8 +8638,8 @@ typeLabel:
     }
   fleet.cattle.io.content: |-
     {count, plural,
-      one { Content }
-      other { Contents }
+      one { Conteúdo }
+      other { Conteúdos }
     }
   fleet.cattle.io.bundle: |-
     {count, plural,
@@ -8653,8 +8653,8 @@ typeLabel:
     }
   k3s.cattle.io.addon: |-
     {count, plural,
-      one { Addon }
-      other { Addons }
+      one { Complemento }
+      other { Complementos }
     }
   management.cattle.io.apiservice: |-
     {count, plural,
@@ -8663,8 +8663,8 @@ typeLabel:
     }
   management.cattle.io.catalog: |-
     {count, plural,
-      one { Catalog }
-      other { Catalogs }
+      one { Catálogo }
+      other { Catálogos }
     }
   fleet.cattle.io.clusterregistration: |-
     {count, plural,
