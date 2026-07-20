@@ -1600,7 +1600,7 @@ cluster:
       configuration: Kube Proxy
     rke2-metrics-server:
       label: 'Complemento: Metrics Server'
-      configuration: Metrics Server
+      configuration: Servidor de Métricas
     rke2-multus:
       label: 'Complemento: Multus'
       configuration: Multus
@@ -3025,7 +3025,7 @@ fleet:
       label: Métricas
       description: 'Habilitar métricas'
     debug:
-      label: Debug
+      label: Depuração
       description: 'Habilitar modo de debug'
     controllerAnnotations:
       label: Controlador
@@ -3562,7 +3562,7 @@ gatekeeperConstraint:
       editAsForm: Editar como Formulário
       editAsYaml: Editar como YAML
       title: Parâmetros
-  template: Template
+  template: Modelo
   enforcement:
     action: Ação de Aplicação
   violations:
@@ -4287,7 +4287,7 @@ logging:
   azurestorage:
     storageAccount: Conta do Secret
     accessKey: Chave de Acesso do Secret
-    container: Container
+    container: Contêiner
     path: Caminho
     storeAs: Armazenar Como
   cloudwatch:
@@ -5413,7 +5413,7 @@ persistentVolume:
       readWrite: Leitura/Gravação
     filesystemType:
       label: Tipo de Sistema de Arquivos
-      placeholder: e.g. ext4
+      placeholder: 'ex.: ext4'
     readOnly:
       label: Somente Leitura
 
@@ -8399,8 +8399,8 @@ typeLabel:
     }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
-      one { Network Policy }
-      other { Network Policies }
+      one { Política de Rede }
+      other { Políticas de Rede }
     }
   service: |-
     {count, plural,
@@ -8434,8 +8434,8 @@ typeLabel:
     }
   projectsecret: |-
     {count, plural,
-      one { Project Secret }
-      other { Project Secrets }
+      one { Segredo de Projeto }
+      other { Segredos de Projeto }
     }
   apiregistration.k8s.io.apiservice: |-
     {count, plural,
@@ -8494,8 +8494,8 @@ typeLabel:
     }
   token: |-
     {count, plural,
-      one { API Key }
-      other { API Keys }
+      one { Chave de API }
+      other { Chaves de API }
     }
   workload: |-
     {count, plural,
@@ -8509,8 +8509,8 @@ typeLabel:
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
-      one { Cloud Config Template }
-      other { Cloud Config Templates }
+      one { Modelo de Configuração de Nuvem }
+      other { Modelos de Configuração de Nuvem }
     }
   fleet.cattle.io.content: |-
     {count, plural,
@@ -8614,8 +8614,8 @@ typeLabel:
     }
   management.cattle.io.node: |-
     {count, plural,
-      one { Node }
-      other { Nodes }
+      one { Nó }
+      other { Nós }
     }
   management.cattle.io.projectalertgroup: |-
     {count, plural,
@@ -8664,8 +8664,8 @@ typeLabel:
     }
   replicationcontroller: |-
     {count, plural,
-      one { Replication Controller }
-      other { Replication Controllers }
+      one { Controlador de Replicação }
+      other { Controladores de Replicação }
     }
   scheduling.k8s.io.priorityclass: |-
     {count, plural,
@@ -8694,8 +8694,8 @@ typeLabel:
     }
   fleet.cattle.io.clusterregistrationtoken: |-
     {count, plural,
-      one { Cluster Registration Token }
-      other { Cluster Registration Tokens }
+      one { Token de Registro de Cluster }
+      other { Tokens de Registro de Cluster }
     }
   turtles-capi.cattle.io.capiprovider: |-
     {count, plural,
@@ -9138,7 +9138,7 @@ resourceQuota:
   requestsCpu: Reserva de CPU
   requestsMemory: Reserva de Memória
   requestsStorage: Reserva de Armazenamento
-  secrets: Secrets
+  secrets: Segredos
   services: Serviços
   servicesLoadBalancers: Balanceadores de Carga de Serviços
   servicesNodePorts: Portas de Nó de Serviços
