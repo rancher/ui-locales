@@ -4856,7 +4856,7 @@ monitoringReceiver:
   slack:
     label: Slack
     title: Configuração do Slack
-    info: "Você pode encontrar informações adicionais sobre como criar Webhooks recebidos para o Slack <a href='https://api.slack.com/incoming-webhooks' target='_blank' rel='nofollow noreferrer noopener'>aqui</a>."
+    info: "Você pode encontrar informações adicionais sobre como criar Webhooks recebidos para o Slack <a href='https://rancher.slack.com/apps/A0F7XDUAZ-incoming-webhooks' target='_blank' rel='noopener noreferrer nofollow'>aqui</a>."
   webhook:
     label: Webhook
     title: Configuração do Webhook
@@ -6647,7 +6647,7 @@ setup:
   defaultPassword:
     intro: 'Parece que esta é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha de bootstrap, insira-a aqui. Caso contrário, uma senha aleatória foi gerada para você. Para encontrá-la, execute:<br/><br/>'
     helmSuffix: ""
-  eula: 'Ao marcar a caixa, você aceita o <a href="https://www.suse.com/licensing/eula">EULA da SUSE</a>.'
+  eula: 'Ao marcar a caixa, você aceita o <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">Contrato de Licença de Usuário Final e Termos e Condições</a>'
   newPassword: Nova Senha
   newUserSetPassword: A primeira ordem do dia é definir uma senha forte. Sugerimos usar esta gerada aleatoriamente para você, mas insira a sua própria se preferir.
   serverUrl:
@@ -7338,13 +7338,13 @@ user:
 validation:
   noUpperCase: 'Caracteres alfanuméricos em "{key}" devem ser minúsculos'
   arrayLength:
-    between: "O '{key}' precisa ter entre {min} e {max} entradas"
+    between: "O '{key}' precisa ter entre {min} e {max} {max, plural, =1 {entrada} other {entradas}}"
     exactly: "O '{key}' precisa ter exatamente {count} {count, plural, one {entrada} other {entradas}}"
     max: "O '{key}' deve ter no máximo {count} {count, plural, one {entrada} other {entradas}}"
     min: "O '{key}' deve ter pelo menos {count} {count, plural, one {entrada} other {entradas}}"
   alphanumeric: '"{key}" deve ser alfanumérico'
   boolean: '"{key}" deve ser um valor booleano.'
-  chars: "O '{key}' não pode conter os caracteres \"{chars}\""
+  chars: "O '{key}' contém {count, plural, =1 {um caractere inválido} other {# caracteres inválidos}}: {chars}"
   cluster:
     name: O nome do cluster não pode ser 'local' ou ter o formato 'c-xxxxx'
   conflict: |-
