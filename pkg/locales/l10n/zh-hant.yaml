@@ -1,8 +1,8 @@
 # ---
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
-# synced-against-en-us-commit: 5f2c1a2 (2026-06-17)
-# last-updated: 2026-07-20
+# synced-against-en-us-commit: 02a2364 (2026-07-20)
+# last-updated: 2026-07-21
 # ---
 ##############################
 # Special stuff
@@ -46,6 +46,7 @@ generic:
   descending: 遞減
   disabled: 禁用
   done: 完成
+  download: 下載
   enabled: 啟用
   error: 錯誤
   here: 此處
@@ -60,6 +61,7 @@ generic:
   labels: 標籤
   labelsAndAnnotations: 標籤 & 註釋
   podSecurityAdmission: Pod 安全准入
+  learnMoreAbout: '瞭解更多關於 '
   links: 鏈接
   loading: 正在加載&hellip;
   members: 成員
@@ -76,6 +78,7 @@ generic:
       warning: 警告
       error: 錯誤
   ok: 確定
+  or: 或
   other: |-
     {count, plural,
     one  {其他}
@@ -155,7 +158,6 @@ generic:
           =1 {匹配 {total, number} 箇中的 1 個："{sample}"}
           other {匹配 {total, number} 中的 {matched, number} 個，包括 "{sample}"}
         }
-
   basic: 基本
   ariaLabel:
     keyValue: 鍵值輸入
@@ -376,6 +378,7 @@ suffix:
       =1 { 次 }
       other { 次 }
     }
+
 ##############################
 # Components & Pages
 ##############################
@@ -507,6 +510,7 @@ authConfig:
   allowedPrincipalIds:
     title: 授權的用戶和用戶組
   associatedWarning: '用於啟用外部提供商的 {provider} 賬戶將被授予與當前登錄的 Rancher 用戶相同的權限。請參閱 <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> 以瞭解原因。'
+  bannerEnableAuthProvider: "「禁用本地認證」設置已啟用。啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能並重新獲得訪問權限。有關更多信息，請參閱 {vendor} 文檔。"
   githubapp:
     clientId:
       label: Client ID
@@ -1011,6 +1015,7 @@ asyncButton:
     action: 立即創建快照
     waiting: 已啟動快照&hellip;
     success: 正在創建快照
+    day2OpsNotEnabled: 此集群未啟用 Day 2 操作
   timing:
     action: 生成響應時間
     waiting: 正在生成&hellip;
@@ -1145,6 +1150,12 @@ catalog:
         checkBoxLabel: Rancher 系統容器鏡像的容器鏡像倉庫
         inputLabel: 容器鏡像倉庫
         placeholder: 鏡像倉庫域名和端口，例如：registry.io:5000
+      pullSecret:
+        skipOption: 不使用 Image Pull Secret
+        defaultLabel: '使用默認 Pull Secret ({name})'
+        defaultLabelGeneric: 使用默認 Pull Secret
+        existingValuesBanner: '{secrets} 已在 Chart 值中配置為 Image Pull Secret。要修改它們，請直接編輯值 YAML。'
+        defaultSecretsBanner: '{secrets} 已配置為默認 Pull Secret。在此處選擇或創建一個 Image Pull Secret 以覆蓋默認值。'
     header:
       charts: Chart
     info:
@@ -1232,6 +1243,7 @@ catalog:
       lastUpdatedDesc: 最後更新
       alphaAscending: chart 名稱，A → Z
       alphaDescending: chart 名稱，Z → A
+    loadingMore: 正在加載更多…
     refreshButton:
       label: 刷新所有倉庫
     findSimilar:
@@ -1361,6 +1373,8 @@ catalog:
         generatedNewImagePullSecret: "將生成一個新的 Image Pull Secret <b>{ imagePullSecretName }</b>"
         generatedImagePullSecretBannerFromPreviousAuth: "將從倉庫 Secret <b>{ repoAuthenticationName }</b> 生成一個新的 Image Pull Secret <b>{ imagePullSecretName }</b>。"
         usePreviouslyGeneratedImagePullSecretBanner: "Image Pull Secret <b>{ imagePullSecretName }</b> 之前已從倉庫 Secret <b>{ repoAuthenticationName }</b> 創建並將被使用。"
+        oldMonitoringChartWarning: '從 v2.15.0 起，此 Chart 已棄用，請改用新的 Rancher Monitoring Dashboard chart。有關更多信息，請參閱 <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">文檔</a><span class="sr-only">在新標籤頁中打開</span>。'
+        newMonitoringChartWarning: '在安裝新的 Rancher Monitoring Dashboard chart 之前，請確保已卸載所有使用舊版 Rancher Monitoring Chart 的應用，並已安裝 Prometheus 等依賴項。有關更多信息，請參閱 <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">文檔</a><span class="sr-only">在新標籤頁中打開</span>。'
       clusterTplVersion:
         label: 版本
         subtext: 選擇模板版本
@@ -1384,6 +1398,8 @@ catalog:
     version: 版本
     versions:
       current: '{ver}（當前）'
+      current_linux: '{ver}（當前，僅 Linux）'
+      current_windows: '{ver}（當前，僅 Windows）'
       linux: '{ver}（僅限 Linux）'
       windows: '{ver}（僅限 Windows）'
   delete:
@@ -1451,6 +1467,10 @@ catalog:
     refreshInterval:
       label: 刷新間隔
       placeholder: '默認：{hours}'
+      unitLabel: 單位
+      enableLabel: 啟用刷新間隔
+    downloaded:
+      label: 已下載
     error:
       refresh: 刷新倉庫時出錯
   tools:
@@ -2161,6 +2181,7 @@ cluster:
         label: 啟用 IPv6
       httpProtocolIpv6: 
         label: 為實例元數據服務啟用 IPv6 端點
+      dualStackValidationWarning: 當一個池啟用雙棧 subnet/vpc 時，所有池必須使用相同的網絡配置。
       ipv6ValidationWarning: 當一個池使用 IPv6 或雙棧子網/vpc 時，所有池都必須使用 IPv6 或雙棧子網/vpc。
     pnap:
       serverLocation:
@@ -2677,6 +2698,7 @@ cluster:
         other {已為{count}個集群請求快照}
       }
     groupLabel: 位置
+    predatesImportTooltip: 此快照的還原操作目前不受支持，因為它早於導入 Rancher 之前創建。
     failed: "{time} 後的快照已失敗"
     rke1:
       local: 本地
@@ -2741,6 +2763,7 @@ cluster:
     upgrade: 升級策略
     registration: 註冊
     nodePools: 節點池
+    operations: 操作
   rotateCertificates:
     label: 輪換證書
     modalTitle: 輪換集群證書
@@ -3152,14 +3175,22 @@ fleet:
       waitApplied: 等待應用
   clusterTargets:
     advancedConfigs: 已定義高級目標配置，請查看 YAML 文件以獲取更多詳細信息。
+    targetMode:
+      local: 本地集群
+      all: 工作空間中的所有集群
+      allCompact: '<b>{namespace}</b> 工作空間中的所有集群（{count}）'
+      none: 無集群
+      clusters: 手動選擇的集群
     clusters:
       title: 集群
       byName:
+        title: 按集群名稱選擇
         placeholder: 選擇多個集群
         label: 按集群名稱選擇
       byLabel:
         title: 按標籤選擇
         addSelector: 添加集群選擇器
+        removeSelector: 移除集群選擇器
         labelKey: 標籤
     clusterGroups:
       title: 集群組
@@ -3174,6 +3205,7 @@ fleet:
             =1 {已選擇 1 個集群}
             other {已選擇 {n, number} 個集群}
             }
+        selectedClusters: 已選集群
         placeholder: 按名稱、標籤或組選擇集群
         empty: 工作空間中沒有集群
         plusMore: |-
@@ -3195,6 +3227,9 @@ fleet:
         description: GitRepo 描述由 Fleet 監視的 git 倉庫。該資源包含將倉庫或其部分部署到目標集群所需的信息。
       fleet.cattle.io.helmop:
         description: HelmOp 是一種通過直接指向 Helm 倉庫或 OCI 倉庫來創建捆綁包的簡化方式，無需設置 git 倉庫。
+      suse-application-collection:
+        label: SUSE Application Collection
+        description: 探索我們維護的安全 Application Collection，選擇一個 Helm chart 並將其部署到你的集群。
     warningTooltip:
       clusterGroup: 此集群組中沒有集群
       cluster: 沒有可用的集群
@@ -3342,6 +3377,24 @@ fleet:
       label: 工作空間
       addWorkspace: 創建工作空間
     helmRepoURLRegex: Helm Repos（URL 正則表達式）
+  appCo:
+    credentials:
+      title: 從 SUSE Application Collection 創建 App Bundle
+      subtitle: 設置你的憑證
+      infoText: 連接到 Helm Charts 目錄需要 Application Collection 訪問令牌。
+      accessTokensLink: SUSE Application Collection 訪問令牌
+      accessTokenLabel: 訪問令牌
+      editCredentials: 編輯憑證
+      addNewToken: 添加新的訪問令牌...
+      noTokensYet: "你尚未添加訪問令牌。"
+      chooseExisting: '選擇一個現有的令牌：'
+      username: 用戶名
+      usernamePlaceholder: user@domain.org
+      accessTokenField: 訪問令牌
+      accessTokenPlaceholder: 你的 SUSE Application Collection 訪問令牌
+    chart:
+      title: Chart
+      loadError: 未找到 Chart 或沒有可用版本。
   helmOp:
     intro:
       add: 創建 Helm Op
@@ -3394,6 +3447,35 @@ fleet:
           subtext: '定義高級設置'
           description: Fleet 將使用認證設置和輪詢來同步其中包含的資源。
           info: 這些設置用於高級用途且為可選。您可以跳過它們並完成創建過程。
+        selection:
+          searchPlaceholder: 搜索目錄...
+          authBanner: '將創建兩個不同的資源：一個 Continuous Delivery secret，以及一個將被複製到下一步中所選的每個下游集群的 imagePullSecret。'
+          emptyState:
+            connectionError:
+              title: 連接錯誤
+              descriptionPre: '獲取 SUSE Application Collection 目錄時出錯。'
+              please: '請'
+              tryAgain: 重試
+              descriptionPost: '，或聯繫你的系統管理員。'
+            noMatch:
+              title: 沒有可顯示的 Chart
+              descriptionPre: '提示：使用不同的搜索條件，或'
+              clearSearch: 清除搜索欄
+              descriptionPost: '並瀏覽目錄。'
+          repoLoading:
+            title: 正在創建 SUSE Application Collection 倉庫...
+            description: 請稍候，正在創建倉庫
+          repoError:
+            description: '請檢查你的憑證或上游集群中的倉庫：'
+            link: SUSE App Collection
+    appCoConfig:
+      chartVersion: Chart 版本
+      name: App Bundle 名稱
+      advanced: 高級
+    appCoView:
+      chartConfig: Chart 配置
+      targetDetails: 目標詳情
+      advanced: 高級
     source:
       title: 來源
       selectLabel: 類型
@@ -3422,10 +3504,13 @@ fleet:
         title: 發行版本
         label: 名稱
         placeholder: Helm release 名稱
+        fullLabel: Release 名稱
     values:
       title: 值
       selectLabel: 值
       description: 配置 Helm 使用的 Values，以幫助定義應用。
+      descriptionCompact: 此部分中定義的值將應用於每個所選集群中的 chart。
+      appCoDescription: 不應修改預定義的全局 imagePullSecret，否則與 SUSE Application Collection 的連接將失敗。
       types:
         values: 值
         valuesFiles: 值檔案
@@ -3452,17 +3537,25 @@ fleet:
     serviceAccount:
       label: Service Account 名稱
       placeholder: "可選：在目標集群中使用 service account"
+      compactPlaceholder: "在所選集群中使用服務賬戶"
+      compactDescription: "如果提供，此 ServiceAccount 將用於執行部署。"
     targetNamespace:
       label: 目標命名空間
       placeholder: "可選：要求所有資源都在此命名空間中"
+      compactPlaceholder: "要求所有資源都位於此命名空間中"
+      compactDescription: "這會將所有資源分配到指定的命名空間。如果存在任何集群範圍的資源，部署將失敗。"
     target:
       selectLabel: 目標
       advanced: 高級
       cluster: 集群
       clusterGroup: 集群組
       label: 部署到
+      title: 部署 chart 至
       labelLocal: 部署使用
       additionalOptions: 附加選項
+      clusterDeploymentSettings: 集群部署設置
+      clusterDeploymentDescription: "在這裡，你可以為部署設置 ServiceAccount 或強制指定目標 Namespace。"
+      clusterDeploymentLink: Bundle 部署選項
     targetDisplay:
       advanced: 高級
       clusters: 集群
@@ -3471,10 +3564,17 @@ fleet:
       local: 本地
     resources:
       label: '資源'
+      lockedSecretBanner: 連接 SUSE Application Collection 需要之前選擇的 Image Pull Secret。
       keepResources: 始終保留資源
       keepResourcesTooltip: 啟用後，刪除 HelmOp 或 Bundle 時將保留資源 - 只會刪除 Helm release secrets。
       correctDrift: 啟用自我修復
       correctDriftTooltip: 啟用後，Fleet 將確保集群資源與 HelmOp 保持同步。在集群上進行的所有資源更改都將丟失。
+    appCoResources:
+      helmChartSettings: Helm chart 資源設置
+      additionalResources: 要同步的其他資源
+      additionalResourcesDescription: 你可以添加 Secret 和 ConfigMap，以便在部署 Helm chart 之前將這些資源複製到每個目標下游集群。
+      additionalResourcesLinkDescription: 瞭解更多關於
+      additionalResourcesLink: 資源自動傳播到下游集群
     polling:
       label: 輪詢
       enable: 啟用輪詢
@@ -3489,6 +3589,7 @@ fleet:
       title: 認證
       label: 認證
       helm: Helm 認證
+      appco: SUSE App Collection 認證
     caBundle:
       label: 證書
       placeholder: "粘貼一個或多個證書，以 -----BEGIN CERTIFICATE---- 開頭"
@@ -3520,7 +3621,10 @@ fleet:
   restrictions:
     addTitle: 'allowedTargetNamespaces'
     addLabel: 添加
-    banner: "{count, plural, =0 { 在這裡添加命名空間會創建一個 GitRepoRestriction。} other { 只有 Git Repo Restriction 的 <code>allowedTargetNamespaces</code> 在此處管理，你可以對 Git Repo Restriction 進行其他更改。} }"
+    banner: "{count, plural,
+          =0 { 在這裡添加命名空間會創建一個 GitRepoRestriction。 }
+          other { 只有 Git Repo Restriction 的 <code>allowedTargetNamespaces</code> 在此處管理，你可以對 Git Repo Restriction 進行其他更改。}
+        }"
   configMaps:
     label: Config Maps
   secrets:
@@ -4892,7 +4996,6 @@ namespaceFilter:
       one {已選擇 1 項}
       other {已選擇 {total} 項}
       }
-
   input: 過濾命名空間選項
   button:
     clear: 移除已應用的命名空間過濾器
@@ -5032,6 +5135,7 @@ networkpolicy:
           =1 {匹配 {totalPods, number} 個 Pod 中的 1 個："{samplePods}"}
           other {匹配 {totalPods, number} 個 Pod 中的 {matchedPods, number} 個，包括 "{samplePods}"}
         }
+
 node:
   list:
     pool: 池
@@ -5834,6 +5938,9 @@ projectNamespaces:
   isIstioInjectionEnabled: 為此命名空間啟用了 Istio 自動 Sidecar 注入
 
 prometheusRule:
+  labels:
+    title: Prometheus 匹配標籤
+    tooltip: 這些標籤必須與 Prometheus 資源上配置的 ruleSelector 匹配。Prometheus Operator 使用此選擇器來發現要評估哪些 PrometheusRule 資源。
   alertingRules:
     addLabel: 添加告警
     annotations:
@@ -5941,6 +6048,13 @@ promptRestore:
   fromS3: 從 S3 恢復
   label: 快照
   placeholder: 選擇要恢復的快照
+  error:
+    unableToResolveTargetCluster: 無法解析用於快照還原的目標集群
+  restoreMode:
+    label: 還原類型
+    onlyEtcd: 僅 etcd
+    kubernetesVersionAndEtcd: Kubernetes 版本和 etcd
+    clusterConfigKubernetesVersionAndEtcd: 集群配置、Kubernetes 版本和 etcd
   notification:
     title: 還原快照
     message: 快照 { selectedSnapshot } 恢復已開始...
@@ -5964,7 +6078,9 @@ promptRotateEncryptionKey:
   title: 輪換加密密鑰
   description: 上次備份 {name} 的備份時間為 {date}
   warning: 在繼續操作前，請確保已成功完成集群的 ETCD 備份。
-  error: 未找到備份
+  error:
+    noBackup: 未找到備份
+    unableToResolveTargetCluster: 無法解析用於加密密鑰輪換的目標集群
 
 rancherAlertingDrivers:
   msTeams: 啟用 Microsoft Teams 通知
@@ -6249,6 +6365,8 @@ resourceYaml:
 
 secret:
   authentication: 身份認證
+  githubApp:
+    label: GitHub App
   certificate:
     certificate: 證書
     certificates: 證書
@@ -6385,12 +6503,17 @@ selectOrCreateAuthSecret:
     passwordPersonalAccessToken: 密碼/個人訪問 Token
   rke:
     info: "An RKE Auth Config secret 包含連接在一起並經 base64 編碼到該 secret 的 'auth' 鍵中的用戶名和密碼"
+  githubApp:
+    appId: GitHub App ID
+    installationId: GitHub App 安裝 ID
+    privateKey: GitHub App 私鑰
   namespaceGroup: "命名空間：{name}"
   chooseExisting: "選擇一個現有的密文："
   createSsh: 創建 SSH 密鑰密文
   createBasic: 創建 HTTP 基本身份認證密文
   createS3: 創建與 S3 兼容的身份認證密文
   createRKE: 創建 RKE Auth Config Secret
+  createGithubApp: 創建 GitHub App 認證 Secret
   createImagePullSecretBasedOnAuth: 基於認證 Secret 創建 Image Pull Secret
   createImagePullSecret: 使用新的用戶名/密碼創建新的 Image Pull Secret
 
@@ -7279,6 +7402,7 @@ validation:
   betweenValues: '"{key}" 必須介於 {min} 和 {max} 之間'
   noSchema: 沒有找到可以驗證的 schema
   noType: 沒有可驗證的類型
+  createResourceFailed: '創建資源失敗：權限不足或未找到資源類型'
   number:
     requiredInt: '"{key}" 必須是整數'
     isPositive: '"{key}" 必須是正數'
@@ -8088,7 +8212,6 @@ typeDescription:
   #       target="_blank" rel="noopener noreferrer nofollow"
   jwt.authentication: 在集群上啟用此功能以添加對 JWT 認證下游服務賬戶的支持。
   branding: "管理員可以修改 Rancher 產品名稱、Logo 和配色方案來全局自定義 UI 界面。"
-  chart: "除非另有說明，否則所有 Chart 都至少有一個可以安裝在具有 Linux 和 Windows 節點的集群上的版本。"
   compliance.cattle.io.clusterscanbenchmark: 基準版本是使用 kube-bench 運行的基準的名稱，以及該基準的有效配置參數。
   compliance.cattle.io.clusterscanprofile: 配置文件是合規掃描的配置，即要使用的基準版本以及該基準中要跳過的任何特定測試。
   compliance.cattle.io.clusterscan: 創建掃描以基於已定義的配置文件在集群上觸發合規掃描。掃描完成後會創建一份報告。
@@ -8697,12 +8820,12 @@ typeLabel:
       one { 集群註冊 Token }
       other { 集群註冊 Token }
     }
-
   turtles-capi.cattle.io.capiprovider: |-
     {count, plural,
       one { Cluster API 提供商 }
       other { Cluster API 提供商 }
     }
+
 oidcclient:
   a11y:
     copyText:
@@ -8883,6 +9006,7 @@ advancedSettings:
     'ingress-ip-domain': '用於自動生成 Ingress 主機名的通配符 DNS 域。<ingress-name>.<namespace-name>.<ip address of ingress controller> 會被添加到該域。'
     'server-url': '默認 {appName} 安裝地址。必須使用 HTTPS。你集群中的所有節點都必須能夠訪問此地址。'
     'system-default-registry': '用於所有 Rancher System 容器鏡像的私有鏡像倉庫。如果未指定任何值，則使用容器運行時的默認鏡像倉庫。對於 Docker 和 containerd，默認為 `docker.io`。'
+    'system-default-registry-pull-secrets': '用於認證到拉取 Rancher 系統容器鏡像的 registry 的 image pull secret 列表。默認情況下，這些 secret 將被複製到每個 Rancher chart 命名空間中。Secret 必須位於 `cattle-system` 命名空間中。此處列出的第一個有效 secret 將被使用。'
     'ui-dashboard-index': '{appName} UI 的 HTML 索引位置。'
     'ui-offline-preferred': '控制 UI 資產是由服務器容器在本地提供，還是從 ui-index 和 ui-dashboard-index 設置中定義的遠程 URL 提供。`動態` 選項將在 {appName} 的生產版本中使用本地資產。'
     'ui-pl': '自有品牌公司名稱。'
@@ -8905,6 +9029,7 @@ advancedSettings:
     'k3s-based-upgrader-uninstall-concurrency': 定義 Rancher 可以從導入的或 node-driver K3s 或 RKE2 集群中並發卸載舊版 `rancher-k3s-upgrader` 或 `rancher-rke2-upgrader` 應用的最大集群數量。
     'system-agent-upgrader-install-concurrency': 定義 Rancher 可以並發安裝升級 system-agent 所需資源的最大集群數量。
     'imported-cluster-version-management': 為導入的 RKE2/K3s 集群以及本地集群（如果它是 RKE2/K3s 集群）啟用版本管理。每個集群的版本管理設置在集群級別覆蓋此全局設置。對於集群級別版本管理設置為 'system-default' 的現有集群，更改此標誌將在下一次協調期間（默認每 5 分鐘一次，或在集群被編輯時立即進行，以先到者為準）觸發集群 agent 的重新部署。
+    'imported-cluster-day2-ops-enabled': 控制導入的 RKE2/K3s 集群是否默認啟用 day 2 操作（etcd 快照、還原、加密密鑰輪換）。這將影響所有使用默認配置的集群，並且可以在集群級別覆蓋。
   warnings:
     'agent-tls-mode': '更改此設置將導致所有 agents 被重新部署。'
   editHelp:
@@ -8932,6 +9057,8 @@ advancedSettings:
     header: 集群配置
 
 featureFlags:
+  description:
+    'hide-local-auth-provider': 啟用此功能並啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能並重新獲得訪問權限。有關更多信息，請參閱 {vendor} 文檔。
   label: 功能開關
   title: "您確定嗎？"
   warning: |-
