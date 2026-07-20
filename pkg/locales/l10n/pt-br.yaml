@@ -4851,7 +4851,7 @@ monitoringReceiver:
   pagerduty:
     label: PagerDuty
     title: Configuração do PagerDuty
-    info: "Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='nofollow noreferrer noopener'>aqui</a>."
+    info: "Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='noopener nofollow' class='flex-right'>aqui</a>."
   slack:
     label: Slack
     title: Configuração do Slack
@@ -4861,7 +4861,7 @@ monitoringReceiver:
     title: Configuração do Webhook
     urlTooltip: Para alguns webhooks este é um URL que aponta para o DNS do serviço
     modifyNamespace: Se os valores padrão de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foram alterados, atualize a url abaixo no formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
-    banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância de <pre class="inline-block m-0">rancher-alerting-drivers</pre> em execução.
+    banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> em execução.
     add:
       selectWebhookType: Selecionar Tipo de Webhook
       generic: Genérico
