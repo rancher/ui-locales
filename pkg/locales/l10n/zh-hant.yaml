@@ -5645,9 +5645,9 @@ validation:
     preferredDuringSchedulingIgnoredDuringExecution: 首選規則
     topologyKey: "{group} {rules} 的規則 [{index}] - 拓撲鍵是必需的。"
     matchExpressions:
-      operator: "{group} {rules} 的規則 [{index}] - 運算符必須是'In'， 'NotIn'，'Exists'，或'DoesNotExist'中的其中一個"
-      valueMustBeEmpty: "{group} {rules} 的規則 [{index}] - 如果運算符是'Exists'或'DoesNotExist'，值必須為空"
-      valuesMustBeDefined: "{group} {rules} 的規則 [{index}] - 如果運算符是'In'或'NotIn'，必須定義值"
+      operator: "{group} {rules} 的規則 [{index}] - 運算符必須是’In'， 'NotIn'，'Exists'，或’DoesNotExist’中的其中一個"
+      valueMustBeEmpty: "{group} {rules} 的規則 [{index}] - 如果運算符是’Exists’或'DoesNotExist'，值必須為空"
+      valuesMustBeDefined: "{group} {rules} 的規則 [{index}] - 如果運算符是’In’或'NotIn'，必須定義值"
   port: 端口號的取值範圍是1到65535。
   path: '"{key}" 必須是絕對路徑'
   prometheusRule:
@@ -7023,7 +7023,7 @@ advancedSettings:
     'custom-notifications': 編輯自定義通知
     'ui-consent-banner': '橫幅用於在登錄期間，向用戶展示自定義同意橫幅。'
     'ui-default-landing': '用戶登錄後的默認頁面。'
-    'brand': 在'/assets/brand'中定義，用於替代主題的文件夾名稱
+    'brand': 在'/assets/brand’中定義，用於替代主題的文件夾名稱
     'hide-local-cluster': 隱藏 local 集群
   editHelp:
     'ui-banners': 此設置使用包含 3 個根參數的 JSON 對象，分別是<code>banner</code>、<code>showHeader</code>和<code>showFooter</code>。<code>banner</code> 是包含 <code>textColor</code>，<code>background</code>和<code>text</code>的對象，其中<code>textColor</code> 和 <code>background</code>的值可以是任何有效的 CSS 顏色值。
@@ -7553,7 +7553,7 @@ charts:
           如果現在很難估計用量，你可以使用默認值12%。然後在沒有使用 Longhorn 卷的工作負載時對其進行調整。
           警告：
             - 0 代表取消為每個引擎管理器 Pod 設置的 CPU 請求。
-            - 考慮到後續系統升級中可能出現的新實例管理器 pod，此整數值的範圍是0-40。此外，設置了'保證的引擎管理器 CPU'的總和不應該大於40。
+            - 考慮到後續系統升級中可能出現的新實例管理器 pod，此整數值的範圍是0-40。此外，設置了’保證的引擎管理器 CPU’的總和不應該大於40。
             - 在 Longhorn 系統升級後，可能需要再部署一組實例管理器 pod。如果當前節點的可用 CPU 不足以滿足新的實例管理器 pod 的需要，你需要拔出使用最老的實例管理器 pod 的卷，這樣 Longhorn 就可以自動清理舊的 pod 以釋放 CPU 資源，然後使用最新的實例管理器鏡像的新 pod 將被啟動。
             - 如果某個節點設置了 \"EngineManagerCPURequest\" 字段，此全局設置將在節點上忽略。
             - 如果此設置被改變，所有節點上使用此全局設置的所有引擎管理器 pod 都會自動重啟。換言之，不要通過插入捲來修改此設置。"
@@ -7567,7 +7567,7 @@ charts:
         如果現在很難估計用量，你可以使用默認值12%。然後在沒有使用 Longhorn 卷的工作負載時對其進行調整。
         警告：
           - 0 代表取消為每個副本管理器 Pod 設置的 CPU 請求。
-          - 考慮到後續系統升級中可能出現的新實例管理器 pod，此整數值的範圍是0-40。此外，設置了'保證的副本管理器 CPU'的總和不應該大於40。
+          - 考慮到後續系統升級中可能出現的新實例管理器 pod，此整數值的範圍是0-40。此外，設置了’保證的副本管理器 CPU’的總和不應該大於40。
           - 在 Longhorn 系統升級後，可能需要再部署一組實例管理器 pod。如果當前節點的可用 CPU 不足以滿足新的實例管理器 pod 的需要，你需要拔出使用最老的實例管理器 pod 的卷，這樣 Longhorn 就可以自動清理舊的 pod 以釋放 CPU 資源，然後使用最新的實例管理器鏡像的新 pod 將被啟動。
           - 如果某個節點設置了 'ReplicaManagerCPURequest\" 字段，此全局設置將在節點上忽略。
           - 如果此設置被改變，所有節點上使用此全局設置的所有副本管理器 pod 都會自動重啟。換言之，不要通過插入捲來修改此設置。"
