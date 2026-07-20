@@ -475,8 +475,8 @@ accountAndKeys:
       scope: 範圍
       noScope: 無範圍
     info:
-      accessKey: Access Key
-      secretKey: Secret Key
+      accessKey: 存取金鑰
+      secretKey: 密鑰
       bearerToken: 持有者令牌
       saveWarning: 請善保存以上的信息。這是你唯一查看該信息的機會。如果丟失這些信息，你需要創建一個新的 API 密鑰。
       keyCreated: 已創建一個新的 API 密鑰。
@@ -801,7 +801,7 @@ authConfig:
     cognitoIssuer: Issuer URL
     cognitoHelp: "您需要在 Cognito 中創建一個 <b>Traditional web application</b> 類型的應用客戶端，並將 Return URL 設置為下面顯示的 URL。"
     scope:
-      label: Scopes
+      label: 範圍
       placeholder: openid
       protip: <code>openid</code>、<code>profile</code> 和 <code>email</code> scopes 是必需的，無法移除。
       missingRequired: "缺少所需的 {count, plural, =1 {scope} other {scopes}}：{scopes}"
@@ -1035,7 +1035,7 @@ asyncButton:
 
 backupRestoreOperator:
   monitoring:
-    label: Monitoring
+    label: 監控
     enableMetrics: 啟用指標
     enableServiceMonitor: 啟用 ServiceMonitor
     serviceMonitorTooltip: 需要先安裝 rancher-monitoring 才能啟用此功能。
@@ -1135,7 +1135,7 @@ catalog:
       resources:
         label: 資源
         busy: "{app} 完全安裝後，相關資源會出現。"
-      values: Values YAML
+      values: 值 YAML
     upgrade:
       uncertainUpgradeWarningTooltip: 無法確定是否有可用的升級（無法識別用於部署此應用的倉庫和 chart）
   chart:
@@ -2346,7 +2346,7 @@ cluster:
     automation:
       label: 自動化
     autoscaler:
-      heading: Autoscaler
+      heading: 自動擴縮器
       enable: 啟用 autoscaler 並覆蓋「Machine Count」值
       machineCountValueOverride: 由 autoscaler 控制
       baseUnit: 機器
@@ -2398,8 +2398,8 @@ cluster:
     role:
       label: 角色
       etcd: ETCD
-      controlPlane: Control Plane
-      worker: Worker
+      controlPlane: 控制平面
+      worker: 工作節點
     labels:
       label: Kubernetes 節點標籤
     noAccessBanner: "你沒有查看此主機池配置的權限。"
@@ -2568,7 +2568,7 @@ cluster:
     workNode:
       label: Worker 節點
     controlPlaneConcurrency:
-      header: Control Plane
+      header: 控制平面
       label: Control Plane 併發
       toolTip: "可以是固定的節點數（如 1），也可以是百分比（如 10%）"
     workerConcurrency:
@@ -2636,24 +2636,24 @@ cluster:
             localDefined: 與本地相同（{count} 個快照）
             localUndefined: 與本地相同
         bucket:
-          label: Bucket
+          label: 儲存貯體
         folder:
           label: 文件夾
         region:
-          label: Region
+          label: 區域
         endpoint:
-          label: Endpoint
+          label: 端點
         skipSSLVerify:
           label: 接受任何證書（不安全）
         endpointCA:
           label: Endpoint CA 證書
     stackPreference:
-      label: Stack Preference
+      label: 堆疊偏好
       description: Stack preference 決定集群使用的網絡棧。IPv4 使用 <code>127.0.0.1</code>，雙棧使用 <code>localhost</code>，IPv6 使用 <code>[::1]</code>。在 Rancher 文檔中了解更多關於 <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >RKE2</a> 和 <a href="https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/k3s-cluster-configuration#stack-preference"  target="_blank" rel="noopener noreferrer nofollow" >K3s</a> 網絡的信息。
       options:
         ipv4: IPv4
         ipv6: IPv6
-        dual: Dual
+        dual: 雙堆疊
   k3s:
     flannelMasq:
       title: IPv6 NAT
@@ -2689,7 +2689,7 @@ cluster:
       header: Ingress-NGINX
       content: 僅當您的工作負載尚未準備好使用 Traefik 時才選擇此項。
     dual:
-      header: Dual Mode
+      header: 雙模式
       content: 使用此項可安全地測試並將流量從 Ingress-NGINX 遷移到 Traefik。
     traefik:
       header: Traefik
@@ -2726,7 +2726,7 @@ cluster:
       portsMatch: Traefik 和 Ingress-NGINX 端口不能相同
   tabs:
     ace: 授權端點
-    addOnAdditionalManifest: Additional Manifest
+    addOnAdditionalManifest: 附加資訊清單
     addons: 附加配置
     advanced: 高級選項
     agentEnv: Agent 環境變量
@@ -3278,7 +3278,7 @@ fleet:
         minimumValueWarning: 建議的最小輪詢間隔為 15 秒。為避免包含大量資源的 GitRepo 出現性能問題，請考慮增大此值。
     ociStorageSecret:
       title: OCI 倉庫
-      label: OCI Storage Secret
+      label: OCI 儲存 Secret
       tooltip: 如果選擇 'None'，Fleet 將在當前工作空間中存在時使用 'ocistorage' 後備 secret。<br>對所選 OCI storage secret 的任何更改在下一次 Git Repo 更新之前都不會生效。
       options:
         chooseExisting: "選擇一個 secret："
@@ -3286,7 +3286,7 @@ fleet:
     add:
       steps:
         metadata:
-          label: Metadata
+          label: 中繼資料
           title: 指定 Git 倉庫名稱和標籤/註解
           subtext: '定義元數據詳情'
           description: Git 倉庫基本信息
@@ -3370,7 +3370,7 @@ fleet:
     add:
       steps:
         metadata:
-          label: Metadata
+          label: 中繼資料
           title: 指定 Helm Op 名稱和標籤/註解
           subtext: '定義元數據詳情'
           description: Helm Op 基本信息
@@ -3380,10 +3380,10 @@ fleet:
           subtext: '定義 Helm Chart 來源詳情'
           description: chart
         values:
-          label: Values
-          title: values
+          label: 值
+          title: 值
           subtext: '定義 chart 的 Helm Values'
-          description: values
+          description: 值
         targetInfo:
           label: 目標詳情
           title: 指定將此倉庫同步到哪個目標
@@ -3420,17 +3420,17 @@ fleet:
         label: 版本
         placeholder: Chart 版本
       release:
-        title: Release
+        title: 發行版本
         label: 名稱
         placeholder: Helm release 名稱
     values:
-      title: Values
-      selectLabel: Values
+      title: 值
+      selectLabel: 值
       description: 配置 Helm 使用的 Values，以幫助定義應用。
       types:
-        values: Values
-        valuesFiles: Values Files
-        valuesFrom: Values From
+        values: 值
+        valuesFiles: 值檔案
+        valuesFrom: 值來源
       yaml:
         options:
           edit: 編輯 YAML
@@ -3439,16 +3439,16 @@ fleet:
         selectLabel: YAML
         loading: 正在從 chart 加載
       valuesFiles:
-        selectLabel: Files
+        selectLabel: 檔案
         ariaLabel: 輸入 value File 的路徑
         placeholder: ''
         addLabel: 添加 File 路徑
-        empty: empty
+        empty: 空
       valuesFrom:
-        selectLabel: Values From
+        selectLabel: 值來源
         options:
-          configMapKeyRef: ConfigMap Key
-          secretKeyRef: Secret Key
+          configMapKeyRef: ConfigMap 鍵
+          secretKeyRef: Secret 鍵
         loading: 正在加載 ConfigMaps 和 Secrets
     serviceAccount:
       label: Service Account 名稱
@@ -4211,7 +4211,7 @@ logging:
     default: /run/log/journal
   elasticsearch:
     host: 主機
-    scheme: Scheme
+    scheme: 協定
     port: 端口
     indexName: 索引名稱
     user: 用戶名
@@ -4932,7 +4932,7 @@ navLink:
           label: 端口
           placeholder: '例如：80'
         scheme:
-          label: Scheme
+          label: 協定
           placeholder: '例如：http'
     target:
       label: 窗口目標
@@ -5073,7 +5073,7 @@ node:
         label: 信息
         key:
           architecture: 架構
-          bootID: Boot ID
+          bootID: 開機 ID
           containerRuntimeVersion: 容器運行時版本
           kernelVersion: 內核版本
           kubeProxyVersion: kube-proxy 版本
@@ -6307,7 +6307,7 @@ secret:
 
   serviceAcct:
     ca: CA 證書
-    token: Token
+    token: 令牌
   customType: 自定義類型
   type: 類型
   types:
@@ -6367,7 +6367,7 @@ secret:
 
 selectOrCreateAuthSecret:
   label: 身份認證
-  imagePullSecret: Image Pull Secret
+  imagePullSecret: 映像拉取密鑰
   options:
     none: 無
     basic: HTTP 基礎認證
@@ -6400,7 +6400,7 @@ serviceAccount:
   imagePullSecrets: 鏡像拉取密文
   tabs:
     serviceAccount:
-      label: Service Account
+      label: 服務帳戶
 
 servicePorts:
   header:
@@ -6424,7 +6424,7 @@ servicePorts:
 serviceTypes:
   clusterip: 集群 IP
   externalname: 外部名稱
-  headless: Headless
+  headless: 無頭
   loadbalancer: 負載均衡器
   nodeport: 節點端口
 
@@ -6506,7 +6506,7 @@ servicesPage:
     headless:
       abbrv: H
       description: 創建沒有 Cluster IP 或 Load Balancer 的 Service。這是高級用例。
-      label: Headless
+      label: 無頭
     loadBalancer:
       abbrv: LB
       description: 在底層基礎設施中創建一個 Load Balancer（例如雲提供商的 Load Balancer）併為該 Service 分配一個公共 IP 地址。允許外部客戶端使用 Service 定義中指定的公共 IP 地址和端口訪問 Service。
@@ -6572,9 +6572,9 @@ sortableTable:
       other {{from} - {to} of {count} Items}}
     resource: |-
       {pages, plural,
-      =0 {No {pluralLabel}}
+      =0 {無 {pluralLabel}}
       =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{from} - {to} of {count} {pluralLabel}}}
+      other {{count} 個 {pluralLabel} 中的 {from} - {to} 個}}
   search: 篩選
   searchLabel: 過濾表格結果
   in: 在
@@ -6686,14 +6686,14 @@ storageClass:
     title: VMWare vSphere 卷
     diskFormat:
       label: 磁盤格式
-      thin: Thin
-      zeroedthick: Zeroed Thick
-      eagerzeroedthick: Eager Zeroed Thick
+      thin: 精簡佈建
+      zeroedthick: 歸零厚佈建
+      eagerzeroedthick: 立即歸零厚佈建
     storagePolicyName:
       label: 存儲策略名稱
       placeholder: 例如：gold
     datastore:
-      label: Datastore
+      label: 資料存放區
       placeholder: 例如：VSANDatastore
     hostFailuresToTolerate:
       label: 容忍主機失敗的次數
@@ -6752,7 +6752,7 @@ storageClass:
       label: 監控
       placeholder: 例如：10.16.153.105:6789
     adminId:
-      label: Admin ID
+      label: 管理員 ID
       placeholder: 例如：kube
     adminSecretNamespace:
       label: Admin 密文所在的命名空間
@@ -7034,13 +7034,13 @@ tableHeaders:
   queueLengthLimit: 隊列長度限制
   ram: 內存（RAM）
   rbac:
-    create: Create
-    delete: Delete
-    get: Get
-    list: List
-    patch: Patch
-    update: Update
-    watch: Watch
+    create: 建立
+    delete: 刪除
+    get: 取得
+    list: 列出
+    patch: 修補
+    update: 更新
+    watch: 監視
   ready: 就緒
   reason: 原因
   receivers: 接收器
@@ -7533,7 +7533,7 @@ workload:
     image: 容器鏡像
     imagePullPolicy: 鏡像拉取策略
     imagePullSecrets:
-      label: Pull Secrets
+      label: 拉取密鑰
       tooltip: 必須為類型 `kubernetes.io/dockercfg` 或 `kubernetes.io/dockerconfigjson`
     init: 初始化容器
     lifecycleHook:
@@ -7562,7 +7562,7 @@ workload:
           label: 端口
           placeholder: 例如：3000
         scheme:
-          label: Scheme
+          label: 協定
           placeholder: 例如：HTTP
       httpHeaders:
         title: HTTP 頭部
@@ -7606,7 +7606,7 @@ workload:
         title: 權限提升
         'true': "是：容器可以獲得比其父進程更多的權限。"
       capabilities:
-        title: Capabilities
+        title: 能力
         add: 添加 Capabilities
         drop: 移除 Capabilities
       fsGroup: 文件系統組
@@ -7633,8 +7633,8 @@ workload:
         title: 以用戶 ID 運行
         label: 用戶 ID
       seccompProfile:
-        pod: Pod Seccomp Profile
-        container: Seccomp Profile
+        pod: Pod Seccomp 設定檔
+        container: Seccomp 設定檔
         type: 類型
         localhostProfile:
           label: Localhost Profile 路徑
@@ -7645,7 +7645,7 @@ workload:
           unselected: Localhost Profile 輸入框已被隱藏。
         types:
           none:
-            label: None
+            label: 無
           runtimeDefault:
             label: RuntimeDefault - 繼承默認的 seccomp profile
           localhost:
@@ -7658,7 +7658,7 @@ workload:
       sysctlsKey: 名稱
     standard: 標準容器
     initContainer:
-      label: Init Containers
+      label: 初始化容器
     terminationState: "最後狀態：已終止，退出碼 {lsExitCode}：{lsDescription}，開始於：{lsStartedAt}，完成於：{lsFinishedAt}"
     titles:
       pods: Pod
@@ -7872,7 +7872,7 @@ workload:
     subtypes:
       secret: 密文
       configMap: ConfigMap
-      hostPath: Bind-Mount
+      hostPath: 繫結掛載
       persistentVolumeClaim: 持久卷聲明
       createPVC: 創建持久卷聲明
       csi: CSI
@@ -8056,9 +8056,9 @@ model:
     displayKind: L7 Ingress
   machine:
     role:
-      controlPlane: Control Plane
+      controlPlane: 控制平面
       etcd: ETCD
-      worker: Worker
+      worker: 工作節點
   openldapconfig:
     domain:
       help: 只有此庫下的用戶能正常登錄。
@@ -8720,7 +8720,7 @@ oidcclient:
   clientId: Client ID
   clientSecrets: Client Secrets
   issuerURL: Issuer URL
-  discoveryDocument: Discovery Document
+  discoveryDocument: 探索文件
   jwksUri: JWKS URI
   regenerate: 重新生成
   addNewSecret: 添加新密鑰
@@ -8927,8 +8927,8 @@ advancedSettings:
       debug: 調試
       trace: 跟蹤
     'agent-tls-mode':
-      strict: 'Strict'
-      system-store: 'System Store'
+      strict: '嚴格'
+      system-store: '系統儲存區'
   provisioning:
     header: 集群配置
 
@@ -9062,7 +9062,7 @@ branding:
   directoryName: 品牌資產目錄名稱
   logos:
     home: 產品主頁面
-    label: Logo
+    label: 標誌
     tip: '上傳 Logo 以替換頂層導航標題中的 Rancher logo。圖片的高度應為 21 像素，最大寬度為 200 像素。最大文件大小為 20KB。支持的格式：JPEG、PNG、SVG。'
     lightPreview: 淺色主題預覽
     darkPreview: 深色主題預覽
@@ -9284,10 +9284,10 @@ gitPicker:
       label: Commit
       tooltip: 要部署的 Commit
     commit:
-      label: Commit
-      inputLabel: Commit
+      label: 提交
+      inputLabel: 提交
     commitMessage:
-      label: Commit Message
+      label: 提交訊息
     errors:
       noAccount: 未找到 GitHub 帳戶或組織。請檢查你的查詢並重試。
       noBranch: 未找到分支。請檢查你的查詢並重試。
@@ -9321,10 +9321,10 @@ gitPicker:
       label: Commit
       tooltip: 要部署的 Commit
     commit:
-      label: Commit
-      inputLabel: Commit
+      label: 提交
+      inputLabel: 提交
     commitMessage:
-      label: Commit Message
+      label: 提交訊息
     errors:
       noAccount: 未找到 GitLab 帳戶或組織。請檢查你的查詢並重試。
       noBranch: 未找到分支。請檢查你的查詢並重試。
@@ -9529,7 +9529,7 @@ component:
 
 autoscaler:
   card:
-    title: Autoscaler
+    title: 自動擴縮器
     pause: 暫停
     resume: 恢復
     loadingError: 加載詳情時出現問題
@@ -9547,7 +9547,7 @@ autoscaler:
       paused: 已暫停
       unavailable: 不可用
   tab:
-    title: Autoscaler
+    title: 自動擴縮器
 
 ext.cattle.io.kubeconfig:
   deleted: "{name}（已刪除）"
