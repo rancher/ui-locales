@@ -1230,19 +1230,11 @@ catalog:
         =1 { {count} chart au total }
         other { {count} charts au total }
       }
-        {count , plural,
-          =1 { {count} chart in total }
-          other { {count} charts in total }
-        }
     totalMatchedChartsMessage: |-
       {count , plural,
         =1 { {count} chart correspond à vos critères. }
         other { {count} charts correspondent à vos critères. }
       }
-        {count , plural,
-          =1 { {count} chart matching your criteria. }
-          other { {count} charts matching your criteria. }
-        }
     resetFilters:
       title: Effacer tous les filtres
     sort:
@@ -1679,7 +1671,11 @@ cluster:
       insecure: "Non sécurisé : sélectionnez cette option pour ignorer la vérification TLS si votre serveur possède un certificat auto-signé."
   credential:
     banner:
-      createCredential: "{length, plural, =0 {Vous devez d’abord créer des identifiants pour communiquer avec le fournisseur cloud} other {Sélectionnez des identifiants pour communiquer avec le fournisseur cloud}}"
+      createCredential: |-
+        {length, plural,
+          =0 {Vous devez d’abord créer des identifiants pour communiquer avec le fournisseur cloud}
+          other {Sélectionnez des identifiants pour communiquer avec le fournisseur cloud}
+        }
     selectExisting:
       label: "Sélectionner l’existant"
     select:
@@ -1845,7 +1841,11 @@ cluster:
       cloudProvider:
         incompatible:
           You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
-    clusterWarning: "Il {count, plural, =1 {y a 1 cluster Harvester qui n’est pas affiché} other {y a # clusters Harvester qui ne sont pas affichés}} car ils n’ont pas accès au type virt.harvester.cattle.io/v1.VirtualMachine."
+    clusterWarning: |-
+      Il {count, plural,
+      =1 {y a 1 cluster Harvester qui n’est pas affiché}
+      other {y a # clusters Harvester qui ne sont pas affichés}
+      } car ils n’ont pas accès au type virt.harvester.cattle.io/v1.VirtualMachine.
     registration:
       step1: "1. Accédez à la page <code>Avancé / Paramètres</code> de l’interface utilisateur Harvester cible."
       step2: '2. Trouvez le paramètre <code>cluster-registration-url</code> et cliquez sur le bouton <code><i class="icon icon-actions" ></i></code> -> <code>Modifier le paramètre</code>.'
@@ -1920,7 +1920,14 @@ cluster:
     banner:
       updateInfo: Créer un nouveau pool pour mettre à jour les configurations de machine
     aws:
-      sizeLabel: "{apiName}: {cpu, plural, =1 {1 vCPU} other {# vCPUs}} / {memory, number} Go de mémoire / {storageSize, plural, =0 {EBS uniquement} other {{storageSize, number} {storageUnit} {storageType}}} - {architecture}"
+      sizeLabel: |-
+        {apiName}: {cpu, plural,
+        =1 {1 vCPU}
+          other {# vCPUs}
+        } / {memory, number} Go de mémoire / {storageSize, plural,
+          =0 {EBS uniquement}
+          other {{storageSize, number} {storageUnit} {storageType}}
+        } - {architecture}
     azure:
       acceleratedNetworking:
         label: Mise en réseau accélérée
@@ -2027,7 +2034,11 @@ cluster:
         label: Étiquettes de Droplet
         placeholder: ex. mon_serveur
     linode:
-      typeLabel: "{label}, {vcpus, plural, =1 {# vCPU} other {# vCPUs}}, {disk} Go de disque ({value})"
+      typeLabel: |-
+        {label}, {vcpus, plural,
+          =1 {# vCPU}
+          other {# vCPUs}
+        }, {disk} Go de disque ({value})
     vsphere:
       hostOptions:
         any: "N’importe lequel"
@@ -2328,7 +2339,7 @@ cluster:
     machinePoolError: |-
       {count, plural,
         =1 { {pool_name} : La valeur fournie pour {fields} est introuvable }
-        other { Erreurs dans les pools de machines }
+        other { {pool_name} : Les valeurs fournies pour {fields} sont introuvables }
       }
     rke1DeprecationMessage: "Rancher Kubernetes Engine (RKE / RKE1) a atteint sa fin de vie et ces clusters ne sont plus pris en charge. Nous recommandons de migrer les clusters RKE1 vers RKE2 pour garantir la continuité du support et des mises à jour de sécurité. En savoir plus sur la transition <a href=\"https://www.suse.com/support/kb/doc/?id=000021518\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">ici</a>."
     nginxDeprecated: Le contrôleur NGINX est obsolète et sera supprimé dans les prochaines versions
@@ -2378,17 +2389,26 @@ cluster:
         controlPlane: |-
           {count, plural,
             =0 { Un cluster nécessite au moins un nœud control plane pour être utilisable. }
-            other {{count, number} nœuds control plane}
+            =1 { Un cluster avec un seul nœud control plane n’est pas tolérant aux pannes. }
+            other {}
           }
         etcd: |-
           {count, plural,
             =0 { Un cluster nécessite au moins un nœud etcd pour être utilisable. }
-            other {{count, number} nœuds etcd}
+            =1 { Un cluster avec un seul nœud etcd n’est pas tolérant aux pannes. }
+            =2 { Les clusters doivent avoir un nombre impair de nœuds. Un cluster avec 2 nœuds etcd n’est pas tolérant aux pannes. }
+            =3 {}
+            =4 { Les clusters doivent avoir un nombre impair de nœuds. }
+            =5 {}
+            =6 { Les clusters doivent avoir un nombre impair de nœuds. }
+            =7 {}
+            other { Plus de 7 nœuds etcd n’est pas recommandé. }
           }
         worker: |-
           {count, plural,
             =0 { Un cluster nécessite au moins un nœud worker pour être utilisable. }
-            other {{count, number} nœuds worker}
+            =1 { Un cluster avec un seul nœud worker n’est pas tolérant aux pannes. }
+            other {}
           }
     quantity:
       label: Nombre de machines
@@ -2883,7 +2903,7 @@ drivers:
     customUiUrl:
       label: "URL d’interface personnalisée"
       placeholder: "https://test.com/ui"
-      tooltip: "L’URL à charger pour l’écran Ajouter des nœuds personnalisé pour ce pilote."
+      tooltip: "L’URL à charger pour l’écran Ajouter des nœuds personnalisé pour ce pilote. Voir https://github.com/rancher/ui-driver-skel pour plus d’informations."
     checksum:
       label: Somme de contrôle
       tooltip: Somme de contrôle pour vérifier que le pilote téléchargé correspond à la somme de contrôle attendue.
@@ -2906,7 +2926,7 @@ drivers:
     warning: |-
       {count, plural,
       =1 { {warningDrivers} Les ressources du fournisseur correspondant ne seront pas automatiquement supprimées. }
-      other { Les ressources des fournisseurs correspondants ne seront pas automatiquement supprimées. }
+      other { {warningDrivers} Les ressources des fournisseurs correspondants ne seront pas automatiquement supprimées. }
       }
   error:
     activate: "Échec de l’activation du pilote { name }"
@@ -3112,10 +3132,6 @@ fleet:
           =1 { cluster }
           other { clusters }
           }
-          {count, plural,
-          =1 { cluster }
-          other { clusters }
-          }
       noClusters: Ne cible aucun cluster
     resources: Ressources
     source: Source
@@ -3127,12 +3143,24 @@ fleet:
     hideLabels: Afficher moins
     showLabels: Afficher plus
   clusters:
-    harvester: "Il {count, plural, =1 {y a 1 cluster Harvester masqué car il ne peut pas être utilisé avec Fleet} other {y a # clusters Harvester masqués car ils ne peuvent pas être utilisés avec Fleet}}."
+    harvester: |-
+      Il {count, plural,
+      =1 {y a 1 cluster Harvester masqué car il ne peut pas être utilisé avec Fleet}
+      other {y a # clusters Harvester masqués car ils ne peuvent pas être utilisés avec Fleet}
+      }.
   tokens:
-    harvester: "{count, plural, =1 {1 token est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet} other {# tokens sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}}."
+    harvester: |-
+      {count, plural,
+      =1 {1 token est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet}
+      other {# tokens sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}
+      }.
   bundles:
     resources: Ressources
-    harvester: "{count, plural, =1 {1 bundle est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet} other {# bundles sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}}."
+    harvester: |-
+      {count, plural,
+      =1 {1 bundle est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet}
+      other {# bundles sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}
+      }.
   fleetSummary:
     noClusters:
       gitRepo: Ce dépôt Git ne cible aucun cluster
@@ -3573,7 +3601,7 @@ fleet:
       matchesSome: |-
         {matched, plural,
           =1 {Correspond à 1 des {total, number} clusters existants : "{sample}"}
-          other {Correspond à {matched, number} des {total, number} clusters existants}
+          other {Correspond à {matched, number} des {total, number} clusters existants, incluant "{sample}"}
         }
   fdc:
     id: ID
@@ -3658,7 +3686,11 @@ glance:
   memory: Mémoire
   nodes:
     total:
-      label: "{count, plural, =1 { Nœud } other { Nœuds au total }}"
+      label: |-
+        {count, plural,
+          =1 { Nœud }
+          other { Nœuds au total }
+        }
   pods: Pods
   provider: Fournisseur
   version: Version de Kubernetes
@@ -4274,7 +4306,7 @@ logging:
     enableAdditionalLoggingSources: Activer la journalisation améliorée du fournisseur cloud
     dockerRootDirectory: Répertoire racine Docker
     systemdLogPath: Chemin du journal systemd
-    tooltip: Certaines distributions Kubernetes écrivent dans <code>journald</code>. Pour collecter ces journaux, le pilote de journal <code>journald</code> doit être activé.
+    tooltip: Certaines distributions Kubernetes écrivent dans <code>journald</code>. Pour collecter ces journaux, <code>systemdLogPath</code> doit être défini. Bien que le répertoire <code>/run/log/journal</code> soit utilisé par défaut, certaines distributions Linux n’utilisent pas ce chemin par défaut.
     url: "<a href=\"{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options\" target=\"_blank\" rel=\"noopener nofollow noreferrer\">En savoir plus</a>"
     default: /run/log/journal
   elasticsearch:
@@ -5078,9 +5110,19 @@ networkpolicy:
     label: Sélecteurs
     hint: La politique réseau est appliquée aux pods sélectionnés
     matchingPods:
-      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
+      matchesSome: |-
+        {matched, plural,
+          =0 {Correspond à 0 des {total, number} pods}
+          =1 {Correspond à 1 des {total, number} pods : "{sample}"}
+          other {Correspond à {matched, number} des {total, number} pods existants, incluant "{sample}"}
+        }
     matchingNamespaces:
-      matchesSome: "Correspond à {matched, number} sur {total, number}, incluant « {sample} »"
+      matchesSome: |-
+        {matched, plural,
+          =0 {Correspond à 0 des {total, number} espaces de noms}
+          =1 {Correspond à 1 des {total, number} espaces de noms : "{sample}"}
+          other {Correspond à {matched, number} des {total, number} espaces de noms existants, incluant "{sample}"}
+        }
     matchingNamespacesAndPods:
       tooltip: "Une règle avec une seule entrée qui spécifie à la fois le sélecteur d’espace de noms et le sélecteur de pod pour sélectionner des pods particuliers."
       matchesSome: |-
@@ -5988,7 +6030,7 @@ promptRemove:
     other { et <b>{count} autres</b>.}
     }
   attemptingToRemove: Vous tentez de supprimer le/la {type}
-  attemptingToRemoveAuthConfig: "Vous tentez de désactiver ce fournisseur d’authentification. <br><br> Notez que les liaisons de modèles de rôles de cluster peuvent être affectées."
+  attemptingToRemoveAuthConfig: "Vous tentez de désactiver ce fournisseur d’authentification. <br><br> Notez que les liaisons de modèles de rôles de cluster, les liaisons de modèles de rôles de projet, les liaisons de rôles globaux, les utilisateurs et les tokens seront tous supprimés. <br><br> Êtes-vous sûr de vouloir continuer ?"
   protip: "Astuce : Maintenez la touche {alternateLabel} enfoncée lors du clic sur supprimer pour ignorer cette confirmation"
   confirmName: "Saisissez <b>{nameToMatch}</b> ci-dessous pour confirmer :"
   deleteAssociatedNamespaces: "Supprimer également les espaces de noms dans ce projet :"
@@ -6255,7 +6297,7 @@ resourceDetail:
     managedWarning: |-
       Ce {type} est géré par {hasName, select,
         no {une application {managedBy}}
-        yes {l’application {managedBy} {appName}}}; les modifications peuvent être écrasées.
+        yes {l’application {managedBy} {appName}}}; les modifications apportées ici seront probablement écrasées lors de la prochaine exécution de {managedBy}.
 resourceList:
   head:
     create: Créer
@@ -6338,11 +6380,8 @@ secret:
     paging: |-
       {pages, plural,
       =0 {Aucun {pluralLabel}}
-      =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}
-        sur {pages} page}
-      other {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}
-        sur {pages} pages}
-      }
+      =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
+      other {{from} - {to} sur {count} {pluralLabel}}}
     plusMore: + {n} de plus
     privateKey: Clé privée
     privateKeyPlaceholder: "Collez la clé privée, commençant généralement par -----BEGIN RSA PRIVATE KEY-----"
@@ -6575,7 +6614,7 @@ servicesPage:
         {matched, plural,
           =0 {Correspond à 0 des {total, number} pods. Si aucun sélecteur n’est créé, des points de terminaison manuels sont possibles.}
           =1 {Correspond à 1 des {total, number} pods : "{sample}"}
-          other {Correspond à {matched, number} des {total, number} pods}
+          other {Correspond à {matched, number} des {total, number} pods existants, incluant "{sample}"}
         }
   serviceTypes:
     clusterIp:
@@ -6652,14 +6691,12 @@ sortableTable:
       {pages, plural,
       =0 {Aucun élément}
       =1 {{count} {count, plural, =1 {élément} other {éléments}}}
-      other {{from} - {to} sur {count} éléments}
-      }
+      other {{from} - {to} sur {count} éléments}}
     resource: |-
       {pages, plural,
       =0 {Aucun {pluralLabel}}
       =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{from} - {to} sur {count} {pluralLabel}}
-      }
+      other {{from} - {to} sur {count} {pluralLabel}}}
   search: Filtrer
   searchLabel: Filtrer les résultats du tableau
   in: dans
@@ -7503,10 +7540,6 @@ wm:
       label: Afficher les derniers
       lines: "{value, number} lignes"
       minutes: |-
-        {value, number} {value, plural,
-        =1 {Minute}
-        other {Minutes}
-        }
         {value, number} {value, plural,
         =1 {Minute}
         other {Minutes}
@@ -9000,7 +9033,7 @@ advancedSettings:
   warnings:
     'agent-tls-mode': 'La modification de ce paramètre entraînera le redéploiement de tous les agents.'
   editHelp:
-    'ui-banners': "Ce paramètre prend un objet JSON contenant 3 paramètres racines : <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> est un objet contenant : <code>textColor</code>, <code>background</code> et <code>text</code>."
+    'ui-banners': "Ce paramètre prend un objet JSON contenant 3 paramètres racines : <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> est un objet contenant : <code>textColor</code>, <code>background</code> et <code>text</code>, où <code>textColor</code> et <code>background</code> sont des valeurs de couleur CSS valides."
   enum:
     'ui-default-landing':
       ember: Gestionnaire de cluster
@@ -9028,7 +9061,11 @@ featureFlags:
     'hide-local-auth-provider': L’activation de cette fonctionnalité et d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} pour plus d’informations.
   label: Indicateurs de fonctionnalités
   title: Êtes-vous sûr ?
-  warning: "Les indicateurs de fonctionnalités permettent à {vendor} de restreindre certaines fonctionnalités derrière des indicateurs. Les fonctionnalités désactivées ne sont pas visibles dans l’interface."
+  warning: |-
+    Les indicateurs de fonctionnalités permettent à {vendor} de restreindre certaines fonctionnalités derrière des indicateurs.
+    Les fonctionnalités désactivées par défaut doivent être considérées comme des fonctionnalités expérimentales.
+    Certaines fonctionnalités nécessitent un redémarrage du serveur {vendor} pour être modifiées.
+    Cela entraînera une brève interruption de l’API et de l’interface, mais n’affectera pas les clusters ou charges de travail en cours d’exécution.
   promptActivate: "Veuillez confirmer que vous souhaitez activer l’indicateur de fonctionnalité \"{flag}\""
   promptDeactivate: "Veuillez confirmer que vous souhaitez désactiver l’indicateur de fonctionnalité \"{flag}\""
   restartRequired: "Remarque : La mise à jour de cet indicateur de fonctionnalité redémarrera {vendor}"
