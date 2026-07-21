@@ -324,7 +324,7 @@ nav:
     resourceNotFound: 未找到資源類型 { resource }
     resourceListNotListable: 資源類型 { resource } 無法列出
     resourceListNotFound: 未找到資源類型 { resource }，無法顯示列表
-    resourceIdNotFound: 未找到 ID 為 { fqid } 的資源 { resources }，無法顯示資源詳細信息
+    resourceIdNotFound: 未找到 ID 為 { fqid } 的資源 { resource }，無法顯示資源詳細信息
     reload: 重新加載
     separator: 或者
 
@@ -1466,7 +1466,7 @@ catalog:
           placeholder: '默認：5'
     refreshInterval:
       label: 刷新間隔
-      placeholder: '默認：{hours}'
+      placeholder: '默認：{value}{unit}'
       unitLabel: 單位
       enableLabel: 啟用刷新間隔
     downloaded:
@@ -4775,7 +4775,7 @@ monitoring:
       keyFilePath:
         label: 密鑰文件路徑
         placeholder: 例如：./key-file.pfx
-      secretsBanner: 部署 Monitoring Chart 時，必須在<<pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre>中引用以下文件路徑。詳情請查看<a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">官方文檔</a>。
+      secretsBanner: 部署 Monitoring Chart 時，必須在<pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre>中引用以下文件路徑。詳情請查看<a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">官方文檔</a>。
   projectMonitoring:
     detail:
       error: "無法獲取具有狀態的儀表板值： "
@@ -9068,7 +9068,7 @@ featureFlags:
     這將導致 API 和 UI 短暫中斷，但不會影響正在運行的集群或工作負載。
   promptActivate: 確認是否要激活功能開關“{flag}”
   promptDeactivate: 確認是否要停用功能開關“{flag}”
-  restartRequired: "注意：你需要重啟以更新此功能開關。"
+  restartRequired: "注意：更新此功能開關將重啟 {vendor}"
   restart:
     title: 等待重啟
     wait: 重啟需要數分鐘。
