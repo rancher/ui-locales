@@ -1,10 +1,9 @@
 # ---
 # locale: fr-fr (French - France)
 # source-locale: en-us
-# synced-against-en-us-commit: 5f2c1a2 (2026-06-17)
-# last-updated: 2026-06-19
+# synced-against-en-us-commit: 02a2364 (2026-07-20)
+# last-updated: 2026-07-21
 # ---
-
 ##############################
 # Special stuff
 ##############################
@@ -47,6 +46,7 @@ generic:
   descending: décroissant
   disabled: Désactivé
   done: Terminé
+  download: Télécharger
   enabled: Activé
   error: Erreur
   here: ici
@@ -61,6 +61,7 @@ generic:
   labels: Étiquettes
   labelsAndAnnotations: Étiquettes et annotations
   podSecurityAdmission: Admission de sécurité des pods
+  learnMoreAbout: 'En savoir plus sur '
   links: Liens
   loading: 'Chargement&hellip;'
   members: Membres
@@ -77,6 +78,7 @@ generic:
       warning: Avertissement
       error: Erreur
   ok: OK
+  or: ou
   other: |-
     {count, plural,
     one  {autre}
@@ -482,6 +484,7 @@ accountAndKeys:
       keyCreated: Une nouvelle clé API a été créée
       bearerTokenTip: "La clé d’accès et la clé secrète peuvent être envoyées comme nom d’utilisateur et mot de passe pour l’authentification HTTP Basic afin d’autoriser les requêtes. Vous pouvez également les combiner pour les utiliser comme token porteur :"
       ttlLimitedWarning: "Le délai d’expiration de cette clé API a été réduit en raison de la configuration du système"
+
 addClusterMemberDialog:
   title: Ajouter un membre au cluster
 
@@ -507,6 +510,7 @@ authConfig:
   allowedPrincipalIds:
     title: Utilisateurs et groupes autorisés
   associatedWarning: 'Le compte {provider} utilisé pour activer le fournisseur externe recevra des autorisations équivalentes à celles de l''utilisateur Rancher actuellement connecté. Voir <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuration de l''authentification externe et utilisateurs principaux</a> pour comprendre pourquoi.'
+  bannerEnableAuthProvider: "Le paramètre « Désactiver l’authentification locale » est activé. L’activation d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} pour plus d’informations."
   githubapp:
     clientId:
       label: ID client
@@ -1011,6 +1015,7 @@ asyncButton:
     action: Snapshot maintenant
     waiting: 'Snapshot initié&hellip;'
     success: Snapshot en cours de création
+    day2OpsNotEnabled: Les opérations Day 2 ne sont pas activées pour ce cluster
   timing:
     action: Générer les temps de réponse
     waiting: 'Génération&hellip;'
@@ -1142,9 +1147,15 @@ catalog:
       label: Registre de conteneurs
       tooltip: Les images de conteneurs sont extraites du registre de conteneurs du cluster ou, à défaut, du paramètre de registre de conteneurs système. Pour modifier ce comportement par défaut, entrez ou mettez à jour le registre ici
       custom:
-        checkBoxLabel: Registre de conteneurs pour les images système Rancher
+        checkBoxLabel: Remplacer le registre de conteneurs par défaut
         inputLabel: Registre de conteneurs
         placeholder: 'Domaine et ports du registre, ex. registry.io:5000'
+      pullSecret:
+        skipOption: Ne pas utiliser de secrets de récupération d’image
+        defaultLabel: 'Utiliser le secret de récupération par défaut ({name})'
+        defaultLabelGeneric: Utiliser les secrets de récupération par défaut
+        existingValuesBanner: '{secrets} sont configurés comme secrets de récupération d’image dans les valeurs du chart. Pour les modifier, modifiez directement le YAML des valeurs.'
+        defaultSecretsBanner: '{secrets} sont configurés comme secrets de récupération par défaut. Sélectionnez ou créez un secret de récupération d’image ici pour remplacer la valeur par défaut.'
     header:
       charts: Graphiques
     info:
@@ -1240,6 +1251,7 @@ catalog:
       lastUpdatedDesc: Dernière mise à jour
       alphaAscending: Nom du graphique, A → Z
       alphaDescending: Nom du graphique, Z → A
+    loadingMore: Chargement de plus d’éléments…
     refreshButton:
       label: Actualiser tous les dépôts
     findSimilar:
@@ -1289,7 +1301,12 @@ catalog:
         timeoutWaiting: "Délai d’attente des journaux dépassé"
     chart: Graphique
     warning:
-      managed: "Attention, {manager} gère le déploiement et la mise à niveau de l’application {name}. La mise à niveau de cette application n’est pas prise en charge.<br> {version, select, null { } other { Dans la plupart des cas, aucune intervention de l’utilisateur n’est nécessaire pour s’assurer que la version {version} est compatible avec la version de Rancher en cours d’exécution.} }"
+      managed:
+        Warning, {manager} manages deployment and upgrade of the {name} app. Upgrading this app is not supported.<br>
+        {version, select,
+          null { }
+          other { Under most circumstances, no user intervention should be needed to ensure that the {version} version is compatible with the version of Rancher that you are running.}
+        }
     error:
       requiresFound: '<a href="{url}">{name}</a> doit être installé avant de pouvoir installer ce chart.'
       requiresMissing: "Ce chart nécessite un autre chart fournissant {name}, mais aucun n’a été trouvé."
@@ -1364,6 +1381,8 @@ catalog:
         generatedNewImagePullSecret: "Un nouveau secret d’extraction d’image <b>{ imagePullSecretName }</b> sera généré"
         generatedImagePullSecretBannerFromPreviousAuth: "Un nouveau Secret d’extraction d’image <b>{ imagePullSecretName }</b> sera généré depuis le secret de dépôt <b>{ repoAuthenticationName }</b>."
         usePreviouslyGeneratedImagePullSecretBanner: "Le Secret d’extraction d’image <b>{ imagePullSecretName }</b> a déjà été créé précédemment depuis le secret de dépôt <b>{ repoAuthenticationName }</b> et sera utilisé."
+        oldMonitoringChartWarning: 'À partir de la v2.15.0, ce chart est obsolète ; veuillez plutôt utiliser le nouveau chart Rancher Monitoring Dashboard. Pour plus d’informations, veuillez consulter <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">la documentation</a><span class="sr-only">S’ouvre dans un nouvel onglet</span>.'
+        newMonitoringChartWarning: 'Avant d’installer le nouveau chart Rancher Monitoring Dashboard, veuillez vous assurer que toutes les applications utilisant l’ancien Rancher Monitoring Chart ont été désinstallées et que les dépendances telles que Prometheus ont été installées. Pour plus d’informations, veuillez consulter <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">la documentation</a><span class="sr-only">S’ouvre dans un nouvel onglet</span>.'
       clusterTplVersion:
         label: Version
         subtext: Sélectionner une version du modèle
@@ -1387,6 +1406,8 @@ catalog:
     version: Version
     versions:
       current: "{ver} (Actuelle)"
+      current_linux: '{ver} (Actuel, Linux uniquement)'
+      current_windows: '{ver} (Actuel, Windows uniquement)'
       linux: "{ver} (Linux uniquement)"
       windows: "{ver} (Windows uniquement)"
   delete:
@@ -1453,7 +1474,11 @@ catalog:
           placeholder: 'par défaut : 5'
     refreshInterval:
       label: Intervalle de rafraîchissement
-      placeholder: 'par défaut : {hours}'
+      placeholder: 'par défaut : {value}{unit}'
+      unitLabel: Unité
+      enableLabel: Activer l’intervalle d’actualisation
+    downloaded:
+      label: Téléchargé
     error:
       refresh: Erreur lors du rafraîchissement du dépôt
   tools:
@@ -1818,7 +1843,8 @@ cluster:
       label: Ceci est un cluster Harvester - activez le flag de fonctionnalité Harvester pour le gérer
       state: Avertissement
       cloudProvider:
-        incompatible: "Vous ne pouvez pas sélectionner le fournisseur cloud Harvester car la version actuelle de Harvester n’est pas compatible avec la version Kubernetes RKE2 sélectionnée. Cliquez <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.suse.com/suse-harvester/support-matrix/all-supported-versions\">ici</a> pour voir les versions Kubernetes prises en charge."
+        incompatible:
+          You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
     clusterWarning: "Il {count, plural, =1 {y a 1 cluster Harvester qui n’est pas affiché} other {y a # clusters Harvester qui ne sont pas affichés}} car ils n’ont pas accès au type virt.harvester.cattle.io/v1.VirtualMachine."
     registration:
       step1: "1. Accédez à la page <code>Avancé / Paramètres</code> de l’interface utilisateur Harvester cible."
@@ -2144,7 +2170,8 @@ cluster:
         label: Activer IPv6
       httpProtocolIpv6: 
         label: "Activer le point de terminaison IPv6 pour le service de métadonnées d’instance"
-      ipv6ValidationWarning: "Quand un pool utilise un sous-réseau/VPC IPv6 ou double pile, tous les pools doivent utiliser un sous-réseau/VPC IPv6 ou double pile."
+      dualStackValidationWarning: Lorsqu’un pool active un sous-réseau/vpc dual-stack, tous les pools doivent utiliser la même configuration réseau.
+      ipv6ValidationWarning: "Lorsqu’un pool active un sous-réseau/vpc IPv6, tous les pools doivent utiliser la même configuration réseau."
     pnap:
       serverLocation:
         label: Emplacement
@@ -2413,7 +2440,7 @@ cluster:
     aws: Amazon
     azure: Azure
     azureaks: Azure AKS
-    aks: Azure AKS
+    aks: AKS
     azurekubernetesservice: Azure AKS (Kev1 non supporté)
     baiducloudcontainerengine: Baidu CCE
     baidu: Baidu CCE
@@ -2422,13 +2449,13 @@ cluster:
     custom: Personnalisé
     digitalocean: DigitalOcean
     docker: Docker
-    eks: Amazon EKS
+    eks: EKS
     exoscale: Exoscale
     sks: Exoscale SKS
     gcp: Google
     google: Google GCE
     googlegke: Google GKE
-    gke: Google GKE
+    gke: GKE
     googlekubernetesengine: Google GKE (Kev1 non supporté)
     harvester: Harvester
     huaweicce: Huawei CCE
@@ -2651,6 +2678,7 @@ cluster:
         other {Un snapshot a été demandé pour {count, number} clusters}
       }
     groupLabel: Emplacement
+    predatesImportTooltip: L’action de restauration n’est actuellement pas prise en charge pour ce snapshot car il est antérieur à l’import dans Rancher.
     failed: Instantané du {time} a échoué
     rke1:
       local: local
@@ -2715,6 +2743,7 @@ cluster:
     upgrade: Stratégie de mise à niveau
     registration: Enregistrement
     nodePools: Pools de nœuds
+    operations: Opérations
   rotateCertificates:
     label: Faire pivoter les certificats
     modalTitle: Faire pivoter les certificats du cluster
@@ -2896,6 +2925,7 @@ detailText:
       =1 {+ 1 caractère supplémentaire}
       other {+ {n, number} caractères supplémentaires}
     }
+
 drainNode:
   action: Drainer
   actionStop: Arrêter le drainage
@@ -2954,10 +2984,10 @@ fleet:
     title: Paramètres de livraison continue
     info: "Rancher va redémarrer l’agent Fleet et le contrôleur lors d’un changement de paramètres."
     apply: Appliquer les modifications
-    noPermissions: "Vous n’avez pas les autorisations pour modifier les paramètres Fleet"
+    noPermissions: "Vous n’avez pas les autorisations pour modifier les paramètres de Livraison continue"
     parseError: "Impossible d’analyser les valeurs depuis \"{ path }\" dans le ConfigMap \"{ id }\""
     fields:
-      ariaLabel: "Paramètre Fleet {name}"
+      ariaLabel: "Paramètre {name} de Livraison continue"
     agentTLSMode:
       label: Mode TLS
       description: "Détermine si l’agent doit faire confiance aux bundles CA du magasin de confiance du système d’exploitation lors de la connexion au serveur Fleet."
@@ -3034,13 +3064,13 @@ fleet:
       description: "Paramètres de déploiement de l’agent."
     replicas:
       label: Réplicas
-      description: Nombre de réplicas des pods Fleet.
+      description: Nombre de réplicas de pods.
     annotations:
       label: Annotations supplémentaires
-      description: Annotations supplémentaires transmises aux pods Fleet.
+      description: Annotations supplémentaires transmises aux pods.
     developer:
       label: Développeur
-      description: Activer les informations de débogage de Fleet.
+      description: Activer les informations de débogage.
 
   tableHeaders:
     applicationType: Type
@@ -3051,7 +3081,7 @@ fleet:
   dashboard:
     pageTitle: Tableau de bord de livraison continue
     menuLabel: Tableau de bord
-    welcome: Bienvenue dans la livraison continue Fleet
+    welcome: Bienvenue dans Livraison continue
     gitOpsScale: "GitOps à l’échelle."
     learnMore: En savoir plus.
     learnMoreLink: https://fleet.rancher.io
@@ -3117,19 +3147,27 @@ fleet:
       waitApplied: "En attente d’application"
   clusterTargets:
     advancedConfigs: Des configurations cibles avancées sont définies, vérifiez le fichier YAML pour plus de détails.
+    targetMode:
+      local: cluster local
+      all: Tous les clusters de l’espace de travail
+      allCompact: 'Tous les clusters de l’espace de travail <b>{namespace}</b> ({count})'
+      none: Aucun cluster
+      clusters: Clusters sélectionnés manuellement
     clusters:
-      title: Clusters
+      title: Sélection de clusters
       byName:
+        title: Sélectionner par nom de cluster
         placeholder: Sélectionner plusieurs clusters
-        label: Sélectionner par nom de cluster
+        label: Noms de clusters
       byLabel:
         title: Sélectionner par étiquettes
         addSelector: Ajouter un sélecteur de cluster
+        removeSelector: Supprimer le sélecteur de cluster
         labelKey: Étiquette
     clusterGroups:
-      title: Groupes de clusters
+      title: Sélectionner par groupes de clusters
       byName:
-        label: Sélectionner par nom de groupe de clusters
+        label: Groupes de clusters
         placeholder: Sélectionner plusieurs groupes de clusters
     rules:
       matching:
@@ -3139,6 +3177,7 @@ fleet:
             =1 {1 cluster sélectionné}
             other {{n, number} clusters sélectionnés}
           }
+        selectedClusters: Clusters sélectionnés
         placeholder: Sélectionner des clusters par nom, étiquettes ou groupes
         empty: "Aucun cluster dans l’espace de travail"
         plusMore: |-
@@ -3157,9 +3196,12 @@ fleet:
     groupBy: Grouper par type
     subTypes:
       fleet.cattle.io.gitrepo:
-        description: GitRepo décrit un dépôt git surveillé par Fleet. La ressource contient les informations nécessaires pour déployer des ressources depuis le dépôt git.
+        description: GitRepo décrit un dépôt git qui est surveillé. La ressource contient les informations nécessaires pour déployer le dépôt, ou des parties de celui-ci, vers les clusters cibles.
       fleet.cattle.io.helmop:
         description: HelmOp est un moyen simplifié de créer des bundles en pointant directement vers un dépôt Helm ou vers un catalogue OCI.
+      suse-application-collection:
+        label: SUSE Application Collection
+        description: Explorez notre Application Collection maintenue et sécurisée, sélectionnez un chart Helm et déployez-le sur vos clusters.
     warningTooltip:
       clusterGroup: "Il n’y a pas de clusters dans ce groupe de clusters"
       cluster: Aucun cluster disponible
@@ -3307,6 +3349,24 @@ fleet:
       label: Espace de travail
       addWorkspace: Créer un espace de travail
     helmRepoURLRegex: Dépôts Helm (Regex URL)
+  appCo:
+    credentials:
+      title: Créer un App Bundle à partir de SUSE Application Collection
+      subtitle: Configurez vos identifiants
+      infoText: Un jeton d’accès Application Collection est requis pour se connecter au catalogue de charts Helm.
+      accessTokensLink: Jetons d’accès SUSE Application Collection
+      accessTokenLabel: Jeton d’accès
+      editCredentials: Modifier les identifiants
+      addNewToken: Ajouter un nouveau jeton d’accès...
+      noTokensYet: "Vous n’avez pas encore ajouté de jeton d’accès."
+      chooseExisting: 'Choisir un jeton existant :'
+      username: Nom d’utilisateur
+      usernamePlaceholder: utilisateur@domaine.org
+      accessTokenField: Jeton d’accès
+      accessTokenPlaceholder: Votre jeton d’accès SUSE Application Collection
+    chart:
+      title: Charts
+      loadError: Chart introuvable ou sans version disponible.
   helmOp:
     intro:
       add: Créer une opération Helm
@@ -3359,6 +3419,35 @@ fleet:
           subtext: Définir les paramètres avancés
           description: "Fleet utilisera les paramètres d’authentification et l’interrogation pour synchroniser les ressources."
           info: Ces paramètres sont pour une utilisation avancée et sont optionnels. Vous pouvez les ignorer et terminer le processus de création.
+        selection:
+          searchPlaceholder: Rechercher dans le catalogue...
+          authBanner: 'Deux ressources différentes seront créées : un secret Livraison continue et un imagePullSecret qui sera copié dans chaque cluster en aval sélectionné à l’étape suivante.'
+          emptyState:
+            connectionError:
+              title: Erreur de connexion
+              descriptionPre: 'Une erreur s’est produite lors de la récupération du catalogue SUSE Application Collection.'
+              please: 'Veuillez '
+              tryAgain: réessayer
+              descriptionPost: ' ou contacter votre administrateur système.'
+            noMatch:
+              title: Aucun chart à afficher
+              descriptionPre: 'Conseils : utilisez un autre critère de recherche ou '
+              clearSearch: effacez la barre de recherche
+              descriptionPost: ' et explorez le catalogue.'
+          repoLoading:
+            title: Création du dépôt SUSE Application Collection...
+            description: Veuillez patienter pendant la création du dépôt
+          repoError:
+            description: 'Veuillez vérifier vos identifiants ou le dépôt dans le cluster en amont :'
+            link: SUSE App Collection
+    appCoConfig:
+      chartVersion: Version du chart
+      name: Nom de l’App Bundle
+      advanced: Avancé
+    appCoView:
+      chartConfig: Configuration du chart
+      targetDetails: Détails de la cible
+      advanced: Avancé
     source:
       title: Source
       selectLabel: Type
@@ -3387,10 +3476,13 @@ fleet:
         title: Version publiée
         label: Nom
         placeholder: Le nom de la version Helm
+        fullLabel: Nom de la version
     values:
       title: Valeurs
       selectLabel: Valeurs
       description: "Configurer les valeurs utilisées par Helm qui aident à définir l’application."
+      descriptionCompact: Les valeurs définies dans cette section seront appliquées au chart dans chaque cluster sélectionné.
+      appCoDescription: L’imagePullSecret global prédéfini ne doit pas être modifié, sinon la connexion avec SUSE Application Collection échouera.
       types:
         values: Valeurs
         valuesFiles: Fichiers de valeurs
@@ -3417,17 +3509,25 @@ fleet:
     serviceAccount:
       label: Nom du compte de service
       placeholder: "Optionnel : Utiliser un compte de service dans les clusters cibles"
+      compactPlaceholder: "Utiliser un compte de service dans les clusters sélectionnés"
+      compactDescription: "Lorsqu’il est fourni, ce ServiceAccount sera utilisé pour effectuer le déploiement."
     targetNamespace:
       label: Espace de noms cible
       placeholder: "Optionnel : Exiger que toutes les ressources soient dans cet espace de noms"
+      compactPlaceholder: "Exiger que toutes les ressources soient dans cet espace de noms"
+      compactDescription: "Cela affectera toutes les ressources à l’espace de noms spécifié. Si une ressource à portée cluster existe, le déploiement échouera."
     target:
       selectLabel: Cible
       advanced: Avancé
       cluster: Cluster
       clusterGroup: Groupe de clusters
       label: Déployer vers
+      title: Déployer le chart vers
       labelLocal: Déployer avec
       additionalOptions: Options supplémentaires
+      clusterDeploymentSettings: Paramètres de déploiement du cluster
+      clusterDeploymentDescription: "Ici, vous pouvez définir un ServiceAccount ou forcer un Namespace cible pour les déploiements."
+      clusterDeploymentLink: Options de déploiement de bundle
     targetDisplay:
       advanced: Avancé
       clusters: Clusters
@@ -3436,10 +3536,17 @@ fleet:
       local: Local
     resources:
       label: Ressources
+      lockedSecretBanner: L’Image Pull Secret précédemment sélectionné est requis pour se connecter à SUSE Application Collection.
       keepResources: Toujours conserver les ressources
       keepResourcesTooltip: "Lorsque activé, les ressources seront conservées lors de la suppression d’un HelmOp ou d’un Bundle - seuls les secrets de version Helm seront supprimés."
       correctDrift: "Activer l’auto-correction"
       correctDriftTooltip: "Lorsque activé, Fleet s’assurera que les ressources du cluster restent synchronisées avec le HelmOp."
+    appCoResources:
+      helmChartSettings: Paramètres des ressources du chart Helm
+      additionalResources: Ressources supplémentaires à synchroniser
+      additionalResourcesDescription: Vous pouvez ajouter des Secrets et des ConfigMaps pour copier ces ressources vers chaque cluster en aval ciblé avant de déployer le chart Helm.
+      additionalResourcesLinkDescription: En savoir plus sur
+      additionalResourcesLink: Propagation automatisée des ressources vers les clusters en aval
     polling:
       label: Interrogation
       enable: "Activer l’interrogation"
@@ -3454,6 +3561,7 @@ fleet:
       title: Authentification
       label: Authentification
       helm: Authentification Helm
+      appco: Authentification SUSE App Collection
     caBundle:
       label: Certificats
       placeholder: Collez un ou plusieurs certificats, en commençant par -----BEGIN CERTIFICATE-----
@@ -3713,6 +3821,7 @@ import:
     =1 {1 ressource}
     other {# ressources}
     }
+
 auditPolicy:
   active: Actif
   inactive: Inactif
@@ -4984,6 +5093,7 @@ networkpolicy:
           =1 {1 des {totalNamespaces, number} espaces de noms : "{sampleNamespaces}"}
           other {{matchedNamespaces, number} des {totalNamespaces, number} espaces de noms existants, dont "{sampleNamespaces}"}
         }
+
 node:
   list:
     pool: Pool
@@ -5786,6 +5896,9 @@ projectNamespaces:
   isIstioInjectionEnabled: "L’injection automatique de sidecar Istio est activée pour cet espace de noms"
 
 prometheusRule:
+  labels:
+    title: Labels de correspondance Prometheus
+    tooltip: Ces labels doivent correspondre au ruleSelector configuré sur la ressource Prometheus. L’opérateur Prometheus utilise ce sélecteur pour découvrir quelles ressources PrometheusRule évaluer.
   alertingRules:
     addLabel: Ajouter une alerte
     annotations:
@@ -5893,6 +6006,13 @@ promptRestore:
   fromS3: Restaurer depuis S3
   label: Instantané
   placeholder: Sélectionner un snapshot à restaurer
+  error:
+    unableToResolveTargetCluster: Impossible de résoudre le cluster cible pour la restauration du snapshot
+  restoreMode:
+    label: Type de restauration
+    onlyEtcd: etcd uniquement
+    kubernetesVersionAndEtcd: Version de Kubernetes et etcd
+    clusterConfigKubernetesVersionAndEtcd: Configuration du cluster, version de Kubernetes et etcd
   notification:
     title: Restaurer le snapshot
     message: La restauration du snapshot { selectedSnapshot } a démarré...
@@ -5916,7 +6036,9 @@ promptRotateEncryptionKey:
   title: Faire pivoter les clés de chiffrement
   description: La dernière sauvegarde {name} a été effectuée le {date}
   warning: "Avant de continuer, assurez-vous qu’une sauvegarde ETCD réussie du cluster a été effectuée."
-  error: Aucune sauvegarde trouvée
+  error:
+    noBackup: Aucune sauvegarde trouvée
+    unableToResolveTargetCluster: Impossible de résoudre le cluster cible pour la rotation de la clé de chiffrement
 
 rancherAlertingDrivers:
   msTeams: Activer Microsoft Teams
@@ -6201,6 +6323,8 @@ resourceYaml:
 
 secret:
   authentication: Authentification
+  githubApp:
+    label: GitHub App
   certificate:
     certificate: Certificat
     certificates: Certificats
@@ -6258,6 +6382,7 @@ secret:
           =1 {1 entrée}
           other {{entries} entrées}
         }
+
   serviceAcct:
     ca: Certificat CA
     token: Jeton
@@ -6339,14 +6464,19 @@ selectOrCreateAuthSecret:
     passwordPersonalAccessToken: "Mot de passe / Token d’accès personnel"
   rke:
     info: "Un secret de configuration d’authentification RKE contient le nom d’utilisateur et le mot de passe concaténés et encodés en base64."
+  githubApp:
+    appId: ID de la GitHub App
+    installationId: ID d’installation de la GitHub App
+    privateKey: Clé privée de la GitHub App
   namespaceGroup: "Espace de noms : {name}"
   chooseExisting: "Choisir un secret existant :"
   createSsh: Créer un secret de clé SSH
   createBasic: "Créer un secret d’authentification HTTP basique"
   createS3: "Créer un secret d’authentification compatible S3"
   createRKE: "Créer un secret de configuration d’authentification RKE"
+  createGithubApp: Créer un secret d’authentification GitHub App
   createImagePullSecretBasedOnAuth: "Créer un secret d’extraction d’image basé sur un secret d’authentification"
-  createImagePullSecret: "Créer un nouveau secret d’extraction d’image avec un nouveau nom d’utilisateur/mot de passe"
+  createImagePullSecret: "Créer un Image Pull Secret avec un nom d’utilisateur et un mot de passe"
 
 serviceAccount:
   automount: Montage automatique du jeton de compte de service
@@ -7235,6 +7365,7 @@ validation:
   betweenValues: '"{key}" doit être compris entre {min} et {max}'
   noSchema: Aucun schéma trouvé pour la validation
   noType: Aucun type à valider
+  createResourceFailed: 'Échec de la création de la ressource : autorisations insuffisantes ou type de ressource introuvable'
   number:
     requiredInt: '"{key}" doit être un entier'
     isPositive: '"{key}" doit être positif'
@@ -8048,7 +8179,6 @@ typeDescription:
   #       target="_blank" rel="noopener noreferrer nofollow"
   jwt.authentication: "Activez cette fonctionnalité sur un cluster pour ajouter la prise en charge de l’authentification JWT des comptes de service en aval."
   branding: "La personnalisation permet aux administrateurs de rebrander globalement l’interface en personnalisant le nom du produit Rancher, le logo et les couleurs."
-  chart: Tous les charts ont au moins une version installable sur des clusters avec des nœuds Linux et Windows.
   compliance.cattle.io.clusterscanbenchmark: Une version de benchmark est le nom du benchmark à exécuter avec kube-bench ainsi que la configuration valide.
   compliance.cattle.io.clusterscanprofile: "Un profil est la configuration pour l’analyse de conformité, qui inclut les versions de benchmark à utiliser."
   compliance.cattle.io.clusterscan: Une analyse est créée pour déclencher une analyse de conformité sur le cluster basée sur le profil défini.
@@ -8572,11 +8702,6 @@ typeLabel:
       one { ClusterRegistrationToken }
       other { ClusterRegistrationTokens }
     }
-  turtles-capi.cattle.io.capiprovider: |-
-    {count, plural,
-      one { Fournisseur Cluster API }
-      other { Fournisseurs Cluster API }
-    }
   management.cattle.io.node: |-
     {count, plural,
       one { Node }
@@ -8661,6 +8786,11 @@ typeLabel:
     {count, plural,
       one { Cluster Registration Token }
       other { Cluster Registration Tokens }
+    }
+  turtles-capi.cattle.io.capiprovider: |-
+    {count, plural,
+      one { Fournisseur Cluster API }
+      other { Fournisseurs Cluster API }
     }
 
 oidcclient:
@@ -8843,6 +8973,7 @@ advancedSettings:
     'ingress-ip-domain': "Domaine DNS générique pour les noms d’hôte Ingress générés automatiquement. <ingress-name>.<namespace-name>.<ip address of ingress controller> sera ajouté au domaine."
     'server-url': "URL d’installation {appName} par défaut. Doit être en HTTPS. Tous les nœuds de votre cluster doivent pouvoir l’atteindre."
     'system-default-registry': "Registre privé pour toutes les images système Rancher. Si aucune valeur n’est spécifiée, le registre par défaut du runtime de conteneur est utilisé. Pour Docker et containerd, la valeur par défaut est `docker.io`."
+    'system-default-registry-pull-secrets': 'Liste des secrets de récupération d’image pour s’authentifier auprès du registre depuis lequel les images de conteneurs système Rancher sont récupérées. Par défaut, ces secrets seront copiés dans chaque espace de noms de chart Rancher. Les secrets doivent se trouver dans l’espace de noms `cattle-system`. Le premier secret valide listé ici sera utilisé.'
     'ui-dashboard-index': "Emplacement de l’index HTML pour l’interface {appName}."
     'ui-offline-preferred': "Contrôle si les ressources de l’interface utilisateur sont servies localement par le conteneur serveur ou depuis l’URL distante définie dans le paramètre ui-dashboard-index. L’option `Dynamique` utilisera les ressources locales dans les versions de production de {appName}."
     'ui-pl': "Nom de l’entreprise en marque blanche."
@@ -8865,6 +8996,7 @@ advancedSettings:
     'k3s-based-upgrader-uninstall-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut désinstaller simultanément l’ancienne application `rancher-k3s-upgrader` ou `rancher-rke2-upgrader`."
     'system-agent-upgrader-install-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut installer simultanément les ressources requises pour la mise à niveau de l’agent système."
     'imported-cluster-version-management': "Active la gestion des versions pour les clusters RKE2/K3s importés, et pour le cluster local s’il s’agit d’un cluster RKE2/K3s. Le paramètre de gestion des versions par cluster remplace ce paramètre global au niveau du cluster."
+    'imported-cluster-day2-ops-enabled': Contrôle si les clusters RKE2/K3s importés auront les opérations Day 2 (snapshots etcd, restaurations, rotations de clés de chiffrement) activées par défaut. Cela affectera tous les clusters utilisant la configuration par défaut, et peut être remplacé au niveau du cluster.
   warnings:
     'agent-tls-mode': 'La modification de ce paramètre entraînera le redéploiement de tous les agents.'
   editHelp:
@@ -8892,6 +9024,8 @@ advancedSettings:
     header: Provisionnement du cluster
 
 featureFlags:
+  description:
+    'hide-local-auth-provider': L’activation de cette fonctionnalité et d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} pour plus d’informations.
   label: Indicateurs de fonctionnalités
   title: Êtes-vous sûr ?
   warning: "Les indicateurs de fonctionnalités permettent à {vendor} de restreindre certaines fonctionnalités derrière des indicateurs. Les fonctionnalités désactivées ne sont pas visibles dans l’interface."
@@ -9157,8 +9291,8 @@ customLinks:
       text: "Lorsque vous avez besoin d’aide avec Rancher, vous avez accès à une équipe d’experts inégalée."
       action: Ouvrir une demande de support
       aws:
-        text: "Le support est disponible via votre abonnement Amazon Marketplace."
         generateConfig: "Générer la configuration de support"
+        text: "Le support est disponible via votre abonnement Amazon Marketplace."
   promos:
     one:
       title: Pour commencer
