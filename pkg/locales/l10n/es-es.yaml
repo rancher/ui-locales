@@ -1407,7 +1407,7 @@ catalog:
       defaultMessage: Predeterminará a "master" si se deja en blanco
     gitRepo:
       label: URL del repositorio de Git
-      placeholder: ej. https://github.com/su-empresa/graficos.git
+      placeholder: ej. https://github.com/your-company/charts.git
     name:
       rancher-charts: '{vendor}'
       rancher-partner-charts: Socios
@@ -2095,7 +2095,7 @@ cluster:
           placeholder: 'Predeterminado: imagen rancheros-vmware más reciente'
         cloudInit:
           label: Cloud Init
-          placeholder: p. ej. http://mi_host/cloud-config.yml
+          placeholder: p. ej. http://my_host/cloud-config.yml
           note: Archivo cloud-init o URL para establecer en guestinfo
         cloudConfigYaml: YAML de configuración de nube
         os: Sistema operativo
@@ -2304,7 +2304,7 @@ cluster:
         titleAlt: |-
           {count, plural,
             =1 { Para todas las máquinas, use los argumentos de Kubelet: }
-            other { Para {count} grupos de máquinas, use los argumentos de Kubelet: }
+            other { Para máquinas sin etiquetas coincidentes a continuación: }
           }
         kubeControllerManagerTitle: Argumentos adicionales del controlador de administración
         kubeApiServerTitle: Argumentos adicionales del servidor API
@@ -2380,7 +2380,13 @@ cluster:
           {count, plural,
             =0 { Un clúster necesita al menos un nodo etcd para ser utilizable. }
             =1 { Un clúster con 1 nodo etcd no tiene alta disponibilidad. }
-            other { Un clúster con {count} nodos etcd tiene alta disponibilidad. }
+            =2 { Los clústeres deben tener un número impar de nodos.  Un clúster con 2 nodos etcd no es tolerante a fallos. }
+            =3 {}
+            =4 { Los clústeres deben tener un número impar de nodos. }
+            =5 {}
+            =6 { Los clústeres deben tener un número impar de nodos. }
+            =7 {}
+            other { No se recomiendan más de 7 nodos etcd. }
           }
         worker: |-
           {count, plural,
@@ -2881,7 +2887,7 @@ drivers:
     customUiUrl:
       label: URL de UI personalizada
       placeholder: https://test.com/ui
-      tooltip: La URL para cargar la pantalla personalizada de Agregar Nodos para este controlador.
+      tooltip: La URL para cargar la pantalla personalizada de Agregar Nodos para este controlador. Consulte https://github.com/rancher/ui-driver-skel para obtener más información.
     checksum:
       label: Suma de verificación
       tooltip: Suma de verificación para verificar que el controlador descargado coincide con la esperada.
@@ -3123,20 +3129,20 @@ fleet:
     harvester: |-
       Hay {count, plural,
       =1 {1 clúster de Harvester oculto ya que no puede usarse con Continuous Delivery}
-      other {{count} clústeres de Harvester ocultos ya que no pueden usarse con Continuous Delivery}
+      other {# clústeres de Harvester ocultos ya que no pueden usarse con Continuous Delivery}
       }
   tokens:
     harvester: |-
       {count, plural,
       =1 {1 token está oculto ya que pertenece a un clúster de Harvester que no puede usarse con Continuous Delivery}
-      other {{count} tokens están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
+      other {# tokens están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
       }
   bundles:
     resources: Recursos
     harvester: |-
       {count, plural,
       =1 {1 paquete está oculto ya que pertenece a un clúster de Harvester que no puede usarse con Continuous Delivery}
-      other {{count} paquetes están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
+      other {# paquetes están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
       }
   fleetSummary:
     noClusters:
@@ -3578,7 +3584,7 @@ fleet:
       matchesSome: |-
         {matched, plural,
           =1 {Coincide con 1 de {total, number} clústeres existentes: "{sample}"}
-          other {Coincide con {matched} de {total, number} clústeres existentes}
+          other {Coincide con {matched, number} de {total, number} clústeres existentes, incluyendo "{sample}"}
         }
   fdc:
     id: ID
@@ -4562,10 +4568,7 @@ logout:
   message: Cerrando sesión...
   error: 'Se produjo un error al cerrar sesión: {msg}'
   specificError:
-    unknown: |-
-      Desconocido.
-
-      Por favor contacte a su administrador del sistema.
+    unknown: Desconocido.\n\nPor favor contacte a su administrador del sistema.
     500: |-
       Error del lado del servidor.
 
@@ -6587,7 +6590,7 @@ servicesPage:
         {matched, plural,
           =0 {Coincide con 0 de {total, number} pods. Si no se crea ningún selector, se pueden configurar endpoints manuales.}
           =1 {Coincide con 1 de {total, number} pods: "{sample}"}
-          other {Coincide con {matched} de {total, number} pods}
+          other {Coincide con {matched, number} de {total, number} pods existentes, incluyendo "{sample}"}
         }
   serviceTypes:
     clusterIp:
@@ -7518,6 +7521,7 @@ wm:
         {value, number} {value, plural,
         =1 {Minute}
         other {Minutes}
+        }
     search: Filtrar
     timestamps: Mostrar marcas de tiempo
     wrap: Ajustar líneas
@@ -9006,7 +9010,7 @@ advancedSettings:
   warnings:
     agent-tls-mode: Cambiar esta configuración provocará que todos los agentes sean redespliegados.
   editHelp:
-    ui-banners: 'Esta configuración acepta un objeto JSON con 3 parámetros raíz: <code>banner</code>, <code>showHeader</code>, y otros parámetros de configuración de banners.'
+    ui-banners: 'Esta configuración acepta un objeto JSON con 3 parámetros raíz: <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> es un objeto que contiene: <code>textColor</code>, <code>background</code> y <code>text</code>, donde <code>textColor</code> y <code>background</code> son cualquier valor de color CSS válido.'
   enum:
     'ui-default-landing':
       ember: Administrador de Clústeres
@@ -9034,7 +9038,11 @@ featureFlags:
     'hide-local-auth-provider': Activar esta función y habilitar un proveedor de autenticación impedirá que los usuarios inicien sesión con credenciales locales. En caso de fallo del proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso a Rancher mediante la API o la CLI para deshabilitar la función y recuperar el acceso. Consulte la documentación de {vendor} para obtener más información.
   label: Indicadores de función
   title: Banderas de características
-  warning: Los indicadores de función permiten a {vendor} controlar ciertas características mediante indicadores. Las características deshabilitadas mediante indicadores no son recomendadas para producción.
+  warning: |-
+    Los indicadores de función permiten a {vendor} controlar ciertas características mediante indicadores.
+    Las características que están desactivadas por defecto deben considerarse funcionalidad experimental.
+    Algunas funciones requieren reiniciar el servidor de {vendor} para poder cambiarlas.
+    Esto provocará una breve interrupción de la API y la interfaz de usuario, pero no afectará a los clústeres ni a las cargas de trabajo en ejecución.
   promptActivate: Confirme que desea activar el indicador de función "{flag}"
   promptDeactivate: Confirme que desea desactivar el indicador de función "{flag}"
   restartRequired: 'Nota: Actualizar este indicador de función reiniciará {vendor}'
@@ -9140,9 +9148,7 @@ banner:
   bannerFontSize:
     label: Tamaño de fuente
   consent: Consentimiento
-  consentFootnote: |-
-    Consejo: Use el carácter 
-     para salto de línea
+  consentFootnote: "Consejo: Use el carácter \\n para salto de línea"
   individualSetting: Este banner es gestionado por la configuración "{name}" y no puede modificarse en la UI
   type:
     html: HTML
