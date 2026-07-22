@@ -1357,15 +1357,15 @@ catalog:
       basics:
         label: Métadonnées
         subtext: "Définir les métadonnées de l’application"
-        description: Ce processus vous aidera {action, select, install { à créer } upgrade { à mettre à niveau } downgrade { à mettre à niveau } other { à installer }} cette application.
-            install { create }
-            upgrade { upgrade }
-            downgrade { upgrade }
-            editVersion { update }
-          } the {existing, select,
-            true { app}
-            false { chart}
-          }. Start by setting some basic information used by {vendor} to manage the App.
+        description: Ce processus vous aidera à {action, select,
+            install { créer }
+            upgrade { mettre à niveau }
+            downgrade { mettre à niveau }
+            editVersion { mettre à jour }
+          } {existing, select,
+            true { l’app}
+            false { le chart}
+          }. Commencez par définir quelques informations de base utilisées par {vendor} pour gérer l’App.
         nsCreationDescription: "Pour installer l’application dans un nouvel espace de noms, saisissez son nom dans le champ Espace de noms et sélectionnez-le."
         createNamespace: "L’espace de noms <code>{namespace}</code> sera créé."
         requiresImagePullSecret: "Ce chart nécessite un secret d’extraction d’image pour que les images soient extraites avec succès."
@@ -2695,7 +2695,7 @@ cluster:
     bulkSuccessMessage: |-
       {count, plural,
         =1 { Un snapshot a été demandé pour 1 cluster }
-        other {Un snapshot a été demandé pour {count, number} clusters}
+        other {Un snapshot a été demandé pour {count} clusters}
       }
     groupLabel: Emplacement
     predatesImportTooltip: L’action de restauration n’est actuellement pas prise en charge pour ce snapshot car il est antérieur à l’import dans Rancher.
