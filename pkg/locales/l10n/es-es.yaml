@@ -2,7 +2,7 @@
 # locale: es-es (Spanish - Spain)
 # source-locale: en-us
 # synced-against-en-us-commit: 02a2364 (2026-07-20)
-# last-updated: 2026-07-21
+# last-updated: 2026-07-22
 # ---
 ##############################
 # Special stuff
@@ -4839,7 +4839,7 @@ monitoringReceiver:
     label: Webhook
     title: Configuración de Webhook
     urlTooltip: Para algunos webhooks, esta es una URL que apunta al DNS del servicio
-    modifyNamespace: "Si los valores predeterminados de <pre class=\"inline-block m-0 p-0 vertical-middle\">rancher-alerting-drivers</pre> fueron cambiados, actualice la url a continuación en el formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt;.svc.&lt;port&gt;/&lt;path&gt;"
+    modifyNamespace: "Si los valores predeterminados de <pre class=\"inline-block m-0 p-0 vertical-middle\">rancher-alerting-drivers</pre> fueron cambiados, actualice la url a continuación en el formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt"
     banner: Para usar MS Teams o SMS necesitará tener al menos una instancia de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> instalada.
     add:
       selectWebhookType: Seleccionar tipo de Webhook
