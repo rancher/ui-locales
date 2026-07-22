@@ -1705,13 +1705,13 @@ cluster:
         label: ID de locataire
     digitalocean:
       accessToken:
-        help: "Collez un jeton d’accès personnel depuis le <a href=\"https://cloud.digitalocean.com/settings/api/tokens\" target=\"_blank\" rel=\"nofollow noreferrer noopener\">tableau de bord API DigitalOcean</a>"
+        help: "Collez un jeton d’accès personnel depuis le <a href=\"https://cloud.digitalocean.com/settings/api/tokens\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">tableau de bord API DigitalOcean</a>"
         label: "Jeton d’accès"
         placeholder: "Votre jeton d’accès API DigitalOcean"
     label: Identifiant cloud
     linode:
       accessToken:
-        help: "Collez un jeton d’accès personnel depuis le <a href=\"https://cloud.linode.com/profile/tokens\" target=\"_blank\" rel=\"nofollow noreferrer noopener\">profil Linode</a>"
+        help: "Collez un jeton d’accès personnel depuis le <a href=\"https://cloud.linode.com/profile/tokens\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">profil Linode</a>"
         label: "Jeton d’accès"
         placeholder: "Votre jeton d’accès API Linode"
     pnap:
@@ -2169,7 +2169,7 @@ cluster:
       tagTitle: Étiquettes EC2
       enableIpv6:
         label: Activer la double pile
-        description: "Pour utiliser la mise en réseau dual-stack, vous devrez mettre à jour la <a aria-label=\"scroll to the networking section in cluster configuration\" href=\"#networking\">Préférence d’ordre de pile réseau</a> sur <b>DUAL</b>. Pour un cluster IPv6 uniquement, cochez \"Activer IPv6\" et mettez à jour la préférence de pile sur <b>IPv6</b>."
+        description: "Pour utiliser la mise en réseau dual-stack, vous devrez mettre à jour la <a aria-label='scroll to the networking section in cluster configuration' href=\"#networking\">Préférence d’ordre de pile réseau</a> sur <b>DUAL</b>. Pour un cluster IPv6 uniquement, cochez \"Activer IPv6\" et mettez à jour la préférence de pile sur <b>IPv6</b>."
       ipv6AddressCount:
         label: "Nombre d’adresses IPv6"
         tooltip: "Spécifie le nombre d’adresses IPv6 à attribuer à l’interface réseau"
@@ -2669,7 +2669,7 @@ cluster:
           label: Certificat CA du point de terminaison
     stackPreference:
       label: Préférence de pile
-      description: "La préférence de pile détermine la pile réseau utilisée par le cluster. IPv4 utilise <code>127.0.0.1</code>, Dual-Stack utilise <code>localhost</code> et IPv6 utilise <code>[::1]</code>. En savoir plus sur la mise en réseau <a href=\"https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">RKE2</a> et <a href=\"https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/k3s-cluster-configuration#stack-preference\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">K3s</a> dans la documentation Rancher."
+      description: "La préférence de pile détermine la pile réseau utilisée par le cluster. IPv4 utilise <code>127.0.0.1</code>, Dual-Stack utilise <code>localhost</code> et IPv6 utilise <code>[::1]</code>. En savoir plus sur la mise en réseau <a href=\"https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference\"  target=\"_blank\" rel=\"noopener noreferrer nofollow\" >RKE2</a> et <a href=\"https://ranchermanager.docs.rancher.com/reference-guides/cluster-configuration/rancher-server-configuration/k3s-cluster-configuration#stack-preference\"  target=\"_blank\" rel=\"noopener noreferrer nofollow\" >K3s</a> dans la documentation Rancher."
       options:
         ipv4: IPv4
         ipv6: IPv6
@@ -4001,7 +4001,7 @@ istio:
   cni: Activer CNI
   customOverlayFile:
     label: Fichier de superposition personnalisé
-    tip: "Le <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest\">fichier de superposition</a> permet une configuration supplémentaire au-dessus de l’installation {vendor} Istio de base. Vous pouvez utiliser l'<a href=\"https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">API IstioOperator</a> pour effectuer des modifications et des ajouts pour tous les composants et appliquer ces modifications via ce fichier YAML de superposition."
+    tip: "Le <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest\">fichier de superposition</a> permet une configuration supplémentaire au-dessus de l’installation {vendor} Istio de base. Vous pouvez utiliser l'<a href=\"https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\" >API IstioOperator</a> pour effectuer des modifications et des ajouts pour tous les composants et appliquer ces modifications via ce fichier YAML de superposition."
   description: "{vendor} Istio helm chart installe une configuration Istio minimale pour vous aider à démarrer l’intégration avec vos applications. Pour plus d’informations sur Istio, visitez <a target=\"_blank\" href=\"https://istio.io/latest/docs/concepts/what-is-istio\" rel=\"noopener noreferrer nofollow\">https://istio.io/latest/docs/concepts/what-is-istio/</a>"
   destinationRule:
     title:
@@ -4526,7 +4526,7 @@ logging:
 longhorn:
   overview:
     title: "Vue d’ensemble"
-    subtitle: "Propulsé par : <a href=\"https://github.com/longhorn\" target=\"_blank\" rel=\"noopener nofollow noreferrer\">Longhorn</a>"
+    subtitle: "Propulsé par : <a href='https://github.com/longhorn' target='_blank' rel='noopener nofollow noreferrer'>Longhorn</a>"
     linkedList:
       longhorn:
         label: Longhorn
@@ -4537,7 +4537,7 @@ longhorn:
 neuvector:
   overview:
     title: "Vue d’ensemble"
-    subtitle: "Propulsé par : <a href=\"https://github.com/neuvector\" target=\"_blank\" rel=\"noopener nofollow noreferrer\">NeuVector</a>"
+    subtitle: "Propulsé par : <a href='https://github.com/neuvector' target='_blank' rel='noopener nofollow noreferrer'>NeuVector</a>"
     linkedList:
       neuvector:
         label: NeuVector
@@ -4676,7 +4676,7 @@ monitoring:
     tip: Crée <code>monitoring-admin</code>, <code>monitoring-edit</code> et <code>monitoring-view</code> ClusterRoles.
   etcdNodeDirectory:
     label: Répertoire des certificats de nœuds etcd
-    tooltip: "Pour les clusters utilisant RancherOS pour les nœuds etcd, cette option doit être définie sur <pre class=\"inline-block m-0\">/opt/rke/etc/kubernetes/ssl</pre>. Les environnements hybrides nécessitant plusieurs répertoires de certificats ne sont pas pris en charge."
+    tooltip: "Pour les clusters utilisant RancherOS pour les nœuds etcd, cette option doit être définie sur <pre class='inline-block m-0'>/opt/rke/etc/kubernetes/ssl</pre>. Les environnements hybrides nécessitant plusieurs répertoires de certificats ne sont pas pris en charge."
   grafana:
     storage:
       annotations: Annotations PVC
