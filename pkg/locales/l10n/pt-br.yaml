@@ -1,10 +1,9 @@
 # ---
 # locale: pt-br (Portuguese - Brazil)
 # source-locale: en-us
-# synced-against-en-us-commit: 5f2c1a2 (2026-06-17)
-# last-updated: 2026-06-19
+# synced-against-en-us-commit: 02a2364 (2026-07-20)
+# last-updated: 2026-07-20
 # ---
-
 ##############################
 # Special stuff
 ##############################
@@ -47,6 +46,7 @@ generic:
   descending: decrescente
   disabled: Desabilitado
   done: Concluído
+  download: Baixar
   enabled: Habilitado
   error: Erro
   here: aqui
@@ -61,6 +61,7 @@ generic:
   labels: Rótulos
   labelsAndAnnotations: Rótulos e Anotações
   podSecurityAdmission: Admissão de Segurança do Pod
+  learnMoreAbout: 'Saiba mais sobre '
   links: Links
   loading: Carregando&hellip;
   members: Membros
@@ -77,6 +78,7 @@ generic:
       warning: Aviso
       error: Erro
   ok: OK
+  or: ou
   other: |-
     {count, plural,
     one  {outro}
@@ -376,6 +378,7 @@ suffix:
       =1 { Vez }
       other { Vezes }
     }
+
 ##############################
 # Components & Pages
 ##############################
@@ -481,6 +484,7 @@ accountAndKeys:
       keyCreated: Uma nova Chave de API foi criada
       bearerTokenTip: A Chave de Acesso e a Chave Secreta podem ser enviadas como nome de usuário e senha para autenticação HTTP Basic Auth.
       ttlLimitedWarning: O tempo de expiração desta Chave de API foi reduzido devido à configuração do sistema
+
 addClusterMemberDialog:
   title: Adicionar Membro do Cluster
 
@@ -506,6 +510,7 @@ authConfig:
   allowedPrincipalIds:
     title: Usuários e Grupos Autorizados
   associatedWarning: 'A conta {provider} usada para ativar o provedor externo receberá permissões equivalentes às do usuário Rancher atualmente conectado. Consulte <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuração de Autenticação Externa e Usuários Principais</a> para entender o motivo.'
+  bannerEnableAuthProvider: "A configuração \"Desabilitar Autenticação Local\" está habilitada. Habilitar um Provedor de Autenticação impedirá que os usuários façam login com credenciais locais. Em caso de falha do Provedor, nenhum usuário conseguirá fazer login. Certifique-se de manter acesso contínuo via API ou CLI ao Rancher para desabilitar o recurso e recuperar o acesso. Consulte a documentação do {vendor} para mais informações."
   githubapp:
     clientId:
       label: ID do Cliente
@@ -1010,6 +1015,7 @@ asyncButton:
     action: Snapshot Agora
     waiting: Snapshot Iniciado&hellip;
     success: Snapshot Sendo Criado
+    day2OpsNotEnabled: As Operações Day 2 não estão habilitadas para este cluster
   timing:
     action: Gerar Tempos de Resposta
     waiting: Gerando&hellip;
@@ -1144,6 +1150,12 @@ catalog:
         checkBoxLabel: Registro de Container para Imagens de Container do Sistema Rancher
         inputLabel: Registro de Container
         placeholder: Domínio e portas do registro, ex. registry.io:5000
+      pullSecret:
+        skipOption: Não usar Image Pull Secrets
+        defaultLabel: 'Usar pull secret padrão ({name})'
+        defaultLabelGeneric: Usar pull secrets padrão
+        existingValuesBanner: '{secrets} estão configurados como image pull secrets nos valores do chart. Para modificá-los, edite o YAML de valores diretamente.'
+        defaultSecretsBanner: '{secrets} estão configurados como pull secrets padrão. Selecione ou crie um image pull secret aqui para substituir o padrão.'
     header:
       charts: Gráficos
     info:
@@ -1231,6 +1243,7 @@ catalog:
       lastUpdatedDesc: Última atualização
       alphaAscending: 'Nome do chart, A → Z'
       alphaDescending: 'Nome do chart, Z → A'
+    loadingMore: Carregando mais…
     refreshButton:
       label: Atualizar todos os repositórios
     findSimilar:
@@ -1360,6 +1373,8 @@ catalog:
         generatedNewImagePullSecret: 'Um novo Image Pull Secret <b>{ imagePullSecretName }</b> será gerado'
         generatedImagePullSecretBannerFromPreviousAuth: 'Um novo Image Pull Secret <b>{ imagePullSecretName }</b> será gerado a partir do segredo do Repositório <b>{ repoAuthenticationName }</b>.'
         usePreviouslyGeneratedImagePullSecretBanner: 'O Image Pull Secret <b>{ imagePullSecretName }</b> já foi criado anteriormente a partir do segredo do Repositório <b>{ repoAuthenticationName }</b> e será usado.'
+        oldMonitoringChartWarning: 'A partir da v2.15.0 este chart está obsoleto; em vez dele, use o novo chart Rancher Monitoring Dashboard. Para mais informações, consulte <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">a documentação</a><span class="sr-only">Abre em uma nova aba</span>.'
+        newMonitoringChartWarning: 'Antes de instalar o novo chart Rancher Monitoring Dashboard, certifique-se de que quaisquer aplicações que usem o antigo Rancher Monitoring Chart tenham sido desinstaladas e que dependências como o Prometheus tenham sido instaladas. Para mais informações, consulte <a href="{docsBase}/integrations-in-rancher/monitoring-and-alerting#monitoring-dashboard" target="_blank" rel="noopener noreferrer">a documentação</a><span class="sr-only">Abre em uma nova aba</span>.'
       clusterTplVersion:
         label: Versão
         subtext: Selecionar uma versão do template
@@ -1383,6 +1398,8 @@ catalog:
     version: Versão
     versions:
       current: '{ver} (Atual)'
+      current_linux: '{ver} (Atual, Somente Linux)'
+      current_windows: '{ver} (Atual, Somente Windows)'
       linux: '{ver} (Somente Linux)'
       windows: '{ver} (Somente Windows)'
   delete:
@@ -1449,7 +1466,11 @@ catalog:
           placeholder: 'padrão: 5'
     refreshInterval:
       label: Intervalo de Atualização
-      placeholder: 'padrão: {hours}'
+      placeholder: 'padrão: {value}{unit}'
+      unitLabel: Unidade
+      enableLabel: Habilitar Intervalo de Atualização
+    downloaded:
+      label: Baixado
     error:
       refresh: Erro ao atualizar repositório
   tools:
@@ -1600,7 +1621,7 @@ cluster:
       configuration: Kube Proxy
     rke2-metrics-server:
       label: 'Complemento: Metrics Server'
-      configuration: Metrics Server
+      configuration: Servidor de Métricas
     rke2-multus:
       label: 'Complemento: Multus'
       configuration: Multus
@@ -2148,7 +2169,7 @@ cluster:
       tagTitle: Tags EC2
       enableIpv6:
         label: Habilitar Dual-Stack
-        description: "Para usar rede dual-stack, você precisará atualizar a <a aria-label='rolar até a seção de rede na configuração do cluster' href=\\"#networking\\">Ordem de Preferência de Pilha de Rede</a> para <b>DUAL</b>. Para um cluster somente IPv6, marque \\"Habilitar IPv6\\" e atualize a preferência de pilha para <b>IPv6</b>."
+        description: "Para usar rede dual-stack, você precisará atualizar a <a aria-label='rolar até a seção de rede na configuração do cluster' href=\"#networking\">Ordem de Preferência de Pilha de Rede</a> para <b>DUAL</b>. Para um cluster somente IPv6, marque \"Habilitar IPv6\" e atualize a preferência de pilha para <b>IPv6</b>."
       ipv6AddressCount:
         label: Contagem de Endereços IPv6
         tooltip: Especifica o número de endereços IPv6 a serem atribuídos à interface de rede
@@ -2160,6 +2181,7 @@ cluster:
         label: Habilitar IPv6
       httpProtocolIpv6: 
         label: Habilitar endpoint IPv6 para o serviço de metadados de instância
+      dualStackValidationWarning: Quando um pool habilita subnet/vpc dual-stack, todos os pools devem usar a mesma configuração de rede.
       ipv6ValidationWarning: 'Quando um pool usa uma sub-rede/vpc IPv6 ou dual-stack, todos os pools devem usar uma sub-rede/vpc IPv6 ou dual-stack.'
     pnap:
       serverLocation:
@@ -2676,6 +2698,7 @@ cluster:
         other {Um snapshot foi solicitado para {count} clusters}
       }
     groupLabel: Localização
+    predatesImportTooltip: A ação de restauração não é atualmente suportada para este snapshot, pois ele é anterior à importação para o Rancher.
     failed: 'Snapshot de {time} falhou'
     rke1:
       local: local
@@ -2740,6 +2763,7 @@ cluster:
     upgrade: Estratégia de Atualização
     registration: Registro
     nodePools: Pools de Nós
+    operations: Operações
   rotateCertificates:
     label: Rotacionar Certificados
     modalTitle: Rotacionar Certificados do Cluster
@@ -2921,6 +2945,7 @@ detailText:
       =1 {+ 1 caractere a mais}
       other {+ {n, number} caracteres a mais}
     }
+
 drainNode:
   action: 'Drenar'
   actionStop: 'Parar Drenagem'
@@ -3025,7 +3050,7 @@ fleet:
       label: Métricas
       description: 'Habilitar métricas'
     debug:
-      label: Debug
+      label: Depuração
       description: 'Habilitar modo de debug'
     controllerAnnotations:
       label: Controlador
@@ -3150,14 +3175,22 @@ fleet:
       waitApplied: Aguardando Aplicação
   clusterTargets:
     advancedConfigs: Configurações avançadas de alvo estão definidas, verifique o arquivo YAML para mais detalhes.
+    targetMode:
+      local: cluster local
+      all: Todos os Clusters no workspace
+      allCompact: 'Todos os Clusters no workspace <b>{namespace}</b> ({count})'
+      none: Nenhum cluster
+      clusters: Clusters selecionados manualmente
     clusters:
       title: Clusters
       byName:
+        title: Selecionar por nome do cluster
         placeholder: vcenter.domain.com
         label: Selecionar por nome do cluster
       byLabel:
         title: Selecionar por rótulos
         addSelector: Adicionar seletor de cluster
+        removeSelector: Remover seletor de cluster
         labelKey: Rótulo
     clusterGroups:
       title: Grupos de Cluster
@@ -3172,6 +3205,7 @@ fleet:
             =1 {1 cluster selecionado}
             other {{n, number} clusters selecionados}
           }
+        selectedClusters: Clusters selecionados
         placeholder: 'Selecionar clusters por nome, rótulos ou grupos'
         empty: Sem clusters no workspace
         plusMore: |-
@@ -3193,6 +3227,9 @@ fleet:
         description: 'GitRepo descreve um repositório git monitorado pelo Fleet. O recurso contém as informações necessárias para implantar o repositório, ou partes dele, em clusters alvo.'
       fleet.cattle.io.helmop:
         description: 'HelmOp é uma forma simplificada de criar bundles apontando diretamente para um repositório Helm ou registro OCI, sem precisar configurar um repositório git.'
+      suse-application-collection:
+        label: SUSE Application Collection
+        description: Explore nossa Application Collection mantida e segura, selecione um Helm chart e implante-o em seus clusters.
     warningTooltip:
       clusterGroup: Não há clusters neste Grupo de Cluster
       cluster: Não há clusters disponíveis
@@ -3340,6 +3377,24 @@ fleet:
       label: Espaço de Trabalho
       addWorkspace: Criar um workspace
     helmRepoURLRegex: Repositórios Helm (Regex de URL)
+  appCo:
+    credentials:
+      title: Criar um App Bundle a partir da SUSE Application Collection
+      subtitle: Configure suas credenciais
+      infoText: Um token de acesso da Application Collection é necessário para conectar ao catálogo de Helm Charts.
+      accessTokensLink: tokens de acesso da SUSE Application Collection
+      accessTokenLabel: Token de acesso
+      editCredentials: Editar credenciais
+      addNewToken: Adicionar um novo token de acesso...
+      noTokensYet: "Você ainda não adicionou um token de acesso."
+      chooseExisting: 'Escolha um token existente:'
+      username: Nome de usuário
+      usernamePlaceholder: user@domain.org
+      accessTokenField: Token de Acesso
+      accessTokenPlaceholder: Seu token de acesso da SUSE Application Collection
+    chart:
+      title: Charts
+      loadError: Chart não encontrado ou sem versões disponíveis.
   helmOp:
     intro:
       add: Criar Helm Op
@@ -3392,6 +3447,35 @@ fleet:
           subtext: 'Definir configurações avançadas'
           description: O Fleet usará as configurações de autenticação e polling para sincronizar os recursos nele contidos.
           info: Essas configurações são para uso avançado e são opcionais. Você pode ignorá-las e concluir o processo de criação.
+        selection:
+          searchPlaceholder: Buscar no catálogo...
+          authBanner: 'Dois recursos diferentes serão criados: um secret de Continuous Delivery e um imagePullSecret que será copiado para cada cluster downstream selecionado na próxima etapa.'
+          emptyState:
+            connectionError:
+              title: Erro de conexão
+              descriptionPre: 'Ocorreu um erro ao buscar o catálogo da SUSE Application Collection.'
+              please: 'Por favor, '
+              tryAgain: tente novamente
+              descriptionPost: ' ou entre em contato com o administrador do sistema.'
+            noMatch:
+              title: Nenhum chart para exibir
+              descriptionPre: 'Dicas: use um critério de busca diferente ou '
+              clearSearch: limpar a barra de busca
+              descriptionPost: ' e explore o catálogo.'
+          repoLoading:
+            title: Criando repositório da SUSE Application Collection...
+            description: Por favor, aguarde enquanto o repositório é criado
+          repoError:
+            description: 'Por favor, verifique suas credenciais ou o repositório no cluster upstream:'
+            link: SUSE App Collection
+    appCoConfig:
+      chartVersion: Versão do chart
+      name: Nome do App Bundle
+      advanced: Avançado
+    appCoView:
+      chartConfig: Configuração do chart
+      targetDetails: Detalhes do alvo
+      advanced: Avançado
     source:
       title: Fonte
       selectLabel: Tipo
@@ -3420,10 +3504,13 @@ fleet:
         title: Lançamento
         label: Nome
         placeholder: O nome da release Helm
+        fullLabel: Nome do Release
     values:
       title: Valores
       selectLabel: Valores
       description: Configurar valores usados pelo Helm para definir o App.
+      descriptionCompact: Os valores definidos nesta seção serão aplicados ao chart em cada cluster selecionado.
+      appCoDescription: O imagePullSecret global predefinido não deve ser modificado, caso contrário a conexão com a SUSE Application Collection falhará.
       types:
         values: Valores
         valuesFiles: Arquivos de Valores
@@ -3450,17 +3537,25 @@ fleet:
     serviceAccount:
       label: Nome da Conta de Serviço
       placeholder: "Opcional: Usar uma conta de serviço nos clusters de destino"
+      compactPlaceholder: "Usar uma conta de serviço nos clusters selecionados"
+      compactDescription: "Quando fornecido, este ServiceAccount será usado para realizar a implantação."
     targetNamespace:
       label: Namespace de Destino
       placeholder: "Opcional: Requer que todos os recursos estejam neste namespace"
+      compactPlaceholder: "Exigir que todos os recursos estejam neste namespace"
+      compactDescription: "Isso atribuirá todos os recursos ao namespace especificado. Se existir algum recurso com escopo de cluster, a implantação falhará."
     target:
       selectLabel: Destino
       advanced: Avançado
       cluster: Cluster
       clusterGroup: Grupo de Cluster
       label: Implantar Em
+      title: Implantar chart em
       labelLocal: Implantar Com
       additionalOptions: Opções Adicionais
+      clusterDeploymentSettings: Configurações de implantação do cluster
+      clusterDeploymentDescription: "Aqui você pode definir um ServiceAccount ou forçar um Namespace alvo para as implantações."
+      clusterDeploymentLink: Opções de Implantação do Bundle
     targetDisplay:
       advanced: Avançado
       clusters: Clusters
@@ -3469,10 +3564,17 @@ fleet:
       local: Local
     resources:
       label: 'Recursos'
+      lockedSecretBanner: O Image Pull Secret previamente selecionado é necessário para conectar com a SUSE Application Collection.
       keepResources: Sempre manter recursos
       keepResourcesTooltip: 'Quando habilitado, os recursos serão mantidos ao excluir um HelmOp ou Bundle - apenas os secrets de release do Helm serão excluídos.'
       correctDrift: Habilitar auto-reparo
       correctDriftTooltip: Quando habilitado, o Fleet garantirá que os recursos do cluster estejam sincronizados com o HelmOp. Todas as alterações de recursos feitas no cluster serão perdidas.
+    appCoResources:
+      helmChartSettings: Configurações de recursos do Helm chart
+      additionalResources: Recursos adicionais para sincronizar
+      additionalResourcesDescription: Você pode adicionar Secrets e ConfigMaps para copiar esses recursos para cada cluster downstream alvo antes de implantar o Helm chart.
+      additionalResourcesLinkDescription: Saiba mais sobre
+      additionalResourcesLink: Propagação automatizada de recursos para clusters downstream
     polling:
       label: Sondagem
       enable: Habilitar Polling
@@ -3487,6 +3589,7 @@ fleet:
       title: Autenticação
       label: Autenticação
       helm: Autenticação Helm
+      appco: Autenticação da SUSE App Collection
     caBundle:
       label: Certificados
       placeholder: Cole um ou mais certificados, começando com -----BEGIN CERTIFICATE----
@@ -3498,7 +3601,7 @@ fleet:
       matchesSome: |-
         {matched, plural,
           =1 {Corresponde a 1 de {total, number} clusters existentes: "{sample}"}
-          other {Corresponde a {matched, number} de {total, number} clusters existentes}
+          other {Corresponde a {matched, number} de {total, number} clusters existentes, incluindo "{sample}"}
         }
   fdc:
     id: ID
@@ -3562,7 +3665,7 @@ gatekeeperConstraint:
       editAsForm: Editar como Formulário
       editAsYaml: Editar como YAML
       title: Parâmetros
-  template: Template
+  template: Modelo
   enforcement:
     action: Ação de Aplicação
   violations:
@@ -3817,7 +3920,7 @@ auditPolicy:
       placeholder: 'ex.: $.gitCommit'
       add: Adicionar Caminho
   error:
-      enableOrDisable: '{flag, select, enable {Erro ao habilitar - {id}} disable {Erro ao desabilitar - {id}} other {Erro}}'
+      enableOrDisable: '{flag, select, enable {Erro ao habilitar - {id}} disable {Erro ao desabilitar - {id}} other {Erro - {id}}}'
       
 ingress:
   description: Os Ingresses roteiam o tráfego de entrada da internet para os Serviços dentro do cluster com base no hostname e no caminho especificados na solicitação. Você pode expor vários Serviços no mesmo endereço IP externo e porta.
@@ -4287,7 +4390,7 @@ logging:
   azurestorage:
     storageAccount: Conta do Secret
     accessKey: Chave de Acesso do Secret
-    container: Container
+    container: Contêiner
     path: Caminho
     storeAs: Armazenar Como
   cloudwatch:
@@ -4748,17 +4851,17 @@ monitoringReceiver:
   pagerduty:
     label: PagerDuty
     title: Configuração do PagerDuty
-    info: "Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='nofollow noreferrer noopener'>aqui</a>."
+    info: "Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='noopener nofollow' class='flex-right'>aqui</a>."
   slack:
     label: Slack
     title: Configuração do Slack
-    info: "Você pode encontrar informações adicionais sobre como criar Webhooks recebidos para o Slack <a href='https://api.slack.com/incoming-webhooks' target='_blank' rel='nofollow noreferrer noopener'>aqui</a>."
+    info: "Você pode encontrar informações adicionais sobre como criar Webhooks recebidos para o Slack <a href='https://rancher.slack.com/apps/A0F7XDUAZ-incoming-webhooks' target='_blank' rel='noopener noreferrer nofollow'>aqui</a>."
   webhook:
     label: Webhook
     title: Configuração do Webhook
     urlTooltip: Para alguns webhooks este é um URL que aponta para o DNS do serviço
-    modifyNamespace: Se <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foi implantado em um namespace diferente, atualize o namespace abaixo.
-    banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância de <pre class="inline-block m-0">rancher-alerting-drivers</pre> em execução.
+    modifyNamespace: Se os valores padrão de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foram alterados, atualize a url abaixo no formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
+    banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância de <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> em execução.
     add:
       selectWebhookType: Selecionar Tipo de Webhook
       generic: Genérico
@@ -5032,6 +5135,7 @@ networkpolicy:
           =1 {1 de {totalNamespaces, number} namespaces: "{sampleNamespaces}"}
           other {{matchedNamespaces, number} de {totalNamespaces, number} namespaces existentes, incluindo "{sampleNamespaces}"}
         }
+
 node:
   list:
     pool: Pool
@@ -5413,7 +5517,7 @@ persistentVolume:
       readWrite: Leitura/Gravação
     filesystemType:
       label: Tipo de Sistema de Arquivos
-      placeholder: e.g. ext4
+      placeholder: 'ex.: ext4'
     readOnly:
       label: Somente Leitura
 
@@ -5834,6 +5938,9 @@ projectNamespaces:
   isIstioInjectionEnabled: A injeção automática de sidecar do Istio está habilitada para este namespace
 
 prometheusRule:
+  labels:
+    title: Rótulos de Correspondência do Prometheus
+    tooltip: Esses rótulos devem corresponder ao ruleSelector configurado no recurso Prometheus. O Prometheus Operator usa esse seletor para descobrir quais recursos PrometheusRule avaliar.
   alertingRules:
     addLabel: Adicionar Alerta
     annotations:
@@ -5941,6 +6048,13 @@ promptRestore:
   fromS3: Restaurar do S3
   label: Instantâneo
   placeholder: Selecione um snapshot para restaurar
+  error:
+    unableToResolveTargetCluster: Não foi possível resolver o cluster alvo para a restauração do snapshot
+  restoreMode:
+    label: Tipo de Restauração
+    onlyEtcd: Apenas etcd
+    kubernetesVersionAndEtcd: Versão do Kubernetes e etcd
+    clusterConfigKubernetesVersionAndEtcd: Configuração do cluster, versão do Kubernetes e etcd
   notification:
     title: Restaurar Snapshot
     message: 'A restauração do snapshot { selectedSnapshot } foi iniciada...'
@@ -5964,7 +6078,9 @@ promptRotateEncryptionKey:
   title: Rotacionar Chaves de Criptografia
   description: 'O último backup {name} foi realizado em {date}'
   warning: Antes de prosseguir, certifique-se de que um backup do ETCD do cluster foi concluído com êxito.
-  error: Nenhum backup encontrado
+  error:
+    noBackup: Nenhum backup encontrado
+    unableToResolveTargetCluster: Não foi possível resolver o cluster alvo para a rotação da chave de criptografia
 
 rancherAlertingDrivers:
   msTeams: Habilitar Microsoft Teams
@@ -6216,7 +6332,7 @@ resourceTable:
     notInAProject: Não em um Projeto
     project: <span>Projeto:</span> <span>{name}</span>
     notInAWorkspace: Não em um Workspace
-    workspace: '<span>Workspace:</span> {name}'
+    workspace: '<span>Espaço de Trabalho:</span> {name}'
     notInANodePool: Não em um Pool
     nodePool: '<span>Pool:</span> {name}'
     node: <span>Nó:</span> {name}
@@ -6249,6 +6365,8 @@ resourceYaml:
 
 secret:
   authentication: Autenticação
+  githubApp:
+    label: GitHub App
   certificate:
     certificate: Certificado
     certificates: Certificados
@@ -6303,6 +6421,7 @@ secret:
           =1 {1 Entrada}
           other {{entries} Entradas}
         }
+
   serviceAcct:
     ca: Certificado CA
     token: Token
@@ -6384,12 +6503,17 @@ selectOrCreateAuthSecret:
     passwordPersonalAccessToken: Senha/Token de Acesso Pessoal
   rke:
     info: "Um secret de configuração de autenticação RKE contém o nome de usuário e a senha concatenados e codificados em base64 na chave 'auth' do secret"
+  githubApp:
+    appId: ID do GitHub App
+    installationId: ID de Instalação do GitHub App
+    privateKey: Chave Privada do GitHub App
   namespaceGroup: 'Namespace: {name}'
   chooseExisting: 'Escolher um secret existente:'
   createSsh: Criar um Secret de Chave SSH
   createBasic: Criar um Secret de Autenticação HTTP Básica
   createS3: Criar um Secret de Autenticação Compatível com S3
   createRKE: Criar um Secret de Configuração de Autenticação RKE
+  createGithubApp: Criar um Secret de Autenticação do GitHub App
   createImagePullSecretBasedOnAuth: Criar um Secret de Pull de Imagem baseado em Secret de Autenticação
   createImagePullSecret: Criar um novo Secret de Pull de Imagem com novo Usuário/Senha
 
@@ -6522,7 +6646,7 @@ setup:
   defaultPassword:
     intro: 'Parece que esta é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha de bootstrap, insira-a aqui. Caso contrário, uma senha aleatória foi gerada para você. Para encontrá-la, execute:<br/><br/>'
     helmSuffix: ""
-  eula: 'Ao marcar a caixa, você aceita o <a href="https://www.suse.com/licensing/eula">EULA da SUSE</a>.'
+  eula: 'Ao marcar a caixa, você aceita o <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">Contrato de Licença de Usuário Final e Termos e Condições</a>'
   newPassword: Nova Senha
   newUserSetPassword: A primeira ordem do dia é definir uma senha forte. Sugerimos usar esta gerada aleatoriamente para você, mas insira a sua própria se preferir.
   serverUrl:
@@ -7213,13 +7337,13 @@ user:
 validation:
   noUpperCase: 'Caracteres alfanuméricos em "{key}" devem ser minúsculos'
   arrayLength:
-    between: "O '{key}' precisa ter entre {min} e {max} entradas"
+    between: "O '{key}' precisa ter entre {min} e {max} {max, plural, =1 {entrada} other {entradas}}"
     exactly: "O '{key}' precisa ter exatamente {count} {count, plural, one {entrada} other {entradas}}"
     max: "O '{key}' deve ter no máximo {count} {count, plural, one {entrada} other {entradas}}"
     min: "O '{key}' deve ter pelo menos {count} {count, plural, one {entrada} other {entradas}}"
   alphanumeric: '"{key}" deve ser alfanumérico'
   boolean: '"{key}" deve ser um valor booleano.'
-  chars: "O '{key}' não pode conter os caracteres \"{chars}\""
+  chars: "O '{key}' contém {count, plural, =1 {um caractere inválido} other {# caracteres inválidos}}: {chars}"
   cluster:
     name: O nome do cluster não pode ser 'local' ou ter o formato 'c-xxxxx'
   conflict: |-
@@ -7278,6 +7402,7 @@ validation:
   betweenValues: '"{key}" deve estar entre {min} e {max}'
   noSchema: Nenhum schema encontrado para validar
   noType: Nenhum tipo para validar
+  createResourceFailed: 'Falha ao criar recurso: permissões insuficientes ou tipo de recurso não encontrado'
   number:
     requiredInt: '"{key}" deve ser inteiro'
     isPositive: '"{key}" deve ser positivo'
@@ -7999,7 +8124,6 @@ workload:
       containers: Contêineres
 
 ##############################
-##############################
 # Model Properties
 ##############################
 model:
@@ -8088,7 +8212,6 @@ typeDescription:
   #       target="_blank" rel="noopener noreferrer nofollow"
   jwt.authentication: Ative este recurso em um cluster para adicionar suporte à autenticação JWT para contas de serviço downstream.
   branding: O branding permite que os administradores façam a remarca global da interface personalizando o nome do produto Rancher, logotipos e esquema de cores.
-  chart: Todos os charts têm pelo menos uma versão instalável em clusters com nós Linux e Windows, salvo indicação em contrário.
   compliance.cattle.io.clusterscanbenchmark: Uma versão de benchmark é o nome do benchmark a ser executado usando o kube-bench, bem como os parâmetros de configuração válidos para esse benchmark.
   compliance.cattle.io.clusterscanprofile: Um perfil é a configuração para a verificação de conformidade, que inclui as versões de benchmark a serem usadas e quaisquer testes específicos a serem ignorados nesse benchmark.
   compliance.cattle.io.clusterscan: Uma verificação é criada para acionar uma verificação de conformidade no cluster com base no perfil definido. Um relatório é criado após a conclusão da verificação.
@@ -8399,8 +8522,8 @@ typeLabel:
     }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
-      one { Network Policy }
-      other { Network Policies }
+      one { Política de Rede }
+      other { Políticas de Rede }
     }
   service: |-
     {count, plural,
@@ -8434,8 +8557,8 @@ typeLabel:
     }
   projectsecret: |-
     {count, plural,
-      one { Project Secret }
-      other { Project Secrets }
+      one { Segredo de Projeto }
+      other { Segredos de Projeto }
     }
   apiregistration.k8s.io.apiservice: |-
     {count, plural,
@@ -8489,18 +8612,18 @@ typeLabel:
     }
   group.principal: |-
     {count, plural,
-      one { Group }
-      other { Groups }
+      one { Grupo }
+      other { Grupos }
     }
   token: |-
     {count, plural,
-      one { API Key }
-      other { API Keys }
+      one { Chave de API }
+      other { Chaves de API }
     }
   workload: |-
     {count, plural,
-      one { Workload }
-      other { Workloads }
+      one { Carga de Trabalho }
+      other { Cargas de Trabalho }
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
@@ -8509,13 +8632,13 @@ typeLabel:
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
-      one { Cloud Config Template }
-      other { Cloud Config Templates }
+      one { Modelo de Configuração de Nuvem }
+      other { Modelos de Configuração de Nuvem }
     }
   fleet.cattle.io.content: |-
     {count, plural,
-      one { Content }
-      other { Contents }
+      one { Conteúdo }
+      other { Conteúdos }
     }
   fleet.cattle.io.bundle: |-
     {count, plural,
@@ -8529,8 +8652,8 @@ typeLabel:
     }
   k3s.cattle.io.addon: |-
     {count, plural,
-      one { Addon }
-      other { Addons }
+      one { Complemento }
+      other { Complementos }
     }
   management.cattle.io.apiservice: |-
     {count, plural,
@@ -8539,8 +8662,8 @@ typeLabel:
     }
   management.cattle.io.catalog: |-
     {count, plural,
-      one { Catalog }
-      other { Catalogs }
+      one { Catálogo }
+      other { Catálogos }
     }
   fleet.cattle.io.clusterregistration: |-
     {count, plural,
@@ -8614,8 +8737,8 @@ typeLabel:
     }
   management.cattle.io.node: |-
     {count, plural,
-      one { Node }
-      other { Nodes }
+      one { Nó }
+      other { Nós }
     }
   management.cattle.io.projectalertgroup: |-
     {count, plural,
@@ -8664,8 +8787,8 @@ typeLabel:
     }
   replicationcontroller: |-
     {count, plural,
-      one { Replication Controller }
-      other { Replication Controllers }
+      one { Controlador de Replicação }
+      other { Controladores de Replicação }
     }
   scheduling.k8s.io.priorityclass: |-
     {count, plural,
@@ -8694,8 +8817,8 @@ typeLabel:
     }
   fleet.cattle.io.clusterregistrationtoken: |-
     {count, plural,
-      one { Cluster Registration Token }
-      other { Cluster Registration Tokens }
+      one { Token de Registro de Cluster }
+      other { Tokens de Registro de Cluster }
     }
   turtles-capi.cattle.io.capiprovider: |-
     {count, plural,
@@ -8860,11 +8983,11 @@ advancedSettings:
   none: Nenhum
   modified: Modificado
   edit:
-    moreActions: Mais Ações
+    moreActions: "Mais ações para configuração - { setting }"
     label: Editar Configuração
     changeSetting: "Alterar Configuração"
     agentConfigBanner: 
-      text: Alterar esta configuração afetará a configuração do agente de cluster
+      text: "Editar este valor não alterará o valor definido nos clusters em execução! Para atualizar um cluster em execução para usar os novos valores, edite o cluster e clique em “Aplicar configurações globais para Priority Class e Pod Disruption Budget” na aba de configuração do Agente {agent}."
       cluster: cluster
       fleet: fleet
     trueOption: "Verdadeiro"
@@ -8883,6 +9006,7 @@ advancedSettings:
     'ingress-ip-domain': 'Domínio DNS curinga para uso em nomes de host Ingress gerados automaticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> será adicionado ao domínio.'
     'server-url': 'URL padrão de instalação do {appName}. Deve ser HTTPS. Todos os nós do cluster devem conseguir alcançar este endereço.'
     'system-default-registry': 'Registro privado a ser usado para todas as Imagens de Container do Sistema Rancher. Se nenhum valor for especificado, o registro padrão do runtime de container será usado.'
+    'system-default-registry-pull-secrets': 'Lista de image pull secrets para autenticar no registry a partir do qual as Imagens de Contêiner do Sistema Rancher são extraídas. Por padrão, esses secrets serão copiados para cada namespace de chart do Rancher. Os secrets devem estar no namespace `cattle-system`. O primeiro secret válido listado aqui será usado.'
     'ui-dashboard-index': 'Localização do índice HTML para a UI do {appName}.'
     'ui-offline-preferred': 'Controla se os ativos da interface são servidos localmente pelo contêiner do servidor ou da URL remota definida na configuração ui-dashboard-index. A opção `Dynamic` usará ativos locais em compilações de produção do {appName}.'
     'ui-pl': 'Nome da empresa de marca privada.'
@@ -8905,6 +9029,7 @@ advancedSettings:
     'k3s-based-upgrader-uninstall-concurrency': Define o número máximo de clusters nos quais o Rancher pode desinstalar simultaneamente o app legado `rancher-k3s-upgrader` ou `rancher-rke2-upgrader` de clusters K3s ou RKE2 importados ou com driver de nó.
     'system-agent-upgrader-install-concurrency': Define o número máximo de clusters nos quais o Rancher pode instalar simultaneamente os recursos necessários para atualizar o system-agent.
     'imported-cluster-version-management': Habilita o gerenciamento de versão para clusters RKE2/K3s importados e o cluster local se for um cluster RKE2/K3s. A configuração de gerenciamento de versão por cluster substitui esta configuração global. Para clusters existentes onde o gerenciamento de versão por cluster está definido como system-default, alterar este sinalizador acionará uma reimplantação do agente de cluster na próxima reconciliação.
+    'imported-cluster-day2-ops-enabled': Controla se os clusters RKE2/K3s importados terão as operações day 2 (snapshots de etcd, restaurações, rotações de chave de criptografia) habilitadas por padrão. Isso afetará todos os clusters que usam a configuração padrão e pode ser substituído no nível do cluster.
   warnings:
     'agent-tls-mode': Alterar esta configuração fará com que todos os agentes sejam reimplantados.
   editHelp:
@@ -8932,6 +9057,8 @@ advancedSettings:
     header: Provisionamento de Cluster
 
 featureFlags:
+  description:
+    'hide-local-auth-provider': Ativar este recurso e habilitar um Provedor de Autenticação impedirá que os usuários façam login com credenciais locais. Em caso de falha do Provedor, nenhum usuário conseguirá fazer login. Certifique-se de manter acesso contínuo via API ou CLI ao Rancher para desabilitar o recurso e recuperar o acesso. Consulte a documentação do {vendor} para mais informações.
   label: Flags de Funcionalidade
   title: Tem certeza?
   warning: |-
@@ -9138,7 +9265,7 @@ resourceQuota:
   requestsCpu: Reserva de CPU
   requestsMemory: Reserva de Memória
   requestsStorage: Reserva de Armazenamento
-  secrets: Secrets
+  secrets: Segredos
   services: Serviços
   servicesLoadBalancers: Balanceadores de Carga de Serviços
   servicesNodePorts: Portas de Nó de Serviços
@@ -9194,29 +9321,28 @@ customLinks:
     commercialSupport: Rancher Prime
     appCo: Coleção de Aplicativos SUSE
 
-  promos:
-    one:
-      title: Primeiros Passos
-      text: Seja você um usuário novo ou experiente de Kubernetes, temos os recursos para ajudá-lo a aproveitar ao máximo o Rancher.
-    two:
-      title: Junte-se à Comunidade
-      text: Conecte-se com outros usuários do Rancher e a equipe de engenharia por meio de eventos da comunidade, fóruns online e muito mais.
-    three:
-      title: Documentação
-      text: Encontre respostas na documentação, desde guias detalhados de como fazer até referências para a API, CLI e muito mais.
-    four:
-      title: Inove com Liberdade
-      text: Aproveite nossa compatibilidade certificada com uma ampla variedade de provedores Kubernetes, sistemas operacionais e software de código aberto.
   suse:
     editBrand: Personalizar Tema da Interface
     access:
       title: Obter Suporte
-      text: Quando você precisa de ajuda com o Rancher, você tem acesso a uma equipe incomparável de especialistas.
-      action: Abrir uma Solicitação de Suporte
+      text: Acesse o SUSE Customer Center para obter suporte para sua assinatura
+      action: SUSE Customer Center
       aws:
-        text: O suporte está disponível através da sua assinatura do Amazon Marketplace.
-        generateConfig: Gerar configuração de suporte
-
+        generateConfig: Gerar Configuração de Suporte
+        text: 'Acesse o SUSE Customer Center para obter suporte para sua assinatura. Precisa abrir um novo caso de suporte? Baixe um arquivo de configuração de suporte abaixo.'
+  promos:
+    one:
+      title: Suporte 24x7
+      text: Oferecemos SLAs rigorosamente definidos e opções de suporte 24 horas por dia.
+    two:
+      title: Resolução de Problemas
+      text: Execute os produtos SUSE Rancher com confiança, sabendo que os desenvolvedores que os criaram estão disponíveis para resolver problemas rapidamente.
+    three:
+      title: Solução de Problemas
+      text: Focamos em descobrir a causa raiz de qualquer problema, seja ele relacionado a produtos SUSE, Kubernetes, Docker ou sua infraestrutura subjacente.
+    four:
+      title: Inove com Liberdade
+      text: Aproveite nossa compatibilidade certificada com uma ampla variedade de provedores Kubernetes, sistemas operacionais e software de código aberto.
 
 serverUpgrade:
   title: Servidor {vendor} Alterado
@@ -9368,10 +9494,10 @@ component:
   drawer:
     chrome:
       ariaLabel:
-        close: Fechar painel
+        close: "Fechar painel {target}"
       close: Fechar
     resourceDetailDrawer:
-      title: "Detalhes do Recurso"
+      title: "{resourceName} ({resourceType}) - Configuração"
       editConfig: Editar Configuração
       editYaml: Editar YAML
       ariaLabel:
@@ -9389,7 +9515,7 @@ component:
       card:
         resourceUsage:
           used: Usado
-          amount: 'Quantidade'
+          amount: "{used} de {available}"
           cpu: CPU
           memory: Memória
           pods: Pods
