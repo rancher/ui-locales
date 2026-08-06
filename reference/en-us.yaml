@@ -1,7 +1,7 @@
 # ---
 # source: rancher/dashboard (master)
 # source-url: https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml
-# synced-commit: 02a2364 (2026-07-20)
+# synced-commit: 40e2b61 (2026-08-06)
 # synced-by: PR #placeholder
 # ---
 ##############################
@@ -211,6 +211,8 @@ nav:
     about: About page link
     pinCluster: Pin/Unpin {cluster} cluster
     collapseExpand: Collapse/Expand menu group
+    expand: "Expand {group} menu group"
+    collapse: "Collapse {group} menu group"
     productAboutPage: Product about page link
   alt:
     mainMenuIcon: Main menu icon
@@ -325,6 +327,7 @@ nav:
     resourceListNotListable: Resource type { resource } cannot be listed
     resourceListNotFound: Resource type { resource } not found, unable to display list
     resourceIdNotFound: Resource { resource } with id { fqid } not found, unable to display resource details
+    didYouMean: 'Did you mean <a href="{url}">{resource}</a>?'
     reload: Reload
     separator: or
 
@@ -510,7 +513,8 @@ authConfig:
   allowedPrincipalIds:
     title: Authorized Users & Groups
   associatedWarning: 'The {provider} account that is used to enable the external provider will be granted permissions equal to the currently logged in Rancher user. See <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> to understand why.'
-  bannerEnableAuthProvider: "The \"Disable Local Authentication\" setting is enabled. Enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature and regain access. Please see {vendor} documentation for more information."
+  bannerEnableAuthProvider: 'The "Disable Local Authentication" feature flag is enabled. Enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see the <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> for more information.'
+  bannerEnabledAuthProvider: 'The "Disable Local Authentication" feature flag is also enabled. Users cannot log in with local credentials. In the event of a failure with this provider no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see the <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> for more information.'
   githubapp:
     clientId:
       label: Client ID
@@ -6583,6 +6587,8 @@ servicesPage:
       label: Use IPAM
     shareIP:
       label: Share IP LB
+    network:
+      label: Network
 
   ips:
     define: Service Ports
@@ -7048,6 +7054,7 @@ tableHeaders:
   completions: Completions
   count: Count
   createdAt: Created At
+  customResources: Resource
   customVerbs: Custom Verbs
   description: Description
   cpu: CPU
@@ -7473,6 +7480,7 @@ validation:
       url: Server URL must be an URL.
       awsStyleEndpoint: Endpoint URL has to be a valid domain-based endpoint and cannot start with a protocol (e.g https:// or http://)
   genericUrl: Field must be a valid URL
+  url: '"{key}" must be a valid URL'
   stringLength:
     between: '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
     exactly: '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
@@ -7807,6 +7815,7 @@ workload:
       status: Status
       volumeClaimTemplates: Volume Claim Templates
       upgrading: Scaling and Upgrade Policy
+      availability: Availability
   cronSchedule: Schedule
   detail:
     services: Services
@@ -7909,6 +7918,7 @@ workload:
   validation:
     containers: Containers
     containerImage: Container {name} - "Container Image" is required.
+    containerName: Container - "Container Name" is required.
     localhostProfile: Container {name} - "Container Localhost Profile" is required when SeccompProfile Type is Localhost.
   replicas: Replicas
   showTabs: 'Show Advanced Options'
@@ -9028,6 +9038,7 @@ advancedSettings:
     'agent-tls-mode': "Rancher Certificate Verification. In `strict` mode the agents (system, cluster, fleet, etc) will only trust Rancher installations which are using a certificate signed by the CABundle in the `cacerts` setting. When the mode is system-store, the agents will trust any certificate signed by a CABundle in the operating system’s trust store."
     'k3s-based-upgrader-uninstall-concurrency': Defines the maximum number of clusters in which Rancher can concurrently uninstall the legacy `rancher-k3s-upgrader` or `rancher-rke2-upgrader` app from imported or node-driver K3s or RKE2 clusters.
     'system-agent-upgrader-install-concurrency': Defines the maximum number of clusters in which Rancher can concurrently install the resources required for upgrading system-agent.
+    'delete-machine-on-failure-after': Defines the number of seconds after which Rancher will delete infrastructure machines that have failed provisioning. Set to 0 to disable automatic deletion of failed machines.
     'imported-cluster-version-management': Enables version management for imported RKE2/K3s clusters, and the local cluster if it is an RKE2/K3s cluster. The per-cluster version management setting overrides this global setting at the cluster level. For existing clusters where the cluster-level version management is set to 'system-default', changing this flag will trigger a redeployment of the cluster agent during the next reconciliation (by default every 5 minutes, or as soon as the cluster is edited, whichever comes first).
     'imported-cluster-day2-ops-enabled': Controls whether imported RKE2/K3s clusters will have day 2 operations (etcd snapshots, restores, encryption key rotations) enabled by default. This will affect all clusters using the default configuration, and can be overridden at the cluster level.
   warnings:
@@ -9058,7 +9069,7 @@ advancedSettings:
 
 featureFlags:
   description:
-    'hide-local-auth-provider': Activating this feature and enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature and regain access. Please see {vendor} documentation for more information.
+    'hide-local-auth-provider': Activating this feature and enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see {vendor} documentation on Feature Flags for more information.
   label: Feature Flags
   title: "Are you sure?"
   warning: |-
