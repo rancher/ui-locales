@@ -1,7 +1,7 @@
 # ---
 # source: rancher/dashboard (master)
 # source-url: https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml
-# synced-commit: 02a2364 (2026-07-20)
+# synced-commit: 08a16cd (2026-08-13)
 # synced-by: PR #placeholder
 # ---
 ##############################
@@ -39,6 +39,7 @@ generic:
   copyValueToClipboard: 'Copy {value} to Clipboard'
   copiedToClipboard: Text copied to Clipboard
   create: Create
+  createNew: Create new…
   created: Created
   customize: Customize
   dashboard: Dashboard
@@ -203,7 +204,7 @@ nav:
     sideNav: Secondary menu
     homePage: Home page navigation menu
     cluster: Cluster menu item
-    harvesterCluster: Harvester cluster menu item
+    harvesterCluster: '[[Harvester]] cluster menu item'
     seeAll: See all clusters menu item
     multiClusterApps: Main menu multi cluster app menu item
     configurationApps: Main menu configuration app menu item
@@ -211,13 +212,16 @@ nav:
     about: About page link
     pinCluster: Pin/Unpin {cluster} cluster
     collapseExpand: Collapse/Expand menu group
+    expand: "Expand {group} menu group"
+    collapse: "Collapse {group} menu group"
     productAboutPage: Product about page link
   alt:
     mainMenuIcon: Main menu icon
     mainMenuRancherLogo: Main menu Rancher logo
     userAvatar: User avatar image
-  expandCollapseAppBar: Expand/Collapse the Application Bar
-  harvesterDashboard: Harvester Dashboard
+  expandAppBar: Expand the Application Bar
+  collapseAppBar: Collapse the Application Bar
+  harvesterDashboard: '[[Harvester]] Dashboard'
   backToRancher: Cluster Manager
   tools: Tools
   clusterTools: Cluster Tools
@@ -325,6 +329,7 @@ nav:
     resourceListNotListable: Resource type { resource } cannot be listed
     resourceListNotFound: Resource type { resource } not found, unable to display list
     resourceIdNotFound: Resource { resource } with id { fqid } not found, unable to display resource details
+    didYouMean: 'Did you mean <a href="{url}">{resource}</a>?'
     reload: Reload
     separator: or
 
@@ -510,7 +515,8 @@ authConfig:
   allowedPrincipalIds:
     title: Authorized Users & Groups
   associatedWarning: 'The {provider} account that is used to enable the external provider will be granted permissions equal to the currently logged in Rancher user. See <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> to understand why.'
-  bannerEnableAuthProvider: "The \"Disable Local Authentication\" setting is enabled. Enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature and regain access. Please see {vendor} documentation for more information."
+  bannerEnableAuthProvider: 'The "Disable Local Authentication" feature flag is enabled. Enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see the <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> for more information.'
+  bannerEnabledAuthProvider: 'The "Disable Local Authentication" feature flag is also enabled. Users cannot log in with local credentials. In the event of a failure with this provider no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see the <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> for more information.'
   githubapp:
     clientId:
       label: Client ID
@@ -621,7 +627,7 @@ authConfig:
           4: 'Click "Create", and then click on the "Download JSON" button.'
           5: 'Upload the downloaded JSON file in the OAuth credentials box.'
         ariaLabel:
-          serverUrlVerify: Copy Server Auth Verfication URL to clipboard
+          serverUrlVerify: Copy Server Auth Verification URL to clipboard
       3:
         title: 'Create Service Account credentials'
         introduction: 'Follow <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">this</a> guide to:'
@@ -1301,7 +1307,7 @@ catalog:
         }
     error:
       requiresFound: '<a href="{url}">{name}</a> must be installed before you can install this chart.'
-      requiresMissing: 'This chart requires another chart that provides {name}, but none was was found.'
+      requiresMissing: 'This chart requires another chart that provides {name}, but none was found.'
       insufficientCpu: 'This chart requires {need, number} CPU cores, but the cluster only has {have, number} available.'
       insufficientMemory: 'This chart requires {need} of memory, but the cluster only has {have} available.'
       legacy:
@@ -1642,7 +1648,7 @@ cluster:
       label: vSphere
       note: '<b>Important:</b> Configure the vSphere Cloud Provider and Storage Provider options in the Add-on Configuration tab.'
     harvester:
-      label: Harvester
+      label: '[[Harvester]]'
   copyConfig: Copy KubeConfig to Clipboard
   copiedConfig: Copied KubeConfig to Clipboard
   custom:
@@ -1821,7 +1827,7 @@ cluster:
       kubeconfigContent:
         label: KubeconfigContent
       placeholder: 'Namespace/Name'
-      cluster: Imported Harvester Cluster
+      cluster: Imported [[Harvester]] Cluster
       enableTpm: Enable TPM
       enableCpuPinning: Enable CPU Pinning
       cpuPinningTooltip: Enable CPU Pinning brings better performance and reduce latency for the harvester virtual machine
@@ -1829,25 +1835,25 @@ cluster:
       secureBoot: Secure Boot
       enableEfi: Booting in EFI mode
       installGuestAgent: Install guest agent
-      tokenExpirationWarning: 'Warning: Harvester Cloud Credentials use an underlying authentication token that may have an expiry time - please see the following <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">knowledge base article</a> for possible implications on management operations.'
+      tokenExpirationWarning: 'Warning: [[Harvester]] Cloud Credentials use an underlying authentication token that may have an expiry time - please see the following <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">knowledge base article</a> for possible implications on management operations.'
   description:
     label: Cluster Description
     placeholder: Any text you want that better describes this cluster
   harvester:
-    importNotice: Import Harvester Clusters via
+    importNotice: Import [[Harvester]] Clusters via
     warning:
-      label: This is a Harvester Cluster - enable the Harvester feature flag to manage it
+      label: This is a [[Harvester]] Cluster - enable the [[Harvester]] feature flag to manage it
       state: Warning
       cloudProvider:
         incompatible:
-          You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
+          You cannot select the [[Harvester]] cloud provider as the current [[Harvester]] version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
     clusterWarning: |-
       There {count, plural,
-      =1 {is 1 Harvester cluster that is not shown}
-      other {are # Harvester clusters that are not shown}
+      =1 {is 1 [[Harvester]] cluster that is not shown}
+      other {are # [[Harvester]] clusters that are not shown}
       }
     registration:
-      step1: "1. Go to the <code>Advanced / Settings</code> page of the target Harvester's UI."
+      step1: "1. Go to the <code>Advanced / Settings</code> page of the target [[Harvester]]'s UI."
       step2: '2. Find the <code>cluster-registration-url</code> setting and click the <code><i class="icon icon-actions" ></i></code> -> <code>Edit Setting</code> button.'
       step3: "3. Input the following registration URL and click the <code>Save</code> button."
       step4: "Registration URL"
@@ -1871,7 +1877,7 @@ cluster:
         toolTip: SSH user to login with the selected OS image.
     kubeconfigSecret:
         nameRequired: Cluster name is required.
-        error: 'Error generating Harvester kubeconfig secret: {err}'
+        error: 'Error generating [[Harvester]] kubeconfig secret: {err}'
   haveOneOwner: There must be at least one member with the Owner role.
   import:
     warningBanner: 'You should not import a cluster which has already been connected to another instance of Rancher as it will lead to data corruption.'
@@ -1882,6 +1888,10 @@ cluster:
   explore: Explore
   importAction: Import Existing
   manageAction: Manage
+  kubeConfig:
+    error:
+      title: Unable to generate KubeConfig
+      noClusters: No clusters could be resolved from the current selection. Refresh the page and try again.
   kubernetesVersion:
     label: Kubernetes Version
     current: (current)
@@ -2477,7 +2487,7 @@ cluster:
     googlegke: Google GKE
     gke: GKE
     googlekubernetesengine: Google GKE (Unsupported Kev1)
-    harvester: Harvester
+    harvester: '[[Harvester]]'
     huaweicce: Huawei CCE
     import: Generic
     imported: Imported
@@ -2653,7 +2663,7 @@ cluster:
           label: S3 Snapshot Retention Count
           options:
             manual: Set manually
-            localDefined: Same as local ({count} Snaphots)
+            localDefined: Same as local ({count} Snapshots)
             localUndefined: Same as local
         bucket:
           label: Bucket
@@ -2978,13 +2988,13 @@ dynamicContent:
     moreInfo: Release Notes
   multipleNewReleases:
     title: New Rancher releases are available!
-    message: A new {version1} patch version has been released and a newer {version2} version is also avaialble.
+    message: A new {version1} patch version has been released and a newer {version2} version is also available.
     moreInfo: "{version} Release Notes"
   upcomingEom:
-    title: End of Maintainence in {days, plural, =1 {1 day} other {{days} days}}
-    message: This version of Rancher ({version}) will reach End of Maintainence in {days} day(s). Consider upgrading to a supported version soon.
+    title: End of Maintainance in {days, plural, =1 {1 day} other {{days} days}}
+    message: This version of Rancher ({version}) will reach End of Maintainance in {days} day(s). Consider upgrading to a supported version soon.
   eom:
-    title: End of Maintainence reached
+    title: End of Maintainance reached
     message: This version of Rancher ({version}) has reached End of Maintainence. Consider upgrading to a supported version.
   upcomingEol:
     title: End of Life in {days, plural, =1 {1 day} other {{days} days}}
@@ -2992,6 +3002,9 @@ dynamicContent:
   eol:
     title: End of Life reached
     message: This version of Rancher ({version}) has reached End of Life. Consider upgrading to a supported version.
+  eoc:
+    title: Updates have ended
+    message: This version of Rancher ({version}) will no longer receive updates. Consider upgrading to a newer version or to Rancher Prime.
 
 etcdInfoBanner:
   hasLeader: "Etcd has a leader:"
@@ -3145,21 +3158,21 @@ fleet:
   clusters:
     harvester: |-
       There {count, plural,
-      =1 {is 1 Harvester cluster that is hidden as this can not be used with Continuous Delivery}
-      other {are # Harvester clusters that are hidden as they can not be used with Continuous Delivery}
+      =1 {is 1 [[Harvester]] cluster that is hidden as this can not be used with Continuous Delivery}
+      other {are # [[Harvester]] clusters that are hidden as they can not be used with Continuous Delivery}
       }
   tokens:
     harvester: |-
       {count, plural,
-      =1 {1 token is hidden as it belongs to a Harvester cluster that can not be used with Continuous Delivery}
-      other {# tokens are hidden as they belong to Harvester clusters that can not be used with Continuous Delivery}
+      =1 {1 token is hidden as it belongs to a [[Harvester]] cluster that can not be used with Continuous Delivery}
+      other {# tokens are hidden as they belong to [[Harvester]] clusters that can not be used with Continuous Delivery}
       }
   bundles:
     resources: Resources
     harvester: |-
       {count, plural,
-      =1 {1 bundle is hidden as it belongs to a Harvester cluster that can not be used with Continuous Delivery}
-      other {# bundles are hidden as they belong to Harvester clusters that can not be used with Continuous Delivery}
+      =1 {1 bundle is hidden as it belongs to a [[Harvester]] cluster that can not be used with Continuous Delivery}
+      other {# bundles are hidden as they belong to [[Harvester]] clusters that can not be used with Continuous Delivery}
       }
   fleetSummary:
     noClusters:
@@ -3331,7 +3344,7 @@ fleet:
           description: Fleet will continuously monitor the Git Repository you configure below and synchronise the resources contained in it to the configured targets.
         advanced:
           label: Advanced
-          title: Specify advanced settings like authenticaion credentials and polling
+          title: Specify advanced settings like authentication credentials and polling
           subtext: 'Define advanced settings'
           description: Fleet will use the authentication settings and polling to synchronise the resources contained in it.
           info: These settings are for advanced usage and optional. You can skip them and finish the creation process.
@@ -3443,7 +3456,7 @@ fleet:
           description: You can configure which clusters will be used as the target of synchronisation with the resources in the repository.
         advanced:
           label: Advanced
-          title: Specify advanced settings like authenticaion credentials and polling
+          title: Specify advanced settings like authentication credentials and polling
           subtext: 'Define advanced settings'
           description: Fleet will use the authentication settings and polling to synchronise the resources contained in it.
           info: These settings are for advanced usage and optional. You can skip them and finish the creation process.
@@ -4196,6 +4209,7 @@ labels:
   addTaint: Add Taint
   addAnnotation: Add Annotation
   protectedWarning: This key is protected and will be discarded
+  readOnlyWarning: This key is read-only and changes will not be persisted
   labels:
     title: Labels
     description: Key/value pairs that are attached to objects which specify identifying attributes.
@@ -4448,7 +4462,7 @@ logging:
       title: Buffer
       tags: Tags
       chunkLimitSize: Chunk Limit Size
-      chunkLimitRecords: Chunk Limit chunkLimitRecords
+      chunkLimitRecords: Chunk Limit Records
       totalLimitSize: Total Limit Size
       flushInterval: Flush Interval
       timekey: Timekey
@@ -5295,7 +5309,7 @@ persistentVolume:
       disk-csi-azure-com: Azure Disk (CSI)
       file-csi-azure-com: Azure File (CSI)
       driver-longhorn-io: Longhorn (CSI)
-      driver-harvesterhci-io: Harvester (CSI)
+      driver-harvesterhci-io: '[[Harvester]] (CSI)'
       lvm-driver-harvesterhci-io: LVM
       nfs-csi-k8s-io: NFS (CSI)
       ebs-csi-aws-com: AWS Elastic Block Store (CSI)
@@ -6583,6 +6597,8 @@ servicesPage:
       label: Use IPAM
     shareIP:
       label: Share IP LB
+    network:
+      label: Network
 
   ips:
     define: Service Ports
@@ -6699,6 +6715,7 @@ sortableTable:
       other {{from} - {to} of {count} {pluralLabel}}}
   search: Filter
   searchLabel: Filter table results
+  clearFilter: Clear Filter for table results
   in: in
   addFilter: Add Filter
   filteringDescription: Using this input will immediately filter the results in the table below
@@ -7001,13 +7018,13 @@ storageClass:
     title: (Deprecated)
     warning: 'The {provisioner} in-tree plugin is deprecated: Find a CSI driver <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes-csi.github.io/docs/drivers.html">here.</a>'
   harvesterhci:
-    title: Harvester (CSI)
+    title: '[[Harvester]] (CSI)'
     warning:
-      unSatisfiesVersion: Please upgrade your Harvester CSI driver version to use this feature. (csi-driver >= v0.1.15)
+      unSatisfiesVersion: Please upgrade your [[Harvester]] CSI driver version to use this feature. (csi-driver >= v0.1.15)
     hostStorageClass:
       label: Host Storage Class
-      placeholder: Storage class name on the host Harvester cluster
-      tooltip: By default the default storage class on the host Harvester cluster is used.
+      placeholder: Storage class name on the host [[Harvester]] cluster
+      tooltip: By default the default storage class on the host [[Harvester]] cluster is used.
 
 tableHeaders:
   assuredConcurrencyShares: Assured Concurrency Shares
@@ -7048,6 +7065,7 @@ tableHeaders:
   completions: Completions
   count: Count
   createdAt: Created At
+  customResources: Resource
   customVerbs: Custom Verbs
   description: Description
   cpu: CPU
@@ -7089,6 +7107,8 @@ tableHeaders:
   iP: IP
   image: Image
   imageSize: Size
+  httpRouteGateways: Gateways
+  httpRouteHostnames: Hostnames
   ingressClass: Ingress Class
   ingressDefaultBackend: Default
   ingressTarget: Target
@@ -7473,6 +7493,7 @@ validation:
       url: Server URL must be an URL.
       awsStyleEndpoint: Endpoint URL has to be a valid domain-based endpoint and cannot start with a protocol (e.g https:// or http://)
   genericUrl: Field must be a valid URL
+  url: '"{key}" must be a valid URL'
   stringLength:
     between: '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
     exactly: '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
@@ -7807,6 +7828,7 @@ workload:
       status: Status
       volumeClaimTemplates: Volume Claim Templates
       upgrading: Scaling and Upgrade Policy
+      availability: Availability
   cronSchedule: Schedule
   detail:
     services: Services
@@ -7817,7 +7839,11 @@ workload:
     cannotViewIngresses: Could not list Ingresses due to lack of permission.
     cannotFindIngresses: Could not find any Ingresses that forward traffic to Services that select Pods in this workload.
     ingressListCaption: "The following Ingresses forward traffic to Services that select Pods from this workload:"
-    cannotViewIngressesBecauseCannotViewServices: Could not find relevant relevant Ingresses due to lack of permission to view Services.
+    cannotViewIngressesBecauseCannotViewServices: Could not find relevant Ingresses due to lack of permission to view Services.
+    httpRoutes: HTTPRoutes
+    cannotFindHttpRoutes: Could not find any HTTPRoutes that forward traffic to Services that select Pods in this workload.
+    httpRouteListCaption: "The following HTTPRoutes forward traffic to Services that select Pods from this workload:"
+    cannotViewHttpRoutesBecauseCannotViewServices: Could not find relevant HTTPRoutes due to lack of permission to view Services.
     pods:
       title: Pods
   detailTop:
@@ -7909,6 +7935,7 @@ workload:
   validation:
     containers: Containers
     containerImage: Container {name} - "Container Image" is required.
+    containerName: Container - "Container Name" is required.
     localhostProfile: Container {name} - "Container Localhost Profile" is required when SeccompProfile Type is Localhost.
   replicas: Replicas
   showTabs: 'Show Advanced Options'
@@ -8520,6 +8547,16 @@ typeLabel:
       one { Ingress }
       other { Ingresses }
     }
+  gateway.networking.k8s.io.httproute: |-
+    {count, plural,
+      one { HTTPRoute }
+      other { HTTPRoutes }
+    }
+  gateway.networking.k8s.io.gateway: |-
+    {count, plural,
+      one { Gateway }
+      other { Gateways }
+    }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
       one { Network Policy }
@@ -8627,8 +8664,8 @@ typeLabel:
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
-      one { Harvester Cluster }
-      other { Harvester Clusters }
+      one { [[Harvester]] Cluster }
+      other { [[Harvester]] Clusters }
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
@@ -8851,7 +8888,7 @@ oidcclient:
   secretAdded: Secret Added!
   noClientId: No Client Id found for this application. If the problem persists please recreate the application
   errors:
-    performSecretAction: The action on OIDC secrets tried to perform is invalid. Please check the the valid parameters for this function
+    performSecretAction: The action on OIDC secrets tried to perform is invalid. Please check the valid parameters for this function
   removeOidcClientModal:
     title: OIDC Application deletion
     content: Are you sure you want to delete the following OIDC applications?
@@ -9028,6 +9065,7 @@ advancedSettings:
     'agent-tls-mode': "Rancher Certificate Verification. In `strict` mode the agents (system, cluster, fleet, etc) will only trust Rancher installations which are using a certificate signed by the CABundle in the `cacerts` setting. When the mode is system-store, the agents will trust any certificate signed by a CABundle in the operating system’s trust store."
     'k3s-based-upgrader-uninstall-concurrency': Defines the maximum number of clusters in which Rancher can concurrently uninstall the legacy `rancher-k3s-upgrader` or `rancher-rke2-upgrader` app from imported or node-driver K3s or RKE2 clusters.
     'system-agent-upgrader-install-concurrency': Defines the maximum number of clusters in which Rancher can concurrently install the resources required for upgrading system-agent.
+    'delete-machine-on-failure-after': Defines the number of seconds after which Rancher will delete infrastructure machines that have failed provisioning. Set to 0 to disable automatic deletion of failed machines.
     'imported-cluster-version-management': Enables version management for imported RKE2/K3s clusters, and the local cluster if it is an RKE2/K3s cluster. The per-cluster version management setting overrides this global setting at the cluster level. For existing clusters where the cluster-level version management is set to 'system-default', changing this flag will trigger a redeployment of the cluster agent during the next reconciliation (by default every 5 minutes, or as soon as the cluster is edited, whichever comes first).
     'imported-cluster-day2-ops-enabled': Controls whether imported RKE2/K3s clusters will have day 2 operations (etcd snapshots, restores, encryption key rotations) enabled by default. This will affect all clusters using the default configuration, and can be overridden at the cluster level.
   warnings:
@@ -9058,7 +9096,7 @@ advancedSettings:
 
 featureFlags:
   description:
-    'hide-local-auth-provider': Activating this feature and enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature and regain access. Please see {vendor} documentation for more information.
+    'hide-local-auth-provider': Activating this feature and enabling an Authentication Provider will prevent users from logging in with local credentials. In the event of a Provider failure no user will be able to log in. Ensure you have continued API or CLI access to Rancher to disable the feature to regain access. Please see {vendor} documentation on Feature Flags for more information.
   label: Feature Flags
   title: "Are you sure?"
   warning: |-
@@ -9179,7 +9217,7 @@ banner:
   type:
     html: HTML
     text: Text
-  htmlWarning: 'Not all HTML elements or attriutes are permitted and the HTML entered here will be sanitized before display. For HTML anchor elements, it is recommended to use the target attribute to have links open in a blank tab.'
+  htmlWarning: 'Not all HTML elements or attributes are permitted and the HTML entered here will be sanitized before display. For HTML anchor elements, it is recommended to use the target attribute to have links open in a blank tab.'
   htmlContent: HTML Content
   toggleTextHtml: Toggle between text and html
 
@@ -9524,6 +9562,7 @@ component:
           rows:
             services: Services
             ingresses: Ingresses
+            httpRoutes: HTTPRoutes
             referredToBy: Referred to by
             refersTo: Refers to
         podsCard:
