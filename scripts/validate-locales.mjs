@@ -204,6 +204,24 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const isUrl = (v) => /^https?:\/\/\S+$/.test(String(v).trim());
 
 /**
+ * The commit to treat as "before this change", or null if it cannot be
+ * resolved — a shallow checkout, or no git at all. Resolved once so that an
+ * unusable ref is reported rather than silently turning the regression checks
+ * into no-ops.
+ */
+const BASE_REF = (() => {
+  const ref = process.env.BASE_REF || 'origin/main';
+
+  try {
+    execFileSync('git', ['rev-parse', '--verify', `${ ref }^{commit}`], { cwd: ROOT, stdio: 'ignore' });
+
+    return ref;
+  } catch {
+    return null;
+  }
+})();
+
+/**
  * The same locale file as it exists on the base ref, or null if it cannot be
  * read — a brand new locale, a shallow checkout, or no git at all.
  *
@@ -213,7 +231,12 @@ const isUrl = (v) => /^https?:\/\/\S+$/.test(String(v).trim());
  * that is only visible by comparing against the previous version of the file.
  */
 function baseline(file) {
-  const ref = process.env.BASE_REF || 'origin/main';
+  const ref = BASE_REF;
+
+  if (!ref) {
+    return null;
+  }
+
   const rel = path.relative(ROOT, file);
 
   try {
@@ -298,7 +321,10 @@ function main() {
     }
   }
 
-  console.log(`Reference: reference/en-us.yaml — ${ enKeys.length } keys${ enCommit ? ` (synced-commit ${ enCommit })` : '' }\n`);
+  console.log(`Reference: reference/en-us.yaml — ${ enKeys.length } keys${ enCommit ? ` (synced-commit ${ enCommit })` : '' }`);
+  console.log(BASE_REF
+    ? `Baseline:  ${ BASE_REF } — changes are also checked for regressions against it\n`
+    : `Baseline:  unavailable${ process.env.BASE_REF ? ` (cannot resolve "${ process.env.BASE_REF }")` : '' } — only drift from en-us is reported\n`);
 
   for (const locale of locales) {
     const file = path.join(L10N_DIR, `${ locale }.yaml`);
