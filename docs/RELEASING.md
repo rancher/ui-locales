@@ -32,41 +32,49 @@ These need repository admin and only have to be done once.
 
 ## Cutting a release
 
-1. **Bump the version in both files — they have to match.**
+**Bump the version in both files — they have to match.**
 
-   - `pkg/locales/package.json` — the extension version, used for the chart tag
-   - `package.json` (root) — used for the catalog image tag
+- `pkg/locales/package.json` — the extension version, used for the chart
+- `package.json` (root) — used for the catalog image tag
 
-   The two release workflows validate the tag differently: `build-extension-charts` matches it
-   against `pkg/<name>-<version>` and `build-extension-catalog` matches it against the root
-   `name-version`. If the versions drift apart, no tag can satisfy both and the catalog job cancels
-   itself.
+The two release workflows validate the release tag differently: the chart matches it against
+`pkg/<name>-<version>` and the catalog matches it against the root `name-version`. If the versions
+drift apart, no tag can satisfy both and the catalog job cancels itself rather than failing.
 
-2. **Open a PR with the bump and merge it.** `validate-locales` and `build-extensions-test` run on
-   the PR; both must be green.
+Then pick a path.
 
-3. **Publish a GitHub release** on `main` with the tag `locales-<version>`, e.g. `locales-0.1.2`.
+### Publishing the chart only — merge the bump
 
-   ```sh
-   gh release create locales-0.1.2 --repo rancher/ui-locales \
-     --title "locales-0.1.2" --generate-notes
-   ```
+`build-extension-charts` runs on any push to `main` that touches `pkg/locales/package.json`, so
+merging the version bump is the whole of publishing the chart. Bumping the number *is* the release.
 
-   The tag must be exactly `<pkg-name>-<version>`; `pkg-name` is `locales`, the directory name under
-   `pkg/`. A mismatch cancels the run rather than failing it, which is easy to miss.
+It refuses to republish: before building, it reads `index.yaml` from `gh-pages` and stops if that
+version is already there. That guard matters because the trigger fires on any edit to the file — a
+change to the catalog annotations alone must not republish the same version with different contents
+inside it.
 
-   Both workflows trigger on `release: [released]`, so a **draft** release does not release
-   anything. Publish it.
+This path does **not** build the catalog image. If air-gapped installs need this version, cut a
+release instead.
 
-## What runs, and where the output lands
+### Publishing both — cut a GitHub release
 
-| Workflow | Output |
-|----------|--------|
-| `build-extension-charts` | Helm chart committed to the `gh-pages` branch and indexed in `index.yaml`, served over GitHub Pages |
-| `build-extension-catalog` | Extension catalog image pushed to `ghcr.io/rancher/ui-extension-locales` |
+Publish a release on `main` tagged `locales-<version>`:
 
-The Helm chart is what users install through **Extensions** in the Rancher UI. The catalog image is
-the air-gapped path — it bundles the same extension for clusters that cannot reach GitHub Pages.
+```sh
+gh release create locales-0.1.2 --repo rancher/ui-locales \
+  --title "locales-0.1.2" --generate-notes
+```
+
+The tag must be exactly `<pkg-name>-<version>` — `pkg-name` is `locales`, the directory under
+`pkg/`. A mismatch cancels the run rather than failing it, which is easy to miss.
+
+Both workflows trigger on `release: [released]`, so a **draft** release publishes nothing. Publish it.
+
+### Re-publishing something that built wrong
+
+Both workflows can be run by hand from the Actions tab. A manual run passes no tag, so it builds
+whatever version `package.json` currently names. For the chart, delete that version from `gh-pages`
+first or the version check will decline to rebuild it.
 
 ## Verifying a release
 

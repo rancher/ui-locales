@@ -46,8 +46,8 @@ ui-locales/
     ├── sync-locales.md             # agentic workflow: weekly en-us.yaml sync (compiled to .lock.yml)
     ├── validate-locales.yml        # runs the validator on every PR
     ├── build-extensions-test.yml   # verifies the extension still builds on every PR
-    ├── build-extension-charts.yml  # publishes the Helm chart on release
-    ├── build-extension-catalog.yml # publishes the extension catalog image on release
+    ├── build-extension-charts.yml  # publishes the Helm chart, on release or a version bump
+    ├── build-extension-catalog.yml # publishes the extension catalog image, on release
     └── shared/translation-rules.md # canonical rules every translation workflow follows
 ```
 
@@ -118,8 +118,8 @@ Advisories (reported, never fail the build) — these are about the *wording*, n
 | **sync-locales** | Weekly / manual | Fetches the latest `en-us.yaml` from `rancher/dashboard` and opens a PR if it changed, closing any sync PR it supersedes |
 | **validate-locales** | Every PR | Runs `yarn validate-locales` |
 | **build-extensions-test** | Every PR | Verifies the extension still builds |
-| **build-extension-charts** | Release published | Publishes the Helm chart to the `gh-pages` branch |
-| **build-extension-catalog** | Release published | Publishes the extension catalog image to `ghcr.io` |
+| **build-extension-charts** | Release, version bump on `main`, manual | Publishes the Helm chart to the `gh-pages` branch, then verifies a bundle actually landed |
+| **build-extension-catalog** | Release, manual | Publishes the extension catalog image to `ghcr.io` |
 
 `sync-locales` is an [agentic workflow](https://github.com/github/gh-aw). Edit `sync-locales.md`
 and run `gh aw compile` — never edit `sync-locales.lock.yml` by hand.
@@ -154,7 +154,12 @@ Rancher 2.10 or newer.
 ## Releasing
 
 See [docs/RELEASING.md](docs/RELEASING.md). In short: bump the version in **both** `package.json`
-and `pkg/locales/package.json`, then publish a GitHub release tagged `locales-<version>`.
+and `pkg/locales/package.json` — merging that bump publishes the Helm chart on its own, and
+publishing a GitHub release tagged `locales-<version>` publishes the chart *and* the air-gapped
+catalog image.
+
+The release workflows call reusable workflows from `rancher/dashboard` pinned by SHA rather than
+tracked at `@master`, since they run with write access to this repository's branches and packages.
 
 ## Contributing
 
