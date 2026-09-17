@@ -295,20 +295,30 @@ function main() {
     const missing = enKeys.filter((k) => !keySet.has(k));
     const extra = keys.filter((k) => !enValues.has(k));
 
+    // en-us is synced from rancher/dashboard weekly and the translations catch
+    // up afterwards, so a translation missing new keys is the normal state of
+    // this repository for part of every week — and Rancher falls back to
+    // English for any key a locale does not define. Reported, never fatal.
     if (missing.length) {
-      error(locale, `${ missing.length } key(s) missing from en-us: ${ missing.slice(0, 5).join(', ') }${ missing.length > 5 ? ', …' : '' }`);
+      warn(locale, `${ missing.length } key(s) not yet translated from en-us — run /update-language ${ locale }: ${ missing.slice(0, 3).join(', ') }${ missing.length > 3 ? ', …' : '' }`);
     }
 
+    // A key that en-us does not have is always a mistake: it is either a typo
+    // or a leftover from a key that upstream removed, and nothing will read it.
     if (extra.length) {
       error(locale, `${ extra.length } key(s) not present in en-us: ${ extra.slice(0, 5).join(', ') }${ extra.length > 5 ? ', …' : '' }`);
     }
 
-    // Order only has to agree on the keys both files share; missing/extra keys
-    // are already reported above and would otherwise report twice.
-    if (!missing.length && !extra.length && !same(keys, enKeys)) {
-      const at = keys.findIndex((k, i) => k !== enKeys[i]);
+    // Order is compared over the keys the two files share, so a translation
+    // that is merely behind is not reported as misordered as well.
+    if (!extra.length) {
+      const shared = enKeys.filter((k) => keySet.has(k));
 
-      error(locale, `key order differs from en-us — first difference at position ${ at }: expected "${ enKeys[at] }", found "${ keys[at] }"`);
+      if (!same(keys, shared)) {
+        const at = keys.findIndex((k, i) => k !== shared[i]);
+
+        error(locale, `key order differs from en-us — first difference at position ${ at }: expected "${ shared[at] }", found "${ keys[at] }"`);
+      }
     }
 
     const localeKinds = kinds(doc);

@@ -59,13 +59,40 @@ Every locale file must have a **provenance comment block** at the very top of th
 
 ## YAML validation procedure
 
-After any translation work, validate the output file using bash/Node.js:
+**Do not write your own validation script — this repository has one.** After any translation work,
+run it and fix everything it reports:
+
+```sh
+yarn validate-locales <locale-code>     # e.g. yarn validate-locales pt-br
+```
+
+It exits non-zero if the file is not shippable, and checks:
 
 1. The file is valid YAML (no parse errors, no duplicate keys)
-2. Every key in `reference/en-us.yaml` exists in the output and vice-versa (exact key parity)
+2. No key that `reference/en-us.yaml` does not have (a key it is missing is reported as an advisory instead — see below)
 3. Key order matches `reference/en-us.yaml`
-4. All placeholders (`{...}`, `&hellip;`, HTML tags) from `reference/en-us.yaml` are present in the corresponding translated values
-5. If any issues are found, fix them and re-validate until the file is clean
+4. Structure parity — a mapping in the source is still a mapping here
+5. Placeholders survive: every `{...}` argument in the source is still present and still spelled
+   the same, and no argument appears that the source never defined
+6. HTML markup in the source is not dropped or altered, and URLs are not translated
+7. The provenance header is present and complete
+8. Every locale file is registered with `plugin.addLocale()` in `pkg/locales/index.ts`
+
+The same script runs on every pull request, so a translation that does not pass locally will not
+pass review either.
+
+Two categories are reported as **advisories** and do not fail the run — they are judgement calls,
+not defects:
+
+- keys the source has that this translation does not yet have. `en-us.yaml` is synced weekly and
+  the translations catch up afterwards, and Rancher falls back to English for any key a locale does
+  not define. Bringing them across is still the job of `/update-language` — it is just not a reason
+  to block an unrelated pull request.
+- plural/select structure simplified relative to the source (expected in languages without plurals)
+- markup or HTML entities the translation adds that the source does not have
+
+Re-run the script after every fix until it is clean. Run `ADVISORIES=1 yarn validate-locales` to
+see the advisory list in full.
 
 ## Fixing YAML parse errors
 

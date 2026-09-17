@@ -34,7 +34,7 @@ Update an existing language translation file to match the current `en-us.yaml`.
    - Changed values: re-translate
    - Key ordering: reorder to match en-us.yaml
 
-8. Validate the updated file using the YAML validation procedure. Fix any issues and re-validate until clean.
+8. Validate with `yarn validate-locales <locale-code>` — do not write your own validation script. Fix everything it reports and re-run until it exits clean.
 
 9. Create a new git branch `update-<locale-code>-translation` and commit the changes.
 
