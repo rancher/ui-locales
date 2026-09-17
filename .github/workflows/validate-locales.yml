@@ -1,0 +1,45 @@
+name: Validate locales
+
+# Every translation file has to stay structurally identical to
+# reference/en-us.yaml — same keys, same order, same placeholders. Until now
+# that was enforced only by prose in shared/translation-rules.md and by whoever
+# reviewed the PR. This runs the same checks mechanically.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+jobs:
+  validate-locales:
+    name: Validate locale files
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+
+      - name: Setup Node.js with yarn caching
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v6
+        with:
+          cache: yarn
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Validate locale files against reference/en-us.yaml
+        run: yarn validate-locales
+        env:
+          # List every advisory difference in the log rather than just counting
+          # them, so a reviewer can see them without running anything locally.
+          ADVISORIES: '1'
