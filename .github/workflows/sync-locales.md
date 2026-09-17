@@ -35,6 +35,10 @@ safe-outputs:
   create-pull-request:
     title-prefix: "chore: "
     labels: [translations, sync, automated]
+  close-pull-request:
+    target: "*"
+    required-labels: [sync]
+    max: 10
   add-comment: {}
 ---
 
@@ -63,7 +67,7 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
 
    c. If the upstream `en-us.yaml` is **identical** to the one already on the PR branch, then the existing PR already covers these changes. Add a comment to the existing PR noting that the sync check ran and no new upstream changes were found. Then **stop** — do not create a new PR.
 
-   d. If the upstream `en-us.yaml` has **additional changes** beyond what the existing PR branch has, proceed to step 5 to create a new PR with the latest changes. Mention in the new PR body that it supersedes the existing PR (reference it by number).
+   d. If the upstream `en-us.yaml` has **additional changes** beyond what the existing PR branch has, proceed to step 5 to create a new PR with the latest changes, then close the superseded PR in step 6. In the new PR body, link the superseded PR by its **full URL** (`https://github.com/rancher/ui-locales/pull/<number>`) — never a bare `#<number>`, which creates a misleading cross-reference.
 
 5. If there **are changes** to `en-us.yaml` and no existing PR already covers them:
 
@@ -85,6 +89,14 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
       - Body that summarizes: what changed (keys added, removed, values modified), with counts
       - Include a note: "After merging, run `/update-language <locale-code>` for each language that needs to be brought up to date."
       - Labels: `translations`, `sync`, `automated`
+
+6. **Close superseded sync PRs.** A new sync PR contains everything the older ones did, so leaving them open piles up stale drafts. After the new PR is opened, close every **older** open sync PR you found in step 4:
+
+   a. Comment on it explaining that it is superseded, linking the new PR by its full URL.
+
+   b. Close it with the `close-pull-request` safe output.
+
+   Only close PRs carrying the `sync` label, and never close the PR you just opened. If step 4 found no older sync PRs, skip this step.
 
 ## Style
 
