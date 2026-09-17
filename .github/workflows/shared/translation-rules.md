@@ -69,7 +69,7 @@ yarn validate-locales <locale-code>     # e.g. yarn validate-locales pt-br
 It exits non-zero if the file is not shippable, and checks:
 
 1. The file is valid YAML (no parse errors, no duplicate keys)
-2. No key that `reference/en-us.yaml` does not have (a key it is missing is reported as an advisory instead — see below)
+2. That this change does not delete translated keys, add keys `reference/en-us.yaml` does not have, or reorder keys the file already had
 3. Key order matches `reference/en-us.yaml`
 4. Structure parity — a mapping in the source is still a mapping here
 5. Placeholders survive: every `{...}` argument in the source is still present and still spelled
@@ -84,10 +84,11 @@ pass review either.
 Two categories are reported as **advisories** and do not fail the run — they are judgement calls,
 not defects:
 
-- keys the source has that this translation does not yet have. `en-us.yaml` is synced weekly and
-  the translations catch up afterwards, and Rancher falls back to English for any key a locale does
-  not define. Bringing them across is still the job of `/update-language` — it is just not a reason
-  to block an unrelated pull request.
+- any way in which this file is out of step with `reference/en-us.yaml`: keys it does not have yet,
+  keys upstream has since removed, or key order upstream has changed. `en-us.yaml` is synced weekly
+  and the translations catch up afterwards, and Rancher falls back to English for any key a locale
+  does not define. Realigning is exactly the job of `/update-language` — it is just not a reason to
+  block an unrelated pull request.
 - plural/select structure simplified relative to the source (expected in languages without plurals)
 - markup or HTML entities the translation adds that the source does not have
 

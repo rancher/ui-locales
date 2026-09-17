@@ -81,10 +81,18 @@ yarn validate-locales pt-br      # one locale
 ADVISORIES=1 yarn validate-locales   # also list the advisory differences
 ```
 
+`en-us.yaml` moves first and the translations catch up afterwards, so being out of step with it is
+the normal state of this repository for part of every week — a sync PR that adds, removes or moves
+one key would otherwise turn every locale red. So divergence from `en-us` is only ever an advisory.
+What fails the build is a change that leaves a translation **worse than it found it**, judged
+against the previous version of that same file.
+
 Failures (the build is blocked):
 
 - the file does not parse, or has duplicate keys
-- a key exists that `en-us` does not have, keys are out of order, or a mapping became a scalar
+- the change deletes keys that were translated and that `en-us` still defines
+- the change adds a key `en-us` does not have, or reorders keys the file already had
+- a mapping became a scalar
 - a placeholder in `en-us` was dropped or renamed, or the translation uses one `en-us` never defined
 - HTML markup present in `en-us` was dropped or altered
 - a URL was translated
@@ -93,11 +101,14 @@ Failures (the build is blocked):
 
 Advisories (reported, never fail the build):
 
-- keys `en-us` has that the translation does not yet — normal in the week after a sync, and
-  Rancher falls back to English for them
+- keys `en-us` has that the translation does not yet — Rancher falls back to English for them
+- keys upstream has since removed that the translation still carries
+- key order no longer matching `en-us` because upstream moved something
 - plural/select structure simplified — legitimate in languages without plural forms
 - markup or HTML entities the translation adds that `en-us` does not have
 - the translation is synced against an older `en-us` commit than the current one
+
+All six advisories are what `/update-language <locale>` exists to clear.
 
 ### Automated workflows
 

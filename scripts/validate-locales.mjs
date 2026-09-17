@@ -12,6 +12,7 @@
  *
  * Exits non-zero if any error is found. Warnings never fail the run.
  */
+import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -202,6 +203,30 @@ function entities(value) {
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const isUrl = (v) => /^https?:\/\/\S+$/.test(String(v).trim());
 
+/**
+ * The same locale file as it exists on the base ref, or null if it cannot be
+ * read — a brand new locale, a shallow checkout, or no git at all.
+ *
+ * en-us.yaml moves first and the translations catch up afterwards, so at any
+ * moment a translation is legitimately out of step with it. What is never
+ * legitimate is a change that leaves a translation worse than it found it, and
+ * that is only visible by comparing against the previous version of the file.
+ */
+function baseline(file) {
+  const ref = process.env.BASE_REF || 'origin/main';
+  const rel = path.relative(ROOT, file);
+
+  try {
+    const raw = execFileSync('git', ['show', `${ ref }:${ rel }`], {
+      cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 64 * 1024 * 1024
+    });
+
+    return yaml.load(raw);
+  } catch {
+    return null;
+  }
+}
+
 /** The provenance block every locale file must carry, per translation-rules.md. */
 function checkProvenance(file, locale, expectedCommit) {
   const head = fs.readFileSync(file, 'utf8').split('\n').slice(0, 8).join('\n');
@@ -295,30 +320,63 @@ function main() {
     const missing = enKeys.filter((k) => !keySet.has(k));
     const extra = keys.filter((k) => !enValues.has(k));
 
-    // en-us is synced from rancher/dashboard weekly and the translations catch
-    // up afterwards, so a translation missing new keys is the normal state of
-    // this repository for part of every week — and Rancher falls back to
-    // English for any key a locale does not define. Reported, never fatal.
+    // A key en-us does not have is never read by anything, and a translation
+    // that lags en-us falls back to English, so neither is broken on its own —
+    // both are simply drift, and drift is this repository's normal state for
+    // part of every week. They become errors only when this change is what
+    // introduced them.
+    const base = baseline(file);
+    const baseKeys = base ? flatten(base).map(([k]) => k) : null;
+    const baseSet = new Set(baseKeys ?? []);
+
+    // Keys this change removes. Dropping a key upstream also dropped is the
+    // cleanup half of a sync catching up; dropping one en-us still defines
+    // throws away a translation that was already done.
+    if (baseKeys) {
+      const deleted = baseKeys.filter((k) => !keySet.has(k) && enValues.has(k));
+
+      if (deleted.length) {
+        error(locale, `${ deleted.length } already-translated key(s) removed by this change: ${ deleted.slice(0, 5).join(', ') }${ deleted.length > 5 ? ', …' : '' }`);
+      }
+    }
+
     if (missing.length) {
       warn(locale, `${ missing.length } key(s) not yet translated from en-us — run /update-language ${ locale }: ${ missing.slice(0, 3).join(', ') }${ missing.length > 3 ? ', …' : '' }`);
     }
 
-    // A key that en-us does not have is always a mistake: it is either a typo
-    // or a leftover from a key that upstream removed, and nothing will read it.
     if (extra.length) {
-      error(locale, `${ extra.length } key(s) not present in en-us: ${ extra.slice(0, 5).join(', ') }${ extra.length > 5 ? ', …' : '' }`);
+      // Without a baseline every key counts as newly introduced, which is the
+      // right answer for a locale file this branch is adding.
+      const introduced = baseKeys ? extra.filter((k) => !baseSet.has(k)) : extra;
+      const stale = extra.filter((k) => !introduced.includes(k));
+
+      if (introduced.length) {
+        error(locale, `${ introduced.length } key(s) added here that en-us does not have: ${ introduced.slice(0, 5).join(', ') }${ introduced.length > 5 ? ', …' : '' }`);
+      }
+
+      if (stale.length) {
+        warn(locale, `${ stale.length } key(s) upstream has since removed — run /update-language ${ locale } to drop them: ${ stale.slice(0, 3).join(', ') }${ stale.length > 3 ? ', …' : '' }`);
+      }
     }
 
-    // Order is compared over the keys the two files share, so a translation
-    // that is merely behind is not reported as misordered as well.
-    if (!extra.length) {
-      const shared = enKeys.filter((k) => keySet.has(k));
+    // Order is checked against the previous version of this same file. Checking
+    // it against en-us instead would fail every locale the moment upstream
+    // moves a key, which no translation PR can be blamed for.
+    if (baseKeys) {
+      const keptOrder = keys.filter((k) => baseSet.has(k));
+      const baseOrder = baseKeys.filter((k) => keySet.has(k));
 
-      if (!same(keys, shared)) {
-        const at = keys.findIndex((k, i) => k !== shared[i]);
+      if (!same(keptOrder, baseOrder)) {
+        const at = keptOrder.findIndex((k, i) => k !== baseOrder[i]);
 
-        error(locale, `key order differs from en-us — first difference at position ${ at }: expected "${ shared[at] }", found "${ keys[at] }"`);
+        error(locale, `this change reorders existing keys — at position ${ at } the file had "${ baseOrder[at] }" and now has "${ keptOrder[at] }"`);
       }
+    }
+
+    const shared = enKeys.filter((k) => keySet.has(k));
+
+    if (!same(keys.filter((k) => enValues.has(k)), shared)) {
+      warn(locale, 'key order no longer matches en-us — upstream has moved keys; /update-language will realign it');
     }
 
     const localeKinds = kinds(doc);
