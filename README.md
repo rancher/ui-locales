@@ -79,36 +79,37 @@ whether that translation has fallen behind. `yarn validate-locales` reports the 
 yarn validate-locales            # all locales
 yarn validate-locales pt-br      # one locale
 ADVISORIES=1 yarn validate-locales   # also list the advisory differences
+BASE_REF=origin/main yarn validate-locales   # which commit to diff against for reference-only mode
 ```
 
-`en-us.yaml` moves first and the translations catch up afterwards, so being out of step with it is
-the normal state of this repository for part of every week — a sync PR that adds, removes or moves
-one key would otherwise turn every locale red. So divergence from `en-us` is only ever an advisory.
-What fails the build is a change that leaves a translation **worse than it found it**, judged
-against the previous version of that same file.
+Every locale file must be an **exact structural copy** of `reference/en-us.yaml` — same keys, same
+order, same nesting — with only the leaf values translated. That is enforced absolutely, not
+relative to what a file used to look like.
+
+The one exception is a pull request that changes `reference/en-us.yaml` **and no locale file** — the
+weekly sync. It cannot keep the translations in step, because it is what puts them out of step, so
+it is checked on the English file alone and told what each language will need afterwards.
+
+The consequence is deliberate: once a sync merges, **every** pull request that is not reference-only
+fails until `/update-language` has realigned each language. Red CI is the reminder that the
+translations are behind.
 
 Failures (the build is blocked):
 
 - the file does not parse, or has duplicate keys
-- the change deletes keys that were translated and that `en-us` still defines
-- the change adds a key `en-us` does not have, or reorders keys the file already had
-- a mapping became a scalar
+- any key in `en-us` is missing here, or any key here is not in `en-us`
+- key order does not match `en-us`, or a mapping became a scalar
 - a placeholder in `en-us` was dropped or renamed, or the translation uses one `en-us` never defined
 - HTML markup present in `en-us` was dropped or altered
 - a URL was translated
 - the provenance header is missing or incomplete
 - a locale has a YAML file but no `addLocale()` registration, or the reverse
 
-Advisories (reported, never fail the build):
+Advisories (reported, never fail the build) — these are about the *wording*, not the structure:
 
-- keys `en-us` has that the translation does not yet — Rancher falls back to English for them
-- keys upstream has since removed that the translation still carries
-- key order no longer matching `en-us` because upstream moved something
 - plural/select structure simplified — legitimate in languages without plural forms
 - markup or HTML entities the translation adds that `en-us` does not have
 - the translation is synced against an older `en-us` commit than the current one
-
-All six advisories are what `/update-language <locale>` exists to clear.
 
 ### Automated workflows
 

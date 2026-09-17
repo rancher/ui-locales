@@ -87,7 +87,7 @@ Keep the `en-us.yaml` translation source file in sync with the upstream `rancher
    c. Open a Pull Request that includes **only** the updated `reference/en-us.yaml`:
       - Title: `chore: sync en-us.yaml from rancher/dashboard`
       - Body that summarizes: what changed (keys added, removed, values modified), with counts
-      - Include a note: "After merging, run `/update-language <locale-code>` for each language that needs to be brought up to date."
+      - Include a note: "After merging, run `/update-language <locale-code>` for each language, and list them. Until every language is realigned, the locale validation fails for all of them and every pull request that is not a reference-only sync will be red."
       - Labels: `translations`, `sync`, `automated`
 
 6. **Close superseded sync PRs.** A new sync PR contains everything the older ones did, so leaving them open piles up stale drafts. After the new PR is opened, close every **older** open sync PR you found in step 4:

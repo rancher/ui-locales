@@ -35,6 +35,10 @@ It is the executable form of the translation rules — key parity and order, dup
 placeholder and markup invariants, provenance header, `addLocale()` registration — and the same
 check runs on every PR.
 
+Parity with `reference/en-us.yaml` is absolute: once en-us changes, every locale fails until
+`/update-language` realigns it, and every PR fails with them. The only exempt change is one that
+touches `reference/en-us.yaml` and no locale file.
+
 ## Releasing
 
 Bump the version in **both** `package.json` and `pkg/locales/package.json`, then publish a release

@@ -5,12 +5,13 @@ name: Validate locales
 # that was enforced only by prose in shared/translation-rules.md and by whoever
 # reviewed the PR. This runs the same checks mechanically.
 #
-# reference/en-us.yaml is synced from rancher/dashboard weekly and the
-# translations catch up afterwards, so a translation is routinely out of step
-# with it and that cannot be treated as a failure — a sync PR would go red for
-# adding, removing or moving a single key. Divergence from en-us is therefore
-# reported as an advisory, and only a change that leaves a translation worse
-# than it found it fails the build.
+# Parity is absolute: once reference/en-us.yaml moves, every locale fails until
+# /update-language realigns it, and so does every pull request. That pressure is
+# intended — the translations are meant to be exact structural copies of the
+# English source. The single exception is a change that touches
+# reference/en-us.yaml and no locale file, i.e. the weekly sync, which is
+# checked on the English source alone; it is detected by diffing against
+# BASE_REF, which is why the full history is fetched.
 
 on:
   pull_request:
@@ -35,9 +36,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
         with:
-          # The validator compares each locale against its previous version to
-          # tell "this change broke it" from "en-us has moved on", so it needs
-          # the base commit to be present.
+          # The validator diffs against the base commit to recognise a
+          # reference-only change, so that commit has to be present.
           fetch-depth: 0
 
       - name: Setup Node.js with yarn caching
@@ -55,5 +55,6 @@ jobs:
           # List every advisory difference in the log rather than just counting
           # them, so a reviewer can see them without running anything locally.
           ADVISORIES: '1'
-          # The version of each locale file to treat as "before this change".
+          # What this change is diffed against, to tell whether it touches only
+          # reference/en-us.yaml.
           BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}

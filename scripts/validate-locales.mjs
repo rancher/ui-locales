@@ -204,51 +204,35 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const isUrl = (v) => /^https?:\/\/\S+$/.test(String(v).trim());
 
 /**
- * The commit to treat as "before this change", or null if it cannot be
- * resolved — a shallow checkout, or no git at all. Resolved once so that an
- * unusable ref is reported rather than silently turning the regression checks
- * into no-ops.
+ * The files this change touches, relative to the base ref, or null when that
+ * cannot be determined (no git, a shallow checkout, an unresolvable ref).
  */
-const BASE_REF = (() => {
+const CHANGED = (() => {
   const ref = process.env.BASE_REF || 'origin/main';
 
   try {
     execFileSync('git', ['rev-parse', '--verify', `${ ref }^{commit}`], { cwd: ROOT, stdio: 'ignore' });
 
-    return ref;
+    const out = execFileSync('git', ['diff', '--name-only', `${ ref }...HEAD`], {
+      cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']
+    });
+
+    return { ref, files: out.split('\n').filter(Boolean) };
   } catch {
     return null;
   }
 })();
 
 /**
- * The same locale file as it exists on the base ref, or null if it cannot be
- * read — a brand new locale, a shallow checkout, or no git at all.
- *
- * en-us.yaml moves first and the translations catch up afterwards, so at any
- * moment a translation is legitimately out of step with it. What is never
- * legitimate is a change that leaves a translation worse than it found it, and
- * that is only visible by comparing against the previous version of the file.
+ * A sync of reference/en-us.yaml is the one change that cannot be expected to
+ * keep the translations in step — it is what puts them out of step. Such a PR
+ * is checked only for the English file being valid; the translations are
+ * reported on, and go red on the next PR that touches them, until
+ * /update-language brings each one back to an exact copy of the new structure.
  */
-function baseline(file) {
-  const ref = BASE_REF;
-
-  if (!ref) {
-    return null;
-  }
-
-  const rel = path.relative(ROOT, file);
-
-  try {
-    const raw = execFileSync('git', ['show', `${ ref }:${ rel }`], {
-      cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 64 * 1024 * 1024
-    });
-
-    return yaml.load(raw);
-  } catch {
-    return null;
-  }
-}
+const REFERENCE_ONLY = !!CHANGED
+  && CHANGED.files.includes('reference/en-us.yaml')
+  && !CHANGED.files.some((f) => f.startsWith('pkg/locales/l10n/'));
 
 /** The provenance block every locale file must carry, per translation-rules.md. */
 function checkProvenance(file, locale, expectedCommit) {
@@ -296,6 +280,49 @@ function main() {
   const enKinds = kinds(en);
   const enCommit = fs.readFileSync(REFERENCE, 'utf8').match(/# synced-commit:\s*(\S+)/)?.[1];
 
+  console.log(`Reference: reference/en-us.yaml — ${ enKeys.length } keys${ enCommit ? ` (synced-commit ${ enCommit })` : '' }`);
+
+  if (REFERENCE_ONLY) {
+    // This change updates the English source and nothing else, so it is judged
+    // on the English source alone.
+    if (!/^# ---/.test(fs.readFileSync(REFERENCE, 'utf8'))) {
+      console.log('\nreference/en-us.yaml is missing its provenance header block.');
+      process.exit(1);
+    }
+
+    console.log(`Mode:      reference-only — ${ CHANGED.ref }...HEAD touches reference/en-us.yaml and no locale file\n`);
+    console.log('reference/en-us.yaml is valid. Translations are not checked against it here.\n');
+    console.log('What the translations will need afterwards:\n');
+
+    for (const f of fs.readdirSync(L10N_DIR).filter((n) => n.endsWith('.yaml')).sort()) {
+      const locale = path.basename(f, '.yaml');
+      const doc = parse(path.join(L10N_DIR, f), locale);
+
+      if (!doc) {
+        continue;
+      }
+
+      const keys = flatten(doc).map(([k]) => k);
+      const keySet = new Set(keys);
+      const behind = enKeys.filter((k) => !keySet.has(k)).length;
+      const gone = keys.filter((k) => !enValues.has(k)).length;
+      const ordered = behind === 0 && gone === 0 && same(keys, enKeys);
+
+      console.log(`  ${ locale.padEnd(8) } ${ String(behind).padStart(4) } key(s) to add, ${ String(gone).padStart(4) } to remove${ ordered ? '' : ', order to realign' }`);
+    }
+
+    console.log('\nRun /update-language <locale> for each. Until every locale is an exact structural');
+    console.log('copy of the new en-us.yaml, any pull request that is not reference-only will fail.');
+
+    if (errors.length) {
+      console.log(`\nErrors (${ errors.length }):`);
+      errors.forEach((e) => console.log(`  ✗ ${ e }`));
+      process.exit(1);
+    }
+
+    process.exit(0);
+  }
+
   const files = fs.readdirSync(L10N_DIR).filter((f) => f.endsWith('.yaml')).sort();
   const locales = files.map((f) => path.basename(f, '.yaml')).filter((l) => !only || l === only);
 
@@ -321,10 +348,9 @@ function main() {
     }
   }
 
-  console.log(`Reference: reference/en-us.yaml — ${ enKeys.length } keys${ enCommit ? ` (synced-commit ${ enCommit })` : '' }`);
-  console.log(BASE_REF
-    ? `Baseline:  ${ BASE_REF } — changes are also checked for regressions against it\n`
-    : `Baseline:  unavailable${ process.env.BASE_REF ? ` (cannot resolve "${ process.env.BASE_REF }")` : '' } — only drift from en-us is reported\n`);
+  console.log(CHANGED
+    ? `Mode:      full — every locale must match en-us exactly (compared against ${ CHANGED.ref })\n`
+    : `Mode:      full — every locale must match en-us exactly${ process.env.BASE_REF ? ` (cannot resolve "${ process.env.BASE_REF }", so reference-only changes are not detected)` : '' }\n`);
 
   for (const locale of locales) {
     const file = path.join(L10N_DIR, `${ locale }.yaml`);
@@ -346,63 +372,25 @@ function main() {
     const missing = enKeys.filter((k) => !keySet.has(k));
     const extra = keys.filter((k) => !enValues.has(k));
 
-    // A key en-us does not have is never read by anything, and a translation
-    // that lags en-us falls back to English, so neither is broken on its own —
-    // both are simply drift, and drift is this repository's normal state for
-    // part of every week. They become errors only when this change is what
-    // introduced them.
-    const base = baseline(file);
-    const baseKeys = base ? flatten(base).map(([k]) => k) : null;
-    const baseSet = new Set(baseKeys ?? []);
-
-    // Keys this change removes. Dropping a key upstream also dropped is the
-    // cleanup half of a sync catching up; dropping one en-us still defines
-    // throws away a translation that was already done.
-    if (baseKeys) {
-      const deleted = baseKeys.filter((k) => !keySet.has(k) && enValues.has(k));
-
-      if (deleted.length) {
-        error(locale, `${ deleted.length } already-translated key(s) removed by this change: ${ deleted.slice(0, 5).join(', ') }${ deleted.length > 5 ? ', …' : '' }`);
-      }
-    }
-
+    // A translation is meant to be a structural copy of reference/en-us.yaml:
+    // same keys, same order, only the leaf values differ. That is enforced
+    // absolutely rather than relative to what the file used to look like. When
+    // a sync moves en-us on, every locale fails until /update-language brings
+    // it back into line — that is the point, not a side effect.
     if (missing.length) {
-      warn(locale, `${ missing.length } key(s) not yet translated from en-us — run /update-language ${ locale }: ${ missing.slice(0, 3).join(', ') }${ missing.length > 3 ? ', …' : '' }`);
+      error(locale, `${ missing.length } key(s) in en-us are missing here — run /update-language ${ locale }: ${ missing.slice(0, 5).join(', ') }${ missing.length > 5 ? ', …' : '' }`);
     }
 
     if (extra.length) {
-      // Without a baseline every key counts as newly introduced, which is the
-      // right answer for a locale file this branch is adding.
-      const introduced = baseKeys ? extra.filter((k) => !baseSet.has(k)) : extra;
-      const stale = extra.filter((k) => !introduced.includes(k));
-
-      if (introduced.length) {
-        error(locale, `${ introduced.length } key(s) added here that en-us does not have: ${ introduced.slice(0, 5).join(', ') }${ introduced.length > 5 ? ', …' : '' }`);
-      }
-
-      if (stale.length) {
-        warn(locale, `${ stale.length } key(s) upstream has since removed — run /update-language ${ locale } to drop them: ${ stale.slice(0, 3).join(', ') }${ stale.length > 3 ? ', …' : '' }`);
-      }
+      error(locale, `${ extra.length } key(s) here are not in en-us — run /update-language ${ locale }: ${ extra.slice(0, 5).join(', ') }${ extra.length > 5 ? ', …' : '' }`);
     }
 
-    // Order is checked against the previous version of this same file. Checking
-    // it against en-us instead would fail every locale the moment upstream
-    // moves a key, which no translation PR can be blamed for.
-    if (baseKeys) {
-      const keptOrder = keys.filter((k) => baseSet.has(k));
-      const baseOrder = baseKeys.filter((k) => keySet.has(k));
+    // Reported on its own only when the key sets already match, since missing
+    // or extra keys shift every later position and would bury the real cause.
+    if (!missing.length && !extra.length && !same(keys, enKeys)) {
+      const at = keys.findIndex((k, i) => k !== enKeys[i]);
 
-      if (!same(keptOrder, baseOrder)) {
-        const at = keptOrder.findIndex((k, i) => k !== baseOrder[i]);
-
-        error(locale, `this change reorders existing keys — at position ${ at } the file had "${ baseOrder[at] }" and now has "${ keptOrder[at] }"`);
-      }
-    }
-
-    const shared = enKeys.filter((k) => keySet.has(k));
-
-    if (!same(keys.filter((k) => enValues.has(k)), shared)) {
-      warn(locale, 'key order no longer matches en-us — upstream has moved keys; /update-language will realign it');
+      error(locale, `key order differs from en-us — at position ${ at } en-us has "${ enKeys[at] }" and this file has "${ keys[at] }"`);
     }
 
     const localeKinds = kinds(doc);

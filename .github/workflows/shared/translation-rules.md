@@ -69,7 +69,7 @@ yarn validate-locales <locale-code>     # e.g. yarn validate-locales pt-br
 It exits non-zero if the file is not shippable, and checks:
 
 1. The file is valid YAML (no parse errors, no duplicate keys)
-2. That this change does not delete translated keys, add keys `reference/en-us.yaml` does not have, or reorder keys the file already had
+2. Exact key parity with `reference/en-us.yaml` — nothing missing, nothing extra
 3. Key order matches `reference/en-us.yaml`
 4. Structure parity — a mapping in the source is still a mapping here
 5. Placeholders survive: every `{...}` argument in the source is still present and still spelled
@@ -81,14 +81,15 @@ It exits non-zero if the file is not shippable, and checks:
 The same script runs on every pull request, so a translation that does not pass locally will not
 pass review either.
 
-Two categories are reported as **advisories** and do not fail the run — they are judgement calls,
-not defects:
+Key parity is absolute. A locale that is behind `reference/en-us.yaml` fails, and every pull
+request fails with it until `/update-language` has realigned that language — the translations are
+meant to be exact structural copies of the English source, and CI going red is how that is kept
+true. The only change exempt from this is one that touches `reference/en-us.yaml` and no locale
+file, which is checked on the English source alone.
 
-- any way in which this file is out of step with `reference/en-us.yaml`: keys it does not have yet,
-  keys upstream has since removed, or key order upstream has changed. `en-us.yaml` is synced weekly
-  and the translations catch up afterwards, and Rancher falls back to English for any key a locale
-  does not define. Realigning is exactly the job of `/update-language` — it is just not a reason to
-  block an unrelated pull request.
+Two categories are reported as **advisories** and do not fail the run. They are about wording rather
+than structure, and are judgement calls:
+
 - plural/select structure simplified relative to the source (expected in languages without plurals)
 - markup or HTML entities the translation adds that the source does not have
 
