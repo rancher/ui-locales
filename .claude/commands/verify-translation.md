@@ -17,14 +17,21 @@ Perform a read-only verification of a translation file. Does NOT modify any file
    - `reference/en-us.yaml`
    - `pkg/locales/l10n/<locale-code>.yaml` (the translated file)
 
-4. **Structural validation** — perform ALL checks:
+4. **Structural validation** — run the repository's validator rather than re-implementing it:
 
-   - **Valid YAML**: parse with Node.js or bash. Report any parse errors, duplicate keys, indentation issues.
-   - **Key parity**: extract all fully-qualified key paths from both files. Report missing keys (in en-us but not locale) and extra keys (in locale but not en-us), up to 30 examples each.
-   - **Key ordering**: check keys appear in the same order as en-us.yaml. Report count and up to 20 examples.
-   - **Structure parity**: verify types match (mappings vs scalars) and nesting depth is identical.
-   - **Placeholders**: verify all `{variableName}`, ICU format, HTML entities, HTML tags, and template expressions from en-us.yaml are preserved in translations. Report up to 30 examples of missing placeholders.
-   - **Empty/special values**: verify empty values stay empty, special values like `'—'` are preserved, YAML comments are in the same positions.
+   ```sh
+   ADVISORIES=1 yarn validate-locales <locale-code>
+   ```
+
+   It covers valid YAML and duplicate keys, key parity, key ordering, structure parity (mappings vs
+   scalars), placeholder and markup integrity, the provenance header, and `addLocale()`
+   registration. Report its errors and advisories as-is — they are already specific about which key
+   is at fault.
+
+   Then check by hand the two things it deliberately does not judge:
+
+   - **Empty/special values**: empty values stay empty, special values like `'—'` are preserved
+   - **Comments**: YAML comments are in the same positions as in en-us.yaml
 
 5. **Translation coverage** — write and run a bash script that:
    - Extracts every leaf key-value pair from both files
