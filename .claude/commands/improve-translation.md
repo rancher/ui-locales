@@ -30,7 +30,7 @@ Find and translate untranslated strings in an existing locale file.
    - Max ~50 keys per bash call
    - Stop after 500 strings — this command can be run again to continue
 
-6. **Validate** the file using the YAML validation procedure. Fix any issues.
+6. **Validate** with `yarn validate-locales <locale-code>` — do not write your own validation script. Fix everything it reports and re-run until it exits clean.
 
 7. **Calculate final coverage** — re-run the coverage script to get updated numbers.
 

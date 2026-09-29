@@ -25,7 +25,7 @@ Add a new language translation to the UI locales extension.
    - Prioritize: user-facing UI text first, long-form text next, technical/edge-case last
    - Stop after 1000 strings if the file has more — `/improve-translation` can continue
 
-6. Validate the file using the YAML validation procedure from the shared rules. Fix any issues and re-validate until clean.
+6. Validate with `yarn validate-locales <locale-code>` — do not write your own validation script. It also fails if the new locale is missing from `plugin.addLocale()` in `pkg/locales/index.ts`, which step 7 must add. Fix everything it reports and re-run until it exits clean.
 
 7. Create a new git branch `add-<locale-code>-translation` and commit the new file.
 

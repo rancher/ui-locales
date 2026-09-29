@@ -19,7 +19,7 @@ Fix a specific translation error in a locale file.
 
 5. Check for similar issues — other occurrences of the same mistake or similar mistranslation patterns in the file. If found, fix them too and report what was found.
 
-6. Validate the file after fixes: confirm valid YAML, no duplicate keys, no structural breakage, all placeholders intact. Fix any issues.
+6. Validate with `yarn validate-locales <locale-code>` — it covers valid YAML, duplicate keys, structural breakage and placeholder integrity. Fix everything it reports and re-run until it exits clean.
 
 7. Commit the changes on the current branch.
 

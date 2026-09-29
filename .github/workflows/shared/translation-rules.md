@@ -59,13 +59,42 @@ Every locale file must have a **provenance comment block** at the very top of th
 
 ## YAML validation procedure
 
-After any translation work, validate the output file using bash/Node.js:
+**Do not write your own validation script — this repository has one.** After any translation work,
+run it and fix everything it reports:
+
+```sh
+yarn validate-locales <locale-code>     # e.g. yarn validate-locales pt-br
+```
+
+It exits non-zero if the file is not shippable, and checks:
 
 1. The file is valid YAML (no parse errors, no duplicate keys)
-2. Every key in `reference/en-us.yaml` exists in the output and vice-versa (exact key parity)
+2. Exact key parity with `reference/en-us.yaml` — nothing missing, nothing extra
 3. Key order matches `reference/en-us.yaml`
-4. All placeholders (`{...}`, `&hellip;`, HTML tags) from `reference/en-us.yaml` are present in the corresponding translated values
-5. If any issues are found, fix them and re-validate until the file is clean
+4. Structure parity — a mapping in the source is still a mapping here
+5. Placeholders survive: every `{...}` argument in the source is still present and still spelled
+   the same, and no argument appears that the source never defined
+6. HTML markup in the source is not dropped or altered, and URLs are not translated
+7. The provenance header is present and complete
+8. Every locale file is registered with `plugin.addLocale()` in `pkg/locales/index.ts`
+
+The same script runs on every pull request, so a translation that does not pass locally will not
+pass review either.
+
+Key parity is absolute. A locale that is behind `reference/en-us.yaml` fails, and every pull
+request fails with it until `/update-language` has realigned that language — the translations are
+meant to be exact structural copies of the English source, and CI going red is how that is kept
+true. The only change exempt from this is one that touches `reference/en-us.yaml` and no locale
+file, which is checked on the English source alone.
+
+Two categories are reported as **advisories** and do not fail the run. They are about wording rather
+than structure, and are judgement calls:
+
+- plural/select structure simplified relative to the source (expected in languages without plurals)
+- markup or HTML entities the translation adds that the source does not have
+
+Re-run the script after every fix until it is clean. Run `ADVISORIES=1 yarn validate-locales` to
+see the advisory list in full.
 
 ## Fixing YAML parse errors
 
