@@ -1,0 +1,27 @@
+apiVersion: v1
+entries:
+  locales:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: SUSE Localization Pack
+      catalog.cattle.io/experimental: "true"
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/prime-only: "true"
+      catalog.cattle.io/rancher-version: '>= 2.10.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+      catalog.cattle.io/ui-extensions-version: '>= 3.0.0 < 4.0.0'
+    apiVersion: v2
+    appVersion: 0.1.2
+    created: "2026-09-29T13:20:38.723040198Z"
+    description: Adds support for additional locales in the Rancher UI
+    digest: cfdb1edda4bf874a4212cda8536537049b49ff6eb731b04026fabd9f193a4396
+    icon: https://raw.githubusercontent.com/rancher/ui-locales/main/pkg/locales/icon.svg
+    name: locales
+    type: application
+    urls:
+    - assets/locales/locales-0.1.2.tgz
+    version: 0.1.2
+generated: "2026-09-29T13:20:38.722604005Z"
