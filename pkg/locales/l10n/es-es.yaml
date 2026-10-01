@@ -1,8 +1,8 @@
 # ---
 # locale: es-es (Spanish - Spain)
 # source-locale: en-us
-# synced-against-en-us-commit: 02a2364 (2026-07-20)
-# last-updated: 2026-07-22
+# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# last-updated: 2026-10-01
 # ---
 ##############################
 # Special stuff
@@ -24,8 +24,9 @@ generic:
   add: Agregar
   all: Todos
   ascending: ascendente
-  and: 'y'
+  and: ' y '
   back: Atrás
+  byteLimitExceeded: '{name} supera el límite de tamaño de archivo de {byteLimit} bytes'
   cancel: Cancelar
   confirm: Confirmar
   colorPicker: Selector de color
@@ -39,6 +40,7 @@ generic:
   copyValueToClipboard: 'Copiar {value} al portapapeles'
   copiedToClipboard: Texto copiado al portapapeles
   create: Crear
+  createNew: Crear nuevo…
   created: Creado
   customize: Personalizar
   dashboard: Tablero
@@ -49,6 +51,7 @@ generic:
   download: Descargar
   enabled: Habilitado
   error: Error
+  errorReadingFile: Error al leer el archivo
   here: aquí
   id: ID
   ignored: Ignorado
@@ -111,6 +114,7 @@ generic:
   type: Tipo
   unknown: Desconocido
   upload: Cargar
+  warning: Advertencia
   provisioning: —
   key: Clave
   value: Valor
@@ -131,7 +135,6 @@ generic:
         1d: 1d
         7d: 7d
         30d: 30d
-  tooltip: Información sobre herramientas
   completed: Completado
   enable: Habilitar
   disable: Deshabilitar
@@ -149,6 +152,7 @@ generic:
   tag: Etiqueta
   placeholder: p. ej. {text}
   moreInfo: Más información
+  hintFor: "Sugerencia de {label}"
   selectors:
     label: Selector
     matchingResources:
@@ -164,7 +168,9 @@ generic:
     key: Clave para la fila {index}
     value: Valor para la fila {index}
     remove: eliminar fila {index}
+    keyValueRemove: Eliminar par clave-valor en la fila {index}
     addKeyValue: Agregar una nueva fila de clave-valor
+    addBtnAriaLabel: "{label} en una entrada clave-valor"
     readKeyValue: leer clave-valores desde archivo
     genericAddRow: Agregar una nueva fila
     arrayList: Entrada de lista de arreglos
@@ -188,36 +194,45 @@ graph:
   rendering: Renderizando gráfico...
 
 locale:
-  menu: Menú de selección de configuración regional
+  menu: Selector de idioma
   en-us: Inglés
   zh-hans: 简体中文
   none: (Ninguno)
 
 nav:
   skipToContent: Ir al contenido principal
+  jumpTo:
+    placeholder: Ir a...
+    tooltip: Empiece a escribir para encontrar e ir rápidamente a una sección concreta ({shortcut})
+    ariaLabel: Ir a una sección de navegación
+    noResults: No hay secciones coincidentes
+    popularHeading: Entradas populares
+    recentHeading: Usadas recientemente
   ariaLabel:
-    clusterIconKeyCombo: Icono de combinación de teclas de acceso directo del clúster
     localClusterIcon: Icono de clúster local
     clusterProvIcon: Icono del proveedor del clúster {cluster}
     topLevelMenu: Menú principal
     sideNav: Menú secundario
     homePage: Menú de navegación de la página de inicio
     cluster: Elemento del menú de clúster
-    harvesterCluster: Elemento del menú de clúster Harvester
-    seeAll: Ver todos los elementos del menú de clústeres
+    harvesterCluster: 'Elemento del menú de clúster [[Harvester]]'
     multiClusterApps: Elemento del menú de aplicaciones multiclúster del menú principal
     configurationApps: Elemento del menú de aplicaciones de configuración del menú principal
     support: Enlace a la página de soporte
     about: Enlace a la página Acerca de
     pinCluster: Anclar/Desanclar clúster {cluster}
     collapseExpand: Colapsar/Expandir grupo del menú
+    expand: "Expandir el grupo de menú {group}"
+    collapse: "Contraer el grupo de menú {group}"
+    collapseAllSections: Contraer todas las secciones
     productAboutPage: Enlace a la página Acerca del producto
   alt:
     mainMenuIcon: Icono del menú principal
     mainMenuRancherLogo: Logo de Rancher en el menú principal
     userAvatar: Imagen del avatar del usuario
-  expandCollapseAppBar: Expandir/Colapsar la barra de aplicaciones
-  harvesterDashboard: Tablero de Harvester
+  expandAppBar: Expandir la barra de aplicaciones
+  collapseAppBar: Contraer la barra de aplicaciones
+  harvesterDashboard: 'Tablero de [[Harvester]]'
   backToRancher: Administrador de clústeres
   tools: Herramientas
   clusterTools: Herramientas del clúster
@@ -238,8 +253,6 @@ nav:
   rotateCertificates: Rotar certificados
   rotateEncryptionKeys: Rotar claves de cifrado
   takeSnapshot: Tomar instantánea
-  seeAllClusters: Ver todos los clústeres
-  seeAllClustersCollapsed: Ver todos
   keyComboTooltip: Cambiar clústeres y mantener ubicación
   group:
     cluster: Clúster
@@ -274,9 +287,7 @@ nav:
     resources: Recursos
   ns:
     all: Todos los espacios de nombres
-    clusterLevel: Solo recursos del clúster
     namespace: '{name}'
-    namespaced: Solo recursos con espacio de nombres
     orphan: No en un proyecto
     project: 'Proyecto: {name}'
     system: Solo espacios de nombres del sistema
@@ -288,20 +299,53 @@ nav:
     legacy: Aplicaciones heredadas
     configuration: Configuración
     hci: HCI
+  pinClusterError: No se pudieron guardar los clústeres fijados
+  pinnedCluster:
+    explore: Explore {name} o arrástrelo para cambiar el orden de los clústeres fijados
+    exploreOnlyPinned: Explorar {name}
+    blocked: No puede explorar {name} ({reason}), pero puede arrastrarlo para cambiar el orden de los clústeres fijados
+    blockedOnlyPinned: No puede explorar {name} ({reason})
   search:
-    placeholder: Filtrar clústeres por...
-    noResults: No hay clústeres coincidentes
-    clusters: clústeres
-    ariaLabel: Filtrar clústeres en el menú principal
-  resourceSearch:
-    label: Búsqueda de tipo de recurso
-    prompt: Buscar un tipo de recurso/recurso personalizado de Kubernetes
-    toolTip: Búsqueda de tipo de recurso {key}
-    placeholder: Escriba para buscar un tipo de recurso...
-    filteringDescription: Usar esta entrada filtrará inmediatamente los resultados en la lista de abajo
+    clusters: |-
+      {count, plural,
+        one {clúster}
+        other {clústeres}
+      }
+  switcher:
+    ariaLabel: Selector de clúster
+    clusterSwitch: Cambio de clúster
+    shortcutTooltip: Cambio de clúster ({shortcut})
+    jumpTo: Ir a...
+    pinned: Clústeres fijados
+    recent: Usados recientemente
+    allClusters: Todos los clústeres
+    matches: Coincidencias
+    managementCluster: Clúster de administración
+    noMatch: No hay clústeres coincidentes
+    noClusters: No hay clústeres que mostrar.
+    loadError: No se pudieron cargar los clústeres. Cierre e inténtelo de nuevo.
+    aria:
+      # Accessible name for the search box. It has no visible label — only the "Jump to..." placeholder —
+      # so the name has to LEAD with those words: a speech-input user says what they can see
+      # (WCAG 2.5.3 Label in Name), while the rest tells a screen-reader user what the box searches.
+      search: Ir a un clúster (busca en todos los clústeres)
+      clusterList: Lista de clústeres
+      searching: Buscando clústeres
+      results: |-
+        {count, plural,
+          one {1 clúster}
+          other {# clústeres}
+        }
+      noResults: No hay clústeres coincidentes
+      notReady: no está listo
+      pinned: fijado
+      pinnedCluster: '{cluster} fijado'
+      unpinnedCluster: '{cluster} no fijado'
   header:
     setLoginPage: Establecer como página de inicio de sesión
     showHideBanner: Mostrar/Ocultar banner
+    pinCluster: Fijar clúster ({shortcut})
+    unpinCluster: Dejar de fijar el clúster ({shortcut})
   userMenu:
     preferences: Preferencias
     accountAndKeys: Cuenta y claves de API
@@ -310,9 +354,9 @@ nav:
     button:
       label: Abrir menú de usuario
   actionMenu:
-    label: Menú de acciones de página
+    label: Acciones de página
     button:
-      label: Abrir menú de acciones de página
+      label: Abrir acciones de página
   notifications:
     label: Centro de notificaciones
     button:
@@ -325,6 +369,7 @@ nav:
     resourceListNotListable: El tipo de recurso { resource } no se puede listar
     resourceListNotFound: Tipo de recurso { resource } no encontrado, no se puede mostrar la lista
     resourceIdNotFound: Recurso { resource } con id { fqid } no encontrado, no se pueden mostrar los detalles
+    didYouMean: '¿Quiso decir <a href="{url}">{resource}</a>?'
     reload: Recargar
     separator: o
 
@@ -378,6 +423,7 @@ suffix:
       =1 { Vez }
       other { Veces }
     }
+
 ##############################
 # Components & Pages
 ##############################
@@ -394,7 +440,7 @@ about:
   title: Acerca de
   versions:
     downloadImages: Descargar lista de imágenes {listName}
-    downloadCli: Descargar CLI para {os}
+    downloadCli: "Descargar la CLI para {os}: {file}"
     githubRepo: Abrir repositorio de GitHub para el componente {name}
     title: Versiones
     component: Componente
@@ -495,6 +541,72 @@ addProjectMemberDialog:
   title: Agregar miembro del proyecto
 
 authConfig:
+  list:
+    title: Proveedores de autenticación
+    description: Configure los proveedores de identidad que las personas pueden usar para iniciar sesión en Rancher.
+    create: Agregar proveedor
+    external: Proveedores externos
+    local: Autenticación local
+    customiseLogin: Personalizar la pantalla de inicio de sesión
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    empty:
+      title: No hay proveedores externos configurados
+      description: Todos inician sesión con una cuenta local de Rancher. Conecte un proveedor de identidad para que las personas puedan usar sus credenciales corporativas existentes.
+      create: Agregar un proveedor
+      learnMore: Cómo funciona la autenticación externa
+    disableLocal:
+      label: Deshabilitar el inicio de sesión con usuarios locales
+      description: Los usuarios inician sesión únicamente a través de proveedores externos. Las cuentas locales se mantienen, pero no se pueden usar para iniciar sesión.
+      risk: El inicio de sesión local está desactivado. Si todos los proveedores externos dejan de estar disponibles, nadie podrá iniciar sesión y la recuperación requerirá acceso por línea de comandos al clúster.
+    localRow:
+      title: Autenticación local
+      chip: Integrada
+      description: Cuentas para administradores. Úselas solo cuando un proveedor no esté disponible.
+      descriptionDisabled: Las cuentas siguen existiendo y conservan sus permisos, pero no se pueden usar para iniciar sesión.
+      meta: Cuentas administradas por Rancher
+      active: Activa
+      disabled: Deshabilitada
+      manageUsers: Administrar usuarios locales
+  access:
+    title: '{provider} - Acceso'
+    type: Tipo
+  add:
+    title: Agregar un proveedor de autenticación
+    subtitle: Seleccione el proveedor que desea conectar. Rancher admite un proveedor externo, por lo que será el que usarán los usuarios para iniciar sesión. Para usar otro más adelante, elimine este y configure el nuevo.
+    searchPlaceholder: Buscar proveedores
+    filterLabel: Protocolo
+    filterAll: Todos
+    noResults: Ningún proveedor coincide con su búsqueda.
+    resultCount: |-
+        {count , plural,
+          =1 { {count} proveedor coincide con su búsqueda. }
+          other { {count} proveedores coinciden con su búsqueda. }
+        }
+  disable:
+    action: Deshabilitar
+    title: '¿Deshabilitar {name}?'
+    titleGeneric: ¿Deshabilitar este proveedor de autenticación?
+    loggedOut: Cualquier usuario que haya iniciado sesión actualmente con este proveedor se cerrará y será redirigido a la pantalla de inicio de sesión.
+    learnMore: Restaurar el acceso tras deshabilitar un proveedor
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    irreversible: Esto no se puede deshacer. Al deshabilitarlo se eliminan todos los recursos almacenados para este proveedor.
+    acknowledge: Entiendo que estos usuarios y permisos se eliminarán
+    confirm: Deshabilitar y eliminar
+  disableLast:
+    title: '¿Deshabilitar {name}?'
+    titleGeneric: ¿Deshabilitar este proveedor de autenticación?
+    soleProvider: El inicio de sesión local está desactivado y {name} es su único proveedor externo. Deshabilitarlo ahora no dejaría ninguna forma de iniciar sesión en Rancher.
+    remedy: Vuelva a activar el inicio de sesión local y, a continuación, deshabilite el proveedor. Puede volver a desactivarlo una vez que haya un nuevo proveedor configurado y en funcionamiento.
+    refusal: Rancher no deshabilitará el último proveedor externo mientras el inicio de sesión local esté desactivado.
+    locked: El inicio de sesión local está bloqueado en esta instalación, por lo que no se puede volver a activar desde aquí. Restaurar el acceso requiere acceso por línea de comandos al clúster.
+    confirm: Volver a activar el inicio de sesión local
+  disableLocal:
+    title: ¿Deshabilitar el inicio de sesión con usuarios locales?
+    effect: A partir de ahora, los usuarios inician sesión únicamente a través de proveedores externos. Las cuentas locales no se eliminan y conservan sus permisos, pero no se pueden usar para iniciar sesión.
+    recovery: Puede volver a desactivar esto en cualquier momento desde la lista de proveedores, pero solo mientras aún pueda iniciar sesión. Si todos los proveedores externos dejan de estar disponibles mientras esto está activado, la recuperación requiere acceso por línea de comandos al clúster.
+    soleRoute: Los proveedores externos se convierten en la única forma de iniciar sesión, para todos los usuarios, incluidos los administradores.
+    acknowledge: Entiendo que las cuentas locales ya no podrán iniciar sesión
+    confirm: Deshabilitar el inicio de sesión local
   slo:
     sloTitle: Comportamiento al cerrar sesión
     sloOptions:
@@ -502,14 +614,15 @@ authConfig:
       logoutAll: Cerrar sesión de Rancher y {name} (incluye todas las demás aplicaciones registradas con {name})
       choose: Permitir al usuario elegir una de las opciones anteriores en un paso adicional de cierre de sesión
   accessMode:
-    label: Configurar quién debe poder iniciar sesión y usar {vendor}
+    label: 'Configure quién debe poder iniciar sesión con este proveedor'
     required: Restringir el acceso solo a los usuarios y grupos autorizados
     restricted: Permitir miembros de clústeres y proyectos, además de usuarios y grupos autorizados
     unrestricted: Permitir cualquier usuario válido
   allowedPrincipalIds:
     title: Usuarios y grupos autorizados
   associatedWarning: 'La cuenta de {provider} que se usa para habilitar el proveedor externo recibirá permisos iguales a los del usuario de Rancher actualmente conectado. Vea <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuración de autenticación externa y usuarios principales</a> para entender por qué.'
-  bannerEnableAuthProvider: "La opción \"Deshabilitar la autenticación local\" está habilitada. Habilitar un proveedor de autenticación impedirá que los usuarios inicien sesión con credenciales locales. En caso de fallo del proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso a Rancher mediante la API o la CLI para deshabilitar la función y recuperar el acceso. Consulte la documentación de {vendor} para obtener más información."
+  bannerEnableAuthProvider: 'La función "Deshabilitar autenticación local" está habilitada. Al habilitar un proveedor de autenticación, se impedirá que los usuarios inicien sesión con credenciales locales. En caso de fallo de un proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso por API o CLI a Rancher para deshabilitar la función y recuperar el acceso. Consulte la <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentación</a> para obtener más información.'
+  bannerEnabledAuthProvider: 'La función "Deshabilitar autenticación local" también está habilitada. Los usuarios no pueden iniciar sesión con credenciales locales. En caso de fallo de este proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso por API o CLI a Rancher para deshabilitar la función y recuperar el acceso. Consulte la <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentación</a> para obtener más información.'
   githubapp:
     clientId:
       label: ID de cliente
@@ -620,7 +733,7 @@ authConfig:
           4: Haga clic en "Crear" y luego haga clic en el botón "Descargar JSON".
           5: Suba el archivo JSON descargado en el cuadro de credenciales OAuth.
         ariaLabel:
-          serverUrlVerify: Copiar URL de verificación de autenticación del servidor al portapapeles
+          serverUrlVerify: Copiar la URL de verificación de autenticación del servidor al portapapeles
       3:
         title: Crear credenciales de cuenta de servicio
         introduction: 'Siga <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/configure-google-oauth#3-creating-service-account-credentials" target="_blank" rel="noopener noreferrer nofollow">esta</a> guía para:'
@@ -711,6 +824,16 @@ authConfig:
     okta: Configurar una cuenta de Okta
     ping: Configurar una cuenta de Ping
     shibboleth: Configurar una cuenta de Shibboleth
+    genericsaml: Configurar un proveedor SAML genérico
+    nameIDFormat: Formato de NameID
+    nameIDFormatOptions:
+      unspecified: Sin especificar
+      emailAddress: Dirección de correo electrónico
+      transient: Transitorio
+      persistent: Persistente
+    signatureMethod: Algoritmo de firma
+    allowIdpInitiated: Permitir inicio de sesión iniciado por el IdP
+    forceAuthn: Forzar la reautenticación
     showLdap: Configurar un servidor OpenLDAP
     userName: Campo de nombre de usuario
     search:
@@ -827,11 +950,8 @@ authConfig:
   stateBanner:
     disabled: El proveedor de autenticación {provider} está actualmente deshabilitado.
     enabled: El proveedor de autenticación {provider} está actualmente habilitado.
-  testAndEnable: Probar y habilitar autenticación
-  noneEnabled: La autenticación local siempre está habilitada, pero puede seleccionar otro proveedor de autenticación adicional de los que se muestran a continuación.
-  localEnabled: '{vendor} está configurado para permitir el acceso a cuentas en su base de datos local.'
-  manageLocal: Administrar cuentas
-
+  testAndEnable: Probar y
+    habilitar autenticación
 authGroups:
   actions:
     refresh: Actualizar membresías de grupo
@@ -855,6 +975,16 @@ assignTo:
 asyncButton:
   alt:
     iconAlt: Icono del botón asíncrono
+  # Read out to screen readers when no phase label of its own says anything useful.
+  # See AsyncButton.vue `announcementFor`.
+  announcement:
+    waiting: En curso
+    success: Correcto
+    error: Fallido
+    withLabel:
+      waiting: '{label}: en curso'
+      success: '{label}: correcto'
+      error: '{label}: fallido'
   registerApplication:
     action: Agregar aplicación
     success: Agregado
@@ -973,6 +1103,9 @@ asyncButton:
     successIcon: checkmark
     waiting: ''
     waitingIcon: refresh
+    waitingAnnouncement: Actualizando&hellip;
+    successAnnouncement: Actualizado
+    errorAnnouncement: Error al actualizar
   manual-refresh:
     action: ''
     actionIcon: refresh
@@ -982,6 +1115,9 @@ asyncButton:
     successIcon: checkmark
     waiting: ''
     waitingIcon: refresh
+    waitingAnnouncement: Actualizando&hellip;
+    successAnnouncement: Actualizado
+    errorAnnouncement: Error al actualizar
   remove:
     action: Eliminar
     success: Eliminado
@@ -1292,22 +1428,17 @@ catalog:
         timeoutWaiting: Se agotó el tiempo de espera para los registros
     chart: Gráfico
     warning:
-      managed: Advertencia, {manager} gestiona el despliegue y actualización de la aplicación {name}. No se admite la actualización de esta aplicación.<br> {version, select, null { } other { En la mayoría de las circunstancias, no debería ser necesaria la intervención del usuario para garantizar que la versión {version} sea compatible con la versión de Rancher que está ejecutando.} }
+      managed:
+        Advertencia, {manager} gestiona el despliegue y actualización de la aplicación {name}. No se admite la actualización de esta aplicación.<br>
+        {version, select,
+          null { }
+          other { En la mayoría de las circunstancias, no debería ser necesaria la intervención del usuario para garantizar que la versión {version} sea compatible con la versión de Rancher que está ejecutando.}
+        }
     error:
       requiresFound: <a href="{url}">{name}</a> debe estar instalado antes de poder instalar este gráfico.
-      requiresMissing: Este gráfico requiere otro gráfico que proporcione {name}, pero no se encontró ninguno.
+      requiresMissing: 'Este chart requiere otro chart que proporcione {name}, pero no se encontró ninguno.'
       insufficientCpu: Este gráfico requiere {need, number} núcleos de CPU, pero el clúster solo tiene {have, number} disponibles.
       insufficientMemory: Este gráfico requiere {need} de memoria, pero el clúster solo tiene {have} disponible.
-      legacy:
-        label: Esta es una aplicación {legacyType} y no se puede modificar aquí
-        enableLegacy:
-          prompt: Deberá habilitar las Funciones Legacy para editar esta Aplicación
-          goto: Ir a Configuración de Indicadores de Función
-        navigate: Navegar a Aplicaciones Legacy
-        mcmNotSupported: Las Aplicaciones Multi-clúster Legacy no pueden gestionarse mediante esta UI
-        category:
-          legacy: Heredado
-          mcm: Multi-clúster
     header:
       install: Instalar {name}
       installGeneric: Instalar gráfico
@@ -1351,7 +1482,17 @@ catalog:
       basics:
         label: Metadatos
         subtext: Configurar metadatos de la Aplicación
-        description: Este proceso ayudará a {action, select, install { crear } upgrade { actualizar } downgrade { actualizar } editVersion { actualizar } } {existing, select, true { la aplicación} false { el gráfico} }. Comience configurando información básica que utiliza {vendor} para gestionar la aplicación.
+        description: Este proceso le ayudará a
+            {action, select, install { crear
+            } upgrade { actualizar }
+            downgrade { actualizar } editVersion
+            { actualizar } other {
+            actualizar } } {existing, select,
+            true { la aplicación} false
+            { el chart} other {
+            el chart} }. Comience estableciendo
+            información básica que {vendor} usa
+            para administrar la aplicación.
         nsCreationDescription: Para instalar la aplicación en un nuevo espacio de nombres, ingrese su nombre en el campo Espacio de Nombres y selecciónelo.
         createNamespace: El espacio de nombres <code>{namespace}</code> será creado.
         requiresImagePullSecret: Este Gráfico requiere un Secreto de Extracción de Imágenes para que las imágenes se extraigan correctamente.
@@ -1434,7 +1575,7 @@ catalog:
       placeholder: ej. https://charts.rancher.io
     oci:
       urlLabel: URL del host del repositorio OCI
-      placeholder: e.g. oci://<registry-host>/<namespace>/<chart-name>:<tag>
+      placeholder: 'p. ej. oci://<registry-host>/<namespace>/<chart-name>:<tag>'
       warning: Las URLs OCI deben apuntar SOLO a gráficos de Helm.
       info: "Para repositorios grandes con muchos gráficos, considere apuntar a un espacio de nombres o gráfico específico para mejorar el rendimiento, por ejemplo con oci://<registry-host>/<namespace> o oci://<registry-host>/<namespace>/<chart-name>."
       skipTlsVerifications: Omitir verificaciones de TLS
@@ -1457,6 +1598,20 @@ catalog:
       enableLabel: Habilitar intervalo de actualización
     downloaded:
       label: Descargado
+    detail:
+      overview: Resumen
+      source: Origen
+      type: Tipo
+      status: Estado
+      authentication: Autenticación
+      caBundle: Paquete de certificados de CA
+      exponentialBackOff: Retroceso exponencial (mín. / máx. / reintentos)
+      charts:
+        label: Contenido
+        view: Ver charts
+        none: No hay contenido disponible
+      extensions:
+        view: Ver extensiones
     error:
       refresh: Error al actualizar el repositorio
   tools:
@@ -1570,12 +1725,15 @@ compliance:
   testsToSkip: Pruebas a omitir
   alerting: Alertas
   detail:
+    noReport: 'Todavía no hay ningún informe de análisis disponible. Estado actual del análisis: {state}. El informe aparecerá aquí una vez que finalice el análisis.'
+    noReportWithMessage: 'Todavía no hay ningún informe de análisis disponible. Estado actual del análisis: {state} - {message}. El informe aparecerá aquí una vez que finalice el análisis.'
     subRow:
       noNodes: Sin información adicional
 
 cluster:
   jwtAuthentication:
-    banner: El acceso a la cuenta de servicio con autenticación JWT puede configurarse después de la creación del clúster desde <br> <code>Gestión de clúster > Avanzado > Autenticación JWT</code>
+    banner: "El acceso a la cuenta de servicio con autenticación JWT puede configurarse después de la creación del clúster desde <br>
+      <code>Gestión de clúster > Avanzado > Autenticación JWT</code>"
   addonChart:
     rancher-vsphere-cpi:
       label: 'Complemento: vSphere CPI'
@@ -1627,7 +1785,7 @@ cluster:
       label: vSphere
       note: <b>Importante:</b> Configure las opciones del proveedor de nube y del proveedor de almacenamiento vSphere en la pestaña Configuración de complemento.
     harvester:
-      label: Harvester
+      label: '[[Harvester]]'
   copyConfig: Copiar KubeConfig al portapapeles
   copiedConfig: KubeConfig copiado al portapapeles
   custom:
@@ -1806,7 +1964,7 @@ cluster:
       kubeconfigContent:
         label: Contenido de Kubeconfig
       placeholder: Espacio de nombres/Nombre
-      cluster: Clúster Harvester importado
+      cluster: Clúster [[Harvester]] importado
       enableTpm: Habilitar TPM
       enableCpuPinning: Habilitar fijación de CPU
       cpuPinningTooltip: Habilitar la fijación de CPU mejora el rendimiento y reduce la latencia para la máquina virtual de Harvester
@@ -1814,24 +1972,25 @@ cluster:
       secureBoot: Arranque seguro
       enableEfi: Arranque en modo EFI
       installGuestAgent: Instalar agente invitado
-      tokenExpirationWarning: 'Advertencia: Las Credenciales Cloud de Harvester usan un token de autenticación subyacente que puede tener una fecha de expiración - por favor consulte el siguiente <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">artículo de la base de conocimientos</a> para posibles implicaciones en las operaciones de gestión.'
+      tokenExpirationWarning: 'Advertencia: las credenciales de nube de [[Harvester]] usan un token de autenticación subyacente que puede tener un tiempo de caducidad; consulte el siguiente <a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">artículo de la base de conocimientos</a> para conocer las posibles implicaciones en las operaciones de administración.'
   description:
     label: Descripción del clúster
     placeholder: Cualquier texto que describa mejor este clúster
   harvester:
-    importNotice: Importar clústeres de Harvester mediante
+    importNotice: Importar clústeres [[Harvester]] mediante
     warning:
-      label: 'Este es un clúster Harvester: habilite el indicador de función Harvester para administrarlo'
+      label: "Este es un clúster [[Harvester]]: habilite el indicador de función [[Harvester]] para administrarlo"
       state: Advertencia
       cloudProvider:
-        incompatible: No puede seleccionar el proveedor cloud de Harvester ya que la versión actual de Harvester no es compatible con la versión de Kubernetes RKE2 seleccionada, haga clic <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aquí</a> para ver qué versiones de Kubernetes son compatibles.
+        incompatible:
+          No puede seleccionar el proveedor de nube [[Harvester]] porque la versión actual de [[Harvester]] no es compatible con la versión de Kubernetes de RKE2 seleccionada; haga clic <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aquí</a> para ver qué versiones de Kubernetes son compatibles.
     clusterWarning: |-
       Hay {count, plural,
-      =1 {1 clúster de Harvester que no se muestra}
-      other {# clústers de Harvester que no se muestran}
+      =1 {1 clúster [[Harvester]] que no se muestra}
+      other {# clústeres [[Harvester]] que no se muestran}
       }
     registration:
-      step1: 1. Vaya a la página <code>Avanzado / Configuración</code> de la interfaz de usuario de Harvester de destino.
+      step1: "1. Vaya a la página <code>Advanced / Settings</code> de la interfaz de usuario del [[Harvester]] de destino."
       step2: 2. Encuentre el ajuste <code>cluster-registration-url</code> y haga clic en el botón <code><i class="icon icon-actions" ></i></code> -> <code>Editar ajuste</code>.
       step3: 3. Ingrese la siguiente URL de registro y haga clic en el botón <code>Guardar</code>.
       step4: URL de registro
@@ -1855,7 +2014,7 @@ cluster:
         toolTip: Usuario SSH para iniciar sesión con la imagen del SO seleccionada.
     kubeconfigSecret:
         nameRequired: El nombre del clúster es obligatorio.
-        error: 'Error al generar el secreto de kubeconfig de Harvester: {err}'
+        error: 'Error al generar el secreto de kubeconfig de [[Harvester]]: {err}'
   haveOneOwner: Debe haber al menos un miembro con el rol de Propietario.
   import:
     warningBanner: No debe importar un clúster que ya haya sido conectado a otra instancia de Rancher, ya que esto provocará corrupción de datos.
@@ -1866,6 +2025,10 @@ cluster:
   explore: Explorar
   importAction: Importar existente
   manageAction: Administrar
+  kubeConfig:
+    error:
+      title: No se puede generar KubeConfig
+      noClusters: No se pudo resolver ningún clúster a partir de la selección actual. Actualice la página e inténtelo de nuevo.
   kubernetesVersion:
     label: Versión de Kubernetes
     current: (actual)
@@ -1874,7 +2037,6 @@ cluster:
     manual: (actualizado manualmente)
     deprecatedPatches: Mostrar versiones de parche de Kubernetes obsoletas
     deprecatedPatchWarning: Recomendamos usar la versión de parche más reciente para cada versión menor de Kubernetes. Las versiones de parche obsoletas pueden ser útiles para fines de migración.
-  legacyWarning: El indicador de función heredada está habilitado y no todas las funciones heredadas son compatibles con Kubernetes 1.21+.
   log:
     connecting: Conectando…
     noData: No hay entradas de registro de aprovisionamiento.
@@ -2108,7 +2270,7 @@ cluster:
         description: Los atributos personalizados le permiten adjuntar metadatos a objetos en el inventario de vSphere para facilitar la clasificación y búsqueda de estos objetos.
         add: Agregar atributo personalizado
     amazonEc2:
-      region: Region
+      region: Región
       zone: Zona
       instanceType: Tipo de Instancia
       rootSize:
@@ -2318,8 +2480,6 @@ cluster:
     desiredNodeGroupWarning: No hay nodos disponibles para ejecutar el agente del clúster. El clúster no se activará hasta que haya al menos un nodo disponible.
     haveArgInfo: La información de configuración no está disponible para la versión de Kubernetes seleccionada. Las opciones disponibles en esta pantalla serán limitadas; es posible que desee usar el editor YAML.
     cloudProviderAddConfig: En Kubernetes 1.27 o superior, el Proveedor Cloud de <b>Amazon</b> requiere configuración adicional. Consulte <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon" target="_blank" rel="noopener noreferrer nofollow">la documentación</a> para más información.
-    cloudProviderUnsupportedAzure: En Kubernetes 1.30 o superior, el Proveedor Cloud de <b>Azure</b> ha sido eliminado. Consulte <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">la documentación</a> para más información.
-    cloudProviderMigrateAzure: En Kubernetes 1.30 o superior, el Proveedor Cloud de <b>Azure</b> ha sido eliminado. Para actualizar Kubernetes, el clúster debe migrarse primero al proveedor externo.<br> Consulte <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">la documentación</a> para más información.
     machinePoolError: |-
       {count, plural,
         =1 { {pool_name}: El valor proporcionado para {fields} no fue encontrado o se proporcionó una cadena de consulta no válida. }
@@ -2373,8 +2533,8 @@ cluster:
         controlPlane: |-
           {count, plural,
             =0 { Un clúster necesita al menos un nodo de plano de control para ser utilizable. }
-            =1 { Un clúster con 1 nodo de plano de control no tiene alta disponibilidad. }
-            other { Un clúster con {count} nodos de plano de control tiene alta disponibilidad. }
+            =1 { Un clúster con un solo nodo de plano de control no es tolerante a fallos. }
+            other {}
           }
         etcd: |-
           {count, plural,
@@ -2391,8 +2551,8 @@ cluster:
         worker: |-
           {count, plural,
             =0 { Un clúster necesita al menos un nodo trabajador para ser utilizable. }
-            =1 { Un clúster con 1 nodo trabajador tiene disponibilidad limitada. }
-            other { Un clúster con {count} nodos trabajadores tiene buena disponibilidad. }
+            =1 { Un clúster con un solo nodo trabajador no es tolerante a fallos. }
+            other {}
           }
     quantity:
       label: Cantidad de máquinas
@@ -2461,7 +2621,7 @@ cluster:
     googlegke: Google GKE
     gke: GKE
     googlekubernetesengine: Google GKE (Unsupported Kev1)
-    harvester: Harvester
+    harvester: '[[Harvester]]'
     huaweicce: Huawei CCE
     import: Genérico
     imported: Importado
@@ -2692,6 +2852,7 @@ cluster:
     enableIngress: Instalar controlador de Ingress para habilitar el enrutamiento externo
     nginx:
       header: Ingress-NGINX
+      contentCommunity: Esta opción solo está disponible en SUSE Rancher Prime.
       content: Elija esto solo si sus cargas de trabajo aún no están listas para Traefik.
     dual:
       header: Modo Dual
@@ -2829,15 +2990,15 @@ configmap:
       label: Datos binarios
 
 containerResourceLimit:
-  cpuPlaceholder: e.g. 1000
-  gpuPlaceholder: e.g. 1
+  cpuPlaceholder: p. ej. 1000
+  gpuPlaceholder: p. ej. 1
   helpText: Configure cuántos recursos puede consumir el contenedor de forma predeterminada.
   helpTextDetail: La cantidad de recursos que el contenedor puede consumir de forma predeterminada.
   label: Límite de recursos predeterminado del contenedor
   limitsCpu: Límite de CPU
   limitsGpu: Límite/Reserva de GPU NVIDIA
   limitsMemory: Límite de memoria
-  memPlaceholder: e.g. 128
+  memPlaceholder: p. ej. 128
   requestsCpu: CPU solicitada
   requestsMemory: Memoria solicitada
 
@@ -2846,6 +3007,12 @@ resource:
   errors:
     update: Error al actualizar {name}
 
+copyToClipboard:
+  action: Copiar
+  waiting: Copiando&hellip;
+  success: ¡Copiado!
+  error: Error al
+    copiar
 codeMirror:
   escapeText: Presione Shift+Escape para salir del editor
   keymap:
@@ -2929,6 +3096,7 @@ detailText:
       =1 {+ 1 carácter más}
       other {+ {n, number} caracteres más}
     }
+
 drainNode:
   action: Drenar
   actionStop: Detener drenaje
@@ -2961,13 +3129,13 @@ dynamicContent:
     moreInfo: Notas de la versión
   multipleNewReleases:
     title: ¡Nuevas versiones de Rancher disponibles!
-    message: Se ha lanzado una nueva versión de parche de {version1} y también está disponible una versión más nueva de {version2}.
+    message: Se ha publicado una nueva versión de parche {version1} y también está disponible una versión {version2} más reciente.
     moreInfo: Notas de la Versión de {version}
   upcomingEom:
-    title: Fin de Mantenimiento en {days, plural, =1 {1 día} other {{days} días}}
-    message: Esta versión de Rancher ({version}) alcanzará el Fin de Mantenimiento en {days} día(s). Considere actualizar.
+    title: Fin del mantenimiento en {days, plural, =1 {1 día} other {{days} días}}
+    message: Esta versión de Rancher ({version}) alcanzará el fin del mantenimiento en {days} día(s). Considere actualizar pronto a una versión compatible.
   eom:
-    title: Fin del Mantenimiento alcanzado
+    title: Fin del mantenimiento alcanzado
     message: Esta versión de Rancher ({version}) ha alcanzado el Fin del Mantenimiento. Considere actualizar a una versión compatible.
   upcomingEol:
     title: Fin de Vida en {days, plural, =1 {1 día} other {{days} días}}
@@ -2975,12 +3143,19 @@ dynamicContent:
   eol:
     title: Fin de Vida alcanzado
     message: Esta versión de Rancher ({version}) ha alcanzado el Fin de Vida. Considere actualizar a una versión compatible.
-
+  eoc:
+    title: Las actualizaciones han finalizado
+    message: Esta versión de Rancher ({version}) ya no recibirá actualizaciones. Considere
+      actualizar a una versión más reciente o a Rancher Prime.
 etcdInfoBanner:
   hasLeader: 'Etcd tiene un líder:'
   leaderChanges: 'Número de cambios de líder:'
   failedProposals: 'Número de propuestas fallidas:'
 
+fileSelectorTextArea:
+  dropHint: o suelte el archivo sobre el área de texto de arriba
+  dropToReplace: Al soltar el archivo aquí
+    se reemplazará cualquier contenido existente
 fleet:
   settings:
     label: Entrega continua
@@ -3128,21 +3303,21 @@ fleet:
   clusters:
     harvester: |-
       Hay {count, plural,
-      =1 {1 clúster de Harvester oculto ya que no puede usarse con Continuous Delivery}
-      other {# clústeres de Harvester ocultos ya que no pueden usarse con Continuous Delivery}
+      =1 {1 clúster [[Harvester]] oculto porque no se puede usar con Continuous Delivery}
+      other {# clústeres [[Harvester]] ocultos porque no se pueden usar con Continuous Delivery}
       }
   tokens:
     harvester: |-
       {count, plural,
-      =1 {1 token está oculto ya que pertenece a un clúster de Harvester que no puede usarse con Continuous Delivery}
-      other {# tokens están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
+      =1 {1 token está oculto porque pertenece a un clúster [[Harvester]] que no se puede usar con Continuous Delivery}
+      other {# tokens están ocultos porque pertenecen a clústeres [[Harvester]] que no se pueden usar con Continuous Delivery}
       }
   bundles:
     resources: Recursos
     harvester: |-
       {count, plural,
-      =1 {1 paquete está oculto ya que pertenece a un clúster de Harvester que no puede usarse con Continuous Delivery}
-      other {# paquetes están ocultos ya que pertenecen a clústeres de Harvester que no pueden usarse con Continuous Delivery}
+      =1 {1 bundle está oculto porque pertenece a un clúster [[Harvester]] que no se puede usar con Continuous Delivery}
+      other {# bundles están ocultos porque pertenecen a clústeres [[Harvester]] que no se pueden usar con Continuous Delivery}
       }
   fleetSummary:
     noClusters:
@@ -3156,6 +3331,13 @@ fleet:
       unknown: Desconocido
       notReady: No listo
       waitApplied: Esperar aplicación
+      notready: No está listo
+      waitapplied: Esperando aplicación
+      errapplied: Error al aplicar
+      modified: Modificado
+      outofsync: Fuera de sincronización
+      pending: Pendiente
+      waitingfordependency: Esperando dependencia
   clusterTargets:
     advancedConfigs: Se han definido configuraciones de destino avanzadas, consulte el archivo YAML para más detalles.
     targetMode:
@@ -3260,7 +3442,10 @@ fleet:
       description1: La carpeta raíz se usa de forma predeterminada. Fleet escaneará recursivamente todas las carpetas y subcarpetas para encontrar archivos fleet.yaml.
       description2: Puede proporcionar varios directorios diferentes. También puede agregar subrutas para especificar diferentes rutas de archivos de configuración YAML.
       ariaLabel: Ingresar rutas para el repositorio Git
+      inputAriaLabel: Introduzca la ruta {index} del repositorio Git
+      removeBtn: Eliminar la ruta {index}
       placeholder: p. ej. /directorio/en/su/repositorio
+      addBtnAriaLabel: Agregar ruta para el repositorio Git
       addLabel: Agregar ruta
       enableBundles: Especificar manualmente las subrutas de archivos de configuración (Fleet no escaneará subcarpetas recursivamente para encontrar archivos fleet.yaml)
       subpaths:
@@ -3314,7 +3499,7 @@ fleet:
           description: Fleet monitoreará continuamente el repositorio Git que configure a continuación y sincronizará los recursos contenidos en él con los destinos configurados.
         advanced:
           label: Avanzado
-          title: Especificar ajustes avanzados como credenciales de autenticación y sondeo
+          title: Especifique opciones avanzadas como credenciales de autenticación y sondeo
           subtext: Definir ajustes avanzados
           description: Fleet usará los ajustes de autenticación y el sondeo para sincronizar los recursos contenidos en él.
           info: Estos ajustes son para uso avanzado y opcionales. Puede omitirlos y finalizar el proceso de creación.
@@ -3426,7 +3611,7 @@ fleet:
           description: Puede configurar qué clústeres se usarán como destino de sincronización con los recursos en el repositorio.
         advanced:
           label: Avanzado
-          title: Especificar configuración avanzada como credenciales de autenticación y sondeo
+          title: Especifique opciones avanzadas como credenciales de autenticación y sondeo
           subtext: Definir configuración avanzada
           description: Fleet usará la configuración de autenticación y el sondeo para sincronizar los recursos contenidos.
           info: Esta configuración es para uso avanzado y opcional. Puede omitirla y finalizar el proceso de creación.
@@ -3541,7 +3726,7 @@ fleet:
       clusterDeploymentLink: Opciones de despliegue del Bundle
     targetDisplay:
       advanced: Avanzado
-      clusters: Clusters
+      clusters: Clústeres
       all: Todos
       none: Ninguno
       local: Local
@@ -3592,6 +3777,7 @@ fleet:
     state: Estado
     cluster: Clúster
     error: Error
+    message: Mensaje
     ready: Listo
     errors: Errores
   workspaces:
@@ -3604,7 +3790,13 @@ fleet:
   restrictions:
     addTitle: allowedTargetNamespaces
     addLabel: Agregar
-    banner: '{count, plural, =0 { Agregar espacios de nombres aquí creará una GitRepoRestriction. } other { Solo los <code>allowedTargetNamespaces</code> de la Restricción de Repositorio Git se administran aquí. Puede realizar cambios adicionales a la Restricción de Repositorio Git} }'
+    deprecationWarning: 'Las GitRepoRestrictions están obsoletas y se eliminarán en una versión futura. Use <policiesLink>Políticas</policiesLink> en su lugar.'
+    deprecationWarningTargetNamespaces: 'Las GitRepoRestrictions están obsoletas y se eliminarán en una versión futura. La restricción de los espacios de nombres de destino permitidos depende de GitRepoRestriction y no tiene equivalente en las políticas de SUSE Continuous Delivery.'
+    migrationGuide: 'Consulte la <docsLink>guía de migración de políticas de SUSE Continuous Delivery</docsLink>.'
+    banner: "{count, plural,
+          =0 { Agregar espacios de nombres aquí creará una GitRepoRestriction. }
+          other { Solo los <code>allowedTargetNamespaces</code> de la Restricción de Repositorio Git se administran aquí. Puede realizar cambios adicionales a la Restricción de Repositorio Git}
+        }"
   configMaps:
     label: Mapas de configuración
   secrets:
@@ -3836,6 +4028,7 @@ import:
     =1 {1 recurso}
     other {# recursos}
     }
+
 auditPolicy:
   active: Activo
   inactive: Inactivo
@@ -4175,6 +4368,7 @@ labels:
   addTaint: Agregar mancha
   addAnnotation: Agregar anotación
   protectedWarning: Esta clave está protegida y se descartará
+  readOnlyWarning: Esta clave es de solo lectura y los cambios no se conservarán
   labels:
     title: Etiquetas
     description: Pares clave/valor adjuntos a objetos que especifican atributos de identificación.
@@ -4427,7 +4621,7 @@ logging:
       title: Búfer
       tags: Etiquetas
       chunkLimitSize: Tamaño límite de bloque
-      chunkLimitRecords: Registros límite de bloque
+      chunkLimitRecords: Límite de registros de fragmento
       totalLimitSize: Tamaño límite total
       flushInterval: Intervalo de vaciado
       timekey: Clave de tiempo
@@ -4436,6 +4630,7 @@ logging:
   s3:
     keyId: ID de clave del secreto
     secretKey: Clave secreta del secreto
+    region: Región
     endpoint: Punto de conexión
     bucket: Depósito
     path: Ruta
@@ -4530,7 +4725,7 @@ login:
   login: Iniciar sesión
   howdy: ¡Hola!
   welcome: Bienvenido a {vendor}
-  landscapeAlt: Imagen de paisaje
+  logoAlt: 'Logotipo de {vendor}'
   loggedOut: Ha cerrado sesión.
   loggedOutSessionIdle: Ha cerrado sesión de Rancher porque su sesión ha expirado. Inicie sesión de nuevo para continuar.
   loggedOutFromSso: Ha cerrado sesión en Rancher, pero es posible que aún tenga sesión iniciada en su proveedor de identidad de inicio de sesión único.
@@ -4547,15 +4742,24 @@ login:
   clientError: Nombre de usuario o contraseña no válidos. Por favor, inténtelo de nuevo.
   userUnauthorized: No está autorizado para usar este sistema.
   specificError: 'Ocurrió un error al iniciar sesión: {msg}'
-  useLocal: Usar un usuario local
   loginWithProvider: Iniciar sesión con {provider}
   username: Nombre de usuario
   password: Contraseña
   loggingIn: Iniciando sesión...
   loggedIn: Sesión iniciada
   loginWithLocal: Iniciar sesión con usuario local
-  useProvider: Usar un usuario de {provider}
-  useNonLocal: Usar un usuario no local
+  providers:
+    heading: Elija cómo iniciar sesión
+    or: O
+    chooseDifferent: Elegir un proveedor diferente
+    useLocal: Iniciar sesión como usuario local
+    meta: "{vendor} · {protocol}"
+    remember: Recordar mi elección en este dispositivo
+    rememberHint: Se aplica al proveedor que elija. Se guarda solo en este navegador.
+    local:
+      name: Cuenta local
+      description: Inicie sesión en Rancher con un nombre de usuario y una contraseña.
+      meta: Nombre de usuario y contraseña
   remember:
     label: Recordar nombre de usuario
   cli:
@@ -4569,10 +4773,7 @@ logout:
   error: 'Se produjo un error al cerrar sesión: {msg}'
   specificError:
     unknown: Desconocido.\n\nPor favor contacte a su administrador del sistema.
-    500: |-
-      Error del lado del servidor.
-
-      Contáctese con el administrador del sistema.
+    500: "Error del lado del servidor.\n\nContáctese con el administrador del sistema."
 
 managementNode:
   customName: Nombre personalizado
@@ -4635,7 +4836,10 @@ monitoring:
         info: Los secretos deben montarse en <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>
         label: Secretos adicionales
       existing: Elegir un secreto de configuración existente
-      info: "<span class=\"text-bold\">Crear configuración predeterminada</span>:<br>Se creará un Secreto con su Configuración de Alertmanager en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre> al implementar este gráfico bajo el nombre <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Por defecto, este Secreto nunca se modificará al desinstalar o actualizar este gráfico. <br /><br />\nUna vez implementado, debe editar el Secreto desde la UI para añadir sus configuraciones de notificación personalizadas que Alertmanager usará para enviar alertas. <br /> <br />\n<span class=\"text-bold\">Elegir un secreto de configuración existente</span>:<br>Debe especificar un Secreto existente en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Si el espacio de nombres no existe, no podrá seleccionar un secreto existente.\n"
+      info: |
+        <span class="text-bold">Crear configuración predeterminada</span>:<br>Se creará un Secreto con su Configuración de Alertmanager en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre> al implementar este gráfico bajo el nombre <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Por defecto, este Secreto nunca se modificará al desinstalar o actualizar este gráfico. <br /><br />
+        Una vez implementado, debe editar el Secreto desde la UI para añadir sus configuraciones de notificación personalizadas que Alertmanager usará para enviar alertas. <br /> <br />
+        <span class="text-bold">Elegir un secreto de configuración existente</span>:<br>Debe especificar un Secreto existente en el espacio de nombres <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Si el espacio de nombres no existe, no podrá seleccionar un secreto existente.
       label: Secreto de Alertmanager
       new: Crear configuración predeterminada
       radio:
@@ -5114,6 +5318,7 @@ networkpolicy:
           =1 {1 de {totalNamespaces, number} espacios de nombres: "{sampleNamespaces}"}
           other {{matchedNamespaces, number} de {totalNamespaces, number} espacios de nombres existentes, incluyendo "{sampleNamespaces}"}
         }
+
 node:
   list:
     pool: Grupo
@@ -5273,7 +5478,7 @@ persistentVolume:
       disk-csi-azure-com: Disco Azure (CSI)
       file-csi-azure-com: Archivo Azure (CSI)
       driver-longhorn-io: Longhorn (CSI)
-      driver-harvesterhci-io: Harvester (CSI)
+      driver-harvesterhci-io: '[[Harvester]] (CSI)'
       lvm-driver-harvesterhci-io: LVM
       nfs-csi-k8s-io: NFS (CSI)
       ebs-csi-aws-com: Almacenamiento de bloques elásticos AWS (CSI)
@@ -5783,14 +5988,16 @@ prefs:
     detail: Cambia la forma en que se muestra la información en la interfaz.
   clusterToShow:
     label: Número de clústeres a mostrar en el menú lateral
-    value: '{count, number}'
+    value: |-
+      {count, number}
   dateFormat:
     label: Formato de fecha
   timeFormat:
     label: Formato de hora
   perPage:
     label: Elementos por página
-    value: '{count, number}'
+    value: |-
+      {count, number}
   keymap:
     label: Mapa de teclas
     sublime: Sublime
@@ -5981,6 +6188,8 @@ promptForceRemove:
 promptScaleMachineDown:
   attemptingToRemove: Está intentando eliminar {count} {type}
   attemptingToScaleDown: Está intentando reducir {type}
+  machineAlreadyDeleted: "La máquina {name} ya se está eliminando o se ha vuelto a crear. El grupo de máquinas no se redujo."
+  machineDeleteAnnotationMissing: "No se pudo marcar la máquina {name} para su eliminación. El grupo de máquinas no se redujo."
   retainedMachine1: Al menos una máquina debe existir para los roles Panel de Control y Etcd.
   retainedMachine2: <b>{ name }</b> permanecerá
   scaling: |-
@@ -6140,9 +6349,10 @@ rbac:
       global:
         label: Permisos Globales
         description: |-
-          Controla el acceso que el {isUser, select,
-          true {usuario}
-          false {grupo}} tiene para administrar la instalación general de {appName}.
+          Controla qué acceso tiene {isUser, select,
+          true {el usuario}
+          false {el grupo}
+          other {el grupo}} para administrar la instalación general de {appName}.
       custom:
         label: Personalizado
         description: Roles no creados por {vendor}.
@@ -6271,10 +6481,10 @@ resourceDetail:
     graph: Gráfico
     yaml: YAML
     managedWarning: |-
-      Este {type} es administrado por {hasName, select,
-        no {una aplicación de {managedBy}}
+      Este {type} está gestionado por {hasName, select,
+        no {una aplicación {managedBy}}
         yes {la aplicación {managedBy} {appName}}
-      }; los cambios realizados aquí probablemente serán sobrescritos la próxima vez que se ejecute {managedBy}.
+        other {una aplicación {managedBy}}}; los cambios realizados aquí probablemente se sobrescribirán la próxima vez que se ejecute {managedBy}.
 resourceList:
   head:
     create: Crear
@@ -6398,6 +6608,7 @@ secret:
           =1 {1 Entrada}
           other {{entries} Entradas}
         }
+
   serviceAcct:
     ca: Certificado CA
     token: Token
@@ -6506,18 +6717,18 @@ servicePorts:
   rules:
     listening:
       label: Puerto de escucha
-      placeholder: e.g. 8080
+      placeholder: p. ej. 8080
     name:
       label: Nombre del puerto
-      placeholder: e.g. myport
+      placeholder: p. ej. myport
     node:
       label: Puerto del nodo
-      placeholder: e.g. 30000
+      placeholder: p. ej. 30000
     protocol:
       label: Protocolo
     target:
       label: Puerto de destino
-      placeholder: e.g. 80 or http
+      placeholder: p. ej. 80 o http
 
 serviceTypes:
   clusterip: IP del clúster
@@ -6559,7 +6770,9 @@ servicesPage:
       label: Usar IPAM
     shareIP:
       label: IP compartida LB
-
+    network:
+      label: Red
+        
   ips:
     define: Puertos del servicio
     clusterIpHelpText: La dirección IP del clúster debe estar dentro del rango CIDR configurado para el servidor API.
@@ -6649,8 +6862,12 @@ sortableTable:
     lastPageBtn: Ícono de última página de resultados
     sortingIconDesc: Ícono de ordenamiento descendente del encabezado de tabla
     sortingIconAsc: Ícono de ordenamiento ascendente del encabezado de tabla
-  genericGroupCheckbox: Casilla de selección de grupo de tabla
-  genericRowCheckbox: Casilla de selección de fila de tabla para el elemento {item}
+  genericGroupCheckbox: Seleccionar todas las filas
+  genericRowCheckbox: Seleccionar {item}
+  genericRowCheckboxNoItem: Seleccionar fila
+  selectAllResources: Seleccionar todos los {resource}
+  expandColumnHeader: Expandir
+  actionsColumnHeader: Acciones
   tableActionsLabel: Más acciones - { resource }
   tableActionsImgAlt: Ícono de más acciones
   bulkActions:
@@ -6667,16 +6884,15 @@ sortableTable:
       {pages, plural,
       =0 {Sin elementos}
       =1 {{count} {count, plural, =1 {Elemento} other {Elementos}}}
-      other {{from} - {to} de {count} Elementos}
-      }
+      other {{from} - {to} de {count} Elementos}}
     resource: |-
       {pages, plural,
       =0 {Sin {pluralLabel}}
       =1 {{count} {count, plural, =1 {{singularLabel}} other {{pluralLabel}}}}
-      other {{from} - {to} de {count} {pluralLabel}}
-      }
+      other {{from} - {to} de {count} {pluralLabel}}}
   search: Filtrar
   searchLabel: Filtrar resultados de la tabla
+  clearFilter: Borrar el filtro de los resultados de la tabla
   in: en
   addFilter: Agregar filtro
   filteringDescription: Usar esta entrada filtrará inmediatamente los resultados en la tabla de abajo
@@ -6979,14 +7195,14 @@ storageClass:
     title: (Obsoleto)
     warning: 'El complemento integrado {provisioner} está obsoleto: encuentre un controlador CSI <a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes-csi.github.io/docs/drivers.html">aquí.</a>'
   harvesterhci:
-    title: Harvester (CSI)
+    title: '[[Harvester]] (CSI)'
     warning:
-      unSatisfiesVersion: Actualice la versión del controlador CSI de Harvester para usar esta función. (csi-driver >= v0.1.15)
+      unSatisfiesVersion: Actualice la versión del controlador CSI de [[Harvester]] para usar esta función. (csi-driver >= v0.1.15)
     hostStorageClass:
       label: Clase de almacenamiento del host
-      placeholder: Nombre de clase de almacenamiento en el clúster Harvester host
-      tooltip: De forma predeterminada, se usa la clase de almacenamiento predeterminada del clúster Harvester host.
-
+      placeholder: Nombre de la clase de almacenamiento en el clúster [[Harvester]] anfitrión
+      tooltip: De forma predeterminada se usa la clase
+        de almacenamiento predeterminada del clúster [[Harvester]] anfitrión.
 tableHeaders:
   assuredConcurrencyShares: Cuotas de concurrencia asegurada
   autoscaler: Escalador automático
@@ -7026,6 +7242,7 @@ tableHeaders:
   completions: Completados
   count: Recuento
   createdAt: Creado el
+  customResources: Recurso
   customVerbs: Verbos personalizados
   description: Descripción
   cpu: CPU
@@ -7045,6 +7262,7 @@ tableHeaders:
   effect: Efecto
   endpoints: Puntos finales
   expires: Expira
+  explore: Explorar
   firstSeen: Visto por primera vez
   firstSeenTooltip: El momento en que el evento fue registrado por primera vez
   flow: Flujo
@@ -7067,6 +7285,8 @@ tableHeaders:
   iP: IP
   image: Imagen
   imageSize: Tamaño
+  httpRouteGateways: Gateways
+  httpRouteHostnames: Nombres de host
   ingressClass: Clase de Ingress
   ingressDefaultBackend: Predeterminado
   ingressTarget: Destino
@@ -7275,6 +7495,8 @@ user:
       userDescription:
         label: Descripción
         placeholder: ej. Esta cuenta es para Juan García
+    roleUpdateFailed:
+      orphaned: 'El usuario "{username}" se creó, pero no se pudieron asignar sus roles y la cuenta incompleta no se pudo eliminar automáticamente. Abra la lista de usuarios para revisarla o eliminarla.'
   list:
     errorRefreshingGroupMemberships: Error al actualizar las membresías de grupo
   retention:
@@ -7293,12 +7515,14 @@ user:
         disableAfter:
           checkbox: Deshabilitar cuentas de usuario después de un período de inactividad (duración desde el último inicio de sesión)
           input:
+            labelDisable: Periodo de inactividad - Deshabilitar cuentas de usuario
             label: Período de inactividad
             tooltip: Usa unidades de duración (ej. usar 30h para 30 horas)
         deleteAfter:
           checkbox: Eliminar cuentas de usuario después de un período de inactividad (duración desde el último inicio de sesión)
           input:
             label: Período de inactividad
+            labelDelete: Periodo de inactividad - Eliminar cuentas de usuario
             tooltip: Usa unidades de duración (ej. usar 30h para 30 horas)
             subLabel: Este valor debe ser mayor que el período de Deshabilitación, si está activo
         cron:
@@ -7451,6 +7675,7 @@ validation:
       url: La URL del servidor debe ser una URL.
       awsStyleEndpoint: La URL del punto de enlace debe ser un punto de enlace basado en dominio válido y no puede comenzar con un protocolo (p. ej. https:// o http://)
   genericUrl: El campo debe ser una URL válida
+  url: '"{key}" debe ser una URL válida'
   stringLength:
     between: '"{key}" debe tener entre {min} y {max} {max, plural, =1 {carácter} other {caracteres}}'
     exactly: '"{key}" debe tener {count, plural, =1 {# carácter} other {# caracteres}}'
@@ -7465,16 +7690,12 @@ validation:
   tab: Uno o más campos de esta pestaña contienen un error de validación de formulario
   version: Número de versión no válido
 
-carousel:
-  previous: Anterior
-  next: Siguiente
-  controlItem: Ir a la diapositiva nº {number}
-
 wizard:
   previous: Anterior
   finish: Finalizar
   next: Siguiente
   step: Paso {number}
+  stepList: Pasos del asistente
   edit: Editar
   create: Crear
   view: Ver
@@ -7519,8 +7740,8 @@ wm:
       lines: '{value, number} Líneas'
       minutes: |-
         {value, number} {value, plural,
-        =1 {Minute}
-        other {Minutes}
+        =1 {Minuto}
+        other {Minutos}
         }
     search: Filtrar
     timestamps: Mostrar marcas de tiempo
@@ -7785,6 +8006,7 @@ workload:
       status: Estado
       volumeClaimTemplates: Plantillas de reclamación de volumen
       upgrading: Política de escala y actualización
+      availability: Disponibilidad
   cronSchedule: Programación
   detail:
     services: Servicios
@@ -7795,7 +8017,11 @@ workload:
     cannotViewIngresses: No se pudieron listar los ingresos por falta de permisos.
     cannotFindIngresses: No se encontraron ingresos que reenvíen tráfico a servicios que seleccionen pods en esta carga de trabajo.
     ingressListCaption: 'Los siguientes ingresos reenvían tráfico a servicios que seleccionan pods de esta carga de trabajo:'
-    cannotViewIngressesBecauseCannotViewServices: No se pudieron encontrar los ingresos relevantes por falta de permisos para ver los servicios.
+    cannotViewIngressesBecauseCannotViewServices: No se pudieron encontrar los Ingresses relevantes por falta de permiso para ver los Services.
+    httpRoutes: HTTPRoutes
+    cannotFindHttpRoutes: No se pudo encontrar ningún HTTPRoute que reenvíe tráfico a los Services que seleccionan los Pods de esta carga de trabajo.
+    httpRouteListCaption: "Los siguientes HTTPRoutes reenvían tráfico a los Services que seleccionan los Pods de esta carga de trabajo:"
+    cannotViewHttpRoutesBecauseCannotViewServices: No se pudieron encontrar los HTTPRoutes relevantes por falta de permiso para ver los Services.
     pods:
       title: Pods
   detailTop:
@@ -7838,7 +8064,7 @@ workload:
       tip: El número de trabajos exitosos terminados a conservar.
     suspend: Suspender
   list:
-    errorCannotScale: Error al escalar {workloadName} {direction, select, up { hacia arriba } down { hacia abajo } }
+    errorCannotScale: No se pudo escalar {workloadName} {direction, select, up { hacia arriba } down { hacia abajo } other { } }
   metrics:
     pod: Métricas del Pod
     metricsView: Vista de métricas
@@ -7887,7 +8113,9 @@ workload:
   validation:
     containers: Contenedores
     containerImage: Contenedor {name} - "Imagen del contenedor" es obligatoria.
+    containerName: Contenedor - "Nombre del contenedor" es obligatorio.
     localhostProfile: Contenedor {name} - "Perfil local del contenedor" es obligatorio cuando el tipo SeccompProfile es Localhost.
+    volumeMountPath: Contenedor {name} - "Punto de montaje" es obligatorio.
   replicas: Réplicas
   showTabs: Mostrar opciones avanzadas
   scheduling:
@@ -8147,10 +8375,12 @@ model:
       freeipa: FreeIPA
       googleoauth: Google
       genericoidc: OIDC genérico
+      genericsaml: SAML genérico
       keycloakoidc: Keycloak
       cognito: Amazon Cognito
-
-
+      oidc: OIDC
+        
+        
   cluster:
     name: Nombre del clúster
   ingress:
@@ -8498,6 +8728,16 @@ typeLabel:
       one { Ingress }
       other { Ingresses }
     }
+  gateway.networking.k8s.io.httproute: |-
+    {count, plural,
+      one { HTTPRoute }
+      other { HTTPRoutes }
+    }
+  gateway.networking.k8s.io.gateway: |-
+    {count, plural,
+      one { Gateway }
+      other { Gateways }
+    }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
       one { Política de red }
@@ -8605,8 +8845,8 @@ typeLabel:
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
-      one { Harvester Cluster }
-      other { Harvester Clusters }
+      one { Clúster [[Harvester]] }
+      other { Clústeres [[Harvester]] }
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
@@ -8803,6 +9043,7 @@ typeLabel:
       one { Proveedor de Cluster API }
       other { Proveedores de Cluster API }
     }
+
 oidcclient:
   a11y:
     copyText:
@@ -8828,7 +9069,7 @@ oidcclient:
   secretAdded: ¡Secreto agregado!
   noClientId: No se encontró ID de cliente para esta aplicación. Si el problema persiste, vuelva a crear la aplicación
   errors:
-    performSecretAction: La acción en los secretos OIDC que intentó realizar es inválida. Verifique los parámetros válidos para esta función
+    performSecretAction: La acción sobre los secretos de OIDC que se intentó realizar no es válida. Compruebe los parámetros válidos para esta función
   removeOidcClientModal:
     title: Eliminación de aplicación OIDC
     content: ¿Está seguro de que desea eliminar las siguientes aplicaciones OIDC?
@@ -9005,6 +9246,7 @@ advancedSettings:
     agent-tls-mode: Verificación de Certificados de Rancher. En modo 'strict' los agentes solo aceptan certificados firmados por la CA de Rancher.
     k3s-based-upgrader-uninstall-concurrency: Define el número máximo de clústeres en los que Rancher puede desinstalar concurrentemente el sistema de actualización legacy.
     system-agent-upgrader-install-concurrency: Define el número máximo de clústeres en los que Rancher puede instalar concurrentemente los recursos del sistema de actualización.
+    'delete-machine-on-failure-after': Define el número de segundos tras los cuales Rancher eliminará las máquinas de infraestructura cuyo aprovisionamiento haya fallado. Establezca el valor en 0 para deshabilitar la eliminación automática de las máquinas con errores.
     imported-cluster-version-management: Habilita la gestión de versiones para clústeres RKE2/K3s importados.
     'imported-cluster-day2-ops-enabled': Controla si los clústeres RKE2/K3s importados tendrán las operaciones de día 2 (instantáneas de etcd, restauraciones, rotaciones de clave de cifrado) habilitadas de forma predeterminada. Esto afectará a todos los clústeres que usen la configuración predeterminada y se puede anular a nivel de clúster.
   warnings:
@@ -9035,7 +9277,7 @@ advancedSettings:
 
 featureFlags:
   description:
-    'hide-local-auth-provider': Activar esta función y habilitar un proveedor de autenticación impedirá que los usuarios inicien sesión con credenciales locales. En caso de fallo del proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso a Rancher mediante la API o la CLI para deshabilitar la función y recuperar el acceso. Consulte la documentación de {vendor} para obtener más información.
+    'hide-local-auth-provider': Al activar esta función y habilitar un proveedor de autenticación, se impedirá que los usuarios inicien sesión con credenciales locales. En caso de fallo de un proveedor, ningún usuario podrá iniciar sesión. Asegúrese de mantener acceso por API o CLI a Rancher para deshabilitar la función y recuperar el acceso. Consulte la documentación de {vendor} sobre los indicadores de características para obtener más información.
   label: Indicadores de función
   title: Banderas de características
   warning: |-
@@ -9052,65 +9294,13 @@ featureFlags:
 
 performance:
   label: Configuración de rendimiento de la UI
+  removedSettingsBanner: A partir de Rancher v2.16, la función ui-sql-cache está siempre habilitada. Se han eliminado las opciones de rendimiento afectadas
   settingName: Rendimiento
-  deprecatedInactivitySetting: La configuración <i class="mr-5">"Inactividad"</i> está obsoleta en favor de <i class="mr-5">auth-user-session-idle-ttl-minutes</i>&nbsp;<a href="{settingsPageUrl}">Configuración</a>.
-  deprecatedForSSP: La configuración <i class="mr-5">"{setting}"</i> está obsoleta y se eliminará en una versión futura.
-  incrementalLoad:
-    label: Carga incremental
-    setting: Puede configurar el umbral por encima del cual se usará la carga incremental.
-    description: Cuando se habilita, los recursos aparecerán más rápidamente, pero puede tardar un poco más en cargar el conjunto completo. Esta configuración solo aplica a recursos de la API de Kubernetes.
-    checkboxLabel: Habilitar carga incremental
-    inputLabel: Umbral de recursos
-    incompatibleDescription: La carga incremental es incompatible con el filtrado por Namespace/Proyecto y la paginación del lado del servidor. Habilitarla deshabilitará esos.
-  manualRefresh:
-    label: Actualización manual
-    setting: Puede configurar un umbral por encima del cual se habilitará la actualización manual.
-    buttonTooltip: Actualizar lista
-    description: Cuando se habilita, los datos de lista no se actualizarán automáticamente; el usuario deberá activar manualmente una actualización de vista de lista. Esta configuración solo aplica a recursos de la API de Kubernetes.
-    checkboxLabel: Habilitar actualización manual de datos para listas
-    inputLabel: Umbral de recursos
-    incompatibleDescription: La actualización manual es incompatible con el filtrado por Namespace/Proyecto y la paginación del lado del servidor. Habilitarla deshabilitará esos.
   websocketNotification:
     label: Notificaciones de Websocket
-    description: Cuando está marcada, las notificaciones de websocket no aparecerán cuando la UI detecte una desconexión.
+    description: |-
+      Cuando está marcada, las notificaciones de websocket no aparecerán cuando la UI detecte una desconexión.
     checkboxLabel: Deshabilitar notificaciones de websocket
-  gc:
-    label: Recolección de basura de recursos
-    description: La UI almacenará en caché los recursos de Kubernetes localmente para evitar volver a obtenerlos. Habilite esta configuración para eliminarlos periódicamente.
-    checkboxLabel: Habilitar recolección de basura
-    whenRun:
-      description: Actualizar cuándo se ejecuta la recolección de basura
-      intervalCheckBox:
-        label: Ejecutar recolección de basura periódicamente
-      interval:
-        inputLabel: Ejecutar cada
-      route:
-        description: Ejecutar recolección de basura al cambiar de página
-        inputLabel: Cambio de página
-    howRun:
-      description: Actualizar cómo se ejecuta la recolección de basura
-      age:
-        description: Los tipos de recursos no deben haber sido accedidos dentro de este período para ser considerados para la recolección de basura.
-        inputLabel: Antigüedad del recurso
-      count:
-        description: Los tipos de recursos deben superar esta cantidad para ser considerados para la recolección de basura.
-        inputLabel: Recuento de recursos
-  nsFiltering:
-    label: Requerir filtrado por Namespace/Proyecto
-    description: Requiere que el usuario seleccione namespaces y/o proyectos. Esto restringe el número de recursos obtenidos al ver listas.
-    checkboxLabel: Habilitar filtrado requerido por Namespace/Proyecto
-    incompatibleDescription: El filtrado requerido por Namespace/Proyecto es incompatible con la actualización manual y la carga incremental. Habilitarlo deshabilitará esos.
-  advancedWorker:
-    label: Web Worker de Websocket
-    description: Las actualizaciones de recursos enviadas a la UI llegan vía WebSocket y se manejan en el hilo de la UI. Habilite esta opción para manejar actualizaciones de WebSocket del clúster en un Web Worker en un hilo separado.
-    checkboxLabel: Habilitar Web Worker avanzado de Websocket
-  inactivity:
-    title: Inactividad
-    checkboxLabel: Habilitar expiración de sesión por inactividad
-    inputLabel: Tiempo de inactividad (minutos)
-    information: Para cambiar el comportamiento de cierre de sesión automático, edite los valores de tiempo de espera de autenticación (<code>auth-user-session-ttl-minutes</code> y <code>auth-token-max-ttl-minutes</code>) y/o sesión en la página de Configuración.
-    description: Cuando se habilita y el usuario está inactivo más allá del tiempo de espera especificado, la UI dejará de actualizar el contenido de la página.
-    authUserTTL: Este tiempo de espera no puede ser mayor que el tiempo de espera de sesión de usuario auth-user-session-ttl-minutes, que actualmente es {current} minutos.
   serverPagination:
     label: Paginación del lado del servidor
     description: Por defecto, las listas obtendrán todos los recursos y paginarán localmente en el navegador. La paginación del lado del servidor mueve esto del navegador al servidor, mejorando el rendimiento.
@@ -9153,7 +9343,7 @@ banner:
   type:
     html: HTML
     text: Texto
-  htmlWarning: No todos los elementos o atributos HTML están permitidos y el HTML ingresado aquí será saneado antes de mostrarse.
+  htmlWarning: 'No todos los elementos o atributos HTML están permitidos y el HTML introducido aquí se saneará antes de mostrarse. Para los elementos de anclaje HTML, se recomienda usar el atributo target para que los enlaces se abran en una pestaña en blanco.'
   htmlContent: Contenido HTML
   toggleTextHtml: Alternar entre texto y html
 
@@ -9162,6 +9352,7 @@ branding:
   directoryName: Nombre del directorio de activos de marca
   logos:
     home: Página principal del producto
+    logoLabel: Logotipo de Rancher
     label: Logotipo
     tip: 'Suba un logotipo para reemplazar el logo de Rancher en el encabezado de navegación. La altura de la imagen debe ser 21 píxeles con un ancho máximo de 200 píxeles. Tamaño máximo de archivo: 20KB. Formatos aceptados: JPEG, PNG, SVG.'
     lightPreview: Vista previa tema claro
@@ -9226,6 +9417,8 @@ resourceQuota:
   helpText: Configure cuántos recursos puede consumir el espacio de nombres en su conjunto.
   helpTextDetail: La cantidad de recursos que el espacio de nombres puede consumir en su conjunto.
   helpTextHarvester: Las VMs necesitan reservar memoria adicional.
+  invalidAnnotation: La anotación {annotation} de este espacio de nombres tiene un formato incorrecto, por lo que no se pudo leer su cuota de recursos. Al guardar se reemplazará por los límites indicados a continuación.
+  invalidAnnotationDetail: La anotación {annotation} de este espacio de nombres tiene un formato incorrecto. No se pudo leer su cuota de recursos, por lo que no se muestra ningún límite.
   custom: Personalizado
   resourceIdentifier:
     placeholder: ej. configmaps
@@ -9498,6 +9691,7 @@ component:
           rows:
             services: Servicios
             ingresses: Entradas
+            httpRoutes: HTTPRoutes
             referredToBy: Referenciado por
             refersTo: Se refiere a
         podsCard:
