@@ -1,8 +1,8 @@
 # ---
 # locale: fr-fr (French - France)
 # source-locale: en-us
-# synced-against-en-us-commit: 02a2364 (2026-07-20)
-# last-updated: 2026-07-21
+# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# last-updated: 2026-10-01
 # ---
 ##############################
 # Special stuff
@@ -26,6 +26,7 @@ generic:
   ascending: croissant
   and: ' et '
   back: Retour
+  byteLimitExceeded: '{name} dépasse la limite de taille de fichier de {byteLimit} octets'
   cancel: Annuler
   confirm: Confirmer
   colorPicker: Sélecteur de couleur
@@ -39,6 +40,7 @@ generic:
   copyValueToClipboard: 'Copier {value} dans le presse-papiers'
   copiedToClipboard: Texte copié dans le presse-papiers
   create: Créer
+  createNew: Créer…
   created: Créé
   customize: Personnaliser
   dashboard: Tableau de bord
@@ -49,6 +51,7 @@ generic:
   download: Télécharger
   enabled: Activé
   error: Erreur
+  errorReadingFile: Erreur de lecture du fichier
   here: ici
   id: ID
   ignored: Ignoré
@@ -111,6 +114,7 @@ generic:
   type: Type
   unknown: Inconnu
   upload: Télécharger
+  warning: Avertissement
   provisioning: '—'
   key: Clé
   value: Valeur
@@ -131,7 +135,6 @@ generic:
         1d: 1d
         7d: 7d
         30d: 30d
-  tooltip: Info-bulle
   completed: Terminé
   enable: Activer
   disable: Désactiver
@@ -149,6 +152,7 @@ generic:
   tag: Étiquette
   placeholder: "ex. {text}"
   moreInfo: "Plus d’informations"
+  hintFor: "Indication pour {label}"
   selectors:
     label: Sélecteur
     matchingResources:
@@ -164,7 +168,9 @@ generic:
     key: 'Clé pour la ligne {index}'
     value: 'Valeur pour la ligne {index}'
     remove: 'supprimer la ligne {index}'
+    keyValueRemove: Supprimer la paire clé-valeur à la ligne {index}
     addKeyValue: Ajouter une nouvelle ligne Clé-Valeur
+    addBtnAriaLabel: "{label} dans une entrée clé-valeur"
     readKeyValue: lire les Clés-Valeurs depuis un fichier
     genericAddRow: Ajouter une nouvelle ligne
     arrayList: Entrée de liste de tableaux
@@ -188,36 +194,45 @@ graph:
   rendering: Rendu du graphique...
 
 locale:
-  menu: Menu de sélection des paramètres régionaux
+  menu: Sélecteur de langue
   en-us: Anglais
   zh-hans: "中文 (简体)"
   none: (Aucun)
 
 nav:
   skipToContent: Passer au contenu principal
+  jumpTo:
+    placeholder: Aller à...
+    tooltip: Commencez à taper pour trouver et accéder rapidement à une section particulière ({shortcut})
+    ariaLabel: Aller à une section de navigation
+    noResults: Aucune section correspondante
+    popularHeading: Entrées populaires
+    recentHeading: Récemment utilisées
   ariaLabel:
-    clusterIconKeyCombo: Icône de raccourci clavier du cluster
     localClusterIcon: Icône du cluster local
     clusterProvIcon: 'Icône du fournisseur du cluster {cluster}'
     topLevelMenu: Menu principal
     sideNav: Menu secondaire
     homePage: "Menu de navigation de la page d’accueil"
     cluster: Élément de menu du cluster
-    harvesterCluster: Élément de menu du cluster Harvester
-    seeAll: Voir tous les clusters - élément de menu
+    harvesterCluster: 'Élément de menu du cluster [[Harvester]]'
     multiClusterApps: Élément de menu multi-cluster dans le menu principal
     configurationApps: Élément de menu de configuration dans le menu principal
     support: "Lien vers la page d’assistance"
     about: Lien vers la page À propos
     pinCluster: 'Épingler/Désépingler le cluster {cluster}'
     collapseExpand: Réduire/Développer le groupe de menu
+    expand: "Développer le groupe de menu {group}"
+    collapse: "Réduire le groupe de menu {group}"
+    collapseAllSections: Réduire toutes les sections
     productAboutPage: Lien vers la page À propos du produit
   alt:
     mainMenuIcon: Icône du menu principal
     mainMenuRancherLogo: Logo Rancher du menu principal
     userAvatar: "Image de l’avatar utilisateur"
-  expandCollapseAppBar: "Réduire/Développer la barre d’application"
-  harvesterDashboard: Tableau de bord Harvester
+  expandAppBar: Développer la barre d’application
+  collapseAppBar: Réduire la barre d’application
+  harvesterDashboard: 'Tableau de bord [[Harvester]]'
   backToRancher: Gestionnaire de cluster
   tools: Outils
   clusterTools: Outils du cluster
@@ -238,8 +253,6 @@ nav:
   rotateCertificates: Renouveler les certificats
   rotateEncryptionKeys: Renouveler les clés de chiffrement
   takeSnapshot: Prendre un snapshot
-  seeAllClusters: Voir tous les clusters
-  seeAllClustersCollapsed: Voir tout
   keyComboTooltip: "Changer de cluster tout en conservant l’emplacement"
   group:
     cluster: Cluster
@@ -274,9 +287,7 @@ nav:
     resources: Ressources
   ns:
     all: Tous les espaces de noms
-    clusterLevel: Ressources du cluster uniquement
     namespace: "{name}"
-    namespaced: Ressources avec espace de noms uniquement
     orphan: "Hors d’un projet"
     project: "Projet : {name}"
     system: Espaces de noms système uniquement
@@ -288,20 +299,53 @@ nav:
     legacy: Applications héritées
     configuration: Configuration
     hci: HCI
+  pinClusterError: Impossible d’enregistrer vos clusters épinglés
+  pinnedCluster:
+    explore: Explorez {name} ou faites-le glisser pour changer l’ordre de vos clusters épinglés
+    exploreOnlyPinned: Explorer {name}
+    blocked: Vous ne pouvez pas explorer {name} ({reason}), mais vous pouvez le faire glisser pour changer l’ordre de vos clusters épinglés
+    blockedOnlyPinned: Vous ne pouvez pas explorer {name} ({reason})
   search:
-    placeholder: Filtrer les clusters par...
-    noResults: Aucun cluster correspondant
-    clusters: clusters
-    ariaLabel: Filtrer les clusters dans le menu principal
-  resourceSearch:
-    label: Recherche de type de ressource
-    prompt: Rechercher un type de ressource Kubernetes/personnalisé
-    toolTip: 'Recherche de type de ressource {key}'
-    placeholder: Saisissez pour rechercher un type de ressource...
-    filteringDescription: "L’utilisation de cette entrée filtrera immédiatement les résultats dans la liste ci-dessous"
+    clusters: |-
+      {count, plural,
+        one {cluster}
+        other {clusters}
+      }
+  switcher:
+    ariaLabel: Sélecteur de cluster
+    clusterSwitch: Changer de cluster
+    shortcutTooltip: Changer de cluster ({shortcut})
+    jumpTo: Aller à...
+    pinned: Clusters épinglés
+    recent: Récemment utilisés
+    allClusters: Tous les clusters
+    matches: Correspondances
+    managementCluster: Cluster de gestion
+    noMatch: Aucun cluster correspondant
+    noClusters: Aucun cluster à afficher.
+    loadError: Impossible de charger vos clusters. Fermez et réessayez.
+    aria:
+      # Accessible name for the search box. It has no visible label — only the "Jump to..." placeholder —
+      # so the name has to LEAD with those words: a speech-input user says what they can see
+      # (WCAG 2.5.3 Label in Name), while the rest tells a screen-reader user what the box searches.
+      search: Aller à un cluster (recherche dans tous les clusters)
+      clusterList: Liste des clusters
+      searching: Recherche de clusters en cours
+      results: |-
+        {count, plural,
+          one {1 cluster}
+          other {# clusters}
+        }
+      noResults: Aucun cluster correspondant
+      notReady: non prêt
+      pinned: épinglé
+      pinnedCluster: '{cluster} épinglé'
+      unpinnedCluster: '{cluster} désépinglé'
   header:
     setLoginPage: Définir comme page de connexion
     showHideBanner: Afficher/Masquer la bannière
+    pinCluster: Épingler le cluster ({shortcut})
+    unpinCluster: Désépingler le cluster ({shortcut})
   userMenu:
     preferences: Préférences
     accountAndKeys: Compte et clés API
@@ -310,9 +354,9 @@ nav:
     button:
       label: Ouvrir le menu utilisateur
   actionMenu:
-    label: Menu des actions de la page
+    label: Actions de la page
     button:
-      label: Ouvrir le menu des actions de la page
+      label: Ouvrir les actions de la page
   notifications:
     label: Centre de notifications
     button:
@@ -325,6 +369,7 @@ nav:
     resourceListNotListable: 'Le type de ressource { resource } ne peut pas être listé'
     resourceListNotFound: "Type de ressource { resource } introuvable, impossible d’afficher la liste"
     resourceIdNotFound: "Ressource { resource } avec l’identifiant { fqid } introuvable, impossible d’afficher les détails"
+    didYouMean: 'Vouliez-vous dire <a href="{url}">{resource}</a> ?'
     reload: Recharger
     separator: ou
 
@@ -395,7 +440,7 @@ about:
   title: À propos
   versions:
     downloadImages: "Télécharger la liste d’images {listName}"
-    downloadCli: "Télécharger CLI pour {os}"
+    downloadCli: "Télécharger CLI pour {os} : {file}"
     githubRepo: "Ouvrir le dépôt GitHub pour le composant {name}"
     title: Versions
     component: Composant
@@ -496,6 +541,72 @@ addProjectMemberDialog:
   title: Ajouter un membre au projet
 
 authConfig:
+  list:
+    title: Fournisseurs d’authentification
+    description: Configurez les fournisseurs d’identité que les utilisateurs peuvent utiliser pour se connecter à Rancher.
+    create: Ajouter un fournisseur
+    external: Fournisseurs externes
+    local: Authentification locale
+    customiseLogin: Personnaliser l’écran de connexion
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    empty:
+      title: Aucun fournisseur externe configuré
+      description: Tout le monde se connecte avec un compte Rancher local. Connectez un fournisseur d’identité pour que les utilisateurs puissent utiliser leurs identifiants d’entreprise existants.
+      create: Ajouter un fournisseur
+      learnMore: Comment fonctionne l’authentification externe
+    disableLocal:
+      label: Désactiver la connexion avec les utilisateurs locaux
+      description: Les utilisateurs se connectent uniquement via des fournisseurs externes. Les comptes locaux subsistent, mais ne peuvent pas être utilisés pour se connecter.
+      risk: La connexion locale est désactivée. Si tous les fournisseurs externes deviennent inaccessibles, personne ne pourra se connecter et la récupération nécessite un accès en ligne de commande au cluster.
+    localRow:
+      title: Authentification locale
+      chip: Intégré
+      description: Comptes pour les administrateurs. À utiliser uniquement lorsqu’un fournisseur est indisponible.
+      descriptionDisabled: Les comptes existent toujours et conservent leurs permissions, mais ne peuvent pas être utilisés pour se connecter.
+      meta: Comptes gérés par Rancher
+      active: Actif
+      disabled: Désactivé
+      manageUsers: Gérer les utilisateurs locaux
+  access:
+    title: '{provider} - Accès'
+    type: Type
+  add:
+    title: Ajouter un fournisseur d’authentification
+    subtitle: Sélectionnez le fournisseur à connecter. Rancher prend en charge un fournisseur externe ; c’est donc celui avec lequel les utilisateurs se connecteront. Pour en utiliser un autre ultérieurement, supprimez celui-ci et configurez le nouveau.
+    searchPlaceholder: Rechercher des fournisseurs
+    filterLabel: Protocole
+    filterAll: Tous
+    noResults: Aucun fournisseur ne correspond à votre recherche.
+    resultCount: |-
+        {count , plural,
+          =1 { {count} fournisseur correspond à votre recherche. }
+          other { {count} fournisseurs correspondent à votre recherche. }
+        }
+  disable:
+    action: Désactiver
+    title: 'Désactiver {name} ?'
+    titleGeneric: Désactiver ce fournisseur d’authentification ?
+    loggedOut: Tout utilisateur actuellement connecté avec ce fournisseur sera déconnecté et redirigé vers l’écran de connexion.
+    learnMore: Restaurer l’accès après la désactivation d’un fournisseur
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    irreversible: Cette action est irréversible. La désactivation supprime toutes les ressources stockées pour ce fournisseur.
+    acknowledge: Je comprends que ces utilisateurs et permissions seront supprimés
+    confirm: Désactiver et supprimer
+  disableLast:
+    title: 'Désactiver {name} ?'
+    titleGeneric: Désactiver ce fournisseur d’authentification ?
+    soleProvider: La connexion locale est désactivée et {name} est votre seul fournisseur externe. Le désactiver maintenant ne laisserait aucun moyen de se connecter à Rancher.
+    remedy: Réactivez la connexion locale, puis désactivez le fournisseur. Vous pourrez la désactiver à nouveau une fois qu’un nouveau fournisseur sera configuré et opérationnel.
+    refusal: Rancher ne désactivera pas le dernier fournisseur externe tant que la connexion locale est désactivée.
+    locked: La connexion locale est verrouillée sur cette installation et ne peut donc pas être réactivée ici. La restauration de l’accès nécessite un accès en ligne de commande au cluster.
+    confirm: Réactiver la connexion locale
+  disableLocal:
+    title: Désactiver la connexion avec les utilisateurs locaux ?
+    effect: Désormais, les utilisateurs se connectent uniquement via des fournisseurs externes. Les comptes locaux ne sont pas supprimés et conservent leurs permissions, mais ne peuvent pas être utilisés pour se connecter.
+    recovery: Vous pouvez désactiver cette option à tout moment depuis la liste des fournisseurs — mais uniquement tant que vous pouvez encore vous connecter. Si tous les fournisseurs externes deviennent inaccessibles alors que cette option est activée, la récupération nécessite un accès en ligne de commande au cluster.
+    soleRoute: Les fournisseurs externes deviennent le seul moyen de se connecter, pour tous les utilisateurs, y compris les administrateurs.
+    acknowledge: Je comprends que les comptes locaux ne pourront plus se connecter
+    confirm: Désactiver la connexion locale
   slo:
     sloTitle: Comportement de déconnexion
     sloOptions:
@@ -503,14 +614,15 @@ authConfig:
       logoutAll: 'Se déconnecter de Rancher et de {name} (inclut toutes les autres applications enregistrées avec {name})'
       choose: "Permettre à l’utilisateur de choisir l’une des options ci-dessus lors d’une étape de déconnexion supplémentaire"
   accessMode:
-    label: 'Configurer qui doit pouvoir se connecter et utiliser {vendor}'
+    label: 'Configurer qui doit pouvoir se connecter avec ce fournisseur'
     required: "Restreindre l’accès aux utilisateurs et groupes autorisés uniquement"
     restricted: 'Autoriser les membres des clusters et projets, ainsi que les utilisateurs et groupes autorisés'
     unrestricted: Autoriser tout utilisateur valide
   allowedPrincipalIds:
     title: Utilisateurs et groupes autorisés
   associatedWarning: 'Le compte {provider} utilisé pour activer le fournisseur externe recevra des autorisations équivalentes à celles de l''utilisateur Rancher actuellement connecté. Voir <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuration de l''authentification externe et utilisateurs principaux</a> pour comprendre pourquoi.'
-  bannerEnableAuthProvider: "Le paramètre « Désactiver l’authentification locale » est activé. L’activation d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} pour plus d’informations."
+  bannerEnableAuthProvider: 'Le flag de fonctionnalité « Désactiver l’authentification locale » est activé. L’activation d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> pour plus d’informations.'
+  bannerEnabledAuthProvider: 'Le flag de fonctionnalité « Désactiver l’authentification locale » est également activé. Les utilisateurs ne peuvent pas se connecter avec des identifiants locaux. En cas de défaillance de ce fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la <a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">documentation</a> pour plus d’informations.'
   githubapp:
     clientId:
       label: ID client
@@ -603,11 +715,11 @@ authConfig:
       1:
         title: '<a href="https://console.developers.google.com/apis/credentials" target="_blank" rel="noopener noreferrer nofollow">Cliquez ici</a> pour ouvrir les paramètres des applications dans un nouvel onglet'
         body:
-          1: 'Connectez-vous à votre compte. Accédez à "APIs & Services" puis sélectionnez "OAuth consent screen".'
-          2: 'Domaines autorisés :'
-          3: "Lien de la page d’accueil de l’application : "
-          4: 'Sous Scopes pour les APIs Google, activez "email", "profile" et "openid".'
-          5: 'Cliquez sur "Enregistrer".'
+         1: 'Connectez-vous à votre compte. Accédez à "APIs & Services" puis sélectionnez "OAuth consent screen".'
+         2: 'Domaines autorisés :'
+         3: "Lien de la page d’accueil de l’application : "
+         4: 'Sous Scopes pour les APIs Google, activez "email", "profile" et "openid".'
+         5: 'Cliquez sur "Enregistrer".'
         topPrivateDomain: 'Domaine privé de premier niveau de :'
         ariaLabel:
           hostname: Copier le nom d’hôte dans le presse-papiers
@@ -712,6 +824,16 @@ authConfig:
     okta: Configurer un compte Okta
     ping: Configurer un compte Ping
     shibboleth: Configurer un compte Shibboleth
+    genericsaml: Configurer un fournisseur SAML générique
+    nameIDFormat: Format NameID
+    nameIDFormatOptions:
+      unspecified: Non spécifié
+      emailAddress: Adresse e-mail
+      transient: Transitoire
+      persistent: Persistant
+    signatureMethod: Algorithme de signature
+    allowIdpInitiated: Autoriser la connexion initiée par l’IdP
+    forceAuthn: Forcer la ré-authentification
     showLdap: Configurer un serveur OpenLDAP
     userName: "Champ Nom d’utilisateur"
     search:
@@ -829,9 +951,6 @@ authConfig:
     disabled: "Le fournisseur d’authentification {provider} est actuellement désactivé."
     enabled: "Le fournisseur d’authentification {provider} est actuellement activé."
   testAndEnable: "Tester et activer l’authentification"
-  noneEnabled: "L’authentification locale est toujours activée, mais vous pouvez sélectionner un autre fournisseur d’authentification supplémentaire parmi ceux affichés ci-dessous."
-  localEnabled: "{vendor} est configuré pour autoriser l’accès aux comptes de sa base de données locale."
-  manageLocal: Gérer les comptes
 
 authGroups:
   actions:
@@ -856,6 +975,16 @@ assignTo:
 asyncButton:
   alt:
     iconAlt: Icône du bouton asynchrone
+  # Read out to screen readers when no phase label of its own says anything useful.
+  # See AsyncButton.vue `announcementFor`.
+  announcement:
+    waiting: En cours
+    success: Réussi
+    error: Échec
+    withLabel:
+      waiting: '{label} : en cours'
+      success: '{label} : réussi'
+      error: '{label} : échec'
   registerApplication:
     action: Ajouter une application
     success: Ajouté
@@ -974,6 +1103,9 @@ asyncButton:
     successIcon: checkmark
     waiting: ''
     waitingIcon: refresh
+    waitingAnnouncement: Actualisation&hellip;
+    successAnnouncement: Actualisé
+    errorAnnouncement: Échec de l’actualisation
   manual-refresh:
     action: ''
     actionIcon: refresh
@@ -983,6 +1115,9 @@ asyncButton:
     successIcon: checkmark
     waiting: ''
     waitingIcon: refresh
+    waitingAnnouncement: Actualisation&hellip;
+    successAnnouncement: Actualisé
+    errorAnnouncement: Échec de l’actualisation
   remove:
     action: Supprimer
     success: Supprimé
@@ -1294,26 +1429,16 @@ catalog:
     chart: Graphique
     warning:
       managed:
-        Warning, {manager} manages deployment and upgrade of the {name} app. Upgrading this app is not supported.<br>
+        Attention, {manager} gère le déploiement et la mise à niveau de l’application {name}. La mise à niveau de cette application n’est pas prise en charge.<br>
         {version, select,
           null { }
-          other { Under most circumstances, no user intervention should be needed to ensure that the {version} version is compatible with the version of Rancher that you are running.}
+          other { Dans la plupart des cas, aucune intervention de l’utilisateur ne devrait être nécessaire pour garantir que la version {version} est compatible avec la version de Rancher que vous utilisez.}
         }
     error:
       requiresFound: '<a href="{url}">{name}</a> doit être installé avant de pouvoir installer ce chart.'
       requiresMissing: "Ce chart nécessite un autre chart fournissant {name}, mais aucun n’a été trouvé."
       insufficientCpu: "Ce chart nécessite {need, number} cœurs CPU, mais le cluster n’en dispose que de {have, number}."
       insufficientMemory: "Ce chart nécessite {need} de mémoire, mais le cluster n’en dispose que de {have}."
-      legacy:
-        label: "Il s’agit d’une application {legacyType} et elle ne peut pas être modifiée ici"
-        enableLegacy:
-          prompt: Vous devrez activer les fonctionnalités héritées pour modifier cette application
-          goto: "Aller aux paramètres d’indicateurs de fonctionnalité"
-        navigate: Naviguer vers les applications héritées
-        mcmNotSupported: Les applications multi-cluster héritées ne peuvent pas être gérées via cette interface
-        category:
-          legacy: Héritage
-          mcm: "Multi-cluster"
     header:
       install: 'Installer {name}'
       installGeneric: Installer le graphique
@@ -1357,15 +1482,7 @@ catalog:
       basics:
         label: Métadonnées
         subtext: "Définir les métadonnées de l’application"
-        description: Ce processus vous aidera à {action, select,
-            install { créer }
-            upgrade { mettre à niveau }
-            downgrade { mettre à niveau }
-            editVersion { mettre à jour }
-          } {existing, select,
-            true { l’app}
-            false { le chart}
-          }. Commencez par définir quelques informations de base utilisées par {vendor} pour gérer l’App.
+        description: Ce processus vous aidera à {action, select, install { créer } upgrade { mettre à niveau } downgrade { mettre à niveau } editVersion { mettre à jour } other { mettre à jour } } {existing, select, true { l’app} false { le chart} other { le chart} }. Commencez par définir quelques informations de base utilisées par {vendor} pour gérer l’App.
         nsCreationDescription: "Pour installer l’application dans un nouvel espace de noms, saisissez son nom dans le champ Espace de noms et sélectionnez-le."
         createNamespace: "L’espace de noms <code>{namespace}</code> sera créé."
         requiresImagePullSecret: "Ce chart nécessite un secret d’extraction d’image pour que les images soient extraites avec succès."
@@ -1421,7 +1538,7 @@ catalog:
       defaultMessage: 'Par défaut "master" si laissé vide'
     gitRepo:
       label: URL du dépôt Git
-      placeholder: "ex. https://github.com/votre-entreprise/charts.git"
+      placeholder: "ex. https://github.com/your-company/charts.git"
     name:
       rancher-charts: '{vendor}'
       rancher-partner-charts: Partenaires
@@ -1448,7 +1565,7 @@ catalog:
       placeholder: "ex. https://charts.rancher.io"
     oci:
       urlLabel: "URL de l’hôte du dépôt OCI"
-      placeholder: "ex. oci://<hôte-registre>/<espace-noms>/<nom-chart>:<tag>"
+      placeholder: "ex. oci://<registry-host>/<namespace>/<chart-name>:<tag>"
       warning: Les URL OCI doivent UNIQUEMENT cibler des charts Helm.
       info: Pour les grands dépôts contenant de nombreux charts, envisagez de cibler un espace de noms ou un chart spécifique pour améliorer les performances, par exemple avec oci://<registry-host>/<namespace> ou oci://<registry-host>/<namespace>/<chart-name>.
       skipTlsVerifications: Ignorer les vérifications TLS
@@ -1471,6 +1588,20 @@ catalog:
       enableLabel: Activer l’intervalle d’actualisation
     downloaded:
       label: Téléchargé
+    detail:
+      overview: Vue d’ensemble
+      source: Source
+      type: Type
+      status: Statut
+      authentication: Authentification
+      caBundle: Bundle de certificats CA
+      exponentialBackOff: Back-off exponentiel (min / max / tentatives)
+      charts:
+        label: Contenu
+        view: Voir les charts
+        none: Aucun contenu disponible
+      extensions:
+        view: Voir les extensions
     error:
       refresh: Erreur lors du rafraîchissement du dépôt
   tools:
@@ -1584,6 +1715,8 @@ compliance:
   testsToSkip: Tests à ignorer
   alerting: Alertes
   detail:
+    noReport: 'Aucun rapport d’analyse n’est encore disponible. État actuel de l’analyse : {state}. Le rapport apparaîtra ici une fois l’analyse terminée.'
+    noReportWithMessage: 'Aucun rapport d’analyse n’est encore disponible. État actuel de l’analyse : {state} - {message}. Le rapport apparaîtra ici une fois l’analyse terminée.'
     subRow:
       noNodes: Aucune information supplémentaire
 
@@ -1642,7 +1775,7 @@ cluster:
       label: vSphere
       note: "<b>Important :</b> Configurez les options du fournisseur cloud vSphere et du fournisseur de stockage dans l’onglet Configuration des modules complémentaires."
     harvester:
-      label: Harvester
+      label: '[[Harvester]]'
   copyConfig: Copier KubeConfig dans le presse-papiers
   copiedConfig: KubeConfig copié dans le presse-papiers
   custom:
@@ -1821,7 +1954,7 @@ cluster:
       kubeconfigContent:
         label: Contenu Kubeconfig
       placeholder: Espace de noms/Nom
-      cluster: Cluster Harvester importé
+      cluster: Cluster [[Harvester]] importé
       enableTpm: Activer TPM
       enableCpuPinning: "Activer l’épinglage CPU"
       cpuPinningTooltip: "L’activation de l’épinglage CPU améliore les performances et réduit la latence pour la machine virtuelle Harvester"
@@ -1829,25 +1962,25 @@ cluster:
       secureBoot: Démarrage sécurisé
       enableEfi: Démarrage en mode EFI
       installGuestAgent: "Installer l’agent invité"
-      tokenExpirationWarning: "Avertissement : les identifiants Cloud Harvester utilisent un jeton d’authentification sous-jacent qui peut avoir une date d’expiration - veuillez consulter l'<a href=\"https://harvesterhci.io/kb/renew_harvester_cloud_credentials\" target=\"_blank\" rel=\"noopener nofollow\">article de la base de connaissances</a> suivant pour les implications possibles sur les opérations de gestion."
+      tokenExpirationWarning: 'Avertissement : les identifiants Cloud [[Harvester]] utilisent un jeton d’authentification sous-jacent qui peut avoir une date d’expiration - veuillez consulter l''<a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">article de la base de connaissances</a> suivant pour les implications possibles sur les opérations de gestion.'
   description:
     label: Description du cluster
     placeholder: Tout texte décrivant mieux ce cluster
   harvester:
-    importNotice: Importer des clusters Harvester via
+    importNotice: Importer des clusters [[Harvester]] via
     warning:
-      label: Ceci est un cluster Harvester - activez le flag de fonctionnalité Harvester pour le gérer
+      label: Ceci est un cluster [[Harvester]] - activez le flag de fonctionnalité [[Harvester]] pour le gérer
       state: Avertissement
       cloudProvider:
         incompatible:
-          You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">here</a> to see which Kubernetes versions are supported.
+          Vous ne pouvez pas sélectionner le fournisseur cloud [[Harvester]] car la version actuelle de [[Harvester]] n’est pas compatible avec la version Kubernetes RKE2 sélectionnée, cliquez <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">ici</a> pour voir quelles versions de Kubernetes sont prises en charge.
     clusterWarning: |-
       Il {count, plural,
-      =1 {y a 1 cluster Harvester qui n’est pas affiché}
-      other {y a # clusters Harvester qui ne sont pas affichés}
-      } car ils n’ont pas accès au type virt.harvester.cattle.io/v1.VirtualMachine.
+      =1 {y a 1 cluster [[Harvester]] qui n’est pas affiché}
+      other {y a # clusters [[Harvester]] qui ne sont pas affichés}
+      }
     registration:
-      step1: "1. Accédez à la page <code>Avancé / Paramètres</code> de l’interface utilisateur Harvester cible."
+      step1: "1. Accédez à la page <code>Avancé / Paramètres</code> de l’interface utilisateur [[Harvester]] cible."
       step2: '2. Trouvez le paramètre <code>cluster-registration-url</code> et cliquez sur le bouton <code><i class="icon icon-actions" ></i></code> -> <code>Modifier le paramètre</code>.'
       step3: "3. Saisissez l’URL d’enregistrement suivante et cliquez sur le bouton <code>Enregistrer</code>."
       step4: "URL d’enregistrement"
@@ -1871,7 +2004,7 @@ cluster:
         toolTip: "Utilisateur SSH pour se connecter avec l’image OS sélectionnée."
     kubeconfigSecret:
         nameRequired: Le nom du cluster est requis.
-        error: "Erreur lors de la génération du secret kubeconfig Harvester : {err}"
+        error: 'Erreur lors de la génération du secret kubeconfig [[Harvester]] : {err}'
   haveOneOwner: Il doit y avoir au moins un membre avec le rôle Propriétaire.
   import:
     warningBanner: Vous ne devez pas importer un cluster déjà connecté à une autre instance de Rancher, car cela peut entraîner des comportements inattendus.
@@ -1882,6 +2015,10 @@ cluster:
   explore: Explorer
   importAction: "Importer l’existant"
   manageAction: Gérer
+  kubeConfig:
+    error:
+      title: Impossible de générer le KubeConfig
+      noClusters: Aucun cluster n’a pu être résolu à partir de la sélection actuelle. Actualisez la page et réessayez.
   kubernetesVersion:
     label: Version de Kubernetes
     current: (actuelle)
@@ -1890,7 +2027,6 @@ cluster:
     manual: (mise à niveau manuelle)
     deprecatedPatches: Afficher les versions de correctif Kubernetes obsolètes
     deprecatedPatchWarning: "Nous recommandons d’utiliser la dernière version de correctif pour chaque version mineure de Kubernetes. Les versions de correctif obsolètes peuvent être utiles à des fins de migration."
-  legacyWarning: "L’indicateur de fonctionnalité héritée est activé et toutes les fonctionnalités héritées ne sont pas prises en charge dans Kubernetes 1.21+."
   log:
     connecting: Connexion en cours…
     noData: "Il n’y a aucune entrée de journal de provisionnement."
@@ -2111,7 +2247,7 @@ cluster:
           placeholder: "Défaut : dernière image rancheros-vmware"
         cloudInit:
           label: Cloud Init
-          placeholder: "ex. http://mon_hôte/cloud-config.yml"
+          placeholder: "ex. http://my_host/cloud-config.yml"
           note: Fichier ou URL cloud-init à définir dans le guestinfo
         cloudConfigYaml: Cloud Config YAML
         os: "Système d’exploitation"
@@ -2334,8 +2470,6 @@ cluster:
     desiredNodeGroupWarning: "Il n’y a aucun nœud disponible pour exécuter l’agent du cluster. Le cluster ne deviendra actif qu’une fois qu’au moins un nœud sera disponible."
     haveArgInfo: Les informations de configuration ne sont pas disponibles pour la version Kubernetes sélectionnée.
     cloudProviderAddConfig: "Sur Kubernetes 1.27 ou supérieur, le fournisseur cloud <b>Amazon</b> nécessite une configuration supplémentaire. Voir <a href=\"https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">la documentation</a> pour plus d’informations."
-    cloudProviderUnsupportedAzure: "Sur Kubernetes 1.30 ou supérieur, le fournisseur cloud <b>Azure</b> a été supprimé. Voir <a href=\"https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">la documentation</a> pour plus d’informations."
-    cloudProviderMigrateAzure: "Sur Kubernetes 1.30 ou supérieur, le fournisseur cloud <b>Azure</b> a été supprimé. Pour mettre à niveau Kubernetes, le cluster doit d’abord être migré vers le fournisseur externe.<br> Voir <a href=\"https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">la documentation</a> pour plus d’informations."
     machinePoolError: |-
       {count, plural,
         =1 { {pool_name} : La valeur fournie pour {fields} est introuvable }
@@ -2382,9 +2516,9 @@ cluster:
       unique: Les noms de pools doivent être uniques
     nodeTotals:
       label:
-        controlPlane: "'{count} Plan de contrôle'"
+        controlPlane: '{count} Plan de contrôle'
         etcd: '{count} etcd'
-        worker: "'{count} Nœud de travail'"
+        worker: '{count} Nœud de travail'
       tooltip:
         controlPlane: |-
           {count, plural,
@@ -2477,7 +2611,7 @@ cluster:
     googlegke: Google GKE
     gke: GKE
     googlekubernetesengine: Google GKE (Kev1 non supporté)
-    harvester: Harvester
+    harvester: '[[Harvester]]'
     huaweicce: Huawei CCE
     import: Générique
     imported: Importé
@@ -2708,6 +2842,7 @@ cluster:
     enableIngress: "Installer le contrôleur d’entrée pour activer le routage externe"
     nginx:
       header: Ingress-NGINX
+      contentCommunity: Cette option est uniquement disponible dans SUSE Rancher Prime.
       content: Choisissez ceci uniquement si vos charges de travail ne sont pas encore prêtes pour Traefik.
     dual:
       header: Mode Dual
@@ -2862,6 +2997,12 @@ resource:
   errors:
     update: Erreur lors de la mise à jour de {name}
 
+copyToClipboard:
+  action: Copier
+  waiting: Copie&hellip;
+  success: Copié !
+  error: Erreur de copie
+
 codeMirror:
   escapeText: "Appuyez sur Maj+Échap pour quitter l’éditeur"
   keymap:
@@ -2992,11 +3133,18 @@ dynamicContent:
   eol:
     title: Fin de vie atteinte
     message: Cette version de Rancher ({version}) a atteint la fin de vie. Envisagez une mise à niveau vers une version prise en charge.
+  eoc:
+    title: Les mises à jour ont pris fin
+    message: Cette version de Rancher ({version}) ne recevra plus de mises à jour. Envisagez une mise à niveau vers une version plus récente ou vers Rancher Prime.
 
 etcdInfoBanner:
   hasLeader: "Etcd a un leader :"
   leaderChanges: "Nombre de changements de leader :"
   failedProposals: "Nombre de propositions échouées :"
+
+fileSelectorTextArea:
+  dropHint: ou déposez le fichier sur la zone de texte ci-dessus
+  dropToReplace: Déposer le fichier ici remplacera tout contenu existant
 
 fleet:
   settings:
@@ -3145,22 +3293,22 @@ fleet:
   clusters:
     harvester: |-
       Il {count, plural,
-      =1 {y a 1 cluster Harvester masqué car il ne peut pas être utilisé avec Fleet}
-      other {y a # clusters Harvester masqués car ils ne peuvent pas être utilisés avec Fleet}
-      }.
+      =1 {y a 1 cluster [[Harvester]] masqué car il ne peut pas être utilisé avec Continuous Delivery}
+      other {y a # clusters [[Harvester]] masqués car ils ne peuvent pas être utilisés avec Continuous Delivery}
+      }
   tokens:
     harvester: |-
       {count, plural,
-      =1 {1 token est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet}
-      other {# tokens sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}
-      }.
+      =1 {1 token est masqué car il appartient à un cluster [[Harvester]] qui ne peut pas être utilisé avec Continuous Delivery}
+      other {# tokens sont masqués car ils appartiennent à des clusters [[Harvester]] qui ne peuvent pas être utilisés avec Continuous Delivery}
+      }
   bundles:
     resources: Ressources
     harvester: |-
       {count, plural,
-      =1 {1 bundle est masqué car il appartient à un cluster Harvester qui ne peut pas être utilisé avec Fleet}
-      other {# bundles sont masqués car ils appartiennent à des clusters Harvester qui ne peuvent pas être utilisés avec Fleet}
-      }.
+      =1 {1 bundle est masqué car il appartient à un cluster [[Harvester]] qui ne peut pas être utilisé avec Continuous Delivery}
+      other {# bundles sont masqués car ils appartiennent à des clusters [[Harvester]] qui ne peuvent pas être utilisés avec Continuous Delivery}
+      }
   fleetSummary:
     noClusters:
       gitRepo: Ce dépôt Git ne cible aucun cluster
@@ -3173,6 +3321,13 @@ fleet:
       unknown: Inconnu
       notReady: Pas prêt
       waitApplied: "En attente d’application"
+      notready: Non prêt
+      waitapplied: En attente d’application
+      errapplied: Erreur d’application
+      modified: Modifié
+      outofsync: Désynchronisé
+      pending: En attente
+      waitingfordependency: En attente d’une dépendance
   clusterTargets:
     advancedConfigs: Des configurations cibles avancées sont définies, vérifiez le fichier YAML pour plus de détails.
     targetMode:
@@ -3277,7 +3432,10 @@ fleet:
       description1: Le dossier racine est utilisé par défaut. Fleet analysera récursivement tous les dossiers et sous-dossiers pour trouver les fichiers fleet.yaml.
       description2: Vous pouvez fournir plusieurs répertoires différents. Vous pouvez également ajouter des sous-chemins pour spécifier différents fichiers YAML.
       ariaLabel: Saisir les chemins pour le dépôt Git
+      inputAriaLabel: Saisir le chemin {index} pour le dépôt Git
+      removeBtn: Supprimer le chemin {index}
       placeholder: ex. /répertoire/dans/votre/dépôt
+      addBtnAriaLabel: Ajouter un chemin pour le dépôt Git
       addLabel: Ajouter un chemin
       enableBundles: Spécifier manuellement les sous-chemins des fichiers de configuration (Fleet ne scannera pas les sous-dossiers récursivement)
       subpaths:
@@ -3609,6 +3767,7 @@ fleet:
     state: État
     cluster: Cluster
     error: Erreur
+    message: Message
     ready: Prêt
     errors: Erreurs
   workspaces:
@@ -3619,9 +3778,15 @@ fleet:
     remove:
       warning: "La suppression d’un espace de travail supprime également toutes les ressources qu’il contient. Cela inclut les GitRepos mais aussi les clusters.<br><br>Les clusters supprimés seront retirés de {vendor}, et si {vendor} gère le cycle de vie du cluster, l’infrastructure sous-jacente sera également supprimée."
   restrictions:
-    addTitle: Espaces de noms cibles autorisés
+    addTitle: 'allowedTargetNamespaces'
     addLabel: Ajouter
-    banner: "{count, plural, =0 { Ajouter des espaces de noms ici créera une GitRepoRestriction. } other { Seul le champ <code>allowedTargetNamespaces</code> de la restriction Git Repo est géré ici. Vous pouvez apporter des modifications supplémentaires à la restriction Git Repo.} }"
+    deprecationWarning: 'Les GitRepoRestrictions sont obsolètes et seront supprimées dans une future version. Utilisez plutôt les <policiesLink>Policies</policiesLink>.'
+    deprecationWarningTargetNamespaces: 'Les GitRepoRestrictions sont obsolètes et seront supprimées dans une future version. La restriction des namespaces cibles autorisés repose sur GitRepoRestriction et n’a pas d’équivalent dans les SUSE Continuous Delivery Policies.'
+    migrationGuide: 'Consultez le <docsLink>guide de migration des SUSE Continuous Delivery Policies</docsLink>.'
+    banner: "{count, plural,
+          =0 { Ajouter des espaces de noms ici créera une GitRepoRestriction. }
+          other { Seul le champ <code>allowedTargetNamespaces</code> de la restriction Git Repo est géré ici. Vous pouvez apporter des modifications supplémentaires à la restriction Git Repo}
+        }"
   configMaps:
     label: ConfigMaps
   secrets:
@@ -4193,6 +4358,7 @@ labels:
   addTaint: Ajouter une contamination
   addAnnotation: Ajouter une annotation
   protectedWarning: Cette clé est protégée et sera ignorée
+  readOnlyWarning: Cette clé est en lecture seule et les modifications ne seront pas conservées
   labels:
     title: Étiquettes
     description: "Paires clé/valeur attachées aux objets qui spécifient des attributs d’identification."
@@ -4445,7 +4611,7 @@ logging:
       title: Tampon
       tags: Étiquettes
       chunkLimitSize: Taille limite de fragment
-      chunkLimitRecords: Limite de chunk par enregistrements
+      chunkLimitRecords: Limite d’enregistrements par chunk
       totalLimitSize: Taille limite totale
       flushInterval: Intervalle de vidage
       timekey: Clé temporelle
@@ -4454,6 +4620,7 @@ logging:
   s3:
     keyId: ID de clé depuis le secret
     secretKey: Clé secrète depuis le secret
+    region: Région
     endpoint: Point de terminaison
     bucket: Compartiment
     path: Chemin
@@ -4548,7 +4715,7 @@ login:
   login: Connexion
   howdy: 'Bonjour !'
   welcome: 'Bienvenue sur {vendor}'
-  landscapeAlt: Image paysage
+  logoAlt: 'Logo {vendor}'
   loggedOut: Vous avez été déconnecté.
   loggedOutSessionIdle: Vous avez été déconnecté de Rancher car votre session a expiré. Connectez-vous à nouveau pour continuer.
   loggedOutFromSso: "Vous avez été déconnecté de Rancher, mais vous pouvez toujours être connecté à votre fournisseur d’identité SSO."
@@ -4565,15 +4732,24 @@ login:
   clientError: "Nom d’utilisateur ou mot de passe invalide. Veuillez réessayer."
   userUnauthorized: "Vous n’êtes pas autorisé à utiliser ce système."
   specificError: "Une erreur s’est produite lors de la connexion : {msg}"
-  useLocal: Utiliser un utilisateur local
   loginWithProvider: 'Se connecter avec {provider}'
   username: "Nom d’utilisateur"
   password: Mot de passe
   loggingIn: Connexion en cours...
   loggedIn: Connecté
   loginWithLocal: Se connecter avec un utilisateur local
-  useProvider: 'Utiliser un utilisateur {provider}'
-  useNonLocal: Utiliser un utilisateur non local
+  providers:
+    heading: Choisissez comment vous connecter
+    or: Ou
+    chooseDifferent: Choisir un autre fournisseur
+    useLocal: Se connecter en tant qu’utilisateur local
+    meta: "{vendor} · {protocol}"
+    remember: Mémoriser mon choix sur cet appareil
+    rememberHint: S’applique au fournisseur que vous choisissez. Enregistré uniquement dans ce navigateur.
+    local:
+      name: Compte local
+      description: Connectez-vous à Rancher avec un nom d’utilisateur et un mot de passe.
+      meta: Nom d’utilisateur et mot de passe
   remember:
     label: "Mémoriser le nom d’utilisateur"
   cli:
@@ -4587,10 +4763,7 @@ logout:
   error: "Une erreur s’est produite lors de la déconnexion : {msg}"
   specificError:
     unknown: Inconnu.\n\nVeuillez contacter votre administrateur système.
-    500: |-
-      Erreur côté serveur.
-      
-      Veuillez contacter votre administrateur système.
+    500: "Erreur côté serveur.\n\nVeuillez contacter votre administrateur système."
 
 managementNode:
   customName: Nom personnalisé
@@ -4771,10 +4944,10 @@ monitoring:
         placeholder: "ex. ./ca-file.csr"
       certFilePath:
         label: Chemin du fichier de certificat
-        placeholder: "ex. ./cert-file.pem"
+        placeholder: "ex. ./cert-file.crt"
       keyFilePath:
         label: Chemin du fichier de clé
-        placeholder: "ex. ./key-file.pem"
+        placeholder: "ex. ./key-file.pfx"
       secretsBanner: "Les chemins de fichiers ci-dessous doivent être référencés dans <pre class=\"inline-block m-0 p-0 vertical-middle\">alertmanager.alertmanagerSpec.secrets</pre> lors du déploiement du chart Monitoring. Pour plus d’informations, consultez notre <a href=\"{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">documentation</a>."
   projectMonitoring:
     detail:
@@ -4891,7 +5064,7 @@ monitoringReceiver:
   shared:
     proxyUrl:
       label: URL du proxy
-      placeholder: "ex. http://mon-proxy/"
+      placeholder: "ex. http://my-proxy/"
     sendResolved:
       label: "Activer l’envoi des alertes résolues"
 
@@ -5295,7 +5468,7 @@ persistentVolume:
       disk-csi-azure-com: Azure Disk (CSI)
       file-csi-azure-com: Azure File (CSI)
       driver-longhorn-io: Longhorn (CSI)
-      driver-harvesterhci-io: Harvester (CSI)
+      driver-harvesterhci-io: '[[Harvester]] (CSI)'
       lvm-driver-harvesterhci-io: LVM
       nfs-csi-k8s-io: NFS (CSI)
       ebs-csi-aws-com: AWS Elastic Block Store (CSI)
@@ -5612,7 +5785,7 @@ plugins:
     message: "Impossible de charger le code de l’extension"
     generic: "Erreur d’extension"
     primeOnly: "Impossible de charger l’extension Rancher Prime dans Rancher Community"
-    apiAnnotationMissing: "Impossible de charger l’extension. La version installée n’est pas compatible avec la version actuelle de l’API Extensions."
+    apiAnnotationMissing: "Impossible de charger l’extension. La version installée n’est pas compatible avec la version actuelle de l’API Extensions (l’annotation catalog.cattle.io/ui-extensions-version est absente de l’extension, ce qui implique une incompatibilité avec Rancher 2.10 et versions ultérieures)"
     api: "Impossible de charger l’extension. La version installée n’est pas compatible avec la version actuelle de l’API Extensions."
     host: "Impossible de charger l’extension. La version installée n’est pas compatible avec cet hôte d’application."
     version: "Impossible de charger l’extension. La version installée n’est pas compatible avec la version actuelle de Rancher."
@@ -6005,6 +6178,8 @@ promptForceRemove:
 promptScaleMachineDown:
   attemptingToRemove: Vous tentez de supprimer {count} {type}
   attemptingToScaleDown: "Vous tentez de réduire l’échelle de {type}"
+  machineAlreadyDeleted: "La machine {name} est déjà en cours de suppression ou a été recréée. Le pool de machines n’a pas été réduit."
+  machineDeleteAnnotationMissing: "La machine {name} n’a pas pu être marquée pour suppression. Le pool de machines n’a pas été réduit."
   retainedMachine1: Au moins une machine doit exister pour les rôles Plan de contrôle et Etcd.
   retainedMachine2: <b>{ name }</b> restera
   scaling: |-
@@ -6166,7 +6341,8 @@ rbac:
         description: |-
           Contrôle l’accès que {isUser, select,
           true {l’utilisateur}
-          false {le groupe}} a pour administrer l’installation globale {appName}.
+          false {le groupe}
+          other {le groupe}} a pour administrer l’installation globale {appName}.
       custom:
         label: Personnalisé
         description: 'Rôles non créés par {vendor}.'
@@ -6297,7 +6473,8 @@ resourceDetail:
     managedWarning: |-
       Ce {type} est géré par {hasName, select,
         no {une application {managedBy}}
-        yes {l’application {managedBy} {appName}}}; les modifications apportées ici seront probablement écrasées lors de la prochaine exécution de {managedBy}.
+        yes {l’application {managedBy} {appName}}
+        other {une application {managedBy}}}; les modifications apportées ici seront probablement écrasées lors de la prochaine exécution de {managedBy}.
 resourceList:
   head:
     create: Créer
@@ -6402,8 +6579,8 @@ secret:
     password: Mot de passe
     username: Nom d’utilisateur
   basic:
-      password: Mot de passe
-      username: Nom d’utilisateur
+    password: Mot de passe
+    username: Nom d’utilisateur
   ssh:
     keys: Clés
     keysAndHosts: Clés et hôtes connus
@@ -6583,6 +6760,8 @@ servicesPage:
       label: Utiliser IPAM
     shareIP:
       label: IP partagée LB
+    network:
+      label: Réseau
 
   ips:
     define: Ports de service
@@ -6673,8 +6852,12 @@ sortableTable:
     lastPageBtn: Icône de dernière page de résultats
     sortingIconDesc: "Icône de tri décroissant de l’en-tête de tableau"
     sortingIconAsc: "Icône de tri croissant de l’en-tête de tableau"
-  genericGroupCheckbox: Case à cocher de sélection de groupe de tableau
-  genericRowCheckbox: "Case à cocher de sélection de ligne pour l’élément {item}"
+  genericGroupCheckbox: Sélectionner toutes les lignes
+  genericRowCheckbox: Sélectionner {item}
+  genericRowCheckboxNoItem: Sélectionner la ligne
+  selectAllResources: Sélectionner tous les {resource}
+  expandColumnHeader: Développer
+  actionsColumnHeader: Actions
   tableActionsLabel: "Plus d’actions - { resource }"
   tableActionsImgAlt: "Icône de plus d’actions"
   bulkActions:
@@ -6699,6 +6882,7 @@ sortableTable:
       other {{from} - {to} sur {count} {pluralLabel}}}
   search: Filtrer
   searchLabel: Filtrer les résultats du tableau
+  clearFilter: Effacer le filtre des résultats du tableau
   in: dans
   addFilter: Ajouter un filtre
   filteringDescription: "L’utilisation de ce champ filtrera immédiatement les résultats dans le tableau ci-dessous"
@@ -6939,7 +7123,7 @@ storageClass:
       placeholder: e.g. 32
     repl:
       label: Réplication
-      placeholder: e.g.1; 0 for entire device
+      placeholder: ex. 1 ; 0 pour l’ensemble du périphérique
     ioPriority:
       label: Priorité E/S
       placeholder: e.g. low
@@ -7001,13 +7185,13 @@ storageClass:
     title: (Obsolète)
     warning: "Le plug-in intégré {provisioner} est obsolète : Trouvez un pilote CSI <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://kubernetes-csi.github.io/docs/drivers.html\">ici.</a>"
   harvesterhci:
-    title: Harvester (CSI)
+    title: '[[Harvester]] (CSI)'
     warning:
-      unSatisfiesVersion: Veuillez mettre à niveau votre version du pilote Harvester CSI pour utiliser cette fonctionnalité. (csi-driver >= v0.1.15)
+      unSatisfiesVersion: Veuillez mettre à niveau votre version du pilote CSI [[Harvester]] pour utiliser cette fonctionnalité. (csi-driver >= v0.1.15)
     hostStorageClass:
       label: Classe de stockage hôte
-      placeholder: Nom de la classe de stockage sur le cluster Harvester hôte
-      tooltip: Par défaut, la classe de stockage par défaut du cluster Harvester hôte est utilisée.
+      placeholder: Nom de la classe de stockage sur le cluster [[Harvester]] hôte
+      tooltip: Par défaut, la classe de stockage par défaut du cluster [[Harvester]] hôte est utilisée.
 
 tableHeaders:
   assuredConcurrencyShares: Partages de concurrence garantis
@@ -7048,6 +7232,7 @@ tableHeaders:
   completions: Achèvements
   count: Nombre
   createdAt: Créé le
+  customResources: Ressource
   customVerbs: Verbes personnalisés
   description: Description
   cpu: CPU
@@ -7067,6 +7252,7 @@ tableHeaders:
   effect: Effet
   endpoints: Points de terminaison
   expires: Expire le
+  explore: Explorer
   firstSeen: Premier vu
   firstSeenTooltip: La date à laquelle l’événement a été enregistré pour la première fois
   flow: Flux
@@ -7089,6 +7275,8 @@ tableHeaders:
   iP: IP
   image: Image
   imageSize: Taille
+  httpRouteGateways: Gateways
+  httpRouteHostnames: Noms d’hôtes
   ingressClass: "Classe d’entrée"
   ingressDefaultBackend: Par défaut
   ingressTarget: Cible
@@ -7297,6 +7485,8 @@ user:
       userDescription:
         label: Description
         placeholder: "ex. Ce compte est destiné à Jean Dupont"
+    roleUpdateFailed:
+      orphaned: 'L’utilisateur « {username} » a été créé, mais ses rôles n’ont pas pu être attribués et le compte incomplet n’a pas pu être supprimé automatiquement. Ouvrez la liste des utilisateurs pour le vérifier ou le supprimer.'
   list:
     errorRefreshingGroupMemberships: Erreur lors du rafraîchissement des appartenances aux groupes
   retention:
@@ -7315,12 +7505,14 @@ user:
         disableAfter:
           checkbox: "Désactiver les comptes utilisateurs après une période d’inactivité (durée depuis la dernière connexion)"
           input:
+            labelDisable: Période d’inactivité - Désactiver les comptes utilisateurs
             label: "Période d’inactivité"
             tooltip: Utilise des unités de durée (ex. 30h pour 30 heures)
         deleteAfter:
           checkbox: "Supprimer les comptes utilisateurs après une période d’inactivité (durée depuis la dernière connexion)"
           input:
             label: "Période d’inactivité"
+            labelDelete: Période d’inactivité - Supprimer les comptes utilisateurs
             tooltip: Utilise des unités de durée (ex. 30h pour 30 heures)
             subLabel: Cette valeur doit être supérieure à la période de désactivation, si elle est active
         cron:
@@ -7471,8 +7663,9 @@ validation:
       localhost: "Si l’URL du serveur est interne au serveur Rancher (ex. localhost), les clusters en aval pourraient ne pas être accessibles."
       trailingForwardSlash: "L’URL du serveur ne doit pas se terminer par une barre oblique."
       url: "L’URL du serveur doit être une URL valide."
-      awsStyleEndpoint: "L’URL du point de terminaison doit être une URL basée sur un domaine valide et ne peut pas commencer par un protocole."
+      awsStyleEndpoint: "L’URL du point de terminaison doit être une URL basée sur un domaine valide et ne peut pas commencer par un protocole (par ex. https:// ou http://)"
   genericUrl: Le champ doit être une URL valide
+  url: '« {key} » doit être une URL valide'
   stringLength:
     between: '"{key}" doit contenir entre {min} et {max} {max, plural, =1 {caractère} other {caractères}}'
     exactly: '"{key}" doit contenir {count, plural, =1 {# caractère} other {# caractères}}'
@@ -7487,16 +7680,12 @@ validation:
   tab: "Un ou plusieurs champs de cet onglet contiennent une erreur de validation du formulaire"
   version: Numéro de version invalide
 
-carousel:
-  previous: Précédent
-  next: Suivant
-  controlItem: 'Aller à la diapositive nº {number}'
-
 wizard:
   previous: Précédent
   finish: Terminer
   next: Suivant
   step: "Étape {number}"
+  stepList: Étapes de l’assistant
   edit: Modifier
   create: Créer
   view: Voir
@@ -7807,6 +7996,7 @@ workload:
       status: État
       volumeClaimTemplates: Modèles de réclamation de volume
       upgrading: "Politique de mise à l’échelle et de mise à niveau"
+      availability: Disponibilité
   cronSchedule: Planification
   detail:
     services: Services
@@ -7818,6 +8008,10 @@ workload:
     cannotFindIngresses: Aucun Ingress transférant du trafic vers des Services sélectionnant des Pods dans cette charge de travail trouvé.
     ingressListCaption: "Les Ingresses suivants transfèrent du trafic vers des Services sélectionnant des Pods de cette charge de travail :"
     cannotViewIngressesBecauseCannotViewServices: "Impossible de trouver les Ingresses pertinents en raison d’un manque de permission pour afficher les Services."
+    httpRoutes: HTTPRoutes
+    cannotFindHttpRoutes: Impossible de trouver des HTTPRoutes qui acheminent le trafic vers des Services sélectionnant des Pods de cette charge de travail.
+    httpRouteListCaption: "Les HTTPRoutes suivantes acheminent le trafic vers des Services qui sélectionnent des Pods de cette charge de travail :"
+    cannotViewHttpRoutesBecauseCannotViewServices: Impossible de trouver les HTTPRoutes pertinentes en raison d’un manque de permission pour afficher les Services.
     pods:
       title: Pods
   detailTop:
@@ -7860,7 +8054,7 @@ workload:
       tip: Le nombre de jobs réussis terminés à conserver.
     suspend: Suspendre
   list:
-    errorCannotScale: "Échec de la mise à l’échelle de {workloadName} {direction, select, up { vers le haut } down { vers le bas } }"
+    errorCannotScale: Échec de la mise à l’échelle de {workloadName} {direction, select, up { vers le haut } down { vers le bas } other { } }
   metrics:
     pod: Métriques du pod
     metricsView: Vue des métriques
@@ -7909,7 +8103,9 @@ workload:
   validation:
     containers: Conteneurs
     containerImage: Conteneur {name} - "Image du conteneur" est requis.
+    containerName: Conteneur - « Nom du conteneur » est requis.
     localhostProfile: Conteneur {name} - "Profil localhost du conteneur" est requis quand le type SeccompProfile est Localhost.
+    volumeMountPath: Conteneur {name} - « Point de montage » est requis.
   replicas: Réplicas
   showTabs: Afficher les options avancées
   scheduling:
@@ -8169,8 +8365,10 @@ model:
       freeipa: FreeIPA
       googleoauth: Google
       genericoidc: OIDC générique
+      genericsaml: SAML générique
       keycloakoidc: Keycloak
       cognito: Amazon Cognito
+      oidc: OIDC
 
 
   cluster:
@@ -8520,6 +8718,16 @@ typeLabel:
       one { Ingress }
       other { Ingresses }
     }
+  gateway.networking.k8s.io.httproute: |-
+    {count, plural,
+      one { HTTPRoute }
+      other { HTTPRoutes }
+    }
+  gateway.networking.k8s.io.gateway: |-
+    {count, plural,
+      one { Gateway }
+      other { Gateways }
+    }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
       one { Network Policy }
@@ -8627,8 +8835,8 @@ typeLabel:
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
-      one { Harvester Cluster }
-      other { Harvester Clusters }
+      one { Cluster [[Harvester]] }
+      other { Clusters [[Harvester]] }
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
@@ -9028,6 +9236,7 @@ advancedSettings:
     'agent-tls-mode': "Vérification du certificat Rancher. En mode `strict`, les agents (système, cluster, fleet, etc.) ne feront confiance qu’aux installations Rancher avec un certificat signé par le CABundle du paramètre `cacerts`. En mode system-store, les agents font confiance aux certificats du magasin de confiance du système d’exploitation."
     'k3s-based-upgrader-uninstall-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut désinstaller simultanément l’ancienne application `rancher-k3s-upgrader` ou `rancher-rke2-upgrader`."
     'system-agent-upgrader-install-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut installer simultanément les ressources requises pour la mise à niveau de l’agent système."
+    'delete-machine-on-failure-after': Définit le nombre de secondes après lequel Rancher supprimera les machines d’infrastructure dont le provisionnement a échoué. Définissez 0 pour désactiver la suppression automatique des machines en échec.
     'imported-cluster-version-management': "Active la gestion des versions pour les clusters RKE2/K3s importés, et pour le cluster local s’il s’agit d’un cluster RKE2/K3s. Le paramètre de gestion des versions par cluster remplace ce paramètre global au niveau du cluster."
     'imported-cluster-day2-ops-enabled': Contrôle si les clusters RKE2/K3s importés auront les opérations Day 2 (snapshots etcd, restaurations, rotations de clés de chiffrement) activées par défaut. Cela affectera tous les clusters utilisant la configuration par défaut, et peut être remplacé au niveau du cluster.
   warnings:
@@ -9058,7 +9267,7 @@ advancedSettings:
 
 featureFlags:
   description:
-    'hide-local-auth-provider': L’activation de cette fonctionnalité et d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} pour plus d’informations.
+    'hide-local-auth-provider': L’activation de cette fonctionnalité et d’un fournisseur d’authentification empêchera les utilisateurs de se connecter avec des identifiants locaux. En cas de défaillance d’un fournisseur, aucun utilisateur ne pourra se connecter. Assurez-vous de conserver un accès API ou CLI à Rancher pour désactiver la fonctionnalité et récupérer l’accès. Veuillez consulter la documentation {vendor} sur les Feature Flags pour plus d’informations.
   label: Indicateurs de fonctionnalités
   title: Êtes-vous sûr ?
   warning: |-
@@ -9075,68 +9284,13 @@ featureFlags:
 
 performance:
   label: Paramètres de performance UI
+  removedSettingsBanner: Depuis Rancher v2.16, la fonctionnalité ui-sql-cache est toujours activée. Les paramètres de performance concernés ont été supprimés
   settingName: Performance
-  deprecatedInactivitySetting: "Le paramètre <i class=\"mr-5\">\"Inactivité\"</i> est désormais déprécié en faveur du <i class=\"mr-5\">auth-user-session-idle-ttl-minutes</i>&nbsp;<a href=\"{settingsPageUrl}\">Paramètre</a>."
-  deprecatedForSSP: "Le paramètre <i class=\"mr-5\">\"{setting}\"</i> est désormais déprécié et sera supprimé dans une prochaine version."
-  incrementalLoad:
-    label: Chargement incrémentiel
-    setting: Vous pouvez configurer le seuil au-dessus duquel le chargement incrémentiel sera utilisé.
-    description: |-
-      Lorsqu’activé, les ressources apparaîtront plus rapidement, mais il peut prendre un peu plus de temps pour charger l’ensemble des ressources. Ce paramètre s’applique uniquement aux ressources provenant de l’API Kubernetes
-    checkboxLabel: Activer le chargement incrémentiel
-    inputLabel: Seuil de ressources
-    incompatibleDescription: "Le chargement incrémentiel est incompatible avec le filtrage Espace de noms/Projet et la pagination côté serveur. L’activer les désactivera."
-  manualRefresh:
-    label: Actualisation manuelle
-    setting: Vous pouvez configurer un seuil au-dessus duquel l’actualisation manuelle sera activée.
-    buttonTooltip: Actualiser la liste
-    description: |-
-      Lorsqu’activé, les données de liste ne se mettront pas à jour automatiquement mais l’utilisateur devra déclencher manuellement une actualisation de la vue liste. Ce paramètre s’applique uniquement aux ressources provenant de l’API Kubernetes
-    checkboxLabel: Activer l’actualisation manuelle des données pour les listes
-    inputLabel: Seuil de ressources
-    incompatibleDescription: "L’actualisation manuelle est incompatible avec le filtrage Espace de noms/Projet et la pagination côté serveur. L’activer les désactivera."
   websocketNotification:
     label: Notifications Websocket
     description: |-
       Lorsque coché, les notifications websocket n’apparaîtront pas lorsque l’interface détecte une déconnexion.
     checkboxLabel: Désactiver les notifications websocket
-  gc:
-    label: Collecte des ressources inutilisées
-    description: L’interface met en cache les ressources Kubernetes localement pour éviter de les récupérer à nouveau. Dans certains cas, cela peut entraîner une grande quantité de données stockées dans le navigateur. Activez ce paramètre pour les supprimer périodiquement.
-    checkboxLabel: Activer la collecte des ressources inutilisées
-    whenRun:
-      description: Mettre à jour quand la collecte s’exécute
-      intervalCheckBox:
-        label: Exécuter la collecte périodiquement
-      interval:
-        inputLabel: Exécuter toutes les
-      route:
-        description: Exécuter la collecte lors du changement de page
-        inputLabel: Changement de page
-    howRun:
-      description: Mettre à jour comment la collecte s’exécute
-      age:
-        description: "Les types de ressources ne doivent pas avoir été accédés dans cette période pour être pris en compte pour la collecte."
-        inputLabel: Âge des ressources
-      count:
-        description: Les types de ressources doivent dépasser cette quantité pour être pris en compte pour la collecte.
-        inputLabel: Nombre de ressources
-  nsFiltering:
-    label: Exiger le filtrage Espace de noms / Projet
-    description: Exiger que l’utilisateur sélectionne des espaces de noms et/ou des projets. Cela restreint le nombre de ressources récupérées lors de l’affichage des listes et devrait améliorer la réactivité de l’interface dans les systèmes avec beaucoup de ressources.
-    checkboxLabel: Activer le filtrage Espace de noms / Projet requis
-    incompatibleDescription: "Le filtrage Espace de noms / Projet requis est incompatible avec l’actualisation manuelle et le chargement incrémentiel. L’activer les désactivera."
-  advancedWorker:
-    label: Web Worker Websocket
-    description: Les mises à jour des ressources poussées vers l’interface arrivent via WebSocket et sont gérées dans le fil UI. Activez cette option pour gérer les mises à jour WebSocket du cluster dans un Web Worker dans un fil séparé. Cela devrait améliorer la réactivité de l’interface dans les systèmes où les ressources changent souvent.
-    checkboxLabel: Activer le Web Worker Websocket avancé
-  inactivity:
-    title: Inactivité
-    checkboxLabel: Activer l’expiration de session par inactivité
-    inputLabel: "Délai d’inactivité (minutes)"
-    information: "Pour modifier le comportement de déconnexion automatique, modifiez les valeurs de délai d’expiration des jetons d’autorisation et/ou de session (<code>auth-user-session-ttl-minutes</code> et <code>auth-token-max-ttl-minutes</code>) dans la page des paramètres."
-    description: "Lorsqu’activé et que l’utilisateur est inactif au-delà du délai spécifié, l’interface utilisateur ne rafraîchira plus le contenu de la page et l’utilisateur devra recharger la page pour continuer."
-    authUserTTL: Ce délai ne peut pas être supérieur au délai de session utilisateur auth-user-session-ttl-minutes, qui est actuellement de {current} minutes.
   serverPagination:
     label: Pagination côté serveur
     description: "Par défaut, les listes récupèrent toutes les ressources et paginent localement dans le navigateur. La pagination côté serveur déplace cette opération du navigateur vers le serveur, améliorant les performances de l’interface."
@@ -9188,6 +9342,7 @@ branding:
   directoryName: Nom du répertoire des ressources de marque
   logos:
     home: Page principale du produit
+    logoLabel: Logo Rancher
     label: Logo
     tip: "Téléchargez un logo pour remplacer le logo Rancher dans l’en-tête de navigation de niveau supérieur. La hauteur de l’image doit être de 21 pixels avec une largeur maximale de 200 pixels. La taille maximale du fichier est de 20 Ko. Formats acceptés : JPEG, PNG, SVG."
     lightPreview: Aperçu thème clair
@@ -9252,6 +9407,8 @@ resourceQuota:
   helpText: Configurez la quantité de ressources que l’espace de noms peut consommer dans son ensemble.
   helpTextDetail: La quantité de ressources que l’espace de noms peut consommer dans son ensemble.
   helpTextHarvester: Les VMs doivent réserver une surcharge mémoire supplémentaire.
+  invalidAnnotation: L’annotation {annotation} sur ce namespace est malformée, son quota de ressources n’a donc pas pu être lu. L’enregistrement la remplacera par les limites ci-dessous.
+  invalidAnnotationDetail: L’annotation {annotation} sur ce namespace est malformée. Son quota de ressources n’a pas pu être lu, aucune limite n’est donc affichée.
   custom: Personnalisé
   resourceIdentifier:
     placeholder: ex. configmaps
@@ -9524,6 +9681,7 @@ component:
           rows:
             services: Services
             ingresses: Entrées
+            httpRoutes: HTTPRoutes
             referredToBy: Référencé par
             refersTo: Référence à
         podsCard:
