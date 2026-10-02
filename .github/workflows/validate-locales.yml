@@ -5,13 +5,14 @@ name: Validate locales
 # that was enforced only by prose in shared/translation-rules.md and by whoever
 # reviewed the PR. This runs the same checks mechanically.
 #
-# Parity is absolute: once reference/en-us.yaml moves, every locale fails until
-# /update-language realigns it, and so does every pull request. That pressure is
-# intended — the translations are meant to be exact structural copies of the
-# English source. The single exception is a change that touches
-# reference/en-us.yaml and no locale file, i.e. the weekly sync, which is
-# checked on the English source alone; it is detected by diffing against
-# BASE_REF, which is why the full history is fetched.
+# Parity is absolute: once reference/en-us.yaml moves, every locale fails on
+# main until /update-language realigns it. A pull request, though, is judged
+# only on the locale files it changes (CHANGED_ONLY), so updating one language
+# is not held red by the others that are still behind; a change to the
+# validator, this workflow or the dependencies is still checked in full. A
+# change that touches reference/en-us.yaml and no locale file, i.e. the weekly
+# sync, is checked on the English source alone. Both are detected by diffing
+# against BASE_REF, which is why the full history is fetched.
 
 on:
   pull_request:
@@ -58,3 +59,6 @@ jobs:
           # What this change is diffed against, to tell whether it touches only
           # reference/en-us.yaml.
           BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          # On a pull request, check only the locale files it changes. Pushes to
+          # main and manual runs check every locale.
+          CHANGED_ONLY: ${{ github.event_name == 'pull_request' && '1' || '' }}
