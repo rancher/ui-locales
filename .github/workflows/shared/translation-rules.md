@@ -81,11 +81,12 @@ It exits non-zero if the file is not shippable, and checks:
 The same script runs on every pull request, so a translation that does not pass locally will not
 pass review either.
 
-Key parity is absolute. A locale that is behind `reference/en-us.yaml` fails, and every pull
-request fails with it until `/update-language` has realigned that language — the translations are
-meant to be exact structural copies of the English source, and CI going red is how that is kept
-true. The only change exempt from this is one that touches `reference/en-us.yaml` and no locale
-file, which is checked on the English source alone.
+Key parity is absolute. A locale that is behind `reference/en-us.yaml` fails until
+`/update-language` has realigned that language — the translations are meant to be exact structural
+copies of the English source, and CI going red is how that is kept true. On a pull request CI checks
+only the locale files that pull request changes, so one language can be realigned without waiting on
+the others; pushes to `main` check every locale. A change that touches `reference/en-us.yaml` and no
+locale file is checked on the English source alone.
 
 Two categories are reported as **advisories** and do not fail the run. They are about wording rather
 than structure, and are judgement calls:
