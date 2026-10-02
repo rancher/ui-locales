@@ -9,6 +9,7 @@
  * Usage:
  *   node scripts/validate-locales.mjs            # validate every locale
  *   node scripts/validate-locales.mjs pt-br      # validate one locale
+ *   CHANGED_ONLY=1 node scripts/validate-locales.mjs   # only the locales changed vs BASE_REF
  *
  * Exits non-zero if any error is found. Warnings never fail the run.
  */
@@ -234,6 +235,35 @@ const REFERENCE_ONLY = !!CHANGED
   && CHANGED.files.includes('reference/en-us.yaml')
   && !CHANGED.files.some((f) => f.startsWith('pkg/locales/l10n/'));
 
+/**
+ * Files whose change can alter the verdict for every locale, so a change that
+ * touches any of them is always checked in full.
+ */
+const GLOBAL_FILES = [
+  'scripts/validate-locales.mjs',
+  '.github/workflows/validate-locales.yml',
+  'package.json',
+  'yarn.lock'
+];
+
+/**
+ * With CHANGED_ONLY set (CI sets it on pull requests), only the locale files the
+ * change touches are checked: a pull request that updates one translation is
+ * judged on that translation, not held red by others still behind a sync. Pushes
+ * to main stay full, so main keeps reporting the state of every locale.
+ *
+ * The locales to check, or null to check every locale.
+ */
+const SCOPED = (() => {
+  if (!process.env.CHANGED_ONLY || !CHANGED || CHANGED.files.some((f) => GLOBAL_FILES.includes(f))) {
+    return null;
+  }
+
+  return CHANGED.files
+    .map((f) => f.match(/^pkg\/locales\/l10n\/([^/]+)\.yaml$/)?.[1])
+    .filter((locale) => locale && fs.existsSync(path.join(L10N_DIR, `${ locale }.yaml`)));
+})();
+
 /** The provenance block every locale file must carry, per translation-rules.md. */
 function checkProvenance(file, locale, expectedCommit) {
   const head = fs.readFileSync(file, 'utf8').split('\n').slice(0, 8).join('\n');
@@ -311,8 +341,8 @@ function main() {
       console.log(`  ${ locale.padEnd(8) } ${ String(behind).padStart(4) } key(s) to add, ${ String(gone).padStart(4) } to remove${ ordered ? '' : ', order to realign' }`);
     }
 
-    console.log('\nRun /update-language <locale> for each. Until every locale is an exact structural');
-    console.log('copy of the new en-us.yaml, any pull request that is not reference-only will fail.');
+    console.log('\nRun /update-language <locale> for each. Until a locale is an exact structural copy');
+    console.log('of the new en-us.yaml, it fails on main and on any pull request that touches it.');
 
     if (errors.length) {
       console.log(`\nErrors (${ errors.length }):`);
@@ -324,7 +354,9 @@ function main() {
   }
 
   const files = fs.readdirSync(L10N_DIR).filter((f) => f.endsWith('.yaml')).sort();
-  const locales = files.map((f) => path.basename(f, '.yaml')).filter((l) => !only || l === only);
+  const scoped = !only && SCOPED;
+  const locales = files.map((f) => path.basename(f, '.yaml'))
+    .filter((l) => (only ? l === only : !scoped || scoped.includes(l)));
 
   if (only && !locales.length) {
     console.error(`No locale file found for "${ only }" in pkg/locales/l10n`);
@@ -348,9 +380,16 @@ function main() {
     }
   }
 
-  console.log(CHANGED
-    ? `Mode:      full — every locale must match en-us exactly (compared against ${ CHANGED.ref })\n`
-    : `Mode:      full — every locale must match en-us exactly${ process.env.BASE_REF ? ` (cannot resolve "${ process.env.BASE_REF }", so reference-only changes are not detected)` : '' }\n`);
+  if (scoped) {
+    const skipped = files.map((f) => path.basename(f, '.yaml')).filter((l) => !scoped.includes(l));
+
+    console.log(`Mode:      changed-only — checking the locale files ${ CHANGED.ref }...HEAD touches: ${ scoped.join(', ') || 'none' }`);
+    console.log(`           not checked (unchanged here): ${ skipped.join(', ') || 'none' }\n`);
+  } else {
+    console.log(CHANGED
+      ? `Mode:      full — every locale must match en-us exactly (compared against ${ CHANGED.ref })\n`
+      : `Mode:      full — every locale must match en-us exactly${ process.env.BASE_REF ? ` (cannot resolve "${ process.env.BASE_REF }", so reference-only changes are not detected)` : '' }\n`);
+  }
 
   for (const locale of locales) {
     const file = path.join(L10N_DIR, `${ locale }.yaml`);
@@ -507,7 +546,9 @@ function main() {
     process.exit(1);
   }
 
-  console.log('\nAll locale files are structurally valid.');
+  console.log(scoped
+    ? `\n${ scoped.length ? `Changed locale files are structurally valid (${ scoped.join(', ') }).` : 'No locale file changed — nothing to check against en-us.' }`
+    : '\nAll locale files are structurally valid.');
 }
 
 main();
