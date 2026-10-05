@@ -1,8 +1,8 @@
 # ---
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
-# synced-against-en-us-commit: 02a2364 (2026-07-20)
-# last-updated: 2026-07-21
+# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# last-updated: 2026-10-01
 # ---
 ##############################
 # Special stuff
@@ -26,6 +26,7 @@ generic:
   ascending: 遞增
   and: ' 和 '
   back: 返回
+  byteLimitExceeded: '{name} 超過了 {byteLimit} 字節的文件大小限制'
   cancel: 取消
   confirm: 確認
   colorPicker: 顏色選擇器
@@ -39,6 +40,7 @@ generic:
   copyValueToClipboard: '複製 {value} 到剪貼簿'
   copiedToClipboard: 文字已複製到剪貼簿
   create: 創建
+  createNew: 新建…
   created: 創建時間
   customize: 自定義
   dashboard: 儀表板
@@ -49,6 +51,7 @@ generic:
   download: 下載
   enabled: 啟用
   error: 錯誤
+  errorReadingFile: 讀取文件時出錯
   here: 此處
   id: ID
   ignored: 忽略
@@ -111,6 +114,7 @@ generic:
   type: 類型
   unknown: 未知
   upload: 上傳
+  warning: 警告
   provisioning: '—'
   key: 鍵
   value: 值
@@ -131,7 +135,6 @@ generic:
         1d: 1天
         7d: 7天
         30d: 30天
-  tooltip: 工具提示
   completed: 已完成
   enable: 啟用
   disable: 禁用
@@ -149,6 +152,7 @@ generic:
   tag: 標籤
   placeholder: "例如：{text}"
   moreInfo: 更多信息
+  hintFor: "{label} 提示"
   selectors:
     label: 選擇器
     matchingResources:
@@ -164,7 +168,9 @@ generic:
     key: 第 {index} 列的鍵
     value: 第 {index} 列的值
     remove: 移除第 {index} 列
+    keyValueRemove: 刪除第 {index} 行的鍵值對
     addKeyValue: 新增一列鍵值
+    addBtnAriaLabel: "鍵值輸入中的 {label}"
     readKeyValue: 從檔案讀取鍵值
     genericAddRow: 新增一列
     arrayList: 陣列清單輸入
@@ -188,36 +194,45 @@ graph:
   rendering: 正在渲染圖表...
 
 locale:
-  menu: 語言選擇器菜單
+  menu: 語言選擇器
   en-us: English
   zh-hans: 簡體中文
   none: (無)
 
 nav:
   skipToContent: 跳至主要內容
+  jumpTo:
+    placeholder: 跳轉到...
+    tooltip: 開始輸入即可快速查找並跳轉到特定部分（{shortcut}）
+    ariaLabel: 跳轉到導航部分
+    noResults: 沒有匹配的部分
+    popularHeading: 熱門條目
+    recentHeading: 最近使用
   ariaLabel:
-    clusterIconKeyCombo: 集群鍵盤快捷鍵組合圖標
     localClusterIcon: 本地集群圖標
     clusterProvIcon: 集群 {cluster} 提供商圖標
     topLevelMenu: 主菜單
     sideNav: 次級菜單
     homePage: 主頁導航菜單
     cluster: 集群菜單項
-    harvesterCluster: Harvester 集群菜單項
-    seeAll: 查看所有集群菜單項
+    harvesterCluster: '[[Harvester]] 集群菜單項'
     multiClusterApps: 主菜單多集群應用菜單項
     configurationApps: 主菜單配置應用菜單項
     support: 支持頁面鏈接
     about: 關於頁面鏈接
     pinCluster: 固定/取消固定 {cluster} 集群
     collapseExpand: 摺疊/展開菜單組
+    expand: "展開 {group} 菜單組"
+    collapse: "摺疊 {group} 菜單組"
+    collapseAllSections: 摺疊所有部分
     productAboutPage: 產品關於頁面鏈接
   alt:
     mainMenuIcon: 主菜單圖標
     mainMenuRancherLogo: 主菜單 Rancher 標誌
     userAvatar: 用戶頭像圖片
-  expandCollapseAppBar: 展開/摺疊應用欄
-  harvesterDashboard: Harvester 儀表板
+  expandAppBar: 展開應用欄
+  collapseAppBar: 摺疊應用欄
+  harvesterDashboard: '[[Harvester]] 儀表板'
   backToRancher: 集群管理器
   tools: 工具
   clusterTools: 集群工具
@@ -238,8 +253,6 @@ nav:
   rotateCertificates: 輪換證書
   rotateEncryptionKeys: 輪換加密密鑰
   takeSnapshot: 拍攝快照
-  seeAllClusters: 查看所有集群
-  seeAllClustersCollapsed: 查看全部
   keyComboTooltip: 切換集群並保持當前位置
   group:
     cluster: 集群
@@ -274,9 +287,7 @@ nav:
     resources: 資源
   ns:
     all: 所有命名空間
-    clusterLevel: 集群資源
     namespace: "{name}"
-    namespaced: 命名空間資源
     orphan: 不在項目內
     project: "項目名稱: {name}"
     system: 系統命名空間
@@ -288,20 +299,53 @@ nav:
     legacy: 舊版應用
     configuration: 配置
     hci: HCI
+  pinClusterError: 無法保存你固定的集群
+  pinnedCluster:
+    explore: 瀏覽 {name}，或拖動它以更改固定集群的順序
+    exploreOnlyPinned: 瀏覽 {name}
+    blocked: 你無法瀏覽 {name}（{reason}），但可以拖動它以更改固定集群的順序
+    blockedOnlyPinned: 你無法瀏覽 {name}（{reason}）
   search:
-    placeholder: 輸入關鍵詞，搜索集群
-    noResults: 沒有匹配的集群
-    clusters: 集群
-    ariaLabel: 在主菜單上過濾集群
-  resourceSearch:
-    label: 資源搜索
-    prompt: 搜索 Kubernetes 資源/自定義資源類型
-    toolTip: 資源搜索 {key}
-    placeholder: 輸入關鍵詞，搜索資源
-    filteringDescription: 使用此輸入將立即過濾下方列表中的結果
+    clusters: |-
+      {count, plural,
+        one {集群}
+        other {集群}
+      }
+  switcher:
+    ariaLabel: 集群切換器
+    clusterSwitch: 集群切換
+    shortcutTooltip: 集群切換（{shortcut}）
+    jumpTo: 跳轉到...
+    pinned: 固定的集群
+    recent: 最近使用
+    allClusters: 所有集群
+    matches: 匹配項
+    managementCluster: 管理集群
+    noMatch: 沒有匹配的集群
+    noClusters: 沒有可顯示的集群。
+    loadError: 無法加載你的集群。請關閉並重試。
+    aria:
+      # Accessible name for the search box. It has no visible label — only the "Jump to..." placeholder —
+      # so the name has to LEAD with those words: a speech-input user says what they can see
+      # (WCAG 2.5.3 Label in Name), while the rest tells a screen-reader user what the box searches.
+      search: 跳轉到某個集群（搜索所有集群）
+      clusterList: 集群列表
+      searching: 正在搜索集群
+      results: |-
+        {count, plural,
+          one {1 個集群}
+          other {# 個集群}
+        }
+      noResults: 沒有匹配的集群
+      notReady: 未就緒
+      pinned: 已固定
+      pinnedCluster: '{cluster} 已固定'
+      unpinnedCluster: '{cluster} 已取消固定'
   header:
     setLoginPage: 設置為登錄頁面
     showHideBanner: 顯示/隱藏橫幅
+    pinCluster: 固定集群（{shortcut}）
+    unpinCluster: 取消固定集群（{shortcut}）
   userMenu:
     preferences: 偏好設置
     accountAndKeys: 賬號 & API 密鑰
@@ -310,9 +354,9 @@ nav:
     button:
       label: 打開用戶菜單
   actionMenu:
-    label: 頁面操作菜單
+    label: 頁面操作
     button:
-      label: 打開頁面操作菜單
+      label: 打開頁面操作
   notifications:
     label: 通知中心
     button:
@@ -325,6 +369,7 @@ nav:
     resourceListNotListable: 資源類型 { resource } 無法列出
     resourceListNotFound: 未找到資源類型 { resource }，無法顯示列表
     resourceIdNotFound: 未找到 ID 為 { fqid } 的資源 { resource }，無法顯示資源詳細信息
+    didYouMean: '你是否要找 <a href="{url}">{resource}</a>？'
     reload: 重新加載
     separator: 或者
 
@@ -395,7 +440,7 @@ about:
   title: 簡介
   versions:
     downloadImages: "下載 {listName} 鏡像列表"
-    downloadCli: "下載適用於 {os} 的 CLI"
+    downloadCli: "下載適用於 {os} 的 CLI：{file}"
     githubRepo: "打開 {name} 組件的 GitHub 倉庫"
     title: 版本
     component: 組件
@@ -496,6 +541,72 @@ addProjectMemberDialog:
   title: 添加項目成員
 
 authConfig:
+  list:
+    title: 認證提供商
+    description: 配置用戶可用於登錄 Rancher 的身份提供商。
+    create: 添加提供商
+    external: 外部提供商
+    local: 本地認證
+    customiseLogin: 自定義登錄界面
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    empty:
+      title: 未配置外部提供商
+      description: 所有人都使用本地 Rancher 賬號登錄。連接一個身份提供商，用戶即可使用其現有的公司憑證。
+      create: 添加提供商
+      learnMore: 外部認證的工作原理
+    disableLocal:
+      label: 禁用本地用戶登錄
+      description: 用戶僅通過外部提供商登錄。本地賬號會保留，但無法用於登錄。
+      risk: 本地登錄已關閉。如果所有外部提供商都無法訪問，任何人都將無法登錄，恢復訪問需要通過命令行訪問集群。
+    localRow:
+      title: 本地認證
+      chip: 內置
+      description: 供管理員使用的賬號。僅在提供商不可用時使用。
+      descriptionDisabled: 賬號仍然存在並保留其權限，但無法用於登錄。
+      meta: 由 Rancher 管理的賬號
+      active: 已啟用
+      disabled: 已禁用
+      manageUsers: 管理本地用戶
+  access:
+    title: '{provider} - 訪問'
+    type: 類型
+  add:
+    title: 添加認證提供商
+    subtitle: 選擇要連接的提供商。Rancher 支持一個外部提供商，因此用戶將使用此提供商登錄。若以後要使用其他提供商，請刪除此提供商並配置新的提供商。
+    searchPlaceholder: 搜索提供商
+    filterLabel: 協議
+    filterAll: 全部
+    noResults: 沒有與你的搜索匹配的提供商。
+    resultCount: |-
+        {count , plural,
+          =1 { 有 {count} 個提供商與你的搜索匹配。 }
+          other { 有 {count} 個提供商與你的搜索匹配。 }
+        }
+  disable:
+    action: 禁用
+    title: '禁用 {name}？'
+    titleGeneric: 禁用此認證提供商？
+    loggedOut: 當前使用此提供商登錄的所有用戶都將被註銷並重定向到登錄界面。
+    learnMore: 禁用提供商後恢復訪問
+    docsUrl: '{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config'
+    irreversible: 此操作無法撤銷。禁用將刪除為此提供商存儲的所有資源。
+    acknowledge: 我瞭解這些用戶和權限將被刪除
+    confirm: 禁用並刪除
+  disableLast:
+    title: '禁用 {name}？'
+    titleGeneric: 禁用此認證提供商？
+    soleProvider: 本地登錄已關閉，且 {name} 是你唯一的外部提供商。現在禁用它將導致無法登錄 Rancher。
+    remedy: 請重新開啟本地登錄，然後再禁用該提供商。配置好新的提供商並確認其正常工作後，你可以再次關閉本地登錄。
+    refusal: 當本地登錄處於關閉狀態時，Rancher 不會禁用最後一個外部提供商。
+    locked: 此安裝已鎖定關閉本地登錄，因此無法從此處重新開啟。恢復訪問需要通過命令行訪問集群。
+    confirm: 重新開啟本地登錄
+  disableLocal:
+    title: 禁用本地用戶登錄？
+    effect: 從現在起，用戶僅通過外部提供商登錄。本地賬號不會被刪除並保留其權限，但無法用於登錄。
+    recovery: 你可以隨時從提供商列表中將其重新關閉 — 但僅限於你仍能登錄時。如果在此功能開啟期間所有外部提供商都無法訪問，恢復訪問需要通過命令行訪問集群。
+    soleRoute: 外部提供商將成為所有用戶（包括管理員）登錄的唯一方式。
+    acknowledge: 我瞭解本地賬號將無法再登錄
+    confirm: 禁用本地登錄
   slo:
     sloTitle: 登出行為
     sloOptions:
@@ -503,14 +614,15 @@ authConfig:
       logoutAll: 登出 Rancher 和 {name}（包括所有其他已註冊到 {name} 的應用）
       choose: 允許用戶在附加的登出步驟中選擇上述選項之一
   accessMode:
-    label: '配置能登錄和使用 {vendor} 的人員名單'
+    label: '配置能夠使用此提供商登錄的人員'
     required: 只有授權用戶和用戶組能夠訪問
     restricted: '允許集群和項目的成員，以及授權用戶和用戶組訪問'
     unrestricted: 允許所有用戶訪問
   allowedPrincipalIds:
     title: 授權的用戶和用戶組
   associatedWarning: '用於啟用外部提供商的 {provider} 賬戶將被授予與當前登錄的 Rancher 用戶相同的權限。請參閱 <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">External Authentication Configuration and Principal Users</a> 以瞭解原因。'
-  bannerEnableAuthProvider: "「禁用本地認證」設置已啟用。啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能並重新獲得訪問權限。有關更多信息，請參閱 {vendor} 文檔。"
+  bannerEnableAuthProvider: '「禁用本地認證」功能開關已啟用。啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能來重新獲得訪問權限。有關更多信息，請參閱<a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">文檔</a>。'
+  bannerEnabledAuthProvider: '「禁用本地認證」功能開關也已啟用。用戶無法使用本地憑證登錄。如果此提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能來重新獲得訪問權限。有關更多信息，請參閱<a href="{docsBase}/getting-started/installation-and-upgrade/installation-references/feature-flags" target="_blank" rel="noopener noreferrer nofollow">文檔</a>。'
   githubapp:
     clientId:
       label: Client ID
@@ -712,6 +824,16 @@ authConfig:
     okta: 配置 Okta 賬號
     ping: 配置 Ping 賬號
     shibboleth: 配置 Shibboleth 賬號
+    genericsaml: 配置通用 SAML 提供商
+    nameIDFormat: NameID 格式
+    nameIDFormatOptions:
+      unspecified: 未指定
+      emailAddress: 電子郵件地址
+      transient: 瞬態
+      persistent: 持久
+    signatureMethod: 簽名算法
+    allowIdpInitiated: 允許 IdP 發起的登錄
+    forceAuthn: 強制重新認證
     showLdap: 配置 OpenLDAP server
     userName: 用戶名字段
     search:
@@ -829,9 +951,6 @@ authConfig:
     disabled: '{provider} 已禁用。'
     enabled: '{provider} 已啟用。'
   testAndEnable: 測試和啟用驗證
-  noneEnabled: 本地驗證是長期開啟的。你也可以選擇以下的驗證提供程序。
-  localEnabled: '{vendor} 配置為允許訪問本地數據庫中的賬號。'
-  manageLocal: 管理賬號
 
 authGroups:
   actions:
@@ -856,6 +975,16 @@ assignTo:
 asyncButton:
   alt:
     iconAlt: 異步按鈕圖標
+  # Read out to screen readers when no phase label of its own says anything useful.
+  # See AsyncButton.vue `announcementFor`.
+  announcement:
+    waiting: 進行中
+    success: 成功
+    error: 失敗
+    withLabel:
+      waiting: '{label}：進行中'
+      success: '{label}：成功'
+      error: '{label}：失敗'
   registerApplication:
     action: 添加應用
     success: 已添加
@@ -974,6 +1103,9 @@ asyncButton:
     successIcon: 勾選
     waiting: ''
     waitingIcon: 刷新
+    waitingAnnouncement: 正在刷新&hellip;
+    successAnnouncement: 已刷新
+    errorAnnouncement: 刷新失敗
   manual-refresh:
     action: ''
     actionIcon: refresh
@@ -983,6 +1115,9 @@ asyncButton:
     successIcon: checkmark
     waiting: ''
     waitingIcon: refresh
+    waitingAnnouncement: 正在刷新&hellip;
+    successAnnouncement: 已刷新
+    errorAnnouncement: 刷新失敗
   remove:
     action: 移除
     success: 已移除
@@ -1301,19 +1436,9 @@ catalog:
         }
     error:
       requiresFound: '在安裝這個 Chart 前，你需要安裝<a href="{url}">{name}</a>。'
-      requiresMissing: '這個 Chart 另一個提供 {name} 的 Chart，但我們找不到這個Chart。'
+      requiresMissing: '這個 Chart 需要另一個提供 {name} 的 Chart，但找不到。'
       insufficientCpu: '這個 Chart 需要 {need, number} 個 CPU 核，但集群只有 {have, number} 個可用。'
       insufficientMemory: '這個 Chart 需要 {need} 內存，但集群只有 {have} 可用。'
-      legacy:
-        label: 這是個 {legacyType} 應用，無法在這裡修改。
-        enableLegacy:
-          prompt: 想編輯這個應用，你需要添加舊版功能。
-          goto: 前往功能開關設置
-        navigate: 導航到舊版應用程序
-        mcmNotSupported: 無法通過此 UI 管理舊版多集群應用程序
-        category:
-          legacy: 舊版
-          mcm: 多集群
     header:
       install: '安裝 {name}'
       installGeneric: 安裝 Chart
@@ -1362,9 +1487,11 @@ catalog:
             upgrade { upgrade }
             downgrade { upgrade }
             editVersion { update }
+            other { update }
           } the {existing, select,
             true { app}
             false { chart}
+            other { chart}
           }. Start by setting some basic information used by {vendor} to manage the App.
         nsCreationDescription: "如果你要把應用安裝到新的命名空間，在命名空間字段中輸入其名稱，並選擇它。"
         createNamespace: "將創建命名空間 <code>{namespace}</code>。"
@@ -1471,6 +1598,20 @@ catalog:
       enableLabel: 啟用刷新間隔
     downloaded:
       label: 已下載
+    detail:
+      overview: 概覽
+      source: 源
+      type: 類型
+      status: 狀態
+      authentication: 認證
+      caBundle: CA 證書包
+      exponentialBackOff: 指數退避（最小 / 最大 / 重試次數）
+      charts:
+        label: 內容
+        view: 查看 Chart
+        none: 沒有可用的內容
+      extensions:
+        view: 查看擴展
     error:
       refresh: 刷新倉庫時出錯
   tools:
@@ -1584,6 +1725,8 @@ compliance:
   testsToSkip: 要跳過的測試
   alerting: 告警
   detail:
+    noReport: '目前還沒有可用的掃描報告。當前掃描狀態：{state}。掃描完成後報告將顯示在此處。'
+    noReportWithMessage: '目前還沒有可用的掃描報告。當前掃描狀態：{state} - {message}。掃描完成後報告將顯示在此處。'
     subRow:
       noNodes: 沒有附加信息
 
@@ -1642,7 +1785,7 @@ cluster:
       label: vSphere
       note: '<b>重要</b>：在附加配置標籤中配置 vSphere 雲提供商和存儲提供商選項。'
     harvester:
-      label: Harvester
+      label: '[[Harvester]]'
   copyConfig: 將 KubeConfig 複製到剪切板
   copiedConfig: 已將 KubeConfig 複製到剪切板
   custom:
@@ -1821,7 +1964,7 @@ cluster:
       kubeconfigContent:
         label: KubeconfigContent
       placeholder: '命名空間/名稱'
-      cluster: 導入的 Harvester 集群
+      cluster: 導入的 [[Harvester]] 集群
       enableTpm: 啟用 TPM
       enableCpuPinning: 啟用 CPU Pinning
       cpuPinningTooltip: 啟用 CPU Pinning 可為 harvester 虛擬機帶來更好的性能並降低延遲
@@ -1829,25 +1972,25 @@ cluster:
       secureBoot: 安全啟動
       enableEfi: 以 EFI 模式啟動
       installGuestAgent: 安裝訪客代理
-      tokenExpirationWarning: '警告：Harvester 雲憑證使用底層認證令牌，該令牌可能有過期時間 - 請參閱以下<a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">知識庫文章</a>，了解對管理操作的可能影響。'
+      tokenExpirationWarning: 'Warning: [[Harvester]] 雲憑證使用底層認證令牌，該令牌可能有過期時間 - 請參閱以下<a href="https://harvesterhci.io/kb/renew_harvester_cloud_credentials" target="_blank" rel="noopener nofollow">知識庫文章</a>，了解對管理操作的可能影響。'
   description:
     label: 集群描述
     placeholder: 輸入可以描述該集群的文本
   harvester:
-    importNotice: 導入 Harvester 集群的方式：
+    importNotice: 導入 [[Harvester]] 集群的方式：
     warning:
-      label: 這是一個 Harvester 集群 - 請啟用 Harvester 功能開關以對其進行管理。
+      label: 這是一個 [[Harvester]] 集群 - 請啟用 [[Harvester]] 功能開關以對其進行管理
       state: 警告
       cloudProvider:
         incompatible:
-          由於當前的 Harvester 版本與所選的 RKE2 Kubernetes 版本不兼容，因此你無法選擇 Harvester cloud provider。請單擊 <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">此處</a>查看支持的 Kubernetes 版本。
+          由於當前的 [[Harvester]] 版本與所選的 RKE2 Kubernetes 版本不兼容，因此你無法選擇 [[Harvester]] cloud provider。請單擊 <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">此處</a>查看支持的 Kubernetes 版本。
     clusterWarning: |-
       還有 {count, plural,
-      =1 {1 個 Harvester 集群未顯示}
-      other { # 個 Harvester 集群未顯示}
+      =1 {1 個 [[Harvester]] 集群未顯示}
+      other { # 個 [[Harvester]] 集群未顯示}
       }
     registration:
-      step1: "1. 前往目標 Harvester UI 的<code>高級設置</code>頁面。"
+      step1: "1. 前往目標 [[Harvester]] UI 的<code>高級設置</code>頁面。"
       step2: '2. 找到<code>cluster-registration-url</code>設置項，並點擊<code><i class="icon icon-actions" ></i></code> -> <code>編輯設置</code>按鈕。'
       step3: "3. 輸入以下注冊 URL，並點擊<code>保存</code>。"
       step4: "註冊 URL"
@@ -1871,7 +2014,7 @@ cluster:
         toolTip: 用於登錄選中的操作系統鏡像的 SSH 用戶名
     kubeconfigSecret:
         nameRequired: 集群名稱為必填項。
-        error: '生成 Harvester kubeconfig secret 時出錯：{err}'
+        error: '生成 [[Harvester]] kubeconfig secret 時出錯：{err}'
   haveOneOwner: 至少有一名成員需要具有所有者角色。
   import:
     warningBanner: '不要導入已連接到另一個 Rancher 實例的集群，避免損壞數據。'
@@ -1882,6 +2025,10 @@ cluster:
   explore: 瀏覽
   importAction: 導入已有集群
   manageAction: 管理
+  kubeConfig:
+    error:
+      title: 無法生成 KubeConfig
+      noClusters: 無法從當前選擇中解析出任何集群。請刷新頁面並重試。
   kubernetesVersion:
     label: Kubernetes 版本
     current: （當前）
@@ -1890,7 +2037,6 @@ cluster:
     manual: （手動升級）
     deprecatedPatches: 顯示已棄用的 Kubernetes 補丁版本
     deprecatedPatchWarning: 建議為每個 Kubernetes 次要版本使用最新的補丁版本，已棄用的補丁版本可能對遷移有用。
-  legacyWarning: 舊版功能開關已開啟，但是不是所有舊版功能都在 Kubernetes 1.21+ 中支持。
   log:
     connecting: 正在連接
     noData: 沒有預設的日誌項目
@@ -2334,8 +2480,6 @@ cluster:
     desiredNodeGroupWarning: 沒有可用於運行 Cluster Agent 的節點。要讓集群變為 Active 狀態，至少需要有 1 個可用的節點。
     haveArgInfo: 所選 Kubernetes 版本的配置信息不可用。此屏幕中可用的選項將受到限制，你可能需要使用 YAML 編輯器。
     cloudProviderAddConfig: '在 Kubernetes 1.27 或更高版本上，<b>Amazon</b> 雲提供商需要額外配置。有關更多信息，請參閱<a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon" target="_blank" rel="noopener noreferrer nofollow">文檔</a>。'
-    cloudProviderUnsupportedAzure: '在 Kubernetes 1.30 或更高版本上，<b>Azure</b> 雲提供商已被移除。有關更多信息，請參閱<a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">文檔</a>。'
-    cloudProviderMigrateAzure: '在 Kubernetes 1.30 或更高版本上，<b>Azure</b> 雲提供商已被移除。要升級 Kubernetes，應先將集群遷移到 External 提供商。<br> 有關更多信息，請參閱<a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">文檔</a>。'
     machinePoolError: |-
       {count, plural,
         =1 { {pool_name}：在預期值列表中找不到為 {fields} 提供的值。這可能發生在 Rancher 之外置備的集群上，或者當提供商的選項發生變化時。 }
@@ -2477,7 +2621,7 @@ cluster:
     googlegke: Google GKE
     gke: Google GKE
     googlekubernetesengine: Google GKE (Unsupported Kev1)
-    harvester: Harvester
+    harvester: '[[Harvester]]'
     huaweicce: 華為 CCE
     import: 通用
     imported: 已導入
@@ -2708,6 +2852,7 @@ cluster:
     enableIngress: 安裝 Ingress 控制器以啟用外部路由
     nginx:
       header: Ingress-NGINX
+      contentCommunity: 此選項僅在 SUSE Rancher Prime 中可用。
       content: 僅當您的工作負載尚未準備好使用 Traefik 時才選擇此項。
     dual:
       header: 雙模式
@@ -2862,6 +3007,12 @@ resource:
   errors:
     update: "更新 {name} 出錯"
 
+copyToClipboard:
+  action: 複製
+  waiting: 正在複製&hellip;
+  success: 已複製！
+  error: 複製時出錯
+
 codeMirror:
   escapeText: 按 Shift+Escape 從編輯器失焦
   keymap:
@@ -2992,11 +3143,18 @@ dynamicContent:
   eol:
     title: 已停止支持
     message: 此版本的 Rancher（{version}）已停止支持。請考慮升級到受支持的版本。
+  eoc:
+    title: 更新已結束
+    message: 此版本的 Rancher（{version}）將不再接收更新。請考慮升級到更新的版本或 Rancher Prime。
 
 etcdInfoBanner:
   hasLeader: "ETCD 有一個 Leader："
   leaderChanges: "Leader 變化的次數："
   failedProposals: "失敗的 proposal 數量："
+
+fileSelectorTextArea:
+  dropHint: 或將文件拖放到上方的文本區域
+  dropToReplace: 將文件拖放到此處將替換任何現有內容
 
 fleet:
   settings:
@@ -3145,21 +3303,21 @@ fleet:
   clusters:
     harvester: |-
       還有 {count, plural,
-      =1 {1個 Harvester 集群未顯示，因為它不能與持續交付一起使用。}
-      other { #個 Harvester 集群未顯示，因為它們不能與持續交付一起使用。}
+      =1 {1個 [[Harvester]] 集群未顯示，因為它不能與持續交付一起使用。}
+      other { #個 [[Harvester]] 集群未顯示，因為它們不能與持續交付一起使用。}
       }
   tokens:
     harvester: |-
       {count, plural,
-      =1 {1個 Token 未顯示，因為它屬於不能與持續交付一起使用的 Harvester 集群。}
-      other {#個 Token 未顯示，因為它屬於不能與持續交付一起使用的 Harvester 集群。}
+      =1 {1個 Token 未顯示，因為它屬於不能與持續交付一起使用的 [[Harvester]] 集群。}
+      other {#個 Token 未顯示，因為它屬於不能與持續交付一起使用的 [[Harvester]] 集群。}
       }
   bundles:
     resources: 資源
     harvester: |-
       {count, plural,
-      =1 {1 個 Bundle 未顯示，因為它屬於不能與持續交付一起使用的 Harvester 集群。}
-      other {# 個 Bundle 未顯示，因為它屬於不能與持續交付一起使用的 Harvester 集群。}
+      =1 {1 個 Bundle 未顯示，因為它屬於不能與持續交付一起使用的 [[Harvester]] 集群。}
+      other {# 個 Bundle 未顯示，因為它屬於不能與持續交付一起使用的 [[Harvester]] 集群。}
       }
   fleetSummary:
     noClusters:
@@ -3173,6 +3331,13 @@ fleet:
       unknown: '未知'
       notReady: 未就緒
       waitApplied: 等待應用
+      notready: 未就緒
+      waitapplied: 等待應用
+      errapplied: 應用出錯
+      modified: 已修改
+      outofsync: 不同步
+      pending: 待定
+      waitingfordependency: 等待依賴項
   clusterTargets:
     advancedConfigs: 已定義高級目標配置，請查看 YAML 文件以獲取更多詳細信息。
     targetMode:
@@ -3277,7 +3442,10 @@ fleet:
       description1: 默認使用根文件夾。Fleet 將遞歸掃描所有文件夾和子文件夾以查找 fleet.yaml 文件。
       description2: 您可以提供多個不同的目錄。您還可以添加子路徑以指定不同的 YAML 配置文件路徑。
       ariaLabel: 輸入 Git Repo 的路徑
+      inputAriaLabel: 輸入 Git 存儲庫的路徑 {index}
+      removeBtn: 刪除路徑 {index}
       placeholder: 例如：/directory/in/your/repo
+      addBtnAriaLabel: 為 Git 存儲庫添加路徑
       addLabel: 添加路徑
       enableBundles: 手動指定配置文件子路徑（Fleet 不會遞歸掃描子文件夾以查找 fleet.yaml 文件）
       subpaths:
@@ -3295,7 +3463,7 @@ fleet:
       placeholder: 例如 https://github.com/rancher/fleet-examples.git 或 git@github.com:rancher/fleet-examples.git
       addRepo: 添加倉庫
       noRepos: 未添加任何倉庫
-      noWorkspaces: 沒有工作空間。<br/>請在添加倉庫之前創建一個工作空間
+      noWorkspaces: 沒有工作空間。
     resources:
       label: '資源處理'
       keepResources: 永遠保留資源
@@ -3609,6 +3777,7 @@ fleet:
     state: 狀態
     cluster: 集群
     error: 錯誤
+    message: 消息
     ready: 就緒
     errors: 錯誤
   workspaces:
@@ -3621,6 +3790,9 @@ fleet:
   restrictions:
     addTitle: 'allowedTargetNamespaces'
     addLabel: 添加
+    deprecationWarning: 'GitRepoRestrictions 已棄用，並將在未來版本中移除。請改用 <policiesLink>策略</policiesLink>。'
+    deprecationWarningTargetNamespaces: 'GitRepoRestrictions 已棄用，並將在未來版本中移除。限制允許的目標命名空間依賴於 GitRepoRestriction，在 SUSE 持續交付策略中沒有對應項。'
+    migrationGuide: '請參閱 <docsLink>SUSE 持續交付策略遷移指南</docsLink>。'
     banner: "{count, plural,
           =0 { 在這裡添加命名空間會創建一個 GitRepoRestriction。 }
           other { 只有 Git Repo Restriction 的 <code>allowedTargetNamespaces</code> 在此處管理，你可以對 Git Repo Restriction 進行其他更改。}
@@ -4005,7 +4177,7 @@ istio:
   customOverlayFile:
     label: 自定義覆蓋文件
     tip: '<a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">覆蓋文件</a>支持在基本的 {vendor} Istio 安裝之上進行額外的配置。你可以利用 <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >IstioOperator API</a> 對所有組件進行更改和添加，並通過此覆蓋 YAML 文件應用這些更改。'
-  description: '{vendor} Istio Helm Chart 為你安裝了一個最小 Istio 配置，以便你進行應用集成。如果你需要獲得有關 Istio 的更多信息，請訪問<a target="_blank" href="https://istio.io/latest/docs/concepts/what-is-istio" rel="noopener noreferrer nofollow"> What Is Istio</a>'
+  description: '{vendor} Istio Helm Chart 為你安裝了一個最小 Istio 配置，以便你進行應用集成。如果你需要獲得有關 Istio 的更多信息，請訪問<a target="_blank" href="https://istio.io/latest/docs/concepts/what-is-istio" rel="noopener noreferrer nofollow">https://istio.io/latest/docs/concepts/what-is-istio/</a>'
   destinationRule:
     title:
       new: 添加目標規則
@@ -4196,6 +4368,7 @@ labels:
   addTaint: 添加汙點
   addAnnotation: 添加註釋
   protectedWarning: 此鍵受保護，將被丟棄
+  readOnlyWarning: 此鍵為只讀，更改將不會被保存
   labels:
     title: 標籤
     description: 鍵值對，是附加到指定標識屬性的對象。
@@ -4448,7 +4621,7 @@ logging:
       title: 緩衝
       tags: 標籤
       chunkLimitSize: 塊大小限制
-      chunkLimitRecords: 塊限制 chunkLimitRecords
+      chunkLimitRecords: 塊限制記錄
       totalLimitSize: 總限制大小
       flushInterval: 刷新時間間隔
       timekey: Timekey
@@ -4457,6 +4630,7 @@ logging:
   s3:
     keyId: 密鑰 ID
     secretKey: Secret Key
+    region: 區域
     endpoint: 端點
     bucket: 存儲桶
     path: 路徑
@@ -4551,7 +4725,7 @@ login:
   login: 登錄
   howdy: 你好！
   welcome: 歡迎使用 {vendor}
-  landscapeAlt: 橫向圖片
+  logoAlt: '{vendor} 徽標'
   loggedOut: 你已登出當前賬號。
   loggedOutSessionIdle: 您已從 Rancher 登出，因為您的會話已過期。請重新登錄以繼續。
   loggedOutFromSso: 您已從 Rancher 登出，但您可能仍登錄在您的單點登錄身份提供商中。
@@ -4568,15 +4742,24 @@ login:
   clientError: 無效的用戶名或密碼，請重試。
   userUnauthorized: 您無權使用此系統。
   specificError: '登錄時發生錯誤：{msg}'
-  useLocal: 使用本地賬號登錄
   loginWithProvider: 使用 {provider} 登錄
   username: 用戶名
   password: 密碼
   loggingIn: 登錄中...
   loggedIn: 已登錄
   loginWithLocal: 使用本地用戶登錄
-  useProvider: 使用 {provider} 用戶
-  useNonLocal: 使用非本地用戶
+  providers:
+    heading: 選擇登錄方式
+    or: 或
+    chooseDifferent: 選擇其他提供商
+    useLocal: 以本地用戶身份登錄
+    meta: "{vendor} · {protocol}"
+    remember: 在此設備上記住我的選擇
+    rememberHint: 適用於你選擇的任何提供商。僅保存在此瀏覽器中。
+    local:
+      name: 本地賬號
+      description: 使用用戶名和密碼登錄 Rancher。
+      meta: 用戶名和密碼
   remember:
     label: 記住用戶名
   cli:
@@ -5295,7 +5478,7 @@ persistentVolume:
       disk-csi-azure-com: Azure 磁盤 (CSI)
       file-csi-azure-com: Azure 文件 (CSI)
       driver-longhorn-io: Longhorn (CSI)
-      driver-harvesterhci-io: Harvester (CSI)
+      driver-harvesterhci-io: '[[Harvester]] (CSI)'
       lvm-driver-harvesterhci-io: LVM
       nfs-csi-k8s-io: NFS (CSI)
       ebs-csi-aws-com: AWS Elastic Block Store (CSI)
@@ -6005,6 +6188,8 @@ promptForceRemove:
 promptScaleMachineDown:
   attemptingToRemove: "你正在嘗試刪除 {count} {type}"
   attemptingToScaleDown: "您正在嘗試縮減 {type}"
+  machineAlreadyDeleted: "機器 {name} 已在刪除中或已被重新創建。機器池未縮容。"
+  machineDeleteAnnotationMissing: "機器 {name} 無法被標記為刪除。機器池未縮容。"
   retainedMachine1: Control Plane 和 Etcd 角色要求至少一臺主機。
   retainedMachine2: <b>{ name }</b> 會保留
   scaling: |-
@@ -6166,7 +6351,8 @@ rbac:
         description: |-
           控制 {isUser, select,
           true {用戶}
-          false {組}} 管理整個 {appName} 安裝的權限。
+          false {組}
+          other {組}} 管理整個 {appName} 安裝的權限。
       custom:
         label: 自定義
         description: '不是 {vendor} 創建的角色。'
@@ -6297,7 +6483,8 @@ resourceDetail:
     managedWarning: |-
       此 {type} 由 {hasName, select,
         no { {managedBy} 應用}
-        yes { {managedBy} 應用 {appName}}} 管理。在此處所做的更改可能會在下次 {managedBy} 運行時被覆蓋。
+        yes { {managedBy} 應用 {appName}}
+        other { {managedBy} 應用}} 管理。在此處所做的更改可能會在下次 {managedBy} 運行時被覆蓋。
 resourceList:
   head:
     create: 創建
@@ -6583,6 +6770,8 @@ servicesPage:
       label: 使用 IPAM
     shareIP:
       label: 共享 IP LB
+    network:
+      label: 網絡
 
   ips:
     define: 服務端口
@@ -6673,8 +6862,12 @@ sortableTable:
     lastPageBtn: 結果最後一頁圖標
     sortingIconDesc: 表格標題降序排序圖標
     sortingIconAsc: 表格標題升序排序圖標
-  genericGroupCheckbox: 表格分組選擇復選框
-  genericRowCheckbox: 項 {item} 的表格行選擇復選框
+  genericGroupCheckbox: 選擇所有行
+  genericRowCheckbox: 選擇 {item}
+  genericRowCheckboxNoItem: 選擇行
+  selectAllResources: 選擇所有 {resource}
+  expandColumnHeader: 展開
+  actionsColumnHeader: 操作
   tableActionsLabel: 更多操作 - { resource }
   tableActionsImgAlt: 更多操作圖標
   bulkActions:
@@ -6699,6 +6892,7 @@ sortableTable:
       other {{count} 個 {pluralLabel} 中的 {from} - {to} 個}}
   search: 篩選
   searchLabel: 過濾表格結果
+  clearFilter: 清除表格結果的過濾器
   in: 在
   addFilter: 添加篩選器
   filteringDescription: 使用此輸入將立即過濾下方表格中的結果
@@ -7001,13 +7195,13 @@ storageClass:
     title: （已棄用）
     warning: '{provisioner} 樹內插件已棄用。你可以在<a target="_blank" rel="noopener noreferrer nofollow" href="https://kubernetes-csi.github.io/docs/drivers.html">這裡</a>查找 CSI 驅動。'
   harvesterhci:
-    title: Harvester (CSI)
+    title: '[[Harvester]] (CSI)'
     warning:
-      unSatisfiesVersion: 請升級 Harvester CSI 驅動版本來使用此功能(csi-driver >= v0.1.15)
+      unSatisfiesVersion: 請升級 [[Harvester]] CSI 驅動版本來使用此功能(csi-driver >= v0.1.15)
     hostStorageClass:
       label: 主機存儲類
-      placeholder: 主機 Harvester 集群上的存儲類名稱
-      tooltip: 默認使用主機 Harvester 集群上的默認存儲類。
+      placeholder: 主機 [[Harvester]] 集群上的存儲類名稱
+      tooltip: 默認使用主機 [[Harvester]] 集群上的默認存儲類。
 
 tableHeaders:
   assuredConcurrencyShares: 確保併發份額
@@ -7047,7 +7241,8 @@ tableHeaders:
   constraint: 約束
   completions: 完成 Job 歷史數
   count: 數量
-  createdAt: 創建於 
+  createdAt: 創建於
+  customResources: 資源
   customVerbs: 自定義操作
   description: 描述
   cpu: CPU
@@ -7067,6 +7262,7 @@ tableHeaders:
   effect: 效果
   endpoints: 端點
   expires: 過期時間
+  explore: 瀏覽
   firstSeen: 首次出現時間
   firstSeenTooltip: 事件首次被記錄的時間
   flow: Flow
@@ -7089,6 +7285,8 @@ tableHeaders:
   iP: IP
   image: 鏡像
   imageSize: 大小
+  httpRouteGateways: 網關
+  httpRouteHostnames: 主機名
   ingressClass: IngressClass
   ingressDefaultBackend: 默認
   ingressTarget: 目標
@@ -7297,6 +7495,8 @@ user:
       userDescription:
         label: 描述
         placeholder: 例如：這是 John Smith 的賬號。
+    roleUpdateFailed:
+      orphaned: '用戶「{username}」已創建，但其角色無法分配，且無法自動移除該不完整的賬號。請打開用戶列表以查看或刪除它。'
   list:
     errorRefreshingGroupMemberships: 刷新組成員名單時出錯
   retention:
@@ -7315,12 +7515,14 @@ user:
         disableAfter:
           checkbox: 在一段不活躍期（自上次登錄以來的時長）後禁用用戶賬戶
           input:
+            labelDisable: 閒置期 - 禁用用戶賬號
             label: 不活躍期
             tooltip: 使用時長單位（例如使用 30h 表示 30 小時）
         deleteAfter:
           checkbox: 在一段不活躍期（自上次登錄以來的時長）後刪除用戶賬戶
           input:
             label: 不活躍期
+            labelDelete: 閒置期 - 刪除用戶賬號
             tooltip: 使用時長單位（例如使用 30h 表示 30 小時）
             subLabel: 如果禁用周期處於激活狀態，此值必須大於該禁用周期
         cron:
@@ -7473,6 +7675,7 @@ validation:
       url: 服務器 URL 必須是一個 URL。
       awsStyleEndpoint: 端點 URL 必須是有效的基於域名的端點，且不能以協議開頭（例如 https:// 或 http://）
   genericUrl: 字段必須是有效的 URL
+  url: '「{key}」必須是有效的 URL'
   stringLength:
     between: '"{key}" 的長度必須是 {min} 到 {max} {max, plural, =1 {字符} other {字符}}'
     exactly: '"{key}" 的長度必須是 {count, plural, =1 {#字符} other {#字符}}'
@@ -7487,16 +7690,12 @@ validation:
   tab: "此選項卡中的一個或多個字段包含表單驗證錯誤"
   version: 無效的版本號
 
-carousel:
-  previous: 上一個
-  next: 下一個
-  controlItem: 轉到第 {number} 張幻燈片
-
 wizard:
   previous: 上一步
   finish: 完成
   next: 下一步
   step: "步驟 {number}"
+  stepList: 嚮導步驟
   edit: 編輯
   create: 創建
   view: 查看
@@ -7807,6 +8006,7 @@ workload:
       status: 狀態
       volumeClaimTemplates: 卷聲明模板
       upgrading: 擴縮容和升級策略
+      availability: 可用性
   cronSchedule: 調度
   detail:
     services: 服務
@@ -7818,6 +8018,10 @@ workload:
     cannotFindIngresses: 找不到將流量轉發到在該工作負載中選擇 Pod 的 Service 的 Ingress。
     ingressListCaption: "以下 Ingress 將流量轉發到從該工作負載中選擇 Pod 的 Service："
     cannotViewIngressesBecauseCannotViewServices: 沒有查看 Service 的權限，因此無法找到相關的 Ingress。
+    httpRoutes: HTTPRoutes
+    cannotFindHttpRoutes: 找不到任何將流量轉發到選擇此工作負載中 Pod 的 Service 的 HTTPRoute。
+    httpRouteListCaption: "以下 HTTPRoute 將流量轉發到選擇此工作負載中 Pod 的 Service："
+    cannotViewHttpRoutesBecauseCannotViewServices: 沒有查看 Service 的權限，因此無法找到相關的 HTTPRoute。
     pods:
       title: Pod
   detailTop:
@@ -7860,7 +8064,7 @@ workload:
       tip: 保留成功完成 Job 的數量
     suspend: 暫停
   list:
-    errorCannotScale: 無法對 {workloadName} {direction, select, up { 擴容 } down { 縮容 } }
+    errorCannotScale: 無法對 {workloadName} {direction, select, up { 擴容 } down { 縮容 } other { } }
   metrics:
     pod: Pod 指標
     metricsView: 指標視圖
@@ -7909,7 +8113,9 @@ workload:
   validation:
     containers: 容器
     containerImage: 容器 {name} - "容器鏡像" 是必填項。
+    containerName: 容器 - 必須填寫「容器名稱」。
     localhostProfile: 容器 {name} - 當 SeccompProfile 類型為 Localhost 時，"Container Localhost Profile" 為必填項。
+    volumeMountPath: 容器 {name} - 必須填寫「掛載點」。
   replicas: 副本數量
   showTabs: '顯示高級選項'
   scheduling:
@@ -8169,8 +8375,10 @@ model:
       freeipa: FreeIPA
       googleoauth: Google
       genericoidc: Generic OIDC
+      genericsaml: 通用 SAML
       keycloakoidc: Keycloak
       cognito: Amazon Cognito
+      oidc: OIDC
 
 
   cluster:
@@ -8520,6 +8728,16 @@ typeLabel:
       one { Ingress }
       other { Ingress }
     }
+  gateway.networking.k8s.io.httproute: |-
+    {count, plural,
+      one { HTTPRoute }
+      other { HTTPRoute }
+    }
+  gateway.networking.k8s.io.gateway: |-
+    {count, plural,
+      one { 網關 }
+      other { 網關 }
+    }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
       one { 網絡策略 }
@@ -8627,8 +8845,8 @@ typeLabel:
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
-      one { Harvester 集群 }
-      other { Harvester 集群 }
+      one { [[Harvester]] 集群 }
+      other { [[Harvester]] 集群 }
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
@@ -9028,6 +9246,7 @@ advancedSettings:
     'agent-tls-mode': "Rancher 證書驗證。在 `strict` 模式下，agents（system、cluster、fleet 等）將僅信任使用由 `cacerts` 設置中的 CABundle 簽名的證書的 Rancher 安裝。當模式為 system-store 時，agents 將信任由操作系統信任存儲中的 CABundle 簽名的任何證書。"
     'k3s-based-upgrader-uninstall-concurrency': 定義 Rancher 可以從導入的或 node-driver K3s 或 RKE2 集群中並發卸載舊版 `rancher-k3s-upgrader` 或 `rancher-rke2-upgrader` 應用的最大集群數量。
     'system-agent-upgrader-install-concurrency': 定義 Rancher 可以並發安裝升級 system-agent 所需資源的最大集群數量。
+    'delete-machine-on-failure-after': 定義 Rancher 在多少秒後刪除預配失敗的基礎設施機器。設置為 0 可禁用自動刪除失敗的機器。
     'imported-cluster-version-management': 為導入的 RKE2/K3s 集群以及本地集群（如果它是 RKE2/K3s 集群）啟用版本管理。每個集群的版本管理設置在集群級別覆蓋此全局設置。對於集群級別版本管理設置為 'system-default' 的現有集群，更改此標誌將在下一次協調期間（默認每 5 分鐘一次，或在集群被編輯時立即進行，以先到者為準）觸發集群 agent 的重新部署。
     'imported-cluster-day2-ops-enabled': 控制導入的 RKE2/K3s 集群是否默認啟用 day 2 操作（etcd 快照、還原、加密密鑰輪換）。這將影響所有使用默認配置的集群，並且可以在集群級別覆蓋。
   warnings:
@@ -9058,7 +9277,7 @@ advancedSettings:
 
 featureFlags:
   description:
-    'hide-local-auth-provider': 啟用此功能並啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能並重新獲得訪問權限。有關更多信息，請參閱 {vendor} 文檔。
+    'hide-local-auth-provider': 啟用此功能並啟用認證提供商將阻止用戶使用本地憑證登錄。如果提供商發生故障，任何用戶都將無法登錄。請確保你可以持續通過 API 或 CLI 訪問 Rancher，以便禁用此功能來重新獲得訪問權限。有關功能開關的更多信息，請參閱 {vendor} 文檔。
   label: 功能開關
   title: "您確定嗎？"
   warning: |-
@@ -9075,68 +9294,13 @@ featureFlags:
 
 performance:
   label: UI 性能設置
+  removedSettingsBanner: 自 Rancher v2.16 起，ui-sql-cache 功能始終處於啟用狀態。相關的性能設置已被移除
   settingName: 性能
-  deprecatedInactivitySetting: <i class="mr-5">"Inactivity"</i> 設置現已棄用，取而代之的是 <i class="mr-5">auth-user-session-idle-ttl-minutes</i>&nbsp;<a href="{settingsPageUrl}">設置</a>。
-  deprecatedForSSP: <i class="mr-5">"{setting}"</i> 設置現已棄用，並將在未來版本中移除。
-  incrementalLoad:
-    label: 增量加載
-    setting: 你可以配置一個閾值，高於該閾值時則使用增量加載。
-    description: |-
-      啟用後，資源會更快出現，但可能需要更長的時間來加載整個資源集。此設置僅適用於來自 Kubernetes API 的資源
-    checkboxLabel: 啟用增量加載
-    inputLabel: 資源閾值
-    incompatibleDescription: "增量加載與命名空間/項目過濾不兼容，無法同時啟用。"
-  manualRefresh:
-    label: 手動刷新
-    setting: 你可以配置一個閾值，高於該閾值時則啟用手動刷新。
-    buttonTooltip: 刷新列表
-    description: |-
-      啟用後，列表數據不會自動更新，用戶必須手動刷新列表視圖。此設置僅適用於來自 Kubernetes API 的資源
-    checkboxLabel: 啟用列表數據的手動刷新
-    inputLabel: 資源閾值
-    incompatibleDescription: "手動刷新與命名空間/項目過濾不兼容，無法同時啟用。"
   websocketNotification:
     label: WebSocket 通知
     description: |-
       啟用後，UI 檢測到斷開連接時不會出現 WebSocket 通知。
     checkboxLabel: 禁用 WebSocket 通知
-  gc:
-    label: 資源垃圾回收
-    description: UI 將在本地緩存 Kubernetes 資源，避免這些資源被重新抓取。在某些情況下，這可能會導致瀏覽器中存儲了大量數據。你可以啟用此設置進行定期刪除。
-    checkboxLabel: 啟用垃圾回收
-    whenRun:
-      description: 垃圾回收運行的時候更新
-      intervalCheckBox:
-        label: 定期運行垃圾回收
-      interval:
-        inputLabel: 運行間隔
-      route:
-        description: 在換頁時運行垃圾回收
-        inputLabel: 換頁
-    howRun:
-      description: 更新垃圾回收的運行方式
-      age:
-        description: "必須在此期間內未訪問過資源，才能考慮進行垃圾回收。"
-        inputLabel: 資源存活時間
-      count:
-        description: 資源必須超過此數量才能考慮進行垃圾回收。
-        inputLabel: 資源數量
-  nsFiltering:
-    label: 要求命名空間/項目過濾
-    description: 用戶需要選擇命名空間和/或項目。這將限制查看列表時獲取的資源數量，有助於在具有大量資源的系統中提高 UI 的響應速度。
-    checkboxLabel: 啟用要求命名空間/項目過濾
-    incompatibleDescription: "\"要求命名空間/項目過濾\"與手動刷新和增量加載不兼容，無法同時啟用。"
-  advancedWorker:
-    label: Websocket Web Worker
-    description: 推送到 UI 的資源更新來自 WebSocket，並在 UI 線程中處理。啟用此選項可在單獨的線程中處理 Web Worker 中的集群 WebSocket 更新。這有助於提高 UI 在資源經常變化的系統中的響應能力。
-    checkboxLabel: 啟用高級 Websocket Web Worker
-  inactivity:
-    title: 閒置狀態
-    checkboxLabel: 啟用閒置會話過期
-    inputLabel: 閒置超時時間（分鐘）
-    information: 要更改自動註銷行為，請在"設置"頁面編輯授權和/或會話 Token 超時值（<code>auth-user-session-ttl-minutes</code> 和 <code>auth-token-max-ttl-minutes</code>)。
-    description: 啟用後，如果用戶在指定的超時時間內未有活動，UI 將不再刷新頁面內容，用戶必須重新加載頁面才能繼續。
-    authUserTTL: 該超時時間不能超過用戶會話超時時間 auth-user-session-ttl-minutes（當前為 {current} 分鐘）。
   serverPagination:
     label: 服務端分頁
     description: 默認情況下，列表將獲取所有資源並在瀏覽器中本地分頁（根據排序和過濾設置創建頁面）。服務端分頁將此工作從瀏覽器移至服務器。這改善了 UI 的性能，尤其是在擁有大量資源的系統中。
@@ -9188,6 +9352,7 @@ branding:
   directoryName: 品牌資產目錄名稱
   logos:
     home: 產品主頁面
+    logoLabel: Rancher 徽標
     label: 標誌
     tip: '上傳 Logo 以替換頂層導航標題中的 Rancher logo。圖片的高度應為 21 像素，最大寬度為 200 像素。最大文件大小為 20KB。支持的格式：JPEG、PNG、SVG。'
     lightPreview: 淺色主題預覽
@@ -9252,6 +9417,8 @@ resourceQuota:
   helpText: 配置整個命名空間可用的資源量。
   helpTextDetail: 整個命名空間可以使用的資源量。
   helpTextHarvester: VM 需要預留額外的內存。
+  invalidAnnotation: 此命名空間上的 {annotation} 註解格式錯誤，因此無法讀取其資源配額。保存將使用下面的限制替換它。
+  invalidAnnotationDetail: 此命名空間上的 {annotation} 註解格式錯誤。無法讀取其資源配額，因此不顯示任何限制。
   custom: 自定義
   resourceIdentifier:
     placeholder: 例如 configmaps
@@ -9524,6 +9691,7 @@ component:
           rows:
             services: 服務
             ingresses: Ingresses
+            httpRoutes: HTTPRoutes
             referredToBy: 被引用於
             refersTo: 引用
         podsCard:
