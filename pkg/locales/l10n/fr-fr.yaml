@@ -2579,8 +2579,8 @@ cluster:
   privateRegistry:
     header: Registre pour les images de conteneurs système Rancher
     label: Activer le registre de conteneurs au niveau du cluster pour les images de conteneurs système Rancher
-    description: "Si activé, Rancher extraira les images de conteneur de ce registre lors du provisionnement du cluster. Par défaut, Rancher utilisera également ce registre lors de l’installation des applications du chart Helm officiel de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
-    importedDescription: "Par défaut, Rancher utilisera également ce registre lors de l’installation des applications du chart Helm officiel de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
+    description: "Si activé, Rancher extraira les images de conteneur de ce registre lors du provisionnement du cluster. Par défaut, Rancher utilisera également ce registre lors de l’installation des applications issues des charts Helm officiels de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
+    importedDescription: "Par défaut, Rancher utilisera également ce registre lors de l’installation des applications issues des charts Helm officiels de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
     docsLinkRke2: "Pour obtenir de l’aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.rke2.io/install/private_registry\" target=\"_blank\">documentation RKE2.</a>"
     docsLinkK3s: "Pour obtenir de l’aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.k3s.io/installation/private-registry\" target=\"_blank\">documentation K3s.</a>"
     privateRegistryUrlError: Un registre doit être une URL valide. Le schéma est facultatif.

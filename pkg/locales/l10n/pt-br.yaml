@@ -3162,10 +3162,10 @@ fleet:
     title: Configurações de Entrega Contínua
     info: O Rancher reiniciará o agente e o controlador Fleet ao alterar as configurações.
     apply: Aplicar alterações
-    noPermissions: Você não tem permissão para modificar as Configurações do Continuous Delivery
+    noPermissions: Você não tem permissão para modificar as Configurações de Entrega Contínua
     parseError: 'Não é possível analisar valores de "{ path }" no ConfigMap "{ id }"'
     fields:
-      ariaLabel: Configuração {name} do Continuous Delivery
+      ariaLabel: Configuração {name} de Entrega Contínua
     agentTLSMode:
       label: Modo TLS
       description: "Determina se o agente deve confiar em pacotes de CA do armazenamento de confiança do sistema operacional ao se conectar a um cluster de gerenciamento."
@@ -3259,7 +3259,7 @@ fleet:
   dashboard:
     pageTitle: Painel de Entrega Contínua
     menuLabel: Painel
-    welcome: Bem-vindo ao Continuous Delivery
+    welcome: Bem-vindo à Entrega Contínua
     gitOpsScale: GitOps em escala.
     learnMore: Saiba mais.
     learnMoreLink: https://fleet.rancher.io
@@ -3350,7 +3350,7 @@ fleet:
       title: Seleção de clusters
       byName:
         title: Selecionar por nome do cluster
-        placeholder: vcenter.domain.com
+        placeholder: Selecionar Múltiplos Clusters
         label: Nomes de cluster
       byLabel:
         title: Selecionar por rótulos
@@ -6815,7 +6815,7 @@ servicesPage:
       label: IP do Cluster
     externalName:
       abbrv: EN
-      description: Cria um Service que usa um nome DNS em vez de seletores. Este é um caso de uso avançado.
+      description: Cria um Serviço que usa um nome DNS em vez de seletores. Este é um caso de uso avançado.
       label: Nome Externo
     headless:
       abbrv: H

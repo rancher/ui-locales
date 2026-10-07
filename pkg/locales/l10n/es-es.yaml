@@ -5999,7 +5999,7 @@ prefs:
     value: |-
       {count, number}
   keymap:
-    label: Asignación de teclas del editor YAML
+    label: Mapeo de teclas del editor YAML
     sublime: 'Normal'
     emacs: Emacs
     vim: Vim
@@ -9161,7 +9161,7 @@ keyValue:
 
 registryMirror:
   header: Espejos
-  toolTip: 'Los espejos pueden usarse para redirigir las solicitudes de imágenes de un registro para que se atiendan desde una lista de endpoints que usted especifique. Por ejemplo, docker.io podría redirigir a su registro interno en lugar de ir nunca a DockerHub.'
+  toolTip: 'Los espejos pueden usarse para redirigir las solicitudes de imágenes de un registro para que se atiendan desde una lista de endpoints que usted especifique. Por ejemplo, docker.io podría redirigir a su registro interno sin llegar a acceder nunca a DockerHub.'
   addLabel: Agregar Espejo
   description: Los espejos definen los nombres y endpoints para registros privados. Los endpoints se intentan uno por uno.
   hostnameLabel: Nombre de Host del Registro
@@ -9223,7 +9223,7 @@ advancedSettings:
     'engine-supported-range': 'Rango Semver de las versiones del motor Docker compatibles. Las versiones que no cumplan este rango se marcarán como no compatibles en la interfaz.'
     ingress-ip-domain: "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
     server-url: URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
-    'system-default-registry': 'Registro privado que se usará para todas las imágenes de contenedores del sistema de Rancher. Si no se especifica ningún valor, se usa el registro predeterminado del runtime de contenedores. Para Docker y containerd, el valor predeterminado es `docker.io`.'
+    'system-default-registry': 'Registro privado que se usará para todas las imágenes de contenedores del sistema de Rancher. Si no se especifica ningún valor, se usa el registro predeterminado del entorno de ejecución de contenedores. Para Docker y containerd, el valor predeterminado es `docker.io`.'
     'system-default-registry-pull-secrets': 'Lista de secretos de extracción de imágenes para autenticarse en el registro desde el que se extraen las imágenes de contenedor del sistema de Rancher. De forma predeterminada, estos secretos se copiarán en cada espacio de nombres de gráfico de Rancher. Los secretos deben estar en el espacio de nombres `cattle-system`. Se utilizará el primer secreto válido de la lista.'
     ui-dashboard-index: Ubicación del índice HTML para la UI de {appName}.
     ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
