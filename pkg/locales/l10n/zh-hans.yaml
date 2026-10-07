@@ -368,7 +368,7 @@ nav:
     resourceNotFound: 未找到资源类型 { resource }
     resourceListNotListable: Resource type { resource } cannot be listed
     resourceListNotFound: 未找到资源类型 { resource }，无法显示列表
-    resourceIdNotFound: 未找到 ID 为 { fqid } 的资源 { resources }，无法显示资源详细信息
+    resourceIdNotFound: 未找到 ID 为 { fqid } 的资源 { resource }，无法显示资源详细信息
     didYouMean: 'Did you mean <a href="{url}">{resource}</a>?'
     reload: 重新加载
     separator: 或者
@@ -535,7 +535,7 @@ addClusterMemberDialog:
 
 addonConfigConfirmation:
   title: 附加配置重置
-  body: 修改 Kubernetes 版本会重置附加配置的值。请先检查这些值是否正确。
+  body: 附加组件配置在 Kubernetes 版本 <b>{previousKubeVersion}</b> 和 <b>{newKubeVersion}</b> 之间发生了变化，与附加组件 {addons} 之前的值存在冲突。因此，请在继续之前重新应用这些值。
 
 addProjectMemberDialog:
   title: 添加项目成员
@@ -614,7 +614,7 @@ authConfig:
       logoutAll: Log out of Rancher and {name} (includes all other applications registered with {name})
       choose: Allow the user to choose one of the above in an additional log out step
   accessMode:
-    label: '配置能登录和使用 {vendor} 的人员名单'
+    label: '配置哪些人员可以使用此提供程序登录'
     required: 只有授权用户和用户组能够访问
     restricted: '允许集群和项目的成员，以及授权用户和用户组访问'
     unrestricted: 允许所有用户访问
@@ -1211,7 +1211,7 @@ backupRestoreOperator:
       warning: '此 {type} 没有将其回收策略设置为 "保留"。如果卷被更改或未绑定，你的备份可能会丢失。'
   encryption: 加密
   encryptionConfigName:
-    backuptip: '<code>cattle-resources-system</code>命名空间中具有<code>encryption-provider-config.yaml</code>密钥的任何密文。<br/>此文件的内容是还原此备份所必需的，Rancher Backup 不会存储这些内容。'
+    backuptip: '<code>{ns}</code> 命名空间中具有 <code>encryption-provider-config.yaml</code> 密钥的任何密文。<br/>此文件的内容是从此备份还原所必需的，Rancher Backup 不会存储这些内容。'
     label: 加密配置密文
     options:
       none: 存储未加密的备份内容。
@@ -1809,7 +1809,7 @@ cluster:
       linuxDetail: 在每台要注册的 Linux 主机上运行此命令。
       windowsDetail: 在每台要注册的 Windows 主机中的 PowerShell 上运行此命令。Windows 节点只能充当 worker。
       windowsWorkersOnly: <b>Windows nodes can only be workers.</b>
-      windowsNotReady: 在用于添加 Windows worker 的注册命令显示之前，集群必须已启动并运行 Linux ETCD，Control Plane，以及 worker 节点。
+      windowsNotReady: 在显示用于添加 Windows worker 节点的注册命令之前，集群必须已启动并运行 Linux etcd、control plane 和 worker 节点。<br /> <br /><b>Windows 节点只能作为 worker 节点。</b>
       windowsWarning: 工作负载 Pod（包括由 Rancher Chart 部署的 Pod）将默认调度到 Linux 和 Windows 节点上。编辑 Chart 中的 NodeSelector 以将它们放置到兼容的节点上。
       windowsDeprecatedForRKE1: RKE1 已弃用 Windows 支持。建议你迁移到 RKE2。
       insecure: "不安全：如果你的服务器具有自签名证书，选择此项以跳过 TLS 验证。"
@@ -2070,11 +2070,11 @@ cluster:
       sizeLabel: |-
         {apiName}: {cpu, plural,
         =1 {1 vCPU}
-        other {# vCPU}
+          other {# vCPU}
         } / {memory, number} GiB 内存 / {storageSize, plural,
           =0 {EBS-Only}
           other {{storageSize, number} {storageUnit} {storageType}}
-        }
+        } - {architecture}
     azure:
       acceleratedNetworking:
         label: 加速网络
@@ -2412,7 +2412,7 @@ cluster:
         diskSizeWithMax: Disk size has to be between {diskSizeMin} and {diskSizeMax} based on this image and disk type.
         projects: Image projects should be a comma separated list of alphanumeric string which may contain '-' and '.'
   addOns:
-    dependencyBanner: 附加组件配置可能因 Kubernetes 版本而异。更改 Kubernetes 版本可能会重置以下值。
+    dependencyBanner: 附加组件配置在 Kubernetes 版本 <b>{previousKubeVersion}</b> 和 <b>{newKubeVersion}</b> 之间发生了变化，与你之前的值存在冲突。请重新应用这些值。
     additionalManifest:
       title: 其它清单文件
       tooltip: '集群启动时要应用的其它 Kubernetes 清单 YAML'
@@ -2577,7 +2577,7 @@ cluster:
       label: 自动替换
       toolTip: 如果大于 0，则在此期间无法访问的节点将被自动删除和替换。
       unit: "秒"
-  managementTimeout: 集群变成可用。可能已创建了集群。建议在创建另一个集群之前检查集群页面。
+  managementTimeout: 等待 {type} {name} 变为可用时超时。集群可能已经创建。建议在尝试创建另一个集群之前先检查集群页面。
   memberRoles:
     removeMessage: '注意：删除用户不会删除其项目权限。'
     addClusterMember:
@@ -5759,8 +5759,8 @@ plugins:
   altIcon: Icon for {extension} extension card
   deprecatedExtension: This extension is deprecated and may soon be removed from the catalog.
   incompatiblePrimeOnly: "The latest version of this extension ({ version }) needs Rancher Prime in order to be installed."
-  incompatibleRancherVersion: "此扩展的最新版本 ({ version }) 与当前的 Rancher 版本 ({ rancherVersion }) 不兼容。"
-  incompatibleKubeVersion: "此扩展的最新版本 ({ version }) 与当前的 Kube 版本 ({ kubeVersion }) 不兼容。"
+  incompatibleRancherVersion: "此扩展的最新版本 ({ version }) 与当前的 Rancher 版本 ({ required }) 不兼容。"
+  incompatibleKubeVersion: "此扩展的最新版本 ({ version }) 与当前的 Kube 版本 ({ required }) 不兼容。"
   incompatibleUiExtensionsApiVersionMissing: 'The latest version of this extension ({ version }) is missing the mandatory annotation catalog.cattle.io/ui-extensions-version from Rancher 2.10 and onwards.'
   incompatibleUiExtensionsApiVersion: "The latest version of this extension ({ version }) is not compatible with the current Extensions API version ({ required })."
   incompatibleHost: 'The latest version of this extension ({ version }) has a host of "{ required }" which is not compatible with this application "{ mainHost }".'
@@ -5818,8 +5818,8 @@ plugins:
     versions: 版本
     versionError: 无法加载版本信息
     requiresRancherPrime: "Requires Rancher Prime"
-    requiresRancherVersion: "需要 Rancher {version}"
-    requiresKubeVersion: "需要 Kube {version}"
+    requiresRancherVersion: "需要 Rancher {required}"
+    requiresKubeVersion: "需要 Kube 版本 {required}"
     requiresExtensionApiVersionMissing: 'Missing the annotation catalog.cattle.io/ui-extensions-version which implies incompatibility with Rancher 2.10 and onwards'
     requiresExtensionApiVersion: "Requires Extensions API version {required}"
     requiresHost: 'Requires a host that matches "{mainHost}"'
@@ -5922,7 +5922,7 @@ plugins:
     title: 未启用扩展支持
     prompt:
       cant: 自动安装不可用 - 找不到所需的 Helm Chart
-      can: 你需要安装 Extension Operator
+      can: '你需要在全局设置中启用 <code>{ff}</code> 功能开关。启用后，Rancher 需要重启。'
       official: Official Rancher Extensions 仓库提供了由 Rancher 发布的扩展。
       partners: Partners Extensions 仓库提供了由 Rancher 合作伙伴发布的扩展。
       community: Community Extensions 仓库提供了由 Rancher 社区发布的扩展。
@@ -9285,7 +9285,7 @@ featureFlags:
     这将导致 API 和 UI 短暂中断，但不会影响正在运行的集群或工作负载。
   promptActivate: 确认是否要激活功能开关“{flag}”
   promptDeactivate: 确认是否要停用功能开关“{flag}”
-  restartRequired: "注意：你需要重启以更新此功能开关。"
+  restartRequired: "注意：更新此功能开关将重启 {vendor}"
   restart:
     title: 等待重启
     wait: 重启需要数分钟。
