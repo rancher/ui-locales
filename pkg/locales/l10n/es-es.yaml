@@ -2,7 +2,7 @@
 # locale: es-es (Spanish - Spain)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -943,7 +943,7 @@ authConfig:
       placeholder: Pegue la clave privada, generalmente comenzando con -----BEGIN RSA PRIVATE KEY-----
     groupSearch:
       label: Habilitar búsqueda de grupos
-      tooltip: Permite a los usuarios con permisos apropiados buscar y ver todos los grupos dentro del realm del proveedor OIDC.
+      tooltip: Permite a los usuarios con los permisos adecuados buscar y ver todos los grupos dentro del realm del proveedor OIDC. Esto puede ser útil para los administradores que necesitan asignar roles globales a grupos de los que no son miembros actualmente.
     clientAuthenticatedSearch:
       label: Habilitar búsqueda autenticada por cliente
       tooltip: Usar las credenciales del cliente OIDC para autenticarse en Keycloak al buscar usuarios o grupos. Esto omitirá el RBAC basado en usuarios dentro del realm
@@ -1013,10 +1013,10 @@ asyncButton:
     success: Creado
     waiting: Creando&hellip;
   default:
-    action: Aplicar
+    action: Acción
     error: Error
-    success: Aplicado
-    waiting: Aplicando...
+    success: Correcto
+    waiting: En espera
   delete:
     action: Eliminar
     success: Eliminado
@@ -1132,8 +1132,8 @@ asyncButton:
     waiting: Reanudando orquestación
   redeploy:
     action: Redesplegar
-    success: Redesplado
-    waiting: Redesplando carga de trabajo
+    success: Redesplegado
+    waiting: Redesplegando carga de trabajo
   rollback:
     action: Revertir
     success: Revertido
@@ -1207,7 +1207,7 @@ backupRestoreOperator:
         label: Volumen persistente
       storageClass:
         label: Clase de almacenamiento
-      tip: Configure una ubicación de almacenamiento donde se guarden todas las copias de seguridad por defecto.
+      tip: 'Configure una ubicación de almacenamiento donde se guarden todas las copias de seguridad por defecto. Podrá sobrescribirla en cada copia de seguridad, pero solo podrá usar un almacén de objetos compatible con S3.'
       warning: Este {type} no tiene su política de reclamación establecida en "Retener". Las copias de seguridad pueden perderse si el volumen cambia o se desvincula.
   encryption: Cifrado
   encryptionConfigName:
@@ -2460,7 +2460,7 @@ cluster:
       machineSelector:
         label: Agregar selector de máquina
         listLabel: Agregar argumento
-        bannerLabel: 'Nota: El último selector que coincide gana, y solo se usarán los argumentos de él.'
+        bannerLabel: 'Nota: Prevalece el último selector que coincide, y solo se usarán sus argumentos. Los argumentos de otras coincidencias anteriores no se combinarán ni se fusionarán.'
         title: 'Para máquinas con etiquetas que coincidan con:'
         subTitle: 'Usar los argumentos de Kubelet:'
         titleAlt: |-
@@ -2880,7 +2880,7 @@ cluster:
       transitioning:
         label: Rancher está haciendo la transición a Traefik como proveedor predeterminado. Mientras que Ingress-NGINX sigue disponible para migración.
       disabled:
-        label: Sin un controlador de Ingress, los servicios en este clúster no serán accesibles mediante URLs externas.
+        label: Sin un controlador de Ingress, los servicios de este clúster no serán accesibles mediante URLs o nombres de host externos. Deberá configurar manualmente una solución de enrutamiento alternativa para exponer sus cargas de trabajo.
       selected:
         ingress-nginx:
           label: "Ingress-NGINX está ahora obsoleto y será eliminado en una versión futura. Para evitar interrupciones del servicio, comience a migrar sus recursos de Ingress a Traefik. Revise nuestra <docsUrl>documentación de migración</docsUrl>."
@@ -3199,7 +3199,7 @@ fleet:
       add: Agregar selector
     tolerations:
       label: Tolerancias
-      description: Lista de manchas de nodo a tolerar
+      description: "Lista de taints de nodo a tolerar."
       add: Agregar tolerancia
     priorityClassName:
       label: Nombre de clase de prioridad
@@ -3460,7 +3460,7 @@ fleet:
     repo:
       title: Origen
       label: URL del repositorio
-      placeholder: p. ej. https://github.com/rancher/fleet-examples.git
+      placeholder: p. ej. https://github.com/rancher/fleet-examples.git o git@github.com:rancher/fleet-examples.git
       addRepo: Agregar repositorio
       noRepos: No se han agregado repositorios
       noWorkspaces: No hay espacios de trabajo.
@@ -4365,7 +4365,7 @@ labels:
   addLabel: Agregar etiqueta
   addSetLabel: Agregar/Establecer etiqueta
   addTag: Agregar etiqueta
-  addTaint: Agregar mancha
+  addTaint: Agregar taint
   addAnnotation: Agregar anotación
   protectedWarning: Esta clave está protegida y se descartará
   readOnlyWarning: Esta clave es de solo lectura y los cambios no se conservarán
@@ -4766,7 +4766,7 @@ login:
     welcome: Inicie sesión para completar la autenticación CLI
     invalidParams: Parámetros de inicio de sesión inválidos - no se puede iniciar sesión
     warning: Si no inició esta solicitud o el "ID de solicitud del cliente" mostrado en su terminal no coincide con el que se muestra a continuación, no continúe.
-    warningLegacy: Si no inició esta solicitud o el código que se muestra a continuación no coincide con el de su terminal, no continúe.
+    warningLegacy: 'Si no inició esta solicitud o el código que se muestra a continuación no coincide con el parámetro "requestId" que aparece como parte de la URL de inicio de sesión en su terminal, no continúe'
 
 logout:
   message: Cerrando sesión...
@@ -4810,7 +4810,7 @@ members:
       label: Personalizado
       description: Elija roles individuales para este usuario.
       lockedRole: Este rol está bloqueado.
-  localClusterWarning: 'Atención: Este es el clúster que Rancher utiliza como almacén de datos. Solo los administradores deberían agregar miembros aquí.'
+  localClusterWarning: "Atención: Este es el clúster que Rancher utiliza como almacén de datos. Solo los administradores deberían tener acceso de escritura a este clúster. Los usuarios con acceso de escritura a este clúster pueden usarlo para concederse acceso a cualquier parte de esta instalación."
   noRolesAssigned: No hay usuarios asignados a este proyecto.
 
 membershipEditor:
@@ -4880,7 +4880,7 @@ monitoring:
     title: Configurar Grafana
   hostNetwork:
     label: Usar red de host para el operador de Prometheus
-    tip: Si está usando un clúster Kubernetes gestionado con CNI personalizado (ej. Calico), debe habilitar esta opción.
+    tip: Si está usando un clúster Kubernetes gestionado con CNI personalizado (p. ej. Calico), debe habilitar esta opción para permitir que un plano de control gestionado contacte con el webhook de admisión expuesto por Prometheus Operator para mutar o validar las PrometheusRules entrantes.
   overview:
     alertsList:
       ends:
@@ -4984,8 +4984,8 @@ monitoring:
     empty: Las alertas no han sido configuradas para ningún espacio de nombres accesible.
     getStarted: Comience haciendo clic en Crear para configurar una alerta.
     receiverTooltip: Esta ruta dirigirá las alertas al receptor seleccionado, que debe estar definido en el mismo AlertmanagerConfig.
-    deprecationWarning: Los recursos Route y Receiver están deprecados. En adelante, las rutas y receptores no deben gestionarse aquí.
-    routeInfo: Este formulario permite configurar una ruta que dirige el tráfico a un receptor.
+    deprecationWarning: Los recursos Route y Receiver están obsoletos. En adelante, las rutas y los receptores no deben gestionarse como recursos de Kubernetes independientes en esta página. Deben configurarse como campos YAML en un recurso AlertmanagerConfig.
+    routeInfo: Este formulario permite configurar una ruta que dirige el tráfico a un receptor. Las alertas pueden dirigirse a más receptores configurando rutas hijas en YAML.
     receiverFormNames:
       create: Crear Receptor en AlertmanagerConfig
       edit: Editar Receptor en AlertmanagerConfig
@@ -5323,7 +5323,7 @@ node:
   list:
     pool: Grupo
     noNodes: Este grupo está vacío
-    nodeTaint: Manchas
+    nodeTaint: Taints
     scaleDown: Reducir grupo
     scaleUp: Ampliar grupo
     poolDescription:
@@ -5369,7 +5369,7 @@ node:
           osImage: Imagen
           systemUUID: UUID del Sistema
       pods: Pods
-      taints: Manchas
+      taints: Taints
   actions:
     downloadSSHKey: Descargar clave SSH
     downloadNodeConfig: Descargar claves
@@ -5995,12 +5995,12 @@ prefs:
   timeFormat:
     label: Formato de hora
   perPage:
-    label: Elementos por página
+    label: Filas de tabla por página
     value: |-
       {count, number}
   keymap:
-    label: Mapa de teclas
-    sublime: Sublime
+    label: Asignación de teclas del editor YAML
+    sublime: 'Normal'
     emacs: Emacs
     vim: Vim
   advFeatures:
@@ -6227,7 +6227,7 @@ promptRemoveApp:
   removeCrd: Eliminar el CRD asociado con esta aplicación
 
 promptRestore:
-  title: Restaurar
+  title: Restaurar instantánea
   name: Nombre
   date: Fecha
   fromS3: Restaurar desde S3
@@ -6808,7 +6808,7 @@ servicesPage:
   serviceTypes:
     clusterIp:
       abbrv: IP
-      description: Exponer un conjunto de Pods a otros Pods dentro del clúster. Este tipo de Servicio solo es accesible desde dentro del clúster.
+      description: Exponer un conjunto de Pods a otros Pods dentro del clúster. Este tipo de Servicio solo es accesible desde dentro del clúster. Este es el tipo predeterminado.
       label: IP de Clúster
     externalName:
       abbrv: EN
@@ -6820,7 +6820,7 @@ servicesPage:
       label: Sin Cabecera
     loadBalancer:
       abbrv: LB
-      description: Crear un balanceador de carga en la infraestructura subyacente y exponer el Servicio externamente.
+      description: Crear un balanceador de carga en la infraestructura subyacente (p. ej., el balanceador de carga de un proveedor de nube) y asignar una dirección IP pública al Servicio. Permite que los clientes externos accedan al Servicio mediante la dirección IP pública y el puerto especificados en la definición del Servicio.
       label: Balanceador de Carga
     nodePort:
       abbrv: NP
@@ -6842,7 +6842,7 @@ setup:
     label: URL del Servidor
     skip: Omitir
     tip: ¿Qué URL se debe usar para esta instalación de {vendor}? Todos los nodos de sus clústeres necesitarán acceso a esta URL.
-  setPassword: Lo primero es establecer una contraseña segura para el usuario predeterminado <code>{username}</code>.
+  setPassword: Lo primero es establecer una contraseña segura para el usuario predeterminado <code>{username}</code>. Le sugerimos usar esta contraseña aleatoria generada solo para usted, pero puede introducir la suya si lo prefiere.
   useManual: Establecer una contraseña específica
   useRandom: Usar una contraseña generada aleatoriamente
   copyRandom: Copiar contraseña aleatoria al portapapeles
@@ -6876,7 +6876,7 @@ sortableTable:
   actionAvailability:
     selected: '{actionable} seleccionado'
     some: Afecta {actionable} de {total}
-  noData: No hay datos
+  noData: No hay filas que coincidan con su búsqueda.
   noRows: No hay filas para mostrar.
   noActions: No hay acciones disponibles
   paging:
@@ -7414,7 +7414,7 @@ tableHeaders:
   success: Éxito
   summary: Resumen
   subobject: Subobjeto
-  taints: Manchas
+  taints: Taints
   target: Destino
   targetKind: Tipo de destino
   targetPort: Destino
@@ -9161,7 +9161,7 @@ keyValue:
 
 registryMirror:
   header: Espejos
-  toolTip: Los espejos pueden usarse para redirigir las solicitudes de imágenes de un registro a una lista de endpoints.
+  toolTip: 'Los espejos pueden usarse para redirigir las solicitudes de imágenes de un registro para que se atiendan desde una lista de endpoints que usted especifique. Por ejemplo, docker.io podría redirigir a su registro interno en lugar de ir nunca a DockerHub.'
   addLabel: Agregar Espejo
   description: Los espejos definen los nombres y endpoints para registros privados. Los endpoints se intentan uno por uno.
   hostnameLabel: Nombre de Host del Registro
@@ -9219,11 +9219,11 @@ advancedSettings:
     cluster-defaults: Anule los valores predeterminados de RKE al crear nuevos clústeres.
     engine-install-url: URL de instalación predeterminada del motor Docker (para la mayoría de los controladores de nodo).
     engine-iso-url: URL de instalación predeterminada del SO (para el controlador vSphere).
-    engine-newest-version: La versión de Docker más reciente compatible en el momento de esta versión.
-    engine-supported-range: Rango Semver para versiones de motor Docker compatibles.
+    'engine-newest-version': 'La versión de Docker más reciente compatible en el momento de esta versión. Una versión de Docker que no cumpla el rango de Docker compatible pero sea más reciente que esta se marcará como no probada.'
+    'engine-supported-range': 'Rango Semver de las versiones del motor Docker compatibles. Las versiones que no cumplan este rango se marcarán como no compatibles en la interfaz.'
     ingress-ip-domain: "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
     server-url: URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
-    system-default-registry: Registro privado para todas las imágenes de contenedores del sistema Rancher.
+    'system-default-registry': 'Registro privado que se usará para todas las imágenes de contenedores del sistema de Rancher. Si no se especifica ningún valor, se usa el registro predeterminado del runtime de contenedores. Para Docker y containerd, el valor predeterminado es `docker.io`.'
     'system-default-registry-pull-secrets': 'Lista de secretos de extracción de imágenes para autenticarse en el registro desde el que se extraen las imágenes de contenedor del sistema de Rancher. De forma predeterminada, estos secretos se copiarán en cada espacio de nombres de gráfico de Rancher. Los secretos deben estar en el espacio de nombres `cattle-system`. Se utilizará el primer secreto válido de la lista.'
     ui-dashboard-index: Ubicación del índice HTML para la UI de {appName}.
     ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
@@ -9231,8 +9231,8 @@ advancedSettings:
     auth-user-info-max-age-seconds: La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
     auth-user-info-resync-cron: Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
     cluster-template-enforcement: Los no administradores estarán restringidos a lanzar clústeres solo mediante Plantillas RKE preaprobadas.
-    auth-user-session-idle-ttl-minutes: TTL de inactividad personalizado (en minutos) en una sesión de autenticación de usuario.
-    auth-user-session-ttl-minutes: TTL personalizado (en minutos) en una sesión de autenticación de usuario.
+    'auth-user-session-idle-ttl-minutes': 'TTL de inactividad personalizado (en minutos) en una sesión de autenticación de usuario. Es la duración máxima que una sesión puede permanecer activa cuando no hay actividad del usuario en un navegador. Debe ser menor que "auth-user-session-ttl-minutes". Si "auth-user-session-idle-ttl-minutes" es mayor o igual que "auth-user-session-ttl-minutes", la función de inactividad de sesión se considera desactivada.'
+    'auth-user-session-ttl-minutes': 'TTL personalizado (en minutos) en una sesión de autenticación de usuario. Es la duración máxima que una sesión puede permanecer activa independientemente de la actividad del usuario en un navegador. Debe ser mayor que "auth-user-session-idle-ttl-minutes".'
     auth-token-max-ttl-minutes: TTL máximo (en minutos) para todos los tokens excepto los controlados por "auth-user-session-ttl-minutes".
     kubeconfig-generate-token: Generar automáticamente tokens para los usuarios cuando se solicita un kubeconfig.
     kubeconfig-default-token-ttl-minutes: TTL (en minutos) aplicado en todos los tokens de kubeconfig. Cuando se establece en 0, el token nunca expira.
@@ -9243,11 +9243,11 @@ advancedSettings:
     ui-default-landing: La página predeterminada a la que llegan los usuarios después de iniciar sesión.
     brand: Nombre de la carpeta para un tema alternativo definido en '/assets/brand'
     hide-local-cluster: Ocultar el clúster local
-    agent-tls-mode: Verificación de Certificados de Rancher. En modo 'strict' los agentes solo aceptan certificados firmados por la CA de Rancher.
+    'agent-tls-mode': "Verificación de certificados de Rancher. En modo `strict`, los agentes (system, cluster, fleet, etc.) solo confiarán en instalaciones de Rancher que usen un certificado firmado por el CABundle de la configuración `cacerts`. Cuando el modo es system-store, los agentes confiarán en cualquier certificado firmado por un CABundle del almacén de confianza del sistema operativo."
     k3s-based-upgrader-uninstall-concurrency: Define el número máximo de clústeres en los que Rancher puede desinstalar concurrentemente el sistema de actualización legacy.
     system-agent-upgrader-install-concurrency: Define el número máximo de clústeres en los que Rancher puede instalar concurrentemente los recursos del sistema de actualización.
     'delete-machine-on-failure-after': Define el número de segundos tras los cuales Rancher eliminará las máquinas de infraestructura cuyo aprovisionamiento haya fallado. Establezca el valor en 0 para deshabilitar la eliminación automática de las máquinas con errores.
-    imported-cluster-version-management: Habilita la gestión de versiones para clústeres RKE2/K3s importados.
+    'imported-cluster-version-management': Habilita la gestión de versiones para los clústeres RKE2/K3s importados y para el clúster local si es un clúster RKE2/K3s. La configuración de gestión de versiones de cada clúster prevalece sobre esta configuración global a nivel de clúster. En los clústeres existentes cuya gestión de versiones a nivel de clúster esté establecida en 'system-default', cambiar este indicador provocará un nuevo despliegue del agente del clúster durante la siguiente reconciliación (por defecto cada 5 minutos, o en cuanto se edite el clúster, lo que ocurra primero).
     'imported-cluster-day2-ops-enabled': Controla si los clústeres RKE2/K3s importados tendrán las operaciones de día 2 (instantáneas de etcd, restauraciones, rotaciones de clave de cifrado) habilitadas de forma predeterminada. Esto afectará a todos los clústeres que usen la configuración predeterminada y se puede anular a nivel de clúster.
   warnings:
     agent-tls-mode: Cambiar esta configuración provocará que todos los agentes sean redespliegados.
@@ -9468,8 +9468,8 @@ resourceQuota:
     remove: Eliminar {identifier}
 customLinks:
   displayTitle: Enlaces
-  label: Etiqueta
-  description: Configure los enlaces a mostrar en la página de inicio. Puede definir sus propios enlaces personalizados.
+  label: Enlaces de Inicio
+  description: 'Configure los enlaces a mostrar en la página de inicio. Puede definir sus propios enlaces personalizados, así como mostrar u ocultar los enlaces predeterminados.'
   restoreDefaults: Restaurar Valores Predeterminados
   addLink: Agregar Enlace
   restoreSuccess: Las URLs predeterminadas han sido restauradas.
@@ -9492,21 +9492,21 @@ customLinks:
     editBrand: Personalizar tema de la interfaz
     access:
       title: Obtener soporte
-      text: Cuando necesite ayuda con Rancher, tiene acceso a un equipo de expertos sin igual.
-      action: Abrir una solicitud de soporte
+      text: Inicie sesión en SUSE Customer Center para acceder al soporte de su suscripción
+      action: SUSE Customer Center
       aws:
         generateConfig: Generar configuración de soporte
-        text: El soporte está disponible a través de su suscripción de Amazon Marketplace.
+        text: 'Inicie sesión en SUSE Customer Center para acceder al soporte de su suscripción. ¿Necesita abrir un nuevo caso de soporte? Descargue un archivo de configuración de soporte a continuación.'
   promos:
     one:
-      title: Primeros pasos
-      text: Ya sea un usuario nuevo o experimentado de Kubernetes, tenemos los recursos para ayudarle a aprovechar al máximo Rancher.
+      title: Soporte 24x7
+      text: Ofrecemos SLAs bien definidos y opciones de soporte las 24 horas.
     two:
-      title: Únase a la comunidad
-      text: Conéctese con otros usuarios de Rancher y el equipo de ingeniería a través de eventos comunitarios, foros en línea y más.
+      title: Resolución de incidencias
+      text: Ejecute los productos SUSE Rancher con confianza, sabiendo que los desarrolladores que los crearon están disponibles para resolver rápidamente los problemas.
     three:
-      title: Documentación
-      text: Encuentre respuestas en la documentación, desde guías detalladas de procedimientos hasta referencias para la API, CLI y más.
+      title: Resolución de problemas
+      text: Nos centramos en descubrir la causa raíz de cualquier problema, ya esté relacionado con productos SUSE, Kubernetes, Docker o su infraestructura subyacente.
     four:
       title: Innove con libertad
       text: Aproveche nuestra compatibilidad certificada con una amplia gama de proveedores de Kubernetes, sistemas operativos y software de código abierto.
