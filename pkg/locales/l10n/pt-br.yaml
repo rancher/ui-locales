@@ -2,7 +2,7 @@
 # locale: pt-br (Portuguese - Brazil)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -1292,7 +1292,7 @@ catalog:
         existingValuesBanner: '{secrets} estão configurados como image pull secrets nos valores do chart. Para modificá-los, edite o YAML de valores diretamente.'
         defaultSecretsBanner: '{secrets} estão configurados como pull secrets padrão. Selecione ou crie um image pull secret aqui para substituir o padrão.'
     header:
-      charts: Gráficos
+      charts: Charts
     info:
       appVersion: Versão do Aplicativo
       chartVersions:
@@ -1304,7 +1304,7 @@ catalog:
       maintainers: Mantenedores
       maintainerContactTooltip: Contatar {maintainer}
       related: Relacionado
-      chartUrls: Gráfico
+      chartUrls: Chart
       keywords: Palavras-chave
     errors:
       clusterToolExists: Este chart tem um namespace e nome fixos. Uma <a href="{url}">aplicação</a> correspondente foi encontrada e quaisquer alterações serão feitas nela.
@@ -1338,7 +1338,7 @@ catalog:
     deploysOnWindows: Implanta no Windows
     windowsIncompatible: Somente Linux
     versionWindowsIncompatible: Versão somente Linux
-    header: Gráficos
+    header: Charts
     noCharts:
       title: Nenhum chart para exibir
       message: <b>Dicas:</b> desfaça o último filtro aplicado ou <resetAllFilters>limpe todos os filtros</resetAllFilters>, e certifique-se de ter os <repositoriesUrl>repositórios</repositoriesUrl> corretos.
@@ -1426,7 +1426,7 @@ catalog:
         fetchChart: Erro ao recuperar chart do repositório
         alreadyInstalled: Chart já instalado
         timeoutWaiting: Tempo esgotado aguardando logs
-    chart: Gráfico
+    chart: Chart
     warning:
       managed:
         Aviso, {manager} gerencia a implantação e atualização do aplicativo {name}. A atualização deste aplicativo não é suportada.<br>
@@ -1745,7 +1745,7 @@ cluster:
       label: 'Complemento: Calico'
       configuration: Calico
     rke2-calico-crd:
-      label: ' "Add-on: Calico"'
+      label: "Complemento: Calico"
       configuration: Calico
     rke2-canal:
       label: 'Complemento: Canal'
@@ -2139,7 +2139,7 @@ cluster:
         supportsAcceleratedNetworking: Tamanhos que Suportam Rede Acelerada
         doesNotSupportAcceleratedNetworking: Tamanhos Sem Rede Acelerada
         availabilityWarning: O tamanho de VM selecionado não está disponível na região selecionada.
-        regionDoesNotSupportAzs: Zonas de disponibilidade não são suportadas na região selecionada.
+        regionDoesNotSupportAzs: Zonas de disponibilidade não são suportadas na região selecionada. Selecione uma região diferente ou use um conjunto de disponibilidade.
         regionSupportsAzsButNotThisSize: 'A região selecionada não suporta zonas de disponibilidade para o tamanho de VM selecionado. Por favor, selecione uma região ou tamanho de VM diferente.'
         selectedSizeAcceleratedNetworkingWarning: 'O tamanho de VM selecionado não suporta rede acelerada. Por favor, selecione outro tamanho de VM ou desative a rede acelerada.'
       sshUser:
@@ -2263,7 +2263,7 @@ cluster:
         os: Sistema Operacional
       tags:
         label: Tags
-        description: As tags permitem anexar metadados a objetos no inventário vSphere.
+        description: As tags permitem anexar metadados a objetos no inventário do vSphere, facilitando a ordenação e a busca desses objetos.
         addTag: Adicionar Tag
       customAttributes:
         label: Atributos personalizados (legado)
@@ -2294,7 +2294,7 @@ cluster:
         title: Grupo de Segurança
         vpcId: (selecione uma VPC/Sub-rede primeiro)
         mode:
-          default: "Padrão: Criar e usar automaticamente um grupo de segurança '{defaultGroup}'"
+          default: 'Padrão: Criar e usar automaticamente um grupo de segurança "{defaultGroup}"'
           custom: 'Escolha um ou mais grupos de segurança existentes:'
       volumeType:
         label: Tipo de Volume Raiz EBS
@@ -3561,7 +3561,7 @@ fleet:
       accessTokenField: Token de Acesso
       accessTokenPlaceholder: Seu token de acesso da SUSE Application Collection
     chart:
-      title: Gráficos
+      title: Charts
       loadError: Chart não encontrado ou sem versões disponíveis.
   helmOp:
     intro:
@@ -3595,10 +3595,10 @@ fleet:
           subtext: 'Definir detalhes de metadados'
           description: Informações básicas do Helm Op
         chart:
-          label: Gráfico
-          title: gráfico
+          label: Chart
+          title: chart
           subtext: Definir detalhes da fonte do Chart Helm
-          description: gráfico
+          description: chart
         values:
           label: Valores
           title: valores
@@ -3659,7 +3659,7 @@ fleet:
           label: URL do Repositório
           placeholder: 'ex.: https://foo.bar/baz'
         chart:
-          label: Gráfico
+          label: Chart
           placeholder: O caminho para o nome do chart no repositório
       oci:
         chart:
@@ -4765,7 +4765,7 @@ login:
   cli:
     welcome: Login para concluir a autenticação da CLI
     invalidParams: Parâmetros de login inválidos - não é possível fazer login
-    warning: Se você não iniciou esta solicitação ou o "ID de solicitação do cliente" mostrado no terminal não corresponde ao código abaixo, não continue
+    warning: 'Se você não iniciou esta solicitação ou o "Client Request Id" mostrado no terminal não corresponde ao código abaixo, não continue'
     warningLegacy: Se você não iniciou esta solicitação ou o código abaixo não corresponde ao parâmetro "requestId" mostrado como parte da URL de login no terminal, não continue
 
 logout:
@@ -4773,7 +4773,10 @@ logout:
   error: 'Ocorreu um erro ao sair: {msg}'
   specificError:
     unknown: Desconhecido.\n\nPor favor, contate o administrador do sistema.
-    500: Erro no servidor.\n\nPor favor, contate o administrador do sistema.
+    500: |-
+      Erro no servidor.
+
+      Por favor, contate o administrador do sistema.
 
 managementNode:
   customName: Nome Personalizado
@@ -4916,7 +4919,7 @@ monitoring:
       adminApi: API Admin
       evaluation: Intervalo de Avaliação
       ignoreNamespaceSelectors:
-        help: Ignorar seletores de namespace permite que administradores de cluster limitem as equipes de monitorar outros namespaces.
+        help: 'Ignorar seletores de namespace permite que administradores de cluster impeçam as equipes de monitorar recursos fora dos namespaces aos quais têm permissão, mas pode quebrar o funcionamento de Apps que dependem de configurar Monitors que coletam alvos em vários namespaces, como o Istio.'
         label: Seletores de Namespace
         radio:
           enforced: 'Usar: Monitores podem acessar recursos com base em namespaces que correspondem ao campo seletor de namespace'
@@ -5795,7 +5798,7 @@ plugins:
     message: Erro ao carregar extensões
     generic: Erro na extensão
     primeOnly: Não foi possível carregar a Extensão Prime do Rancher na Comunidade Rancher
-    apiAnnotationMissing: Não foi possível carregar a Extensão. A versão instalada não é compatível com a versão atual da API de Extensões da UI.
+    apiAnnotationMissing: 'Não foi possível carregar a Extensão. A versão instalada não é compatível com a versão atual da API de Extensões (a Extensão não possui a anotação catalog.cattle.io/ui-extensions-version, o que indica incompatibilidade com o Rancher 2.10 e versões posteriores)'
     api: Não foi possível carregar a Extensão. A versão instalada não é compatível com a versão atual da API de Extensões
     host: Não foi possível carregar a Extensão. A versão instalada não é compatível com o host desta aplicação
     version: Não foi possível carregar a Extensão. A versão instalada não é compatível com a versão atual do Rancher
@@ -6015,7 +6018,7 @@ prefs:
   helm:
     'true': Incluir Versões Pré-lançamento
     'false': Mostrar Apenas Lançamentos
-    label: 'Gráficos Helm'
+    label: Helm Charts
   confirmationSetting:
     title: Configuração de Confirmação
     scalingDownPrompt: Não pedir confirmação ao reduzir pools de nós.
@@ -6292,7 +6295,7 @@ rbac:
       tooltip: Esta função será atribuída a todos os novos usuários por padrão
     locked:
       label: Bloqueado
-      yes: 'Sim'
+      yes: 'Sim: novos vínculos não podem usar esta função'
       no: Não
     tabs:
       grantResources:
@@ -6303,7 +6306,7 @@ rbac:
           labelClusterScoped: Com escopo de cluster
           labelNamespaceScoped: Com escopo de namespace
         deprecatedLabel: Obsoleto
-        resourceOptionInfo: Informações sobre opções de recursos
+        resourceOptionInfo: As opções de recursos não são uma lista completa de todos os recursos disponíveis em cada cluster Kubernetes gerenciado pelo Rancher. Em casos de uso avançados, pode ser necessário inserir recursos e grupos de API manualmente.
         tableHeaders:
           verbs: Verbos
           resources: Recurso
@@ -6812,7 +6815,7 @@ servicesPage:
       label: IP do Cluster
     externalName:
       abbrv: EN
-      description: Mapeia o serviço para um nome DNS externo.
+      description: Cria um Service que usa um nome DNS em vez de seletores. Este é um caso de uso avançado.
       label: Nome Externo
     headless:
       abbrv: H
@@ -6820,7 +6823,7 @@ servicesPage:
       label: Sem Cabeça
     loadBalancer:
       abbrv: LB
-      description: Expõe o serviço externamente usando o balanceador de carga do provedor de nuvem.
+      description: Cria um balanceador de carga na infraestrutura subjacente (por exemplo, o balanceador de carga de um provedor de nuvem) e atribui um endereço IP público ao serviço. Permite que clientes externos acessem o serviço usando o endereço IP público e a porta especificada na definição do serviço.
       label: Balanceador de Carga
     nodePort:
       abbrv: NP
@@ -7204,7 +7207,7 @@ storageClass:
       tooltip: Por padrão, a classe de armazenamento padrão no cluster [[Harvester]] host é usada.
 
 tableHeaders:
-  assuredConcurrencyShares: Compartilhamentos de Simultaneidade Garantida
+  assuredConcurrencyShares: Cotas de Simultaneidade Garantida
   autoscaler: Autoescalador
   accessKey: Chave de Acesso
   addressType: Tipo de Endereço
@@ -7225,7 +7228,7 @@ tableHeaders:
   bundlesReady: Bundles Prontos
   bundleDeploymentsReady: Implantações
   builtin: Integrado
-  chart: Gráfico
+  chart: Chart
   capacity: Capacidade
   current: Atual
   clusterCreatorDefault: Padrão para Criadores de Cluster
@@ -7279,7 +7282,7 @@ tableHeaders:
   holder: Titular
   hpaReference: Carga de Trabalho
   health: Saúde
-  handSize: Tamanho do Lote
+  handSize: Tamanho da Mão
   ipAddress: Endereço IP
   id: ID
   iP: IP
@@ -7365,7 +7368,7 @@ tableHeaders:
   reason: Motivo
   receivers: Receptores
   receiverTypes: Tipos de Receptor
-  reclaimPolicy: Política de Reclamação
+  reclaimPolicy: Política de Recuperação
   registrationNamespace: Namespace de Registro
   repo: Repositório
   repoType: Tipo de Repositório
@@ -7409,7 +7412,7 @@ tableHeaders:
   storage: Tamanho do Armazenamento
   storageClass: Classe de Armazenamento
   source: Fonte
-  subject: Assunto
+  subject: Sujeito
   subType: Tipo
   success: Sucesso
   summary: Resumo
@@ -7539,13 +7542,13 @@ user:
 validation:
   noUpperCase: 'Caracteres alfanuméricos em "{key}" devem ser minúsculos'
   arrayLength:
-    between: "O '{key}' precisa ter entre {min} e {max} {max, plural, =1 {entrada} other {entradas}}"
-    exactly: "O '{key}' precisa ter exatamente {count} {count, plural, one {entrada} other {entradas}}"
-    max: "O '{key}' deve ter no máximo {count} {count, plural, one {entrada} other {entradas}}"
-    min: "O '{key}' deve ter pelo menos {count} {count, plural, one {entrada} other {entradas}}"
+    between: '"{key}" deve conter entre {min} e {max} {max, plural, =1 {item} other {itens}}'
+    exactly: '"{key}" deve conter {count, plural, =1 {# item} other {# itens}}'
+    max: '"{key}" deve conter no máximo {count} {count, plural, =1 {item} other {itens}}'
+    min: '"{key}" deve conter pelo menos {count} {count, plural, =1 {item} other {itens}}'
   alphanumeric: '"{key}" deve ser alfanumérico'
   boolean: '"{key}" deve ser um valor booleano.'
-  chars: "O '{key}' contém {count, plural, =1 {um caractere inválido} other {# caracteres inválidos}}: {chars}"
+  chars: '"{key}" contém {count, plural, =1 {um caractere inválido} other {# caracteres inválidos}}: {chars}'
   cluster:
     name: O nome do cluster não pode ser 'local' ou ter o formato 'c-xxxxx'
   conflict: |-
@@ -7553,7 +7556,7 @@ validation:
     Esta tela foi atualizada para refletir os valores atuais no cluster. Revise e reaplique as alterações que desejava fazer, depois Salve novamente.
     {fieldCount, plural, =1 {Campo} other {Campos}} em conflito: {fields}
   custom:
-    missing: 'Nenhum validador existe para { validatorName }! O validador existe em validadores-personalizados? O nome está escrito corretamente?'
+    missing: 'Nenhum validador existe para { validatorName }! O validador existe em custom-validators? O nome está escrito corretamente?'
   dns:
     doubleHyphen: '"{key}" Não pode conter dois ou mais hífens consecutivos'
     hostname:
@@ -7747,7 +7750,7 @@ wm:
     timestamps: Mostrar Timestamps
     wrap: Quebrar Linhas
   containerShell:
-    escapeText: Pressione Shift+Escape para sair do terminal
+    escapeText: Pressione Shift+Escape para tirar o foco do terminal
     clear: Limpar
     containerName: 'Contêiner: {label}'
     failed: "Não foi possível abrir um shell para o container (nenhum dos comandos shell foi bem-sucedido)\n\r"
@@ -8283,10 +8286,10 @@ workload:
   typeDescriptions:
     apps.daemonset: 'DaemonSets executam exatamente um pod em cada nó elegível. Quando novos nós são adicionados ao cluster, DaemonSets os configuram automaticamente.'
     apps.deployment: Deployments executam um número escalável de réplicas de um pod distribuídas entre os nós elegíveis. Alterações na configuração são aplicadas de forma gradual.
-    apps.statefulset: StatefulSets gerenciam aplicações com estado e fornecem garantias sobre a ordenação e unicidade dos pods.
-    batch.cronjob: CronJobs criam Jobs em um cronograma recorrente. O cronograma é expresso na sintaxe padrão do cron.
-    batch.job: Jobs criam um ou mais pods para executar uma tarefa única de forma confiável.
-    pod: Pods são as menores unidades de computação implantáveis que podem ser criadas e gerenciadas no Kubernetes.
+    apps.statefulset: StatefulSets gerenciam aplicações com estado e fornecem garantias sobre a ordenação e a unicidade dos pods criados. Recomendado para cargas de trabalho com armazenamento persistente ou com requisitos rígidos de identidade, quórum ou ordem de atualização.
+    batch.cronjob: CronJobs criam Jobs, que por sua vez executam Pods, em um cronograma recorrente. O cronograma é expresso no formato cron padrão do Unix e usa o fuso horário do plano de controle do Kubernetes (normalmente UTC).
+    batch.job: Jobs criam um ou mais pods para executar de forma confiável uma tarefa única, executando um pod até que ele termine com sucesso. Pods com falha são substituídos automaticamente até que o número especificado de execuções concluídas seja atingido. Jobs também podem executar vários pods em paralelo ou funcionar como uma fila de trabalho em lote.
+    pod: Pods são as menores unidades de computação implantáveis que podem ser criadas e gerenciadas no Kubernetes. Um Pod é um grupo de um ou mais contêineres, com recursos de armazenamento e de rede compartilhados, e uma especificação de como executar os contêineres.
   upgrading:
     activeDeadlineSeconds:
       label: Prazo Ativo do Pod
@@ -9161,7 +9164,7 @@ keyValue:
 
 registryMirror:
   header: Espelhos
-  toolTip: Espelhos podem ser usados para redirecionar solicitações de imagens de um registro para vir de outro.
+  toolTip: 'Espelhos podem ser usados para redirecionar solicitações de imagens de um registro para uma lista de endpoints especificada por você. Por exemplo, docker.io pode ser redirecionado para o seu registro interno em vez de acessar o DockerHub.'
   addLabel: Adicionar Mirror
   description: Espelhos definem os nomes e endpoints para registros privados. Os endpoints são tentados em ordem.
   hostnameLabel: Hostname do Registro
@@ -9338,7 +9341,7 @@ banner:
   bannerFontSize:
     label: Tamanho da Fonte
   consent: Banner de Consentimento
-  consentFootnote: 'Dica: Use o caractere \\n para quebra de linha'
+  consentFootnote: "Dica: Use o caractere \\n para quebra de linha"
   individualSetting: 'Este banner é gerenciado pela configuração "{name}" e não pode ser modificado na interface'
   type:
     html: HTML
