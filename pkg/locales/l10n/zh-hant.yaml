@@ -1349,7 +1349,7 @@ catalog:
       all: 所有操作系統
       linux: Linux
       windows: Windows
-    search: 篩選
+    search: 搜索目錄...
     addNewRepo:
       label: 添加新的
       ariaLabel: 添加新倉庫
@@ -1620,8 +1620,8 @@ catalog:
     noTools: "未找到集群工具"
     action:
       install: 安裝
-      upgrade: 升級/編輯
-      edit: 編輯
+      upgrade: 升級
+      edit: 編輯當前版本
       downgrade: 降級
       remove: 移除
       manage: 管理
@@ -1806,7 +1806,7 @@ cluster:
     registrationCommand:
       label: 註冊命令
       linuxDetail: 在每臺要註冊的 Linux 主機上運行此命令。
-      windowsDetail: 在每臺要註冊的 Windows 主機中的 PowerShell 上運行此命令。Windows 節點只能充當 worker。
+      windowsDetail: 在每臺要註冊的 Windows 主機中的 PowerShell 上運行此命令。
       windowsWorkersOnly: <b>Windows 節點只能是工作節點。</b>
       windowsNotReady: 在用於添加 Windows worker 的註冊命令顯示之前，集群必須已啟動並運行 Linux ETCD，Control Plane，以及 worker 節點。<br /> <br /><b>Windows 節點只能作為 worker。</b>
       windowsWarning: 工作負載 Pod（包括由 Rancher Chart 部署的 Pod）將默認調度到 Linux 和 Windows 節點上。編輯 Chart 中的 NodeSelector 以將它們放置到兼容的節點上。
@@ -1830,7 +1830,7 @@ cluster:
         label: 訪問密鑰
         placeholder: 你的 AWS Access Key
       defaultRegion:
-        help: 創建集群時使用的默認區域。需要驗證此憑證是否有效。
+        help: 創建集群時使用的默認區域。也會通過此區域驗證此憑證是否有效。
         label: 默認區域
       secretKey:
         label: 秘密密鑰
@@ -1867,7 +1867,7 @@ cluster:
         placeholder: 你的客戶端 Secret
     name:
       label: 憑證名稱
-      placeholder: 此憑證的名稱（可選）
+      placeholder: 此憑證的名稱
     s3:
       accessKey:
         label: 訪問密鑰
@@ -2078,7 +2078,7 @@ cluster:
       acceleratedNetworking:
         label: 加速網絡
       availabilitySet:
-        label: 可用性集（非託管）
+        label: 可用性集
         description: 可用性集用於讓應用程序免受 Azure 數據中心內硬件故障的影響。
       availabilityZone:
         label: 可用區
@@ -2463,10 +2463,10 @@ cluster:
         bannerLabel: '注意：優先匹配最後一個的選擇器，並且只使用它的參數。匹配到的其他選擇器的參數不會合並。'
         title: '標籤匹配的主機：'
         subTitle: '使用 Kubelet 參數：'
-        titleAlt:  |-
+        titleAlt: |-
           {count, plural,
             =1 { 所有主機均使用 Kubelet 參數： }
-            other { 任何主機均使用 Kubelet 參數： }
+            other { 對於下方沒有匹配標籤的主機： }
           }
         kubeControllerManagerTitle: 補充的 Controller Manager 參數
         kubeApiServerTitle: 補充的 API server 參數
@@ -2604,8 +2604,8 @@ cluster:
     aws: Amazon
     azure: Azure
     azureaks: Azure AKS
-    aks: Azure AKS
-    azurekubernetesservice: Azure AKS
+    aks: AKS
+    azurekubernetesservice: Azure AKS（不支持的 Kev1）
     baiducloudcontainerengine: 百度 CCE
     baidu: 百度 CCE
     cloudca: Cloud.ca
@@ -2613,13 +2613,13 @@ cluster:
     custom: 自定義
     digitalocean: DigitalOcean
     docker: Docker
-    eks: Amazon EKS
+    eks: EKS
     exoscale: Exoscale
     sks: Exoscale SKS
     gcp: Google
     google: Google GCE
     googlegke: Google GKE
-    gke: Google GKE
+    gke: GKE
     googlekubernetesengine: Google GKE (Unsupported Kev1)
     harvester: '[[Harvester]]'
     huaweicce: 華為 CCE
@@ -2644,7 +2644,7 @@ cluster:
     pinganyunecs: 平安雲 ECS
     pnap: phoenixNAP
     rackspace: RackSpace
-    rancherkubernetesengine: RKE
+    rancherkubernetesengine: RKE1
     rke2: RKE2
     rke: RKE1
     rkeWindows: Windows（僅限 RKE1）
@@ -2779,11 +2779,11 @@ cluster:
         toolTip: 客戶端用於驗證端點返回的證書是否有效的證書。
     etcd:
       disableSnapshots:
-        label: 自動快照
+        label: 自動備份
       snapshotScheduleCron:
         label: Cron 調度
       snapshotRetention:
-        label: 保留最後一個
+        label: 本地快照保留數量
         tooltip: 每次備份為每個 etcd 節點記錄 1 個快照。如果您指定 3 個快照且有 3 個 etcd 節點，您將只保留 1 個完整備份。
       exportMetric:
         label: 指標
@@ -3888,17 +3888,17 @@ clusterBadge:
   customize: 自定義
   editLabel: 編輯集群徽章
   modal:
-    title: 自定義集群徽章
-    checkbox: 顯示此集群的徽章
+    title: 集群外觀
+    checkbox: 顯示集群備註
     comment: 自定義備註
     iconText: 圖標文本
     buttonAction: 應用
     badgeBgColor: 徽章背景顏色
     badgeBgColorInput: 徽章背景顏色選擇器輸入
     badgeTextColor: 徽章文字顏色
-    badgeAsIcon: 自定義集群圖標
-    maxCharsTooltip: 最多兩個字符
-    previewTitle: "集群圖標和名稱效果"
+    badgeAsIcon: 使用自定義徽章
+    maxCharsTooltip: 覆蓋默認的集群名稱縮寫。
+    previewTitle: "預覽："
     previewSide: "側邊導航"
     previewHeader: "RANCHER 標題"
 
@@ -4423,8 +4423,8 @@ landing:
     docs: Rancher 官方文檔
     forums: 論壇
   commercial:
-    title: 商業支持
-    body: 瞭解商業支持
+    title: Rancher Prime
+    body: 了解 Rancher Prime
   landingPrefs:
     body: "登錄後顯示："
     ariaLabelTakeMeToCluster: 選擇登錄後要前往的集群
@@ -4500,7 +4500,7 @@ logging:
     clientKey:
       label: 客戶端密鑰
       placeholder: 粘貼客戶端密鑰
-    clientKeyPass: 傳自密文的客戶端密鑰
+    clientKeyPass: 客戶端密鑰密碼
     verifySsl: 驗證 SSL
     sslVersion: SSL 版本
     suppressTypeName:
@@ -4538,7 +4538,7 @@ logging:
       label: CA 證書
       placeholder: 粘貼 CA 證書
     sslClientCert:
-      label: CA 證書
+      label: 客戶端證書
       placeholder: 粘貼客戶端證書
     sslClientCertChain:
       label: 證書鏈
@@ -5282,11 +5282,11 @@ networkpolicy:
       invalidCidr: "無效的 CIDR"
       invalidExceptionCidrs: "無效的例外： "
     podSelector:
-      label: Pod 選擇器
+      label: Pod 標籤選擇器
     namespaceSelector:
-      label: 命名空間選擇器
+      label: 命名空間標籤選擇器
     namespaceAndPodSelector:
-      label: 命名空間/Pod 選擇器
+      label: 命名空間/Pod 標籤選擇器
   config:
     label: 配置
   selectors:
@@ -5753,7 +5753,7 @@ podDisruptionBudget:
 inactivity:
   title: 會話即將過期
   banner: 由於不活動，你的會話即將過期。任何未保存的更改都將丟失。
-  content: 單擊“恢復會話”來讓選項卡中的會話保持活動狀態，或在會話過期後刷新瀏覽器。
+  content: 單擊"恢復會話"以保持此瀏覽器中的會話處於活動狀態。
   cta: 恢復會話
 
 # Rancher Extensions
@@ -5917,7 +5917,7 @@ plugins:
     banner: 有新的擴展倉庫可用。要啟用這些倉庫，請單擊右側的按鈕。
     bannerBtn: 添加倉庫
     title: 添加擴展倉庫
-    prompt: 你可以安裝多個 Rancher 擴展倉庫來增加你的擴展商店
+    prompt: 啟用更多倉庫以獲取更多擴展
   setup:
     installed: 已安裝
     uninstalled: 已卸載
@@ -5930,10 +5930,10 @@ plugins:
       community: Community Extensions 倉庫提供了由 Rancher 社區發佈的擴展。
     install:
       title: 啟用擴展支持？
-      prompt: 這將安裝啟用擴展支持所需的 Helm Chart
+      prompt: 這將引導你前往可啟用擴展支持所需功能開關的頁面。
       featuresButton: 前往功能標誌
       airgap: 離線安裝環境請不要啟用此功能
-      addRancherRepo: 添加 Official Rancher Extensions 倉庫
+      addRancherRepo: 添加 Rancher Prime Extensions 倉庫
       addPartnersRancherRepo: 添加 Partners Extensions 倉庫
     remove:
       label: 禁用擴展支持
@@ -6388,8 +6388,8 @@ rbac:
         label: 管理所有集群
         description: 允許用戶管理所有集群，包括他們不是成員的集群。
       clusterscans-manage:
-        label: 管理 CIS 集群掃描
-        description: 允許用戶運行新建的 CIS 集群掃描，並管理 CIS 集群掃描。
+        label: 管理合規集群掃描
+        description: 允許用戶運行新建的合規集群掃描，並管理合規集群掃描。
       kontainerdrivers-manage:
         label: 創建集群驅動
         description: 允許用戶創建集群驅動，併成為該集群驅動的所有者（owner）。
@@ -6833,7 +6833,7 @@ setup:
   currentPassword: Bootstrap 密碼
   confirmPassword: 確認新密碼
   defaultPassword:
-    intro: 這是你第一次訪問 {vendor}。如果你預先設置了 Bootstrap 密碼，請在此處輸入。否則我們會為你生成一個隨機密碼。找到它：<br/><br/>
+    intro: 這是你第一次訪問 {vendor}。如果你預先設置了 Bootstrap 密碼，請在此處輸入。否則我們會為你生成一個隨機密碼。要找到它，請運行：<br/><br/>
     helmSuffix: ""
   eula: 選中此框，即表示你接受<a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">最終用戶許可協議及條款和條件</a>
   newPassword: 新密碼
@@ -7371,7 +7371,7 @@ tableHeaders:
   repoType: 倉庫類型
   repositories: 倉庫
   repoName: 倉庫名稱
-  reposReady: 就緒倉庫
+  reposReady: 就緒 Git 倉庫
   replicas: 副本數量
   reqRate: 請求頻率
   resource: 資源
@@ -7926,7 +7926,7 @@ workload:
       addGroupIDs: 添加組 ID
       allowPrivilegeEscalation:
         title: 權限提升
-        'true': "是：容器可以獲得比其父進程更多的權限。"
+        'true': "容器可以獲得比其父進程更多的權限"
       capabilities:
         title: 能力
         add: 添加 Capabilities
@@ -7937,18 +7937,18 @@ workload:
       podFsGroup: Pod 文件系統組
       privileged:
         title: 特權
-        'true': "是：容器可以完全訪問主機"
+        'true': "容器可以完全訪問主機"
         help: 啟用特權將隱藏權限提升和 seccompProfile。
         afterTick: 
           'true': 權限提升和 seccompProfile 已被隱藏。
           'false': 權限提升和 seccompProfile 已出現。
       readOnlyRootFilesystem:
         title: 只讀根文件系統
-        'true': "是：容器有一個只讀的根文件系統"
+        'true': "容器有一個只讀的根文件系統"
       runAsGroup: 以組 ID 運行
       runAsNonRoot:
         title: 以非 Root 運行
-        'true': "是：容器必須以非 Root 用戶的身份運行"
+        'true': "容器必須以非 Root 用戶的身份運行"
       runAsNonRootOptions:
         'true': "容器必須以非 root 用戶運行"
       runAsUser: 
@@ -9233,7 +9233,7 @@ advancedSettings:
     'cluster-template-enforcement': '非管理員只能通過預先批准的 RKE 模板啟動集群。'
     'auth-user-session-idle-ttl-minutes': '用戶認證會話的自定義空閒 TTL（以分鐘為單位）。這是瀏覽器中沒有用戶活動時會話可以保持存活的最長持續時間。此值應小於 "auth-user-session-ttl-minutes"。如果 "auth-user-session-idle-ttl-minutes" 大於或等於 "auth-user-session-ttl-minutes"，則認為會話空閒功能被禁用。'
     'auth-user-session-ttl-minutes': '用戶認證會話的自定義 TTL（單位：分鐘）。這是會話可保持活動的最長時間，與用戶在瀏覽器中的活動無關。該值應大於 "auth-user-session-idle-ttl-minutes"。'
-    'auth-token-max-ttl-minutes': '所有身份認證 Token 的最大 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
+    'auth-token-max-ttl-minutes': '除受 "auth-user-session-ttl-minutes" 控制的 Token（用戶會話 Token）外，所有 Token 的最大 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
     'kubeconfig-generate-token': '請求 kubeconfig 時自動為用戶生成 Token。'
     'kubeconfig-default-token-ttl-minutes': '應用於所有 kubeconfig Token 的 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
     'rke-metadata-config': '配置 RKE 元數據刷新參數。'
@@ -9485,7 +9485,7 @@ customLinks:
     slack: Slack
     issues:     提交 GitHub Issue
     getStarted: 開始使用
-    commercialSupport: 商業支持
+    commercialSupport: Rancher Prime
     appCo: SUSE Application Collection
 
   suse:
