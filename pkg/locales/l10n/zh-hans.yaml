@@ -2235,7 +2235,7 @@ cluster:
         folder: 文件夹
         host:
           label: 主机
-          note: 用于创建虚拟机的主机（如果是独立的 ESXi 或是带有 DRS 的集群，请留空)
+          note: 用于创建虚拟机的主机（如果是独立的 ESXi 或是带有 DRS 的集群，请留空）
         gracefulShutdownTimeout:
           label: 优雅关机超时
           note: 在基础设施中强制删除虚拟机前等待的时间（秒）。0 表示禁用优雅关机。
@@ -3322,7 +3322,7 @@ fleet:
   fleetSummary:
     noClusters:
       gitRepo: 这个 Git 仓库不针对任何集群
-      helmOp: ''
+      helmOp: 这个 Helm Op 不针对任何集群
     state:
       ready: '就绪'
       info: '转换中'
