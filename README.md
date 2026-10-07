@@ -13,9 +13,10 @@ Translations are maintained on a best-effort basis using AI-powered automation w
 | Locale | Language | Coverage |
 |--------|----------|----------|
 | `zh-hant` | Chinese (Traditional) | 93.7% |
-| `es-es` | Spanish (Spain) | 91.7% |
-| `pt-br` | Portuguese (Brazil) | 90.3% |
-| `fr-fr` | French (France) | 87.8% |
+| `zh-hans` | Chinese (Simplified) | 92.9% |
+| `es-es` | Spanish (Spain) | 91.9% |
+| `pt-br` | Portuguese (Brazil) | 90.6% |
+| `fr-fr` | French (France) | 87.9% |
 
 `en-us` is the source language and is not shipped by this extension — Rancher already provides it.
 
@@ -36,6 +37,7 @@ ui-locales/
 │       ├── es-es.yaml
 │       ├── fr-fr.yaml
 │       ├── pt-br.yaml
+│       ├── zh-hans.yaml
 │       └── zh-hant.yaml
 ├── reference/
 │   └── en-us.yaml                  # English source, synced from rancher/dashboard (not shipped)
