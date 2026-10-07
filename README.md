@@ -80,6 +80,7 @@ yarn validate-locales            # all locales
 yarn validate-locales pt-br      # one locale
 ADVISORIES=1 yarn validate-locales   # also list the advisory differences
 BASE_REF=origin/main yarn validate-locales   # which commit to diff against for reference-only mode
+CHANGED_ONLY=1 yarn validate-locales   # only the locales changed vs BASE_REF (what CI does on a PR)
 ```
 
 Every locale file must be an **exact structural copy** of `reference/en-us.yaml` — same keys, same
