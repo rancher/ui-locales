@@ -2,7 +2,7 @@
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -158,9 +158,9 @@ generic:
     matchingResources:
       matchesSome: |-
         {matched, plural,
-          =0 {匹配 {total, number} 箇中的 0 個}
-          =1 {匹配 {total, number} 箇中的 1 個："{sample}"}
-          other {匹配 {total, number} 中的 {matched, number} 個，包括 "{sample}"}
+          =0 {匹配 {total, number} 個中的 0 個}
+          =1 {匹配 {total, number} 個中的 1 個："{sample}"}
+          other {匹配 {total, number} 個中的 {matched, number} 個，包括 "{sample}"}
         }
   basic: 基本
   ariaLabel:
@@ -196,7 +196,7 @@ graph:
 locale:
   menu: 語言選擇器
   en-us: English
-  zh-hans: 簡體中文
+  zh-hans: 简体中文
   none: (無)
 
 nav:
@@ -252,7 +252,7 @@ nav:
   restoreSnapshot: 還原快照
   rotateCertificates: 輪換證書
   rotateEncryptionKeys: 輪換加密密鑰
-  takeSnapshot: 拍攝快照
+  takeSnapshot: 創建快照
   keyComboTooltip: 切換集群並保持當前位置
   group:
     cluster: 集群
@@ -267,7 +267,7 @@ nav:
     advanced: 高級選項
     providers: 提供商
     RKE1Configuration: RKE1 配置
-    admission: 管理
+    admission: 准入
     apps: 應用
     clusterProvisioning: 集群配置
     jwt.authentication: JWT 認證
@@ -290,8 +290,8 @@ nav:
     namespace: "{name}"
     orphan: 不在項目內
     project: "項目名稱: {name}"
-    system: 系統命名空間
-    user: 用戶命名空間
+    system: 僅系統命名空間
+    user: 僅用戶命名空間
   apps: 應用
   categories:
     explore: 瀏覽集群
@@ -785,7 +785,7 @@ authConfig:
     serverConnectionTimeout: 服務器連接超時
     serviceAccountDN: Service Account 標識名稱
     serviceAccountPassword: Service Account 密碼
-    serviceAccountInfo: '{vendor} 需要一個對所有能夠登錄的域名都有隻讀訪問權的 Service Account，以在用戶使用 API 密鑰進行請求時，確定用戶屬於什麼組。'
+    serviceAccountInfo: '{vendor} 需要一個對所有能夠登錄的域名都有只讀訪問權的 Service Account，以在用戶使用 API 密鑰進行請求時，確定用戶屬於什麼組。'
     starttls:
       label: 啟用 TLS
       tip: 通過在連接過程中使用 TLS 封裝來升級非加密連接。不能與 TLS 結合使用。
@@ -1010,7 +1010,7 @@ asyncButton:
     success: 已複製
   create:
     action: 創建
-    success: 創建時間
+    success: 已創建
     waiting: 正在創建&hellip;
   default:
     action: 操作
@@ -1023,8 +1023,8 @@ asyncButton:
     waiting: 正在刪除&hellip;
   disable:
     action: 禁用
-    success: 禁用
-    waiting: 正在關閉&hellip;
+    success: 已禁用
+    waiting: 正在禁用&hellip;
   activate:
     action:  激活
     waiting: 正在激活&hellip;
@@ -1067,7 +1067,7 @@ asyncButton:
     waiting: 正在保存&hellip;
   enable:
     action: 啟用
-    success: 啟用
+    success: 已啟用
     waiting: 正在啟用&hellip;
   finish:
     action: 完成
@@ -1096,13 +1096,13 @@ asyncButton:
     description: 由於編排已暫停，新的修改不會部署。要部署新修改，請恢復編排。
   refresh:
     action: ''
-    actionIcon: 刷新
+    actionIcon: refresh
     error: ''
-    errorIcon: 錯誤
+    errorIcon: error
     success: ''
-    successIcon: 勾選
+    successIcon: checkmark
     waiting: ''
-    waitingIcon: 刷新
+    waitingIcon: refresh
     waitingAnnouncement: 正在刷新&hellip;
     successAnnouncement: 已刷新
     errorAnnouncement: 刷新失敗
@@ -1165,8 +1165,8 @@ asyncButton:
     waiting: 正在更新&hellip;
   upgrade:
     action: 升級
-    success: 正在升級
-    waiting: 正在啟動&hellip;
+    success: 已升級
+    waiting: 正在升級&hellip;
   generate:
     action: 生成
     success: 已生成
@@ -1282,7 +1282,7 @@ catalog:
       label: 容器鏡像倉庫
       tooltip: 容器鏡像是從 Cluster Container Registry 中拉取的，如果拉取失敗，則從系統容器鏡像倉庫中拉取。要更改默認行為，請在此處輸入或更新鏡像倉庫。
       custom:
-        checkBoxLabel: Rancher 系統容器鏡像的容器鏡像倉庫
+        checkBoxLabel: 覆蓋默認容器鏡像倉庫
         inputLabel: 容器鏡像倉庫
         placeholder: 鏡像倉庫域名和端口，例如：registry.io:5000
       pullSecret:
@@ -1349,7 +1349,7 @@ catalog:
       all: 所有操作系統
       linux: Linux
       windows: Windows
-    search: 篩選
+    search: 搜索目錄...
     addNewRepo:
       label: 添加新的
       ariaLabel: 添加新倉庫
@@ -1620,8 +1620,8 @@ catalog:
     noTools: "未找到集群工具"
     action:
       install: 安裝
-      upgrade: 升級/編輯
-      edit: 編輯
+      upgrade: 升級
+      edit: 編輯當前版本
       downgrade: 降級
       remove: 移除
       manage: 管理
@@ -1806,7 +1806,7 @@ cluster:
     registrationCommand:
       label: 註冊命令
       linuxDetail: 在每臺要註冊的 Linux 主機上運行此命令。
-      windowsDetail: 在每臺要註冊的 Windows 主機中的 PowerShell 上運行此命令。Windows 節點只能充當 worker。
+      windowsDetail: 在每臺要註冊的 Windows 主機中的 PowerShell 上運行此命令。
       windowsWorkersOnly: <b>Windows 節點只能是工作節點。</b>
       windowsNotReady: 在用於添加 Windows worker 的註冊命令顯示之前，集群必須已啟動並運行 Linux ETCD，Control Plane，以及 worker 節點。<br /> <br /><b>Windows 節點只能作為 worker。</b>
       windowsWarning: 工作負載 Pod（包括由 Rancher Chart 部署的 Pod）將默認調度到 Linux 和 Windows 節點上。編輯 Chart 中的 NodeSelector 以將它們放置到兼容的節點上。
@@ -1830,7 +1830,7 @@ cluster:
         label: 訪問密鑰
         placeholder: 你的 AWS Access Key
       defaultRegion:
-        help: 創建集群時使用的默認區域。需要驗證此憑證是否有效。
+        help: 創建集群時使用的默認區域。也會通過此區域驗證此憑證是否有效。
         label: 默認區域
       secretKey:
         label: 秘密密鑰
@@ -1867,7 +1867,7 @@ cluster:
         placeholder: 你的客戶端 Secret
     name:
       label: 憑證名稱
-      placeholder: 此憑證的名稱（可選）
+      placeholder: 此憑證的名稱
     s3:
       accessKey:
         label: 訪問密鑰
@@ -1950,7 +1950,7 @@ cluster:
         title: 卷
         volume: 卷
         imageVolume: 鏡像卷
-        addVolume: 添加捲
+        addVolume: 添加卷
         addVMImage: 添加虛擬機鏡像
         storageClass: 存儲類
       reservedMemory: 預留內存
@@ -1992,7 +1992,7 @@ cluster:
     registration:
       step1: "1. 前往目標 [[Harvester]] UI 的<code>高級設置</code>頁面。"
       step2: '2. 找到<code>cluster-registration-url</code>設置項，並點擊<code><i class="icon icon-actions" ></i></code> -> <code>編輯設置</code>按鈕。'
-      step3: "3. 輸入以下注冊 URL，並點擊<code>保存</code>。"
+      step3: "3. 輸入以下註冊 URL，並點擊<code>保存</code>。"
       step4: "註冊 URL"
     machinePool:
       cpu:
@@ -2078,7 +2078,7 @@ cluster:
       acceleratedNetworking:
         label: 加速網絡
       availabilitySet:
-        label: 可用性集（非託管）
+        label: 可用性集
         description: 可用性集用於讓應用程序免受 Azure 數據中心內硬件故障的影響。
       availabilityZone:
         label: 可用區
@@ -2235,7 +2235,7 @@ cluster:
         folder: 文件夾
         host:
           label: 主機
-          note: 用於創建虛擬機的主機（如果是獨立的 ESXi 或是帶有 DRS 的集群，請留空)
+          note: 用於創建虛擬機的主機（如果是獨立的 ESXi 或是帶有 DRS 的集群，請留空）
         gracefulShutdownTimeout:
           label: 優雅關閉超時
           note: 在基礎設施中強制刪除 VM 之前等待的時間（秒）。零表示禁用優雅關閉。
@@ -2463,10 +2463,10 @@ cluster:
         bannerLabel: '注意：優先匹配最後一個的選擇器，並且只使用它的參數。匹配到的其他選擇器的參數不會合並。'
         title: '標籤匹配的主機：'
         subTitle: '使用 Kubelet 參數：'
-        titleAlt:  |-
+        titleAlt: |-
           {count, plural,
             =1 { 所有主機均使用 Kubelet 參數： }
-            other { 任何主機均使用 Kubelet 參數： }
+            other { 對於下方沒有匹配標籤的主機： }
           }
         kubeControllerManagerTitle: 補充的 Controller Manager 參數
         kubeApiServerTitle: 補充的 API server 參數
@@ -2604,8 +2604,8 @@ cluster:
     aws: Amazon
     azure: Azure
     azureaks: Azure AKS
-    aks: Azure AKS
-    azurekubernetesservice: Azure AKS
+    aks: AKS
+    azurekubernetesservice: Azure AKS（不支持的 Kev1）
     baiducloudcontainerengine: 百度 CCE
     baidu: 百度 CCE
     cloudca: Cloud.ca
@@ -2613,13 +2613,13 @@ cluster:
     custom: 自定義
     digitalocean: DigitalOcean
     docker: Docker
-    eks: Amazon EKS
+    eks: EKS
     exoscale: Exoscale
     sks: Exoscale SKS
     gcp: Google
     google: Google GCE
     googlegke: Google GKE
-    gke: Google GKE
+    gke: GKE
     googlekubernetesengine: Google GKE (Unsupported Kev1)
     harvester: '[[Harvester]]'
     huaweicce: 華為 CCE
@@ -2644,7 +2644,7 @@ cluster:
     pinganyunecs: 平安雲 ECS
     pnap: phoenixNAP
     rackspace: RackSpace
-    rancherkubernetesengine: RKE
+    rancherkubernetesengine: RKE1
     rke2: RKE2
     rke: RKE1
     rkeWindows: Windows（僅限 RKE1）
@@ -2757,7 +2757,7 @@ cluster:
         inputLabel: 排空超時
     truncateHostnames: 將主機名截斷為 15 個字符來兼容 NetBIOS。
     address:
-      tooltip: 創建集群后無法更改集群網絡值。
+      tooltip: 創建集群後無法更改集群網絡值。
       header: 尋址
       clusterCidr:
         label: 集群 CIDR
@@ -2779,11 +2779,11 @@ cluster:
         toolTip: 客戶端用於驗證端點返回的證書是否有效的證書。
     etcd:
       disableSnapshots:
-        label: 自動快照
+        label: 自動備份
       snapshotScheduleCron:
         label: Cron 調度
       snapshotRetention:
-        label: 保留最後一個
+        label: 本地快照保留數量
         tooltip: 每次備份為每個 etcd 節點記錄 1 個快照。如果您指定 3 個快照且有 3 個 etcd 節點，您將只保留 1 個完整備份。
       exportMetric:
         label: 指標
@@ -3259,7 +3259,7 @@ fleet:
   dashboard:
     pageTitle: 持續交付儀表板
     menuLabel: 儀表板
-    welcome: 歡迎使用 Fleet 持續交付
+    welcome: 歡迎使用持續交付
     gitOpsScale: 大規模 GitOps。
     learnMore: 瞭解更多。
     learnMoreLink: https://fleet.rancher.io
@@ -3347,20 +3347,20 @@ fleet:
       none: 無集群
       clusters: 手動選擇的集群
     clusters:
-      title: 集群
+      title: 集群選擇
       byName:
         title: 按集群名稱選擇
         placeholder: 選擇多個集群
-        label: 按集群名稱選擇
+        label: 集群名稱
       byLabel:
         title: 按標籤選擇
         addSelector: 添加集群選擇器
         removeSelector: 移除集群選擇器
         labelKey: 標籤
     clusterGroups:
-      title: 集群組
+      title: 按集群組選擇
       byName:
-        label: 按集群組名稱選擇
+        label: 集群組
         placeholder: 選擇多個集群組
     rules:
       matching:
@@ -3888,17 +3888,17 @@ clusterBadge:
   customize: 自定義
   editLabel: 編輯集群徽章
   modal:
-    title: 自定義集群徽章
-    checkbox: 顯示此集群的徽章
+    title: 集群外觀
+    checkbox: 顯示集群備註
     comment: 自定義備註
     iconText: 圖標文本
     buttonAction: 應用
     badgeBgColor: 徽章背景顏色
     badgeBgColorInput: 徽章背景顏色選擇器輸入
     badgeTextColor: 徽章文字顏色
-    badgeAsIcon: 自定義集群圖標
-    maxCharsTooltip: 最多兩個字符
-    previewTitle: "集群圖標和名稱效果"
+    badgeAsIcon: 使用自定義徽章
+    maxCharsTooltip: 覆蓋默認的集群名稱縮寫。
+    previewTitle: "預覽："
     previewSide: "側邊導航"
     previewHeader: "RANCHER 標題"
 
@@ -4267,7 +4267,7 @@ istio:
       baseEjectionTime:
         label: 基礎驅逐時間
         placeholder: 例如：30s
-        help: 最短驅逐時長。主機被驅逐的時間，基於其最短驅逐時長，及其已被驅逐的次數。
+        help: 最短驅逐時長。主機保持被驅逐狀態的時長，等於最短驅逐時長與該主機已被驅逐次數的乘積。
       consecutiveErrors:
         label: 連續錯誤
         placeholder: 例如：5
@@ -4371,10 +4371,10 @@ labels:
   readOnlyWarning: 此鍵為只讀，更改將不會被保存
   labels:
     title: 標籤
-    description: 鍵值對，是附加到指定標識屬性的對象。
+    description: 附加到對象上、用於指定標識屬性的鍵值對。
     fleetClusterTooltip: 標籤更改應用到管理集群並同步到 Fleet 集群。
-    show: 顯示系統標籤
-    hide: 隱藏系統標籤
+    show: 顯示系統標籤和註釋
+    hide: 隱藏系統標籤和註釋
   annotations:
     title: 註釋
     singular: 註解
@@ -4423,8 +4423,8 @@ landing:
     docs: Rancher 官方文檔
     forums: 論壇
   commercial:
-    title: 商業支持
-    body: 瞭解商業支持
+    title: Rancher Prime
+    body: 了解 Rancher Prime
   landingPrefs:
     body: "登錄後顯示："
     ariaLabelTakeMeToCluster: 選擇登錄後要前往的集群
@@ -4500,7 +4500,7 @@ logging:
     clientKey:
       label: 客戶端密鑰
       placeholder: 粘貼客戶端密鑰
-    clientKeyPass: 傳自密文的客戶端密鑰
+    clientKeyPass: 客戶端密鑰密碼
     verifySsl: 驗證 SSL
     sslVersion: SSL 版本
     suppressTypeName:
@@ -4538,7 +4538,7 @@ logging:
       label: CA 證書
       placeholder: 粘貼 CA 證書
     sslClientCert:
-      label: CA 證書
+      label: 客戶端證書
       placeholder: 粘貼客戶端證書
     sslClientCertChain:
       label: 證書鏈
@@ -4734,7 +4734,7 @@ login:
   serverError:
     authFailedCreds: "登錄失敗。請檢查憑證，或查看你是否有登錄權限。"
     authFailed: "登錄失敗，你可能沒有登錄權限。"
-    unknown: "登錄時發生錯誤，請聯繫你的系統管理員。"
+    unknown: "登錄時發生未知錯誤，請聯繫你的系統管理員。"
     invalidSamlAttrs: "無效的 SAML 屬性"
     noResponse: "沒有收到響應。"
   error: 登錄時發生錯誤，請重試。
@@ -5282,11 +5282,11 @@ networkpolicy:
       invalidCidr: "無效的 CIDR"
       invalidExceptionCidrs: "無效的例外： "
     podSelector:
-      label: Pod 選擇器
+      label: Pod 標籤選擇器
     namespaceSelector:
-      label: 命名空間選擇器
+      label: 命名空間標籤選擇器
     namespaceAndPodSelector:
-      label: 命名空間/Pod 選擇器
+      label: 命名空間/Pod 標籤選擇器
   config:
     label: 配置
   selectors:
@@ -5449,7 +5449,7 @@ persistentVolume:
       label: 卷句柄
       placeholder: 例如：pvc-xxxx
     volumeAttributes:
-      add: 添加捲屬性
+      add: 添加卷屬性
     nodePublishSecretName:
       label: 節點發布密文名稱
       placeholder: 例如：secret
@@ -5753,7 +5753,7 @@ podDisruptionBudget:
 inactivity:
   title: 會話即將過期
   banner: 由於不活動，你的會話即將過期。任何未保存的更改都將丟失。
-  content: 單擊“恢復會話”來讓選項卡中的會話保持活動狀態，或在會話過期後刷新瀏覽器。
+  content: 單擊"恢復會話"以保持此瀏覽器中的會話處於活動狀態。
   cta: 恢復會話
 
 # Rancher Extensions
@@ -5796,9 +5796,9 @@ plugins:
     generic: 擴展錯誤
     primeOnly: 無法在 Rancher Community 中加載 Rancher Prime 擴展
     apiAnnotationMissing: '無法加載擴展。已安裝的版本與當前的擴展 API 版本不兼容（擴展缺少註釋 catalog.cattle.io/ui-extensions-version，這意味著與 Rancher 2.10 及以後版本不兼容）'
-    api: 此擴展與 Extensions API 不兼容
-    host: 此擴展與此應用程序不兼容
-    version: 此擴展與此 Rancher 版本不兼容
+    api: 無法加載擴展。已安裝的版本與當前的 Extensions API 版本不兼容
+    host: 無法加載擴展。已安裝的版本與此應用程序主機不兼容
+    version: 無法加載擴展。已安裝的版本與當前的 Rancher 版本不兼容
     kubeVersion: 無法加載擴展。已安裝的版本與當前的 Rancher kubernetes 版本不兼容
     load: 加載此擴展的代碼時出錯
     developerPkg: 此擴展已在內部加載，因此我們不會加載外部版本
@@ -5917,7 +5917,7 @@ plugins:
     banner: 有新的擴展倉庫可用。要啟用這些倉庫，請單擊右側的按鈕。
     bannerBtn: 添加倉庫
     title: 添加擴展倉庫
-    prompt: 你可以安裝多個 Rancher 擴展倉庫來增加你的擴展商店
+    prompt: 啟用更多倉庫以獲取更多擴展
   setup:
     installed: 已安裝
     uninstalled: 已卸載
@@ -5930,10 +5930,10 @@ plugins:
       community: Community Extensions 倉庫提供了由 Rancher 社區發佈的擴展。
     install:
       title: 啟用擴展支持？
-      prompt: 這將安裝啟用擴展支持所需的 Helm Chart
+      prompt: 這將引導你前往可啟用擴展支持所需功能開關的頁面。
       featuresButton: 前往功能標誌
       airgap: 離線安裝環境請不要啟用此功能
-      addRancherRepo: 添加 Official Rancher Extensions 倉庫
+      addRancherRepo: 添加 Rancher Prime Extensions 倉庫
       addPartnersRancherRepo: 添加 Partners Extensions 倉庫
     remove:
       label: 禁用擴展支持
@@ -5977,10 +5977,10 @@ prefs:
     light: 淺色
     auto: 自動
     dark: 深色
-    autoDetail: 自動模式使用系統設置，或在{pm}點到次日{am}點間自動切換到深色模式。
+    autoDetail: 自動模式將使用系統設置（如可用），否則在 {pm} 到次日 {am} 之間使用深色模式。
   language: 語言
   landing:
-    label: 登錄頁面
+    label: 登錄後的首頁
     vue: 集群瀏覽器
     ember: 集群管理器
   displaySettings:
@@ -5999,19 +5999,19 @@ prefs:
     value: |-
       {count, number}
   keymap:
-    label: YAML 編輯器
+    label: YAML 編輯器按鍵映射
     sublime: '默認'
     emacs: 'Emacs'
     vim: 'Vim'
   advFeatures:
     title: 高級功能
     viewInApi: 啟用“在 API 中查看”
-    allNamespaces: 顯示由 Rancher 管理的 system 命名空間（不要編輯或刪除）
+    allNamespaces: 顯示由 Rancher 管理的動態命名空間（不應編輯或刪除）
     themeShortcut: 使用快捷鍵（shift+T）來切換深色/淺色主題
     pluginDeveloper: 啟用擴展開發者功能
     pluginDeveloperTooltip: 啟用執行 UI 擴展開發者加載的能力
   hideDesc:
-    label: 隱藏所有類型描述
+    label: 隱藏資源列表上方的類型描述橫幅
   helm:
     'true': 包括預發佈版本
     'false': 只顯示正式版本
@@ -6179,7 +6179,7 @@ prometheusRule:
 
 promptForceRemove:
   modalTitle: 是否確認？
-  removeWarning: "刪除底層基礎設施時出現問題。如果你繼續執行此操作，主機<b>{nameToMatch}</b>將從 Rancher 中刪除。強烈建議手動刪除所有引用的基礎設施。"
+  removeWarning: "刪除底層基礎設施時出現問題。如果你繼續執行此操作，主機 <b>{nameToMatch}</b> 將僅從 Rancher 中刪除。強烈建議手動刪除所有引用的基礎設施。"
   forceDelete: 強制刪除
   ariaLabel: 將機器名稱複製到剪貼簿
   confirmName: "在下面輸入池名稱以確認："
@@ -6289,7 +6289,7 @@ rbac:
   roletemplate:
     newUserDefault:
       no: 否
-      tooltip: 不影響已有角色的綁定。
+      tooltip: 這不會影響該角色已有的任何綁定。
     locked:
       label: 鎖定
       yes: '是：不允許新綁定使用這個角色'
@@ -6388,8 +6388,8 @@ rbac:
         label: 管理所有集群
         description: 允許用戶管理所有集群，包括他們不是成員的集群。
       clusterscans-manage:
-        label: 管理 CIS 集群掃描
-        description: 允許用戶運行新建的 CIS 集群掃描，並管理 CIS 集群掃描。
+        label: 管理合規集群掃描
+        description: 允許用戶運行新建的合規集群掃描，並管理合規集群掃描。
       kontainerdrivers-manage:
         label: 創建集群驅動
         description: 允許用戶創建集群驅動，併成為該集群驅動的所有者（owner）。
@@ -6519,7 +6519,7 @@ resourceTable:
     notInAProject: 不在項目內
     project: "<span>項目：</span> <span>{name}</span>"
     notInAWorkspace: 不在工作空間內
-    workspace: "<span>工作空間</span> {name}"
+    workspace: "<span>工作空間：</span> {name}"
     notInANodePool: "不在節點池中"
     nodePool: "<span>節點池：</span> {name}"
     node: "<span>節點：</span> {name}"
@@ -6833,7 +6833,7 @@ setup:
   currentPassword: Bootstrap 密碼
   confirmPassword: 確認新密碼
   defaultPassword:
-    intro: 這是你第一次訪問 {vendor}。如果你預先設置了 Bootstrap 密碼，請在此處輸入。否則我們會為你生成一個隨機密碼。找到它：<br/><br/>
+    intro: 這是你第一次訪問 {vendor}。如果你預先設置了 Bootstrap 密碼，請在此處輸入。否則我們會為你生成一個隨機密碼。要找到它，請運行：<br/><br/>
     helmSuffix: ""
   eula: 選中此框，即表示你接受<a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">最終用戶許可協議及條款和條件</a>
   newPassword: 新密碼
@@ -6883,8 +6883,8 @@ sortableTable:
     generic: |-
       {pages, plural,
       =0 {無項目}
-      =1 {{count} {count, plural, =1 {Item} other {Items}}}
-      other {{from} - {to} of {count} Items}}
+      =1 {{count} {count, plural, =1 {個項目} other {個項目}}}
+      other {{count} 個項目中的 {from} - {to} 個}}
     resource: |-
       {pages, plural,
       =0 {無 {pluralLabel}}
@@ -7239,7 +7239,7 @@ tableHeaders:
   commit: 提交
   condition: 狀態
   constraint: 約束
-  completions: 完成 Job 歷史數
+  completions: 完成數
   count: 數量
   createdAt: 創建於
   customResources: 資源
@@ -7371,7 +7371,7 @@ tableHeaders:
   repoType: 倉庫類型
   repositories: 倉庫
   repoName: 倉庫名稱
-  reposReady: 就緒倉庫
+  reposReady: 就緒 Git 倉庫
   replicas: 副本數量
   reqRate: 請求頻率
   resource: 資源
@@ -7386,7 +7386,7 @@ tableHeaders:
   routes: 路由
   routeConnectivity: 路由連接
   readyToUse: 可用
-  scale: 比例
+  scale: 擴縮
   scope: 範圍
   selector: 選擇器
   secrets: 密文
@@ -7398,7 +7398,7 @@ tableHeaders:
   serviceAccounts: Service Account
   secret-Name: 密文名稱
   simpleName: 名稱
-  simpleScale: 比例
+  simpleScale: 擴縮
   simpleType: 類型
   size: 大小
   started: 已開始
@@ -7409,7 +7409,7 @@ tableHeaders:
   storage: 存儲大小
   storageClass: 存儲類
   source: 源
-  subject: 主題
+  subject: 主體
   subType: 類型
   success: 成功
   summary: 概述
@@ -7429,8 +7429,8 @@ tableHeaders:
   users: 用戶
   userDisplayName: 顯示名稱
   userId: ID
-  userDeletedIn: 刪除於
-  userDisabledIn: 禁用於
+  userDeletedIn: 刪除倒計時
+  userDisabledIn: 禁用倒計時
   userLastLogin: 上次登錄
   userState: 已啟用
   userStatus: 狀態
@@ -7609,7 +7609,7 @@ validation:
     requiredInt: '"{key}" 必須是整數'
     isPositive: '"{key}" 必須是正數'
     isOctal: '"{key}" 不能有前導零'
-    between: '"{key}" 的長度必須在 {min} 和 {max}之間'
+    between: '"{key}" 必須在 {min} 和 {max} 之間'
     exactly: '"{key}" 需要設為 {val}'
     max: '"{key}" 最多可以是 {val}'
     min: '"{key}" 至少需要是 {val}'
@@ -7659,13 +7659,13 @@ validation:
         requiredInt: '端口規則 [{position}] - 如果包含 Node Port，Node Port 必須是整數。'
         between: '端口規則 [{position}] - Node Port 的取值範圍是：1-65535'
       port:
-        required: '端口規則 [{position}] - 端口是必填項，'
+        required: '端口規則 [{position}] - 端口是必填項。'
         requiredInt: '端口規則 [{position}] - 如果包含端口，端口必須是整數。'
         between: '端口規則 [{position}] - 端口的取值範圍是：1-65535'
       targetPort:
         between: '端口規則 [{position}] - 目標端口的取值範圍是：1-65535'
         iana: '端口規則 [{position}] - 目標端口必須是 IANA 服務名稱或整數'
-        ianaAt: '端口穀子額 [{position}] - 目標端口 '
+        ianaAt: '端口規則 [{position}] - 目標端口 '
         required: '端口規則[{position}] - 目標端口是必填項。'
   setting:
     serverUrl:
@@ -7736,7 +7736,7 @@ wm:
         =1 {小時}
         other {小時}
         }
-      label: 顯示最後一個
+      label: 顯示最近
       lines: "{value, number} 行"
       minutes: |-
         {value, number} {value, plural,
@@ -7926,7 +7926,7 @@ workload:
       addGroupIDs: 添加組 ID
       allowPrivilegeEscalation:
         title: 權限提升
-        'true': "是：容器可以獲得比其父進程更多的權限。"
+        'true': "容器可以獲得比其父進程更多的權限"
       capabilities:
         title: 能力
         add: 添加 Capabilities
@@ -7937,18 +7937,18 @@ workload:
       podFsGroup: Pod 文件系統組
       privileged:
         title: 特權
-        'true': "是：容器可以完全訪問主機"
+        'true': "容器可以完全訪問主機"
         help: 啟用特權將隱藏權限提升和 seccompProfile。
         afterTick: 
           'true': 權限提升和 seccompProfile 已被隱藏。
           'false': 權限提升和 seccompProfile 已出現。
       readOnlyRootFilesystem:
         title: 只讀根文件系統
-        'true': "是：容器有一個只讀的根文件系統"
+        'true': "容器有一個只讀的根文件系統"
       runAsGroup: 以組 ID 運行
       runAsNonRoot:
         title: 以非 Root 運行
-        'true': "是：容器必須以非 Root 用戶的身份運行"
+        'true': "容器必須以非 Root 用戶的身份運行"
       runAsNonRootOptions:
         'true': "容器必須以非 root 用戶運行"
       runAsUser: 
@@ -8215,9 +8215,9 @@ workload:
       emptyDir: 空目錄
     addClaim: 添加聲明
     addMount: 添加掛載
-    addVolume: 添加捲
+    addVolume: 添加卷
     selectVolume: 選擇卷
-    noVolumes: 在 Pod 選項卡中添加捲後，卷將顯示在此處
+    noVolumes: 在 Pod 選項卡中添加卷後，卷將顯示在此處
     certificate: 證書
     csi:
       diskName: 磁盤名稱
@@ -8425,9 +8425,9 @@ typeDescription:
   compliance.cattle.io.clusterscan: 創建掃描以基於已定義的配置文件在集群上觸發合規掃描。掃描完成後會創建一份報告。
   compliance.cattle.io.clusterscanreport: 報告是集群合規掃描的結果。
   management.cattle.io.feature: 功能開關用於打開或關閉某些 {vendor} 功能。默認關閉的功能是實驗功能。
-  cluster.x-k8s.io.machine: 一個 Machine 封裝一個 Kubernetes 節點的配置。你可以使用此視圖來查看更新集群后的情況。
-  cluster.x-k8s.io.machinedeployment: Machine Deployment 通過使用模板，在一組 Machine Set（與 Deployment 類似）上編排部署。你可以使用此視圖來查看更新集群后的情況。
-  cluster.x-k8s.io.machineset: Machine Set 確保所需數量的 Machine 始終啟動並運行（與 ReplicaSet 類似）。你可以使用此視圖來查看更新集群后的情況。
+  cluster.x-k8s.io.machine: 一個 Machine 封裝一個 Kubernetes 節點的配置。你可以使用此視圖來查看更新集群後的情況。
+  cluster.x-k8s.io.machinedeployment: Machine Deployment 通過使用模板，在一組 Machine Set（與 Deployment 類似）上編排部署。你可以使用此視圖來查看更新集群後的情況。
+  cluster.x-k8s.io.machineset: Machine Set 確保所需數量的 Machine 始終啟動並運行（與 ReplicaSet 類似）。你可以使用此視圖來查看更新集群後的情況。
   resources.cattle.io.backup: 創建備份是為了基於 ResourceSet 執行一次性備份或安排重複性備份。
   resources.cattle.io.restore: 創建還原用於根據備份文件觸發對集群的還原。
   resources.cattle.io.resourceset: Resource Set 定義要在備份中存儲哪些 CRD 和資源。
@@ -9130,7 +9130,7 @@ action:
   openShell: 執行命令行
   runNow: 立即運行
   suspend: 暫停
-  resume: 重新開始
+  resume: 恢復
   showConfiguration: 顯示配置
 
 unit:
@@ -9232,8 +9232,8 @@ advancedSettings:
     'auth-user-info-resync-cron': '重新同步驗證提供程序組成員的默認 cron 調度。'
     'cluster-template-enforcement': '非管理員只能通過預先批准的 RKE 模板啟動集群。'
     'auth-user-session-idle-ttl-minutes': '用戶認證會話的自定義空閒 TTL（以分鐘為單位）。這是瀏覽器中沒有用戶活動時會話可以保持存活的最長持續時間。此值應小於 "auth-user-session-ttl-minutes"。如果 "auth-user-session-idle-ttl-minutes" 大於或等於 "auth-user-session-ttl-minutes"，則認為會話空閒功能被禁用。'
-    'auth-user-session-ttl-minutes': '用戶認證會話的自定義 TTL（單位：分鐘）。'
-    'auth-token-max-ttl-minutes': '所有身份認證 Token 的最大 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
+    'auth-user-session-ttl-minutes': '用戶認證會話的自定義 TTL（單位：分鐘）。這是會話可保持活動的最長時間，與用戶在瀏覽器中的活動無關。該值應大於 "auth-user-session-idle-ttl-minutes"。'
+    'auth-token-max-ttl-minutes': '除受 "auth-user-session-ttl-minutes" 控制的 Token（用戶會話 Token）外，所有 Token 的最大 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
     'kubeconfig-generate-token': '請求 kubeconfig 時自動為用戶生成 Token。'
     'kubeconfig-default-token-ttl-minutes': '應用於所有 kubeconfig Token 的 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
     'rke-metadata-config': '配置 RKE 元數據刷新參數。'
@@ -9485,7 +9485,7 @@ customLinks:
     slack: Slack
     issues:     提交 GitHub Issue
     getStarted: 開始使用
-    commercialSupport: 商業支持
+    commercialSupport: Rancher Prime
     appCo: SUSE Application Collection
 
   suse:

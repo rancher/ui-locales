@@ -2,7 +2,7 @@
 # locale: fr-fr (French - France)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -88,7 +88,7 @@ generic:
     other {autres}
     }
   overview: "Vue d’ensemble"
-  plusMore: "+  {n} de plus"
+  plusMore: "+ {n} de plus"
   readFromFile: Lire depuis un fichier
   readFromFileArea: 'Lire depuis un fichier - {area}'
   readFromFolder: Lire depuis un dossier
@@ -113,7 +113,7 @@ generic:
   techPreview: Aperçu technique
   type: Type
   unknown: Inconnu
-  upload: Télécharger
+  upload: Téléverser
   warning: Avertissement
   provisioning: '—'
   key: Clé
@@ -173,7 +173,7 @@ generic:
     addBtnAriaLabel: "{label} dans une entrée clé-valeur"
     readKeyValue: lire les Clés-Valeurs depuis un fichier
     genericAddRow: Ajouter une nouvelle ligne
-    arrayList: Entrée de liste de tableaux
+    arrayList: Entrée de liste
     genericRow: 'ligne {index}'
   showLess: Afficher moins
   showMore: Afficher plus
@@ -195,8 +195,8 @@ graph:
 
 locale:
   menu: Sélecteur de langue
-  en-us: Anglais
-  zh-hans: "中文 (简体)"
+  en-us: English
+  zh-hans: 简体中文
   none: (Aucun)
 
 nav:
@@ -272,7 +272,7 @@ nav:
     clusterProvisioning: Provisionnement du cluster
     jwt.authentication: "Authentification JWT"
     core: Noyau
-    legacy: Héritage
+    legacy: Hérité
     API: API
     Coordination: Coordination
     Discovery: Découverte
@@ -1135,7 +1135,7 @@ asyncButton:
     success: Redéployé
     waiting: Redéploiement de la charge de travail
   rollback:
-    action: Restauration
+    action: Restaurer
     success: Restauré
     waiting: 'Restauration en cours&hellip;'
   rotate:
@@ -2472,8 +2472,8 @@ cluster:
     cloudProviderAddConfig: "Sur Kubernetes 1.27 ou supérieur, le fournisseur cloud <b>Amazon</b> nécessite une configuration supplémentaire. Voir <a href=\"https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">la documentation</a> pour plus d’informations."
     machinePoolError: |-
       {count, plural,
-        =1 { {pool_name} : La valeur fournie pour {fields} est introuvable }
-        other { {pool_name} : Les valeurs fournies pour {fields} sont introuvables }
+        =1 { {pool_name} : La valeur fournie pour {fields} est introuvable dans la liste des valeurs attendues. Cela peut se produire avec des clusters provisionnés en dehors de Rancher ou lorsque les options du fournisseur ont changé. }
+        other { {pool_name} : Les valeurs fournies pour {fields} sont introuvables dans la liste des valeurs attendues. Cela peut se produire avec des clusters provisionnés en dehors de Rancher ou lorsque les options du fournisseur ont changé. }
       }
     rke1DeprecationMessage: "Rancher Kubernetes Engine (RKE / RKE1) a atteint sa fin de vie et ces clusters ne sont plus pris en charge. Nous recommandons de migrer les clusters RKE1 vers RKE2 pour garantir la continuité du support et des mises à jour de sécurité. En savoir plus sur la transition <a href=\"https://www.suse.com/support/kb/doc/?id=000021518\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">ici</a>."
     nginxDeprecated: Le contrôleur NGINX est obsolète et sera supprimé dans les prochaines versions
@@ -2579,8 +2579,8 @@ cluster:
   privateRegistry:
     header: Registre pour les images de conteneurs système Rancher
     label: Activer le registre de conteneurs au niveau du cluster pour les images de conteneurs système Rancher
-    description: Si activé, Rancher extraira les images de conteneur de ce registre lors du provisionnement du cluster.
-    importedDescription: "Par défaut, Rancher utilisera également ce registre lors de l’installation des applications Helm officielles de Rancher."
+    description: "Si activé, Rancher extraira les images de conteneur de ce registre lors du provisionnement du cluster. Par défaut, Rancher utilisera également ce registre lors de l’installation des applications issues des charts Helm officiels de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
+    importedDescription: "Par défaut, Rancher utilisera également ce registre lors de l’installation des applications issues des charts Helm officiels de Rancher. Si le registre au niveau du cluster est désactivé, les images système sont extraites du registre système par défaut défini dans les paramètres globaux."
     docsLinkRke2: "Pour obtenir de l’aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.rke2.io/install/private_registry\" target=\"_blank\">documentation RKE2.</a>"
     docsLinkK3s: "Pour obtenir de l’aide sur la configuration des miroirs de registre privé, consultez la <a href=\"https://docs.k3s.io/installation/private-registry\" target=\"_blank\">documentation K3s.</a>"
     privateRegistryUrlError: Un registre doit être une URL valide. Le schéma est facultatif.
@@ -3123,7 +3123,7 @@ dynamicContent:
     moreInfo: Notes de version {version}
   upcomingEom:
     title: Fin de maintenance dans {days, plural, =1 {1 jour} other {{days} jours}}
-    message: Cette version de Rancher ({version}) atteindra la fin de maintenance dans {days} jour(s). Envisagez une mise à niveau.
+    message: Cette version de Rancher ({version}) atteindra la fin de maintenance dans {days} jour(s). Envisagez de passer prochainement à une version prise en charge.
   eom:
     title: Fin de maintenance atteinte
     message: Cette version de Rancher ({version}) a atteint la fin de maintenance. Envisagez une mise à niveau.
@@ -3182,7 +3182,7 @@ fleet:
       description: "Liste séparée par des virgules de domaines ou adresses IP qui n’utiliseront pas le proxy."
     gitClientTimeout:
       label: "Délai d’expiration du client Git"
-      description: "Le temps d’attente d’une réponse du serveur avant d’annuler la requête. Utilisé pour récupérer les référentiels git."
+      description: "Le temps d’attente d’une réponse du serveur avant d’annuler la requête. Utilisé pour récupérer le dernier commit des référentiels git configurés. Une valeur absente ou égale à 0 entraînera un délai d’expiration de 30 secondes."
     nodeSelector:
       label: Sélecteur de nœud
       description: "Étiquettes de nœud pour l’attribution des pods."
@@ -4755,8 +4755,8 @@ login:
   cli:
     welcome: "Connectez-vous pour compléter l’authentification CLI"
     invalidParams: Paramètres de connexion invalides - impossible de se connecter
-    warning: "Si vous n’avez pas initié cette demande ou si l'« ID de demande client » affiché dans votre terminal ne correspond pas, fermez immédiatement cette fenêtre."
-    warningLegacy: "Si vous n’avez pas initié cette demande ou si le code ci-dessous ne correspond pas au paramètre « requestId », fermez immédiatement cette fenêtre."
+    warning: 'Si vous n’avez pas initié cette demande ou si l’« ID de demande client » affiché dans votre terminal ne correspond pas au code affiché ci-dessous, ne continuez pas'
+    warningLegacy: 'Si vous n’avez pas initié cette demande ou si le code affiché ci-dessous ne correspond pas au paramètre « requestId » figurant dans l’URL de connexion affichée dans votre terminal, ne continuez pas'
 
 logout:
   message: Déconnexion en cours...
@@ -4800,7 +4800,7 @@ members:
       label: Personnalisé
       description: Choisissez des rôles individuels pour cet utilisateur.
       lockedRole: Ce rôle est verrouillé.
-  localClusterWarning: "Attention : Il s’agit du cluster que Rancher utilise comme banque de données. Seuls les administrateurs doivent y avoir accès."
+  localClusterWarning: "Attention : Il s’agit du cluster que Rancher utilise comme banque de données. Seuls les administrateurs doivent disposer d’un accès en écriture à ce cluster. Les utilisateurs disposant d’un accès en écriture à ce cluster peuvent l’utiliser pour s’octroyer l’accès à n’importe quelle partie de cette installation."
   noRolesAssigned: "Aucun utilisateur n’est assigné à ce projet."
 
 membershipEditor:
@@ -4846,7 +4846,7 @@ monitoring:
     placeholder: Sélectionner le type de cluster
   createDefaultRoles:
     label: Créer les rôles de cluster de surveillance par défaut
-    tip: Crée <code>monitoring-admin</code>, <code>monitoring-edit</code> et <code>monitoring-view</code> ClusterRoles.
+    tip: 'Crée les ClusterRoles <code>monitoring-admin</code>, <code>monitoring-edit</code> et <code>monitoring-view</code>, qui peuvent être attribués aux utilisateurs pour leur donner des autorisations sur les CRD installées par le chart Monitoring.'
   etcdNodeDirectory:
     label: Répertoire des certificats de nœuds etcd
     tooltip: "Pour les clusters utilisant RancherOS pour les nœuds etcd, cette option doit être définie sur <pre class='inline-block m-0'>/opt/rke/etc/kubernetes/ssl</pre>. Les environnements hybrides nécessitant plusieurs répertoires de certificats ne sont pas pris en charge."
@@ -4974,7 +4974,7 @@ monitoring:
     empty: "Les alertes n’ont pas été configurées pour les espaces de noms accessibles."
     getStarted: Commencez en cliquant sur Créer pour configurer une alerte.
     receiverTooltip: Cette route dirigera les alertes vers le récepteur sélectionné, qui doit être défini dans la même ressource AlertmanagerConfig.
-    deprecationWarning: "Les ressources Route et Récepteur sont obsolètes. À l’avenir, les routes et récepteurs ne doivent pas être gérés directement."
+    deprecationWarning: Les ressources Route et Récepteur sont obsolètes. À l’avenir, les routes et récepteurs ne doivent plus être gérés comme des ressources Kubernetes distinctes sur cette page. Ils doivent être configurés en tant que champs YAML dans une ressource AlertmanagerConfig.
     routeInfo: "Ce formulaire prend en charge la configuration d’une route qui dirige le trafic vers un récepteur. Les alertes peuvent être dirigées vers plusieurs récepteurs."
     receiverFormNames:
       create: Créer un récepteur dans AlertmanagerConfig
@@ -5833,7 +5833,7 @@ plugins:
     subtitle: Catalogues
     imageLoad:
       load: "Importer un catalogue d’extensions"
-      prompt: "Un catalogue d’extensions contient des ressources d’extension regroupées dans une image."
+      prompt: Un catalogue d’extensions contient des ressources d’extension regroupées dans une image. L’importation prend l’image et héberge un référentiel Helm servant de catalogue pour les extensions personnalisées.
       fields:
         image:
           label: "Référence de l’image du catalogue"
@@ -6810,7 +6810,7 @@ servicesPage:
       label: Sans tête
     loadBalancer:
       abbrv: LB
-      description: "Créer un équilibreur de charge dans l’infrastructure sous-jacente (ex. équilibreur de charge d’un fournisseur cloud)."
+      description: Créer un équilibreur de charge dans l’infrastructure sous-jacente (ex. équilibreur de charge d’un fournisseur cloud) et attribuer une adresse IP publique au service. Permet aux clients externes d’accéder au service via l’adresse IP publique et le port spécifié dans la définition du service.
       label: Équilibreur de charge
     nodePort:
       abbrv: NP
@@ -7194,7 +7194,7 @@ storageClass:
       tooltip: Par défaut, la classe de stockage par défaut du cluster [[Harvester]] hôte est utilisée.
 
 tableHeaders:
-  assuredConcurrencyShares: Partages de concurrence garantis
+  assuredConcurrencyShares: Parts de concurrence garanties
   autoscaler: Autoscaler
   accessKey: "Clé d’accès"
   addressType: "Type d’adresse"
@@ -7348,7 +7348,7 @@ tableHeaders:
     delete: Supprimer
     get: Obtenir
     list: Lister
-    patch: Corriger
+    patch: Patch
     update: Mettre à jour
     watch: Surveiller
   ready: Prêt
@@ -7395,7 +7395,7 @@ tableHeaders:
   state: État
   status: Statut
   targetVm: VM cible
-  storage_class_provisioner: Fournisseur
+  storage_class_provisioner: Provisionneur
   storage: Taille de stockage
   storageClass: Classe de stockage
   source: Source
@@ -7541,7 +7541,7 @@ validation:
   conflict: |-
     Cette ressource a été modifiée depuis que vous avez commencé à la modifier, et certaines de ces modifications entrent en conflit avec vos changements.
     Cet écran a été mis à jour pour refléter les valeurs actuelles sur le cluster. Vérifiez et réappliquez les changements que vous vouliez effectuer, puis enregistrez à nouveau.
-    Champ(s) en conflit {fieldCount, plural, =1 {field} other {fields}} : {fields}
+    {fieldCount, plural, =1 {Champ en conflit} other {Champs en conflit}} : {fields}
   custom:
     missing: "Aucun validateur n’existe pour { validatorName } ! Le validateur existe-t-il dans custom-validators ? Le nom est-il correctement orthographié ?"
   dns:
@@ -7650,17 +7650,17 @@ validation:
         between: Règle de port [{position}] - Le port de nœud doit être compris entre 1 et 65535
       port:
         required: Règle de port [{position}] - Le port est requis.
-        requiredInt: Règle de port [{position}] - Le port doit être une valeur entière.
+        requiredInt: 'Règle de port [{position}] - Le port doit être une valeur entière s’il est inclus.'
         between: Règle de port [{position}] - Le port doit être compris entre 1 et 65535
       targetPort:
         between: Règle de port [{position}] - Le port cible doit être compris entre 1 et 65535
         iana: Règle de port [{position}] - Le port cible doit être un nom de service IANA ou un entier
-        ianaAt: Règle de port [{position}] - Port cible 
+        ianaAt: 'Règle de port [{position}] - Port cible '
         required: Règle de port [{position}] - Le port cible est requis
   setting:
     serverUrl:
       https: "L’URL du serveur doit être en https."
-      localhost: "Si l’URL du serveur est interne au serveur Rancher (ex. localhost), les clusters en aval pourraient ne pas être accessibles."
+      localhost: Si l’URL du serveur est interne au serveur Rancher (ex. localhost), les clusters en aval pourraient ne pas être en mesure de communiquer avec Rancher.
       trailingForwardSlash: "L’URL du serveur ne doit pas se terminer par une barre oblique."
       url: "L’URL du serveur doit être une URL valide."
       awsStyleEndpoint: "L’URL du point de terminaison doit être une URL basée sur un domaine valide et ne peut pas commencer par un protocole (par ex. https:// ou http://)"
@@ -7737,7 +7737,7 @@ wm:
     timestamps: Afficher les horodatages
     wrap: Retour à la ligne
   containerShell:
-    escapeText: Appuyez sur Maj+Échap pour quitter le terminal
+    escapeText: Appuyez sur Maj+Échap pour retirer le focus du terminal
     clear: Effacer
     containerName: "Conteneur : {label}"
     failed: "Impossible d’ouvrir un shell vers le conteneur (aucune des commandes shell n’a réussi)\n\r"
@@ -8271,11 +8271,11 @@ workload:
         label: Limite de taille
         placeholder: "e.g. 300"
   typeDescriptions:
-    apps.daemonset: "Les DaemonSets exécutent exactement un pod sur chaque nœud éligible. Recommandé pour les charges de travail à l’échelle du système."
+    apps.daemonset: Les DaemonSets exécutent exactement un pod sur chaque nœud éligible. Lorsque de nouveaux nœuds sont ajoutés au cluster, les DaemonSets s’y déploient automatiquement. Recommandé pour les charges de travail à l’échelle du système ou à mise à l’échelle verticale qui n’ont jamais besoin de plus d’un pod par nœud.
     apps.deployment: Les Deployments exécutent un nombre évolutif de répliques de pod. Les changements sont déployés progressivement. Recommandé pour les charges de travail sans état et évolutives horizontalement.
     apps.statefulset: "Les StatefulSets gèrent les applications avec état et garantissent l’ordre et l’unicité des pods créés. Recommandé pour les charges de travail avec stockage persistant."
     batch.cronjob: Les CronJobs créent des Jobs selon une planification répétitive. La planification est exprimée au format cron Unix standard.
-    batch.job: Les Jobs créent un ou plusieurs pods pour effectuer une tâche unique de manière fiable. Les pods en échec sont automatiquement remplacés.
+    batch.job: Les Jobs créent un ou plusieurs pods pour effectuer une tâche unique de manière fiable, en exécutant un pod jusqu’à ce qu’il se termine avec succès. Les pods en échec sont automatiquement remplacés jusqu’à ce que le nombre spécifié d’exécutions terminées soit atteint. Les Jobs peuvent aussi exécuter plusieurs pods en parallèle ou fonctionner comme une file de travail par lots.
     pod: "Les Pods sont les plus petites unités de calcul déployables dans Kubernetes. Un Pod est un groupe d’un ou plusieurs conteneurs avec des ressources de stockage et réseau partagées."
   upgrading:
     activeDeadlineSeconds:
@@ -9151,7 +9151,7 @@ keyValue:
 
 registryMirror:
   header: Miroirs
-  toolTip: "Les miroirs peuvent être utilisés pour rediriger les demandes d’images d’un registre vers une liste de miroirs."
+  toolTip: 'Les miroirs peuvent être utilisés pour rediriger les demandes d’images d’un registre vers une liste de points de terminaison que vous spécifiez.  Par exemple, docker.io peut être redirigé vers votre registre interne au lieu de passer par DockerHub.'
   addLabel: Ajouter un miroir
   description: "Les miroirs définissent les noms et les points de terminaison pour les registres privés. Les points de terminaison sont essayés l’un après l’autre."
   hostnameLabel: "Nom d’hôte du registre"
@@ -9221,7 +9221,7 @@ advancedSettings:
     'auth-user-info-max-age-seconds': "L’âge maximum des tokens d’authentification d’un utilisateur avant qu’une synchronisation des appartenances aux groupes soit effectuée."
     'auth-user-info-resync-cron': "Planification cron par défaut pour la resynchronisation des appartenances aux groupes du fournisseur d’authentification."
     'cluster-template-enforcement': "Les non-administrateurs seront limités au lancement de clusters via des modèles RKE préapprouvés uniquement."
-    'auth-user-session-idle-ttl-minutes': "TTL d’inactivité personnalisé (en minutes) sur une session utilisateur. Durée maximale d’inactivité avant expiration de session."
+    'auth-user-session-idle-ttl-minutes': 'TTL d’inactivité personnalisé (en minutes) sur une session d’authentification utilisateur. Il s’agit de la durée maximale pendant laquelle une session peut rester active en l’absence d’activité de l’utilisateur dans un navigateur. Cette valeur doit être inférieure à "auth-user-session-ttl-minutes". Si "auth-user-session-idle-ttl-minutes" est supérieur ou égal à "auth-user-session-ttl-minutes", la fonctionnalité d’inactivité de session est considérée comme désactivée.'
     'auth-user-session-ttl-minutes': "TTL personnalisé (en minutes) sur une session utilisateur. Durée maximale d’une session quelle que soit l’activité de l’utilisateur."
     'auth-token-max-ttl-minutes': "TTL maximum (en minutes) pour tous les tokens sauf ceux contrôlés par les paramètres de session utilisateur. Lorsque défini à 0, le token n’expire jamais."
     'kubeconfig-generate-token': "Générer automatiquement des tokens pour les utilisateurs lorsqu’un kubeconfig est demandé."
@@ -9237,7 +9237,7 @@ advancedSettings:
     'k3s-based-upgrader-uninstall-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut désinstaller simultanément l’ancienne application `rancher-k3s-upgrader` ou `rancher-rke2-upgrader`."
     'system-agent-upgrader-install-concurrency': "Définit le nombre maximum de clusters dans lesquels Rancher peut installer simultanément les ressources requises pour la mise à niveau de l’agent système."
     'delete-machine-on-failure-after': Définit le nombre de secondes après lequel Rancher supprimera les machines d’infrastructure dont le provisionnement a échoué. Définissez 0 pour désactiver la suppression automatique des machines en échec.
-    'imported-cluster-version-management': "Active la gestion des versions pour les clusters RKE2/K3s importés, et pour le cluster local s’il s’agit d’un cluster RKE2/K3s. Le paramètre de gestion des versions par cluster remplace ce paramètre global au niveau du cluster."
+    'imported-cluster-version-management': Active la gestion des versions pour les clusters RKE2/K3s importés, et pour le cluster local s’il s’agit d’un cluster RKE2/K3s. Le paramètre de gestion des versions par cluster remplace ce paramètre global au niveau du cluster. Pour les clusters existants dont la gestion des versions au niveau du cluster est définie sur 'system-default', la modification de ce paramètre déclenchera un redéploiement de l’agent du cluster lors de la prochaine réconciliation (par défaut toutes les 5 minutes, ou dès que le cluster est modifié, selon ce qui se produit en premier).
     'imported-cluster-day2-ops-enabled': Contrôle si les clusters RKE2/K3s importés auront les opérations Day 2 (snapshots etcd, restaurations, rotations de clés de chiffrement) activées par défaut. Cela affectera tous les clusters utilisant la configuration par défaut, et peut être remplacé au niveau du cluster.
   warnings:
     'agent-tls-mode': 'La modification de ce paramètre entraînera le redéploiement de tous les agents.'
@@ -9459,7 +9459,7 @@ resourceQuota:
 customLinks:
   displayTitle: Liens
   label: "Liens de la page d’accueil"
-  description: "Configurez les liens à afficher sur la page d’accueil. Vous pouvez définir vos propres liens personnalisés ainsi qu’afficher les liens par défaut."
+  description: 'Configurez les liens à afficher sur la page d’accueil. Vous pouvez définir vos propres liens personnalisés ainsi qu’afficher ou masquer les liens par défaut.'
   restoreDefaults: Restaurer les valeurs par défaut
   addLink: Ajouter un lien
   restoreSuccess: Les URL par défaut ont été restaurées.
@@ -9482,21 +9482,21 @@ customLinks:
     editBrand: "Personnaliser le thème de l’interface"
     access:
       title: Obtenir du support
-      text: "Lorsque vous avez besoin d’aide avec Rancher, vous avez accès à une équipe d’experts inégalée."
-      action: Ouvrir une demande de support
+      text: Connectez-vous au SUSE Customer Center pour accéder au support de votre abonnement
+      action: SUSE Customer Center
       aws:
         generateConfig: "Générer la configuration de support"
-        text: "Le support est disponible via votre abonnement Amazon Marketplace."
+        text: 'Connectez-vous au SUSE Customer Center pour accéder au support de votre abonnement. Besoin d’ouvrir un nouveau dossier de support ? Téléchargez un fichier de configuration de support ci-dessous.'
   promos:
     one:
-      title: Pour commencer
-      text: "Que vous soyez un utilisateur Kubernetes débutant ou expérimenté, nous avons les ressources pour vous aider à tirer le meilleur parti de Rancher."
+      title: Support 24h/24, 7j/7
+      text: Nous offrons des SLA rigoureusement définis et proposons des options de support 24 heures sur 24.
     two:
-      title: Rejoindre la communauté
-      text: "Connectez-vous avec d’autres utilisateurs Rancher et l’équipe d’ingénierie à travers des événements communautaires, des forums en ligne et plus encore."
+      title: Résolution des problèmes
+      text: Utilisez les produits SUSE Rancher en toute confiance, en sachant que les développeurs qui les ont conçus sont disponibles pour résoudre rapidement les problèmes.
     three:
-      title: Documentation
-      text: "Trouvez des réponses dans la documentation, des guides pratiques détaillés aux références pour l’API, la CLI et plus encore."
+      title: Dépannage
+      text: Nous nous attachons à identifier la cause profonde de tout problème, qu’il soit lié aux produits SUSE, à Kubernetes, à Docker ou à votre infrastructure sous-jacente.
     four:
       title: Innover en toute liberté
       text: "Profitez de notre compatibilité certifiée avec un large éventail de fournisseurs Kubernetes, de systèmes d’exploitation et de logiciels open source."
