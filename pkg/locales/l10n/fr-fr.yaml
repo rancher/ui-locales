@@ -1,7 +1,7 @@
 # ---
 # locale: fr-fr (French - France)
 # source-locale: en-us
-# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# synced-against-en-us-commit: 0294f39 (2026-10-06)
 # last-updated: 2026-10-07
 # ---
 ##############################
@@ -440,7 +440,6 @@ about:
   title: À propos
   versions:
     downloadImages: "Télécharger la liste d’images {listName}"
-    downloadCli: "Télécharger CLI pour {os} : {file}"
     githubRepo: "Ouvrir le dépôt GitHub pour le composant {name}"
     title: Versions
     component: Composant
@@ -450,14 +449,12 @@ about:
     machine: Machine
     rancher: Rancher
     releaseNotes: Voir les notes de version
-  os:
-    mac: macOS
-    windows: Windows
-    linux: Linux
   downloadImageList:
     title: "Listes d’images"
-  downloadCLI:
-    title: Téléchargements CLI
+  cli:
+    title: "{vendor} CLI"
+    description: The {vendor} CLI lets you manage clusters, projects and resources from the command line. Builds are available for a range of operating systems and architectures, and the documentation covers how to download and install them.
+    docsLink: View {vendor} CLI documentation
   diagnostic:
     title: Diagnostics
     checkboxTooltip: Complétez les données de diagnostic avec les temps de réponse pour les 10 premières ressources. Cela peut prendre du temps
@@ -752,6 +749,7 @@ authConfig:
     cert: Certificat
     disabledStatusBitmask: Bitmask de statut désactivé
     groupDNAttribute: Attribut DN de groupe
+    groupIDAttribute: Group Identifier Attribute
     groupMemberMappingAttribute: Attribut de mappage des membres du groupe
     groupMemberUserAttribute: Attribut utilisateur des membres du groupe
     groupSearchBase:
@@ -761,6 +759,10 @@ authConfig:
       label: Nom d’hôte/Adresse IP
       placeholder: 'par exemple : serveur1,serveur2'
       hint: Plusieurs serveurs peuvent être spécifiés séparés par des virgules
+    idAttribute:
+      tip: Attribute whose value identifies the user or group in Rancher instead of its Distinguished Name, so that moving or renaming the entry in the directory keeps its permissions. Leave empty to use the Distinguished Name.
+      locked: Cannot be changed while the provider is enabled. Disable the provider to change it.
+      samlTip: Attribute whose value matches what the identity provider sends in the UID Field for users or the Groups Field for groups, so that search results match logged-in principals. Leave empty to use the Login Attribute for users and the Group DN Attribute for groups.
     loginAttribute: Attribut de connexion
     nameAttribute: Attribut de nom
     nestedGroupMembership:
@@ -794,6 +796,7 @@ authConfig:
       tip: 'Lorsque activé, Rancher utilisera le compte de service au lieu du compte utilisateur pour rechercher des utilisateurs et des groupes.'
     tls: TLS
     userEnabledAttribute: Attribut utilisateur activé
+    userIDAttribute: User Identifier Attribute
     userMemberAttribute: Attribut de membre utilisateur
     userLoginFilter: Filtre de connexion utilisateur
     userSearchBase:
@@ -1339,6 +1342,7 @@ catalog:
     windowsIncompatible: Linux uniquement
     versionWindowsIncompatible: Version Linux uniquement
     header: Graphiques
+    cannotListApps: You do not have permission to list installed apps, which is required to view charts
     noCharts:
       title: Aucun graphique à afficher
       message: "<b>Conseils :</b> annulez le dernier filtre appliqué ou <resetAllFilters>effacez tous les filtres</resetAllFilters>, et assurez-vous que vous avez les bons <repositoriesUrl>dépôts</repositoriesUrl> configurés."
@@ -2015,6 +2019,8 @@ cluster:
   explore: Explorer
   importAction: "Importer l’existant"
   manageAction: Gérer
+  pinAction: Pin
+  unpinAction: Unpin
   kubeConfig:
     error:
       title: Impossible de générer le KubeConfig
@@ -3787,6 +3793,62 @@ fleet:
           =0 { Ajouter des espaces de noms ici créera une GitRepoRestriction. }
           other { Seul le champ <code>allowedTargetNamespaces</code> de la restriction Git Repo est géré ici. Vous pouvez apporter des modifications supplémentaires à la restriction Git Repo}
         }"
+  policy:
+    name:
+      label: Policy name
+    serviceAccounts:
+      title: Service accounts
+      require:
+        label: Require service account
+        description: Enforces that a ServiceAccount is specified on targeted resources.
+      allowNamespaceCreation:
+        title: Namespace creation
+        label: Allow namespace creation
+        description: While a service account is required, Fleet does not create namespaces on downstream clusters, so target namespaces have to exist already. Allow it only where namespace creation is controlled by other means.
+        link: Namespace creation in the Fleet documentation
+      restrict:
+        all: Allow all service accounts
+        selected: Only allow selected service accounts
+        description: Restricts the set of service accounts that GitRepo, HelmOp and Bundle resources may reference.
+      allowed:
+        title: Select allowed service accounts
+        label: Allowed service accounts
+    gitRepo:
+      title: GitRepo Policy
+      defaultServiceAccount:
+        label: Default service account
+        description: This will be applied to GitRepo app bundles with no service account provided.
+      defaultSecret:
+        label: Default client secret
+        description: This will be applied to GitRepo app bundles with no client secret provided.
+      restrict:
+        all: Allow all client secrets
+        selected: Only allow selected client secrets
+        description: Restricts the set of clientSecretName values GitRepos may reference.
+      allowed:
+        title: Select allowed client secrets
+        label: Allowed client secrets
+    helmOp:
+      title: HelmOps Policy
+      defaultServiceAccount:
+        label: Default service account
+        description: This will be applied to HelmOps app bundles with no service account provided.
+      defaultSecret:
+        label: Default Helm secret
+        description: This will be applied to HelmOps app bundles with no Helm secret provided.
+      restrict:
+        all: Allow all Helm secrets
+        selected: Only allow selected Helm secrets
+        description: Restricts the set of credential secret names HelmOps may reference.
+      allowed:
+        title: Select allowed Helm secrets
+        label: Allowed Helm secrets
+    defaultServiceAccountNotAllowed: The selected default service account must be allowed in the policy.
+    defaultSecretNotAllowed: The selected default secret must be allowed in the policy.
+    placeholder:
+      serviceAccount: Select or enter a service account name
+      secret: Select or enter a secret name
+      allowList: Select or enter names
   configMaps:
     label: ConfigMaps
   secrets:
@@ -4552,7 +4614,7 @@ logging:
     secretKey: Clé secrète depuis le secret
   azurestorage:
     storageAccount: Compte depuis le secret
-    accessKey:  "Clé d’accès depuis le secret"
+    accessKey: "Clé d’accès depuis le secret"
     container: Conteneur
     path: Chemin
     storeAs: Stocker sous
@@ -7193,6 +7255,127 @@ storageClass:
       placeholder: Nom de la classe de stockage sur le cluster [[Harvester]] hôte
       tooltip: Par défaut, la classe de stockage par défaut du cluster [[Harvester]] hôte est utilisée.
 
+tableViews:
+  tabs:
+    all: Explorer
+    label: Saved views
+    newView: Add View
+    count: "{name} ({count})"
+  view:
+    label: View
+    unsaved: You have unsaved changes...
+    unsavedShort: Unsaved changes
+    discard: Discard Changes
+    saveChanges: Save Changes
+    saveAsNew: Save Changes to New View
+    groupBy: Group By
+    columnsConfiguration: Columns Configuration
+    columnsDefault: Default
+    columnsCount: "{shown} / {total}"
+    reset: Reset to Default
+  tab:
+    menu: View options
+    rename: Rename View
+    duplicate: Duplicate View
+    copySuffix: (copy)
+    delete: Delete View
+    setDefault: Set as Default View
+    newViewName: Untitled
+    deleted: View Deleted
+    deletedMessage: The "{name}" view has been successfully deleted.
+    undo: Undo
+  bulk:
+    selected: "{count} Selected"
+    deleteSelected: Delete Selected
+  query:
+    fields:
+      pinned: Pinned
+      clusterId: Cluster ID
+    placeholder: 'Filter across all columns or only specific ones (e.g. state:error)'
+    clear: Clear filter
+    inUse: "{count} in use"
+    label: Label
+    suggestions: Filter suggestions
+    suggestionsAvailable: |-
+      {count, plural,
+      one {1 suggestion available}
+      other {{count} suggestions available}
+      }
+    connective:
+      and: Both must match
+      or: Either can match
+      not: Leave these out
+    # What the toolbar says about a query it cannot read as written. Nothing here stops the query
+    # running - the table filters by as much of it as it can.
+    problem:
+      emptyValue: '<b>{label}</b> has no value to match.'
+      trailingOperator: 'The query ends with <b>{text}</b>.'
+      leadingJoiner: '<b>{text}</b> has nothing before it to join.'
+      consecutiveOperators: '<b>{text}</b> follows another operator.'
+      danglingNegation: '<b>{text}</b> on its own negates nothing.'
+      unbalancedQuote: 'A quote is opened and never closed.'
+      noTerms: 'There is nothing to filter by.'
+    # Shown when part of a query names something this list cannot be filtered by on the server
+    unsupported: |-
+      {count, plural,
+      one {<b>{fields}</b> cannot be filtered on this list, so that part of the query was ignored.}
+      other {<b>{fields}</b> cannot be filtered on this list, so those parts of the query were ignored.}
+      }
+  columns:
+    selectAll: Select All Columns
+    reset: Reset to Default
+    locked: This column cannot be hidden
+    reorder: Drag to reorder
+    moveKeys: '{modifier}+Up Arrow or {modifier}+Down Arrow moves it'
+    moved: '{label} moved to position {position} of {total}'
+    allShown: 'All {count} columns shown'
+    resetDone: Columns reset to the default
+  group:
+    none: None
+    resetDone: 'Grouping reset to {label}'
+    empty: (none)
+    # A list's own groupings, as the Group By menu names them
+    by:
+      namespace: Namespace
+      project: Project
+      node: Node
+      role: Role
+      cluster: Cluster
+      device: Device
+      pool: Pool
+      workspace: Workspace
+      type: Type
+  export:
+    label: Export All View Contents
+    title: Export All View Contents
+    intro: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    # The same, once there is more than a page of rows to fetch and the wait is worth warning about
+    introSlow: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    # A view the api could not count: exported all the same, with no number to put to it
+    introUncounted: 'You are about to <b>export all items</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    choose: '<b>Please choose the export format</b> to continue...'
+    # What the same modal says when it was opened for a selection rather than for a whole view
+    selectionTitle: Export As...
+    selectionIntro: |-
+      You are about to <b>export {count, plural,
+      one {1 selected item}
+      other {{count, number} selected items}
+      }</b>. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).
+    selectionIntroSlow: 'You are about to <b>export {count, number} selected items</b> - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    download: Download
+    format:
+      yaml: YAML
+      json: JSON
+      csv: CSV
+    # What the notification centre shows while the export runs, and what that entry becomes once
+    # it is done. The file can take a while, so the export is watched there rather than blocking.
+    notification:
+      title: Export in progress
+      message: Exporting all items from the {name} view as {format}...
+      doneTitle: Export completed
+      doneMessage: The {name} view has been exported to {file}.
+      failedTitle: Export failed
+      failedMessage: The {name} view could not be exported.
 tableHeaders:
   assuredConcurrencyShares: Parts de concurrence garanties
   autoscaler: Autoscaler
@@ -7201,6 +7384,7 @@ tableHeaders:
   accessModes: "Modes d’accès"
   address: Adresse
   age: Âge
+  badge: Badge
   apiGroup: "Groupes d’API"
   apikey: Clé API
   available: Disponible
@@ -7837,11 +8021,11 @@ workload:
       successThreshold: Seuil de succès
       timeout: "Délai d’expiration"
       kind:
-        none:  Aucune
-        HTTP:  La requête HTTP retourne un statut réussi (200-399)
+        none: Aucune
+        HTTP: La requête HTTP retourne un statut réussi (200-399)
         HTTPS: La requête HTTPS retourne un statut réussi
-        tcp:   "La connexion TCP s’ouvre avec succès"
-        exec:  La commande exécutée dans le conteneur se termine avec le statut 0
+        tcp: "La connexion TCP s’ouvre avec succès"
+        exec: La commande exécutée dans le conteneur se termine avec le statut 0
     image: Image du conteneur
     imagePullPolicy: Politique de téléchargement
     imagePullSecrets:
@@ -9097,6 +9281,9 @@ action:
   clone: Cloner
   disable: Désactiver
   download: Télécharger YAML
+  # What the same action is called when the configurable tables feature is on, where it offers the
+  # other formats alongside the yaml it has always given
+  downloadExport: Export As...
   edit: Modifier la configuration
   editYaml: Modifier YAML
   enable: Activer
@@ -9739,9 +9926,26 @@ component:
         namespace: Espace de noms
         project: Projet
         type: Type
+        ready: Ready
+        restarts: Restarts
+        podRestarts: Pod Restarts
+        endpoints: Endpoints
+        podIp: Pod IP
+        workload: Workload
+        node: Node
+        loadError: Unable to load the details of this resource
+        externalIp: External IP
+        internalIp: Internal IP
+        version: Version
+        os: OS
+        cpu: CPU
+        memory: Memory
+        pods: Pods
         ariaLabel:
           showDetails: Afficher les informations sur la ressource { resource } nommée { name }
           actionMenu: Actions de ressource - { resource }
+          loading: Loading resource information
+          loadingUsage: Loading usage
   cron:
     expressionEditor:
       label:
