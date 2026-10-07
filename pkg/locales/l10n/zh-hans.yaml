@@ -1282,7 +1282,7 @@ catalog:
       label: 容器镜像仓库
       tooltip: 容器镜像是从 Cluster Container Registry 中拉取的，如果拉取失败，则从系统容器镜像仓库中拉取。要更改默认行为，请在此处输入或更新镜像仓库。
       custom:
-        checkBoxLabel: Rancher 系统容器镜像的容器镜像仓库
+        checkBoxLabel: 覆盖默认容器镜像仓库
         inputLabel: 容器镜像仓库
         placeholder: 镜像仓库域名和端口，例如：registry.io:5000
       pullSecret:
@@ -1349,7 +1349,7 @@ catalog:
       all: 所有操作系统
       linux: Linux
       windows: Windows
-    search: 筛选
+    search: 搜索目录...
     addNewRepo:
       label: 添加
       ariaLabel: 添加新仓库
@@ -1436,7 +1436,7 @@ catalog:
         }
     error:
       requiresFound: '在安装这个 Chart 前，你需要安装<a href="{url}">{name}</a>。'
-      requiresMissing: '这个 Chart 另一个提供 {name} 的 Chart，但我们找不到这个Chart。'
+      requiresMissing: '此 Chart 需要另一个提供 {name} 的 Chart，但未找到。'
       insufficientCpu: '这个 Chart 需要 {need, number} 个 CPU 核，但集群只有 {have, number} 个可用。'
       insufficientMemory: '这个 Chart 需要 {need} 内存，但集群只有 {have} 可用。'
     header:
@@ -1621,8 +1621,8 @@ catalog:
     noTools: "未找到集群工具"
     action:
       install: 安装
-      upgrade: 升级/编辑
-      edit: 编辑
+      upgrade: 升级
+      edit: 编辑当前版本
       downgrade: 降级
       remove: 移除
       manage: 管理
@@ -1686,11 +1686,11 @@ compliance:
       =1 { 任何使用此配置文件的定时扫描将会失效。}
       other { 任何使用这些配置文件的定时扫描将会失效。}
     }
-  downloadAllReports: 下载所有保存的报告
+  downloadAllReports: 下载所有保存的报告（CSV）
   downloadAllReportsXCCDF: 下载所有已保存的报告 (XCCDF)
-  downloadLatestReport: 下载最新报告
+  downloadLatestReport: 下载最新报告（CSV）
   downloadLatestReportXCCDF: 下载最新报告 (XCCDF)
-  downloadReport: 下载报告
+  downloadReport: 下载报告（CSV）
   downloadReportXCCDF: 下载报告 (XCCDF)
   maxKubernetesVersion: 允许的最大 Kubernetes 版本
   minKubernetesVersion: 允许的最低 Kubernetes 版本
@@ -1806,7 +1806,7 @@ cluster:
     registrationCommand:
       label: 注册命令
       linuxDetail: 在每台要注册的 Linux 主机上运行此命令。
-      windowsDetail: 在每台要注册的 Windows 主机中的 PowerShell 上运行此命令。Windows 节点只能充当 worker。
+      windowsDetail: 在每台要注册的 Windows 主机中的 PowerShell 上运行此命令。
       windowsWorkersOnly: <b>Windows 节点只能作为 Worker 节点。</b>
       windowsNotReady: 在显示用于添加 Windows worker 节点的注册命令之前，集群必须已启动并运行 Linux etcd、control plane 和 worker 节点。<br /> <br /><b>Windows 节点只能作为 worker 节点。</b>
       windowsWarning: 工作负载 Pod（包括由 Rancher Chart 部署的 Pod）将默认调度到 Linux 和 Windows 节点上。编辑 Chart 中的 NodeSelector 以将它们放置到兼容的节点上。
@@ -1830,7 +1830,7 @@ cluster:
         label: Access Key
         placeholder: 你的 AWS Access Key
       defaultRegion:
-        help: 创建集群时使用的默认区域。需要验证此凭证是否有效。
+        help: 创建集群时使用的默认区域。也会通过此区域验证此凭证是否有效。
         label: 默认区域
       secretKey:
         label: Secret Key
@@ -1867,7 +1867,7 @@ cluster:
         placeholder: 你的客户端 Secret
     name:
       label: 凭证名称
-      placeholder: 此凭证的名称（可选）
+      placeholder: 此凭证的名称
     s3:
       accessKey:
         label: Access Key
@@ -2078,7 +2078,7 @@ cluster:
       acceleratedNetworking:
         label: 加速网络
       availabilitySet:
-        label: 可用性集（非托管）
+        label: 可用性集
         description: 可用性集用于让应用程序免受 Azure 数据中心内硬件故障的影响。
       availabilityZone:
         label: 可用区
@@ -2466,7 +2466,7 @@ cluster:
         titleAlt: |-
           {count, plural,
             =1 { 所有主机均使用 Kubelet 参数： }
-            other { 任何主机均使用 Kubelet 参数： }
+            other { 对于下方没有匹配标签的主机： }
           }
         kubeControllerManagerTitle: 补充的 Controller Manager 参数
         kubeApiServerTitle: 补充的 API server 参数
@@ -2476,7 +2476,7 @@ cluster:
   banner:
     warning: '此集群包含此表单不完全支持的 machineSelectorConfig。使用 YAML 编辑器管理完整配置。'
     os: '你正在将 {newOS} worker 节点添加到具有一个或多个 {existingOS} worker 节点的集群。你可能需要升级或删除某些已安装的应用。'
-    rke2-k3-reprovisioning: '更改集群配置可能导致节点重新配置。详情请参见 <a target="blank" href="{docsBase}/how-to-guides/new-user-guides/launch-kubernetes-with-rancher/rke1-vs-rke2-differences#cluster-api" target="_blank" rel="noopener nofollow">文档</a>。'
+    rke2-k3-reprovisioning: '更改集群配置可能导致节点重新配置。详情请参见 <a href="{docsBase}/how-to-guides/new-user-guides/launch-kubernetes-with-rancher#launching-kubernetes-on-new-nodes-in-an-infrastructure-provider" target="_blank" rel="noopener nofollow">文档</a>。'
     desiredNodeGroupWarning: 没有可用于运行 Cluster Agent 的节点。要让集群变为 Active 状态，至少需要有 1 个可用的节点。
     haveArgInfo: 所选 Kubernetes 版本的配置信息不可用。此屏幕中可用的选项将受到限制，你可能需要使用 YAML 编辑器。
     cloudProviderAddConfig: '在 Kubernetes 1.27 或更高版本上，<b>Amazon</b> 云提供商需要额外配置。详情请参阅<a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/amazon" target="_blank" rel="noopener noreferrer nofollow">文档</a>。'
@@ -2604,8 +2604,8 @@ cluster:
     aws: Amazon
     azure: Azure
     azureaks: Azure AKS
-    aks: Azure AKS
-    azurekubernetesservice: Azure AKS
+    aks: AKS
+    azurekubernetesservice: Azure AKS（不支持的 Kev1）
     baiducloudcontainerengine: 百度 CCE
     baidu: 百度 CCE
     cloudca: Cloud.ca
@@ -2613,13 +2613,13 @@ cluster:
     custom: 自定义
     digitalocean: DigitalOcean
     docker: Docker
-    eks: Amazon EKS
+    eks: EKS
     exoscale: Exoscale
     sks: Exoscale SKS
     gcp: Google
     google: Google GCE
     googlegke: Google GKE
-    gke: Google GKE
+    gke: GKE
     googlekubernetesengine: Google GKE（不支持的 Kev1）
     harvester: '[[Harvester]]'
     huaweicce: 华为 CCE
@@ -2644,7 +2644,7 @@ cluster:
     pinganyunecs: 平安云 ECS
     pnap: phoenixNAP
     rackspace: RackSpace
-    rancherkubernetesengine: RKE
+    rancherkubernetesengine: RKE1
     rke2: RKE2
     rke: RKE1
     rkeWindows: Windows（仅限 RKE1）
@@ -2779,11 +2779,11 @@ cluster:
         toolTip: 客户端用于验证端点返回的证书是否有效的证书。
     etcd:
       disableSnapshots:
-        label: 自动快照
+        label: 自动备份
       snapshotScheduleCron:
         label: Cron 调度
       snapshotRetention:
-        label: 保留最后一个
+        label: 本地快照保留数量
         tooltip: 每次备份会为每个 etcd 节点记录 1 个快照。如果你指定保留 3 个快照，而你有 3 个 etcd 节点，那么你只会保留 1 个完整备份。
       exportMetric:
         label: 指标
@@ -3259,7 +3259,7 @@ fleet:
   dashboard:
     pageTitle: 持续交付仪表板
     menuLabel: 仪表板
-    welcome: 欢迎使用 Fleet 持续交付
+    welcome: 欢迎使用持续交付
     gitOpsScale: 大规模 GitOps。
     learnMore: 了解更多。
     learnMoreLink: https://fleet.rancher.io
@@ -3885,17 +3885,17 @@ clusterBadge:
   customize: 自定义
   editLabel: 编辑集群徽章
   modal:
-    title: 自定义集群徽章
-    checkbox: 显示此集群的徽章
+    title: 集群外观
+    checkbox: 显示集群备注
     comment: 自定义备注
     iconText: 图标文本
     buttonAction: 应用
     badgeBgColor: 徽章背景颜色
     badgeBgColorInput: 徽章背景颜色选择器输入框
     badgeTextColor: 徽章文字颜色
-    badgeAsIcon: 自定义集群图标
-    maxCharsTooltip: 最多两个字符
-    previewTitle: "集群图标和名称效果"
+    badgeAsIcon: 使用自定义徽章
+    maxCharsTooltip: 覆盖默认的集群名称缩写。
+    previewTitle: "预览："
     previewSide: "侧边导航"
     previewHeader: "RANCHER 页眉"
 
@@ -4420,8 +4420,8 @@ landing:
     docs: Rancher 官方文档
     forums: 论坛
   commercial:
-    title: 商业支持
-    body: 了解商业支持
+    title: Rancher Prime
+    body: 了解 Rancher Prime
   landingPrefs:
     body: "登录后显示："
     ariaLabelTakeMeToCluster: 选择登录后要跳转到的集群
@@ -4497,7 +4497,7 @@ logging:
     clientKey:
       label: 客户端密钥
       placeholder: 粘贴客户端密钥
-    clientKeyPass: 传自密文的客户端密钥
+    clientKeyPass: 客户端密钥密码
     verifySsl: 验证 SSL
     sslVersion: SSL 版本
     suppressTypeName:
@@ -4535,7 +4535,7 @@ logging:
       label: CA 证书
       placeholder: 粘贴 CA 证书
     sslClientCert:
-      label: CA 证书
+      label: 客户端证书
       placeholder: 粘贴客户端证书
     sslClientCertChain:
       label: 证书链
@@ -4618,7 +4618,7 @@ logging:
       title: 缓冲
       tags: 标签
       chunkLimitSize: 块大小限制
-      chunkLimitRecords: 块限制 chunkLimitRecords
+      chunkLimitRecords: 块记录数限制
       totalLimitSize: 总限制大小
       flushInterval: 刷新时间间隔
       timekey: Timekey
@@ -5282,11 +5282,11 @@ networkpolicy:
       invalidCidr: "无效的 CIDR"
       invalidExceptionCidrs: "无效的例外： "
     podSelector:
-      label: Pod 选择器
+      label: Pod 标签选择器
     namespaceSelector:
-      label: 命名空间选择器
+      label: 命名空间标签选择器
     namespaceAndPodSelector:
-      label: 命名空间/Pod 选择器
+      label: 命名空间/Pod 标签选择器
   config:
     label: 配置
   selectors:
@@ -5753,7 +5753,7 @@ podDisruptionBudget:
 inactivity:
   title: 会话即将过期
   banner: 由于不活动，你的会话即将过期。任何未保存的更改都将丢失。
-  content: 单击“恢复会话”来让选项卡中的会话保持活动状态，或在会话过期后刷新浏览器。
+  content: 单击“恢复会话”以保持此浏览器中的会话处于活动状态。
   cta: 恢复会话
 
 # Rancher Extensions
@@ -5917,7 +5917,7 @@ plugins:
     banner: 有新的扩展仓库可用。要启用这些仓库，请单击右侧的按钮。
     bannerBtn: 添加仓库
     title: 添加扩展仓库
-    prompt: 你可以安装多个 Rancher 扩展仓库来增加你的扩展商店
+    prompt: 启用更多仓库以获取更多扩展
   setup:
     installed: 已安装
     uninstalled: 已卸载
@@ -5930,10 +5930,10 @@ plugins:
       community: Community Extensions 仓库提供了由 Rancher 社区发布的扩展。
     install:
       title: 启用扩展支持？
-      prompt: 这将安装启用扩展支持所需的 Helm Chart
+      prompt: 这将引导你前往可启用扩展支持所需功能开关的页面。
       featuresButton: 前往功能开关
       airgap: 离线安装环境请不要启用此功能
-      addRancherRepo: 添加 Official Rancher Extensions 仓库
+      addRancherRepo: 添加 Rancher Prime Extensions 仓库
       addPartnersRancherRepo: 添加 Partners Extensions 仓库
     remove:
       label: 禁用扩展支持
@@ -6388,8 +6388,8 @@ rbac:
         label: 管理所有集群
         description: 允许用户管理所有集群，包括他们不是成员的集群。
       clusterscans-manage:
-        label: 管理 CIS 集群扫描
-        description: 允许用户运行新建的 CIS 集群扫描，并管理 CIS 集群扫描。
+        label: 管理合规集群扫描
+        description: 允许用户运行新建的合规集群扫描，并管理合规集群扫描。
       kontainerdrivers-manage:
         label: 创建集群驱动
         description: 允许用户创建集群驱动，并成为该集群驱动的所有者（owner）。
@@ -6833,7 +6833,7 @@ setup:
   currentPassword: Bootstrap 密码
   confirmPassword: 确认新密码
   defaultPassword:
-    intro: 这是你第一次访问 {vendor}。如果你预先设置了 Bootstrap 密码，请在此处输入。否则我们会为你生成一个随机密码。找到它：<br/><br/>
+    intro: 这是你第一次访问 {vendor}。如果你预先设置了 Bootstrap 密码，请在此处输入。否则我们会为你生成一个随机密码。要找到它，请运行：<br/><br/>
     helmSuffix: ""
   eula: 选中此框，即表示你接受<a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">最终用户许可协议及条款和条件</a>
   newPassword: 新密码
@@ -7371,7 +7371,7 @@ tableHeaders:
   repoType: 仓库类型
   repositories: 仓库
   repoName: 仓库名称
-  reposReady: 就绪仓库
+  reposReady: 就绪 Git 仓库
   replicas: 副本数量
   reqRate: 请求频率
   resource: 资源
@@ -7926,7 +7926,7 @@ workload:
       addGroupIDs: 添加组 ID
       allowPrivilegeEscalation:
         title: 权限提升
-        'true': "是：容器可以获得比其父进程更多的权限。"
+        'true': "容器可以获得比其父进程更多的权限"
       capabilities:
         title: Capabilities
         add: 添加 Capabilities
@@ -7937,18 +7937,18 @@ workload:
       podFsGroup: Pod 文件系统组
       privileged:
         title: 特权模式
-        'true': "是：容器可以完全访问主机"
+        'true': "容器可以完全访问主机"
         help: 启用特权模式将隐藏权限提升和 seccompProfile。
         afterTick: 
           'true': 权限提升和 seccompProfile 已隐藏。
           'false': 权限提升和 seccompProfile 已显示。
       readOnlyRootFilesystem:
         title: 只读根文件系统
-        'true': "是：容器有一个只读的根文件系统"
+        'true': "容器有一个只读的根文件系统"
       runAsGroup: 以组 ID 运行
       runAsNonRoot:
         title: 以非 Root 用户运行
-        'true': "是：容器必须以非 Root 用户的身份运行"
+        'true': "容器必须以非 Root 用户的身份运行"
       runAsNonRootOptions:
         'true': "容器必须以非 Root 用户的身份运行"
       runAsUser: 
@@ -9233,7 +9233,7 @@ advancedSettings:
     'cluster-template-enforcement': '非管理员只能通过预先批准的 RKE 模板启动集群。'
     'auth-user-session-idle-ttl-minutes': '用户认证会话的自定义空闲 TTL（分钟）。这是浏览器中没有用户活动时会话可以保持活动的最长时间。该值应小于 "auth-user-session-ttl-minutes"。如果 "auth-user-session-idle-ttl-minutes" 大于或等于 "auth-user-session-ttl-minutes"，则视为禁用会话空闲功能。'
     'auth-user-session-ttl-minutes': '用户认证会话的自定义 TTL（单位：分钟）。这是会话可保持活动的最长时间，与用户在浏览器中的活动无关。该值应大于 "auth-user-session-idle-ttl-minutes"。'
-    'auth-token-max-ttl-minutes': '所有身份认证 Token 的最大 TTL（单位：分钟）。如果设置为 0，则 Token 永不过期。'
+    'auth-token-max-ttl-minutes': '除受 "auth-user-session-ttl-minutes" 控制的 Token（用户会话 Token）外，所有 Token 的最大 TTL（单位：分钟）。如果设置为 0，则 Token 永不过期。'
     'kubeconfig-generate-token': '请求 kubeconfig 时自动为用户生成 Token。'
     'kubeconfig-default-token-ttl-minutes': '应用于所有 kubeconfig Token 的 TTL（单位：分钟）。如果设置为 0，则 Token 永不过期。'
     'rke-metadata-config': '配置 RKE 元数据刷新参数。'
@@ -9485,7 +9485,7 @@ customLinks:
     slack: Slack
     issues: 提交 GitHub Issue
     getStarted: 开始使用
-    commercialSupport: 商业支持
+    commercialSupport: Rancher Prime
     appCo: SUSE Application Collection
 
   suse:
