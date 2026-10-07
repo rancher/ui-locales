@@ -46,6 +46,12 @@ locale file is checked on the English source alone.
 Bump the version in **both** `package.json` and `pkg/locales/package.json`, then publish a release
 tagged `locales-<version>`. See `docs/RELEASING.md`.
 
+## Updating @rancher/shell
+
+Don't bump it by hand. `.github/workflows/bump-shell.yml` checks npm daily and keeps one PR open
+for the newest release, release candidates included (`scripts/bump-shell.mjs` picks it), closing
+any older one, and Dependabot ignores the package.
+
 ## Rules
 
 - Use Node.js or pure bash for scripting (no Python/pip)
