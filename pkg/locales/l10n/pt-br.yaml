@@ -452,9 +452,9 @@ about:
   downloadImageList:
     title: Listas de Imagens
   cli:
-    title: "{vendor} CLI"
-    description: The {vendor} CLI lets you manage clusters, projects and resources from the command line. Builds are available for a range of operating systems and architectures, and the documentation covers how to download and install them.
-    docsLink: View {vendor} CLI documentation
+    title: "CLI do {vendor}"
+    description: A CLI do {vendor} permite gerenciar clusters, projetos e recursos pela linha de comando. Há builds disponíveis para diversos sistemas operacionais e arquiteturas, e a documentação explica como baixá-las e instalá-las.
+    docsLink: Ver a documentação da CLI do {vendor}
   diagnostic:
     title: Diagnósticos
     checkboxTooltip: Complementar dados de diagnóstico com tempos de resposta para os 10 principais recursos. Isso pode demorar um pouco
@@ -749,7 +749,7 @@ authConfig:
     cert: Certificado
     disabledStatusBitmask: Bitmask de Status Desabilitado
     groupDNAttribute: Atributo DN do Grupo
-    groupIDAttribute: Group Identifier Attribute
+    groupIDAttribute: Atributo Identificador do Grupo
     groupMemberMappingAttribute: Atributo de Mapeamento de Membro do Grupo
     groupMemberUserAttribute: Atributo de Usuário Membro do Grupo
     groupSearchBase:
@@ -760,9 +760,9 @@ authConfig:
       placeholder: 'ex.: servidor1,servidor2'
       hint: Vários servidores podem ser especificados como uma lista separada por vírgulas
     idAttribute:
-      tip: Attribute whose value identifies the user or group in Rancher instead of its Distinguished Name, so that moving or renaming the entry in the directory keeps its permissions. Leave empty to use the Distinguished Name.
-      locked: Cannot be changed while the provider is enabled. Disable the provider to change it.
-      samlTip: Attribute whose value matches what the identity provider sends in the UID Field for users or the Groups Field for groups, so that search results match logged-in principals. Leave empty to use the Login Attribute for users and the Group DN Attribute for groups.
+      tip: Atributo cujo valor identifica o usuário ou grupo no Rancher em vez do seu Nome Distinto, para que mover ou renomear a entrada no diretório mantenha suas permissões. Deixe vazio para usar o Nome Distinto.
+      locked: Não pode ser alterado enquanto o provedor estiver habilitado. Desabilite o provedor para alterá-lo.
+      samlTip: Atributo cujo valor corresponde ao que o provedor de identidade envia no Campo UID para usuários ou no Campo Groups para grupos, para que os resultados da busca correspondam aos principals conectados. Deixe vazio para usar o Atributo de Login para usuários e o Atributo DN do Grupo para grupos.
     loginAttribute: Atributo de Login
     nameAttribute: Atributo de Nome
     nestedGroupMembership:
@@ -796,7 +796,7 @@ authConfig:
       tip: 'Quando habilitado, o Rancher usará a conta de serviço em vez da conta do usuário para pesquisar usuários e grupos.'
     tls: TLS
     userEnabledAttribute: Atributo de Usuário Habilitado
-    userIDAttribute: User Identifier Attribute
+    userIDAttribute: Atributo Identificador do Usuário
     userMemberAttribute: Atributo de Membro do Usuário
     userLoginFilter: Filtro de Login do Usuário
     userSearchBase:
@@ -1342,7 +1342,7 @@ catalog:
     windowsIncompatible: Somente Linux
     versionWindowsIncompatible: Versão somente Linux
     header: Charts
-    cannotListApps: You do not have permission to list installed apps, which is required to view charts
+    cannotListApps: Você não tem permissão para listar os apps instalados, o que é necessário para visualizar os charts
     noCharts:
       title: Nenhum chart para exibir
       message: <b>Dicas:</b> desfaça o último filtro aplicado ou <resetAllFilters>limpe todos os filtros</resetAllFilters>, e certifique-se de ter os <repositoriesUrl>repositórios</repositoriesUrl> corretos.
@@ -2028,8 +2028,8 @@ cluster:
   explore: Explorar
   importAction: Importar Existente
   manageAction: Gerenciar
-  pinAction: Pin
-  unpinAction: Unpin
+  pinAction: Fixar
+  unpinAction: Desafixar
   kubeConfig:
     error:
       title: Não foi possível gerar o KubeConfig
@@ -3804,60 +3804,60 @@ fleet:
         }"
   policy:
     name:
-      label: Policy name
+      label: Nome da política
     serviceAccounts:
-      title: Service accounts
+      title: Contas de serviço
       require:
-        label: Require service account
-        description: Enforces that a ServiceAccount is specified on targeted resources.
+        label: Exigir conta de serviço
+        description: Exige que uma ServiceAccount seja especificada nos recursos de destino.
       allowNamespaceCreation:
-        title: Namespace creation
-        label: Allow namespace creation
-        description: While a service account is required, Fleet does not create namespaces on downstream clusters, so target namespaces have to exist already. Allow it only where namespace creation is controlled by other means.
-        link: Namespace creation in the Fleet documentation
+        title: Criação de namespaces
+        label: Permitir criação de namespaces
+        description: Enquanto uma conta de serviço for exigida, o Fleet não cria namespaces nos clusters downstream, então os namespaces de destino já precisam existir. Permita isso apenas onde a criação de namespaces for controlada por outros meios.
+        link: Criação de namespaces na documentação do Fleet
       restrict:
-        all: Allow all service accounts
-        selected: Only allow selected service accounts
-        description: Restricts the set of service accounts that GitRepo, HelmOp and Bundle resources may reference.
+        all: Permitir todas as contas de serviço
+        selected: Permitir apenas as contas de serviço selecionadas
+        description: Restringe o conjunto de contas de serviço que os recursos GitRepo, HelmOp e Bundle podem referenciar.
       allowed:
-        title: Select allowed service accounts
-        label: Allowed service accounts
+        title: Selecione as contas de serviço permitidas
+        label: Contas de serviço permitidas
     gitRepo:
-      title: GitRepo Policy
+      title: Política de GitRepo
       defaultServiceAccount:
-        label: Default service account
-        description: This will be applied to GitRepo app bundles with no service account provided.
+        label: Conta de serviço padrão
+        description: Será aplicada aos bundles de aplicação de GitRepo sem conta de serviço informada.
       defaultSecret:
-        label: Default client secret
-        description: This will be applied to GitRepo app bundles with no client secret provided.
+        label: Secret de cliente padrão
+        description: Será aplicado aos bundles de aplicação de GitRepo sem secret de cliente informado.
       restrict:
-        all: Allow all client secrets
-        selected: Only allow selected client secrets
-        description: Restricts the set of clientSecretName values GitRepos may reference.
+        all: Permitir todos os secrets de cliente
+        selected: Permitir apenas os secrets de cliente selecionados
+        description: Restringe o conjunto de valores de clientSecretName que os GitRepos podem referenciar.
       allowed:
-        title: Select allowed client secrets
-        label: Allowed client secrets
+        title: Selecione os secrets de cliente permitidos
+        label: Secrets de cliente permitidos
     helmOp:
-      title: HelmOps Policy
+      title: Política de HelmOps
       defaultServiceAccount:
-        label: Default service account
-        description: This will be applied to HelmOps app bundles with no service account provided.
+        label: Conta de serviço padrão
+        description: Será aplicada aos bundles de aplicação de HelmOps sem conta de serviço informada.
       defaultSecret:
-        label: Default Helm secret
-        description: This will be applied to HelmOps app bundles with no Helm secret provided.
+        label: Secret padrão do Helm
+        description: Será aplicado aos bundles de aplicação de HelmOps sem secret do Helm informado.
       restrict:
-        all: Allow all Helm secrets
-        selected: Only allow selected Helm secrets
-        description: Restricts the set of credential secret names HelmOps may reference.
+        all: Permitir todos os secrets do Helm
+        selected: Permitir apenas os secrets do Helm selecionados
+        description: Restringe o conjunto de nomes de secrets de credenciais que os HelmOps podem referenciar.
       allowed:
-        title: Select allowed Helm secrets
-        label: Allowed Helm secrets
-    defaultServiceAccountNotAllowed: The selected default service account must be allowed in the policy.
-    defaultSecretNotAllowed: The selected default secret must be allowed in the policy.
+        title: Selecione os secrets do Helm permitidos
+        label: Secrets do Helm permitidos
+    defaultServiceAccountNotAllowed: A conta de serviço padrão selecionada precisa ser permitida na política.
+    defaultSecretNotAllowed: O secret padrão selecionado precisa ser permitido na política.
     placeholder:
-      serviceAccount: Select or enter a service account name
-      secret: Select or enter a secret name
-      allowList: Select or enter names
+      serviceAccount: Selecione ou informe o nome de uma conta de serviço
+      secret: Selecione ou informe o nome de um secret
+      allowList: Selecione ou informe nomes
   configMaps:
     label: Mapas de Configuração
   secrets:
@@ -7269,112 +7269,112 @@ storageClass:
 
 tableViews:
   tabs:
-    all: Explorer
-    label: Saved views
-    newView: Add View
+    all: Explorador
+    label: Exibições salvas
+    newView: Nova Exibição
     count: "{name} ({count})"
   view:
-    label: View
-    unsaved: You have unsaved changes...
-    unsavedShort: Unsaved changes
-    discard: Discard Changes
-    saveChanges: Save Changes
-    saveAsNew: Save Changes to New View
-    groupBy: Group By
-    columnsConfiguration: Columns Configuration
-    columnsDefault: Default
+    label: Exibição
+    unsaved: Você tem alterações não salvas...
+    unsavedShort: Alterações não salvas
+    discard: Descartar Alterações
+    saveChanges: Salvar Alterações
+    saveAsNew: Salvar Alterações em Nova Exibição
+    groupBy: Agrupar Por
+    columnsConfiguration: Configuração de Colunas
+    columnsDefault: Padrão
     columnsCount: "{shown} / {total}"
-    reset: Reset to Default
+    reset: Redefinir Padrão
   tab:
-    menu: View options
-    rename: Rename View
-    duplicate: Duplicate View
-    copySuffix: (copy)
-    delete: Delete View
-    setDefault: Set as Default View
-    newViewName: Untitled
-    deleted: View Deleted
-    deletedMessage: The "{name}" view has been successfully deleted.
-    undo: Undo
+    menu: Opções da exibição
+    rename: Renomear Exibição
+    duplicate: Duplicar Exibição
+    copySuffix: (cópia)
+    delete: Excluir Exibição
+    setDefault: Definir como Exibição Padrão
+    newViewName: Sem título
+    deleted: Exibição Excluída
+    deletedMessage: A exibição "{name}" foi excluída com sucesso.
+    undo: Desfazer
   bulk:
-    selected: "{count} Selected"
-    deleteSelected: Delete Selected
+    selected: "{count, plural, one {{count} Selecionado} other {{count} Selecionados}}"
+    deleteSelected: Excluir Selecionados
   query:
     fields:
-      pinned: Pinned
-      clusterId: Cluster ID
-    placeholder: 'Filter across all columns or only specific ones (e.g. state:error)'
-    clear: Clear filter
-    inUse: "{count} in use"
-    label: Label
-    suggestions: Filter suggestions
+      pinned: Fixado
+      clusterId: ID do Cluster
+    placeholder: 'Filtre em todas as colunas ou só em algumas (ex.: state:error)'
+    clear: Limpar filtro
+    inUse: "{count} em uso"
+    label: Rótulo
+    suggestions: Sugestões de filtro
     suggestionsAvailable: |-
       {count, plural,
-      one {1 suggestion available}
-      other {{count} suggestions available}
+      one {1 sugestão disponível}
+      other {{count} sugestões disponíveis}
       }
     connective:
-      and: Both must match
-      or: Either can match
-      not: Leave these out
+      and: Ambos devem corresponder
+      or: Qualquer um pode corresponder
+      not: Deixar estes de fora
     # What the toolbar says about a query it cannot read as written. Nothing here stops the query
     # running - the table filters by as much of it as it can.
     problem:
-      emptyValue: '<b>{label}</b> has no value to match.'
-      trailingOperator: 'The query ends with <b>{text}</b>.'
-      leadingJoiner: '<b>{text}</b> has nothing before it to join.'
-      consecutiveOperators: '<b>{text}</b> follows another operator.'
-      danglingNegation: '<b>{text}</b> on its own negates nothing.'
-      unbalancedQuote: 'A quote is opened and never closed.'
-      noTerms: 'There is nothing to filter by.'
+      emptyValue: '<b>{label}</b> não tem valor para corresponder.'
+      trailingOperator: 'A consulta termina com <b>{text}</b>.'
+      leadingJoiner: '<b>{text}</b> não tem nada antes para unir.'
+      consecutiveOperators: '<b>{text}</b> vem logo após outro operador.'
+      danglingNegation: '<b>{text}</b> sozinho não nega nada.'
+      unbalancedQuote: 'Uma aspa foi aberta e nunca fechada.'
+      noTerms: 'Não há nada para filtrar.'
     # Shown when part of a query names something this list cannot be filtered by on the server
     unsupported: |-
       {count, plural,
-      one {<b>{fields}</b> cannot be filtered on this list, so that part of the query was ignored.}
-      other {<b>{fields}</b> cannot be filtered on this list, so those parts of the query were ignored.}
+      one {<b>{fields}</b> não pode ser filtrado nesta lista, então essa parte da consulta foi ignorada.}
+      other {<b>{fields}</b> não podem ser filtrados nesta lista, então essas partes da consulta foram ignoradas.}
       }
   columns:
-    selectAll: Select All Columns
-    reset: Reset to Default
-    locked: This column cannot be hidden
-    reorder: Drag to reorder
-    moveKeys: '{modifier}+Up Arrow or {modifier}+Down Arrow moves it'
-    moved: '{label} moved to position {position} of {total}'
-    allShown: 'All {count} columns shown'
-    resetDone: Columns reset to the default
+    selectAll: Selecionar Todas as Colunas
+    reset: Redefinir Padrão
+    locked: Esta coluna não pode ser ocultada
+    reorder: Arraste para reordenar
+    moveKeys: '{modifier}+Seta para cima ou {modifier}+Seta para baixo move a coluna'
+    moved: '{label} foi para a posição {position} de {total}'
+    allShown: 'Todas as {count} colunas exibidas'
+    resetDone: Colunas redefinidas para o padrão
   group:
-    none: None
-    resetDone: 'Grouping reset to {label}'
-    empty: (none)
+    none: Nenhum
+    resetDone: 'Agrupamento redefinido para {label}'
+    empty: (nenhum)
     # A list's own groupings, as the Group By menu names them
     by:
       namespace: Namespace
-      project: Project
-      node: Node
-      role: Role
+      project: Projeto
+      node: Nó
+      role: Função
       cluster: Cluster
-      device: Device
+      device: Dispositivo
       pool: Pool
       workspace: Workspace
-      type: Type
+      type: Tipo
   export:
-    label: Export All View Contents
-    title: Export All View Contents
-    intro: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    label: Exportar Toda a Exibição
+    title: Exportar Todo o Conteúdo da Exibição
+    intro: 'Você está prestes a <b>exportar todos os itens ({count, number})</b> da exibição <b>{name}</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
     # The same, once there is more than a page of rows to fetch and the wait is worth warning about
-    introSlow: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    introSlow: 'Você está prestes a <b>exportar todos os itens ({count, number})</b> da exibição <b>{name}</b> - dependendo da sua conexão, isso pode demorar um pouco. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
     # A view the api could not count: exported all the same, with no number to put to it
-    introUncounted: 'You are about to <b>export all items</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
-    choose: '<b>Please choose the export format</b> to continue...'
+    introUncounted: 'Você está prestes a <b>exportar todos os itens</b> da exibição <b>{name}</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    choose: '<b>Escolha o formato de exportação</b> para continuar...'
     # What the same modal says when it was opened for a selection rather than for a whole view
-    selectionTitle: Export As...
+    selectionTitle: Exportar Como...
     selectionIntro: |-
-      You are about to <b>export {count, plural,
-      one {1 selected item}
-      other {{count, number} selected items}
-      }</b>. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).
-    selectionIntroSlow: 'You are about to <b>export {count, number} selected items</b> - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
-    download: Download
+      Você está prestes a <b>exportar {count, plural,
+      one {1 item selecionado}
+      other {{count, number} itens selecionados}
+      }</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).
+    selectionIntroSlow: 'Você está prestes a <b>exportar {count, number} itens selecionados</b> - dependendo da sua conexão, isso pode demorar um pouco. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    download: Baixar
     format:
       yaml: YAML
       json: JSON
@@ -7382,12 +7382,12 @@ tableViews:
     # What the notification centre shows while the export runs, and what that entry becomes once
     # it is done. The file can take a while, so the export is watched there rather than blocking.
     notification:
-      title: Export in progress
-      message: Exporting all items from the {name} view as {format}...
-      doneTitle: Export completed
-      doneMessage: The {name} view has been exported to {file}.
-      failedTitle: Export failed
-      failedMessage: The {name} view could not be exported.
+      title: Exportação em andamento
+      message: Exportando todos os itens da exibição {name} como {format}...
+      doneTitle: Exportação concluída
+      doneMessage: A exibição {name} foi exportada para {file}.
+      failedTitle: Falha na exportação
+      failedMessage: Não foi possível exportar a exibição {name}.
 tableHeaders:
   assuredConcurrencyShares: Cotas de Simultaneidade Garantida
   autoscaler: Autoescalador
@@ -7396,7 +7396,7 @@ tableHeaders:
   accessModes: Modos de Acesso
   address: Endereço
   age: Idade
-  badge: Badge
+  badge: Emblema
   apiGroup: Grupos de API
   apikey: Chave de API
   available: Disponível
@@ -9295,7 +9295,7 @@ action:
   download: Baixar YAML
   # What the same action is called when the configurable tables feature is on, where it offers the
   # other formats alongside the yaml it has always given
-  downloadExport: Export As...
+  downloadExport: Exportar Como...
   edit: Editar Configuração
   editYaml: Editar YAML
   enable: Ativar
@@ -9938,26 +9938,26 @@ component:
         namespace: Namespace
         project: Projeto
         type: Tipo
-        ready: Ready
-        restarts: Restarts
-        podRestarts: Pod Restarts
+        ready: Pronto
+        restarts: Reinicializações
+        podRestarts: Reinicializações do Pod
         endpoints: Endpoints
-        podIp: Pod IP
-        workload: Workload
-        node: Node
-        loadError: Unable to load the details of this resource
-        externalIp: External IP
-        internalIp: Internal IP
-        version: Version
-        os: OS
+        podIp: IP do Pod
+        workload: Carga de Trabalho
+        node: Nó
+        loadError: Não foi possível carregar os detalhes deste recurso
+        externalIp: IP Externo
+        internalIp: IP Interno
+        version: Versão
+        os: SO
         cpu: CPU
-        memory: Memory
+        memory: Memória
         pods: Pods
         ariaLabel:
           showDetails: Mostrar Informações do Recurso sobre { resource } chamado { name }
           actionMenu: Ações do Recurso - { resource }
-          loading: Loading resource information
-          loadingUsage: Loading usage
+          loading: Carregando informações do recurso
+          loadingUsage: Carregando uso
   cron:
     expressionEditor:
       label:

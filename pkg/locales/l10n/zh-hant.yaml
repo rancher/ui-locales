@@ -453,8 +453,8 @@ about:
     title: 鏡像列表
   cli:
     title: "{vendor} CLI"
-    description: The {vendor} CLI lets you manage clusters, projects and resources from the command line. Builds are available for a range of operating systems and architectures, and the documentation covers how to download and install them.
-    docsLink: View {vendor} CLI documentation
+    description: '{vendor} CLI 讓你可以通過命令行管理集群、項目和資源。我們為多種操作系統和架構提供了構建版本，文檔中介紹了如何下載和安裝。'
+    docsLink: 查看 {vendor} CLI 文檔
   diagnostic:
     title: 診斷
     checkboxTooltip: 用前 10 個資源的響應時間補充診斷數據，可能需要一些的時間才能完成。
@@ -749,7 +749,7 @@ authConfig:
     cert: 證書
     disabledStatusBitmask: 禁用狀態位掩碼
     groupDNAttribute: 用戶組域名屬性
-    groupIDAttribute: Group Identifier Attribute
+    groupIDAttribute: 用戶組標識符屬性
     groupMemberMappingAttribute: 用戶組成員映射屬性
     groupMemberUserAttribute: 用戶組成員屬性
     groupSearchBase:
@@ -760,9 +760,9 @@ authConfig:
       placeholder: 例如：server1,server2
       hint: 可以使用逗號分隔列表來指定多個服務器
     idAttribute:
-      tip: Attribute whose value identifies the user or group in Rancher instead of its Distinguished Name, so that moving or renaming the entry in the directory keeps its permissions. Leave empty to use the Distinguished Name.
-      locked: Cannot be changed while the provider is enabled. Disable the provider to change it.
-      samlTip: Attribute whose value matches what the identity provider sends in the UID Field for users or the Groups Field for groups, so that search results match logged-in principals. Leave empty to use the Login Attribute for users and the Group DN Attribute for groups.
+      tip: 在 Rancher 中用來標識用戶或用戶組的屬性，用於替代其標識名稱（Distinguished Name），這樣即使在目錄中移動或重命名該條目，其權限也會保留。留空則使用標識名稱。
+      locked: 提供程序啟用期間無法更改此項。請先禁用該提供程序再進行更改。
+      samlTip: 此屬性的值需與身份提供程序在 UID 字段（用戶）或用戶組字段（用戶組）中發送的值一致，從而讓搜索結果與已登錄的主體相匹配。留空則用戶使用登錄屬性，用戶組使用用戶組域名屬性。
     loginAttribute: 登錄屬性
     nameAttribute: 名稱屬性
     nestedGroupMembership:
@@ -796,7 +796,7 @@ authConfig:
       tip: 啟用後，Rancher 將使用服務賬戶而非用戶賬戶來搜索用戶和組。
     tls: TLS
     userEnabledAttribute: 用戶啟用屬性
-    userIDAttribute: User Identifier Attribute
+    userIDAttribute: 用戶標識符屬性
     userMemberAttribute: 用戶成員屬性
     userLoginFilter: 用戶登錄過濾器
     userSearchBase:
@@ -1342,7 +1342,7 @@ catalog:
     windowsIncompatible: 僅 Linux
     versionWindowsIncompatible: 僅限 Linux 版本
     header: Chart
-    cannotListApps: You do not have permission to list installed apps, which is required to view charts
+    cannotListApps: 你沒有列出已安裝應用的權限，而查看 Chart 需要此權限
     noCharts:
       title: 沒有可顯示的 charts
       message: '<b>提示：</b>撤銷您應用的上一個過濾器或 <resetAllFilters>清除所有過濾器</resetAllFilters>，並確保您已配置正確的 <repositoriesUrl>倉庫</repositoriesUrl>。'
@@ -2029,8 +2029,8 @@ cluster:
   explore: 瀏覽
   importAction: 導入已有集群
   manageAction: 管理
-  pinAction: Pin
-  unpinAction: Unpin
+  pinAction: 固定
+  unpinAction: 取消固定
   kubeConfig:
     error:
       title: 無法生成 KubeConfig
@@ -3805,60 +3805,60 @@ fleet:
         }"
   policy:
     name:
-      label: Policy name
+      label: 策略名稱
     serviceAccounts:
-      title: Service accounts
+      title: Service Account
       require:
-        label: Require service account
-        description: Enforces that a ServiceAccount is specified on targeted resources.
+        label: 要求 Service Account
+        description: 強制要求在目標資源上指定 ServiceAccount。
       allowNamespaceCreation:
-        title: Namespace creation
-        label: Allow namespace creation
-        description: While a service account is required, Fleet does not create namespaces on downstream clusters, so target namespaces have to exist already. Allow it only where namespace creation is controlled by other means.
-        link: Namespace creation in the Fleet documentation
+        title: 命名空間創建
+        label: 允許創建命名空間
+        description: 在要求 Service Account 的情況下，Fleet 不會在下游集群上創建命名空間，因此目標命名空間必須已經存在。僅當命名空間的創建已通過其他方式加以管控時才允許此操作。
+        link: Fleet 文檔中的命名空間創建說明
       restrict:
-        all: Allow all service accounts
-        selected: Only allow selected service accounts
-        description: Restricts the set of service accounts that GitRepo, HelmOp and Bundle resources may reference.
+        all: 允許所有 Service Account
+        selected: 僅允許選定的 Service Account
+        description: 限制 GitRepo、HelmOp 和 Bundle 資源可以引用的 Service Account 範圍。
       allowed:
-        title: Select allowed service accounts
-        label: Allowed service accounts
+        title: 選擇允許的 Service Account
+        label: 允許的 Service Account
     gitRepo:
-      title: GitRepo Policy
+      title: GitRepo 策略
       defaultServiceAccount:
-        label: Default service account
-        description: This will be applied to GitRepo app bundles with no service account provided.
+        label: 默認 Service Account
+        description: 此設置將應用於未提供 Service Account 的 GitRepo 應用 Bundle。
       defaultSecret:
-        label: Default client secret
-        description: This will be applied to GitRepo app bundles with no client secret provided.
+        label: 默認客戶端密文
+        description: 此設置將應用於未提供客戶端密文的 GitRepo 應用 Bundle。
       restrict:
-        all: Allow all client secrets
-        selected: Only allow selected client secrets
-        description: Restricts the set of clientSecretName values GitRepos may reference.
+        all: 允許所有客戶端密文
+        selected: 僅允許選定的客戶端密文
+        description: 限制 GitRepo 可以引用的 clientSecretName 值範圍。
       allowed:
-        title: Select allowed client secrets
-        label: Allowed client secrets
+        title: 選擇允許的客戶端密文
+        label: 允許的客戶端密文
     helmOp:
-      title: HelmOps Policy
+      title: HelmOps 策略
       defaultServiceAccount:
-        label: Default service account
-        description: This will be applied to HelmOps app bundles with no service account provided.
+        label: 默認 Service Account
+        description: 此設置將應用於未提供 Service Account 的 HelmOps 應用 Bundle。
       defaultSecret:
-        label: Default Helm secret
-        description: This will be applied to HelmOps app bundles with no Helm secret provided.
+        label: 默認 Helm 密文
+        description: 此設置將應用於未提供 Helm 密文的 HelmOps 應用 Bundle。
       restrict:
-        all: Allow all Helm secrets
-        selected: Only allow selected Helm secrets
-        description: Restricts the set of credential secret names HelmOps may reference.
+        all: 允許所有 Helm 密文
+        selected: 僅允許選定的 Helm 密文
+        description: 限制 HelmOps 可以引用的憑證密文名稱範圍。
       allowed:
-        title: Select allowed Helm secrets
-        label: Allowed Helm secrets
-    defaultServiceAccountNotAllowed: The selected default service account must be allowed in the policy.
-    defaultSecretNotAllowed: The selected default secret must be allowed in the policy.
+        title: 選擇允許的 Helm 密文
+        label: 允許的 Helm 密文
+    defaultServiceAccountNotAllowed: 所選的默認 Service Account 必須是策略中允許的 Service Account。
+    defaultSecretNotAllowed: 所選的默認密文必須是策略中允許的密文。
     placeholder:
-      serviceAccount: Select or enter a service account name
-      secret: Select or enter a secret name
-      allowList: Select or enter names
+      serviceAccount: 選擇或輸入 Service Account 名稱
+      secret: 選擇或輸入密文名稱
+      allowList: 選擇或輸入名稱
   configMaps:
     label: Config Maps
   secrets:
@@ -7267,112 +7267,112 @@ storageClass:
 
 tableViews:
   tabs:
-    all: Explorer
-    label: Saved views
-    newView: Add View
-    count: "{name} ({count})"
+    all: 瀏覽器
+    label: 已保存的視圖
+    newView: 添加視圖
+    count: "{name}（{count}）"
   view:
-    label: View
-    unsaved: You have unsaved changes...
-    unsavedShort: Unsaved changes
-    discard: Discard Changes
-    saveChanges: Save Changes
-    saveAsNew: Save Changes to New View
-    groupBy: Group By
-    columnsConfiguration: Columns Configuration
-    columnsDefault: Default
+    label: 視圖
+    unsaved: 你有未保存的更改……
+    unsavedShort: 未保存的更改
+    discard: 放棄更改
+    saveChanges: 保存更改
+    saveAsNew: 將更改保存為新視圖
+    groupBy: 分組依據
+    columnsConfiguration: 列配置
+    columnsDefault: 默認
     columnsCount: "{shown} / {total}"
-    reset: Reset to Default
+    reset: 重置為默認
   tab:
-    menu: View options
-    rename: Rename View
-    duplicate: Duplicate View
-    copySuffix: (copy)
-    delete: Delete View
-    setDefault: Set as Default View
-    newViewName: Untitled
-    deleted: View Deleted
-    deletedMessage: The "{name}" view has been successfully deleted.
-    undo: Undo
+    menu: 視圖選項
+    rename: 重命名視圖
+    duplicate: 複製視圖
+    copySuffix: （副本）
+    delete: 刪除視圖
+    setDefault: 設為默認視圖
+    newViewName: 未命名
+    deleted: 視圖已刪除
+    deletedMessage: 已成功刪除“{name}”視圖。
+    undo: 撤銷
   bulk:
-    selected: "{count} Selected"
-    deleteSelected: Delete Selected
+    selected: "已選擇 {count} 項"
+    deleteSelected: 刪除所選項
   query:
     fields:
-      pinned: Pinned
-      clusterId: Cluster ID
-    placeholder: 'Filter across all columns or only specific ones (e.g. state:error)'
-    clear: Clear filter
-    inUse: "{count} in use"
-    label: Label
-    suggestions: Filter suggestions
+      pinned: 已固定
+      clusterId: 集群 ID
+    placeholder: '在所有列或僅在特定列中過濾（例如 state:error）'
+    clear: 清除過濾條件
+    inUse: "{count} 個使用中"
+    label: 標籤
+    suggestions: 過濾建議
     suggestionsAvailable: |-
       {count, plural,
-      one {1 suggestion available}
-      other {{count} suggestions available}
+      one {有 1 條可用建議}
+      other {有 {count} 條可用建議}
       }
     connective:
-      and: Both must match
-      or: Either can match
-      not: Leave these out
+      and: 兩者都須匹配
+      or: 任一匹配即可
+      not: 排除這些
     # What the toolbar says about a query it cannot read as written. Nothing here stops the query
     # running - the table filters by as much of it as it can.
     problem:
-      emptyValue: '<b>{label}</b> has no value to match.'
-      trailingOperator: 'The query ends with <b>{text}</b>.'
-      leadingJoiner: '<b>{text}</b> has nothing before it to join.'
-      consecutiveOperators: '<b>{text}</b> follows another operator.'
-      danglingNegation: '<b>{text}</b> on its own negates nothing.'
-      unbalancedQuote: 'A quote is opened and never closed.'
-      noTerms: 'There is nothing to filter by.'
+      emptyValue: '<b>{label}</b> 沒有要匹配的值。'
+      trailingOperator: '查詢以 <b>{text}</b> 結尾。'
+      leadingJoiner: '<b>{text}</b> 前面沒有可連接的內容。'
+      consecutiveOperators: '<b>{text}</b> 緊跟在另一個運算符之後。'
+      danglingNegation: '單獨使用 <b>{text}</b> 無法否定任何內容。'
+      unbalancedQuote: '有引號未閉合。'
+      noTerms: '沒有可用於過濾的條件。'
     # Shown when part of a query names something this list cannot be filtered by on the server
     unsupported: |-
       {count, plural,
-      one {<b>{fields}</b> cannot be filtered on this list, so that part of the query was ignored.}
-      other {<b>{fields}</b> cannot be filtered on this list, so those parts of the query were ignored.}
+      one {此列表無法按 <b>{fields}</b> 過濾，因此已忽略查詢中的該部分。}
+      other {此列表無法按 <b>{fields}</b> 過濾，因此已忽略查詢中的這些部分。}
       }
   columns:
-    selectAll: Select All Columns
-    reset: Reset to Default
-    locked: This column cannot be hidden
-    reorder: Drag to reorder
-    moveKeys: '{modifier}+Up Arrow or {modifier}+Down Arrow moves it'
-    moved: '{label} moved to position {position} of {total}'
-    allShown: 'All {count} columns shown'
-    resetDone: Columns reset to the default
+    selectAll: 選擇所有列
+    reset: 重置為默認
+    locked: 此列無法隱藏
+    reorder: 拖動以調整順序
+    moveKeys: '按 {modifier}+上方向鍵或 {modifier}+下方向鍵可移動此列'
+    moved: '{label} 已移至第 {position} 位（共 {total} 位）'
+    allShown: '已顯示全部 {count} 列'
+    resetDone: 已將列重置為默認設置
   group:
-    none: None
-    resetDone: 'Grouping reset to {label}'
-    empty: (none)
+    none: 無
+    resetDone: '分組已重置為{label}'
+    empty: （無）
     # A list's own groupings, as the Group By menu names them
     by:
-      namespace: Namespace
-      project: Project
-      node: Node
-      role: Role
-      cluster: Cluster
-      device: Device
-      pool: Pool
-      workspace: Workspace
-      type: Type
+      namespace: 命名空間
+      project: 項目
+      node: 節點
+      role: 角色
+      cluster: 集群
+      device: 設備
+      pool: 池
+      workspace: 工作空間
+      type: 類型
   export:
-    label: Export All View Contents
-    title: Export All View Contents
-    intro: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    label: 導出視圖全部內容
+    title: 導出視圖全部內容
+    intro: '你即將從 <b>{name}</b> 視圖<b>導出全部 {count, number} 項</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
     # The same, once there is more than a page of rows to fetch and the wait is worth warning about
-    introSlow: 'You are about to <b>export all items ({count, number})</b> from the <b>{name}</b> view - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
+    introSlow: '你即將從 <b>{name}</b> 視圖<b>導出全部 {count, number} 項</b>，根據你的網絡連接情況，這可能需要一段時間。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
     # A view the api could not count: exported all the same, with no number to put to it
-    introUncounted: 'You are about to <b>export all items</b> from the <b>{name}</b> view. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
-    choose: '<b>Please choose the export format</b> to continue...'
+    introUncounted: '你即將從 <b>{name}</b> 視圖<b>導出全部項</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    choose: '<b>請選擇導出格式</b>以繼續……'
     # What the same modal says when it was opened for a selection rather than for a whole view
-    selectionTitle: Export As...
+    selectionTitle: 導出為……
     selectionIntro: |-
-      You are about to <b>export {count, plural,
-      one {1 selected item}
-      other {{count, number} selected items}
-      }</b>. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).
-    selectionIntroSlow: 'You are about to <b>export {count, number} selected items</b> - depending on your connection, this might take a while. Based on the format you choose below (e.g. CSV), the structure of the export will match the current view settings, if any (e.g. selected grouping method and / or columns configuration).'
-    download: Download
+      你即將<b>導出 {count, plural,
+      one {1 個所選項}
+      other {{count, number} 個所選項}
+      }</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。
+    selectionIntroSlow: '你即將<b>導出 {count, number} 個所選項</b>，根據你的網絡連接情況，這可能需要一段時間。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    download: 下載
     format:
       yaml: YAML
       json: JSON
@@ -7380,12 +7380,12 @@ tableViews:
     # What the notification centre shows while the export runs, and what that entry becomes once
     # it is done. The file can take a while, so the export is watched there rather than blocking.
     notification:
-      title: Export in progress
-      message: Exporting all items from the {name} view as {format}...
-      doneTitle: Export completed
-      doneMessage: The {name} view has been exported to {file}.
-      failedTitle: Export failed
-      failedMessage: The {name} view could not be exported.
+      title: 正在導出
+      message: 正在將 {name} 視圖中的所有項導出為 {format}……
+      doneTitle: 導出完成
+      doneMessage: '{name} 視圖已導出到 {file}。'
+      failedTitle: 導出失敗
+      failedMessage: 無法導出 {name} 視圖。
 tableHeaders:
   assuredConcurrencyShares: 確保併發份額
   autoscaler: 自動擴縮器
@@ -7394,7 +7394,7 @@ tableHeaders:
   accessModes: 訪問模式
   address: 地址
   age: 存活時間
-  badge: Badge
+  badge: 徽章
   apiGroup: API 組
   apikey: API 密鑰
   available: 可用
@@ -9293,7 +9293,7 @@ action:
   download: 下載 YAML
   # What the same action is called when the configurable tables feature is on, where it offers the
   # other formats alongside the yaml it has always given
-  downloadExport: Export As...
+  downloadExport: 導出為……
   edit: 編輯配置
   editYaml: 編輯 YAML
   enable: 啟用
@@ -9936,26 +9936,26 @@ component:
         namespace: 命名空間
         project: 項目
         type: 類型
-        ready: Ready
-        restarts: Restarts
-        podRestarts: Pod Restarts
-        endpoints: Endpoints
+        ready: 就緒
+        restarts: 重啟次數
+        podRestarts: Pod 重啟次數
+        endpoints: 端點
         podIp: Pod IP
-        workload: Workload
-        node: Node
-        loadError: Unable to load the details of this resource
-        externalIp: External IP
-        internalIp: Internal IP
-        version: Version
-        os: OS
+        workload: 工作負載
+        node: 節點
+        loadError: 無法加載此資源的詳細信息
+        externalIp: 外部 IP
+        internalIp: 內部 IP
+        version: 版本
+        os: 操作系統
         cpu: CPU
-        memory: Memory
-        pods: Pods
+        memory: 內存
+        pods: Pod
         ariaLabel:
           showDetails: 顯示名為 { name } 的 { resource } 的資源信息
           actionMenu: 資源操作 - { resource }
-          loading: Loading resource information
-          loadingUsage: Loading usage
+          loading: 正在加載資源信息
+          loadingUsage: 正在加載使用情況
   cron:
     expressionEditor:
       label:
