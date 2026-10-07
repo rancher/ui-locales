@@ -2,7 +2,7 @@
 # locale: fr-fr (French - France)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -195,8 +195,8 @@ graph:
 
 locale:
   menu: Sélecteur de langue
-  en-us: Anglais
-  zh-hans: "中文 (简体)"
+  en-us: English
+  zh-hans: 简体中文
   none: (Aucun)
 
 nav:
