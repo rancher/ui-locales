@@ -160,7 +160,7 @@ generic:
         {matched, plural,
           =0 {匹配 {total, number} 个中的 0 个}
           =1 {匹配 {total, number} 个中的 1 个："{sample}"}
-          other {匹配 {total, number} 中的 {matched, number} 个，包括 "{sample}"}
+          other {匹配 {total, number} 个中的 {matched, number} 个，包括 "{sample}"}
         }
   basic: 基础
   ariaLabel:
@@ -252,7 +252,7 @@ nav:
   restoreSnapshot: 还原快照
   rotateCertificates: 轮换证书
   rotateEncryptionKeys: 轮换加密密钥
-  takeSnapshot: 拍摄快照
+  takeSnapshot: 创建快照
   keyComboTooltip: 切换集群并保留当前位置
   group:
     cluster: 集群
@@ -267,7 +267,7 @@ nav:
     advanced: 高级选项
     providers: 提供商
     RKE1Configuration: RKE1 配置
-    admission: 管理
+    admission: 准入
     apps: 应用
     clusterProvisioning: 集群配置
     jwt.authentication: JWT 身份认证
@@ -290,8 +290,8 @@ nav:
     namespace: "{name}"
     orphan: 不在项目内
     project: "项目名称: {name}"
-    system: 系统命名空间
-    user: 用户命名空间
+    system: 仅系统命名空间
+    user: 仅用户命名空间
   apps: 应用
   categories:
     explore: 浏览集群
@@ -4264,7 +4264,7 @@ istio:
       baseEjectionTime:
         label: 基础驱逐时间
         placeholder: 例如：30s
-        help: 最短驱逐时长。主机被驱逐的时间，基于其最短驱逐时长，及其已被驱逐的次数。
+        help: 最短驱逐时长。主机保持被驱逐状态的时长，等于最短驱逐时长与该主机已被驱逐次数的乘积。
       consecutiveErrors:
         label: 连续错误
         placeholder: 例如：5
@@ -4368,10 +4368,10 @@ labels:
   readOnlyWarning: 此键为只读，更改不会被保存
   labels:
     title: 标签
-    description: 键值对，是附加到指定标识属性的对象。
+    description: 附加到对象上、用于指定标识属性的键值对。
     fleetClusterTooltip: 标签更改应用到管理集群并同步到 Fleet 集群。
-    show: 显示系统标签
-    hide: 隐藏系统标签
+    show: 显示系统标签和注释
+    hide: 隐藏系统标签和注释
   annotations:
     title: 注释
     singular: 注释
@@ -4731,7 +4731,7 @@ login:
   serverError:
     authFailedCreds: "登录失败。请检查凭证，或查看你是否有登录权限。"
     authFailed: "登录失败，你可能没有登录权限。"
-    unknown: "登录时发生错误，请联系你的系统管理员。"
+    unknown: "登录时发生未知错误，请联系你的系统管理员。"
     invalidSamlAttrs: "无效的 SAML 属性"
     noResponse: "没有收到响应。"
   error: 登录时发生错误，请重试。
@@ -5796,9 +5796,9 @@ plugins:
     generic: 扩展错误
     primeOnly: 无法在 Rancher Community 中加载 Rancher Prime 扩展
     apiAnnotationMissing: '无法加载扩展。已安装的版本与当前的扩展 API 版本不兼容（扩展缺少注释 catalog.cattle.io/ui-extensions-version，这意味着它与 Rancher 2.10 及以上版本不兼容）'
-    api: 此扩展与 Extensions API 不兼容
-    host: 此扩展与此应用程序不兼容
-    version: 此扩展与此 Rancher 版本不兼容
+    api: 无法加载扩展。已安装的版本与当前的 Extensions API 版本不兼容
+    host: 无法加载扩展。已安装的版本与此应用程序主机不兼容
+    version: 无法加载扩展。已安装的版本与当前的 Rancher 版本不兼容
     kubeVersion: 无法加载扩展。已安装的版本与当前 Rancher 的 Kubernetes 版本不兼容
     load: 加载此扩展的代码时出错
     developerPkg: 此扩展已在内部加载，因此我们不会加载外部版本
@@ -5977,10 +5977,10 @@ prefs:
     light: 浅色
     auto: 自动
     dark: 深色
-    autoDetail: 自动模式使用系统设置，或在{pm}点到次日{am}点间自动切换到深色模式。
+    autoDetail: 自动模式将使用系统设置（如可用），否则在 {pm} 到次日 {am} 之间使用深色模式。
   language: 语言
   landing:
-    label: 登录页面
+    label: 登录后的首页
     vue: 集群浏览器
     ember: 集群管理器
   displaySettings:
@@ -5999,19 +5999,19 @@ prefs:
     value: |-
       {count, number}
   keymap:
-    label: YAML 编辑器
+    label: YAML 编辑器按键映射
     sublime: '默认'
     emacs: 'Emacs'
     vim: 'Vim'
   advFeatures:
     title: 高级功能
     viewInApi: 启用“在 API 中查看”
-    allNamespaces: 显示由 Rancher 管理的 system 命名空间（不要编辑或删除）
+    allNamespaces: 显示由 Rancher 管理的动态命名空间（不应编辑或删除）
     themeShortcut: 使用快捷键（shift+T）来切换深色/浅色主题
     pluginDeveloper: 启用扩展开发者功能
     pluginDeveloperTooltip: 启用对 UI 扩展执行开发者加载的功能
   hideDesc:
-    label: 隐藏所有类型描述
+    label: 隐藏资源列表上方的类型描述横幅
   helm:
     'true': 包括预发布版本
     'false': 只显示正式版本
@@ -6179,7 +6179,7 @@ prometheusRule:
 
 promptForceRemove:
   modalTitle: 是否确认？
-  removeWarning: "删除底层基础设施时出现问题。如果你继续执行此操作，主机<b>{nameToMatch}</b>将从 Rancher 中删除。强烈建议手动删除所有引用的基础设施。"
+  removeWarning: "删除底层基础设施时出现问题。如果你继续执行此操作，主机 <b>{nameToMatch}</b> 将仅从 Rancher 中删除。强烈建议手动删除所有引用的基础设施。"
   forceDelete: 强制删除
   ariaLabel: 将主机名称复制到剪贴板
   confirmName: "在下面输入池名称以确认："
@@ -6289,7 +6289,7 @@ rbac:
   roletemplate:
     newUserDefault:
       no: 否
-      tooltip: 不影响已有角色的绑定。
+      tooltip: 这不会影响该角色已有的任何绑定。
     locked:
       label: 锁定
       yes: '是：不允许新绑定使用这个角色'
@@ -6519,7 +6519,7 @@ resourceTable:
     notInAProject: 不在项目内
     project: "<span>项目：</span> <span>{name}</span>"
     notInAWorkspace: 不在工作空间内
-    workspace: "<span>工作空间</span> {name}"
+    workspace: "<span>工作空间：</span> {name}"
     notInANodePool: "不在节点池中"
     nodePool: "<span>节点池：</span> {name}"
     node: "<span>节点：</span> {name}"
@@ -7239,7 +7239,7 @@ tableHeaders:
   commit: Commit
   condition: 状态
   constraint: 约束
-  completions: 完成 Job 历史数
+  completions: 完成数
   count: 数量
   createdAt: 创建于
   customResources: 资源
@@ -7386,7 +7386,7 @@ tableHeaders:
   routes: 路由
   routeConnectivity: 路由连接
   readyToUse: 可用
-  scale: 比例
+  scale: 扩缩
   scope: 范围
   selector: 选择器
   secrets: 密文
@@ -7398,7 +7398,7 @@ tableHeaders:
   serviceAccounts: Service Account
   secret-Name: 密文名称
   simpleName: 名称
-  simpleScale: 比例
+  simpleScale: 扩缩
   simpleType: 类型
   size: 大小
   started: 已开始
@@ -7409,7 +7409,7 @@ tableHeaders:
   storage: 存储大小
   storageClass: 存储类
   source: 源
-  subject: 主题
+  subject: 主体
   subType: 类型
   success: 成功
   summary: 概述
@@ -7429,8 +7429,8 @@ tableHeaders:
   users: 用户
   userDisplayName: 显示名称
   userId: ID
-  userDeletedIn: 删除于
-  userDisabledIn: 禁用于
+  userDeletedIn: 删除倒计时
+  userDisabledIn: 禁用倒计时
   userLastLogin: 上次登录
   userState: 已启用
   userStatus: 状态
@@ -7609,7 +7609,7 @@ validation:
     requiredInt: '"{key}" 必须是整数'
     isPositive: '"{key}" 必须是正数'
     isOctal: '"{key}" 不能有前导零'
-    between: '"{key}" 的长度必须在 {min} 和 {max}之间'
+    between: '"{key}" 必须在 {min} 和 {max} 之间'
     exactly: '"{key}" 需要设为 {val}'
     max: '"{key}" 最多可以是 {val}'
     min: '"{key}" 至少需要是 {val}'
@@ -7659,13 +7659,13 @@ validation:
         requiredInt: '端口规则 [{position}] - 如果包含 Node Port，Node Port 必须是整数。'
         between: '端口规则 [{position}] - Node Port 的取值范围是：1-65535'
       port:
-        required: '端口规则 [{position}] - 端口是必填项，'
+        required: '端口规则 [{position}] - 端口是必填项。'
         requiredInt: '端口规则 [{position}] - 如果包含端口，端口必须是整数。'
         between: '端口规则 [{position}] - 端口的取值范围是：1-65535'
       targetPort:
         between: '端口规则 [{position}] - 目标端口的取值范围是：1-65535'
         iana: '端口规则 [{position}] - 目标端口必须是 IANA 服务名称或整数'
-        ianaAt: '端口谷子额 [{position}] - 目标端口 '
+        ianaAt: '端口规则 [{position}] - 目标端口 '
         required: '端口规则[{position}] - 目标端口是必填项。'
   setting:
     serverUrl:
@@ -7736,7 +7736,7 @@ wm:
         =1 {小时}
         other {小时}
         }
-      label: 显示最后一个
+      label: 显示最近
       lines: "{value, number} 行"
       minutes: |-
         {value, number} {value, plural,
@@ -9130,7 +9130,7 @@ action:
   openShell: 执行命令行
   runNow: 立即运行
   suspend: 暂停
-  resume: 重新开始
+  resume: 恢复
   showConfiguration: 显示配置
 
 unit:
@@ -9232,7 +9232,7 @@ advancedSettings:
     'auth-user-info-resync-cron': '重新同步验证提供程序组成员的默认 cron 调度。'
     'cluster-template-enforcement': '非管理员只能通过预先批准的 RKE 模板启动集群。'
     'auth-user-session-idle-ttl-minutes': '用户认证会话的自定义空闲 TTL（分钟）。这是浏览器中没有用户活动时会话可以保持活动的最长时间。该值应小于 "auth-user-session-ttl-minutes"。如果 "auth-user-session-idle-ttl-minutes" 大于或等于 "auth-user-session-ttl-minutes"，则视为禁用会话空闲功能。'
-    'auth-user-session-ttl-minutes': '用户认证会话的自定义 TTL（单位：分钟）。'
+    'auth-user-session-ttl-minutes': '用户认证会话的自定义 TTL（单位：分钟）。这是会话可保持活动的最长时间，与用户在浏览器中的活动无关。该值应大于 "auth-user-session-idle-ttl-minutes"。'
     'auth-token-max-ttl-minutes': '所有身份认证 Token 的最大 TTL（单位：分钟）。如果设置为 0，则 Token 永不过期。'
     'kubeconfig-generate-token': '请求 kubeconfig 时自动为用户生成 Token。'
     'kubeconfig-default-token-ttl-minutes': '应用于所有 kubeconfig Token 的 TTL（单位：分钟）。如果设置为 0，则 Token 永不过期。'
