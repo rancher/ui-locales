@@ -2,10 +2,12 @@
 /**
  * Works out whether @rancher/shell needs bumping and, with --write, makes the edits.
  *
- * The target is the newest stable @rancher/shell release in the major line package.json already
- * uses. Release candidates are skipped, and so is the next major: moving to it means moving
- * catalog.cattle.io/ui-extensions-version in pkg/locales/package.json too, which is a migration
- * to do by hand rather than a bump.
+ * The target is the newest @rancher/shell release in the major line package.json already uses,
+ * release candidates (x.y.z-rc.N) included, so the extension is built against the shell that is
+ * about to ship rather than the one that already has. A stable release outranks its own rcs, so
+ * 3.0.14 replaces 3.0.14-rc.3 when it comes out. The next major is skipped: moving to it means
+ * moving catalog.cattle.io/ui-extensions-version in pkg/locales/package.json too, which is a
+ * migration to do by hand rather than a bump.
  *
  * The reusable rancher/dashboard workflows are pinned by SHA with the matching creators-pkg tag
  * beside it (see build-extension-charts.yml). They follow the newest creators-pkg tag that is not
@@ -61,6 +63,7 @@ const compare = (a, b) => {
   return x.pre.localeCompare(y.pre, 'en', { numeric: true });
 };
 const isStable = (v) => /^\d+\.\d+\.\d+$/.test(v);
+const isCandidate = (v) => isStable(v) || /^\d+\.\d+\.\d+-rc\.\d+$/.test(v);
 
 function fail(msg) {
   console.error(`::error::${ msg }`);
@@ -129,18 +132,18 @@ const [major] = parse(declaredVersion).core;
 
 const published = JSON.parse(execFileSync('npm', ['view', SHELL, 'versions', 'time', '--json'], { encoding: 'utf8' }));
 const target = published.versions
-  .filter((v) => isStable(v) && parse(v).core[0] === major)
+  .filter((v) => isCandidate(v) && parse(v).core[0] === major)
   .sort(compare)
   .at(-1);
 
 if (!target) {
-  fail(`no stable ${ SHELL } ${ major }.x release on npm`);
+  fail(`no ${ SHELL } ${ major }.x release on npm`);
 }
 
 const newRange = `${ prefix }${ target }`;
 // Only ever forwards, and only when what actually installs changes: a lockfile already ahead of
-// the newest stable (an rc installed by hand) is left alone, and so is a range whose floor is
-// behind a lockfile that is already on the newest.
+// the newest release (another prerelease installed by hand) is left alone, and so is a range
+// whose floor is behind a lockfile that is already on the newest.
 const changed = compare(target, current) > 0;
 
 // The workflow pins, as they are now and as they should be.

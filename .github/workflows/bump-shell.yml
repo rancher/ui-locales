@@ -1,8 +1,9 @@
-# Keeps @rancher/shell on its newest stable release.
+# Keeps @rancher/shell on its newest release, release candidates included.
 #
-# Once a day this asks npm for the newest stable @rancher/shell in the major line package.json
-# already uses (see scripts/bump-shell.mjs for why not rcs or the next major), and when it is ahead
-# of yarn.lock opens a pull request that bumps package.json and regenerates yarn.lock.
+# Once a day this asks npm for the newest @rancher/shell in the major line package.json already
+# uses - stable or rc, whichever is newer; see scripts/bump-shell.mjs for why not the next major -
+# and when it is ahead of yarn.lock opens a pull request that bumps package.json and regenerates
+# yarn.lock.
 #
 # There is only ever one such pull request open. Each lives on its own bump-shell/<version>
 # branch, and when a newer release replaces it the older one is closed, pointing at the new one,
@@ -167,7 +168,7 @@ jobs:
               fi
             fi
           else
-            echo "${BASE} already has @rancher/shell ${CURRENT}, the newest stable release"
+            echo "${BASE} already has @rancher/shell ${CURRENT}, the newest release"
           fi
 
           # Everything else this workflow opened is out of date now.
@@ -176,7 +177,7 @@ jobs:
             if [[ -n "$number" ]]; then
               reason="Superseded by #${number}, which bumps @rancher/shell to ${TARGET}."
             else
-              reason="${BASE} already has @rancher/shell ${CURRENT}, the newest stable release."
+              reason="${BASE} already has @rancher/shell ${CURRENT}, the newest release."
             fi
             gh pr close "$stale" --repo "$GITHUB_REPOSITORY" --comment "$reason" --delete-branch
             echo "Closed #${stale}: ${reason}"
