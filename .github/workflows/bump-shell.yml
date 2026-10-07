@@ -106,16 +106,19 @@ jobs:
           prefix='bump-shell/'
           branch="${prefix}${TARGET}"
 
+          # Only branches in this repository: a pull request from a fork that happens to use the same
+          # branch name is somebody else's.
           open_prs=$(gh pr list --repo "$GITHUB_REPOSITORY" --base "$BASE" --state open --limit 100 \
-            --json number,headRefName,mergeable \
-            --jq "[.[] | select(.headRefName | startswith(\"${prefix}\"))]")
+            --json number,headRefName,mergeable,isCrossRepository \
+            --jq "[.[] | select((.headRefName | startswith(\"${prefix}\")) and (.isCrossRepository | not))]")
 
           number=''
           if [[ "$CHANGED" == 'true' ]]; then
             # Somebody closed the pull request for this very version without merging it: that is a
             # decision, not something to reopen every morning. The next release starts over.
             declined=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state closed \
-              --json number,mergedAt --jq '[.[] | select(.mergedAt == null)][0].number // empty')
+              --json number,mergedAt,isCrossRepository \
+              --jq '[.[] | select(.mergedAt == null and (.isCrossRepository | not))][0].number // empty')
             if [[ -n "$declined" ]] && ! jq -e --arg b "$branch" 'any(.headRefName == $b)' <<< "$open_prs" > /dev/null; then
               echo "#${declined} for @rancher/shell ${TARGET} was closed without merging - not reopening it"
               exit 0

@@ -38,11 +38,27 @@ const args = new Set(process.argv.slice(2));
 const write = args.has('--write');
 const pinWorkflows = args.has('--pin-workflows');
 
-const parse = (v) => v.split('.').map(Number);
+const VERSION = /^(\d+)\.(\d+)\.(\d+)(?:-([\w.-]+))?$/;
+
+const parse = (v) => {
+  const m = v.match(VERSION);
+
+  return m ? { core: m.slice(1, 4).map(Number), pre: m[4] } : null;
+};
+
+/** Semver order, including prereleases: 3.0.12-rc.1 < 3.0.12 < 3.0.13-rc.2 < 3.0.13. */
 const compare = (a, b) => {
   const [x, y] = [parse(a), parse(b)];
+  const core = x.core[0] - y.core[0] || x.core[1] - y.core[1] || x.core[2] - y.core[2];
 
-  return x[0] - y[0] || x[1] - y[1] || x[2] - y[2];
+  if (core || x.pre === y.pre) {
+    return core;
+  }
+  if (!x.pre || !y.pre) {
+    return x.pre ? -1 : 1;
+  }
+
+  return x.pre.localeCompare(y.pre, 'en', { numeric: true });
 };
 const isStable = (v) => /^\d+\.\d+\.\d+$/.test(v);
 
@@ -78,10 +94,10 @@ function lockedVersion() {
 /** The newest creators-pkg tag in the same major that is not ahead of `shell`, with its commit. */
 async function creatorsPin(shell) {
   const refs = await github(`repos/${ DASHBOARD }/git/matching-refs/tags/creators-pkg-v`);
-  const [major] = parse(shell);
+  const [major] = parse(shell).core;
   const versions = refs
     .map((r) => r.ref.replace('refs/tags/creators-pkg-v', ''))
-    .filter((v) => isStable(v) && parse(v)[0] === major && compare(v, shell) <= 0)
+    .filter((v) => isStable(v) && parse(v).core[0] === major && compare(v, shell) <= 0)
     .sort(compare);
 
   if (!versions.length) {
@@ -96,7 +112,7 @@ async function creatorsPin(shell) {
 
 const manifest = fs.readFileSync(PACKAGE_JSON, 'utf8');
 const range = JSON.parse(manifest).dependencies?.[SHELL];
-const declared = range?.match(/^([\^~]?)(\d+\.\d+\.\d+)$/);
+const declared = range?.match(/^([\^~]?)(\d+\.\d+\.\d+(?:-[\w.-]+)?)$/);
 
 if (!declared) {
   fail(`package.json: expected ${ SHELL } as a plain version or ^/~ range, found "${ range }"`);
@@ -104,11 +120,16 @@ if (!declared) {
 
 const [, prefix, declaredVersion] = declared;
 const current = lockedVersion() || declaredVersion;
-const [major] = parse(declaredVersion);
+
+if (!parse(current)) {
+  fail(`yarn.lock: cannot read the ${ SHELL } version "${ current }"`);
+}
+
+const [major] = parse(declaredVersion).core;
 
 const published = JSON.parse(execFileSync('npm', ['view', SHELL, 'versions', 'time', '--json'], { encoding: 'utf8' }));
 const target = published.versions
-  .filter((v) => isStable(v) && parse(v)[0] === major)
+  .filter((v) => isStable(v) && parse(v).core[0] === major)
   .sort(compare)
   .at(-1);
 
@@ -117,9 +138,10 @@ if (!target) {
 }
 
 const newRange = `${ prefix }${ target }`;
-// Only ever forwards: a lockfile already ahead of the newest stable (an rc installed by hand) is
-// left alone.
-const changed = compare(target, current) > 0 || (compare(target, current) === 0 && range !== newRange);
+// Only ever forwards, and only when what actually installs changes: a lockfile already ahead of
+// the newest stable (an rc installed by hand) is left alone, and so is a range whose floor is
+// behind a lockfile that is already on the newest.
+const changed = compare(target, current) > 0;
 
 // The workflow pins, as they are now and as they should be.
 const workflowFiles = fs.readdirSync(WORKFLOWS_DIR).filter((f) => /\.ya?ml$/.test(f));
