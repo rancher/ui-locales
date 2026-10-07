@@ -10,6 +10,7 @@ export default function(plugin: IPlugin): void {
   plugin.metadata = require('./package.json');
 
   // Add new locales
+  plugin.addLocale('zh-hans', '简体中文');
   plugin.addLocale('zh-hant', '繁體中文');
   plugin.addLocale('es-es', 'Español');
   plugin.addLocale('fr-fr', 'Français');
