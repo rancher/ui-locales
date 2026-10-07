@@ -2,7 +2,7 @@
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
 # synced-against-en-us-commit: b1cb3ff (2026-09-29)
-# last-updated: 2026-10-01
+# last-updated: 2026-10-07
 # ---
 ##############################
 # Special stuff
@@ -158,9 +158,9 @@ generic:
     matchingResources:
       matchesSome: |-
         {matched, plural,
-          =0 {匹配 {total, number} 箇中的 0 個}
-          =1 {匹配 {total, number} 箇中的 1 個："{sample}"}
-          other {匹配 {total, number} 中的 {matched, number} 個，包括 "{sample}"}
+          =0 {匹配 {total, number} 個中的 0 個}
+          =1 {匹配 {total, number} 個中的 1 個："{sample}"}
+          other {匹配 {total, number} 個中的 {matched, number} 個，包括 "{sample}"}
         }
   basic: 基本
   ariaLabel:
@@ -252,7 +252,7 @@ nav:
   restoreSnapshot: 還原快照
   rotateCertificates: 輪換證書
   rotateEncryptionKeys: 輪換加密密鑰
-  takeSnapshot: 拍攝快照
+  takeSnapshot: 創建快照
   keyComboTooltip: 切換集群並保持當前位置
   group:
     cluster: 集群
@@ -267,7 +267,7 @@ nav:
     advanced: 高級選項
     providers: 提供商
     RKE1Configuration: RKE1 配置
-    admission: 管理
+    admission: 准入
     apps: 應用
     clusterProvisioning: 集群配置
     jwt.authentication: JWT 認證
@@ -290,8 +290,8 @@ nav:
     namespace: "{name}"
     orphan: 不在項目內
     project: "項目名稱: {name}"
-    system: 系統命名空間
-    user: 用戶命名空間
+    system: 僅系統命名空間
+    user: 僅用戶命名空間
   apps: 應用
   categories:
     explore: 瀏覽集群
@@ -785,7 +785,7 @@ authConfig:
     serverConnectionTimeout: 服務器連接超時
     serviceAccountDN: Service Account 標識名稱
     serviceAccountPassword: Service Account 密碼
-    serviceAccountInfo: '{vendor} 需要一個對所有能夠登錄的域名都有隻讀訪問權的 Service Account，以在用戶使用 API 密鑰進行請求時，確定用戶屬於什麼組。'
+    serviceAccountInfo: '{vendor} 需要一個對所有能夠登錄的域名都有只讀訪問權的 Service Account，以在用戶使用 API 密鑰進行請求時，確定用戶屬於什麼組。'
     starttls:
       label: 啟用 TLS
       tip: 通過在連接過程中使用 TLS 封裝來升級非加密連接。不能與 TLS 結合使用。
@@ -1010,7 +1010,7 @@ asyncButton:
     success: 已複製
   create:
     action: 創建
-    success: 創建時間
+    success: 已創建
     waiting: 正在創建&hellip;
   default:
     action: 操作
@@ -1023,8 +1023,8 @@ asyncButton:
     waiting: 正在刪除&hellip;
   disable:
     action: 禁用
-    success: 禁用
-    waiting: 正在關閉&hellip;
+    success: 已禁用
+    waiting: 正在禁用&hellip;
   activate:
     action:  激活
     waiting: 正在激活&hellip;
@@ -1067,7 +1067,7 @@ asyncButton:
     waiting: 正在保存&hellip;
   enable:
     action: 啟用
-    success: 啟用
+    success: 已啟用
     waiting: 正在啟用&hellip;
   finish:
     action: 完成
@@ -1096,13 +1096,13 @@ asyncButton:
     description: 由於編排已暫停，新的修改不會部署。要部署新修改，請恢復編排。
   refresh:
     action: ''
-    actionIcon: 刷新
+    actionIcon: refresh
     error: ''
-    errorIcon: 錯誤
+    errorIcon: error
     success: ''
-    successIcon: 勾選
+    successIcon: checkmark
     waiting: ''
-    waitingIcon: 刷新
+    waitingIcon: refresh
     waitingAnnouncement: 正在刷新&hellip;
     successAnnouncement: 已刷新
     errorAnnouncement: 刷新失敗
@@ -1165,8 +1165,8 @@ asyncButton:
     waiting: 正在更新&hellip;
   upgrade:
     action: 升級
-    success: 正在升級
-    waiting: 正在啟動&hellip;
+    success: 已升級
+    waiting: 正在升級&hellip;
   generate:
     action: 生成
     success: 已生成
@@ -1950,7 +1950,7 @@ cluster:
         title: 卷
         volume: 卷
         imageVolume: 鏡像卷
-        addVolume: 添加捲
+        addVolume: 添加卷
         addVMImage: 添加虛擬機鏡像
         storageClass: 存儲類
       reservedMemory: 預留內存
@@ -1992,7 +1992,7 @@ cluster:
     registration:
       step1: "1. 前往目標 [[Harvester]] UI 的<code>高級設置</code>頁面。"
       step2: '2. 找到<code>cluster-registration-url</code>設置項，並點擊<code><i class="icon icon-actions" ></i></code> -> <code>編輯設置</code>按鈕。'
-      step3: "3. 輸入以下注冊 URL，並點擊<code>保存</code>。"
+      step3: "3. 輸入以下註冊 URL，並點擊<code>保存</code>。"
       step4: "註冊 URL"
     machinePool:
       cpu:
@@ -2235,7 +2235,7 @@ cluster:
         folder: 文件夾
         host:
           label: 主機
-          note: 用於創建虛擬機的主機（如果是獨立的 ESXi 或是帶有 DRS 的集群，請留空)
+          note: 用於創建虛擬機的主機（如果是獨立的 ESXi 或是帶有 DRS 的集群，請留空）
         gracefulShutdownTimeout:
           label: 優雅關閉超時
           note: 在基礎設施中強制刪除 VM 之前等待的時間（秒）。零表示禁用優雅關閉。
@@ -2757,7 +2757,7 @@ cluster:
         inputLabel: 排空超時
     truncateHostnames: 將主機名截斷為 15 個字符來兼容 NetBIOS。
     address:
-      tooltip: 創建集群后無法更改集群網絡值。
+      tooltip: 創建集群後無法更改集群網絡值。
       header: 尋址
       clusterCidr:
         label: 集群 CIDR
@@ -4267,7 +4267,7 @@ istio:
       baseEjectionTime:
         label: 基礎驅逐時間
         placeholder: 例如：30s
-        help: 最短驅逐時長。主機被驅逐的時間，基於其最短驅逐時長，及其已被驅逐的次數。
+        help: 最短驅逐時長。主機保持被驅逐狀態的時長，等於最短驅逐時長與該主機已被驅逐次數的乘積。
       consecutiveErrors:
         label: 連續錯誤
         placeholder: 例如：5
@@ -4371,10 +4371,10 @@ labels:
   readOnlyWarning: 此鍵為只讀，更改將不會被保存
   labels:
     title: 標籤
-    description: 鍵值對，是附加到指定標識屬性的對象。
+    description: 附加到對象上、用於指定標識屬性的鍵值對。
     fleetClusterTooltip: 標籤更改應用到管理集群並同步到 Fleet 集群。
-    show: 顯示系統標籤
-    hide: 隱藏系統標籤
+    show: 顯示系統標籤和註釋
+    hide: 隱藏系統標籤和註釋
   annotations:
     title: 註釋
     singular: 註解
@@ -4734,7 +4734,7 @@ login:
   serverError:
     authFailedCreds: "登錄失敗。請檢查憑證，或查看你是否有登錄權限。"
     authFailed: "登錄失敗，你可能沒有登錄權限。"
-    unknown: "登錄時發生錯誤，請聯繫你的系統管理員。"
+    unknown: "登錄時發生未知錯誤，請聯繫你的系統管理員。"
     invalidSamlAttrs: "無效的 SAML 屬性"
     noResponse: "沒有收到響應。"
   error: 登錄時發生錯誤，請重試。
@@ -5449,7 +5449,7 @@ persistentVolume:
       label: 卷句柄
       placeholder: 例如：pvc-xxxx
     volumeAttributes:
-      add: 添加捲屬性
+      add: 添加卷屬性
     nodePublishSecretName:
       label: 節點發布密文名稱
       placeholder: 例如：secret
@@ -5796,9 +5796,9 @@ plugins:
     generic: 擴展錯誤
     primeOnly: 無法在 Rancher Community 中加載 Rancher Prime 擴展
     apiAnnotationMissing: '無法加載擴展。已安裝的版本與當前的擴展 API 版本不兼容（擴展缺少註釋 catalog.cattle.io/ui-extensions-version，這意味著與 Rancher 2.10 及以後版本不兼容）'
-    api: 此擴展與 Extensions API 不兼容
-    host: 此擴展與此應用程序不兼容
-    version: 此擴展與此 Rancher 版本不兼容
+    api: 無法加載擴展。已安裝的版本與當前的 Extensions API 版本不兼容
+    host: 無法加載擴展。已安裝的版本與此應用程序主機不兼容
+    version: 無法加載擴展。已安裝的版本與當前的 Rancher 版本不兼容
     kubeVersion: 無法加載擴展。已安裝的版本與當前的 Rancher kubernetes 版本不兼容
     load: 加載此擴展的代碼時出錯
     developerPkg: 此擴展已在內部加載，因此我們不會加載外部版本
@@ -5977,10 +5977,10 @@ prefs:
     light: 淺色
     auto: 自動
     dark: 深色
-    autoDetail: 自動模式使用系統設置，或在{pm}點到次日{am}點間自動切換到深色模式。
+    autoDetail: 自動模式將使用系統設置（如可用），否則在 {pm} 到次日 {am} 之間使用深色模式。
   language: 語言
   landing:
-    label: 登錄頁面
+    label: 登錄後的首頁
     vue: 集群瀏覽器
     ember: 集群管理器
   displaySettings:
@@ -5999,19 +5999,19 @@ prefs:
     value: |-
       {count, number}
   keymap:
-    label: YAML 編輯器
+    label: YAML 編輯器按鍵映射
     sublime: '默認'
     emacs: 'Emacs'
     vim: 'Vim'
   advFeatures:
     title: 高級功能
     viewInApi: 啟用“在 API 中查看”
-    allNamespaces: 顯示由 Rancher 管理的 system 命名空間（不要編輯或刪除）
+    allNamespaces: 顯示由 Rancher 管理的動態命名空間（不應編輯或刪除）
     themeShortcut: 使用快捷鍵（shift+T）來切換深色/淺色主題
     pluginDeveloper: 啟用擴展開發者功能
     pluginDeveloperTooltip: 啟用執行 UI 擴展開發者加載的能力
   hideDesc:
-    label: 隱藏所有類型描述
+    label: 隱藏資源列表上方的類型描述橫幅
   helm:
     'true': 包括預發佈版本
     'false': 只顯示正式版本
@@ -6179,7 +6179,7 @@ prometheusRule:
 
 promptForceRemove:
   modalTitle: 是否確認？
-  removeWarning: "刪除底層基礎設施時出現問題。如果你繼續執行此操作，主機<b>{nameToMatch}</b>將從 Rancher 中刪除。強烈建議手動刪除所有引用的基礎設施。"
+  removeWarning: "刪除底層基礎設施時出現問題。如果你繼續執行此操作，主機 <b>{nameToMatch}</b> 將僅從 Rancher 中刪除。強烈建議手動刪除所有引用的基礎設施。"
   forceDelete: 強制刪除
   ariaLabel: 將機器名稱複製到剪貼簿
   confirmName: "在下面輸入池名稱以確認："
@@ -6289,7 +6289,7 @@ rbac:
   roletemplate:
     newUserDefault:
       no: 否
-      tooltip: 不影響已有角色的綁定。
+      tooltip: 這不會影響該角色已有的任何綁定。
     locked:
       label: 鎖定
       yes: '是：不允許新綁定使用這個角色'
@@ -6519,7 +6519,7 @@ resourceTable:
     notInAProject: 不在項目內
     project: "<span>項目：</span> <span>{name}</span>"
     notInAWorkspace: 不在工作空間內
-    workspace: "<span>工作空間</span> {name}"
+    workspace: "<span>工作空間：</span> {name}"
     notInANodePool: "不在節點池中"
     nodePool: "<span>節點池：</span> {name}"
     node: "<span>節點：</span> {name}"
@@ -6883,8 +6883,8 @@ sortableTable:
     generic: |-
       {pages, plural,
       =0 {無項目}
-      =1 {{count} {count, plural, =1 {Item} other {Items}}}
-      other {{from} - {to} of {count} Items}}
+      =1 {{count} {count, plural, =1 {個項目} other {個項目}}}
+      other {{count} 個項目中的 {from} - {to} 個}}
     resource: |-
       {pages, plural,
       =0 {無 {pluralLabel}}
@@ -7239,7 +7239,7 @@ tableHeaders:
   commit: 提交
   condition: 狀態
   constraint: 約束
-  completions: 完成 Job 歷史數
+  completions: 完成數
   count: 數量
   createdAt: 創建於
   customResources: 資源
@@ -7386,7 +7386,7 @@ tableHeaders:
   routes: 路由
   routeConnectivity: 路由連接
   readyToUse: 可用
-  scale: 比例
+  scale: 擴縮
   scope: 範圍
   selector: 選擇器
   secrets: 密文
@@ -7398,7 +7398,7 @@ tableHeaders:
   serviceAccounts: Service Account
   secret-Name: 密文名稱
   simpleName: 名稱
-  simpleScale: 比例
+  simpleScale: 擴縮
   simpleType: 類型
   size: 大小
   started: 已開始
@@ -7409,7 +7409,7 @@ tableHeaders:
   storage: 存儲大小
   storageClass: 存儲類
   source: 源
-  subject: 主題
+  subject: 主體
   subType: 類型
   success: 成功
   summary: 概述
@@ -7429,8 +7429,8 @@ tableHeaders:
   users: 用戶
   userDisplayName: 顯示名稱
   userId: ID
-  userDeletedIn: 刪除於
-  userDisabledIn: 禁用於
+  userDeletedIn: 刪除倒計時
+  userDisabledIn: 禁用倒計時
   userLastLogin: 上次登錄
   userState: 已啟用
   userStatus: 狀態
@@ -7609,7 +7609,7 @@ validation:
     requiredInt: '"{key}" 必須是整數'
     isPositive: '"{key}" 必須是正數'
     isOctal: '"{key}" 不能有前導零'
-    between: '"{key}" 的長度必須在 {min} 和 {max}之間'
+    between: '"{key}" 必須在 {min} 和 {max} 之間'
     exactly: '"{key}" 需要設為 {val}'
     max: '"{key}" 最多可以是 {val}'
     min: '"{key}" 至少需要是 {val}'
@@ -7659,13 +7659,13 @@ validation:
         requiredInt: '端口規則 [{position}] - 如果包含 Node Port，Node Port 必須是整數。'
         between: '端口規則 [{position}] - Node Port 的取值範圍是：1-65535'
       port:
-        required: '端口規則 [{position}] - 端口是必填項，'
+        required: '端口規則 [{position}] - 端口是必填項。'
         requiredInt: '端口規則 [{position}] - 如果包含端口，端口必須是整數。'
         between: '端口規則 [{position}] - 端口的取值範圍是：1-65535'
       targetPort:
         between: '端口規則 [{position}] - 目標端口的取值範圍是：1-65535'
         iana: '端口規則 [{position}] - 目標端口必須是 IANA 服務名稱或整數'
-        ianaAt: '端口穀子額 [{position}] - 目標端口 '
+        ianaAt: '端口規則 [{position}] - 目標端口 '
         required: '端口規則[{position}] - 目標端口是必填項。'
   setting:
     serverUrl:
@@ -7736,7 +7736,7 @@ wm:
         =1 {小時}
         other {小時}
         }
-      label: 顯示最後一個
+      label: 顯示最近
       lines: "{value, number} 行"
       minutes: |-
         {value, number} {value, plural,
@@ -8215,9 +8215,9 @@ workload:
       emptyDir: 空目錄
     addClaim: 添加聲明
     addMount: 添加掛載
-    addVolume: 添加捲
+    addVolume: 添加卷
     selectVolume: 選擇卷
-    noVolumes: 在 Pod 選項卡中添加捲後，卷將顯示在此處
+    noVolumes: 在 Pod 選項卡中添加卷後，卷將顯示在此處
     certificate: 證書
     csi:
       diskName: 磁盤名稱
@@ -8425,9 +8425,9 @@ typeDescription:
   compliance.cattle.io.clusterscan: 創建掃描以基於已定義的配置文件在集群上觸發合規掃描。掃描完成後會創建一份報告。
   compliance.cattle.io.clusterscanreport: 報告是集群合規掃描的結果。
   management.cattle.io.feature: 功能開關用於打開或關閉某些 {vendor} 功能。默認關閉的功能是實驗功能。
-  cluster.x-k8s.io.machine: 一個 Machine 封裝一個 Kubernetes 節點的配置。你可以使用此視圖來查看更新集群后的情況。
-  cluster.x-k8s.io.machinedeployment: Machine Deployment 通過使用模板，在一組 Machine Set（與 Deployment 類似）上編排部署。你可以使用此視圖來查看更新集群后的情況。
-  cluster.x-k8s.io.machineset: Machine Set 確保所需數量的 Machine 始終啟動並運行（與 ReplicaSet 類似）。你可以使用此視圖來查看更新集群后的情況。
+  cluster.x-k8s.io.machine: 一個 Machine 封裝一個 Kubernetes 節點的配置。你可以使用此視圖來查看更新集群後的情況。
+  cluster.x-k8s.io.machinedeployment: Machine Deployment 通過使用模板，在一組 Machine Set（與 Deployment 類似）上編排部署。你可以使用此視圖來查看更新集群後的情況。
+  cluster.x-k8s.io.machineset: Machine Set 確保所需數量的 Machine 始終啟動並運行（與 ReplicaSet 類似）。你可以使用此視圖來查看更新集群後的情況。
   resources.cattle.io.backup: 創建備份是為了基於 ResourceSet 執行一次性備份或安排重複性備份。
   resources.cattle.io.restore: 創建還原用於根據備份文件觸發對集群的還原。
   resources.cattle.io.resourceset: Resource Set 定義要在備份中存儲哪些 CRD 和資源。
@@ -9130,7 +9130,7 @@ action:
   openShell: 執行命令行
   runNow: 立即運行
   suspend: 暫停
-  resume: 重新開始
+  resume: 恢復
   showConfiguration: 顯示配置
 
 unit:
@@ -9232,7 +9232,7 @@ advancedSettings:
     'auth-user-info-resync-cron': '重新同步驗證提供程序組成員的默認 cron 調度。'
     'cluster-template-enforcement': '非管理員只能通過預先批准的 RKE 模板啟動集群。'
     'auth-user-session-idle-ttl-minutes': '用戶認證會話的自定義空閒 TTL（以分鐘為單位）。這是瀏覽器中沒有用戶活動時會話可以保持存活的最長持續時間。此值應小於 "auth-user-session-ttl-minutes"。如果 "auth-user-session-idle-ttl-minutes" 大於或等於 "auth-user-session-ttl-minutes"，則認為會話空閒功能被禁用。'
-    'auth-user-session-ttl-minutes': '用戶認證會話的自定義 TTL（單位：分鐘）。'
+    'auth-user-session-ttl-minutes': '用戶認證會話的自定義 TTL（單位：分鐘）。這是會話可保持活動的最長時間，與用戶在瀏覽器中的活動無關。該值應大於 "auth-user-session-idle-ttl-minutes"。'
     'auth-token-max-ttl-minutes': '所有身份認證 Token 的最大 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
     'kubeconfig-generate-token': '請求 kubeconfig 時自動為用戶生成 Token。'
     'kubeconfig-default-token-ttl-minutes': '應用於所有 kubeconfig Token 的 TTL（單位：分鐘）。如果設置為 0，則 Token 永不過期。'
