@@ -1282,7 +1282,7 @@ catalog:
       label: Registro de Container
       tooltip: As imagens de container são obtidas do Registro de Container do Cluster ou, em caso de falha, da Configuração do Registro de Container do Sistema. Para alterar esse comportamento padrão, insira ou atualize o registro aqui
       custom:
-        checkBoxLabel: Registro de Container para Imagens de Container do Sistema Rancher
+        checkBoxLabel: Substituir o Registro de Container Padrão
         inputLabel: Registro de Container
         placeholder: Domínio e portas do registro, ex. registry.io:5000
       pullSecret:
@@ -2328,7 +2328,7 @@ cluster:
       httpProtocolIpv6: 
         label: Habilitar endpoint IPv6 para o serviço de metadados de instância
       dualStackValidationWarning: Quando um pool habilita subnet/vpc dual-stack, todos os pools devem usar a mesma configuração de rede.
-      ipv6ValidationWarning: 'Quando um pool usa uma sub-rede/vpc IPv6 ou dual-stack, todos os pools devem usar uma sub-rede/vpc IPv6 ou dual-stack.'
+      ipv6ValidationWarning: Quando um pool habilita uma sub-rede/vpc IPv6, todos os pools devem usar a mesma configuração de rede.
     pnap:
       serverLocation:
         label: Localização
@@ -3162,10 +3162,10 @@ fleet:
     title: Configurações de Entrega Contínua
     info: O Rancher reiniciará o agente e o controlador Fleet ao alterar as configurações.
     apply: Aplicar alterações
-    noPermissions: Você não tem permissão para modificar as Configurações do Fleet
+    noPermissions: Você não tem permissão para modificar as Configurações do Continuous Delivery
     parseError: 'Não é possível analisar valores de "{ path }" no ConfigMap "{ id }"'
     fields:
-      ariaLabel: 'Configuração do Fleet {name}'
+      ariaLabel: Configuração {name} do Continuous Delivery
     agentTLSMode:
       label: Modo TLS
       description: "Determina se o agente deve confiar em pacotes de CA do armazenamento de confiança do sistema operacional ao se conectar a um cluster de gerenciamento."
@@ -3242,13 +3242,13 @@ fleet:
       description: 'Configurações de implantação do agente.'
     replicas:
       label: Réplicas
-      description: 'Número de réplicas dos pods do Fleet.'
+      description: 'Número de réplicas dos pods.'
     annotations:
       label: Anotações Extras
-      description: 'Anotações extras passadas aos pods do Fleet.'
+      description: 'Anotações extras passadas aos pods.'
     developer:
       label: Desenvolvedor
-      description: 'Habilitar informações de debug do Fleet.'
+      description: 'Habilitar informações de debug.'
 
   tableHeaders:
     applicationType: Tipo
@@ -3259,7 +3259,7 @@ fleet:
   dashboard:
     pageTitle: Painel de Entrega Contínua
     menuLabel: Painel
-    welcome: Bem-vindo ao Fleet Continuous Delivery
+    welcome: Bem-vindo ao Continuous Delivery
     gitOpsScale: GitOps em escala.
     learnMore: Saiba mais.
     learnMoreLink: https://fleet.rancher.io
@@ -3347,20 +3347,20 @@ fleet:
       none: Nenhum cluster
       clusters: Clusters selecionados manualmente
     clusters:
-      title: Clusters
+      title: Seleção de clusters
       byName:
         title: Selecionar por nome do cluster
         placeholder: vcenter.domain.com
-        label: Selecionar por nome do cluster
+        label: Nomes de cluster
       byLabel:
         title: Selecionar por rótulos
         addSelector: Adicionar seletor de cluster
         removeSelector: Remover seletor de cluster
         labelKey: Rótulo
     clusterGroups:
-      title: Grupos de Cluster
+      title: Selecionar por grupos de cluster
       byName:
-        label: Selecionar por nome do grupo de cluster
+        label: Grupos de cluster
         placeholder: Selecionar Múltiplos Grupos de Cluster
     rules:
       matching:
@@ -3389,7 +3389,7 @@ fleet:
     groupBy: Agrupar por Tipo
     subTypes:
       fleet.cattle.io.gitrepo:
-        description: 'GitRepo descreve um repositório git monitorado pelo Fleet. O recurso contém as informações necessárias para implantar o repositório, ou partes dele, em clusters alvo.'
+        description: GitRepo descreve um repositório git monitorado. O recurso contém as informações necessárias para implantar o repositório, ou partes dele, em clusters alvo.
       fleet.cattle.io.helmop:
         description: 'HelmOp é uma forma simplificada de criar bundles apontando diretamente para um repositório Helm ou registro OCI, sem precisar configurar um repositório git.'
       suse-application-collection:
@@ -6705,7 +6705,7 @@ selectOrCreateAuthSecret:
   createRKE: Criar um Secret de Configuração de Autenticação RKE
   createGithubApp: Criar um Secret de Autenticação do GitHub App
   createImagePullSecretBasedOnAuth: Criar um Secret de Pull de Imagem baseado em Secret de Autenticação
-  createImagePullSecret: Criar um novo Secret de Pull de Imagem com novo Usuário/Senha
+  createImagePullSecret: Criar um Secret de Pull de Imagem com Usuário e Senha
 
 serviceAccount:
   automount: Montar Automaticamente Token de Conta de Serviço

@@ -3123,7 +3123,7 @@ dynamicContent:
     moreInfo: Notes de version {version}
   upcomingEom:
     title: Fin de maintenance dans {days, plural, =1 {1 jour} other {{days} jours}}
-    message: Cette version de Rancher ({version}) atteindra la fin de maintenance dans {days} jour(s). Envisagez une mise à niveau.
+    message: Cette version de Rancher ({version}) atteindra la fin de maintenance dans {days} jour(s). Envisagez de passer prochainement à une version prise en charge.
   eom:
     title: Fin de maintenance atteinte
     message: Cette version de Rancher ({version}) a atteint la fin de maintenance. Envisagez une mise à niveau.

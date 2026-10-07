@@ -8610,8 +8610,8 @@ typeLabel:
     }
   helm.cattle.io.projecthelmchart: |-
     {count, plural,
-      one { Gráfico Helm de Proyecto }
-      other { Gráficos Helm de Proyecto }
+      one { Monitor de Proyecto }
+      other { Monitores de Proyecto }
     }
   monitoring.coreos.com.servicemonitor: |-
     {count, plural,

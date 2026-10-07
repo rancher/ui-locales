@@ -1282,7 +1282,7 @@ catalog:
       label: 容器鏡像倉庫
       tooltip: 容器鏡像是從 Cluster Container Registry 中拉取的，如果拉取失敗，則從系統容器鏡像倉庫中拉取。要更改默認行為，請在此處輸入或更新鏡像倉庫。
       custom:
-        checkBoxLabel: Rancher 系統容器鏡像的容器鏡像倉庫
+        checkBoxLabel: 覆蓋默認容器鏡像倉庫
         inputLabel: 容器鏡像倉庫
         placeholder: 鏡像倉庫域名和端口，例如：registry.io:5000
       pullSecret:
@@ -3259,7 +3259,7 @@ fleet:
   dashboard:
     pageTitle: 持續交付儀表板
     menuLabel: 儀表板
-    welcome: 歡迎使用 Fleet 持續交付
+    welcome: 歡迎使用持續交付
     gitOpsScale: 大規模 GitOps。
     learnMore: 瞭解更多。
     learnMoreLink: https://fleet.rancher.io
@@ -3347,20 +3347,20 @@ fleet:
       none: 無集群
       clusters: 手動選擇的集群
     clusters:
-      title: 集群
+      title: 集群選擇
       byName:
         title: 按集群名稱選擇
         placeholder: 選擇多個集群
-        label: 按集群名稱選擇
+        label: 集群名稱
       byLabel:
         title: 按標籤選擇
         addSelector: 添加集群選擇器
         removeSelector: 移除集群選擇器
         labelKey: 標籤
     clusterGroups:
-      title: 集群組
+      title: 按集群組選擇
       byName:
-        label: 按集群組名稱選擇
+        label: 集群組
         placeholder: 選擇多個集群組
     rules:
       matching:
