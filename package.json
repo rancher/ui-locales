@@ -12,7 +12,7 @@
     "@rancher/shell": "^3.0.13"
   },
   "devDependencies": {
-    "js-yaml": "5.4.2"
+    "js-yaml": "5.4.3"
   },
   "resolutions": {
     "@types/node": "~25.3.0",
