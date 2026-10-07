@@ -16,7 +16,7 @@ import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REFERENCE = path.join(ROOT, 'reference/en-us.yaml');
@@ -45,7 +45,7 @@ function parse(file, locale) {
   try {
     // js-yaml throws on duplicate mapping keys, which YAML forbids and which
     // silently drops translations when a parser is more lenient.
-    return yaml.load(fs.readFileSync(file, 'utf8'), { filename: file });
+    return load(fs.readFileSync(file, 'utf8'), { filename: file });
   } catch (e) {
     error(locale, `does not parse — ${ e.message.split('\n')[0] }`);
 
