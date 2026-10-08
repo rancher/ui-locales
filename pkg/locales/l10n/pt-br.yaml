@@ -1,7 +1,7 @@
 # ---
 # locale: pt-br (Portuguese - Brazil)
 # source-locale: en-us
-# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# synced-against-en-us-commit: 0294f39 (2026-10-06)
 # last-updated: 2026-10-07
 # ---
 ##############################
@@ -440,7 +440,6 @@ about:
   title: Sobre
   versions:
     downloadImages: "Baixar lista de imagens {listName}"
-    downloadCli: 'Baixar CLI para {os}: {file}'
     githubRepo: "Abrir repositório GitHub para o componente {name}"
     title: Versões
     component: Componente
@@ -450,14 +449,12 @@ about:
     machine: Máquina
     rancher: Rancher
     releaseNotes: 'Ver notas de versão'
-  os:
-    mac: macOS
-    windows: Windows
-    linux: Linux
   downloadImageList:
     title: Listas de Imagens
-  downloadCLI:
-    title: Downloads de CLI
+  cli:
+    title: "CLI do {vendor}"
+    description: A CLI do {vendor} permite gerenciar clusters, projetos e recursos pela linha de comando. Há builds disponíveis para diversos sistemas operacionais e arquiteturas, e a documentação explica como baixá-las e instalá-las.
+    docsLink: Ver a documentação da CLI do {vendor}
   diagnostic:
     title: Diagnósticos
     checkboxTooltip: Complementar dados de diagnóstico com tempos de resposta para os 10 principais recursos. Isso pode demorar um pouco
@@ -643,7 +640,7 @@ authConfig:
         4: '<li>Clique em "New Github App"</li>'
       instruction: 'Preencha o formulário com estes valores:'
       app:
-        label: Nome do App GitHub 
+        label: Nome do App GitHub
         value: 'Qualquer coisa que você queira, ex.: Meu {vendor}'
       callback:
         label: URL de Callback
@@ -752,6 +749,7 @@ authConfig:
     cert: Certificado
     disabledStatusBitmask: Bitmask de Status Desabilitado
     groupDNAttribute: Atributo DN do Grupo
+    groupIDAttribute: Atributo Identificador do Grupo
     groupMemberMappingAttribute: Atributo de Mapeamento de Membro do Grupo
     groupMemberUserAttribute: Atributo de Usuário Membro do Grupo
     groupSearchBase:
@@ -761,6 +759,10 @@ authConfig:
       label: Hostname/IP
       placeholder: 'ex.: servidor1,servidor2'
       hint: Vários servidores podem ser especificados como uma lista separada por vírgulas
+    idAttribute:
+      tip: Atributo cujo valor identifica o usuário ou grupo no Rancher em vez do seu Nome Distinto, para que mover ou renomear a entrada no diretório mantenha suas permissões. Deixe vazio para usar o Nome Distinto.
+      locked: Não pode ser alterado enquanto o provedor estiver habilitado. Desabilite o provedor para alterá-lo.
+      samlTip: Atributo cujo valor corresponde ao que o provedor de identidade envia no Campo UID para usuários ou no Campo Groups para grupos, para que os resultados da busca correspondam aos principals conectados. Deixe vazio para usar o Atributo de Login para usuários e o Atributo DN do Grupo para grupos.
     loginAttribute: Atributo de Login
     nameAttribute: Atributo de Nome
     nestedGroupMembership:
@@ -794,6 +796,7 @@ authConfig:
       tip: 'Quando habilitado, o Rancher usará a conta de serviço em vez da conta do usuário para pesquisar usuários e grupos.'
     tls: TLS
     userEnabledAttribute: Atributo de Usuário Habilitado
+    userIDAttribute: Atributo Identificador do Usuário
     userMemberAttribute: Atributo de Membro do Usuário
     userLoginFilter: Filtro de Login do Usuário
     userSearchBase:
@@ -1026,11 +1029,11 @@ asyncButton:
     success: Desabilitado
     waiting: Desabilitando&hellip;
   activate:
-    action:  Ativar
+    action: Ativar
     waiting: Ativando&hellip;
     success: Ativado
   deactivate:
-    action:  Desativar
+    action: Desativar
     waiting: Desativando&hellip;
     success: Desativado
   diagnostic:
@@ -1339,6 +1342,7 @@ catalog:
     windowsIncompatible: Somente Linux
     versionWindowsIncompatible: Versão somente Linux
     header: Charts
+    cannotListApps: Você não tem permissão para listar os apps instalados, o que é necessário para visualizar os charts
     noCharts:
       title: Nenhum chart para exibir
       message: <b>Dicas:</b> desfaça o último filtro aplicado ou <resetAllFilters>limpe todos os filtros</resetAllFilters>, e certifique-se de ter os <repositoriesUrl>repositórios</repositoriesUrl> corretos.
@@ -1983,7 +1987,6 @@ cluster:
       state: Aviso
       cloudProvider:
         incompatible: Você não pode selecionar o provedor de nuvem [[Harvester]], pois a versão atual do [[Harvester]] não é compatível com a versão do RKE2 Kubernetes selecionada. Clique <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são suportadas.
-          
     clusterWarning: |-
       Há {count, plural,
       =1 {1 cluster [[Harvester]] que não está sendo exibido}
@@ -2025,6 +2028,8 @@ cluster:
   explore: Explorar
   importAction: Importar Existente
   manageAction: Gerenciar
+  pinAction: Fixar
+  unpinAction: Desafixar
   kubeConfig:
     error:
       title: Não foi possível gerar o KubeConfig
@@ -2680,7 +2685,7 @@ cluster:
       ipv6Warning:
         title: Verificar Configurações de IPv6
         body: 'Os pools de máquinas neste cluster estão configurados para usar redes IPv6, mas as configurações de rede do cluster podem não suportá-lo.'
-        stackPrefInvalid: A <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Preferência de Pilha</a> deve ser definida como "Dual" ou "IPv6" para usar rede dual-stack ou somente IPv6, respectivamente. 
+        stackPrefInvalid: A <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Preferência de Pilha</a> deve ser definida como "Dual" ou "IPv6" para usar rede dual-stack ou somente IPv6, respectivamente.
         flannelMasqInvalid: O K3s usa o plugin cni Flannel por padrão. Habilitar o Flannel Masq é geralmente recomendado ao usar redes IPv6.
         cidrInvalidRke2: 'Para habilitar redes dual-stack em clusters RKE2, você deve definir intervalos de CIDR válidos de dual-stack para cluster e serviço.'
         cidrInvalidK3s: 'Para habilitar redes dual-stack ou apenas IPv6 em clusters K3s, você deve definir intervalos de CIDR válidos de dual-stack ou IPv6 para cluster e serviço.'
@@ -3797,6 +3802,62 @@ fleet:
           =0 { Adicionar namespaces aqui criará uma GitRepoRestriction. }
           other { Apenas o campo <code>allowedTargetNamespaces</code> da Restrição Git Repo é gerenciado aqui. Você pode fazer alterações adicionais na Restrição Git Repo}
         }"
+  policy:
+    name:
+      label: Nome da política
+    serviceAccounts:
+      title: Contas de serviço
+      require:
+        label: Exigir conta de serviço
+        description: Exige que uma ServiceAccount seja especificada nos recursos de destino.
+      allowNamespaceCreation:
+        title: Criação de namespaces
+        label: Permitir criação de namespaces
+        description: Enquanto uma conta de serviço for exigida, o Fleet não cria namespaces nos clusters downstream, então os namespaces de destino já precisam existir. Permita isso apenas onde a criação de namespaces for controlada por outros meios.
+        link: Criação de namespaces na documentação do Fleet
+      restrict:
+        all: Permitir todas as contas de serviço
+        selected: Permitir apenas as contas de serviço selecionadas
+        description: Restringe o conjunto de contas de serviço que os recursos GitRepo, HelmOp e Bundle podem referenciar.
+      allowed:
+        title: Selecione as contas de serviço permitidas
+        label: Contas de serviço permitidas
+    gitRepo:
+      title: Política de GitRepo
+      defaultServiceAccount:
+        label: Conta de serviço padrão
+        description: Será aplicada aos bundles de aplicação de GitRepo sem conta de serviço informada.
+      defaultSecret:
+        label: Secret de cliente padrão
+        description: Será aplicado aos bundles de aplicação de GitRepo sem secret de cliente informado.
+      restrict:
+        all: Permitir todos os secrets de cliente
+        selected: Permitir apenas os secrets de cliente selecionados
+        description: Restringe o conjunto de valores de clientSecretName que os GitRepos podem referenciar.
+      allowed:
+        title: Selecione os secrets de cliente permitidos
+        label: Secrets de cliente permitidos
+    helmOp:
+      title: Política de HelmOps
+      defaultServiceAccount:
+        label: Conta de serviço padrão
+        description: Será aplicada aos bundles de aplicação de HelmOps sem conta de serviço informada.
+      defaultSecret:
+        label: Secret padrão do Helm
+        description: Será aplicado aos bundles de aplicação de HelmOps sem secret do Helm informado.
+      restrict:
+        all: Permitir todos os secrets do Helm
+        selected: Permitir apenas os secrets do Helm selecionados
+        description: Restringe o conjunto de nomes de secrets de credenciais que os HelmOps podem referenciar.
+      allowed:
+        title: Selecione os secrets do Helm permitidos
+        label: Secrets do Helm permitidos
+    defaultServiceAccountNotAllowed: A conta de serviço padrão selecionada precisa ser permitida na política.
+    defaultSecretNotAllowed: O secret padrão selecionado precisa ser permitido na política.
+    placeholder:
+      serviceAccount: Selecione ou informe o nome de uma conta de serviço
+      secret: Selecione ou informe o nome de um secret
+      allowList: Selecione ou informe nomes
   configMaps:
     label: Mapas de Configuração
   secrets:
@@ -6605,7 +6666,7 @@ secret:
     knownHostsPlaceholder: "Metadados de hosts conhecidos, um por linha"
     editKnownHosts:
       title: Configuração de Hosts Conhecidos SSH
-      entries:  |-
+      entries: |-
         {entries, plural,
           =0 {Vazio}
           =1 {1 Entrada}
@@ -7206,6 +7267,127 @@ storageClass:
       placeholder: Nome da classe de armazenamento no cluster [[Harvester]] host
       tooltip: Por padrão, a classe de armazenamento padrão no cluster [[Harvester]] host é usada.
 
+tableViews:
+  tabs:
+    all: Explorador
+    label: Exibições salvas
+    newView: Nova Exibição
+    count: "{name} ({count})"
+  view:
+    label: Exibição
+    unsaved: Você tem alterações não salvas...
+    unsavedShort: Alterações não salvas
+    discard: Descartar Alterações
+    saveChanges: Salvar Alterações
+    saveAsNew: Salvar Alterações em Nova Exibição
+    groupBy: Agrupar Por
+    columnsConfiguration: Configuração de Colunas
+    columnsDefault: Padrão
+    columnsCount: "{shown} / {total}"
+    reset: Redefinir Padrão
+  tab:
+    menu: Opções da exibição
+    rename: Renomear Exibição
+    duplicate: Duplicar Exibição
+    copySuffix: (cópia)
+    delete: Excluir Exibição
+    setDefault: Definir como Exibição Padrão
+    newViewName: Sem título
+    deleted: Exibição Excluída
+    deletedMessage: A exibição "{name}" foi excluída com sucesso.
+    undo: Desfazer
+  bulk:
+    selected: "{count, plural, one {{count} Selecionado} other {{count} Selecionados}}"
+    deleteSelected: Excluir Selecionados
+  query:
+    fields:
+      pinned: Fixado
+      clusterId: ID do Cluster
+    placeholder: 'Filtre em todas as colunas ou só em algumas (ex.: state:error)'
+    clear: Limpar filtro
+    inUse: "{count} em uso"
+    label: Rótulo
+    suggestions: Sugestões de filtro
+    suggestionsAvailable: |-
+      {count, plural,
+      one {1 sugestão disponível}
+      other {{count} sugestões disponíveis}
+      }
+    connective:
+      and: Ambos devem corresponder
+      or: Qualquer um pode corresponder
+      not: Deixar estes de fora
+    # What the toolbar says about a query it cannot read as written. Nothing here stops the query
+    # running - the table filters by as much of it as it can.
+    problem:
+      emptyValue: '<b>{label}</b> não tem valor para corresponder.'
+      trailingOperator: 'A consulta termina com <b>{text}</b>.'
+      leadingJoiner: '<b>{text}</b> não tem nada antes para unir.'
+      consecutiveOperators: '<b>{text}</b> vem logo após outro operador.'
+      danglingNegation: '<b>{text}</b> sozinho não nega nada.'
+      unbalancedQuote: 'Uma aspa foi aberta e nunca fechada.'
+      noTerms: 'Não há nada para filtrar.'
+    # Shown when part of a query names something this list cannot be filtered by on the server
+    unsupported: |-
+      {count, plural,
+      one {<b>{fields}</b> não pode ser filtrado nesta lista, então essa parte da consulta foi ignorada.}
+      other {<b>{fields}</b> não podem ser filtrados nesta lista, então essas partes da consulta foram ignoradas.}
+      }
+  columns:
+    selectAll: Selecionar Todas as Colunas
+    reset: Redefinir Padrão
+    locked: Esta coluna não pode ser ocultada
+    reorder: Arraste para reordenar
+    moveKeys: '{modifier}+Seta para cima ou {modifier}+Seta para baixo move a coluna'
+    moved: '{label} foi para a posição {position} de {total}'
+    allShown: 'Todas as {count} colunas exibidas'
+    resetDone: Colunas redefinidas para o padrão
+  group:
+    none: Nenhum
+    resetDone: 'Agrupamento redefinido para {label}'
+    empty: (nenhum)
+    # A list's own groupings, as the Group By menu names them
+    by:
+      namespace: Namespace
+      project: Projeto
+      node: Nó
+      role: Função
+      cluster: Cluster
+      device: Dispositivo
+      pool: Pool
+      workspace: Workspace
+      type: Tipo
+  export:
+    label: Exportar Toda a Exibição
+    title: Exportar Todo o Conteúdo da Exibição
+    intro: 'Você está prestes a <b>exportar todos os itens ({count, number})</b> da exibição <b>{name}</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    # The same, once there is more than a page of rows to fetch and the wait is worth warning about
+    introSlow: 'Você está prestes a <b>exportar todos os itens ({count, number})</b> da exibição <b>{name}</b> - dependendo da sua conexão, isso pode demorar um pouco. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    # A view the api could not count: exported all the same, with no number to put to it
+    introUncounted: 'Você está prestes a <b>exportar todos os itens</b> da exibição <b>{name}</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    choose: '<b>Escolha o formato de exportação</b> para continuar...'
+    # What the same modal says when it was opened for a selection rather than for a whole view
+    selectionTitle: Exportar Como...
+    selectionIntro: |-
+      Você está prestes a <b>exportar {count, plural,
+      one {1 item selecionado}
+      other {{count, number} itens selecionados}
+      }</b>. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).
+    selectionIntroSlow: 'Você está prestes a <b>exportar {count, number} itens selecionados</b> - dependendo da sua conexão, isso pode demorar um pouco. Com base no formato que você escolher abaixo (ex.: CSV), a estrutura da exportação seguirá as configurações atuais da exibição, se houver (ex.: método de agrupamento selecionado e / ou configuração de colunas).'
+    download: Baixar
+    format:
+      yaml: YAML
+      json: JSON
+      csv: CSV
+    # What the notification centre shows while the export runs, and what that entry becomes once
+    # it is done. The file can take a while, so the export is watched there rather than blocking.
+    notification:
+      title: Exportação em andamento
+      message: Exportando todos os itens da exibição {name} como {format}...
+      doneTitle: Exportação concluída
+      doneMessage: A exibição {name} foi exportada para {file}.
+      failedTitle: Falha na exportação
+      failedMessage: Não foi possível exportar a exibição {name}.
 tableHeaders:
   assuredConcurrencyShares: Cotas de Simultaneidade Garantida
   autoscaler: Autoescalador
@@ -7214,6 +7396,7 @@ tableHeaders:
   accessModes: Modos de Acesso
   address: Endereço
   age: Idade
+  badge: Emblema
   apiGroup: Grupos de API
   apikey: Chave de API
   available: Disponível
@@ -9110,6 +9293,9 @@ action:
   clone: Clonar
   disable: Desativar
   download: Baixar YAML
+  # What the same action is called when the configurable tables feature is on, where it offers the
+  # other formats alongside the yaml it has always given
+  downloadExport: Exportar Como...
   edit: Editar Configuração
   editYaml: Editar YAML
   enable: Ativar
@@ -9752,9 +9938,26 @@ component:
         namespace: Namespace
         project: Projeto
         type: Tipo
+        ready: Pronto
+        restarts: Reinicializações
+        podRestarts: Reinicializações do Pod
+        endpoints: Endpoints
+        podIp: IP do Pod
+        workload: Carga de Trabalho
+        node: Nó
+        loadError: Não foi possível carregar os detalhes deste recurso
+        externalIp: IP Externo
+        internalIp: IP Interno
+        version: Versão
+        os: SO
+        cpu: CPU
+        memory: Memória
+        pods: Pods
         ariaLabel:
           showDetails: Mostrar Informações do Recurso sobre { resource } chamado { name }
           actionMenu: Ações do Recurso - { resource }
+          loading: Carregando informações do recurso
+          loadingUsage: Carregando uso
   cron:
     expressionEditor:
       label:

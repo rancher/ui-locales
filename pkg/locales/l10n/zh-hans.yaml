@@ -1,7 +1,7 @@
 # ---
 # locale: zh-hans (Chinese - Simplified)
 # source-locale: en-us
-# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# synced-against-en-us-commit: 0294f39 (2026-10-06)
 # last-updated: 2026-10-07
 # ---
 ##############################
@@ -440,7 +440,6 @@ about:
   title: 简介
   versions:
     downloadImages: "下载 {listName} 镜像列表"
-    downloadCli: "下载适用于 {os} 的 CLI：{file}"
     githubRepo: "打开 {name} 组件的 GitHub 仓库"
     title: 版本
     component: 组件
@@ -450,14 +449,12 @@ about:
     machine: Machine
     rancher: Rancher
     releaseNotes: '查看发行说明'
-  os:
-    mac: macOS
-    windows: Windows
-    linux: Linux
   downloadImageList:
     title: 镜像列表
-  downloadCLI:
-    title: CLI 下载
+  cli:
+    title: "{vendor} CLI"
+    description: '{vendor} CLI 让你可以通过命令行管理集群、项目和资源。我们为多种操作系统和架构提供了构建版本，文档中介绍了如何下载和安装。'
+    docsLink: 查看 {vendor} CLI 文档
   diagnostic:
     title: 诊断
     checkboxTooltip: 用前 10 个资源的响应时间补充诊断数据，可能需要一些的时间才能完成。
@@ -752,6 +749,7 @@ authConfig:
     cert: 证书
     disabledStatusBitmask: 禁用状态位掩码
     groupDNAttribute: 用户组域名属性
+    groupIDAttribute: 用户组标识符属性
     groupMemberMappingAttribute: 用户组成员映射属性
     groupMemberUserAttribute: 用户组成员属性
     groupSearchBase:
@@ -761,6 +759,10 @@ authConfig:
       label: 主机名/IP
       placeholder: 例如：server1,server2
       hint: 可以使用逗号分隔列表来指定多个服务器
+    idAttribute:
+      tip: 在 Rancher 中用来标识用户或用户组的属性，用于替代其标识名称（Distinguished Name），这样即使在目录中移动或重命名该条目，其权限也会保留。留空则使用标识名称。
+      locked: 提供程序启用期间无法更改此项。请先禁用该提供程序再进行更改。
+      samlTip: 此属性的值需与身份提供程序在 UID 字段（用户）或用户组字段（用户组）中发送的值一致，从而让搜索结果与已登录的主体相匹配。留空则用户使用登录属性，用户组使用用户组域名属性。
     loginAttribute: 登录属性
     nameAttribute: 名称属性
     nestedGroupMembership:
@@ -794,6 +796,7 @@ authConfig:
       tip: 启用后，Rancher 将使用 Service Account 而不是用户账号来搜索用户和组。
     tls: TLS
     userEnabledAttribute: 用户启用属性
+    userIDAttribute: 用户标识符属性
     userMemberAttribute: 用户成员属性
     userLoginFilter: 用户登录过滤器
     userSearchBase:
@@ -1339,6 +1342,7 @@ catalog:
     windowsIncompatible: 仅 Linux
     versionWindowsIncompatible: 仅限 Linux 版本
     header: Chart
+    cannotListApps: 你没有列出已安装应用的权限，而查看 Chart 需要此权限
     noCharts:
       title: 没有可显示的 Chart
       message: '<b>提示：</b>撤销你最后应用的筛选条件或<resetAllFilters>清除所有筛选条件</resetAllFilters>，并确保已配置正确的<repositoriesUrl>仓库</repositoriesUrl>。'
@@ -2025,6 +2029,8 @@ cluster:
   explore: 浏览
   importAction: 导入已有集群
   manageAction: 管理
+  pinAction: 固定
+  unpinAction: 取消固定
   kubeConfig:
     error:
       title: 无法生成 KubeConfig
@@ -3794,6 +3800,62 @@ fleet:
     deprecationWarningTargetNamespaces: 'GitRepoRestriction 已弃用，并将在未来的版本中移除。限制允许的目标命名空间依赖于 GitRepoRestriction，在 SUSE Continuous Delivery 策略中没有对应功能。'
     migrationGuide: '请参阅 <docsLink>SUSE Continuous Delivery 策略迁移指南</docsLink>。'
     banner: "{count, plural, =0 { 在这里添加命名空间会创建一个 GitRepoRestriction。} other { 只有 Git Repo Restriction 的 <code>allowedTargetNamespaces</code> 在此处管理，你可以对 Git Repo Restriction 进行其他更改。} }"
+  policy:
+    name:
+      label: 策略名称
+    serviceAccounts:
+      title: Service Account
+      require:
+        label: 要求 Service Account
+        description: 强制要求在目标资源上指定 ServiceAccount。
+      allowNamespaceCreation:
+        title: 命名空间创建
+        label: 允许创建命名空间
+        description: 在要求 Service Account 的情况下，Fleet 不会在下游集群上创建命名空间，因此目标命名空间必须已经存在。仅当命名空间的创建已通过其他方式加以管控时才允许此操作。
+        link: Fleet 文档中的命名空间创建说明
+      restrict:
+        all: 允许所有 Service Account
+        selected: 仅允许选定的 Service Account
+        description: 限制 GitRepo、HelmOp 和 Bundle 资源可以引用的 Service Account 范围。
+      allowed:
+        title: 选择允许的 Service Account
+        label: 允许的 Service Account
+    gitRepo:
+      title: GitRepo 策略
+      defaultServiceAccount:
+        label: 默认 Service Account
+        description: 此设置将应用于未提供 Service Account 的 GitRepo 应用 Bundle。
+      defaultSecret:
+        label: 默认客户端密文
+        description: 此设置将应用于未提供客户端密文的 GitRepo 应用 Bundle。
+      restrict:
+        all: 允许所有客户端密文
+        selected: 仅允许选定的客户端密文
+        description: 限制 GitRepo 可以引用的 clientSecretName 值范围。
+      allowed:
+        title: 选择允许的客户端密文
+        label: 允许的客户端密文
+    helmOp:
+      title: HelmOps 策略
+      defaultServiceAccount:
+        label: 默认 Service Account
+        description: 此设置将应用于未提供 Service Account 的 HelmOps 应用 Bundle。
+      defaultSecret:
+        label: 默认 Helm 密文
+        description: 此设置将应用于未提供 Helm 密文的 HelmOps 应用 Bundle。
+      restrict:
+        all: 允许所有 Helm 密文
+        selected: 仅允许选定的 Helm 密文
+        description: 限制 HelmOps 可以引用的凭证密文名称范围。
+      allowed:
+        title: 选择允许的 Helm 密文
+        label: 允许的 Helm 密文
+    defaultServiceAccountNotAllowed: 所选的默认 Service Account 必须是策略中允许的 Service Account。
+    defaultSecretNotAllowed: 所选的默认密文必须是策略中允许的密文。
+    placeholder:
+      serviceAccount: 选择或输入 Service Account 名称
+      secret: 选择或输入密文名称
+      allowList: 选择或输入名称
   configMaps:
     label: ConfigMap
   secrets:
@@ -7203,6 +7265,127 @@ storageClass:
       placeholder: 主机 [[Harvester]] 集群上的存储类名称
       tooltip: 默认使用主机 [[Harvester]] 集群上的默认存储类。
 
+tableViews:
+  tabs:
+    all: 浏览器
+    label: 已保存的视图
+    newView: 添加视图
+    count: "{name}（{count}）"
+  view:
+    label: 视图
+    unsaved: 你有未保存的更改……
+    unsavedShort: 未保存的更改
+    discard: 放弃更改
+    saveChanges: 保存更改
+    saveAsNew: 将更改保存为新视图
+    groupBy: 分组依据
+    columnsConfiguration: 列配置
+    columnsDefault: 默认
+    columnsCount: "{shown} / {total}"
+    reset: 重置为默认
+  tab:
+    menu: 视图选项
+    rename: 重命名视图
+    duplicate: 复制视图
+    copySuffix: （副本）
+    delete: 删除视图
+    setDefault: 设为默认视图
+    newViewName: 未命名
+    deleted: 视图已删除
+    deletedMessage: 已成功删除“{name}”视图。
+    undo: 撤销
+  bulk:
+    selected: "已选择 {count} 项"
+    deleteSelected: 删除所选项
+  query:
+    fields:
+      pinned: 已固定
+      clusterId: 集群 ID
+    placeholder: '在所有列或仅在特定列中过滤（例如 state:error）'
+    clear: 清除过滤条件
+    inUse: "{count} 个使用中"
+    label: 标签
+    suggestions: 过滤建议
+    suggestionsAvailable: |-
+      {count, plural,
+      one {有 1 条可用建议}
+      other {有 {count} 条可用建议}
+      }
+    connective:
+      and: 两者都须匹配
+      or: 任一匹配即可
+      not: 排除这些
+    # What the toolbar says about a query it cannot read as written. Nothing here stops the query
+    # running - the table filters by as much of it as it can.
+    problem:
+      emptyValue: '<b>{label}</b> 没有要匹配的值。'
+      trailingOperator: '查询以 <b>{text}</b> 结尾。'
+      leadingJoiner: '<b>{text}</b> 前面没有可连接的内容。'
+      consecutiveOperators: '<b>{text}</b> 紧跟在另一个运算符之后。'
+      danglingNegation: '单独使用 <b>{text}</b> 无法否定任何内容。'
+      unbalancedQuote: '有引号未闭合。'
+      noTerms: '没有可用于过滤的条件。'
+    # Shown when part of a query names something this list cannot be filtered by on the server
+    unsupported: |-
+      {count, plural,
+      one {此列表无法按 <b>{fields}</b> 过滤，因此已忽略查询中的该部分。}
+      other {此列表无法按 <b>{fields}</b> 过滤，因此已忽略查询中的这些部分。}
+      }
+  columns:
+    selectAll: 选择所有列
+    reset: 重置为默认
+    locked: 此列无法隐藏
+    reorder: 拖动以调整顺序
+    moveKeys: '按 {modifier}+上方向键或 {modifier}+下方向键可移动此列'
+    moved: '{label} 已移至第 {position} 位（共 {total} 位）'
+    allShown: '已显示全部 {count} 列'
+    resetDone: 已将列重置为默认设置
+  group:
+    none: 无
+    resetDone: '分组已重置为{label}'
+    empty: （无）
+    # A list's own groupings, as the Group By menu names them
+    by:
+      namespace: 命名空间
+      project: 项目
+      node: 节点
+      role: 角色
+      cluster: 集群
+      device: 设备
+      pool: 池
+      workspace: 工作空间
+      type: 类型
+  export:
+    label: 导出视图全部内容
+    title: 导出视图全部内容
+    intro: '你即将从 <b>{name}</b> 视图<b>导出全部 {count, number} 项</b>。根据你在下方选择的格式（例如 CSV），导出内容的结构将与当前的视图设置（如有）保持一致（例如所选的分组方式和/或列配置）。'
+    # The same, once there is more than a page of rows to fetch and the wait is worth warning about
+    introSlow: '你即将从 <b>{name}</b> 视图<b>导出全部 {count, number} 项</b>，根据你的网络连接情况，这可能需要一段时间。根据你在下方选择的格式（例如 CSV），导出内容的结构将与当前的视图设置（如有）保持一致（例如所选的分组方式和/或列配置）。'
+    # A view the api could not count: exported all the same, with no number to put to it
+    introUncounted: '你即将从 <b>{name}</b> 视图<b>导出全部项</b>。根据你在下方选择的格式（例如 CSV），导出内容的结构将与当前的视图设置（如有）保持一致（例如所选的分组方式和/或列配置）。'
+    choose: '<b>请选择导出格式</b>以继续……'
+    # What the same modal says when it was opened for a selection rather than for a whole view
+    selectionTitle: 导出为……
+    selectionIntro: |-
+      你即将<b>导出 {count, plural,
+      one {1 个所选项}
+      other {{count, number} 个所选项}
+      }</b>。根据你在下方选择的格式（例如 CSV），导出内容的结构将与当前的视图设置（如有）保持一致（例如所选的分组方式和/或列配置）。
+    selectionIntroSlow: '你即将<b>导出 {count, number} 个所选项</b>，根据你的网络连接情况，这可能需要一段时间。根据你在下方选择的格式（例如 CSV），导出内容的结构将与当前的视图设置（如有）保持一致（例如所选的分组方式和/或列配置）。'
+    download: 下载
+    format:
+      yaml: YAML
+      json: JSON
+      csv: CSV
+    # What the notification centre shows while the export runs, and what that entry becomes once
+    # it is done. The file can take a while, so the export is watched there rather than blocking.
+    notification:
+      title: 正在导出
+      message: 正在将 {name} 视图中的所有项导出为 {format}……
+      doneTitle: 导出完成
+      doneMessage: '{name} 视图已导出到 {file}。'
+      failedTitle: 导出失败
+      failedMessage: 无法导出 {name} 视图。
 tableHeaders:
   assuredConcurrencyShares: 确保并发份额
   autoscaler: 自动扩缩器
@@ -7211,6 +7394,7 @@ tableHeaders:
   accessModes: 访问模式
   address: 地址
   age: 存活时间
+  badge: 徽章
   apiGroup: API 组
   apikey: API 密钥
   available: 可用
@@ -9107,6 +9291,9 @@ action:
   clone: 克隆
   disable: 禁用
   download: 下载 YAML
+  # What the same action is called when the configurable tables feature is on, where it offers the
+  # other formats alongside the yaml it has always given
+  downloadExport: 导出为……
   edit: 编辑配置
   editYaml: 编辑 YAML
   enable: 启用
@@ -9749,9 +9936,26 @@ component:
         namespace: 命名空间
         project: 项目
         type: 类型
+        ready: 就绪
+        restarts: 重启次数
+        podRestarts: Pod 重启次数
+        endpoints: 端点
+        podIp: Pod IP
+        workload: 工作负载
+        node: 节点
+        loadError: 无法加载此资源的详细信息
+        externalIp: 外部 IP
+        internalIp: 内部 IP
+        version: 版本
+        os: 操作系统
+        cpu: CPU
+        memory: 内存
+        pods: Pod
         ariaLabel:
           showDetails: 显示名为 { name } 的 { resource } 的资源信息
           actionMenu: 资源操作 - { resource }
+          loading: 正在加载资源信息
+          loadingUsage: 正在加载使用情况
   cron:
     expressionEditor:
       label:

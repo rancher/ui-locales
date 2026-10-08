@@ -1,7 +1,7 @@
 # ---
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
-# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# synced-against-en-us-commit: 0294f39 (2026-10-06)
 # last-updated: 2026-10-07
 # ---
 ##############################
@@ -440,7 +440,6 @@ about:
   title: 簡介
   versions:
     downloadImages: "下載 {listName} 鏡像列表"
-    downloadCli: "下載適用於 {os} 的 CLI：{file}"
     githubRepo: "打開 {name} 組件的 GitHub 倉庫"
     title: 版本
     component: 組件
@@ -450,14 +449,12 @@ about:
     machine: Machine
     rancher: Rancher
     releaseNotes: '查看發行說明'
-  os:
-    mac: macOS
-    windows: Windows
-    linux: Linux
   downloadImageList:
     title: 鏡像列表
-  downloadCLI:
-    title: CLI 下載
+  cli:
+    title: "{vendor} CLI"
+    description: '{vendor} CLI 讓你可以通過命令行管理集群、項目和資源。我們為多種操作系統和架構提供了構建版本，文檔中介紹了如何下載和安裝。'
+    docsLink: 查看 {vendor} CLI 文檔
   diagnostic:
     title: 診斷
     checkboxTooltip: 用前 10 個資源的響應時間補充診斷數據，可能需要一些的時間才能完成。
@@ -643,7 +640,7 @@ authConfig:
         4: <li>點擊“New Github App”</li>
       instruction: '使用這些值填寫表單：'
       app:
-        label: GitHub App 名稱 
+        label: GitHub App 名稱
         value: '任何您喜歡的名稱，例如 My {vendor}'
       callback:
         label: 回調 URL
@@ -752,6 +749,7 @@ authConfig:
     cert: 證書
     disabledStatusBitmask: 禁用狀態位掩碼
     groupDNAttribute: 用戶組域名屬性
+    groupIDAttribute: 用戶組標識符屬性
     groupMemberMappingAttribute: 用戶組成員映射屬性
     groupMemberUserAttribute: 用戶組成員屬性
     groupSearchBase:
@@ -761,6 +759,10 @@ authConfig:
       label: 主機名/IP
       placeholder: 例如：server1,server2
       hint: 可以使用逗號分隔列表來指定多個服務器
+    idAttribute:
+      tip: 在 Rancher 中用來標識用戶或用戶組的屬性，用於替代其標識名稱（Distinguished Name），這樣即使在目錄中移動或重命名該條目，其權限也會保留。留空則使用標識名稱。
+      locked: 提供程序啟用期間無法更改此項。請先禁用該提供程序再進行更改。
+      samlTip: 此屬性的值需與身份提供程序在 UID 字段（用戶）或用戶組字段（用戶組）中發送的值一致，從而讓搜索結果與已登錄的主體相匹配。留空則用戶使用登錄屬性，用戶組使用用戶組域名屬性。
     loginAttribute: 登錄屬性
     nameAttribute: 名稱屬性
     nestedGroupMembership:
@@ -794,6 +796,7 @@ authConfig:
       tip: 啟用後，Rancher 將使用服務賬戶而非用戶賬戶來搜索用戶和組。
     tls: TLS
     userEnabledAttribute: 用戶啟用屬性
+    userIDAttribute: 用戶標識符屬性
     userMemberAttribute: 用戶成員屬性
     userLoginFilter: 用戶登錄過濾器
     userSearchBase:
@@ -1026,11 +1029,11 @@ asyncButton:
     success: 已禁用
     waiting: 正在禁用&hellip;
   activate:
-    action:  激活
+    action: 激活
     waiting: 正在激活&hellip;
     success: 已激活
   deactivate:
-    action:  停用
+    action: 停用
     waiting: 正在停用&hellip;
     success: 已停用
   diagnostic:
@@ -1339,6 +1342,7 @@ catalog:
     windowsIncompatible: 僅 Linux
     versionWindowsIncompatible: 僅限 Linux 版本
     header: Chart
+    cannotListApps: 你沒有列出已安裝應用的權限，而查看 Chart 需要此權限
     noCharts:
       title: 沒有可顯示的 charts
       message: '<b>提示：</b>撤銷您應用的上一個過濾器或 <resetAllFilters>清除所有過濾器</resetAllFilters>，並確保您已配置正確的 <repositoriesUrl>倉庫</repositoriesUrl>。'
@@ -2025,6 +2029,8 @@ cluster:
   explore: 瀏覽
   importAction: 導入已有集群
   manageAction: 管理
+  pinAction: 固定
+  unpinAction: 取消固定
   kubeConfig:
     error:
       title: 無法生成 KubeConfig
@@ -2428,7 +2434,7 @@ cluster:
       podRequestsAndLimits: 請求和限制
       schedulingCustomization: 調度自定義
       agentsScheduling:
-        text: 確保 cluster- 和/或 fleet-agent pod 不會因節點壓力、資源限制或調度器策略而被驅逐。啟用後，這些設置可以在 
+        text: 確保 cluster- 和/或 fleet-agent pod 不會因節點壓力、資源限制或調度器策略而被驅逐。啟用後，這些設置可以在
         textLink: 全局設置
         label: '阻止以下項的代理 pod 驅逐：'
     subGroups:
@@ -2679,8 +2685,8 @@ cluster:
         body: 機器配置定義了池中的機器如何部署。<br><br> 它們將被預先保存，以確保能夠保存有效的集群 YAML。
       ipv6Warning:
         title: 驗證 IPv6 設置
-        body: 此集群中的機器池被配置為使用 IPv6 網絡，但集群的網絡設置可能不支持它。 
-        stackPrefInvalid: <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Stack Preference</a> 應該分別設置為「Dual」或「IPv6」以使用雙棧或僅 IPv6 網絡。 
+        body: 此集群中的機器池被配置為使用 IPv6 網絡，但集群的網絡設置可能不支持它。
+        stackPrefInvalid: <a href="{docsBase}/reference-guides/cluster-configuration/rancher-server-configuration/rke2-cluster-configuration#stack-preference" target="_blank" rel="noopener noreferrer nofollow" aria-label="rke2 documentation for the stack preference setting">Stack Preference</a> 應該分別設置為「Dual」或「IPv6」以使用雙棧或僅 IPv6 網絡。
         flannelMasqInvalid: K3s 默認使用 Flannel cni 插件。使用 IPv6 網絡時通常建議啟用 Flannel Masq。
         cidrInvalidRke2: 要在 RKE2 集群中啟用雙棧網絡，您必須定義有效的雙棧集群和服務 CIDR 範圍。
         cidrInvalidK3s: 要在 K3s 集群中啟用雙棧或僅 IPv6 網絡，您必須定義有效的雙棧或 IPv6 集群和服務 CIDR 範圍。
@@ -3797,6 +3803,62 @@ fleet:
           =0 { 在這裡添加命名空間會創建一個 GitRepoRestriction。 }
           other { 只有 Git Repo Restriction 的 <code>allowedTargetNamespaces</code> 在此處管理，你可以對 Git Repo Restriction 進行其他更改。}
         }"
+  policy:
+    name:
+      label: 策略名稱
+    serviceAccounts:
+      title: Service Account
+      require:
+        label: 要求 Service Account
+        description: 強制要求在目標資源上指定 ServiceAccount。
+      allowNamespaceCreation:
+        title: 命名空間創建
+        label: 允許創建命名空間
+        description: 在要求 Service Account 的情況下，Fleet 不會在下游集群上創建命名空間，因此目標命名空間必須已經存在。僅當命名空間的創建已通過其他方式加以管控時才允許此操作。
+        link: Fleet 文檔中的命名空間創建說明
+      restrict:
+        all: 允許所有 Service Account
+        selected: 僅允許選定的 Service Account
+        description: 限制 GitRepo、HelmOp 和 Bundle 資源可以引用的 Service Account 範圍。
+      allowed:
+        title: 選擇允許的 Service Account
+        label: 允許的 Service Account
+    gitRepo:
+      title: GitRepo 策略
+      defaultServiceAccount:
+        label: 默認 Service Account
+        description: 此設置將應用於未提供 Service Account 的 GitRepo 應用 Bundle。
+      defaultSecret:
+        label: 默認客戶端密文
+        description: 此設置將應用於未提供客戶端密文的 GitRepo 應用 Bundle。
+      restrict:
+        all: 允許所有客戶端密文
+        selected: 僅允許選定的客戶端密文
+        description: 限制 GitRepo 可以引用的 clientSecretName 值範圍。
+      allowed:
+        title: 選擇允許的客戶端密文
+        label: 允許的客戶端密文
+    helmOp:
+      title: HelmOps 策略
+      defaultServiceAccount:
+        label: 默認 Service Account
+        description: 此設置將應用於未提供 Service Account 的 HelmOps 應用 Bundle。
+      defaultSecret:
+        label: 默認 Helm 密文
+        description: 此設置將應用於未提供 Helm 密文的 HelmOps 應用 Bundle。
+      restrict:
+        all: 允許所有 Helm 密文
+        selected: 僅允許選定的 Helm 密文
+        description: 限制 HelmOps 可以引用的憑證密文名稱範圍。
+      allowed:
+        title: 選擇允許的 Helm 密文
+        label: 允許的 Helm 密文
+    defaultServiceAccountNotAllowed: 所選的默認 Service Account 必須是策略中允許的 Service Account。
+    defaultSecretNotAllowed: 所選的默認密文必須是策略中允許的密文。
+    placeholder:
+      serviceAccount: 選擇或輸入 Service Account 名稱
+      secret: 選擇或輸入密文名稱
+      allowList: 選擇或輸入名稱
   configMaps:
     label: Config Maps
   secrets:
@@ -4562,7 +4624,7 @@ logging:
     secretKey: Secret Key
   azurestorage:
     storageAccount: 賬號
-    accessKey:  Access Key
+    accessKey: Access Key
     container: 容器
     path: 路徑
     storeAs: 存儲為
@@ -6602,7 +6664,7 @@ secret:
     knownHostsPlaceholder: "已知主機元數據，每行一個"
     editKnownHosts:
       title: SSH 已知主機配置
-      entries:  |-
+      entries: |-
         {entries, plural,
           =0 {空}
           =1 {1 個條目}
@@ -7203,6 +7265,127 @@ storageClass:
       placeholder: 主機 [[Harvester]] 集群上的存儲類名稱
       tooltip: 默認使用主機 [[Harvester]] 集群上的默認存儲類。
 
+tableViews:
+  tabs:
+    all: 瀏覽器
+    label: 已保存的視圖
+    newView: 添加視圖
+    count: "{name}（{count}）"
+  view:
+    label: 視圖
+    unsaved: 你有未保存的更改……
+    unsavedShort: 未保存的更改
+    discard: 放棄更改
+    saveChanges: 保存更改
+    saveAsNew: 將更改保存為新視圖
+    groupBy: 分組依據
+    columnsConfiguration: 列配置
+    columnsDefault: 默認
+    columnsCount: "{shown} / {total}"
+    reset: 重置為默認
+  tab:
+    menu: 視圖選項
+    rename: 重命名視圖
+    duplicate: 複製視圖
+    copySuffix: （副本）
+    delete: 刪除視圖
+    setDefault: 設為默認視圖
+    newViewName: 未命名
+    deleted: 視圖已刪除
+    deletedMessage: 已成功刪除“{name}”視圖。
+    undo: 撤銷
+  bulk:
+    selected: "已選擇 {count} 項"
+    deleteSelected: 刪除所選項
+  query:
+    fields:
+      pinned: 已固定
+      clusterId: 集群 ID
+    placeholder: '在所有列或僅在特定列中過濾（例如 state:error）'
+    clear: 清除過濾條件
+    inUse: "{count} 個使用中"
+    label: 標籤
+    suggestions: 過濾建議
+    suggestionsAvailable: |-
+      {count, plural,
+      one {有 1 條可用建議}
+      other {有 {count} 條可用建議}
+      }
+    connective:
+      and: 兩者都須匹配
+      or: 任一匹配即可
+      not: 排除這些
+    # What the toolbar says about a query it cannot read as written. Nothing here stops the query
+    # running - the table filters by as much of it as it can.
+    problem:
+      emptyValue: '<b>{label}</b> 沒有要匹配的值。'
+      trailingOperator: '查詢以 <b>{text}</b> 結尾。'
+      leadingJoiner: '<b>{text}</b> 前面沒有可連接的內容。'
+      consecutiveOperators: '<b>{text}</b> 緊跟在另一個運算符之後。'
+      danglingNegation: '單獨使用 <b>{text}</b> 無法否定任何內容。'
+      unbalancedQuote: '有引號未閉合。'
+      noTerms: '沒有可用於過濾的條件。'
+    # Shown when part of a query names something this list cannot be filtered by on the server
+    unsupported: |-
+      {count, plural,
+      one {此列表無法按 <b>{fields}</b> 過濾，因此已忽略查詢中的該部分。}
+      other {此列表無法按 <b>{fields}</b> 過濾，因此已忽略查詢中的這些部分。}
+      }
+  columns:
+    selectAll: 選擇所有列
+    reset: 重置為默認
+    locked: 此列無法隱藏
+    reorder: 拖動以調整順序
+    moveKeys: '按 {modifier}+上方向鍵或 {modifier}+下方向鍵可移動此列'
+    moved: '{label} 已移至第 {position} 位（共 {total} 位）'
+    allShown: '已顯示全部 {count} 列'
+    resetDone: 已將列重置為默認設置
+  group:
+    none: 無
+    resetDone: '分組已重置為{label}'
+    empty: （無）
+    # A list's own groupings, as the Group By menu names them
+    by:
+      namespace: 命名空間
+      project: 項目
+      node: 節點
+      role: 角色
+      cluster: 集群
+      device: 設備
+      pool: 池
+      workspace: 工作空間
+      type: 類型
+  export:
+    label: 導出視圖全部內容
+    title: 導出視圖全部內容
+    intro: '你即將從 <b>{name}</b> 視圖<b>導出全部 {count, number} 項</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    # The same, once there is more than a page of rows to fetch and the wait is worth warning about
+    introSlow: '你即將從 <b>{name}</b> 視圖<b>導出全部 {count, number} 項</b>，根據你的網絡連接情況，這可能需要一段時間。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    # A view the api could not count: exported all the same, with no number to put to it
+    introUncounted: '你即將從 <b>{name}</b> 視圖<b>導出全部項</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    choose: '<b>請選擇導出格式</b>以繼續……'
+    # What the same modal says when it was opened for a selection rather than for a whole view
+    selectionTitle: 導出為……
+    selectionIntro: |-
+      你即將<b>導出 {count, plural,
+      one {1 個所選項}
+      other {{count, number} 個所選項}
+      }</b>。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。
+    selectionIntroSlow: '你即將<b>導出 {count, number} 個所選項</b>，根據你的網絡連接情況，這可能需要一段時間。根據你在下方選擇的格式（例如 CSV），導出內容的結構將與當前的視圖設置（如有）保持一致（例如所選的分組方式和/或列配置）。'
+    download: 下載
+    format:
+      yaml: YAML
+      json: JSON
+      csv: CSV
+    # What the notification centre shows while the export runs, and what that entry becomes once
+    # it is done. The file can take a while, so the export is watched there rather than blocking.
+    notification:
+      title: 正在導出
+      message: 正在將 {name} 視圖中的所有項導出為 {format}……
+      doneTitle: 導出完成
+      doneMessage: '{name} 視圖已導出到 {file}。'
+      failedTitle: 導出失敗
+      failedMessage: 無法導出 {name} 視圖。
 tableHeaders:
   assuredConcurrencyShares: 確保併發份額
   autoscaler: 自動擴縮器
@@ -7211,6 +7394,7 @@ tableHeaders:
   accessModes: 訪問模式
   address: 地址
   age: 存活時間
+  badge: 徽章
   apiGroup: API 組
   apikey: API 密鑰
   available: 可用
@@ -7847,11 +8031,11 @@ workload:
       successThreshold: 成功閾值
       timeout: 超時
       kind:
-        none:  無
-        HTTP:  HTTP 請求返回成功的狀態（200-399）
+        none: 無
+        HTTP: HTTP 請求返回成功的狀態（200-399）
         HTTPS: HTTPS 請求返回成功的狀態
-        tcp:   成功啟動 TCP 連接
-        exec:  容器內運行的命令以 0 狀態退出
+        tcp: 成功啟動 TCP 連接
+        exec: 容器內運行的命令以 0 狀態退出
     image: 容器鏡像
     imagePullPolicy: 鏡像拉取策略
     imagePullSecrets:
@@ -9107,6 +9291,9 @@ action:
   clone: 克隆
   disable: 禁用
   download: 下載 YAML
+  # What the same action is called when the configurable tables feature is on, where it offers the
+  # other formats alongside the yaml it has always given
+  downloadExport: 導出為……
   edit: 編輯配置
   editYaml: 編輯 YAML
   enable: 啟用
@@ -9480,10 +9667,10 @@ customLinks:
     valueLabel: URL
     showLabel: 顯示
   defaults:
-    docs:       Rancher 官方文檔
-    forums:     論壇
+    docs: Rancher 官方文檔
+    forums: 論壇
     slack: Slack
-    issues:     提交 GitHub Issue
+    issues: 提交 GitHub Issue
     getStarted: 開始使用
     commercialSupport: Rancher Prime
     appCo: SUSE Application Collection
@@ -9749,9 +9936,26 @@ component:
         namespace: 命名空間
         project: 項目
         type: 類型
+        ready: 就緒
+        restarts: 重啟次數
+        podRestarts: Pod 重啟次數
+        endpoints: 端點
+        podIp: Pod IP
+        workload: 工作負載
+        node: 節點
+        loadError: 無法加載此資源的詳細信息
+        externalIp: 外部 IP
+        internalIp: 內部 IP
+        version: 版本
+        os: 操作系統
+        cpu: CPU
+        memory: 內存
+        pods: Pod
         ariaLabel:
           showDetails: 顯示名為 { name } 的 { resource } 的資源信息
           actionMenu: 資源操作 - { resource }
+          loading: 正在加載資源信息
+          loadingUsage: 正在加載使用情況
   cron:
     expressionEditor:
       label:

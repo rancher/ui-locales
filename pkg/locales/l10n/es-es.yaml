@@ -1,7 +1,7 @@
 # ---
 # locale: es-es (Spanish - Spain)
 # source-locale: en-us
-# synced-against-en-us-commit: b1cb3ff (2026-09-29)
+# synced-against-en-us-commit: 0294f39 (2026-10-06)
 # last-updated: 2026-10-07
 # ---
 ##############################
@@ -440,7 +440,6 @@ about:
   title: Acerca de
   versions:
     downloadImages: Descargar lista de imágenes {listName}
-    downloadCli: "Descargar la CLI para {os}: {file}"
     githubRepo: Abrir repositorio de GitHub para el componente {name}
     title: Versiones
     component: Componente
@@ -450,14 +449,12 @@ about:
     machine: Máquina
     rancher: Rancher
     releaseNotes: Ver notas de la versión
-  os:
-    mac: macOS
-    windows: Windows
-    linux: Linux
   downloadImageList:
     title: Listas de imágenes
-  downloadCLI:
-    title: Descargas de CLI
+  cli:
+    title: "CLI de {vendor}"
+    description: La CLI de {vendor} le permite gestionar clústeres, proyectos y recursos desde la línea de comandos. Hay compilaciones disponibles para diversos sistemas operativos y arquitecturas, y la documentación explica cómo descargarlas e instalarlas.
+    docsLink: Ver la documentación de la CLI de {vendor}
   diagnostic:
     title: Diagnósticos
     checkboxTooltip: Complementar los datos de diagnóstico con tiempos de respuesta para los 10 recursos principales. Esto puede tardar un tiempo.
@@ -752,6 +749,7 @@ authConfig:
     cert: Certificado
     disabledStatusBitmask: Máscara de bits de estado deshabilitado
     groupDNAttribute: Atributo DN del grupo
+    groupIDAttribute: Atributo identificador del grupo
     groupMemberMappingAttribute: Atributo de asignación de miembros del grupo
     groupMemberUserAttribute: Atributo de usuario miembro del grupo
     groupSearchBase:
@@ -761,6 +759,10 @@ authConfig:
       label: Nombre de host/IP
       placeholder: p. ej. servidor1,servidor2
       hint: Se pueden especificar varios servidores como una lista separada por comas
+    idAttribute:
+      tip: Atributo cuyo valor identifica al usuario o grupo en Rancher en lugar de su nombre distinguido, de modo que mover o renombrar la entrada en el directorio conserve sus permisos. Déjelo vacío para usar el nombre distinguido.
+      locked: No se puede cambiar mientras el proveedor esté habilitado. Deshabilite el proveedor para cambiarlo.
+      samlTip: Atributo cuyo valor coincide con lo que el proveedor de identidad envía en el campo de UID para los usuarios o en el campo de grupos para los grupos, de modo que los resultados de búsqueda coincidan con las entidades que han iniciado sesión. Déjelo vacío para usar el atributo de inicio de sesión para los usuarios y el atributo DN del grupo para los grupos.
     loginAttribute: Atributo de inicio de sesión
     nameAttribute: Atributo de nombre
     nestedGroupMembership:
@@ -794,6 +796,7 @@ authConfig:
       tip: Cuando está activado, Rancher usará la cuenta de servicio en lugar de la cuenta de usuario para buscar usuarios y grupos.
     tls: TLS
     userEnabledAttribute: Atributo de usuario habilitado
+    userIDAttribute: Atributo identificador del usuario
     userMemberAttribute: Atributo de miembro del usuario
     userLoginFilter: Filtro de inicio de sesión de usuario
     userSearchBase:
@@ -839,8 +842,8 @@ authConfig:
     search:
       title: Búsqueda de usuarios y grupos
       message: El protocolo SAML no admite la búsqueda de usuarios o grupos. Para habilitar la búsqueda, se debe configurar un servidor OpenLDAP.
-      'on': La búsqueda de usuarios y grupos de LDAP está configurada
-      'off': La búsqueda de usuarios y grupos de LDAP no está configurada
+      on: La búsqueda de usuarios y grupos de LDAP está configurada
+      off: La búsqueda de usuarios y grupos de LDAP no está configurada
       show: Mostrar detalles
       hide: Ocultar detalles
   azuread:
@@ -952,6 +955,7 @@ authConfig:
     enabled: El proveedor de autenticación {provider} está actualmente habilitado.
   testAndEnable: Probar y
     habilitar autenticación
+
 authGroups:
   actions:
     refresh: Actualizar membresías de grupo
@@ -1184,8 +1188,8 @@ backupRestoreOperator:
     enableEncryptionWarning: Se recomienda encarecidamente habilitar el cifrado al usar <b><i>Conjunto de recursos de copia de seguridad completa de Rancher</i></b>, de lo contrario la información sensible se guardará en texto plano. <a target="_blank" rel="noopener noreferrer nofollow" href="https://ranchermanager.docs.rancher.com/reference-guides/backup-restore-configuration/backup-configuration#resourcesets">Leer más</a>.
     missingResourceSetWarning: El conjunto de recursos <b><i>{resourceSet}</i></b> no existe, es posible que haya sido eliminado. Por favor seleccione una opción diferente.
     resourceSetOptions:
-      rancher-resource-set-basic: Conjunto de recursos básico de Rancher
-      rancher-resource-set-full: Conjunto de recursos completo de Rancher
+      'rancher-resource-set-basic': Conjunto de recursos básico de Rancher
+      'rancher-resource-set-full': Conjunto de recursos completo de Rancher
       custom: Personalizado
       customResourceSetLabel: Conjunto de recursos personalizado
   backupFilename: Nombre del archivo de copia de seguridad
@@ -1339,6 +1343,7 @@ catalog:
     windowsIncompatible: Solo Linux
     versionWindowsIncompatible: Versión solo para Linux
     header: Gráficos
+    cannotListApps: No tiene permiso para listar las aplicaciones instaladas, lo cual es necesario para ver los gráficos
     noCharts:
       title: No hay gráficos para mostrar
       message: <b>Consejos:</b> deshaga el último filtro aplicado o <resetAllFilters>borre todos los filtros</resetAllFilters>, y asegúrese de tener los <repositoriesUrl>repositorios</repositoriesUrl> correctos.
@@ -2025,6 +2030,8 @@ cluster:
   explore: Explorar
   importAction: Importar existente
   manageAction: Administrar
+  pinAction: Fijar
+  unpinAction: Dejar de fijar
   kubeConfig:
     error:
       title: No se puede generar KubeConfig
@@ -2787,8 +2794,8 @@ cluster:
         tooltip: Cada copia de seguridad registra 1 instantánea por nodo etcd. Si especifica 3 instantáneas y tiene 3 nodos etcd, solo conservará 1 copia de seguridad completa.
       exportMetric:
         label: Métricas
-        'false': Solo disponible dentro del clúster
-        'true': Expuesto a la interfaz pública
+        false: Solo disponible dentro del clúster
+        true: Expuesto a la interfaz pública
       s3backups:
         label: Guardar copias de seguridad en S3
       s3config:
@@ -3013,6 +3020,7 @@ copyToClipboard:
   success: ¡Copiado!
   error: Error al
     copiar
+
 codeMirror:
   escapeText: Presione Shift+Escape para salir del editor
   keymap:
@@ -3147,6 +3155,7 @@ dynamicContent:
     title: Las actualizaciones han finalizado
     message: Esta versión de Rancher ({version}) ya no recibirá actualizaciones. Considere
       actualizar a una versión más reciente o a Rancher Prime.
+
 etcdInfoBanner:
   hasLeader: 'Etcd tiene un líder:'
   leaderChanges: 'Número de cambios de líder:'
@@ -3156,6 +3165,7 @@ fileSelectorTextArea:
   dropHint: o suelte el archivo sobre el área de texto de arriba
   dropToReplace: Al soltar el archivo aquí
     se reemplazará cualquier contenido existente
+
 fleet:
   settings:
     label: Entrega continua
@@ -3797,6 +3807,62 @@ fleet:
           =0 { Agregar espacios de nombres aquí creará una GitRepoRestriction. }
           other { Solo los <code>allowedTargetNamespaces</code> de la Restricción de Repositorio Git se administran aquí. Puede realizar cambios adicionales a la Restricción de Repositorio Git}
         }"
+  policy:
+    name:
+      label: Nombre de la política
+    serviceAccounts:
+      title: Cuentas de servicio
+      require:
+        label: Requerir cuenta de servicio
+        description: Exige que se especifique una ServiceAccount en los recursos de destino.
+      allowNamespaceCreation:
+        title: Creación de espacios de nombres
+        label: Permitir la creación de espacios de nombres
+        description: Mientras se requiera una cuenta de servicio, Fleet no crea espacios de nombres en los clústeres descendentes, por lo que los espacios de nombres de destino deben existir previamente. Permítalo solo donde la creación de espacios de nombres esté controlada por otros medios.
+        link: Creación de espacios de nombres en la documentación de Fleet
+      restrict:
+        all: Permitir todas las cuentas de servicio
+        selected: Permitir solo las cuentas de servicio seleccionadas
+        description: Restringe el conjunto de cuentas de servicio a las que pueden hacer referencia los recursos GitRepo, HelmOp y Bundle.
+      allowed:
+        title: Seleccione las cuentas de servicio permitidas
+        label: Cuentas de servicio permitidas
+    gitRepo:
+      title: Política de GitRepo
+      defaultServiceAccount:
+        label: Cuenta de servicio predeterminada
+        description: Se aplicará a los App Bundles de GitRepo que no indiquen una cuenta de servicio.
+      defaultSecret:
+        label: Secreto de cliente predeterminado
+        description: Se aplicará a los App Bundles de GitRepo que no indiquen un secreto de cliente.
+      restrict:
+        all: Permitir todos los secretos de cliente
+        selected: Permitir solo los secretos de cliente seleccionados
+        description: Restringe el conjunto de valores de clientSecretName a los que pueden hacer referencia los GitRepos.
+      allowed:
+        title: Seleccione los secretos de cliente permitidos
+        label: Secretos de cliente permitidos
+    helmOp:
+      title: Política de HelmOps
+      defaultServiceAccount:
+        label: Cuenta de servicio predeterminada
+        description: Se aplicará a los App Bundles de HelmOps que no indiquen una cuenta de servicio.
+      defaultSecret:
+        label: Secreto de Helm predeterminado
+        description: Se aplicará a los App Bundles de HelmOps que no indiquen un secreto de Helm.
+      restrict:
+        all: Permitir todos los secretos de Helm
+        selected: Permitir solo los secretos de Helm seleccionados
+        description: Restringe el conjunto de nombres de secretos de credenciales a los que pueden hacer referencia los HelmOps.
+      allowed:
+        title: Seleccione los secretos de Helm permitidos
+        label: Secretos de Helm permitidos
+    defaultServiceAccountNotAllowed: La cuenta de servicio predeterminada seleccionada debe estar permitida en la política.
+    defaultSecretNotAllowed: El secreto predeterminado seleccionado debe estar permitido en la política.
+    placeholder:
+      serviceAccount: Seleccione o ingrese el nombre de una cuenta de servicio
+      secret: Seleccione o ingrese el nombre de un secreto
+      allowList: Seleccione o ingrese nombres
   configMaps:
     label: Mapas de configuración
   secrets:
@@ -5134,7 +5200,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: Espacio de trabajo
-    placeholder: null
+    placeholder:
   description:
     label: Descripción
     placeholder: Cualquier texto que describa mejor este recurso
@@ -6288,12 +6354,12 @@ rbac:
     label: Miembros
   roletemplate:
     newUserDefault:
-      'no': 'No'
+      no: 'No'
       tooltip: Esto no afecta los enlaces existentes al rol.
     locked:
       label: Bloqueado
-      'yes': 'Sí: No se permiten nuevos enlaces para usar este rol'
-      'no': 'No'
+      yes: 'Sí: No se permiten nuevos enlaces para usar este rol'
+      no: 'No'
     tabs:
       grantResources:
         label: Otorgar recursos
@@ -6314,17 +6380,17 @@ rbac:
       GLOBAL:
         createButton: Crear rol global
         label: Global
-        'yes': 'Sí: Rol predeterminado para nuevos usuarios'
+        yes: 'Sí: Rol predeterminado para nuevos usuarios'
         defaultLabel: Predeterminado para nuevos usuarios
       CLUSTER:
         createButton: Crear rol de clúster
         label: Clúster
-        'yes': 'Sí: Rol predeterminado para la creación de nuevos clústeres'
+        yes: 'Sí: Rol predeterminado para la creación de nuevos clústeres'
         defaultLabel: Predeterminado para creador de clúster
       NAMESPACE:
         createButton: Crear rol de proyecto/namespaces
         label: Proyecto/Namespaces
-        'yes': 'Sí: Rol predeterminado para la creación de nuevos proyectos'
+        yes: 'Sí: Rol predeterminado para la creación de nuevos proyectos'
         defaultLabel: Predeterminado para creador de proyecto
       RBAC_ROLE:
         label: Rol
@@ -6615,33 +6681,33 @@ secret:
   customType: Tipo personalizado
   type: Tipo
   types:
-    opaque: Opaco
-    kubernetes.io/service-account-token: Token de Cuenta de Servicio
-    kubernetes.io/dockercfg: Registry
-    kubernetes.io/dockerconfigjson: Registry
-    kubernetes.io/basic-auth: Autenticación HTTP Básica
-    kubernetes.io/ssh-auth: Clave SSH
-    kubernetes.io/tls: TLS Certificate
-    bootstrap.kubernetes.io/token: Bootstrap Token
-    istio.io/key-and-cert: Istio Certificate
-    helm.sh/release.v1: Helm Release
-    fleet.cattle.io/cluster-registration-values: Fleet Cluster
-    provisioning.cattle.io/cloud-credential: Cloud Credential
-    rke.cattle.io/auth-config: RKE Auth Config
+    'opaque': Opaco
+    'kubernetes.io/service-account-token': Token de Cuenta de Servicio
+    'kubernetes.io/dockercfg': Registry
+    'kubernetes.io/dockerconfigjson': Registry
+    'kubernetes.io/basic-auth': Autenticación HTTP Básica
+    'kubernetes.io/ssh-auth': Clave SSH
+    'kubernetes.io/tls': TLS Certificate
+    'bootstrap.kubernetes.io/token': Bootstrap Token
+    'istio.io/key-and-cert': Istio Certificate
+    'helm.sh/release.v1': Helm Release
+    'fleet.cattle.io/cluster-registration-values': Fleet Cluster
+    'provisioning.cattle.io/cloud-credential': Cloud Credential
+    'rke.cattle.io/auth-config': RKE Auth Config
   initials:
-    opaque: O
-    kubernetes.io/service-account-token: SAT
-    kubernetes.io/dockercfg: R
-    kubernetes.io/dockerconfigjson: R
-    kubernetes.io/basic-auth: HTTP
-    kubernetes.io/ssh-auth: SSH
-    kubernetes.io/tls: TLS
-    bootstrap.kubernetes.io/token: Boot
-    istio.io/key-and-cert: Ist
-    helm.sh/release.v1: Helm
-    fleet.cattle.io/cluster-registration-values: F
-    provisioning.cattle.io/cloud-credential: CC
-    s3: S3
+    'opaque': O
+    'kubernetes.io/service-account-token': SAT
+    'kubernetes.io/dockercfg': R
+    'kubernetes.io/dockerconfigjson': R
+    'kubernetes.io/basic-auth': HTTP
+    'kubernetes.io/ssh-auth': SSH
+    'kubernetes.io/tls': TLS
+    'bootstrap.kubernetes.io/token': Boot
+    'istio.io/key-and-cert': Ist
+    'helm.sh/release.v1': Helm
+    'fleet.cattle.io/cluster-registration-values': F
+    'provisioning.cattle.io/cloud-credential': CC
+    's3': S3
   relatedWorkloads: Cargas de trabajo relacionadas
   typeDescriptions:
     custom:
@@ -6772,7 +6838,7 @@ servicesPage:
       label: IP compartida LB
     network:
       label: Red
-        
+
   ips:
     define: Puertos del servicio
     clusterIpHelpText: La dirección IP del clúster debe estar dentro del rango CIDR configurado para el servidor API.
@@ -7203,6 +7269,128 @@ storageClass:
       placeholder: Nombre de la clase de almacenamiento en el clúster [[Harvester]] anfitrión
       tooltip: De forma predeterminada se usa la clase
         de almacenamiento predeterminada del clúster [[Harvester]] anfitrión.
+
+tableViews:
+  tabs:
+    all: Explorador
+    label: Vistas guardadas
+    newView: Agregar vista
+    count: "{name} ({count})"
+  view:
+    label: Vista
+    unsaved: Tiene cambios sin guardar...
+    unsavedShort: Cambios sin guardar
+    discard: Descartar cambios
+    saveChanges: Guardar cambios
+    saveAsNew: Guardar cambios en una vista nueva
+    groupBy: Agrupar por
+    columnsConfiguration: Configuración de columnas
+    columnsDefault: Predeterminada
+    columnsCount: "{shown} / {total}"
+    reset: Restablecer predeterminado
+  tab:
+    menu: Opciones de vista
+    rename: Renombrar vista
+    duplicate: Duplicar vista
+    copySuffix: (copia)
+    delete: Eliminar vista
+    setDefault: Establecer como vista predeterminada
+    newViewName: Sin título
+    deleted: Vista eliminada
+    deletedMessage: La vista "{name}" se ha eliminado correctamente.
+    undo: Deshacer
+  bulk:
+    selected: "{count} seleccionados"
+    deleteSelected: Eliminar seleccionados
+  query:
+    fields:
+      pinned: Fijado
+      clusterId: ID del clúster
+    placeholder: 'Filtre en todas las columnas o solo en algunas (p. ej., state:error)'
+    clear: Limpiar filtro
+    inUse: "{count} en uso"
+    label: Etiqueta
+    suggestions: Sugerencias de filtro
+    suggestionsAvailable: |-
+      {count, plural,
+      one {1 sugerencia disponible}
+      other {{count} sugerencias disponibles}
+      }
+    connective:
+      and: Ambos deben coincidir
+      or: Cualquiera puede coincidir
+      not: Excluir estos
+    # What the toolbar says about a query it cannot read as written. Nothing here stops the query
+    # running - the table filters by as much of it as it can.
+    problem:
+      emptyValue: '<b>{label}</b> no tiene ningún valor con el que coincidir.'
+      trailingOperator: 'La consulta termina con <b>{text}</b>.'
+      leadingJoiner: '<b>{text}</b> no tiene nada delante con lo que unirse.'
+      consecutiveOperators: '<b>{text}</b> sigue a otro operador.'
+      danglingNegation: '<b>{text}</b> por sí solo no niega nada.'
+      unbalancedQuote: 'Hay comillas abiertas que nunca se cierran.'
+      noTerms: 'No hay nada por lo que filtrar.'
+    # Shown when part of a query names something this list cannot be filtered by on the server
+    unsupported: |-
+      {count, plural,
+      one {<b>{fields}</b> no se puede filtrar en esta lista, por lo que se ha ignorado esa parte de la consulta.}
+      other {<b>{fields}</b> no se pueden filtrar en esta lista, por lo que se han ignorado esas partes de la consulta.}
+      }
+  columns:
+    selectAll: Seleccionar todas las columnas
+    reset: Restablecer predeterminado
+    locked: Esta columna no se puede ocultar
+    reorder: Arrastre para reordenar
+    moveKeys: '{modifier}+Flecha arriba o {modifier}+Flecha abajo la mueve'
+    moved: '{label} se ha movido a la posición {position} de {total}'
+    allShown: 'Se muestran las {count} columnas'
+    resetDone: Columnas restablecidas a los valores predeterminados
+  group:
+    none: Ninguno
+    resetDone: 'Agrupación restablecida a {label}'
+    empty: (ninguno)
+    # A list's own groupings, as the Group By menu names them
+    by:
+      namespace: Espacio de nombres
+      project: Proyecto
+      node: Nodo
+      role: Rol
+      cluster: Clúster
+      device: Dispositivo
+      pool: Pool
+      workspace: Espacio de trabajo
+      type: Tipo
+  export:
+    label: Exportar toda la vista
+    title: Exportar todo el contenido de la vista
+    intro: 'Está a punto de <b>exportar todos los elementos ({count, number})</b> de la vista <b>{name}</b>. Según el formato que elija a continuación (p. ej., CSV), la estructura de la exportación coincidirá con la configuración actual de la vista, si la hay (p. ej., el método de agrupación seleccionado y/o la configuración de columnas).'
+    # The same, once there is more than a page of rows to fetch and the wait is worth warning about
+    introSlow: 'Está a punto de <b>exportar todos los elementos ({count, number})</b> de la vista <b>{name}</b>; dependiendo de su conexión, esto podría tardar un rato. Según el formato que elija a continuación (p. ej., CSV), la estructura de la exportación coincidirá con la configuración actual de la vista, si la hay (p. ej., el método de agrupación seleccionado y/o la configuración de columnas).'
+    # A view the api could not count: exported all the same, with no number to put to it
+    introUncounted: 'Está a punto de <b>exportar todos los elementos</b> de la vista <b>{name}</b>. Según el formato que elija a continuación (p. ej., CSV), la estructura de la exportación coincidirá con la configuración actual de la vista, si la hay (p. ej., el método de agrupación seleccionado y/o la configuración de columnas).'
+    choose: '<b>Elija el formato de exportación</b> para continuar...'
+    # What the same modal says when it was opened for a selection rather than for a whole view
+    selectionTitle: Exportar como...
+    selectionIntro: |-
+      Está a punto de <b>exportar {count, plural,
+      one {1 elemento seleccionado}
+      other {{count, number} elementos seleccionados}
+      }</b>. Según el formato que elija a continuación (p. ej., CSV), la estructura de la exportación coincidirá con la configuración actual de la vista, si la hay (p. ej., el método de agrupación seleccionado y/o la configuración de columnas).
+    selectionIntroSlow: 'Está a punto de <b>exportar {count, number} elementos seleccionados</b>; dependiendo de su conexión, esto podría tardar un rato. Según el formato que elija a continuación (p. ej., CSV), la estructura de la exportación coincidirá con la configuración actual de la vista, si la hay (p. ej., el método de agrupación seleccionado y/o la configuración de columnas).'
+    download: Descargar
+    format:
+      yaml: YAML
+      json: JSON
+      csv: CSV
+    # What the notification centre shows while the export runs, and what that entry becomes once
+    # it is done. The file can take a while, so the export is watched there rather than blocking.
+    notification:
+      title: Exportación en curso
+      message: Exportando todos los elementos de la vista {name} como {format}...
+      doneTitle: Exportación completada
+      doneMessage: La vista {name} se ha exportado a {file}.
+      failedTitle: Error en la exportación
+      failedMessage: No se pudo exportar la vista {name}.
 tableHeaders:
   assuredConcurrencyShares: Cuotas de concurrencia asegurada
   autoscaler: Escalador automático
@@ -7211,6 +7399,7 @@ tableHeaders:
   accessModes: Modos de acceso
   address: Dirección
   age: Antigüedad
+  badge: Insignia
   apiGroup: Grupos de API
   apikey: Clave de API
   available: Disponible
@@ -8379,8 +8568,8 @@ model:
       keycloakoidc: Keycloak
       cognito: Amazon Cognito
       oidc: OIDC
-        
-        
+
+
   cluster:
     name: Nombre del clúster
   ingress:
@@ -8653,17 +8842,17 @@ typeLabel:
       one { Ruta }
       other { Rutas }
     }
-  management.cattle.io.cluster: |-
+  'management.cattle.io.cluster': |-
     {count, plural,
       one { Clúster de Gestión }
       other { Clústeres de Gestión }
     }
-  cluster.x-k8s.io.cluster: |-
+  'cluster.x-k8s.io.cluster': |-
     {count, plural,
       one { CAPI Cluster }
       other { CAPI Clusters }
     }
-  provisioning.cattle.io.cluster: |-
+  'provisioning.cattle.io.cluster': |-
     {count, plural,
       one { Clúster }
       other { Clústeres }
@@ -9107,6 +9296,9 @@ action:
   clone: Clonar
   disable: Deshabilitar
   download: Descargar YAML
+  # What the same action is called when the configurable tables feature is on, where it offers the
+  # other formats alongside the yaml it has always given
+  downloadExport: Exportar como...
   edit: Editar Configuración
   editYaml: Editar YAML
   enable: Habilitar
@@ -9214,53 +9406,53 @@ advancedSettings:
     useDefault: Usar el valor predeterminado
     invalidJSON: JSON inválido - verifique y corrija su entrada antes de guardar
   descriptions:
-    cacerts: Certificados CA necesarios para verificar el certificado del servidor.
-    password-min-length: Defina el número mínimo de caracteres requeridos para una contraseña de usuario.
-    cluster-defaults: Anule los valores predeterminados de RKE al crear nuevos clústeres.
-    engine-install-url: URL de instalación predeterminada del motor Docker (para la mayoría de los controladores de nodo).
-    engine-iso-url: URL de instalación predeterminada del SO (para el controlador vSphere).
+    'cacerts': Certificados CA necesarios para verificar el certificado del servidor.
+    'password-min-length': Defina el número mínimo de caracteres requeridos para una contraseña de usuario.
+    'cluster-defaults': Anule los valores predeterminados de RKE al crear nuevos clústeres.
+    'engine-install-url': URL de instalación predeterminada del motor Docker (para la mayoría de los controladores de nodo).
+    'engine-iso-url': URL de instalación predeterminada del SO (para el controlador vSphere).
     'engine-newest-version': 'La versión de Docker más reciente compatible en el momento de esta versión. Una versión de Docker que no cumpla el rango de Docker compatible pero sea más reciente que esta se marcará como no probada.'
     'engine-supported-range': 'Rango Semver de las versiones del motor Docker compatibles. Las versiones que no cumplan este rango se marcarán como no compatibles en la interfaz.'
-    ingress-ip-domain: "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
-    server-url: URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
+    'ingress-ip-domain': "Dominio DNS comodín para usar con nombres de host de Ingress generados automáticamente. <ingress-name>.<namespace-name>.<ip address of ingress controller> se añadirá al dominio."
+    'server-url': URL de instalación predeterminada de {appName}. Debe ser HTTPS. Todos los nodos del clúster deben poder alcanzar esta dirección.
     'system-default-registry': 'Registro privado que se usará para todas las imágenes de contenedores del sistema de Rancher. Si no se especifica ningún valor, se usa el registro predeterminado del entorno de ejecución de contenedores. Para Docker y containerd, el valor predeterminado es `docker.io`.'
     'system-default-registry-pull-secrets': 'Lista de secretos de extracción de imágenes para autenticarse en el registro desde el que se extraen las imágenes de contenedor del sistema de Rancher. De forma predeterminada, estos secretos se copiarán en cada espacio de nombres de gráfico de Rancher. Los secretos deben estar en el espacio de nombres `cattle-system`. Se utilizará el primer secreto válido de la lista.'
-    ui-dashboard-index: Ubicación del índice HTML para la UI de {appName}.
-    ui-offline-preferred: 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
-    ui-pl: Nombre de empresa para etiqueta privada.
-    auth-user-info-max-age-seconds: La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
-    auth-user-info-resync-cron: Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
-    cluster-template-enforcement: Los no administradores estarán restringidos a lanzar clústeres solo mediante Plantillas RKE preaprobadas.
+    'ui-dashboard-index': Ubicación del índice HTML para la UI de {appName}.
+    'ui-offline-preferred': 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
+    'ui-pl': Nombre de empresa para etiqueta privada.
+    'auth-user-info-max-age-seconds': La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
+    'auth-user-info-resync-cron': Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
+    'cluster-template-enforcement': Los no administradores estarán restringidos a lanzar clústeres solo mediante Plantillas RKE preaprobadas.
     'auth-user-session-idle-ttl-minutes': 'TTL de inactividad personalizado (en minutos) en una sesión de autenticación de usuario. Es la duración máxima que una sesión puede permanecer activa cuando no hay actividad del usuario en un navegador. Debe ser menor que "auth-user-session-ttl-minutes". Si "auth-user-session-idle-ttl-minutes" es mayor o igual que "auth-user-session-ttl-minutes", la función de inactividad de sesión se considera desactivada.'
     'auth-user-session-ttl-minutes': 'TTL personalizado (en minutos) en una sesión de autenticación de usuario. Es la duración máxima que una sesión puede permanecer activa independientemente de la actividad del usuario en un navegador. Debe ser mayor que "auth-user-session-idle-ttl-minutes".'
-    auth-token-max-ttl-minutes: TTL máximo (en minutos) para todos los tokens excepto los controlados por "auth-user-session-ttl-minutes".
-    kubeconfig-generate-token: Generar automáticamente tokens para los usuarios cuando se solicita un kubeconfig.
-    kubeconfig-default-token-ttl-minutes: TTL (en minutos) aplicado en todos los tokens de kubeconfig. Cuando se establece en 0, el token nunca expira.
-    rke-metadata-config: Configurar los parámetros de actualización de metadatos de RKE.
-    ui-banners: El banner de clasificación se usa para mostrar un banner fijo personalizado en el encabezado, pie de página o ambos.
-    custom-notifications: Editar notificaciones personalizadas
-    ui-consent-banner: El banner se usa para mostrar un banner de consentimiento personalizado durante el inicio de sesión.
-    ui-default-landing: La página predeterminada a la que llegan los usuarios después de iniciar sesión.
-    brand: Nombre de la carpeta para un tema alternativo definido en '/assets/brand'
-    hide-local-cluster: Ocultar el clúster local
+    'auth-token-max-ttl-minutes': TTL máximo (en minutos) para todos los tokens excepto los controlados por "auth-user-session-ttl-minutes".
+    'kubeconfig-generate-token': Generar automáticamente tokens para los usuarios cuando se solicita un kubeconfig.
+    'kubeconfig-default-token-ttl-minutes': TTL (en minutos) aplicado en todos los tokens de kubeconfig. Cuando se establece en 0, el token nunca expira.
+    'rke-metadata-config': Configurar los parámetros de actualización de metadatos de RKE.
+    'ui-banners': El banner de clasificación se usa para mostrar un banner fijo personalizado en el encabezado, pie de página o ambos.
+    'custom-notifications': Editar notificaciones personalizadas
+    'ui-consent-banner': El banner se usa para mostrar un banner de consentimiento personalizado durante el inicio de sesión.
+    'ui-default-landing': La página predeterminada a la que llegan los usuarios después de iniciar sesión.
+    'brand': Nombre de la carpeta para un tema alternativo definido en '/assets/brand'
+    'hide-local-cluster': Ocultar el clúster local
     'agent-tls-mode': "Verificación de certificados de Rancher. En modo `strict`, los agentes (system, cluster, fleet, etc.) solo confiarán en instalaciones de Rancher que usen un certificado firmado por el CABundle de la configuración `cacerts`. Cuando el modo es system-store, los agentes confiarán en cualquier certificado firmado por un CABundle del almacén de confianza del sistema operativo."
-    k3s-based-upgrader-uninstall-concurrency: Define el número máximo de clústeres en los que Rancher puede desinstalar concurrentemente el sistema de actualización legacy.
-    system-agent-upgrader-install-concurrency: Define el número máximo de clústeres en los que Rancher puede instalar concurrentemente los recursos del sistema de actualización.
+    'k3s-based-upgrader-uninstall-concurrency': Define el número máximo de clústeres en los que Rancher puede desinstalar concurrentemente el sistema de actualización legacy.
+    'system-agent-upgrader-install-concurrency': Define el número máximo de clústeres en los que Rancher puede instalar concurrentemente los recursos del sistema de actualización.
     'delete-machine-on-failure-after': Define el número de segundos tras los cuales Rancher eliminará las máquinas de infraestructura cuyo aprovisionamiento haya fallado. Establezca el valor en 0 para deshabilitar la eliminación automática de las máquinas con errores.
     'imported-cluster-version-management': Habilita la gestión de versiones para los clústeres RKE2/K3s importados y para el clúster local si es un clúster RKE2/K3s. La configuración de gestión de versiones de cada clúster prevalece sobre esta configuración global a nivel de clúster. En los clústeres existentes cuya gestión de versiones a nivel de clúster esté establecida en 'system-default', cambiar este indicador provocará un nuevo despliegue del agente del clúster durante la siguiente reconciliación (por defecto cada 5 minutos, o en cuanto se edite el clúster, lo que ocurra primero).
     'imported-cluster-day2-ops-enabled': Controla si los clústeres RKE2/K3s importados tendrán las operaciones de día 2 (instantáneas de etcd, restauraciones, rotaciones de clave de cifrado) habilitadas de forma predeterminada. Esto afectará a todos los clústeres que usen la configuración predeterminada y se puede anular a nivel de clúster.
   warnings:
-    agent-tls-mode: Cambiar esta configuración provocará que todos los agentes sean redespliegados.
+    'agent-tls-mode': Cambiar esta configuración provocará que todos los agentes sean redespliegados.
   editHelp:
-    ui-banners: 'Esta configuración acepta un objeto JSON con 3 parámetros raíz: <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> es un objeto que contiene: <code>textColor</code>, <code>background</code> y <code>text</code>, donde <code>textColor</code> y <code>background</code> son cualquier valor de color CSS válido.'
+    'ui-banners': 'Esta configuración acepta un objeto JSON con 3 parámetros raíz: <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> es un objeto que contiene: <code>textColor</code>, <code>background</code> y <code>text</code>, donde <code>textColor</code> y <code>background</code> son cualquier valor de color CSS válido.'
   enum:
     'ui-default-landing':
       ember: Administrador de Clústeres
       vue: Explorador de Clústeres
     'ui-offline-preferred':
       dynamic: Dinámico
-      'true': Local
-      'false': Remoto
+      true: Local
+      false: Remoto
     'harv-ui-source':
       auto: Auto
       bundled: Empaquetado
@@ -9749,9 +9941,26 @@ component:
         namespace: Espacio de Nombres
         project: Proyecto
         type: Tipo
+        ready: Listo
+        restarts: Reinicios
+        podRestarts: Reinicios del Pod
+        endpoints: Endpoints
+        podIp: IP del Pod
+        workload: Carga de trabajo
+        node: Nodo
+        loadError: No se pudieron cargar los detalles de este recurso
+        externalIp: IP externa
+        internalIp: IP interna
+        version: Versión
+        os: SO
+        cpu: CPU
+        memory: Memoria
+        pods: Pods
         ariaLabel:
           showDetails: Mostrar información de recurso sobre { resource } llamado { name }
           actionMenu: Acciones de Recurso - { resource }
+          loading: Cargando información del recurso
+          loadingUsage: Cargando uso
   cron:
     expressionEditor:
       label:
