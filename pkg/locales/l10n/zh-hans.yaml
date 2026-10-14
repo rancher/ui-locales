@@ -1,8 +1,8 @@
 # ---
 # locale: zh-hans (Chinese - Simplified)
 # source-locale: en-us
-# synced-against-en-us-commit: 0294f39 (2026-10-06)
-# last-updated: 2026-10-07
+# synced-against-en-us-commit: 350d929 (2026-10-13)
+# last-updated: 2026-10-14
 # ---
 ##############################
 # Special stuff
@@ -2026,6 +2026,10 @@ cluster:
     commandInstructionsInsecure: '如果你看到&quot;证书由未知机构签名&quot;的错误，你的 {vendor} 安装了自签名或不受信任的 SSL 证书。你可以运行下面的命令来绕过证书验证：'
     clusterRoleBindingInstructions: '如果你在创建资源时遇到权限错误，你的用户可能没有绑定 <code>cluster-admin</code> 角色。你可以运行这个命令来申请角色：'
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <你的 kubeconfig 中的用户名>'
+  registration:
+    serverUrlMissing:
+      import: 'The <code>server-url</code> setting is not set, so {vendor} cannot include its URL in the commands below. Replace <code>&lt;SERVER_URL&gt;</code> with a URL this cluster can reach {vendor} on, or ask an administrator to set <code>server-url</code> in Global Settings.'
+      custom: 'The <code>server-url</code> setting is not set, so {vendor} cannot generate the registration command. Ask an administrator to set <code>server-url</code> in Global Settings.'
   explore: 浏览
   importAction: 导入已有集群
   manageAction: 管理
@@ -3020,10 +3024,29 @@ copyToClipboard:
   error: 复制出错
 
 codeMirror:
+  # Shown by CodeMirror 5 editors in extensions built with an older shell
   escapeText: 按 Shift+Escape 使编辑器失去焦点
+  leaveEditor: Press Escape, then Tab to leave the editor
+  foldLine: Fold line
+  unfoldLine: Unfold line
+  search:
+    find: Find
+    next: Next
+    previous: Previous
+    all: Select all
+    matchCase: Match case
+    regexp: Regular expression
+    byWord: Whole word
+    replaceField: Replace
+    replace: Replace
+    replaceAll: Replace all
+    close: Close search
+    clear: Clear search
+    count: "{current} of {total}"
   keymap:
     tooltip: 按键映射偏好设置。
     indicatorToolip: "按键映射：{name}"
+    hideIndicator: "Hide key mapping: {name}"
 
 cruResource:
   backToForm: 返回表单编辑
@@ -3090,6 +3113,12 @@ drivers:
 
 detailText:
   copyAriaLabel: 将 {item} 的值复制到剪贴板
+  paste:
+    ariaLabel: Paste a {item} value from the clipboard
+    action: Paste
+    waiting: Pasting...
+    success: Pasted!
+    error: Error Pasting
   collapse: 隐藏
   binary: '<二进制数据: {n, number} 字节>'
   empty: '<空白>'
@@ -3793,6 +3822,12 @@ fleet:
     timeout: 工作空间创建超时。工作空间可能已创建，建议在创建另一个工作空间之前检查工作空间页面。
     remove:
       warning: "删除工作空间也会删除工作空间中的所有资源，其中包括 GitRepo 和集群。<br><br>删除的集群将从 {vendor} 中移除，如果 {vendor} 管理该集群的生命周期，其底层基础设施也将被删除。"
+    moved:
+      removed: "Changing the workspace clears previous selections. The following items are not available in the {workspace} workspace and have been deselected: {names}."
+      cluster: "cluster {name}"
+      clusterGroup: "cluster group {name}"
+      secret: "secret {name}"
+      configMap: "config map {name}"
   restrictions:
     addTitle: 'allowedTargetNamespaces'
     addLabel: 添加
@@ -5196,7 +5231,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: 工作空间
-    placeholder:
+    placeholder: Select a workspace
   description:
     label: 描述
     placeholder: 输入可以描述该资源的文本
@@ -5864,6 +5899,7 @@ plugins:
     kubeVersion: 无法加载扩展。已安装的版本与当前 Rancher 的 Kubernetes 版本不兼容
     load: 加载此扩展的代码时出错
     developerPkg: 此扩展已在内部加载，因此我们不会加载外部版本
+    extendedProductMissing: This Extension adds pages to a product that is not available. Install the Extension that provides that product, or check that it loaded without errors
   success:
     title: 已加载扩展 {name}
     message: 扩展加载成功
@@ -5879,7 +5915,8 @@ plugins:
     actions: 操作
     noActions: 没有可用的操作
     detail: 详情
-    versions: 版本
+    versions: Latest Versions
+    showAllVersions: Show all
     versionError: 无法加载版本信息
     requiresRancherPrime: "需要 Rancher Prime"
     requiresRancherVersion: "需要 Rancher {required}"
@@ -6555,8 +6592,6 @@ resourceList:
   nsFiltering: "请使用上面的过滤器选择一个或多个命名空间或项目。"
   nsFilteringGeneric: "请使用上方的筛选器选择有效的命名空间或项目选项。"
   nsFilterToolTip: "仅限于过滤项目和命名空间"
-  stateFilterApplied: "已应用状态筛选："
-  clearStateFilter: "清除筛选"
 resourceLoadingIndicator:
   loading: 正在加载
 
@@ -7267,7 +7302,7 @@ storageClass:
 
 tableViews:
   tabs:
-    all: 浏览器
+    all: All
     label: 已保存的视图
     newView: 添加视图
     count: "{name}（{count}）"
@@ -7287,6 +7322,8 @@ tableViews:
     menu: 视图选项
     rename: 重命名视图
     duplicate: 复制视图
+    shareView: Share View
+    importView: Import View
     copySuffix: （副本）
     delete: 删除视图
     setDefault: 设为默认视图
@@ -7306,6 +7343,7 @@ tableViews:
     inUse: "{count} 个使用中"
     label: 标签
     suggestions: 过滤建议
+    loadingValues: Loading values…
     suggestionsAvailable: |-
       {count, plural,
       one {有 1 条可用建议}
@@ -7353,8 +7391,25 @@ tableViews:
       cluster: 集群
       device: 设备
       pool: 池
+      provider: Provider
       workspace: 工作空间
       type: 类型
+  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
+  share:
+    title: Share View
+    intro: 'Copy this text and share it. Anyone with the text can import the view using <b>Import View</b>. It holds the view as it is now, unsaved changes included: columns, grouping, sort and filter. <b>The filter is included and can reveal information such as resource or namespace names.</b>'
+    label: View
+  import:
+    title: Import View
+    intro: "Paste the text of a view shared with you. It replaces this view's settings, including any unsaved changes, as changes you can save or discard."
+    # From the All tab, which can't be changed
+    introNew: 'Paste the text of a view shared with you. It is added as a new view, with its settings as changes you can save or discard.'
+    placeholder: Paste the view here
+    import: Import
+    invalid: This isn't a shared view. Check that the whole text was copied.
+    # `list` names the table the view was shared from, eg Pods
+    otherTable: This view was shared from the {list} list. Open Import View there to import it.
+    otherPage: This view was shared from the {list} list on another page. Open Import View there to import it.
   export:
     label: 导出视图全部内容
     title: 导出视图全部内容
@@ -7386,6 +7441,20 @@ tableViews:
       doneMessage: '{name} 视图已导出到 {file}。'
       failedTitle: 导出失败
       failedMessage: 无法导出 {name} 视图。
+      # The same for a selection exported from its rows' actions. `type` is what the rows are, as many as
+      # `count` (eg Pod, Pods), else `items`
+      selectionMessage: Exporting {count, number} selected {type} as {format}...
+      selectionDoneMessage: |-
+        {count, plural,
+        one {1 selected {type} has}
+        other {{count, number} selected {type} have}
+        } been exported to {file}.
+      selectionFailedMessage: |-
+        {count, plural,
+        one {The selected {type}}
+        other {The {count, number} selected {type}}
+        } could not be exported.
+      items: "{count, plural, one {item} other {items}}"
 tableHeaders:
   assuredConcurrencyShares: 确保并发份额
   autoscaler: 自动扩缩器
@@ -9415,6 +9484,7 @@ advancedSettings:
     'ui-dashboard-index': '{appName} UI 的 HTML 索引位置。'
     'ui-offline-preferred': '控制 UI 资产是由服务器容器在本地提供，还是从 ui-dashboard-index 设置中定义的远程 URL 提供。`动态` 选项将在 {appName} 的生产版本中使用本地资产。'
     'ui-pl': '自有品牌公司名称。'
+    'ui-appco-enabled': 'Determines the visibility of SUSE Application Collection features, specifically the option to create App Bundles in Continuous Delivery and the preconfigured option to create an Application Collection repository.'
     'auth-user-info-max-age-seconds': '在同步验证提供程序组成员之前，用户验证 Token 的最长存活时间。'
     'auth-user-info-resync-cron': '重新同步验证提供程序组成员的默认 cron 调度。'
     'cluster-template-enforcement': '非管理员只能通过预先批准的 RKE 模板启动集群。'
@@ -9459,6 +9529,15 @@ advancedSettings:
     'agent-tls-mode':
       strict: '严格'
       system-store: '系统存储'
+    'ui-appco-enabled':
+      'true': 'True'
+      'false': 'False'
+      none: None (default)
+  enumDescription:
+    'ui-appco-enabled':
+      'true': Always shows these features.
+      'false': Always hides these features. Useful for air-gapped installations that cannot reach the Application Collection registry.
+      none: Inherits behavior from the system-catalog setting. Features are hidden if the catalog is “bundled” (serving only bundled charts) and shown otherwise.
   provisioning:
     header: 集群配置
 
@@ -9893,6 +9972,15 @@ component:
           rows:
             conditions: 状况
             events: 事件
+        statusBreakdownCard:
+          ariaLabel:
+            count: '{count} {label}, {color}'
+          color:
+            error: Error
+            warning: Warning
+            info: Info
+            success: Success
+            disabled: Disabled
         extrasCard:
           title: 更多
           message: '考虑安装更多<extensionsLink>扩展</extensionsLink>和/或<clusterToolsLink>集群工具</clusterToolsLink>来丰富你的 Rancher 体验。'
