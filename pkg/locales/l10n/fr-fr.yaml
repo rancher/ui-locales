@@ -2018,8 +2018,8 @@ cluster:
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <your username from your kubeconfig>'
   registration:
     serverUrlMissing:
-      import: 'The <code>server-url</code> setting is not set, so {vendor} cannot include its URL in the commands below. Replace <code>&lt;SERVER_URL&gt;</code> with a URL this cluster can reach {vendor} on, or ask an administrator to set <code>server-url</code> in Global Settings.'
-      custom: 'The <code>server-url</code> setting is not set, so {vendor} cannot generate the registration command. Ask an administrator to set <code>server-url</code> in Global Settings.'
+      import: 'Le paramètre <code>server-url</code> n’est pas défini, {vendor} ne peut donc pas inclure son URL dans les commandes ci-dessous. Remplacez <code>&lt;SERVER_URL&gt;</code> par une URL par laquelle ce cluster peut joindre {vendor}, ou demandez à un administrateur de définir <code>server-url</code> dans les paramètres globaux.'
+      custom: 'Le paramètre <code>server-url</code> n’est pas défini, {vendor} ne peut donc pas générer la commande d’enregistrement. Demandez à un administrateur de définir <code>server-url</code> dans les paramètres globaux.'
   explore: Explorer
   importAction: "Importer l’existant"
   manageAction: Gérer
@@ -3016,27 +3016,27 @@ copyToClipboard:
 codeMirror:
   # Shown by CodeMirror 5 editors in extensions built with an older shell
   escapeText: "Appuyez sur Maj+Échap pour quitter l’éditeur"
-  leaveEditor: Press Escape, then Tab to leave the editor
-  foldLine: Fold line
-  unfoldLine: Unfold line
+  leaveEditor: Appuyez sur Échap, puis sur Tab pour quitter l’éditeur
+  foldLine: Replier la ligne
+  unfoldLine: Déplier la ligne
   search:
-    find: Find
-    next: Next
-    previous: Previous
-    all: Select all
-    matchCase: Match case
-    regexp: Regular expression
-    byWord: Whole word
-    replaceField: Replace
-    replace: Replace
-    replaceAll: Replace all
-    close: Close search
-    clear: Clear search
-    count: "{current} of {total}"
+    find: Rechercher
+    next: Suivant
+    previous: Précédent
+    all: Tout sélectionner
+    matchCase: Respecter la casse
+    regexp: Expression régulière
+    byWord: Mot entier
+    replaceField: Remplacer
+    replace: Remplacer
+    replaceAll: Tout remplacer
+    close: Fermer la recherche
+    clear: Effacer la recherche
+    count: "{current} sur {total}"
   keymap:
     tooltip: Préférence de mappage des touches.
     indicatorToolip: "Mappage des touches : {name}"
-    hideIndicator: "Hide key mapping: {name}"
+    hideIndicator: "Masquer le mappage des touches : {name}"
 
 cruResource:
   backToForm: Retour au formulaire
@@ -3104,11 +3104,11 @@ drivers:
 detailText:
   copyAriaLabel: Copier la valeur de {item} dans le presse-papiers
   paste:
-    ariaLabel: Paste a {item} value from the clipboard
-    action: Paste
-    waiting: Pasting...
-    success: Pasted!
-    error: Error Pasting
+    ariaLabel: Coller une valeur de {item} depuis le presse-papiers
+    action: Coller
+    waiting: Collage...
+    success: Collé !
+    error: Erreur de collage
   collapse: Masquer
   binary: "<Données binaires : {n, number} octets>"
   empty: <Vide>
@@ -3813,11 +3813,11 @@ fleet:
     remove:
       warning: "La suppression d’un espace de travail supprime également toutes les ressources qu’il contient. Cela inclut les GitRepos mais aussi les clusters.<br><br>Les clusters supprimés seront retirés de {vendor}, et si {vendor} gère le cycle de vie du cluster, l’infrastructure sous-jacente sera également supprimée."
     moved:
-      removed: "Changing the workspace clears previous selections. The following items are not available in the {workspace} workspace and have been deselected: {names}."
+      removed: "Changer d’espace de travail efface les sélections précédentes. Les éléments suivants ne sont pas disponibles dans l’espace de travail {workspace} et ont été désélectionnés : {names}."
       cluster: "cluster {name}"
-      clusterGroup: "cluster group {name}"
+      clusterGroup: "groupe de clusters {name}"
       secret: "secret {name}"
-      configMap: "config map {name}"
+      configMap: "ConfigMap {name}"
   restrictions:
     addTitle: 'allowedTargetNamespaces'
     addLabel: Ajouter
@@ -5221,7 +5221,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: Espace de travail
-    placeholder: Select a workspace
+    placeholder: Sélectionner un espace de travail
   description:
     label: Description
     placeholder: "N’importe quel texte qui décrit mieux cette ressource"
@@ -5889,7 +5889,7 @@ plugins:
     kubeVersion: "Impossible de charger l’extension. La version installée n’est pas compatible avec la version Kubernetes Rancher actuelle."
     load: "Une erreur s’est produite lors du chargement du code de cette extension"
     developerPkg: Cette extension a été chargée en interne, nous ne chargerons donc pas la version externe
-    extendedProductMissing: This Extension adds pages to a product that is not available. Install the Extension that provides that product, or check that it loaded without errors
+    extendedProductMissing: Cette extension ajoute des pages à un produit qui n’est pas disponible. Installez l’extension qui fournit ce produit, ou vérifiez qu’elle s’est chargée sans erreur
   success:
     title: Extension {name} chargée
     message: "L’extension a été chargée avec succès"
@@ -5905,8 +5905,8 @@ plugins:
     actions: Actions
     noActions: Aucune action disponible
     detail: Détail
-    versions: Latest Versions
-    showAllVersions: Show all
+    versions: Dernières versions
+    showAllVersions: Tout afficher
     versionError: Impossible de charger les informations de version
     requiresRancherPrime: Nécessite Rancher Prime
     requiresRancherVersion: Nécessite Rancher {required}
@@ -7292,7 +7292,7 @@ storageClass:
 
 tableViews:
   tabs:
-    all: All
+    all: Tous
     label: Vues enregistrées
     newView: Ajouter une vue
     count: "{name} ({count})"
@@ -7312,8 +7312,8 @@ tableViews:
     menu: Options de la vue
     rename: Renommer la vue
     duplicate: Dupliquer la vue
-    shareView: Share View
-    importView: Import View
+    shareView: Partager la vue
+    importView: Importer une vue
     copySuffix: (copie)
     delete: Supprimer la vue
     setDefault: Définir comme vue par défaut
@@ -7333,7 +7333,7 @@ tableViews:
     inUse: "Utilisé {count} fois"
     label: Étiquette
     suggestions: Suggestions de filtre
-    loadingValues: Loading values…
+    loadingValues: Chargement des valeurs…
     suggestionsAvailable: |-
       {count, plural,
       one {1 suggestion disponible}
@@ -7381,25 +7381,25 @@ tableViews:
       cluster: Cluster
       device: Périphérique
       pool: Pool
-      provider: Provider
+      provider: Fournisseur
       workspace: Espace de travail
       type: Type
   # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
-    title: Share View
-    intro: 'Copy this text and share it. Anyone with the text can import the view using <b>Import View</b>. It holds the view as it is now, unsaved changes included: columns, grouping, sort and filter. <b>The filter is included and can reveal information such as resource or namespace names.</b>'
-    label: View
+    title: Partager la vue
+    intro: 'Copiez ce texte et partagez-le. Toute personne disposant de ce texte peut importer la vue via <b>Importer une vue</b>. Il contient la vue dans son état actuel, modifications non enregistrées comprises : colonnes, regroupement, tri et filtre. <b>Le filtre est inclus et peut révéler des informations telles que des noms de ressources ou d’espaces de noms.</b>'
+    label: Vue
   import:
-    title: Import View
-    intro: "Paste the text of a view shared with you. It replaces this view's settings, including any unsaved changes, as changes you can save or discard."
+    title: Importer une vue
+    intro: "Collez le texte d’une vue partagée avec vous. Il remplace les paramètres de cette vue, y compris les modifications non enregistrées, sous forme de modifications que vous pouvez enregistrer ou annuler."
     # From the All tab, which can't be changed
-    introNew: 'Paste the text of a view shared with you. It is added as a new view, with its settings as changes you can save or discard.'
-    placeholder: Paste the view here
-    import: Import
-    invalid: This isn't a shared view. Check that the whole text was copied.
+    introNew: 'Collez le texte d’une vue partagée avec vous. Elle est ajoutée en tant que nouvelle vue, avec ses paramètres sous forme de modifications que vous pouvez enregistrer ou annuler.'
+    placeholder: Collez la vue ici
+    import: Importer
+    invalid: Ce texte n’est pas une vue partagée. Vérifiez que le texte a été copié en entier.
     # `list` names the table the view was shared from, eg Pods
-    otherTable: This view was shared from the {list} list. Open Import View there to import it.
-    otherPage: This view was shared from the {list} list on another page. Open Import View there to import it.
+    otherTable: Cette vue a été partagée depuis la liste {list}. Ouvrez Importer une vue sur la liste {list} pour l’importer.
+    otherPage: Cette vue a été partagée depuis la liste {list} d’une autre page. Ouvrez Importer une vue sur cette autre page pour l’importer.
   export:
     label: Exporter toute la vue
     title: Exporter tout le contenu de la vue
@@ -7433,18 +7433,18 @@ tableViews:
       failedMessage: La vue {name} n’a pas pu être exportée.
       # The same for a selection exported from its rows' actions. `type` is what the rows are, as many as
       # `count` (eg Pod, Pods), else `items`
-      selectionMessage: Exporting {count, number} selected {type} as {format}...
+      selectionMessage: Export de la sélection ({count, number} {type}) au format {format}...
       selectionDoneMessage: |-
         {count, plural,
-        one {1 selected {type} has}
-        other {{count, number} selected {type} have}
-        } been exported to {file}.
+        one {La sélection (1 {type}) a été exportée}
+        other {La sélection ({count, number} {type}) a été exportée}
+        } vers {file}.
       selectionFailedMessage: |-
         {count, plural,
-        one {The selected {type}}
-        other {The {count, number} selected {type}}
-        } could not be exported.
-      items: "{count, plural, one {item} other {items}}"
+        one {La sélection (1 {type}) n’a pas pu être exportée}
+        other {La sélection ({count, number} {type}) n’a pas pu être exportée}
+        }.
+      items: "{count, plural, one {élément} other {éléments}}"
 tableHeaders:
   assuredConcurrencyShares: Parts de concurrence garanties
   autoscaler: Autoscaler
@@ -9474,7 +9474,7 @@ advancedSettings:
     'ui-dashboard-index': "Emplacement de l’index HTML pour l’interface {appName}."
     'ui-offline-preferred': "Contrôle si les ressources de l’interface utilisateur sont servies localement par le conteneur serveur ou depuis l’URL distante définie dans le paramètre ui-dashboard-index. L’option `Dynamique` utilisera les ressources locales dans les versions de production de {appName}."
     'ui-pl': "Nom de l’entreprise en marque blanche."
-    'ui-appco-enabled': 'Determines the visibility of SUSE Application Collection features, specifically the option to create App Bundles in Continuous Delivery and the preconfigured option to create an Application Collection repository.'
+    'ui-appco-enabled': 'Détermine la visibilité des fonctionnalités SUSE Application Collection, en particulier l’option de création de bundles d’applications dans Livraison continue et l’option préconfigurée de création d’un dépôt Application Collection.'
     'auth-user-info-max-age-seconds': "L’âge maximum des tokens d’authentification d’un utilisateur avant qu’une synchronisation des appartenances aux groupes soit effectuée."
     'auth-user-info-resync-cron': "Planification cron par défaut pour la resynchronisation des appartenances aux groupes du fournisseur d’authentification."
     'cluster-template-enforcement': "Les non-administrateurs seront limités au lancement de clusters via des modèles RKE préapprouvés uniquement."
@@ -9520,14 +9520,14 @@ advancedSettings:
       strict: Strict
       system-store: 'Magasin système'
     'ui-appco-enabled':
-      'true': 'True'
-      'false': 'False'
-      none: None (default)
+      'true': 'Vrai'
+      'false': 'Faux'
+      none: Aucun (par défaut)
   enumDescription:
     'ui-appco-enabled':
-      'true': Always shows these features.
-      'false': Always hides these features. Useful for air-gapped installations that cannot reach the Application Collection registry.
-      none: Inherits behavior from the system-catalog setting. Features are hidden if the catalog is “bundled” (serving only bundled charts) and shown otherwise.
+      'true': Affiche toujours ces fonctionnalités.
+      'false': Masque toujours ces fonctionnalités. Utile pour les installations air-gapped qui ne peuvent pas joindre le registre Application Collection.
+      none: Hérite du comportement du paramètre system-catalog. Les fonctionnalités sont masquées si le catalogue est « bundled » (ne servant que les charts intégrés) et affichées sinon.
   provisioning:
     header: Provisionnement du cluster
 
@@ -9966,11 +9966,11 @@ component:
           ariaLabel:
             count: '{count} {label}, {color}'
           color:
-            error: Error
-            warning: Warning
+            error: Erreur
+            warning: Avertissement
             info: Info
-            success: Success
-            disabled: Disabled
+            success: Succès
+            disabled: Désactivé
         extrasCard:
           title: Extras
           message: "Envisagez d’installer des <extensionsLink>extensions</extensionsLink> supplémentaires et/ou des <clusterToolsLink>outils de cluster</clusterToolsLink> pour enrichir votre expérience Rancher."

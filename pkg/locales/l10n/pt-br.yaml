@@ -2027,8 +2027,8 @@ cluster:
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <seu nome de usuário do seu kubeconfig>'
   registration:
     serverUrlMissing:
-      import: 'The <code>server-url</code> setting is not set, so {vendor} cannot include its URL in the commands below. Replace <code>&lt;SERVER_URL&gt;</code> with a URL this cluster can reach {vendor} on, or ask an administrator to set <code>server-url</code> in Global Settings.'
-      custom: 'The <code>server-url</code> setting is not set, so {vendor} cannot generate the registration command. Ask an administrator to set <code>server-url</code> in Global Settings.'
+      import: 'A configuração <code>server-url</code> não está definida, então o {vendor} não pode incluir sua URL nos comandos abaixo. Substitua <code>&lt;SERVER_URL&gt;</code> por uma URL pela qual este cluster consiga alcançar o {vendor}, ou peça a um administrador para definir <code>server-url</code> em Configurações Globais.'
+      custom: 'A configuração <code>server-url</code> não está definida, então o {vendor} não pode gerar o comando de registro. Peça a um administrador para definir <code>server-url</code> em Configurações Globais.'
   explore: Explorar
   importAction: Importar Existente
   manageAction: Gerenciar
@@ -3025,27 +3025,27 @@ copyToClipboard:
 codeMirror:
   # Shown by CodeMirror 5 editors in extensions built with an older shell
   escapeText: Pressione Shift+Escape para sair do editor
-  leaveEditor: Press Escape, then Tab to leave the editor
-  foldLine: Fold line
-  unfoldLine: Unfold line
+  leaveEditor: Pressione Escape e depois Tab para sair do editor
+  foldLine: Recolher linha
+  unfoldLine: Expandir linha
   search:
-    find: Find
-    next: Next
-    previous: Previous
-    all: Select all
-    matchCase: Match case
-    regexp: Regular expression
-    byWord: Whole word
-    replaceField: Replace
-    replace: Replace
-    replaceAll: Replace all
-    close: Close search
-    clear: Clear search
-    count: "{current} of {total}"
+    find: Localizar
+    next: Próximo
+    previous: Anterior
+    all: Selecionar tudo
+    matchCase: Diferenciar maiúsculas
+    regexp: Expressão regular
+    byWord: Palavra inteira
+    replaceField: Substituir
+    replace: Substituir
+    replaceAll: Substituir tudo
+    close: Fechar busca
+    clear: Limpar busca
+    count: "{current} de {total}"
   keymap:
     tooltip: Preferência de mapeamento de teclas.
     indicatorToolip: "Mapeamento de teclas: {name}"
-    hideIndicator: "Hide key mapping: {name}"
+    hideIndicator: "Ocultar mapeamento de teclas: {name}"
 
 cruResource:
   backToForm: Voltar ao Formulário
@@ -3113,11 +3113,11 @@ drivers:
 detailText:
   copyAriaLabel: Copiar valor de {item} para a área de transferência
   paste:
-    ariaLabel: Paste a {item} value from the clipboard
-    action: Paste
-    waiting: Pasting...
-    success: Pasted!
-    error: Error Pasting
+    ariaLabel: Colar um valor de {item} da área de transferência
+    action: Colar
+    waiting: Colando...
+    success: Colado!
+    error: Erro ao Colar
   collapse: Ocultar
   binary: '<Dados Binários: {n, number} bytes>'
   empty: '<Vazio>'
@@ -3822,9 +3822,9 @@ fleet:
     remove:
       warning: 'Excluir um Workspace também exclui todos os recursos nele. Isso inclui GitRepos e também Clusters.<br><br>Os Clusters excluídos serão removidos do {vendor}, e se o {vendor} gerencia o ciclo de vida do Cluster, sua infraestrutura subjacente também será excluída.'
     moved:
-      removed: "Changing the workspace clears previous selections. The following items are not available in the {workspace} workspace and have been deselected: {names}."
+      removed: "Alterar o workspace limpa as seleções anteriores. Os seguintes itens não estão disponíveis no workspace {workspace} e foram desmarcados: {names}."
       cluster: "cluster {name}"
-      clusterGroup: "cluster group {name}"
+      clusterGroup: "grupo de clusters {name}"
       secret: "secret {name}"
       configMap: "config map {name}"
   restrictions:
@@ -5233,7 +5233,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: Espaço de Trabalho
-    placeholder: Select a workspace
+    placeholder: Selecione um espaço de trabalho
   description:
     label: Descrição
     placeholder: Qualquer texto que descreva melhor este recurso
@@ -5901,7 +5901,7 @@ plugins:
     kubeVersion: Não foi possível carregar a Extensão. A versão instalada não é compatível com a versão atual do Kubernetes
     load: Ocorreu um erro ao carregar o código desta Extensão
     developerPkg: Esta Extensão foi carregada internamente, portanto não carregaremos a versão externa
-    extendedProductMissing: This Extension adds pages to a product that is not available. Install the Extension that provides that product, or check that it loaded without errors
+    extendedProductMissing: Esta Extensão adiciona páginas a um produto que não está disponível. Instale a Extensão que fornece esse produto ou verifique se ela foi carregada sem erros
   success:
     title: Extensão {name} carregada
     message: A extensão foi carregada com sucesso
@@ -5917,8 +5917,8 @@ plugins:
     actions: Ações
     noActions: Nenhuma ação disponível
     detail: Detalhes
-    versions: Latest Versions
-    showAllVersions: Show all
+    versions: Últimas Versões
+    showAllVersions: Mostrar todas
     versionError: Não foi possível carregar informações de versão
     requiresRancherPrime: Requer Rancher Prime
     requiresRancherVersion: 'Requer Rancher {required}'
@@ -7304,7 +7304,7 @@ storageClass:
 
 tableViews:
   tabs:
-    all: All
+    all: Todos
     label: Exibições salvas
     newView: Nova Exibição
     count: "{name} ({count})"
@@ -7324,8 +7324,8 @@ tableViews:
     menu: Opções da exibição
     rename: Renomear Exibição
     duplicate: Duplicar Exibição
-    shareView: Share View
-    importView: Import View
+    shareView: Compartilhar Exibição
+    importView: Importar Exibição
     copySuffix: (cópia)
     delete: Excluir Exibição
     setDefault: Definir como Exibição Padrão
@@ -7345,7 +7345,7 @@ tableViews:
     inUse: "{count} em uso"
     label: Rótulo
     suggestions: Sugestões de filtro
-    loadingValues: Loading values…
+    loadingValues: Carregando valores…
     suggestionsAvailable: |-
       {count, plural,
       one {1 sugestão disponível}
@@ -7393,25 +7393,25 @@ tableViews:
       cluster: Cluster
       device: Dispositivo
       pool: Pool
-      provider: Provider
+      provider: Provedor
       workspace: Workspace
       type: Tipo
   # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
-    title: Share View
-    intro: 'Copy this text and share it. Anyone with the text can import the view using <b>Import View</b>. It holds the view as it is now, unsaved changes included: columns, grouping, sort and filter. <b>The filter is included and can reveal information such as resource or namespace names.</b>'
-    label: View
+    title: Compartilhar Exibição
+    intro: 'Copie este texto e compartilhe-o. Qualquer pessoa com o texto pode importar a exibição usando <b>Importar Exibição</b>. Ele contém a exibição como está agora, incluindo alterações não salvas: colunas, agrupamento, ordenação e filtro. <b>O filtro é incluído e pode revelar informações como nomes de recursos ou de namespaces.</b>'
+    label: Exibição
   import:
-    title: Import View
-    intro: "Paste the text of a view shared with you. It replaces this view's settings, including any unsaved changes, as changes you can save or discard."
+    title: Importar Exibição
+    intro: "Cole o texto de uma exibição compartilhada com você. Ele substitui as configurações desta exibição, incluindo quaisquer alterações não salvas, como alterações que você pode salvar ou descartar."
     # From the All tab, which can't be changed
-    introNew: 'Paste the text of a view shared with you. It is added as a new view, with its settings as changes you can save or discard.'
-    placeholder: Paste the view here
-    import: Import
-    invalid: This isn't a shared view. Check that the whole text was copied.
+    introNew: 'Cole o texto de uma exibição compartilhada com você. Ela é adicionada como uma nova exibição, com as configurações dela como alterações que você pode salvar ou descartar.'
+    placeholder: Cole a exibição aqui
+    import: Importar
+    invalid: Isto não é uma exibição compartilhada. Verifique se o texto inteiro foi copiado.
     # `list` names the table the view was shared from, eg Pods
-    otherTable: This view was shared from the {list} list. Open Import View there to import it.
-    otherPage: This view was shared from the {list} list on another page. Open Import View there to import it.
+    otherTable: Esta exibição foi compartilhada a partir da lista {list}. Abra Importar Exibição nela para importá-la.
+    otherPage: Esta exibição foi compartilhada a partir da lista {list} em outra página. Abra Importar Exibição nela para importá-la.
   export:
     label: Exportar Toda a Exibição
     title: Exportar Todo o Conteúdo da Exibição
@@ -7445,18 +7445,18 @@ tableViews:
       failedMessage: Não foi possível exportar a exibição {name}.
       # The same for a selection exported from its rows' actions. `type` is what the rows are, as many as
       # `count` (eg Pod, Pods), else `items`
-      selectionMessage: Exporting {count, number} selected {type} as {format}...
+      selectionMessage: Exportando a seleção ({count, number} {type}) como {format}...
       selectionDoneMessage: |-
         {count, plural,
-        one {1 selected {type} has}
-        other {{count, number} selected {type} have}
-        } been exported to {file}.
+        one {A seleção (1 {type}) foi exportada}
+        other {A seleção ({count, number} {type}) foi exportada}
+        } para {file}.
       selectionFailedMessage: |-
         {count, plural,
-        one {The selected {type}}
-        other {The {count, number} selected {type}}
-        } could not be exported.
-      items: "{count, plural, one {item} other {items}}"
+        one {Não foi possível exportar a seleção (1 {type})}
+        other {Não foi possível exportar a seleção ({count, number} {type})}
+        }.
+      items: "{count, plural, one {item} other {itens}}"
 tableHeaders:
   assuredConcurrencyShares: Cotas de Simultaneidade Garantida
   autoscaler: Autoescalador
@@ -9486,7 +9486,7 @@ advancedSettings:
     'ui-dashboard-index': 'Localização do índice HTML para a UI do {appName}.'
     'ui-offline-preferred': 'Controla se os ativos da interface são servidos localmente pelo contêiner do servidor ou da URL remota definida na configuração ui-dashboard-index. A opção `Dynamic` usará ativos locais em compilações de produção do {appName}.'
     'ui-pl': 'Nome da empresa de marca privada.'
-    'ui-appco-enabled': 'Determines the visibility of SUSE Application Collection features, specifically the option to create App Bundles in Continuous Delivery and the preconfigured option to create an Application Collection repository.'
+    'ui-appco-enabled': 'Determina a visibilidade dos recursos da SUSE Application Collection, especificamente a opção de criar Bundles de App na Entrega Contínua e a opção pré-configurada de criar um repositório da Application Collection.'
     'auth-user-info-max-age-seconds': 'A idade máxima dos tokens de autenticação de usuários antes que uma sincronização de associação de grupo do provedor de autenticação seja realizada.'
     'auth-user-info-resync-cron': 'Agendamento cron padrão para ressincronização de associações de grupos do provedor de autenticação.'
     'cluster-template-enforcement': 'Não-administradores serão restritos a criar clusters apenas via Modelos RKE pré-aprovados.'
@@ -9532,14 +9532,14 @@ advancedSettings:
       strict: Estrito
       system-store: Repositório do Sistema
     'ui-appco-enabled':
-      'true': 'True'
-      'false': 'False'
-      none: None (default)
+      'true': 'Verdadeiro'
+      'false': 'Falso'
+      none: Nenhum (padrão)
   enumDescription:
     'ui-appco-enabled':
-      'true': Always shows these features.
-      'false': Always hides these features. Useful for air-gapped installations that cannot reach the Application Collection registry.
-      none: Inherits behavior from the system-catalog setting. Features are hidden if the catalog is “bundled” (serving only bundled charts) and shown otherwise.
+      'true': Sempre mostra estes recursos.
+      'false': Sempre oculta estes recursos. Útil para instalações air-gapped que não conseguem alcançar o registro da Application Collection.
+      none: Herda o comportamento da configuração system-catalog. Os recursos ficam ocultos se o catálogo for “bundled” (servindo apenas charts empacotados) e visíveis caso contrário.
   provisioning:
     header: Provisionamento de Cluster
 
@@ -9978,11 +9978,11 @@ component:
           ariaLabel:
             count: '{count} {label}, {color}'
           color:
-            error: Error
-            warning: Warning
-            info: Info
-            success: Success
-            disabled: Disabled
+            error: Erro
+            warning: Aviso
+            info: Informação
+            success: Sucesso
+            disabled: Desabilitado
         extrasCard:
           title: Extras
           message: 'Considere instalar <extensionsLink>extensões</extensionsLink> adicionais e/ou <clusterToolsLink>ferramentas de cluster</clusterToolsLink> para enriquecer sua experiência com o Rancher.'
