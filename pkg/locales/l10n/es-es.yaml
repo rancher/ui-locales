@@ -1,8 +1,8 @@
 # ---
 # locale: es-es (Spanish - Spain)
 # source-locale: en-us
-# synced-against-en-us-commit: 0294f39 (2026-10-06)
-# last-updated: 2026-10-07
+# synced-against-en-us-commit: 350d929 (2026-10-13)
+# last-updated: 2026-10-14
 # ---
 ##############################
 # Special stuff
@@ -2027,6 +2027,10 @@ cluster:
     commandInstructionsInsecure: 'Si obtiene un error de &quot;certificado firmado por autoridad desconocida&quot;, su instalación de {vendor} tiene un certificado SSL autofirmado o no confiable. Ejecute el comando siguiente para omitir la verificación del certificado:'
     clusterRoleBindingInstructions: 'Si obtiene errores de permisos al crear algunos de los recursos, es posible que su usuario no tenga el rol <code>cluster-admin</code>. Use este comando para aplicarlo:'
     clusterRoleBindingCommand: kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <your username from your kubeconfig>
+  registration:
+    serverUrlMissing:
+      import: 'La opción <code>server-url</code> no está establecida, por lo que {vendor} no puede incluir su URL en los comandos siguientes. Sustituya <code>&lt;SERVER_URL&gt;</code> por una URL desde la que este clúster pueda acceder a {vendor}, o pida a un administrador que establezca <code>server-url</code> en Configuración global.'
+      custom: 'La opción <code>server-url</code> no está establecida, por lo que {vendor} no puede generar el comando de registro. Pida a un administrador que establezca <code>server-url</code> en Configuración global.'
   explore: Explorar
   importAction: Importar existente
   manageAction: Administrar
@@ -3022,10 +3026,29 @@ copyToClipboard:
     copiar
 
 codeMirror:
+  # Shown by CodeMirror 5 editors in extensions built with an older shell
   escapeText: Presione Shift+Escape para salir del editor
+  leaveEditor: Presione Escape y después Tab para salir del editor
+  foldLine: Plegar línea
+  unfoldLine: Desplegar línea
+  search:
+    find: Buscar
+    next: Siguiente
+    previous: Anterior
+    all: Seleccionar todo
+    matchCase: Distinguir mayúsculas
+    regexp: Expresión regular
+    byWord: Palabra completa
+    replaceField: Reemplazar
+    replace: Reemplazar
+    replaceAll: Reemplazar todo
+    close: Cerrar búsqueda
+    clear: Limpiar búsqueda
+    count: "{current} de {total}"
   keymap:
     tooltip: Preferencia de mapeo de teclas.
     indicatorToolip: 'Mapeo de teclas: {name}'
+    hideIndicator: "Ocultar mapeo de teclas: {name}"
 
 cruResource:
   backToForm: Volver al formulario
@@ -3092,6 +3115,12 @@ drivers:
 
 detailText:
   copyAriaLabel: Copiar valor de {item} al portapapeles
+  paste:
+    ariaLabel: Pegar un valor de {item} desde el portapapeles
+    action: Pegar
+    waiting: Pegando...
+    success: ¡Pegado!
+    error: Error al pegar
   collapse: Ocultar
   binary: "<Datos Binarios: {n, number} bytes>"
   empty: "<Vacío>"
@@ -3797,6 +3826,12 @@ fleet:
     timeout: Tiempo de espera para la creación del espacio de trabajo agotado. Es posible que el espacio de trabajo haya sido creado.
     remove:
       warning: Eliminar un Espacio de Trabajo también elimina todos los recursos en él, incluyendo GitRepos y Clústeres.<br><br>Los Clústeres eliminados se retirarán de {vendor}, y si {vendor} gestiona el ciclo de vida del Clúster, su infraestructura subyacente también será eliminada.
+    moved:
+      removed: "Al cambiar el espacio de trabajo se borran las selecciones anteriores. Los siguientes elementos no están disponibles en el espacio de trabajo {workspace} y se han deseleccionado: {names}."
+      cluster: "clúster {name}"
+      clusterGroup: "grupo de clústeres {name}"
+      secret: "secreto {name}"
+      configMap: "mapa de configuración {name}"
   restrictions:
     addTitle: allowedTargetNamespaces
     addLabel: Agregar
@@ -5200,7 +5235,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: Espacio de trabajo
-    placeholder:
+    placeholder: Seleccione un espacio de trabajo
   description:
     label: Descripción
     placeholder: Cualquier texto que describa mejor este recurso
@@ -5868,6 +5903,7 @@ plugins:
     kubeVersion: No se puede cargar la extensión. La versión instalada no es compatible con la versión actual de Kubernetes de Rancher
     load: Ocurrió un error al cargar el código de esta extensión
     developerPkg: Esta extensión se ha cargado internamente, por lo que no cargaremos la versión externa
+    extendedProductMissing: Esta extensión añade páginas a un producto que no está disponible. Instale la extensión que proporciona ese producto o compruebe que se haya cargado sin errores
   success:
     title: Extensión {name} cargada
     message: La extensión se cargó correctamente
@@ -5883,7 +5919,8 @@ plugins:
     actions: Acciones
     noActions: No hay acciones disponibles
     detail: Detalle
-    versions: Versiones
+    versions: Últimas versiones
+    showAllVersions: Mostrar todas
     versionError: No se pudo cargar la información de versión
     requiresRancherPrime: Requiere Rancher Prime
     requiresRancherVersion: Requiere Rancher {required}
@@ -6559,8 +6596,6 @@ resourceList:
   nsFiltering: Seleccione uno o más espacios de nombres o proyectos usando el filtro de arriba.
   nsFilteringGeneric: Seleccione una opción válida de espacio de nombres o proyecto usando el filtro de arriba.
   nsFilterToolTip: El filtrado está restringido a proyectos y espacios de nombres
-  stateFilterApplied: "Filtro de estado aplicado:"
-  clearStateFilter: "Limpiar filtro"
 resourceLoadingIndicator:
   loading: Cargando
 
@@ -7272,7 +7307,7 @@ storageClass:
 
 tableViews:
   tabs:
-    all: Explorador
+    all: Todos
     label: Vistas guardadas
     newView: Agregar vista
     count: "{name} ({count})"
@@ -7292,6 +7327,8 @@ tableViews:
     menu: Opciones de vista
     rename: Renombrar vista
     duplicate: Duplicar vista
+    shareView: Compartir vista
+    importView: Importar vista
     copySuffix: (copia)
     delete: Eliminar vista
     setDefault: Establecer como vista predeterminada
@@ -7311,6 +7348,7 @@ tableViews:
     inUse: "{count} en uso"
     label: Etiqueta
     suggestions: Sugerencias de filtro
+    loadingValues: Cargando valores…
     suggestionsAvailable: |-
       {count, plural,
       one {1 sugerencia disponible}
@@ -7358,8 +7396,25 @@ tableViews:
       cluster: Clúster
       device: Dispositivo
       pool: Pool
+      provider: Proveedor
       workspace: Espacio de trabajo
       type: Tipo
+  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
+  share:
+    title: Compartir vista
+    intro: 'Copie este texto y compártalo. Cualquier persona que tenga el texto puede importar la vista con <b>Importar vista</b>. Contiene la vista tal como está ahora, incluidos los cambios sin guardar: columnas, agrupación, ordenación y filtro. <b>El filtro está incluido y puede revelar información como nombres de recursos o de espacios de nombres.</b>'
+    label: Vista
+  import:
+    title: Importar vista
+    intro: "Pegue el texto de una vista compartida con usted. Sustituye la configuración de esta vista, incluidos los cambios sin guardar, por cambios que puede guardar o descartar."
+    # From the All tab, which can't be changed
+    introNew: 'Pegue el texto de una vista compartida con usted. Se añade como una vista nueva, con su configuración como cambios que puede guardar o descartar.'
+    placeholder: Pegue la vista aquí
+    import: Importar
+    invalid: Esto no es una vista compartida. Compruebe que se haya copiado el texto completo.
+    # `list` names the table the view was shared from, eg Pods
+    otherTable: Esta vista se compartió desde la lista {list}. Abra Importar vista allí para importarla.
+    otherPage: Esta vista se compartió desde la lista {list} de otra página. Abra Importar vista allí para importarla.
   export:
     label: Exportar toda la vista
     title: Exportar todo el contenido de la vista
@@ -7391,6 +7446,20 @@ tableViews:
       doneMessage: La vista {name} se ha exportado a {file}.
       failedTitle: Error en la exportación
       failedMessage: No se pudo exportar la vista {name}.
+      # The same for a selection exported from its rows' actions. `type` is what the rows are, as many as
+      # `count` (eg Pod, Pods), else `items`
+      selectionMessage: Exportando la selección ({count, number} {type}) como {format}...
+      selectionDoneMessage: |-
+        {count, plural,
+        one {La selección (1 {type}) se ha}
+        other {La selección ({count, number} {type}) se ha}
+        } exportado a {file}.
+      selectionFailedMessage: |-
+        {count, plural,
+        one {La selección (1 {type})}
+        other {La selección ({count, number} {type})}
+        } no se pudo exportar.
+      items: "{count, plural, one {elemento} other {elementos}}"
 tableHeaders:
   assuredConcurrencyShares: Cuotas de concurrencia asegurada
   autoscaler: Escalador automático
@@ -9420,6 +9489,7 @@ advancedSettings:
     'ui-dashboard-index': Ubicación del índice HTML para la UI de {appName}.
     'ui-offline-preferred': 'Controla si los recursos de la UI se sirven localmente desde el contenedor del servidor o desde la URL remota definida en el ajuste ui-dashboard-index. La opción `Dynamic` utilizará recursos locales en las compilaciones de producción de {appName}.'
     'ui-pl': Nombre de empresa para etiqueta privada.
+    'ui-appco-enabled': 'Determina la visibilidad de las funciones de SUSE Application Collection, en concreto la opción de crear paquetes de aplicaciones en Entrega continua y la opción preconfigurada de crear un repositorio de Application Collection.'
     'auth-user-info-max-age-seconds': La edad máxima de los tokens de autenticación de los usuarios antes de realizar una sincronización de membresía de grupos.
     'auth-user-info-resync-cron': Programación cron predeterminada para resincronizar membresías de grupos del proveedor de autenticación.
     'cluster-template-enforcement': Los no administradores estarán restringidos a lanzar clústeres solo mediante Plantillas RKE preaprobadas.
@@ -9464,6 +9534,15 @@ advancedSettings:
     'agent-tls-mode':
       strict: Estricto
       system-store: Almacén del sistema
+    'ui-appco-enabled':
+      'true': 'Verdadero'
+      'false': 'Falso'
+      none: Ninguno (predeterminado)
+  enumDescription:
+    'ui-appco-enabled':
+      'true': Muestra siempre estas funciones.
+      'false': Oculta siempre estas funciones. Útil para instalaciones sin conexión que no pueden acceder al registro de Application Collection.
+      none: Hereda el comportamiento de la opción system-catalog. Las funciones se ocultan si el catálogo es “bundled” (solo sirve gráficos empaquetados) y se muestran en caso contrario.
   provisioning:
     header: Aprovisionamiento de clústeres
 
@@ -9898,6 +9977,15 @@ component:
           rows:
             conditions: Condiciones
             events: Eventos
+        statusBreakdownCard:
+          ariaLabel:
+            count: '{count} {label}, {color}'
+          color:
+            error: Error
+            warning: Advertencia
+            info: Información
+            success: Correcto
+            disabled: Deshabilitado
         extrasCard:
           title: Extras
           message: Considere instalar <extensionsLink>extensiones</extensionsLink> adicionales y/o <clusterToolsLink>herramientas de clúster</clusterToolsLink> para enriquecer su experiencia con Rancher.

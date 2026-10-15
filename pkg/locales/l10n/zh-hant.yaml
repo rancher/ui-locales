@@ -1,8 +1,8 @@
 # ---
 # locale: zh-hant (Chinese - Traditional)
 # source-locale: en-us
-# synced-against-en-us-commit: 0294f39 (2026-10-06)
-# last-updated: 2026-10-07
+# synced-against-en-us-commit: 350d929 (2026-10-13)
+# last-updated: 2026-10-14
 # ---
 ##############################
 # Special stuff
@@ -2026,6 +2026,10 @@ cluster:
     commandInstructionsInsecure: '如果你看到&quot;證書由未知機構簽名&quot;的錯誤，你的 {vendor} 安裝了自簽名或不受信任的 SSL 證書。你可以運行下面的命令來繞過證書驗證：'
     clusterRoleBindingInstructions: '如果你在創建資源時遇到權限錯誤，你的用戶可能沒有綁定 <code>cluster-admin</code> 角色。你可以運行這個命令來申請角色：'
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <你的 kubeconfig 中的用戶名>'
+  registration:
+    serverUrlMissing:
+      import: '<code>server-url</code> 設置項未設置，因此 {vendor} 無法在以下命令中包含其 URL。請將 <code>&lt;SERVER_URL&gt;</code> 替換為此集群可以訪問 {vendor} 的 URL，或請管理員在全局設置中設置 <code>server-url</code>。'
+      custom: '<code>server-url</code> 設置項未設置，因此 {vendor} 無法生成註冊命令。請讓管理員在全局設置中設置 <code>server-url</code>。'
   explore: 瀏覽
   importAction: 導入已有集群
   manageAction: 管理
@@ -3020,10 +3024,29 @@ copyToClipboard:
   error: 複製時出錯
 
 codeMirror:
+  # Shown by CodeMirror 5 editors in extensions built with an older shell
   escapeText: 按 Shift+Escape 從編輯器失焦
+  leaveEditor: 按 Escape 鍵，然後按 Tab 鍵離開編輯器
+  foldLine: 摺疊行
+  unfoldLine: 展開行
+  search:
+    find: 查找
+    next: 下一個
+    previous: 上一個
+    all: 全選
+    matchCase: 區分大小寫
+    regexp: 正則表達式
+    byWord: 全字匹配
+    replaceField: 替換
+    replace: 替換
+    replaceAll: 全部替換
+    close: 關閉搜索
+    clear: 清除搜索
+    count: "{current} / {total}"
   keymap:
     tooltip: 按鍵映射偏好。
     indicatorToolip: "按鍵映射：{name}"
+    hideIndicator: "隱藏按鍵映射：{name}"
 
 cruResource:
   backToForm: 返回表單編輯
@@ -3090,6 +3113,12 @@ drivers:
 
 detailText:
   copyAriaLabel: 將 {item} 值複製到剪貼簿
+  paste:
+    ariaLabel: 從剪貼簿粘貼 {item} 的值
+    action: 粘貼
+    waiting: 正在粘貼……
+    success: 已粘貼！
+    error: 粘貼出錯
   collapse: 隱藏
   binary: '<二進制數據: {n, number} 字節>'
   empty: '<空白>'
@@ -3793,6 +3822,12 @@ fleet:
     timeout: 工作空間創建超時。工作空間可能已創建，建議在創建另一個工作空間之前檢查工作空間頁面。
     remove:
       warning: "刪除工作區也會刪除工作區中的所有資源。這包括 GitRepos 以及集群。<br><br>已刪除的集群將從 {vendor} 中移除，如果 {vendor} 管理集群的生命週期，其底層基礎設施也將被刪除。"
+    moved:
+      removed: "更改工作空間會清除之前的選擇。以下項目在 {workspace} 工作空間中不可用，已被取消選擇：{names}。"
+      cluster: "集群 {name}"
+      clusterGroup: "集群組 {name}"
+      secret: "密文 {name}"
+      configMap: "ConfigMap {name}"
   restrictions:
     addTitle: 'allowedTargetNamespaces'
     addLabel: 添加
@@ -5196,7 +5231,7 @@ nameNsDescription:
     placeholder: ''
   workspace:
     label: 工作空間
-    placeholder:
+    placeholder: 選擇工作空間
   description:
     label: 描述
     placeholder: 輸入可以描述該資源的文本
@@ -5864,6 +5899,7 @@ plugins:
     kubeVersion: 無法加載擴展。已安裝的版本與當前的 Rancher kubernetes 版本不兼容
     load: 加載此擴展的代碼時出錯
     developerPkg: 此擴展已在內部加載，因此我們不會加載外部版本
+    extendedProductMissing: 此擴展會向一個不可用的產品添加頁面。請安裝提供該產品的擴展，或檢查該擴展是否已正常加載
   success:
     title: 已加載擴展 {name}
     message: 擴展加載成功
@@ -5879,7 +5915,8 @@ plugins:
     actions: 操作
     noActions: 沒有可用的操作
     detail: 詳情
-    versions: 版本
+    versions: 最新版本
+    showAllVersions: 顯示全部
     versionError: 無法加載版本信息
     requiresRancherPrime: "需要 Rancher Prime"
     requiresRancherVersion: "需要 Rancher {required}"
@@ -6555,8 +6592,6 @@ resourceList:
   nsFiltering: "請使用上面的過濾器選擇一個或多個命名空間或項目。"
   nsFilteringGeneric: "請使用上方的過濾器選擇有效的命名空間或項目選項。"
   nsFilterToolTip: "僅限於過濾項目和命名空間"
-  stateFilterApplied: "已應用狀態過濾器："
-  clearStateFilter: "清除過濾器"
 resourceLoadingIndicator:
   loading: 正在加載
 
@@ -7267,7 +7302,7 @@ storageClass:
 
 tableViews:
   tabs:
-    all: 瀏覽器
+    all: 全部
     label: 已保存的視圖
     newView: 添加視圖
     count: "{name}（{count}）"
@@ -7287,6 +7322,8 @@ tableViews:
     menu: 視圖選項
     rename: 重命名視圖
     duplicate: 複製視圖
+    shareView: 分享視圖
+    importView: 導入視圖
     copySuffix: （副本）
     delete: 刪除視圖
     setDefault: 設為默認視圖
@@ -7306,6 +7343,7 @@ tableViews:
     inUse: "{count} 個使用中"
     label: 標籤
     suggestions: 過濾建議
+    loadingValues: 正在加載值……
     suggestionsAvailable: |-
       {count, plural,
       one {有 1 條可用建議}
@@ -7353,8 +7391,25 @@ tableViews:
       cluster: 集群
       device: 設備
       pool: 池
+      provider: 提供商
       workspace: 工作空間
       type: 類型
+  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
+  share:
+    title: 分享視圖
+    intro: '複製此文本並分享。任何擁有此文本的人都可以通過<b>導入視圖</b>導入該視圖。文本保存的是視圖的當前狀態（包括未保存的更改）：列、分組、排序和過濾條件。<b>其中包含過濾條件，可能會洩露資源名稱或命名空間名稱等信息。</b>'
+    label: 視圖
+  import:
+    title: 導入視圖
+    intro: "粘貼他人分享給你的視圖文本。它會替換此視圖的設置（包括所有未保存的更改），替換後的設置將作為可保存或放棄的更改。"
+    # From the All tab, which can't be changed
+    introNew: '粘貼他人分享給你的視圖文本。它會作為新視圖添加，其設置將作為可保存或放棄的更改。'
+    placeholder: 在此處粘貼視圖
+    import: 導入
+    invalid: 這不是分享的視圖。請檢查是否已複製完整的文本。
+    # `list` names the table the view was shared from, eg Pods
+    otherTable: 此視圖是從 {list} 列表分享的。請在該列表中打開“導入視圖”進行導入。
+    otherPage: 此視圖是從另一個頁面上的 {list} 列表分享的。請在該列表中打開“導入視圖”進行導入。
   export:
     label: 導出視圖全部內容
     title: 導出視圖全部內容
@@ -7386,6 +7441,20 @@ tableViews:
       doneMessage: '{name} 視圖已導出到 {file}。'
       failedTitle: 導出失敗
       failedMessage: 無法導出 {name} 視圖。
+      # The same for a selection exported from its rows' actions. `type` is what the rows are, as many as
+      # `count` (eg Pod, Pods), else `items`
+      selectionMessage: 正在將 {count, number} 個所選{type}導出為 {format}……
+      selectionDoneMessage: |-
+        {count, plural,
+        one {1 個所選{type}}
+        other {{count, number} 個所選{type}}
+        }已導出到 {file}。
+      selectionFailedMessage: |-
+        {count, plural,
+        one {所選{type}}
+        other {所選的 {count, number} 個{type}}
+        }無法導出。
+      items: "{count, plural, one {項} other {項}}"
 tableHeaders:
   assuredConcurrencyShares: 確保併發份額
   autoscaler: 自動擴縮器
@@ -9415,6 +9484,7 @@ advancedSettings:
     'ui-dashboard-index': '{appName} UI 的 HTML 索引位置。'
     'ui-offline-preferred': '控制 UI 資產是由服務器容器在本地提供，還是從 ui-index 和 ui-dashboard-index 設置中定義的遠程 URL 提供。`動態` 選項將在 {appName} 的生產版本中使用本地資產。'
     'ui-pl': '自有品牌公司名稱。'
+    'ui-appco-enabled': '決定 SUSE Application Collection 功能的可見性，具體包括在持續交付中創建應用 Bundle 的選項，以及用於創建 Application Collection 倉庫的預配置選項。'
     'auth-user-info-max-age-seconds': '在同步驗證提供程序組成員之前，用戶驗證 Token 的最長存活時間。'
     'auth-user-info-resync-cron': '重新同步驗證提供程序組成員的默認 cron 調度。'
     'cluster-template-enforcement': '非管理員只能通過預先批准的 RKE 模板啟動集群。'
@@ -9459,6 +9529,15 @@ advancedSettings:
     'agent-tls-mode':
       strict: '嚴格'
       system-store: '系統儲存區'
+    'ui-appco-enabled':
+      'true': '是'
+      'false': '否'
+      none: 無（默認）
+  enumDescription:
+    'ui-appco-enabled':
+      'true': 始終顯示這些功能。
+      'false': 始終隱藏這些功能。適用於無法訪問 Application Collection 鏡像倉庫的離線安裝環境。
+      none: 繼承 system-catalog 設置的行為。如果該 Catalog 為“bundled”（僅提供內置的 Chart），則隱藏這些功能，否則顯示這些功能。
   provisioning:
     header: 集群配置
 
@@ -9893,6 +9972,15 @@ component:
           rows:
             conditions: 狀況
             events: 事件
+        statusBreakdownCard:
+          ariaLabel:
+            count: '{count} {label}，{color}'
+          color:
+            error: 錯誤
+            warning: 警告
+            info: 信息
+            success: 成功
+            disabled: 已禁用
         extrasCard:
           title: 附加項
           message: '考慮安裝額外的 <extensionsLink>擴展</extensionsLink> 和 / 或 <clusterToolsLink>集群工具</clusterToolsLink> 以豐富您的 Rancher 體驗。'
