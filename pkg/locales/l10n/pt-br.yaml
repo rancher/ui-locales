@@ -6328,6 +6328,7 @@ prefs:
 
 principal:
   loading: Carregando&hellip;
+  # Also shown by extensions built with an older shell, which bundle their own Principal.vue
   error: Não foi possível buscar informações do principal
   unresolved: 'O {vendor} não conseguiu consultar o nome deste usuário ou grupo, por isso o ID do principal é exibido no lugar.'
   name: Nome
@@ -7639,7 +7640,6 @@ tableViews:
     title: Publicar
     body: Publique esta exibição para torná-la visível a todos os usuários.
   filterWarning: O nome e os valores do filtro são incluídos e podem revelar informações como nomes de recursos ou de namespaces.
-  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
     title: Compartilhar Exibição
     intro: 'Copie este texto e compartilhe-o. Qualquer pessoa com o texto pode importar a exibição usando <b>Importar Exibição</b>. Ele contém a exibição como está agora, incluindo alterações não salvas: colunas, agrupamento, ordenação e filtro.'

@@ -6326,6 +6326,7 @@ prefs:
 
 principal:
   loading: 正在加载&hellip;
+  # Also shown by extensions built with an older shell, which bundle their own Principal.vue
   error: 无法获取信息
   unresolved: '{vendor} 无法查找此用户或组的名称，因此改为显示其主体 ID。'
   name: 名称
@@ -7637,7 +7638,6 @@ tableViews:
     title: 发布
     body: 发布此视图，使其对所有用户可见。
   filterWarning: 其中包含过滤条件的名称和值，可能会泄露资源名称或命名空间名称等信息。
-  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
     title: 分享视图
     intro: '复制此文本并分享。任何拥有此文本的人都可以通过<b>导入视图</b>导入该视图。文本保存的是视图的当前状态（包括未保存的更改）：列、分组、排序和过滤条件。'

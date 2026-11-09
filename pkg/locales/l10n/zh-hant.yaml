@@ -6308,6 +6308,7 @@ prefs:
 
 principal:
   loading: 載入中&hellip;
+  # Also shown by extensions built with an older shell, which bundle their own Principal.vue
   error: 無法取得主體資訊
   unresolved: '{vendor} 無法查詢此使用者或群組的名稱，因此改為顯示其主體 ID。'
   name: 名稱
@@ -7619,7 +7620,6 @@ tableViews:
     title: 發佈
     body: 發佈此檢視，讓所有使用者都能看到。
   filterWarning: 篩選條件的名稱與值也會一併包含，可能透露資源或命名空間名稱等資訊。
-  # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
     title: 分享檢視
     intro: '複製這段文字並分享出去。拿到這段文字的人都能透過<b>匯入檢視</b>匯入此檢視。內容是檢視目前的樣子，包含未儲存的變更：欄位、分組、排序與篩選條件。'
