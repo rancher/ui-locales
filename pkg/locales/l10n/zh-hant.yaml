@@ -349,7 +349,7 @@ nav:
   userMenu:
     preferences: 偏好設定
     accountAndKeys: 帳號與 API 金鑰
-    whatsNew: What's New
+    whatsNew: 新功能
     logOut: 登出
     label: 使用者選單
     button:
@@ -453,14 +453,14 @@ about:
   downloadImageList:
     title: 映像檔清單
   cli:
-    title: "Rancher CLI (legacy)"
-    description: This version of the Rancher CLI will be deprecated in a future release and will no longer receive new features. It remains fully supported for now, so existing scripts and automation keep working, but we recommend starting with the new Rancher CLI below.
-    docsLink: View Rancher CLI documentation
+    title: "Rancher CLI（舊版）"
+    description: 此版本的 Rancher CLI 將在未來的版本中棄用，也不會再新增功能。目前仍提供完整支援，既有的指令碼與自動化作業都能繼續運作，但建議您從下方的新版 Rancher CLI 開始使用。
+    docsLink: 檢視 Rancher CLI 文件
     new:
-      title: "New Rancher CLI (AI & Agent Edition)"
-      badge: New
-      description: The intelligent CLI built for AI, AI agents and autonomous Kubernetes.
-      githubLink: View on GitHub (rancher/rancher-cli)
+      title: "新版 Rancher CLI（AI 與代理程式版）"
+      badge: 新
+      description: 專為 AI、AI 代理程式與自主運作的 Kubernetes 打造的智慧型 CLI。
+      githubLink: 在 GitHub 上檢視（rancher/rancher-cli）
   diagnostic:
     title: 診斷
     checkboxTooltip: 在診斷資料中加入前 10 項資源的回應時間。這可能需要一些時間才能完成
@@ -488,23 +488,23 @@ about:
       title: 尚未產生回應時間。
       body: 產生回應時間以提供更具體的資訊。
   licenses:
-    title: Open Source Licenses
-    description: This dashboard is built on top of other open source software. Click below to view the full list of third-party packages and their licenses.
-    viewLicenses: View Licenses
+    title: 開放原始碼授權
+    description: 此儀表板建構於其他開放原始碼軟體之上。按一下下方按鈕，即可檢視完整的第三方套件清單及其授權。
+    viewLicenses: 檢視授權
     page:
-      title: Open Source Licenses
-      hint: Click a license to view its full text.
-      error: "Failed to load licenses ({error}). Please try again later."
+      title: 開放原始碼授權
+      hint: 按一下授權即可檢視其完整條款。
+      error: "無法載入授權（{error}）。請稍後再試。"
     table:
-      package: Package
-      license: License
-      viewFor: "View {license} license text for {name}"
+      package: 套件
+      license: 授權
+      viewFor: "檢視 {name} 的 {license} 授權條款"
     panel:
-      none: No license content is available for this package.
-      declaredAs: "Declared license: {license}"
-      rawLicense: "Original expression: {expression}"
-      author: "Author: {author}"
-      textLabel: License text
+      none: 此套件沒有可顯示的授權內容。
+      declaredAs: "宣告的授權：{license}"
+      rawLicense: "原始運算式：{expression}"
+      author: "作者：{author}"
+      textLabel: 授權條款
 
 accountAndKeys:
   title: 帳號與 API 金鑰
@@ -562,8 +562,8 @@ addProjectMemberDialog:
   title: 新增專案成員
 
 authConfig:
-  enableLimitReached: Another external provider is already enabled. Rancher Community allows for one external auth provider to be configured at a time. Disable the active provider to add a different one, or use Rancher Prime to run several together.
-  enableLimitReachedPrime: Another external provider is already enabled. The multiple-auth-providers feature flag is off, so one external auth provider can be enabled at a time. Disable the active provider to add a different one, or turn the flag on under Global Settings > Feature Flags to run several together.
+  enableLimitReached: 已有另一個外部提供者處於啟用狀態。Rancher Community 一次只能設定一個外部驗證提供者。請先停用目前作用中的提供者再新增其他提供者，或使用 Rancher Prime 同時啟用多個提供者。
+  enableLimitReachedPrime: 已有另一個外部提供者處於啟用狀態。multiple-auth-providers 功能旗標目前為關閉，因此一次只能啟用一個外部驗證提供者。請先停用目前作用中的提供者再新增其他提供者，或在「全域設定 > 功能旗標」中開啟此旗標，以同時啟用多個提供者。
   list:
     title: 驗證提供者
     description: 設定使用者可用來登入 Rancher 的身分識別提供者。
@@ -578,13 +578,13 @@ authConfig:
       create: 新增提供者
       learnMore: 外部驗證的運作方式
     prime:
-      title: Run multiple auth providers at once with SUSE Rancher Prime
-      description: Rancher Community supports one external auth provider at a time, so disable the active one to switch. With <primeUrl>SUSE Rancher Prime</primeUrl> employees, contractors and partners can each sign in through the provider they already use, all active together.
-      action: Learn about SUSE Rancher Prime
+      title: 使用 SUSE Rancher Prime 同時啟用多個驗證提供者
+      description: Rancher Community 一次只支援一個外部驗證提供者，若要切換，請先停用目前作用中的提供者。使用 <primeUrl>SUSE Rancher Prime</primeUrl> 時，員工、約聘人員與合作夥伴都能透過各自已在使用的提供者登入，所有提供者可同時啟用。
+      action: 了解 SUSE Rancher Prime
     primeFlagOff:
-      title: Run multiple auth providers at once with the multiple-auth-providers feature flag
-      description: The multiple-auth-providers feature flag is off, so one external auth provider can be active at a time. Disable the active one to switch, or turn the flag on to let employees, contractors and partners each sign in through the provider they already use, all active together.
-      action: Go to Feature Flags
+      title: 透過 multiple-auth-providers 功能旗標同時啟用多個驗證提供者
+      description: multiple-auth-providers 功能旗標目前為關閉，因此一次只能有一個外部驗證提供者處於作用中。若要切換，請先停用目前作用中的提供者；或開啟此旗標，讓員工、約聘人員與合作夥伴都能透過各自已在使用的提供者登入，所有提供者可同時啟用。
+      action: 前往功能旗標
     disableLocal:
       label: 停用本機使用者登入
       description: 使用者只能透過外部提供者登入。本機帳號仍會保留，但無法用來登入。
@@ -602,28 +602,28 @@ authConfig:
     title: '{provider} - 存取'
     type: 類型
   create:
-    back: Authentication Providers
-    unknownProvider: '{provider} is not a provider this Rancher supports.'
-    limitReached: Another external provider is already enabled. Rancher Community allows for one external auth provider to be configured at a time. Disable the active provider to add a different one, or use Rancher Prime to run several together.
-    limitReachedPrime: Another external provider is already enabled. The multiple-auth-providers feature flag is off, so one external auth provider can be enabled at a time. Disable the active provider to add a different one, or turn the flag on under Global Settings > Feature Flags to run several together.
+    back: 驗證提供者
+    unknownProvider: '{provider} 不是此 Rancher 支援的提供者。'
+    limitReached: 已有另一個外部提供者處於啟用狀態。Rancher Community 一次只能設定一個外部驗證提供者。請先停用目前作用中的提供者再新增其他提供者，或使用 Rancher Prime 同時啟用多個提供者。
+    limitReachedPrime: 已有另一個外部提供者處於啟用狀態。multiple-auth-providers 功能旗標目前為關閉，因此一次只能啟用一個外部驗證提供者。請先停用目前作用中的提供者再新增其他提供者，或在「全域設定 > 功能旗標」中開啟此旗標，以同時啟用多個提供者。
     provider:
-      title: 'Add {provider}'
+      title: '新增 {provider}'
     clone:
-      title: 'Clone {name}'
-      notFound: '{name} is not an authentication provider that can be cloned from here.'
+      title: '複製 {name}'
+      notFound: '{name} 不是可在此複製的驗證提供者。'
     name:
-      label: Name
-      required: A name is required.
-      invalid: Use lowercase letters, numbers and dashes, starting and ending with a letter or number.
-      taken: '{name} is already in use by another provider.'
+      label: 名稱
+      required: 名稱為必填。
+      invalid: 請使用小寫字母、數字與連字號，且開頭與結尾必須是字母或數字。
+      taken: '{name} 已被其他提供者使用。'
     descriptionField:
-      label: Description
-      placeholder: e.g. Engineering and support.
+      label: 說明
+      placeholder: 例如：工程與支援部門。
   add:
     title: 新增驗證提供者
     subtitle: 選擇要連接的提供者。Rancher 只支援一個外部提供者，使用者將以這個提供者登入。日後若要改用其他提供者，請先刪除這個，再設定新的。
-    subtitleMultiple: Select the provider to connect. More than one external provider can be enabled at a time, and users choose which one to log in with.
-    subtitlePrimeSingle: Select the provider to connect. The multiple-auth-providers feature flag is off, so one external provider can be enabled at a time. Turn the flag on under Global Settings > Feature Flags to run several together.
+    subtitleMultiple: 選擇要連接的提供者。可同時啟用多個外部提供者，使用者可自行選擇要以哪一個登入。
+    subtitlePrimeSingle: 選擇要連接的提供者。multiple-auth-providers 功能旗標目前為關閉，因此一次只能啟用一個外部提供者。請在「全域設定 > 功能旗標」中開啟此旗標，以同時啟用多個提供者。
     searchPlaceholder: 搜尋提供者
     filterLabel: 協定
     filterAll: 全部
@@ -1531,11 +1531,11 @@ catalog:
       valuesYaml: 編輯 YAML
       diff: 比較變更
       chartDefaults:
-        label: Chart values
-        hint: Edit the chart default values with overrides, if any, overlayed below, exactly how Helm will resolve it. Only your changes, shown to the right, are saved. To unset a property, explicitly set it to “null”.
+        label: Chart 設定值
+        hint: 編輯 Chart 的預設設定值，下方會疊加任何覆寫值，呈現方式與 Helm 解析的結果完全相同。只會儲存您的變更（顯示於右側）。若要取消設定某個屬性，請明確將其設為「null」。
       overrides:
-        label: Your values
-        hint: These values will override the chart default values. Only these values will be saved.
+        label: 您的設定值
+        hint: 這些設定值會覆寫 Chart 的預設設定值。只會儲存這些設定值。
     slideIn:
       dock: 停駐到 Shell 區
     steps:
@@ -1565,7 +1565,7 @@ catalog:
         subtext: 變更應用程式的運作方式
         description: 設定 Helm 用來定義應用程式的設定值。
         overridesDescription:
-          upgrade: Your values from {from} are applied on top of the {to} defaults, just like helm upgrade does.
+          upgrade: 您在 {from} 的設定值會套用在 {to} 的預設值之上，與 helm upgrade 的做法相同。
         chartInfo:
           button: 檢視 Chart 資訊
           label: Chart 資訊
@@ -1999,9 +1999,9 @@ cluster:
           notAllocatable: '[{vGpu}] vGPU 裝置無法分配，需要：{allocated}，可分配：{allocatable}'
       hostDevices:
         warnings:
-          minimumAllocatable: It's highly recommended to select PCI devices with a number of allocatable devices greater than the number of nodes (Machine Count) to avoid "un-schedulable" errors after cluster updates. Devices that share an IOMMU group must all be selected together.
+          minimumAllocatable: 強烈建議選擇可分配裝置數量大於節點數（機器數量）的 PCI 裝置，以免叢集更新後出現「un-schedulable」錯誤。屬於同一個 IOMMU 群組的裝置必須一併選取。
         errors:
-          notAllocatable: '[{hostDevice}] PCI device is not allocatable; required: {allocated}, allocatable: {allocatable}'
+          notAllocatable: '[{hostDevice}] PCI 裝置無法分配，需要：{allocated}，可分配：{allocatable}'
       volume:
         title: 磁碟區
         volume: 磁碟區
@@ -2011,48 +2011,48 @@ cluster:
         storageClass: StorageClass
       storageOptions:
         profile:
-          label: Storage Performance Profile
-          tip: '"High Performance" disables the host cache, uses native AIO and gives the disk a dedicated I/O thread. Choose "Custom" to set each option yourself.'
-          default: Default
-          highPerformance: High Performance
-          custom: Custom
-        highPerformanceTip: This disk will use no host cache, native AIO and a dedicated I/O thread.
+          label: 儲存效能設定檔
+          tip: '「高效能」會停用主機快取、使用原生 AIO，並為磁碟配置專用的 I/O 執行緒。選擇「自訂」可自行設定各個選項。'
+          default: 預設
+          highPerformance: 高效能
+          custom: 自訂
+        highPerformanceTip: 此磁碟將不使用主機快取，並採用原生 AIO 與專用的 I/O 執行緒。
         cache:
-          label: Cache Mode
-          tip: 'How the host caches disk I/O. "None" is best for high-throughput guests on block storage, "WriteBack" favors performance and "WriteThrough" favors durability.'
-          default: Default (hypervisor)
-          none: None (no host cache)
+          label: 快取模式
+          tip: '主機快取磁碟 I/O 的方式。「無」最適合使用區塊儲存的高輸送量客體，「WriteBack」偏重效能，「WriteThrough」偏重資料耐久性。'
+          default: 預設（Hypervisor）
+          none: 無（不使用主機快取）
           writeback: WriteBack
           writethrough: WriteThrough
         io:
-          label: I/O Mode
-          tip: 'How QEMU submits I/O. "Native" (Linux AIO) has the lowest overhead and needs cache mode "None". "Threads" uses a host thread pool.'
-          default: Default (hypervisor)
-          native: Native (AIO)
-          threads: Threads
-          nativeTip: Native I/O mode needs the host cache disabled, so cache mode is set to None.
+          label: I/O 模式
+          tip: 'QEMU 提交 I/O 的方式。「原生」（Linux AIO）的額外負擔最低，但快取模式必須為「無」。「執行緒」使用主機的執行緒池。'
+          default: 預設（Hypervisor）
+          native: 原生（AIO）
+          threads: 執行緒
+          nativeTip: 原生 I/O 模式需要停用主機快取，因此快取模式已設為「無」。
         dedicatedIOThread:
-          label: Dedicated I/O Thread
-          tip: Give this disk its own I/O thread instead of sharing one. Useful for disks with heavy I/O.
-        busWarning: 'This disk uses the {bus} bus. A dedicated I/O thread, and so the High Performance profile, needs the virtio bus.'
+          label: 專用 I/O 執行緒
+          tip: 讓此磁碟使用自己的 I/O 執行緒，而不與其他磁碟共用。適用於 I/O 負載繁重的磁碟。
+        busWarning: '此磁碟使用 {bus} 匯流排。專用 I/O 執行緒（以及高效能設定檔）需要 virtio 匯流排。'
       vmStorageOptions:
-        title: Storage Performance
-        description: These options apply to all volumes of the virtual machine.
+        title: 儲存效能
+        description: 這些選項會套用到虛擬機器的所有磁碟區。
         blockMultiQueue:
-          label: Virtio Block Multi-Queue
-          tip: Spread disk I/O over one queue per vCPU so that it is processed on multiple CPUs.
+          label: Virtio 區塊多佇列
+          tip: 將磁碟 I/O 分散到每個 vCPU 各一個佇列，讓 I/O 能在多個 CPU 上處理。
         ioThreadsPolicy:
-          label: I/O Threads Policy
-          tip: '"Shared" uses one I/O thread for all disks. "Auto" spreads disks over a pool of threads. "Supplemental Pool" uses a fixed number of threads.'
-          default: Disabled (default)
-          shared: Shared
-          auto: Auto
-          supplementalPool: Supplemental Pool
-          sharedTip: A volume asks for a dedicated I/O thread, so the Shared policy will be used.
+          label: I/O 執行緒政策
+          tip: '「共用」讓所有磁碟使用同一個 I/O 執行緒。「自動」將磁碟分散到執行緒池中。「補充池」使用固定數量的執行緒。'
+          default: 停用（預設）
+          shared: 共用
+          auto: 自動
+          supplementalPool: 補充池
+          sharedTip: 有磁碟區要求專用的 I/O 執行緒，因此將使用「共用」政策。
         ioThreadCount:
-          label: I/O Thread Count
-          tip: Number of I/O threads in the supplemental pool.
-          invalid: I/O Thread Count must be at least 1 with the "Supplemental Pool" policy.
+          label: I/O 執行緒數量
+          tip: 補充池中的 I/O 執行緒數量。
+          invalid: 使用「補充池」政策時，I/O 執行緒數量至少須為 1。
       reservedMemory: 保留記憶體
       sshUser: SSH 使用者
       userData:
@@ -2625,14 +2625,14 @@ cluster:
         isAutoscalerMaxGreaterThanMin: 最大機器數量必須大於或等於最小機器數量。
       etcdControlPlaneWarning: 不建議在具有 etcd 或控制平面角色的機器池使用自動擴縮器。若要覆寫目前的值，可以修改 YAML。
       pause:
-        pausedBanner: Autoscaling is paused for this pool. It keeps these values and applies them again when you resume it on the cluster's Machine Pools tab.
-        pauseAction: Pause Autoscaler
-        resumeAction: Resume Autoscaler
-        rangeTooltip: 'Min {min}, Max {max}'
-        unconfiguredTooltip: Autoscaling is not configured for this pool. Set a machine count range in the pool configuration.
-        clusterPausedTooltip: Autoscaling is paused for the whole cluster.
-        lastPoolTooltip: This is the only pool left autoscaling. Pausing it would uninstall the autoscaler.
-        error: Error updating autoscaling for machine pool
+        pausedBanner: 此池的自動擴縮已暫停。系統會保留這些值，待您在叢集的「機器池」分頁中繼續後再次套用。
+        pauseAction: 暫停自動擴縮器
+        resumeAction: 繼續自動擴縮器
+        rangeTooltip: '最小 {min}，最大 {max}'
+        unconfiguredTooltip: 此池尚未設定自動擴縮。請在池設定中設定機器數量範圍。
+        clusterPausedTooltip: 整個叢集的自動擴縮已暫停。
+        lastPoolTooltip: 這是唯一仍在自動擴縮的池。暫停它會解除安裝自動擴縮器。
+        error: 更新機器池的自動擴縮時發生錯誤
     name:
       label: 池名稱
       notNamed: （未命名）
@@ -2896,7 +2896,7 @@ cluster:
         label: 自動備份
       snapshotScheduleCron:
         label: Cron 排程
-        validationError: "Use a valid cron expression, such as 0 */5 * * * (every 5 hours) or @daily. The five fields are minute, hour, day of month, month and day of week (0-6, Sunday is 0)."
+        validationError: "請使用有效的 cron 運算式，例如 0 */5 * * *（每 5 小時）或 @daily。五個欄位依序為分、時、日、月與星期（0-6，星期日為 0）。"
       snapshotRetention:
         label: 本機快照保留數量
         tooltip: 每次備份會在每個 etcd 節點各記錄 1 個快照。若指定 3 個快照且有 3 個 etcd 節點，只會保留 1 份完整備份。
@@ -2967,8 +2967,8 @@ cluster:
     enableIngress: 安裝 Ingress 控制器以啟用外部路由
     nginx:
       header: Ingress-NGINX
-      contentUnsupported: Ingress-NGINX is unavailable with Kubernetes 1.37 or later. Choose Traefik instead.
-      content: Choose this only if your workloads are not yet ready for Traefik. Standalone Ingress-NGINX is unsupported with Kubernetes 1.37 or later.
+      contentUnsupported: Kubernetes 1.37 以上版本無法使用 Ingress-NGINX。請改選 Traefik。
+      content: 僅在您的工作負載尚未準備好改用 Traefik 時選擇此項。Kubernetes 1.37 以上版本不支援獨立的 Ingress-NGINX。
     dual:
       header: 雙模式
       content: 用於安全地測試流量，並將其從 Ingress-NGINX 遷移到 Traefik。
@@ -2995,14 +2995,14 @@ cluster:
       transitioning:
         label: Rancher 正在將預設提供者轉換為 Traefik。雖然 Ingress-NGINX 仍可用於遷移，但建議將工作負載移至 Traefik，以確保長期的相容性與支援。
       nginxUpgradeBlocked:
-        label: Kubernetes 1.37 or later cannot use standalone Ingress-NGINX. Select Traefik or Dual Mode. We strongly recommend running in Dual Mode and confirming your workloads before upgrading. Please review our <docsUrl>migration documentation</docsUrl>.
+        label: Kubernetes 1.37 以上版本無法使用獨立的 Ingress-NGINX。請選擇 Traefik 或雙模式。強烈建議先以雙模式執行並確認工作負載正常後再升級。請參閱<docsUrl>遷移文件</docsUrl>。
       nginxUpgradeWarning:
-        label: After upgrading to Kubernetes 1.37 or later, you cannot switch back to standalone Ingress-NGINX.
+        label: 升級到 Kubernetes 1.37 以上版本後，就無法再切換回獨立的 Ingress-NGINX。
       disabled:
         label: 沒有 Ingress 控制器時，此叢集中的服務將無法透過外部 URL 或主機名稱存取。您需要手動設定替代的路由方案來公開工作負載。
       selected:
         ingress-nginx:
-          label: Ingress-NGINX reached end of life in March 2026 and no longer receives fixes. It is unavailable with Kubernetes 1.37 or later. To avoid service interruptions, please begin migrating your Ingress resources to Traefik. Please review our <docsUrl>migration documentation</docsUrl>.
+          label: Ingress-NGINX 已於 2026 年 3 月結束生命週期，不再提供修正。Kubernetes 1.37 以上版本無法使用它。為避免服務中斷，請開始將 Ingress 資源遷移到 Traefik。請參閱<docsUrl>遷移文件</docsUrl>。
         traefik:
           label: 切換到 Traefik 之前，請先參閱<docsUrl>遷移文件</docsUrl>，確保 Ingress 資源已更新為符合 Traefik 的組態要求。
         dual:
@@ -3031,16 +3031,16 @@ cluster:
   rotateCertificates:
     label: 輪替憑證
     modalTitle: 輪替叢集憑證
-    description: New certificates are issued and the affected services restart. The cluster shows as 'Updating' until rotation completes.
-    allServices: All services
-    selectedServices: Selected services
+    description: 系統會核發新的憑證，並重新啟動受影響的服務。輪替完成前，叢集會顯示為「Updating」。
+    allServices: 所有服務
+    selectedServices: 選取的服務
     services: 服務
-    placeholder: Select one or more services
-    reset: Reset
-    more: "+{count} more"
-    deselect: "Deselect {service}"
-    selectionSummary: "{count} of {total} services selected. Only these services restart."
-    rotate: Rotate Certificates
+    placeholder: 選取一或多個服務
+    reset: 重設
+    more: "還有 {count} 個"
+    deselect: "取消選取 {service}"
+    selectionSummary: "已選取 {count} 個服務（共 {total} 個）。只有這些服務會重新啟動。"
+    rotate: 輪替憑證
   toggle:
     v1: RKE1
     v2: RKE2/K3s
@@ -3066,8 +3066,8 @@ clusterIndexPage:
     totalResources: 資源總數
   resourceStatus:
     unhealthy:
-      title: Other, Unhealthy Workloads
-      empty: No other unhealthy workloads
+      title: 其他異常工作負載
+      empty: 沒有其他異常的工作負載
   sections:
     capacity:
       label: 容量
@@ -4603,7 +4603,7 @@ labelSelect:
 labeledSelect:
   startTyping: 開始輸入以定義項目
   pressEnter: 按 Enter 鍵新增「{input}」
-  keptSearch: 'Last search: {search}'
+  keptSearch: '上次搜尋：{search}'
 
 landing:
   bannerImage: 首頁橫幅圖片
@@ -4650,55 +4650,55 @@ landing:
   welcomeToRancher: '歡迎使用 {vendor}'
 
 releaseWelcome:
-  close: Close
-  title: Welcome to {vendor}
-  subtitleCommunity: "{vendor} is up and running. Here's what's new in this release."
-  subtitlePrime: "{vendor} is up and running."
-  registerLead: To activate your subscription benefits, register this system on the
-  registrationPage: Registration page
-  newTab: (opens in a new tab)
-  loading: Loading the release content
-  reopenHint: You can reopen this any time from the user menu at the top right.
+  close: 關閉
+  title: 歡迎使用 {vendor}
+  subtitleCommunity: "{vendor} 已啟動並正常運作。以下是此版本的新功能。"
+  subtitlePrime: "{vendor} 已啟動並正常運作。"
+  registerLead: 若要啟用訂閱權益，請註冊此系統：
+  registrationPage: 前往註冊頁面
+  newTab: （在新分頁中開啟）
+  loading: 正在載入版本內容
+  reopenHint: 您隨時可以從右上角的使用者選單重新開啟此視窗。
   whatsNew:
-    title: What's new in this release
+    title: 此版本的新功能
     version: "{version}"
-    releaseNotes: Release notes
+    releaseNotes: 版本資訊
     features:
       tables:
-        title: Super-charged tables
-        description: "Tables across the UI are now smarter, featuring advanced filtering, customizable columns and much faster performance on large lists."
+        title: 全面強化的表格
+        description: "整個 UI 中的表格現在更聰明了，提供進階篩選與可自訂的欄位，大型清單的效能也大幅提升。"
       navigation:
-        title: Improved navigation
-        description: Jump to any cluster with the new switcher, plus a cleaner, reorganized side menu.
+        title: 改良的導覽
+        description: 透過新的切換器快速跳至任一叢集，側邊選單也經過重新編排，更加簡潔。
       rancher-cli:
-        title: New CLI
-        description: A new, experimental CLI for Rancher Manager designed to be equally useful for terminal coding agents and administrative users.
+        title: 新版 CLI
+        description: 全新的實驗性 Rancher Manager CLI，對終端機中的程式設計代理程式與管理員使用者同樣實用。
       workload-search:
-        title: Workload search
-        description: Workloads Overview now has a search bar to let you quickly find specific resources.
+        title: 工作負載搜尋
+        description: 「工作負載概觀」現在提供搜尋列，讓您快速找到特定資源。
   prime:
-    title: Ready for production? Go Prime.
-    description: "Everything in the community edition, plus 24×7 enterprise support, hardened images from a trusted registry, extended lifecycles and the full SUSE cloud-native suite:"
+    title: 準備投入生產環境了嗎？升級至 Prime。
+    description: "包含社群版的所有功能，另外還提供全年無休（24×7）的企業級支援、來自受信任映像檔倉庫的強化映像檔、延長的生命週期，以及完整的 SUSE 雲端原生產品組合："
     products:
       manager: Rancher Manager
-      distributions: RKE2, k3k & K3s
+      distributions: RKE2、k3k 與 K3s
       fleet: SUSE Continuous Integration & Delivery
       security: SUSE Security
       storage: SUSE Storage
       virtualization: SUSE Virtualization
       observability: SUSE Observability
       appCollection: Application Collection
-    explore: Explore SUSE Rancher Prime
+    explore: 探索 SUSE Rancher Prime
   registration:
-    title: Register to activate your Prime benefits
-    description: "Registering with SUSE Customer Center unlocks:"
+    title: 註冊以啟用您的 Prime 權益
+    description: "向 SUSE Customer Center 註冊後即可享有："
     benefits:
-      support: "24×7 support: open cases directly from your account"
-      appCollection: "Application Collection: curated, signed apps ready to deploy"
-      images: Hardened images from the Prime trusted registry
-      academy: "Rancher Academy: free certification courses for your team"
-    supportHandbook: Support handbook
-    open: Open SUSE Customer Center
+      support: "全年無休（24×7）支援：直接從您的帳號開立支援案件"
+      appCollection: "Application Collection：經過精選與簽署、可直接部署的應用程式"
+      images: 來自 Prime 受信任映像檔倉庫的強化映像檔
+      academy: "Rancher Academy：為您的團隊提供免費的認證課程"
+    supportHandbook: 支援手冊
+    open: 開啟 SUSE Customer Center
 
 logging:
   clusterFlow:
@@ -5014,14 +5014,14 @@ login:
   loggingIn: 正在登入...
   loggedIn: 已登入
   loginWithLocal: 使用本機使用者登入
-  useProvider: Use a {provider} user
-  useNonLocal: Use a non-local user
+  useProvider: 使用 {provider} 使用者
+  useNonLocal: 使用非本機使用者
   providers:
     heading: 選擇登入方式
     or: 或
-    choose: Choose another authentication provider
+    choose: 選擇其他驗證提供者
     chooseDifferent: 選擇其他提供者
-    menu: Authentication providers
+    menu: 驗證提供者
     useLocal: 以本機使用者登入
     meta: "{vendor} · {protocol}"
     remember: 在此裝置上記住我的選擇
@@ -5596,8 +5596,8 @@ node:
     nodeTaint: 污點
     scaleDown: 縮減池
     scaleUp: 擴充池
-    scaleDownAriaLabel: Scale down machine pool {name}
-    scaleUpAriaLabel: Scale up machine pool {name}
+    scaleDownAriaLabel: 縮減機器池 {name}
+    scaleUpAriaLabel: 擴充機器池 {name}
     poolDescription:
       noSize: 無大小
       noLocation: 無位置
@@ -5616,8 +5616,8 @@ node:
         used: 已使用
         amount: "{used} / {total} {unit}"
         cpu: CPU
-        memory: Memory
-        pods: Pods
+        memory: 記憶體
+        pods: Pod
         running: 執行中
       diskPressure: 磁碟壓力
       kubelet: kubelet
@@ -5661,12 +5661,12 @@ notificationCenter:
 
 persistentVolume:
   detail:
-    source: Source
-    reclaimPolicy: Reclaim Policy
-    storageClass: Storage Class
+    source: 來源
+    reclaimPolicy: 回收政策
+    storageClass: StorageClass
     claim:
-      label: Claims
-      none: This volume is not bound to a PersistentVolumeClaim.
+      label: PersistentVolumeClaim
+      none: 此磁碟區未繫結到任何 PersistentVolumeClaim。
   pluginConfiguration:
     label: 外掛設定
   plugin:
@@ -5987,8 +5987,8 @@ persistentVolumeClaim:
   name: PersistentVolumeClaim 名稱
   detail:
     pods:
-      label: Pods
-      none: Could not find any Pods that mount this PersistentVolumeClaim.
+      label: Pod
+      none: 找不到任何掛載此 PersistentVolumeClaim 的 Pod。
   accessModes: 存取模式
   accessModesOptions:
     singleNodeRW: 單一節點讀寫
@@ -6052,7 +6052,7 @@ plugins:
   currentInstalledVersionBlockedByKubeVersion: "此版本與目前的 Kubernetes 版本不相容（{ kubeVersion }  與  { kubeVersionToCheck }）。"
   closePluginPanel: 關閉外掛說明面板
   viewVersionDetails: 檢視擴充套件 {name} 版本 {version} 的詳細資料／Readme
-  upgradeableTo: "Upgradeable to { version }"
+  upgradeableTo: "可升級至 { version }"
   labels:
     isDeveloper: 開發者載入
     primeOnly: 僅限 Prime
@@ -6309,7 +6309,7 @@ prefs:
 principal:
   loading: 載入中&hellip;
   error: 無法取得主體資訊
-  unresolved: '{vendor} could not look up the name of this user or group, so its principal ID is shown instead.'
+  unresolved: '{vendor} 無法查詢此使用者或群組的名稱，因此改為顯示其主體 ID。'
   name: 名稱
   loginName: 使用者名稱
   type: 類型
@@ -6514,15 +6514,15 @@ promptRemoveApp:
   removeCrd: "刪除與此應用程式相關的 CRD"
 
 promptRemoveOperation:
-  attemptingToRemove: You are attempting to delete {kind} operation
+  attemptingToRemove: 您即將刪除{kind}作業
   kind:
-    etcdSnapshotSave: a snapshot
-    etcdSnapshotRestore: a snapshot restore
-    encryptionKeyRotation: an encryption key rotation
-    certificateRotation: a certificate rotation
+    etcdSnapshotSave: 快照
+    etcdSnapshotRestore: 快照還原
+    encryptionKeyRotation: 加密金鑰輪替
+    certificateRotation: 憑證輪替
   inProgress:
-    warning: This operation is in progress. Deleting it now may leave your cluster in an unstable state.
-    acknowledge: I understand that this cluster might need to be restored if this operation is interrupted
+    warning: 此作業正在進行中。現在刪除可能會使叢集處於不穩定的狀態。
+    acknowledge: 我瞭解若此作業中斷，可能需要還原此叢集
 
 promptRestore:
   title: 還原快照
@@ -6558,19 +6558,19 @@ promptRedeploy:
 
 promptRotateEncryptionKey:
   title: 輪替加密金鑰
-  description: Rotation re-encrypts every secret in this cluster with a new key. The cluster shows as 'Updating' while control plane nodes restart one at a time, which can take several minutes.
+  description: 輪替會以新的金鑰重新加密此叢集中的所有 Secret。控制平面節點會逐一重新啟動，期間叢集會顯示為「Updating」，可能需要數分鐘。
   warning:
-    noBackup: No etcd snapshot found for this cluster. Take a snapshot, then rotate the keys once it has completed, so you can restore the cluster if rotation fails.
+    noBackup: 找不到此叢集的 etcd 快照。請先建立快照，待其完成後再輪替金鑰，以便在輪替失敗時還原叢集。
     outdated: |-
       {days, plural,
-        one {The latest snapshot is # day old.}
-        other {The latest snapshot is # days old.}
-      } Changes made since then cannot be restored if rotation fails.
+        one {最新的快照是 # 天前建立的。}
+        other {最新的快照是 # 天前建立的。}
+      }若輪替失敗，此後所做的變更將無法還原。
   snapshotInfo:
-    title: Latest etcd snapshot
-    viewSnapshots: View snapshots
-    taken: Taken
-  rotateKeys: Rotate Keys
+    title: 最新的 etcd 快照
+    viewSnapshots: 檢視快照
+    taken: 建立時間
+  rotateKeys: 輪替金鑰
   error:
     unableToResolveTargetCluster: 無法解析加密金鑰輪替的目標叢集
 
@@ -6792,9 +6792,9 @@ resourceDetail:
         no {{managedBy} 應用程式}
         yes {{managedBy} 應用程式 {appName}}
         other {{managedBy} 應用程式}} 管理，在這裡所做的變更很可能會在 {managedBy} 下次執行時被覆寫。
-    fleetManaged: This resource is managed by <b>{name}</b>. To make permanent changes, update the configuration in the source repository. Any manual changes made here will be overwritten during the next sync.
-    fleetManagedLink: View in {name}
-    fleetManagedBadge: Managed
+    fleetManaged: 此資源由 <b>{name}</b> 管理。若要進行永久變更，請更新來源儲存庫中的設定。在此所做的任何手動變更，都會在下次同步時被覆寫。
+    fleetManagedLink: 在 {name} 中檢視
+    fleetManagedBadge: 受管理
 resourceList:
   head:
     create: 建立
@@ -6803,9 +6803,9 @@ resourceList:
   nsFiltering: "請使用上方的篩選器選擇一或多個命名空間或專案。"
   nsFilteringGeneric: "請使用上方的篩選器選擇有效的命名空間或專案選項。"
   nsFilterToolTip: "篩選僅限於專案與命名空間"
-  stateFilterApplied: "State filter applied:"
-  nameFilterApplied: "Name filter applied:"
-  clearStateFilter: "Clear filter"
+  stateFilterApplied: "已套用狀態篩選："
+  nameFilterApplied: "已套用名稱篩選："
+  clearStateFilter: "清除篩選條件"
 resourceLoadingIndicator:
   loading: 載入中
 
@@ -6866,7 +6866,7 @@ secret:
   githubApp:
     label: GitHub App
   helmRelease:
-    dataNotEditable: The data of a Helm release secret is managed by Helm and can't be viewed or edited here. You can still edit the labels, annotations and description.
+    dataNotEditable: Helm Release 的 Secret 資料由 Helm 管理，無法在此檢視或編輯。您仍可以編輯標籤、註解與說明。
   certificate:
     certificate: 憑證
     certificates: 憑證
@@ -7546,11 +7546,11 @@ tableViews:
     newViewName: 未命名
     deleted: 已刪除檢視
     deletedMessage: 已成功刪除「{name}」檢視。
-    deletedSharedMessage: The "{name}" view has been unpublished and deleted.
+    deletedSharedMessage: 「{name}」檢視已取消發佈並刪除。
     undo: 復原
-    shared: Published
-    share: Publish
-    unshare: Unpublish
+    shared: 已發佈
+    share: 發佈
+    unshare: 取消發佈
   bulk:
     selected: "已選取 {count} 項"
     deleteSelected: 刪除所選項目
@@ -7616,13 +7616,13 @@ tableViews:
       type: 類型
   # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   publish:
-    title: Publish
-    body: Publish this view to make it visible to all users.
-  filterWarning: Filter name and values are included and can reveal information such as resource or namespace names.
+    title: 發佈
+    body: 發佈此檢視，讓所有使用者都能看到。
+  filterWarning: 篩選條件的名稱與值也會一併包含，可能透露資源或命名空間名稱等資訊。
   # A view as text: Share View hands it out, Import View takes it into a saved view, both in the same box
   share:
     title: 分享檢視
-    intro: 'Copy this text and share it. Anyone with the text can import the view using <b>Import View</b>. It holds the view as it is now, unsaved changes included: columns, grouping, sort and filter.'
+    intro: '複製這段文字並分享出去。拿到這段文字的人都能透過<b>匯入檢視</b>匯入此檢視。內容是檢視目前的樣子，包含未儲存的變更：欄位、分組、排序與篩選條件。'
     label: 檢視
   import:
     title: 匯入檢視
@@ -8103,10 +8103,10 @@ validation:
       valuesMustBeDefined: '{group} {rules} 的規則 [{index}] - 運算子為 ''In'' 或 ''NotIn'' 時，必須定義值'
   port: 連接埠必須是 1 到 65535 之間的數字。
   path: '「{key}」必須是絕對路徑'
-  pemCertificate: '"{key}" must be a PEM encoded certificate'
-  pemPrivateKey: '"{key}" must be a PEM encoded private key'
-  sshPublicKey: '"{key}" must be an SSH public key, e.g. "ssh-ed25519 AAAA..."'
-  dataKey: '"{key}" must consist of alphanumeric characters, "-", "_" or "."'
+  pemCertificate: '「{key}」必須是 PEM 編碼的憑證'
+  pemPrivateKey: '「{key}」必須是 PEM 編碼的私密金鑰'
+  sshPublicKey: '「{key}」必須是 SSH 公開金鑰，例如「ssh-ed25519 AAAA...」'
+  dataKey: '「{key}」只能包含英數字元、「-」、「_」或「.」'
   prometheusRule:
     noEdit: 此 Prometheus 規則的名稱含有無效字元，因此無法編輯。
     groups:
@@ -8266,13 +8266,13 @@ workloadDashboard:
     byType: 依類型
     byNamespace: 依命名空間
   search:
-    ariaLabel: Find workloads in the selected namespaces...
-    placeholder: Find workloads in the selected namespaces...
-    startTyping: Start typing to search
-    minCharacters: Type at least {count} characters to search
-    noMatch: No matching workloads
-    searching: Searching...
-    moreResults: "+ {count} more {type}"
+    ariaLabel: 在選取的命名空間中尋找工作負載...
+    placeholder: 在選取的命名空間中尋找工作負載...
+    startTyping: 開始輸入以搜尋
+    minCharacters: 請至少輸入 {count} 個字元以搜尋
+    noMatch: 沒有符合的工作負載
+    searching: 正在搜尋...
+    moreResults: "還有 {count} 個 {type}"
   errors:
     noAccess: "沒有 {type} 的存取權限"
     fetchType: "無法取得 {type}"
@@ -8512,8 +8512,8 @@ workload:
     cannotFindHttpRoutes: 找不到任何將流量轉送到「選取此工作負載中 Pod 之 Service」的 HTTPRoute。
     httpRouteListCaption: "下列 HTTPRoute 會將流量轉送到選取此工作負載中 Pod 的 Service："
     cannotViewHttpRoutesBecauseCannotViewServices: 沒有檢視 Service 的權限，因此無法找到相關的 HTTPRoute。
-    storage: Storage
-    cannotFindStorage: Could not find any PersistentVolumeClaims mounted by this workload.
+    storage: 儲存
+    cannotFindStorage: 找不到此工作負載掛載的任何 PersistentVolumeClaim。
     pods:
       title: Pod
   detailTop:
@@ -9734,7 +9734,7 @@ advancedSettings:
     'auth-token-max-ttl-minutes': '除了由 "auth-user-session-ttl-minutes" 控制的 token（使用者工作階段 token）以外，所有 token 的最大 TTL（分鐘）。設為 0 時，token 永不過期。'
     'kubeconfig-generate-token': '使用者要求 kubeconfig 時自動為其產生 token。'
     'kubeconfig-default-token-ttl-minutes': '套用於所有 kubeconfig token 的 TTL（分鐘）。設為 0 時，token 永不過期。'
-    'kubeconfig-prefer-rancher-proxy': 'Preferred current context in downloaded Kubeconfig files for clusters with Authorized Cluster Endpoint (ACE) enabled.'
+    'kubeconfig-prefer-rancher-proxy': '已啟用授權叢集端點（ACE）的叢集，在下載的 Kubeconfig 檔案中偏好使用的目前 context。'
     'rke-metadata-config': '設定 RKE 中繼資料的重新整理參數。'
     'ui-banners': '分級橫幅用於在頁首、頁尾或兩者顯示自訂的固定橫幅。'
     'custom-notifications': 編輯自訂通知
@@ -9754,8 +9754,8 @@ advancedSettings:
     'ui-banners': 此設定接受一個包含 3 個根參數的 JSON 物件：<code>banner</code>、<code>showHeader</code>、<code>showFooter</code>。<code>banner</code> 是一個物件，包含 <code>textColor</code>、<code>background</code> 與 <code>text</code>，其中 <code>textColor</code> 與 <code>background</code> 可以是任何有效的 CSS 顏色值。
   enum:
     'kubeconfig-prefer-rancher-proxy':
-      false: ACE (Authorized Cluster Endpoint)
-      true: Rancher-proxied
+      false: ACE（授權叢集端點）
+      true: 經由 Rancher Proxy
     'ui-default-landing':
       ember: 叢集管理員
       vue: 叢集總管
@@ -10290,7 +10290,7 @@ component:
           loading: 正在載入資源資訊
           loadingUsage: 正在載入使用量
   resourceStatusWidget:
-    loadError: Could not load the status
+    loadError: 無法載入狀態
   cron:
     expressionEditor:
       label:
@@ -10360,7 +10360,7 @@ component:
         marchToMayHourly: "每小時，僅限 3 月、4 月與 5 月"
         every4Hours9to17: "上午 09:00 到下午 05:00 之間，每 4 小時，於整點第 0 分"
   rcSection:
-    invalidFields: Some fields inside this section are invalid
+    invalidFields: 此區段中有部分欄位無效
 
 autoscaler:
   card:
