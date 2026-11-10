@@ -1,6 +1,6 @@
 {
   "name": "locales",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Additional UI locales for Rancher Prime",
   "repository": "https://github.com/rancher/ui-locales",
   "license": "Apache-2.0",

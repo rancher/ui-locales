@@ -1,7 +1,7 @@
 {
   "name": "locales",
   "description": "Adds support for additional locales in the Rancher UI",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "icon": "https://raw.githubusercontent.com/rancher/ui-locales/main/pkg/locales/icon.svg",
   "rancher": {
