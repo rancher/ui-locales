@@ -1,10 +1,10 @@
 # Releasing the SUSE Localization Pack
 
 This extension is released the same way as every other Rancher UI extension: publishing a GitHub
-release with a specific tag name triggers two reusable workflows in `rancher/dashboard`.
+release with a specific tag name triggers two reusable workflows in `rancher/dashboard`, one
+building a Helm chart on this repository's `gh-pages` branch and one a catalog image on `ghcr.io`.
 
-Nothing has been released from this repository yet, so the one-time setup below has to be done
-before the first release.
+The one-time setup below has been done; it stays here for reference.
 
 ## One-time setup
 
@@ -30,56 +30,68 @@ These need repository admin and only have to be done once.
    needs `packages: write` to push to `ghcr.io`. They request these themselves, but the repository's
    default workflow permissions must allow it (Settings → Actions → General → Workflow permissions).
 
+4. **Check the release and pull request settings.** Release immutability can be on: nothing is
+   attached to a release after it is published. `bump-shell` opens its pull requests with the
+   workflow token unless a `SHELL_BUMP_TOKEN` secret is set, and the workflow token needs **Allow
+   GitHub Actions to create and approve pull requests** (Settings → Actions → General).
+
 ## Cutting a release
 
-**Bump the version in both files — they have to match.**
+1. **Bump the version in both files, in a pull request, and merge it.** They have to match.
 
-- `pkg/locales/package.json` — the extension version, used for the chart
-- `package.json` (root) — used for the catalog image tag
+   - `pkg/locales/package.json` - the extension version, used for the chart
+   - `package.json` (root) - used for the catalog image tag
 
-The two release workflows validate the release tag differently: the chart matches it against
-`pkg/<name>-<version>` and the catalog matches it against the root `name-version`. If the versions
-drift apart, no tag can satisfy both and the catalog job cancels itself rather than failing.
+   Merging publishes nothing.
 
-Then pick a path.
+2. **Publish a release on `main` tagged `locales-<version>`.** In **Releases → Draft a new
+   release**, type the tag under **Choose a tag** and create it, set **Target** to `main`, choose
+   the previous release's tag under **Previous tag**, click **Generate release notes**, then
+   **Publish release**. Or:
 
-### Publishing the chart only — merge the bump
+   ```sh
+   gh release create locales-<version> --repo rancher/ui-locales --target main --generate-notes
+   ```
 
-`build-extension-charts` runs on any push to `main` that touches `pkg/locales/package.json`, so
-merging the version bump is the whole of publishing the chart. Bumping the number *is* the release.
+3. **The release starts both workflows.** `build-extension-charts` builds the chart, commits it to
+   `gh-pages` and checks a bundle landed; `build-extension-catalog` pushes the catalog image to
+   `ghcr.io`.
 
-It refuses to republish: before building, it reads `index.yaml` from `gh-pages` and stops if that
-version is already there. That guard matters because the trigger fires on any edit to the file — a
-change to the catalog annotations alone must not republish the same version with different contents
-inside it.
+The tag must be exactly `locales-<version>`. The chart workflow checks it against
+`pkg/locales/package.json` and the catalog workflow against the root `package.json`; both are named
+`locales`, so one tag satisfies both while the versions match. If the versions drift apart, a tag
+can match only one of them: that half publishes, and the other run fails or cancels itself, which is
+easy to miss.
 
-This path does **not** build the catalog image. If air-gapped installs need this version, cut a
-release instead.
+Both workflows trigger on `release: [released]`, so a **draft** or a **pre-release** publishes
+nothing.
 
-### Publishing both — cut a GitHub release
+With release immutability on, a release can't change once published: the title and notes can still
+be edited, but the tag can't be moved and its name can't be used again. Check the tag and the target
+before publishing.
 
-Publish a release on `main` tagged `locales-<version>`:
+### The first release in this flow
 
-```sh
-gh release create locales-0.1.2 --repo rancher/ui-locales \
-  --title "locales-0.1.2" --generate-notes
-```
+0.1.2 and 0.1.3 were published before this flow, and their releases are tagged on `gh-pages` build
+commits, which share no history with `main`. For the next release, choose **`locales-0.1.3-main`**
+as the previous tag (with `gh`, add `--notes-start-tag locales-0.1.3-main`) - it marks the `main`
+commit 0.1.3 was built from - or the generated notes list every pull request since the start.
 
-The tag must be exactly `<pkg-name>-<version>` — `pkg-name` is `locales`, the directory under
-`pkg/`. A mismatch cancels the run rather than failing it, which is easy to miss.
-
-Both workflows trigger on `release: [released]`, so a **draft** release publishes nothing. Publish it.
+Those versions also can't be rebuilt from their release tags, because a `gh-pages` commit has no
+workflows to run: a fix to one of them goes out as a new version.
 
 ### Re-publishing something that built wrong
 
-Both workflows can be run by hand from the Actions tab. A manual run passes no tag, so it builds
-whatever version `package.json` currently names. For the chart, delete that version from `gh-pages`
-first or the version check will decline to rebuild it.
+Run **Build and Release Extension Charts** by hand from that version's release tag (**Run workflow →
+Use workflow from → Tags**). It rebuilds the version and overwrites its chart, its extension files
+and its entry in the root `index.yaml`, and chart-releaser skips the existing release. A run from a
+branch stops before building: publishing always needs a release tag. A manual run of **Build and
+Release Extension Catalog** from the same tag rebuilds the image.
 
 ## Verifying a release
 
-1. Both workflow runs are green in Actions.
-2. `index.yaml` on the `gh-pages` branch lists the new version.
+1. Both workflow runs are green in Actions, including **A bundle exists for this version**.
+2. `index.yaml` at the root of `gh-pages` lists the new version, with a URL under `assets/`.
 3. The package is visible at `https://github.com/orgs/rancher/packages?repo_name=ui-locales`.
 4. In a Rancher 2.10+ install, add `https://rancher.github.io/ui-locales/` under
    **Extensions → Manage Repositories**, then confirm **SUSE Localization Pack** appears in the
