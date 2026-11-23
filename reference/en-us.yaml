@@ -1,8 +1,8 @@
 # ---
 # source: rancher/dashboard (master)
 # source-url: https://raw.githubusercontent.com/rancher/dashboard/master/shell/assets/translations/en-us.yaml
-# synced-commit: 261b893 (2026-11-04)
-# synced-by: PR #76
+# synced-commit: 4b84c2e (2026-11-23)
+# synced-by: PR #sync-en-us-yaml-20261123
 # ---
 ##############################
 # Special stuff
@@ -1620,6 +1620,7 @@ catalog:
       rancher-partner-charts: Partners
       rancher-rke2-charts: RKE2
       rancher-ui-plugins: Rancher Extensions
+      partner-extensions: Partner Extensions
       suse-application-collection: SUSE App Collection
 
     target:
@@ -2532,6 +2533,10 @@ cluster:
         diskSizeWithMax: Disk size has to be between {diskSizeMin} and {diskSizeMax} based on this image and disk type.
         projects: Image projects should be a comma separated list of alphanumeric string which may contain '-' and '.'
   addOns:
+    chartUnavailable:
+      message: 'Configuration for the {names} {count, plural, =1 {add-on} other {add-ons}} is unavailable because the add-on {count, plural, =1 {chart} other {charts}} could not be loaded. {refresh}'
+      refreshLink: 'The RKE2 repository may be out of date: <a href="{url}" target="_blank" rel="noopener noreferrer nofollow">refresh it from its repository page <i class="icon icon-external-link" aria-hidden="true"></i><span class="sr-only">{newTab}</span></a>, then reload this page (unsaved changes will be lost).'
+      refreshAdmin: 'The RKE2 repository may be out of date: ask an administrator to refresh it from Apps > Repositories in the local cluster, then reload this page (unsaved changes will be lost).'
     dependencyBanner: Add-On Configuration has changed between Kubernetes versions <b>{previousKubeVersion}</b> and <b>{newKubeVersion}</b> and conflict with your previous values. Please re-apply them.
     additionalManifest:
       title: Additional Manifest
@@ -3069,7 +3074,9 @@ clusterIndexPage:
     pods: Pods
     ram: Memory
     used: Used
+    usedTooltip: The amount in use right now, including by the system, out of the total capacity.
     reserved: Reserved
+    reservedTooltip: The amount pods have requested, out of what is available to pods, which is the total capacity minus what is set aside for the system.
     allocated: Allocated
     units:
       cores: |-
@@ -3086,6 +3093,8 @@ clusterIndexPage:
   sections:
     capacity:
       label: Capacity
+      countedNodes: "{counted} of {total} nodes. Cordoned nodes, and control plane or etcd nodes that don't run workloads, aren't counted."
+      reportingNodes: "Used only covers {reporting} of {counted} nodes, so it reads low. The rest aren't reporting metrics."
     events:
       label: Events
       resource:
@@ -4251,10 +4260,10 @@ hpa:
 
 import:
   title: Import YAML
+  instructions: You can import multiple resources at the same time by separating their YAML using `---` as divider.
+  namespace: Namespace
   editor:
     label: YAML Editor
-  defaultNamespace:
-    label: Default Namespace
   success: |-
     Applied {count, plural,
     =1 {1 Resource}
@@ -5250,6 +5259,8 @@ monitoring:
   projectMonitoring:
     detail:
       error: "Unable to fetch Dashboard values with status: "
+    federatorFetchFailed: "Unable to load the Prometheus Federator configuration: {message}"
+    federatorNotInstalled: Prometheus Federator is not installed on this cluster. Install it from Apps to manage project monitoring.
     list:
       banner: Project Monitoring Configuration is stored in ProjectHelmChart resources
       empty:
@@ -5636,7 +5647,6 @@ node:
         cpu: CPU
         memory: Memory
         pods: Pods
-        running: Running
       diskPressure: Disk Pressure
       kubelet: kubelet
       memoryPressure: Memory Pressure
@@ -6060,6 +6070,9 @@ inactivity:
 # Rancher Extensions
 plugins:
   altIcon: Icon for {extension} extension card
+  conflict:
+    bundleBlocked: "Cannot be installed because it contains { names }, which is already installed. Uninstall it first."
+    memberBlocked: 'Cannot be installed because it is already provided by the "{ name }" bundle.'
   deprecatedExtension: This extension is deprecated and may soon be removed from the catalog.
   incompatiblePrimeOnly: "The latest version of this extension ({ version }) needs Rancher Prime in order to be installed."
   incompatibleRancherVersion: "The latest version of this extension ({ version }) is not compatible with the current Rancher version ({ required })."
@@ -6068,7 +6081,6 @@ plugins:
   incompatibleUiExtensionsApiVersion: "The latest version of this extension ({ version }) is not compatible with the current Extensions API version ({ required })."
   incompatibleHost: 'The latest version of this extension ({ version }) has a host of "{ required }" which is not compatible with this application "{ mainHost }".'
   currentInstalledVersionBlockedByKubeVersion: "This version is not compatible with the current Kubernetes version ({ kubeVersion }  Vs  { kubeVersionToCheck })."
-  closePluginPanel: Close plugin description panel
   viewVersionDetails: View extension {name} version {version} details/Readme
   upgradeableTo: "Upgradeable to { version }"
   labels:
@@ -6117,11 +6129,10 @@ plugins:
       name: Extension module name
       persist: Persist extension by creating custom resource
   info:
-    actions: Actions
-    noActions: No actions available
     detail: Detail
     versions: Latest Versions
     showAllVersions: Show all
+    titleVersion: "v{version}"
     versionError: Could not load version information
     requiresRancherPrime: "Requires Rancher Prime"
     requiresRancherVersion: "Requires Rancher {required}"
@@ -6222,6 +6233,15 @@ plugins:
     bannerBtn: Add repositories
     title: Add Extensions repositories
     prompt: Enable additional repositories to access more extensions
+  pendingRepos:
+    downloading: 'The extensions from the following repositories are being downloaded: <b>{names}</b> - this might take a few minutes.'
+    continue: <b>You can continue using Rancher</b> and we will notify you when the extensions are ready to be used.
+    failed: 'The extensions from the following repositories could not be downloaded:'
+  repoDownload:
+    ready:
+      title: Extensions ready!
+      message: 'All the extensions from the "{name}" repository have been successfully downloaded and are now ready to be used.'
+      action: View Extensions
   setup:
     installed: Already installed
     uninstalled: Already uninstalled
@@ -6370,6 +6390,7 @@ probe:
 
 project:
   membersEditOnly: Only permissions equal to or below those of the current user can be applied
+  membersPermissionCheckFailed: Could not check your permissions for this project's members. Reload the page to try again.
   members:
     label: Members
   containerDefaultResourceLimit: Container Default Resource Limit
@@ -6688,6 +6709,11 @@ rbac:
     unknownRole:
         description: No description provided
     assignOnlyRole: This role is already assigned
+    groupRole: |-
+      {count, plural,
+        one {The user also has this role through their group {groups}.}
+        other {The user also has this role through their groups {groups}.}
+      }
     role:
       admin:
         label: Administrator
@@ -7742,6 +7768,7 @@ tableHeaders:
   customVerbs: Custom Verbs
   description: Description
   cpu: CPU
+  cpuUsed: CPU Used
   currentReplicas: Current Replicas
   date: Date
   data: Data
@@ -7811,6 +7838,7 @@ tableHeaders:
   maxReplicas: Maximum Replicas
   missingPL: MissingPL
   memory: Memory
+  memoryUsed: Memory Used
   monitored: Monitored
   name: Name
   nameDisplay: Display Name
@@ -7848,7 +7876,6 @@ tableHeaders:
   publicPorts: Public Ports
   queues: Queues
   queueLengthLimit: Queue Length Limit
-  ram: RAM
   rbac:
     create: Create
     delete: Delete
@@ -7975,9 +8002,11 @@ user:
       tableHeaders:
         project: Project
     generic:
+      direct: Direct
       tableHeaders:
         role: Role
         granted: Granted
+        grantedVia: Granted Via
   edit:
     credentials:
       label: Credentials
@@ -8283,6 +8312,9 @@ workloadDashboard:
     byState: By State
     byType: By Type
     byNamespace: By Namespace
+  flaggedState:
+    error: "{state} (error)"
+    info: "{state} (transitioning)"
   search:
     ariaLabel: Find workloads in the selected namespaces...
     placeholder: Find workloads in the selected namespaces...
@@ -10194,6 +10226,8 @@ component:
       close: Close
     resourceDetailDrawer:
       title: "{resourceName} ({resourceType}) - Configuration"
+      loading: Loading configuration
+      loadFailed: Could not load the configuration drawer
       editConfig: Edit Config
       editYaml: Edit YAML
       ariaLabel:
